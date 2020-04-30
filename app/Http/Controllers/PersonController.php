@@ -93,11 +93,24 @@ class PersonController extends Controller
         return redirect()->route('people.show', [$person]);
     }
 
-    /**
-     * @todo allow people deletion
-     */
     public function destroy(Person $person)
     {
-        // $this->authorize('delete', $person);
+        $this->authorize('delete', $person);
+
+        if ($person->marriages->count() > 0) {
+            return back()->withErrors([
+                'deleting' => __('people.cant_delete_person_with_relationships'),
+            ]);
+        }
+
+        if ($person->children->count() > 0) {
+            return back()->withErrors([
+                'deleting' => __('people.cant_delete_person_with_children'),
+            ]);
+        }
+
+        $person->delete();
+
+        return redirect()->route('people.index');
     }
 }

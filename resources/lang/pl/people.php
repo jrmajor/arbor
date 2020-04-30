@@ -11,6 +11,10 @@ return [
     'add_a_new_person' => 'Dodaj nową osobę',
     'edit_this_person' => 'Edytuj tę osobę',
 
+    'delete' => 'usuń',
+    'cant_delete_person_with_relationships' => 'Aby usunąć tę osobę, usuń najpierw jej związki.',
+    'cant_delete_person_with_children' => 'Aby usunąć tę osobę, usuń najpierw jej dzieci.',
+
     'sex' => 'Płeć',
     'female' => 'kobieta',
     'male' => 'mężczyzna',

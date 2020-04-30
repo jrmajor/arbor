@@ -51,11 +51,12 @@ class MarriageController extends Controller
         return redirect()->route('people.show', [$marriage->woman_id]);
     }
 
-    /**
-     * @todo allow marriages deletion
-     */
     public function destroy(Marriage $marriage)
     {
-        // $this->authorize('delete', $marriage);
+        $this->authorize('delete', $marriage);
+
+        $marriage->delete();
+
+        return redirect()->route('people.show', ['person' => $marriage->woman_id]);
     }
 }

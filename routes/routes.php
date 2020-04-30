@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::post('people', 'PersonController@store')->name('people.store');
     Route::get('people/{person}/edit', 'PersonController@edit')->name('people.edit');
     Route::match(['put', 'patch'], 'people/{person}', 'PersonController@update')->name('people.update');
-    // Route::delete('people/{person}', 'PersonController@destroy')->name('people.destroy');
+    Route::delete('people/{person}', 'PersonController@destroy')->name('people.destroy');
 });
 Route::get('people', 'PersonController@index')->name('people.index');
 Route::get('people/{type}/{letter}', 'PersonController@letter')->where('type', '[fl]')->name('people.letter');
@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('marriages', 'MarriageController@store')->name('marriages.store');
     Route::get('marriages/{marriage}/edit', 'MarriageController@edit')->name('marriages.edit');
     Route::match(['put', 'patch'], 'marriages/{marriage}', 'MarriageController@update')->name('marriages.update');
-    // Route::delete('marriages/{marriage}', 'MarriageController@destroy')->name('marriages.destroy');
+    Route::delete('marriages/{marriage}', 'MarriageController@destroy')->name('marriages.destroy');
 });
 
 Route::middleware('auth')->group(function () {

@@ -8,6 +8,8 @@ return [
     'edit_this_marriage' => 'Edit this marriage',
     'edit_marriage' => 'Edit marriage',
 
+    'delete' => 'delete',
+
     'woman' => 'Woman',
     'man' => 'Man',
     'rite' => 'Rite',

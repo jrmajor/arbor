@@ -8,6 +8,8 @@ return [
     'edit_this_marriage' => 'Edytuj ten związek',
     'edit_marriage' => 'Edytuj związek',
 
+    'delete' => 'usuń',
+
     'woman' => 'Kobieta',
     'man' => 'Mężczyzna',
     'rite' => 'Obrządek',
