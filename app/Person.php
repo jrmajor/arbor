@@ -296,15 +296,16 @@ class Person extends Model
             throw new InvalidArgumentException('Type must be "family" or "last".');
         }
 
-        return Cache::remember("letters_$type", CarbonInterval::day(), function () use ($type) {
-            return DB::table('people')
-                ->selectRaw(
-                    'left(' . ($type == 'family' ? 'family_name' : 'ifnull(last_name, family_name)') . ', 1)
-                    collate utf8mb4_0900_as_ci as letter,
-                    count(*) as total'
-                )->groupBy('letter')
-                ->orderBy('letter')
-                ->get();
-        });
+        return Cache::rememberForever(
+            "letters_$type",
+            fn() => DB::table('people')
+                    ->selectRaw(
+                        'left(' . ($type == 'family' ? 'family_name' : 'ifnull(last_name, family_name)') . ', 1)
+                        collate utf8mb4_0900_as_ci as letter,
+                        count(*) as total'
+                    )->groupBy('letter')
+                    ->orderBy('letter')
+                    ->get()
+        );
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\PersonObserver;
+use App\Person;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
             }
             return $array;
         });
+
+        Person::observe(PersonObserver::class);
     }
 }
