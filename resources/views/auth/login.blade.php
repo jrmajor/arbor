@@ -18,8 +18,12 @@
     </head>
     <body>
         <div class="flex justify-center items-center" style="height: 100vh">
-            <div class="text-center">
-                <h1 style="font-family: Nunito; font-size: 8rem; letter-spacing: 0.2em">arbor</h1>
+            <div class="text-center p-3">
+                <h1
+                    style="font-family: Nunito; letter-spacing: 0.2em"
+                    class="text-7xl md:text-8xl xl:text-10xl">
+                    arbor
+                </h1>
                 <div class="w-full">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

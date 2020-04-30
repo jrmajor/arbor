@@ -7,7 +7,7 @@
     </div>
 
     @if(optional(auth()->user())->canWrite())
-        <div>
+        <div class="hidden md:block">
             <a href="{{ route('people.create') }}"><small>{{ __('misc.menu.add_person') }}</small></a>
             | <a href="{{ route('marriages.create') }}"><small>{{ __('misc.menu.add_marriage') }}</small></a>
             {{--@if(optional(auth()->user())->isSuperAdmin())
@@ -21,7 +21,7 @@
         <div class="px-2">
             <form action="{{ route('locale.set') }}" method="POST">
                 @csrf
-                <small>{{ __('misc.language') }}:</small>
+                <small class="hidden md:inline">{{ __('misc.language') }}:</small>
                 @unless(App::isLocale('en'))
                     <button name="language" value="en" class="leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
                         EN
@@ -41,7 +41,8 @@
                 </a>
             @else
                 <a class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-300" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                    <img class="inline-block h-4" src="{{ asset('img/export.png') }}" height="15px">&nbsp;{{ __('misc.menu.logout') }} <small>[{{ Auth::user()->username }}]</small>
+                    <img class="inline-block h-4" src="{{ asset('img/export.png') }}" height="15px">&nbsp;{{ __('misc.menu.logout') }}
+                    <small class="hidden md:inline">[{{ Auth::user()->username }}]</small>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
                     @csrf
