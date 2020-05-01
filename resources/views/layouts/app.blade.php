@@ -10,8 +10,7 @@
     </head>
     <body class="font-body">
         <div class="container mx-auto my-5 p-4" id="app">
-            @component('components.menu')
-            @endcomponent
+            <x:menu/>
 
             <div class="p-1 sm:p-2">
                 @yield('content')

@@ -6,11 +6,11 @@
         </a>
     </div>
 
-    @if(optional(auth()->user())->canWrite())
+    @if($user->canWrite())
         <div class="hidden md:block">
             <a href="{{ route('people.create') }}"><small>{{ __('misc.menu.add_person') }}</small></a>
             | <a href="{{ route('marriages.create') }}"><small>{{ __('misc.menu.add_marriage') }}</small></a>
-            {{--@if(optional(auth()->user())->isSuperAdmin())
+            {{--@if($user())->isSuperAdmin())
                 | <a href="{{ route('users.create') }}"><small>{{ __('misc.menu.add_user') }}</small></a>
                 | <a href="{{ route('users.index') }}"><small>{{ __('misc.menu.manage_users') }}</small></a>
             @endif--}}
@@ -42,7 +42,7 @@
             @else
                 <a class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-300" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     <img class="inline-block h-4" src="{{ asset('img/export.png') }}" height="15px">&nbsp;{{ __('misc.menu.logout') }}
-                    <small class="hidden md:inline">[{{ Auth::user()->username }}]</small>
+                    <small class="hidden md:inline">[{{ $user->username }}]</small>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
                     @csrf
