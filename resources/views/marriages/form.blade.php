@@ -1,3 +1,7 @@
+@push('scripts')
+    <script src="{{ mix('/js/vue.js') }}" defer></script>
+@endpush
+
 <form
     method="POST"
     action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', ['marriage' => $marriage->id]) }}">
