@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <script src="{{ mix('/js/alpine.js') }}" defer></script>
+@endpush
+
 @section('content')
     <h3>
         @if($person->sex == 'xx')
@@ -43,7 +47,7 @@
         {{-- pytlewski --}}
         @if($pytlewski = $person->pytlewski)
             <dt>@lang('people.pytlewski.id')&nbsp;</dt>
-            <dd>
+            <dd x-data="{ open: false }">
                 <a href="{{ $pytlewski->url }}" target="_blank">
                     {{ $pytlewski->id}}
                     @if($pytlewski->basic_name)
@@ -52,14 +56,13 @@
                             {!! $pytlewski->basic_name !!}
                         </small>
                     @endif
-                </a>&nbsp;
-                {{--
-                    <button class="leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
-                        {{ __('people.pytlewski.show_more') }}
-                    </button>
-                --}}
+                </a>
+                <button @click="open = true"
+                    class="leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
+                    {{ __('people.pytlewski.show_more') }}
+                </button>
                 <br>
-                <div>
+                <div x-show="open" @click.away="open = false" style="display: none;">
                     <small style="display: block; line-height: 1.45">
                         @if($pytlewski->parents)
                             &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}: <br>
