@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Pytlewski\Pytlewski;
 use App\Wielcy;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;

@@ -46,13 +46,18 @@
             <dd>
                 <a href="{{ $pytlewski->url }}" target="_blank">
                     {{ $pytlewski->id}}
-                    <small>
-                        {{ __('people.pytlewski.as') }} {!! $pytlewski->basic_name !!}
-                    </small>
+                    @if($pytlewski->basic_name)
+                        <small>
+                            {{ __('people.pytlewski.as') }}
+                            {!! $pytlewski->basic_name !!}
+                        </small>
+                    @endif
                 </a>&nbsp;
-                <button class="leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
-                    {{ __('people.pytlewski.show_more') }}
-                </button>
+                {{--
+                    <button class="leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
+                        {{ __('people.pytlewski.show_more') }}
+                    </button>
+                --}}
                 <br>
                 <div>
                     <small style="display: block; line-height: 1.45">

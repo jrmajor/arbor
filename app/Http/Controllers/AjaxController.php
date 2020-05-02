@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Person;
-use App\Pytlewski;
+use App\Services\Pytlewski\Pytlewski;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -47,11 +47,13 @@ class AjaxController extends Controller
         $pytlewski = new Pytlewski($request->input('search'));
 
         if (! $pytlewski->family_name && ! $pytlewski->last_name) {
-            return response()->json(['name' => __('people.pytlewski.not_found')]);
+            return response()->json([
+                'name' => __('people.pytlewski.not_found'),
+            ]);
         }
 
         return response()->json([
-            'name' => $pytlewski->family_name . ($pytlewski->last_name ? ' (' . $pytlewski->last_name . ') ' : ' ') . $pytlewski->name
+            'name' => strip_tags($pytlewski->basic_name),
         ]);
     }
 }
