@@ -6,7 +6,7 @@
     @endphp
     @if (! $person)
         <a
-            target="_blank" href="{{ App\Pytlewski::url($id) }}"
+            target="_blank" href="{{ App\Services\Pytlewski\Pytlewski::url($id) }}"
             class="text-red-600 hover:text-red-800">
             {{ $slot }}
         </a>
