@@ -1,5 +1,6 @@
 @push('scripts')
-    <script src="{{ mix('/js/vue.js') }}" defer></script>
+    <livewire:styles>
+    <livewire:scripts>
 @endpush
 
 <form
@@ -7,12 +8,17 @@
     action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', ['marriage' => $marriage->id]) }}">
     @method($action == 'create' ? 'post' : 'put')
     @csrf
-@foreach($errors as $error)
-dd($error)@endforeach
-    <pair-picker
-        :labels="{{ json_encode(['woman' => __('marriages.woman'), 'man' => __('marriages.man')]) }}"
-        :initial-ids="{{ json_encode(['woman' => $marriage->woman_id, 'man' => $marriage->man_id ]) }}">
-    </pair-picker>
+
+    <fieldset class="mb-2">
+        <livewire:person-picker
+            :label="__('marriages.woman')" :sex="'xx'"
+            :name="'woman'" :nullable="false"
+            :initial="old('woman_id') ?? $marriage->woman_id">
+        <livewire:person-picker
+            :label="__('marriages.man')" :sex="'xy'"
+            :name="'man'" :nullable="false"
+            :initial="old('man_id') ?? $marriage->man_id">
+    </fieldset>
     <fieldset class="mb-2">
         <div class="flex flex-wrap items-end mb-1">
             <label for="rite" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('marriages.rite') }}</label>

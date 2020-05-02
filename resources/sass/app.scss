@@ -58,14 +58,16 @@ select {
 input[type=text].invalid,
 input[type=email].invalid,
 input[type=username].invalid,
-input[type=password].invalid {
+input[type=password].invalid,
+select.invalid {
     @apply border-red-500;
 }
 
 input[type=text][disabled],
 input[type=email][disabled],
 input[type=username][disabled],
-input[type=password][disabled] {
+input[type=password][disabled],
+select[disabled] {
     @apply bg-gray-100 text-gray-700;
 }
 

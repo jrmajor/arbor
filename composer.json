@@ -19,6 +19,7 @@
         "laravel/ui": "^2.0",
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.0",
+        "livewire/livewire": "^1.0",
         "spatie/laravel-activitylog": "^3.9",
         "spatie/laravel-backup": "^6.7",
         "spatie/laravel-enum": "^1.4",

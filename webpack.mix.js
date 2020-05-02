@@ -2,11 +2,6 @@ const mix = require('laravel-mix')
 const tailwindcss = require('tailwindcss')
 require('laravel-mix-purgecss')
 
-mix.js('resources/js/vue.js', 'public/js')
-    .options({
-      terser: { extractComments: false }
-    }).version()
-
 mix.sass('resources/sass/app.scss', 'public/css')
     .options({
         processCssUrls: false,

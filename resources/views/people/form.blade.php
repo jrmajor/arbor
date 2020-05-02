@@ -1,5 +1,6 @@
 @push('scripts')
-    <script src="{{ mix('/js/vue.js') }}" defer></script>
+    <livewire:styles>
+    <livewire:scripts>
 @endpush
 
 <form
@@ -7,6 +8,7 @@
     action="{{ $action == 'create' ? route('people.store') : route('people.update', ['person' => $person->id]) }}">
     @method($action == 'create' ? 'post' : 'put')
     @csrf
+
     <fieldset class="mb-2">
         <div class="flex flex-wrap items-end mb-1">
             <legend class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.sex') }}</legend>
@@ -89,14 +91,9 @@
             </div>
         </div>
     </fieldset>
-    <pytlewski-picker
-        :labels="{{ json_encode([
-            'pytlewski' => __('people.pytlewski.id'),
-        ]) }}"
-        :initial-ids="{{ json_encode([
-            'pytlewski' => old('id_pytlewski') ?? $person->id_pytlewski,
-        ]) }}">
-    </pytlewski-picker>
+    <fieldset class="mb-2">
+        <livewire:pytlewski-picker :person="$person">
+    </fieldset>
     {{--
     <div class="flex flex-wrap items-end mb-2">
         <label class="w-full sm:w-1/2 md:w-1/4 pr-1">{{ __('people.pytlewski.guess') }}</label>
@@ -152,7 +149,7 @@
             <div class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.dead') }}</div>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
-                    type="hidden" id="dead" name="dead" value="0">
+                    type="hidden" id="dead-hidden" name="dead" value="0">
                 <input
                     type="checkbox"
                     id="dead" name="dead"
@@ -235,16 +232,16 @@
             </div>
         </div>
     </fieldset>
-    <parents-picker
-        :labels="{{ json_encode([
-            'mother' => __('people.mother'),
-            'father' => __('people.father'),
-        ]) }}"
-        :initial-ids="{{ json_encode([
-            'mother' => old('mother_id') ?? $person->mother_id,
-            'father' => old('father_id') ?? $person->father_id,
-        ]) }}">
-    </parents-picker>
+    <fieldset class="mb-2">
+        <livewire:person-picker
+            :label="__('people.mother')" :sex="'xx'"
+            :name="'mother'" :nullable="true"
+            :initial="old('mother_id') ?? $person->mother_id">
+        <livewire:person-picker
+            :label="__('people.father')" :sex="'xy'"
+            :name="'father'" :nullable="true"
+            :initial="old('father_id') ?? $person->father_id">
+    </fieldset>
     <fieldset>
         <div class="flex">
             <div class="w-full sm:w-1/2 md:w-1/4 pr-1"></div>
