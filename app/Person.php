@@ -299,12 +299,14 @@ class Person extends Model
 
         return Cache::rememberForever(
             "letters_$type",
-            fn() => self::selectRaw(
+            fn() => DB::table('people')
+                    ->selectRaw(
                         'left(' . ($type == 'family' ? 'family_name' : 'ifnull(last_name, family_name)') . ', 1)
                         collate utf8mb4_0900_as_ci as letter,
                         count(*) as total'
                     )->groupBy('letter')
                     ->orderBy('letter')
+                    ->whereNull('deleted_at')
                     ->get()
         );
     }

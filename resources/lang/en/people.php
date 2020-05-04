@@ -11,6 +11,7 @@ return [
     'add_a_new_person' => 'Add a new person',
     'edit_this_person' => 'Edit this person',
 
+    'return_to_person_overwiew' => 'Return to person overwiew',
     'delete' => 'delete',
     'cant_delete_person_with_relationships' => 'In order to delete this person, first delete relationships.',
     'cant_delete_person_with_children' => 'In order to delete this person, first delete children.',

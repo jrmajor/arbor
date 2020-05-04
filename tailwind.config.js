@@ -2,7 +2,18 @@ module.exports = {
     purge: false,
     theme: {
         fontFamily: {
-            body: ['Inter'],
+            sans: [
+                'Inter',
+                'system-ui',
+                '-apple-system',
+                'BlinkMacSystemFont',
+                '"Segoe UI"',
+                'Roboto',
+                '"Helvetica Neue"',
+                'Arial',
+                '"Noto Sans"',
+                'sans-serif',
+            ],
         },
         fontSize: {
             xs: '0.75rem',

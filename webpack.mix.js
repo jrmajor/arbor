@@ -2,7 +2,10 @@ const mix = require('laravel-mix')
 const tailwindcss = require('tailwindcss')
 require('laravel-mix-purgecss')
 
-mix.js('node_modules/alpinejs/dist/alpine.js', 'public/js/');
+mix.js('resources/js/app.js', 'public/js')
+    .options({
+      terser: { extractComments: false }
+    })
 
 mix.sass('resources/sass/app.scss', 'public/css')
     .options({

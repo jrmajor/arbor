@@ -7,6 +7,7 @@ return [
     'add_a_new_marriage' => 'Add marriage',
     'edit_this_marriage' => 'Edit this marriage',
     'edit_marriage' => 'Edit marriage',
+    'add_child' => 'Add child',
 
     'delete' => 'delete',
 

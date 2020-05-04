@@ -7,6 +7,7 @@ return [
     'add_a_new_marriage' => 'Dodaj związek',
     'edit_this_marriage' => 'Edytuj ten związek',
     'edit_marriage' => 'Edytuj związek',
+    'add_child' => 'Dodaj dziecko',
 
     'delete' => 'usuń',
 

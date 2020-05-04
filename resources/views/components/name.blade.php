@@ -89,7 +89,7 @@
 @if(! $raw && $edit)
     <a
         href="{{ route('people.edit', $person->id) }}"
-        alt="{{ __('people.edit_this_person') }}">
+        data-tippy-content="{{ __('people.edit_this_person') }}">
 @endif
 @if(! $raw)
     <small class="text-muted">

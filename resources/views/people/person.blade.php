@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@push('scripts')
-    <script src="{{ mix('/js/alpine.js') }}" defer></script>
-@endpush
-
 @section('content')
     <h3>
         @if($person->sex == 'xx')
@@ -32,11 +28,16 @@
         @endif
 
         @if(optional(auth()->user())->canWrite())
-            <a href="{{ route('people.edit', ['person' => $person->id]) }}">
-                <small class="text-lg">[№{{ $person->id }}]</small>
+            <a href="{{ route('people.edit', ['person' => $person->id]) }}"
+                data-tippy-content="{{ __('people.edit_this_person') }}">
+                <small class="text-lg">
+                    [№{{ $person->id }}]
+                </small>
             </a>
             <a href="{{ route('marriages.create') }}?{{ $person->sex == 'xx' ? 'woman' : 'man' }}={{ $person->id }}">
-                <small class="text-lg">[{{ strtolower(__('marriages.add_a_new_marriage')) }}]</small>
+                <small class="text-lg">
+                    [{{ strtolower(__('marriages.add_a_new_marriage')) }}]
+                </small>
             </a>
         @else
             <small class="text-lg">[№{{ $person->id }}]</small>
@@ -343,10 +344,11 @@
                             @if(optional(auth()->user())->canWrite())
                                 <a
                                     href="{{ route('marriages.edit', ['marriage' => $marriage]) }}"
-                                    alt="{{ __('marriages.edit_this_marriage') }}">
+                                    data-tippy-content="{{ __('marriages.edit_this_marriage') }}">
                                     <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                                 </a>
-                                <a href="{{ route('people.create') }}?mother={{ $marriage->woman_id }}&father={{ $marriage->man_id }}">
+                                <a href="{{ route('people.create') }}?mother={{ $marriage->woman_id }}&father={{ $marriage->man_id }}"
+                                    data-tippy-content="{{ __('marriages.add_child') }}">
                                     <small>[+]</small>
                                 </a>
                             @else

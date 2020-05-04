@@ -12,7 +12,8 @@
     <small class="text-muted">
         [{{ __('people.index.total') }}: <strong>{{ App\Person::count() }}</strong>]
     </small>
-    <a href="{{ route('people.create') }}">
+    <a href="{{ route('people.create') }}"
+        data-tippy-content="{{ __('people.add_a_new_person') }}">
         <small>[+]</small>
     </a>
     <br>&nbsp;&nbsp;
@@ -39,7 +40,8 @@
     <small class="text-muted">
         [{{ __('people.index.total') }}: <strong>{{ App\Person::count() }}</strong>]
     </small>
-    <a href="{{ route('people.create') }}">
+    <a href="{{ route('people.create') }}"
+        data-tippy-content="{{ __('people.add_a_new_person') }}">
         <small>[+]</small>
     </a>
     <br>&nbsp;&nbsp;
