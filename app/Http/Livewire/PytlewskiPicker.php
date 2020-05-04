@@ -14,13 +14,13 @@ class PytlewskiPicker extends Component
     public function search()
     {
         if (blank($this->pytlewskiId)) {
-            $this->result = 'blank';
+            return $this->result = '←';
         }
+
         $pytlewski = new Pytlewski($this->pytlewskiId);
 
-        if (! $pytlewski->basic_name) {
-            $this->result = __('people.pytlewski.not_found');
-            return;
+        if (blank(strip_tags($pytlewski->basic_name))) {
+            return $this->result = __('people.pytlewski.not_found');
         }
 
         $this->result = strip_tags($pytlewski->basic_name);
@@ -30,7 +30,7 @@ class PytlewskiPicker extends Component
     {
         $this->pytlewskiId = old('id_pytlewski') ?? $person->id_pytlewski;
 
-        $this->pytlewskiId ? $this->search() : $this->result = 'x';
+        $this->pytlewskiId ? $this->search() : $this->result = '←';
     }
 
     public function render()
