@@ -14,10 +14,9 @@
         </div>
         <div class="w-full sm:w-3/4 md:w-5/8 mb-1">
             <div class="inline-block relative w-full">
-                <select id="{{ $name }}_id" name="{{ $name }}_id"
-                    @if(empty($people)) disabled @endif>
+                <select id="{{ $name }}_id" name="{{ $name }}_id">
                     @if(empty($people))
-                        <option>←</option>
+                        <option value=""></option>
                     @else
                         @foreach($people as $person)
                             <option value="{{ $person['id'] }}">
@@ -25,7 +24,7 @@
                             </option>
                         @endforeach
                         @if($nullable)
-                            <option></option>
+                            <option value=""></option>
                         @endif
                     @endif
                 </select>
