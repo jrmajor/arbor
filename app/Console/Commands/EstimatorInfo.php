@@ -15,7 +15,7 @@ class EstimatorInfo extends Command
     public function handle()
     {
         $people = Person::whereNotNull('birth_date')->get()
-            ->map(fn($person) => (object) [
+            ->map(fn ($person) => (object) [
                 'person' => $person,
                 'error' => $person->estimatedBirthDateError()
             ])->whereNotNull('error')
@@ -27,7 +27,7 @@ class EstimatorInfo extends Command
                 Person::whereNotNull('birth_date')
                     ->whereNotNull('father_id')
             )->get()
-            ->map(fn($person) => [
+            ->map(fn ($person) => [
                 optional($person->mother)->birth_year
                     ? $person->birth_year - $person->mother->birth_year
                     : null,
@@ -53,7 +53,7 @@ class EstimatorInfo extends Command
                 'variance',
                 round(
                     $variance = $people
-                        ->map(fn($data) => ($data->error - $averageError) ** 2)
+                        ->map(fn ($data) => ($data->error - $averageError) ** 2)
                         ->avg(),
                     2
                 ),

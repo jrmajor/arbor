@@ -52,18 +52,18 @@ abstract class TestCase extends BaseTestCase
     {
         $mother = factory(Person::class)->state('woman')->create([
             'birth_date_from' => $this->faker->dateTimeBetween('-80 years', '-60 years')->format('Y-m-d'),
-            'birth_date_to' => fn($person) => $person['birth_date_from'],
+            'birth_date_to' => fn ($person) => $person['birth_date_from'],
         ]);
         $father = factory(Person::class)->state('man')->create([
             'birth_date_from' => $this->faker->dateTimeBetween('-80 years', '-60 years')->format('Y-m-d'),
-            'birth_date_to' => fn($person) => $person['birth_date_from'],
+            'birth_date_to' => fn ($person) => $person['birth_date_from'],
         ]);
 
         return factory(Person::class)->create([
             'mother_id' => $mother->id,
             'father_id' => $father->id,
             'birth_date_from' => $this->faker->dateTimeBetween('-40 years', '-30 years')->format('Y-m-d'),
-            'birth_date_to' => fn($person) => $person['birth_date_from'],
+            'birth_date_to' => fn ($person) => $person['birth_date_from'],
         ]);
     }
 }

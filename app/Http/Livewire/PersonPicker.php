@@ -28,25 +28,25 @@ class PersonPicker extends Component
         }
 
         $this->people = Person::
-            where(function ($query) {
-                $query->where('id', $this->search)
-                    ->orWhere(function ($query) {
+            where(function ($q) {
+                $q->where('id', $this->search)
+                    ->orWhere(function ($q) {
                         foreach(Arr::trim(explode(' ', $this->search)) as $s) {
-                            $query->where(fn($query) =>
-                                $query->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
+                            $q->where(fn ($q) =>
+                                $q->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
                                     ->OrWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
                                     ->OrWhereRaw('last_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
                             );
                         }
                     });
-            })->when(filled($this->sex), fn($query) =>
-                $query->where(fn($query) =>
-                    $query->where('sex', $this->sex)->orWhereNull('sex')
+            })->when(filled($this->sex), fn ($q) =>
+                $q->where(fn ($q) =>
+                    $q->where('sex', $this->sex)->orWhereNull('sex')
                 )
             )
             ->limit(10)
             ->get()
-            ->map(fn($person) => [
+            ->map(fn ($person) => [
                 'id' => $person->id,
                 'name' => $person->formatName(),
             ])->all();

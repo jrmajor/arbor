@@ -101,7 +101,7 @@ class Person extends Model
     {
         return $this->hasMany('App\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn($q) =>
+                    ->orWhere(fn ($q) =>
                         $this->mother_id && $this->father_id
                         ? $q->where('mother_id', $this->mother_id)
                             ->where('father_id', $this->father_id)
@@ -114,10 +114,10 @@ class Person extends Model
     {
         return $this->hasMany('App\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn($q) =>
+                    ->orWhere(fn ($q) =>
                         $this->mother_id
                         ? $q->where('mother_id', $this->mother_id)
-                            ->where(fn($q) =>
+                            ->where(fn ($q) =>
                                 $q->where('father_id', '!=', $this->father_id)
                                     ->orWhereNull('father_id')
                             )->where('id', '!=', $this->id)
@@ -129,10 +129,10 @@ class Person extends Model
     {
         return $this->hasMany('App\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn($q) =>
+                    ->orWhere(fn ($q) =>
                         $this->father_id
                         ? $q->where('father_id', $this->father_id)
-                            ->where(fn($q) =>
+                            ->where(fn ($q) =>
                                 $q->where('mother_id', '!=', $this->mother_id)
                                     ->orWhereNull('mother_id')
                             )->where('id', '!=', $this->id)
@@ -153,7 +153,7 @@ class Person extends Model
     {
         return $this->hasMany('App\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn($q) =>
+                    ->orWhere(fn ($q) =>
                         $q->where('mother_id', $this->id)
                             ->orwhere('father_id', $this->id)
                     )->orderBy('birth_date_from', 'asc');
@@ -320,7 +320,7 @@ class Person extends Model
 
         return Cache::rememberForever(
             "letters_$type",
-            fn() => DB::table('people')
+            fn () => DB::table('people')
                     ->selectRaw(
                         'left(' . ($type == 'family' ? 'family_name' : 'ifnull(last_name, family_name)') . ', 1)
                         collate utf8mb4_0900_as_ci as letter,

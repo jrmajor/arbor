@@ -16,9 +16,9 @@ trait ScrapesPytlewski
         return collect(
             $reflection->getMethods()
         )->map(
-            fn($method) => $method->name
+            fn ($method) => $method->name
         )->filter(
-            fn($method) => Str::startsWith($method, 'parse')
+            fn ($method) => Str::startsWith($method, 'parse')
         );
     }
 

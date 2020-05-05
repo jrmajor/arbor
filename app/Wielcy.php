@@ -42,7 +42,7 @@ class Wielcy
         $this->source = Cache::remember(
             "wielcy.$this->id",
             CarbonInterval::day(),
-            fn() => iconv('iso-8859-2', 'UTF-8', file_get_contents($this->url))
+            fn () => iconv('iso-8859-2', 'UTF-8', file_get_contents($this->url))
         );
     }
 

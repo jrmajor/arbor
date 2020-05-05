@@ -27,7 +27,7 @@ class Pytlewski
     {
         $attributes = $this->getParsers()
         ->flatMap(
-            fn($method) => $this->{$method}($source)
+            fn ($method) => $this->{$method}($source)
         );
 
         return Arr::trim($attributes->toArray());
@@ -67,7 +67,7 @@ class Pytlewski
         return Cache::remember(
             'pytlewski.'.$this->id,
             CarbonInterval::day(),
-            fn() => $this->getSourceFromPytlewski($this->id)
+            fn () => $this->getSourceFromPytlewski($this->id)
         );
     }
 

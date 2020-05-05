@@ -353,7 +353,7 @@ class PersonTest extends TestCase
                 ['letter' => 'Š', 'total' => 1],
                 ['letter' => 'Ż', 'total' => 1],
             ],
-            Person::letters('family')->map(fn($std) => (array) $std)->toArray()
+            Person::letters('family')->map(fn ($std) => (array) $std)->toArray()
         );
 
         $this->assertEquals(
@@ -362,7 +362,7 @@ class PersonTest extends TestCase
                 ['letter' => 'M', 'total' => 1],
                 ['letter' => 'Š', 'total' => 2],
             ],
-            Person::letters('last')->map(fn($std) => (array) $std)->toArray()
+            Person::letters('last')->map(fn ($std) => (array) $std)->toArray()
         );
     }
 }
