@@ -84,13 +84,6 @@ class Marriage extends Model
 
     public function getFirstEventDateAttribute(): ?string
     {
-        if (
-            Arr::exists($this->attributes, 'first_event_date')
-            && $this->attributes['first_event_date']
-        ) {
-            return format_date($this->attributes['first_event_date']);
-        }
-
         if ($this->first_event_date_from && $this->first_event_date_to) {
             return format_date_from_period($this->first_event_date_from, $this->first_event_date_to);
         }
@@ -100,13 +93,6 @@ class Marriage extends Model
 
     public function getSecondEventDateAttribute(): ?string
     {
-        if (
-            Arr::exists($this->attributes, 'second_event_date')
-            && $this->attributes['second_event_date']
-        ) {
-            return format_date($this->attributes['second_event_date']);
-        }
-
         if ($this->second_event_date_from && $this->second_event_date_to) {
             return format_date_from_period($this->second_event_date_from, $this->second_event_date_to);
         }
@@ -116,13 +102,6 @@ class Marriage extends Model
 
     public function getEndDateAttribute(): ?string
     {
-        if (
-            Arr::exists($this->attributes, 'end_date')
-            && $this->attributes['end_date']
-        ) {
-            return format_date($this->attributes['end_date']);
-        }
-
         if ($this->end_date_from && $this->end_date_to) {
             return format_date_from_period($this->end_date_from, $this->end_date_to);
         }

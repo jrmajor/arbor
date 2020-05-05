@@ -7,13 +7,6 @@ use Tests\TestCase;
 
 class HelpersTest extends TestCase
 {
-    public function testFormatDateHelper()
-    {
-        $this->assertEquals('1984', format_date('1984-00-00'));
-        $this->assertEquals('1963-05', format_date('1963-05-00'));
-        $this->assertEquals('1984-07-14', format_date('1984-07-14'));
-    }
-
     public function testFormatDateFromPeriod()
     {
         $this->assertEquals(

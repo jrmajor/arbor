@@ -1,22 +1,5 @@
 <?php
 
-if (! function_exists('format_date')) {
-    function format_date($date)
-    {
-        $year = substr($date, 0, 4);
-        $month = substr($date, -5, 2);
-        $day = substr($date, -2, 2);
-
-        if ($month == '00') {
-            return $year;
-        } elseif ($day == '00') {
-            return $year.'-'.$month;
-        } else {
-            return $date;
-        }
-    }
-}
-
 if (! function_exists('format_date_from_period')) {
     function format_date_from_period($from, $to)
     {

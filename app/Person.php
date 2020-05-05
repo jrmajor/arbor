@@ -102,7 +102,7 @@ class Person extends Model
             return Person::where('mother_id', $this->mother_id)
                             ->where('father_id', $this->father_id)
                             ->where('id', '!=', $this->id)
-                            ->orderBy('birth_date', 'asc')
+                            ->orderBy('birth_date_from', 'asc')
                             ->get();
         }
         return collect();
@@ -116,7 +116,7 @@ class Person extends Model
                                 $q->where('father_id', '!=', $this->father_id)
                                   ->orWhereNull('father_id');
                             })->where('id', '!=', $this->id)
-                            ->orderBy('birth_date', 'asc')
+                            ->orderBy('birth_date_from', 'asc')
                             ->get();
         }
         return collect();
@@ -130,7 +130,7 @@ class Person extends Model
                                 $q->where('mother_id', '!=', $this->mother_id)
                                   ->orWhereNull('mother_id');
                             })->where('id', '!=', $this->id)
-                            ->orderBy('birth_date', 'asc')
+                            ->orderBy('birth_date_from', 'asc')
                             ->get();
         }
         return collect();
@@ -149,19 +149,12 @@ class Person extends Model
     {
         return Person::where('father_id', $this->id)
                         ->orWhere('mother_id', $this->id)
-                        ->orderBy('birth_date', 'asc')
+                        ->orderBy('birth_date_from', 'asc')
                         ->get();
     }
 
     public function getBirthYearAttribute(): ?int
     {
-        if (
-            Arr::exists($this->attributes, 'birth_date')
-            && $this->attributes['birth_date']
-        ) {
-            return (int) substr($this->birth_date, 0, 4) ?: null;
-        }
-
         if (optional($this->birth_date_from)->year == optional($this->birth_date_to)->year) {
             return optional($this->birth_date_from)->year;
         }
@@ -171,13 +164,6 @@ class Person extends Model
 
     public function getDeathYearAttribute(): ?int
     {
-        if (
-            Arr::exists($this->attributes, 'death_date')
-            && $this->attributes['death_date']
-        ) {
-            return (int) substr($this->death_date, 0, 4) ?: null;
-        }
-
         if (optional($this->death_date_from)->year == optional($this->death_date_to)->year) {
             return optional($this->death_date_from)->year;
         }
@@ -187,13 +173,6 @@ class Person extends Model
 
     public function getBirthDateAttribute(): ?string
     {
-        if (
-            Arr::exists($this->attributes, 'birth_date')
-            && $this->attributes['birth_date']
-        ) {
-            return format_date($this->attributes['birth_date']);
-        }
-
         if ($this->birth_date_from && $this->birth_date_to) {
             return format_date_from_period($this->birth_date_from, $this->birth_date_to);
         }
@@ -203,13 +182,6 @@ class Person extends Model
 
     public function getDeathDateAttribute(): ?string
     {
-        if (
-            Arr::exists($this->attributes, 'death_date')
-            && $this->attributes['death_date']
-        ) {
-            return format_date($this->attributes['death_date']);
-        }
-
         if ($this->death_date_from && $this->death_date_to) {
             return format_date_from_period($this->death_date_from, $this->death_date_to);
         }
@@ -219,13 +191,6 @@ class Person extends Model
 
     public function getFuneralDateAttribute(): ?string
     {
-        if (
-            Arr::exists($this->attributes, 'funeral_date')
-            && $this->attributes['funeral_date']
-        ) {
-            return format_date($this->attributes['funeral_date']);
-        }
-
         if ($this->funeral_date_from && $this->funeral_date_to) {
             return format_date_from_period($this->funeral_date_from, $this->funeral_date_to);
         }
@@ -235,13 +200,6 @@ class Person extends Model
 
     public function getBurialDateAttribute(): ?string
     {
-        if (
-            Arr::exists($this->attributes, 'burial_date')
-            && $this->attributes['burial_date']
-        ) {
-            return format_date($this->attributes['burial_date']);
-        }
-
         if ($this->burial_date_from && $this->burial_date_to) {
             return format_date_from_period($this->burial_date_from, $this->burial_date_to);
         }
