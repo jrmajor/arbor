@@ -19,6 +19,7 @@ return [
     'sex' => 'Płeć',
     'female' => 'kobieta',
     'male' => 'mężczyzna',
+    'unknown' => 'nieznana',
     'pytlewski' => [
         'id' => 'ID w <a href="http://www.pytlewski.pl/index/drzewo/" target="_blank">pytlewski.pl</a>',
         'as' => 'jako',
@@ -50,6 +51,8 @@ return [
     'years_of_error' => 'lat błędu',
     'death' => 'Zgon',
     'dead' => 'Zmarły',
+    'dead_xx' => 'Zmarła',
+    'dead_xy' => 'Zmarły',
     'death_date' => 'Data zgonu',
     'death_place' => 'Miejsce zgonu',
     'death_cause' => 'Powód zgonu',

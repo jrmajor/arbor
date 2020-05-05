@@ -5,7 +5,8 @@
 
 <form
     method="POST"
-    action="{{ $action == 'create' ? route('people.store') : route('people.update', ['person' => $person->id]) }}">
+    action="{{ $action == 'create' ? route('people.store') : route('people.update', ['person' => $person->id]) }}"
+    x-data="{ sex: '{{ old('sex') ?? $person->sex }}' }">
     @method($action == 'create' ? 'post' : 'put')
     @csrf
 
@@ -16,14 +17,23 @@
                     <input
                         type="radio" class="mb-1"
                         id="sex_1" name="sex"
-                        value="xx"{{ (old('sex') ?? $person->sex) == 'xx' ? ' checked' : '' }}>
+                        value="xx" {{ (old('sex') ?? $person->sex) == 'xx' ? 'checked' : '' }}
+                        x-model="sex">
                     <label class="" for="sex_1">{{ __('people.female') }}</label>
                     <br>
                     <input
                         type="radio" class="mb-1"
                         id="sex_2" name="sex"
-                        value="xy"{{ (old('sex') ?? $person->sex) == 'xy' ? ' checked' : '' }}>
+                        value="xy" {{ (old('sex') ?? $person->sex) == 'xy' ? 'checked' : '' }}
+                        x-model="sex">
                     <label class="" for="sex_2">{{ __('people.male') }}</label>
+                    <br>
+                    <input
+                        type="radio" class="mb-1"
+                        id="sex_3" name="sex"
+                        value="" {{ (old('sex') ?? $person->sex) == null ? 'checked' : '' }}
+                        x-model="sex">
+                    <label class="" for="sex_3">{{ __('people.unknown') }}</label>
                     @error('sex')<br><small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
@@ -158,7 +168,10 @@
     </fieldset>
     <fieldset class="mb-2">
         <div class="flex flex-wrap mb-1">
-            <div class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.dead') }}</div>
+            <div class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1"
+                x-text="sex == 'xx' ? '{{ __('people.dead_xx') }}' : '{{ __('people.dead_xy') }}'">
+                {{ __('people.dead') }}
+            </div>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="hidden" id="dead-hidden" name="dead" value="0">
@@ -166,7 +179,10 @@
                     type="checkbox"
                     id="dead" name="dead"
                     value="1" {{ old('dead') ?? $person->dead ? 'checked' : '' }}>
-                <label for="dead">&nbsp;{{ __('people.dead') }}</label>
+                <label for="dead"
+                    x-text="sex == 'xx' ? '{{ __('people.dead_xx') }}' : '{{ __('people.dead_xy') }}'">
+                    &nbsp;{{ __('people.dead') }}
+                </label>
             </div>
         </div>
         <div class="flex flex-wrap mb-1">
