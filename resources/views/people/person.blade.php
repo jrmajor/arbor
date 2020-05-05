@@ -167,7 +167,7 @@
         @endif
 
         {{-- birth --}}
-        @if($person->birth_date || $person->birth_place) {{--  || $person->calcEstimatedBirthDate()) --}}
+        @if($person->birth_date || $person->birth_place  || $person->estimatedBirthDate())
             @if($person->canBeViewedBy(auth()->user()))
                 <dt>{{ __('people.birth') }}&nbsp;</dt>
                 <dd>
@@ -191,7 +191,6 @@
                         <br>
                         @php $some_birth_data_printed = true; @endphp
                     @endif
-                    {{--
                     @if(
                         (! $person->birth_date || optional(auth()->user())->isSuperAdmin())
                         && $person->estimatedBirthDateError()
@@ -207,7 +206,6 @@
                             </small>
                         @endif
                     @endif
-                    --}}
                 </dd>
             @else
                 <dt>{{ __('people.birth') }}&nbsp;</dt>

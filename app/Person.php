@@ -226,7 +226,7 @@ class Person extends Model
         $or = $this->birth_date_from->diffInYears($to_to);
 
         if($either == $or) {
-            return $either;
+            return (int) $either;
         } else {
             return $raw ? $either : $either . '-' . $or;
         }
@@ -246,46 +246,47 @@ class Person extends Model
         return $this->age([$this->death_date_from, $this->death_date_to], $raw);
     }
 
-    // public function estimatedBirthDate()
-    // {
-    //     $interval = self::generationInterval;
-    //     $prediction = collect();
+    public function estimatedBirthDate()
+    {
+        $interval = self::generationInterval;
+        $prediction = collect();
 
-    //     $mother_age = optional($this->mother)->birth_year;
-    //     $father_age = optional($this->father)->birth_year;
-    //     if ($mother_age && $father_age) {
-    //         $prediction->put('parents', (($mother_age + $father_age) / 2) + $interval);
-    //     } elseif ($mother_age || $father_age) {
-    //         $prediction->put('parents', $mother_age + $father_age + $interval);
-    //     }
+        $mother_year = optional($this->mother)->birth_year;
+        $father_year = optional($this->father)->birth_year;
 
-    //     $prediction->put('children',
-    //         $this->children->avg->birth_year ? $this->children->avg->birth_year - $interval : null
-    //     );
+        if ($mother_year && $father_year) {
+            $prediction->put('parents', (($mother_year + $father_year) / 2) + $interval);
+        } elseif ($mother_year || $father_year) {
+            $prediction->put('parents', $mother_year + $father_year + $interval);
+        }
 
-    //     $prediction->put('partners',
-    //         $this->marriages
-    //             ->map->partner($this)
-    //             ->avg->birth_year
-    //     );
+        $prediction->put('children',
+            $this->children->avg->birth_year ? $this->children->avg->birth_year - $interval : null
+        );
 
-    //     $prediction->put('siblings',
-    //         $this->siblings
-    //             ->merge($this->siblings_mother)
-    //             ->merge($this->siblings_father)
-    //             ->avg->birth_year
-    //     );
+        $prediction->put('partners',
+            $this->marriages
+                ->map->partner($this)
+                ->avg->birth_year
+        );
 
-    //     return $prediction->avg() ? round($prediction->avg()) : null;
-    // }
+        $prediction->put('siblings',
+            $this->siblings
+                ->merge($this->siblings_mother)
+                ->merge($this->siblings_father)
+                ->avg->birth_year
+        );
 
-    // public function estimatedBirthDateError(): ?int
-    // {
-    //     if (! $this->estimatedBirthDate() || ! $this->birth_year) {
-    //         return null;
-    //     }
-    //     return abs($this->estimatedBirthDate() - $this->birth_year);
-    // }
+        return $prediction->avg() ? round($prediction->avg()) : null;
+    }
+
+    public function estimatedBirthDateError(): ?int
+    {
+        if (! $this->estimatedBirthDate() || ! $this->birth_year) {
+            return null;
+        }
+        return abs($this->estimatedBirthDate() - $this->birth_year);
+    }
 
     public function formatName(): string
     {
