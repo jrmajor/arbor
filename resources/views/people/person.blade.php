@@ -183,7 +183,6 @@
                         {{ $person->birth_place }}<br>
                         @php $some_birth_data_printed = true; @endphp
                     @endif
-                    {{--
                     @if(! $person->dead && $person->currentAge())
                         @if($some_birth_data_printed)
                             &nbsp;&nbsp;
@@ -192,7 +191,6 @@
                         <br>
                         @php $some_birth_data_printed = true; @endphp
                     @endif
-                    --}}
                     {{--
                     @if(
                         (! $person->birth_date || optional(auth()->user())->isSuperAdmin())
@@ -243,14 +241,12 @@
                         {{ $person->death_cause }}<br>
                         @php $some_death_data_printed = true; @endphp
                     @endif
-                    {{--
                     @if($person->ageAtDeath())
                         @if($some_death_data_printed)
                             &nbsp;&nbsp;
                         @endif
                         {{ __('people.death_age') }}: {{ trans_choice('misc.year', $person->ageAtDeath()) }}
                     @endif
-                    --}}
                 </dd>
             @else
                 <dd>&#10013;</dd>

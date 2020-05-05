@@ -207,58 +207,37 @@ class Person extends Model
         return null;
     }
 
-    // public function age(array $to, $raw = false)
-    // {
-    //     if (! $this->birth_date) {
-    //         return null;
-    //     }
+    public function age($to, $raw = false)
+    {
+        if (! $this->birth_date) {
+            return null;
+        }
 
-    //     if ($this->birth_month === null || $to['m'] === null) {
-    //         return (! $raw ? '~' : '') . ($to['y'] - $this->birth_year);
-    //     }
+        [$to_from, $to_to] = is_array($to) ? $to : [$to, $to];
 
-    //     if ($to['m'] > $this->birth_month) {
-    //         return $to['y'] - $this->birth_year;
-    //     } elseif ($to['m'] < $this->birth_month) {
-    //         return $to['y'] - $this->birth_year - 1;
-    //     }
+        $either = $this->birth_date_to->diffInYears($to_from);
+        $or = $this->birth_date_from->diffInYears($to_to);
 
-    //     if ($this->birth_day === null || $to['d'] === null) {
-    //         return (! $raw ? '~' : '') . ($to['y'] - $this->birth_year);
-    //     }
+        if($either == $or) {
+            return $either;
+        } else {
+            return $raw ? $either : $either . '-' . $or;
+        }
+    }
 
-    //     if ($to['d'] < $this->birth_day) {
-    //         return $to['y'] - $this->birth_year - 1;
-    //     } else {
-    //         return $to['y'] - $this->birth_year;
-    //     }
-    // }
+    public function currentAge($raw = false)
+    {
+        return $this->age(Carbon::now(), $raw);
+    }
 
-    // public function currentAge($raw = false)
-    // {
-    //     $now = [
-    //         'y' => Carbon::now()->format('Y'),
-    //         'm' => Carbon::now()->format('m'),
-    //         'd' => Carbon::now()->format('d'),
-    //     ];
+    public function ageAtDeath($raw = false)
+    {
+        if (! $this->death_date) {
+            return null;
+        }
 
-    //     return $this->age($now, $raw);
-    // }
-
-    // public function ageAtDeath($raw = false)
-    // {
-    //     if (! $this->death_date) {
-    //         return null;
-    //     }
-
-    //     $death = [
-    //         'y' => $this->death_year,
-    //         'm' => $this->death_month,
-    //         'd' => $this->death_day,
-    //     ];
-
-    //     return $this->age($death, $raw);
-    // }
+        return $this->age([$this->death_date_from, $this->death_date_to], $raw);
+    }
 
     // public function estimatedBirthDate()
     // {

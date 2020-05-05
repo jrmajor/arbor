@@ -159,142 +159,119 @@ class PersonTest extends TestCase
         $this->assertNull($personWithoutDates->death_year);
     }
 
-    // public function testReturnsNullWhenCalculatingAgeWithoutDate()
-    // {
-    //     $person = factory(Person::class)->create([
-    //         'birth_date' => null,
-    //     ]);
+    public function testReturnsNullWhenCalculatingAgeWithoutDate()
+    {
+        $person = factory(Person::class)->create([
+            'birth_date_from' => null,
+            'birth_date_to' => null,
+        ]);
 
-    //     $at = [
-    //         'y' => 2019,
-    //         'm' => 8,
-    //         'd' => 15,
-    //     ];
+        $at = Carbon::create(2019, 8, 15);
 
-    //     $this->assertNull($person->age($at, true));
-    //     $this->assertNull($person->age($at));
-    // }
+        $this->assertNull($person->age($at, true));
+        $this->assertNull($person->age($at));
+    }
 
-    // public function testCanCalculateAgeWithCompleteDates()
-    // {
-    //     $person = factory(Person::class)->create([
-    //         'birth_date' => '1994-06-22',
-    //     ]);
+    public function testCanCalculateAgeWithCompleteDates()
+    {
+        $person = factory(Person::class)->create([
+            'birth_date_from' => '1994-06-22',
+            'birth_date_to' => '1994-06-22',
+        ]);
 
-    //     $at = [
-    //         'y' => 2019,
-    //         'm' => 8,
-    //         'd' => 15,
-    //     ];
+        $at = Carbon::create(2019, 8, 15);
 
-    //     $this->assertEquals(25, $person->age($at, true));
-    //     $this->assertEquals(25, $person->age($at));
-    // }
+        $this->assertEquals(25, $person->age($at, true));
+        $this->assertEquals(25, $person->age($at));
+    }
 
-    // public function testCanCalculateAgeWithIncompleteBirthDate()
-    // {
-    //     $person_without_day = factory(Person::class)->create([
-    //         'birth_date' => '1978-04-00',
-    //     ]);
+    public function testCanCalculateAgeWithIncompleteBirthDate()
+    {
+        $person_without_day = factory(Person::class)->create([
+            'birth_date_from' => '1978-04-01',
+            'birth_date_to' => '1978-04-30',
+        ]);
 
-    //     $person_without_month = factory(Person::class)->create([
-    //         'birth_date' => '1982-00-00',
-    //     ]);
+        $person_without_month = factory(Person::class)->create([
+            'birth_date_from' => '1982-01-01',
+            'birth_date_to' => '1982-12-31',
+        ]);
 
-    //     $at_diffrent_month = [
-    //         'y' => 2017,
-    //         'm' => 6,
-    //         'd' => 15,
-    //     ];
+        $at_diffrent_month = Carbon::create(2017, 6, 15);
 
-    //     $at_same_month = [
-    //         'y' => 2006,
-    //         'm' => 4,
-    //         'd' => 16,
-    //     ];
+        $at_same_month = Carbon::create(2006, 4, 16);
 
-    //     $this->assertEquals(39, $person_without_day->age($at_diffrent_month, true));
-    //     $this->assertEquals(39, $person_without_day->age($at_diffrent_month));
-    //     $this->assertEquals(28, $person_without_day->age($at_same_month, true)); // 27-28
-    //     $this->assertEquals('~28', $person_without_day->age($at_same_month)); // 27-28
-    //     $this->assertEquals(35, $person_without_month->age($at_diffrent_month, true)); // 34-35
-    //     $this->assertEquals('~35', $person_without_month->age($at_diffrent_month)); // 34-35
-    // }
+        $this->assertEquals(39, $person_without_day->age($at_diffrent_month, true));
+        $this->assertEquals(39, $person_without_day->age($at_diffrent_month));
+        $this->assertEquals(27, $person_without_day->age($at_same_month, true)); // 27-28
+        $this->assertEquals('27-28', $person_without_day->age($at_same_month));
+        $this->assertEquals(34, $person_without_month->age($at_diffrent_month, true)); // 34-35
+        $this->assertEquals('34-35', $person_without_month->age($at_diffrent_month));
+    }
 
-    // public function testCanCalculateAgeWithIncompleteAtDate()
-    // {
-    //     $person = factory(Person::class)->create([
-    //         'birth_date' => '1975-03-22',
-    //     ]);
+    public function testCanCalculateAgeWithIncompleteAtDate()
+    {
+        $person = factory(Person::class)->create([
+            'birth_date_from' => '1975-03-22',
+            'birth_date_to' => '1975-03-22',
+        ]);
 
-    //     $without_day = [
-    //         'y' => 2013,
-    //         'm' => 7,
-    //         'd' => null,
-    //     ];
+        $without_day = [Carbon::create(2013, 7, 01), Carbon::create(2013, 7, 31)];
 
-    //     $without_day_in_same_month = [
-    //         'y' => 2015,
-    //         'm' => 3,
-    //         'd' => null,
-    //     ];
+        $without_day_in_same_month = [Carbon::create(2015, 3, 01), Carbon::create(2015, 3, 31)];
 
-    //     $without_month = [
-    //         'y' => 2016,
-    //         'm' => null,
-    //         'd' => null,
-    //     ];
+        $without_month = [Carbon::create(2016, 01, 01), Carbon::create(2016, 12, 31)];
 
-    //     $this->assertEquals(38, $person->age($without_day, true));
-    //     $this->assertEquals(38, $person->age($without_day));
-    //     $this->assertEquals(40, $person->age($without_day_in_same_month, true)); // 39-40
-    //     $this->assertEquals('~40', $person->age($without_day_in_same_month)); // 39-40
-    //     $this->assertEquals(41, $person->age($without_month, true)); // 40-41
-    //     $this->assertEquals('~41', $person->age($without_month)); // 40-41
-    // }
+        $this->assertEquals(38, $person->age($without_day, true));
+        $this->assertEquals(38, $person->age($without_day));
+        $this->assertEquals(39, $person->age($without_day_in_same_month, true)); // 39-40
+        $this->assertEquals('39-40', $person->age($without_day_in_same_month));
+        $this->assertEquals(40, $person->age($without_month, true)); // 40-41
+        $this->assertEquals('40-41', $person->age($without_month));
+    }
 
-    // public function testCanCalculateAgeWithIncompleteDates()
-    // {
-    //     $person = factory(Person::class)->create([
-    //         'birth_date' => '1992',
-    //     ]);
+    public function testCanCalculateAgeWithIncompleteDates()
+    {
+        $person = factory(Person::class)->create([
+            'birth_date_from' => '1992-01-01',
+            'birth_date_to' => '1992-12-31',
+        ]);
 
-    //     $at = [
-    //         'y' => 2010,
-    //         'm' => 7,
-    //         'd' => null,
-    //     ];
+        $at = [Carbon::create(2010, 7, 01), Carbon::create(2010, 7, 31)];
 
-    //     $this->assertEquals(18, $person->age($at, true)); // 17-18
-    //     $this->assertEquals('~18', $person->age($at)); // 17-18
-    // }
+        $this->assertEquals(17, $person->age($at, true)); // 17-18
+        $this->assertEquals('17-18', $person->age($at));
+    }
 
-    // public function testCanCalculateCurrentAge()
-    // {
-    //     $person = factory(Person::class)->create([
-    //         'birth_date' => '1973-05-12',
-    //     ]);
+    public function testCanCalculateCurrentAge()
+    {
+        $person = factory(Person::class)->create([
+            'birth_date_from' => '1973-05-12',
+            'birth_date_to' => '1973-05-12',
+        ]);
 
-    //     $today = Carbon::create('2016-11-10');
-    //     Carbon::setTestNow($today);
+        $today = Carbon::create('2016-11-10');
+        Carbon::setTestNow($today);
 
-    //     $this->assertEquals('2016-11-10', Carbon::now()->format('Y-m-d'));
-    //     $this->assertEquals(43, $person->currentAge(true));
-    //     $this->assertEquals(43, $person->currentAge());
+        $this->assertEquals('2016-11-10', Carbon::now()->format('Y-m-d'));
+        $this->assertEquals(43, $person->currentAge(true));
+        $this->assertEquals(43, $person->currentAge());
 
-    //     Carbon::setTestNow();
-    // }
+        Carbon::setTestNow();
+    }
 
-    // public function testCanCalculateAgeAgeAtDeath()
-    // {
-    //     $person = factory(Person::class)->create([
-    //         'birth_date' => '1874-04-08',
-    //         'death_date' => '1941-05-30',
-    //     ]);
+    public function testCanCalculateAgeAgeAtDeath()
+    {
+        $person = factory(Person::class)->create([
+            'birth_date_from' => '1874-04-08',
+            'birth_date_to' => '1874-04-08',
+            'death_date_from' => '1941-05-30',
+            'death_date_to' => '1941-05-30',
+        ]);
 
-    //     $this->assertEquals(67, $person->ageAtDeath(true));
-    //     $this->assertEquals(67, $person->ageAtDeath());
-    // }
+        $this->assertEquals(67, $person->ageAtDeath(true));
+        $this->assertEquals(67, $person->ageAtDeath());
+    }
 
     public function testCanFormatName()
     {
