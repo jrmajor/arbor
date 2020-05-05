@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -96,44 +97,47 @@ class Person extends Model
         return $this->pytlewski;
     }
 
-    public function getSiblingsAttribute(): Collection
+    public function siblings(): HasMany
     {
-        if($this->mother_id && $this->father_id) {
-            return Person::where('mother_id', $this->mother_id)
+        return $this->hasMany('App\Person', 'id', 'id')
+                    ->where('id', '!=', $this->id)
+                    ->orWhere(fn($q) =>
+                        $this->mother_id && $this->father_id
+                        ? $q->where('mother_id', $this->mother_id)
                             ->where('father_id', $this->father_id)
                             ->where('id', '!=', $this->id)
-                            ->orderBy('birth_date_from', 'asc')
-                            ->get();
-        }
-        return collect();
+                        : $q->whereRaw('false')
+                    )->orderBy('birth_date_from', 'asc');
     }
 
-    public function getSiblingsMotherAttribute(): Collection
+    public function siblings_mother(): HasMany
     {
-        if($this->mother_id) {
-            return Person::where('mother_id', $this->mother_id)
-                            ->where(function($q) {
+        return $this->hasMany('App\Person', 'id', 'id')
+                    ->where('id', '!=', $this->id)
+                    ->orWhere(fn($q) =>
+                        $this->mother_id
+                        ? $q->where('mother_id', $this->mother_id)
+                            ->where(fn($q) =>
                                 $q->where('father_id', '!=', $this->father_id)
-                                  ->orWhereNull('father_id');
-                            })->where('id', '!=', $this->id)
-                            ->orderBy('birth_date_from', 'asc')
-                            ->get();
-        }
-        return collect();
+                                    ->orWhereNull('father_id')
+                            )->where('id', '!=', $this->id)
+                        : $q->whereRaw('false')
+                    )->orderBy('birth_date_from', 'asc');
     }
 
-    public function getSiblingsFatherAttribute(): Collection
+    public function siblings_father(): HasMany
     {
-        if($this->father_id) {
-            return Person::where('father_id', $this->father_id)
-                            ->where(function($q) {
+        return $this->hasMany('App\Person', 'id', 'id')
+                    ->where('id', '!=', $this->id)
+                    ->orWhere(fn($q) =>
+                        $this->father_id
+                        ? $q->where('father_id', $this->father_id)
+                            ->where(fn($q) =>
                                 $q->where('mother_id', '!=', $this->mother_id)
-                                  ->orWhereNull('mother_id');
-                            })->where('id', '!=', $this->id)
-                            ->orderBy('birth_date_from', 'asc')
-                            ->get();
-        }
-        return collect();
+                                    ->orWhereNull('mother_id')
+                            )->where('id', '!=', $this->id)
+                        : $q->whereRaw('false')
+                    )->orderBy('birth_date_from', 'asc');
     }
 
     public function getMarriagesAttribute(): Collection
@@ -145,12 +149,14 @@ class Person extends Model
                             ->get();
     }
 
-    public function getChildrenAttribute(): Collection
+    public function children(): HasMany
     {
-        return Person::where('father_id', $this->id)
-                        ->orWhere('mother_id', $this->id)
-                        ->orderBy('birth_date_from', 'asc')
-                        ->get();
+        return $this->hasMany('App\Person', 'id', 'id')
+                    ->where('id', '!=', $this->id)
+                    ->orWhere(fn($q) =>
+                        $q->where('mother_id', $this->id)
+                            ->orwhere('father_id', $this->id)
+                    )->orderBy('birth_date_from', 'asc');
     }
 
     public function getBirthYearAttribute(): ?int

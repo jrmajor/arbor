@@ -90,6 +90,15 @@ class PersonTest extends TestCase
         $this->assertCount(3, $person->siblings_mother);
 
         $this->assertCount(4, $person->siblings_father);
+
+        $person->mother_id = null;
+        $person = tap($person)->save()->fresh();
+
+        $this->assertCount(0, $person->siblings);
+
+        $this->assertCount(0, $person->siblings_mother);
+
+        $this->assertCount(6, $person->siblings_father);
     }
 
     public function testCanGetMarriages()
