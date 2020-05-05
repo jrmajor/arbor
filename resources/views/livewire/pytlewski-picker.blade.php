@@ -1,5 +1,5 @@
-<div class="flex flex-wrap items-end mb-1">
-    <label for="id_pytlewski" class="w-full sm:w-1/2 md:w-1/4 pr-1">
+<div class="flex flex-wrap mb-1">
+    <label for="id_pytlewski" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">
         {!! __('people.pytlewski.id') !!}
     </label>
     <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">

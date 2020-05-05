@@ -19,9 +19,10 @@
             :name="'man'" :nullable="false"
             :initial="old('man_id') ?? $marriage->man_id">
     </fieldset>
+
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="rite" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('marriages.rite') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="rite" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.rite') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <div class="inline-block relative w-full">
                     <select id="rite" name="rite">
@@ -29,7 +30,7 @@
                         @foreach(\App\Enums\MarriageRiteEnum::getAll() as $rite)
                             <option
                                 value="{{ $rite }}"
-                                {{ $rite->isEqual($marriage->rite) ? 'selected' : '' }}>
+                                {{ $rite->isEqual(old('rite') ?? $marriage->rite) ? 'selected' : '' }}>
                                 {{ __('marriages.rites.' . $rite) }}
                             </option>
                         @endforeach
@@ -44,9 +45,10 @@
             </div>
         </div>
     </fieldset>
+
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="first_event_type" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('marriages.first_event_type') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="first_event_type" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.first_event_type') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <div class="inline-block relative w-full">
                     <select id="first_event_type" name="first_event_type">
@@ -54,7 +56,7 @@
                         @foreach(\App\Enums\MarriageEventTypeEnum::getAll() as $type)
                             <option
                                 value="{{ $type }}"
-                                {{ $type->isEqual($marriage->first_event_type) ? 'selected' : '' }}>
+                                {{ $type->isEqual(old('first_event_type') ?? $marriage->first_event_type) ? 'selected' : '' }}>
                                 {{ __('marriages.event_types.' . $type) }}
                             </option>
                         @endforeach
@@ -68,30 +70,43 @@
                 @error('first_event_type')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="first_event_date" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('marriages.first_event_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
-                <input
-                    type="text" class="@error('event_date') invalid @enderror"
-                    id="first_event_date" name="first_event_date"
-                    value="{{ $marriage->first_event_date }}">
-                @error('first_event_date')<small class="text-red-500">{{ $message }}</small>@enderror
+        <div class="flex flex-wrap mb-1">
+            <label for="first_event_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.first_event_date') }}</label>
+            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
+                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.between') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('first_event_date_from') invalid @enderror"
+                        id="first_event_date_from" name="first_event_date_from"
+                        value="{{ old('first_event_date_from') ?? optional($marriage->first_event_date_from)->toDateString() }}">
+                    @error('first_event_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
+                <div class="w-full sm:w-1/2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.and') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('first_event_date_to') invalid @enderror"
+                        id="first_event_date_to" name="first_event_date_to"
+                        value="{{ old('first_event_date_to') ?? optional($marriage->first_event_date_to)->toDateString() }}"
+                        class="flex-grow">
+                    @error('first_event_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="first_event_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('marriages.first_event_place') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="first_event_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.first_event_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('event_place') invalid @enderror"
                     id="first_event_place" name="first_event_place"
-                    value="{{ $marriage->first_event_place }}">
+                    value="{{ old('first_event_place') ?? $marriage->first_event_place }}">
                 @error('first_event_place')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
     </fieldset>
+
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="second_event_type" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('marriages.second_event_type') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="second_event_type" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.second_event_type') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <div class="inline-block relative w-full">
                     <select id="second_event_type" name="second_event_type">
@@ -99,7 +114,7 @@
                         @foreach(\App\Enums\MarriageEventTypeEnum::getAll() as $type)
                             <option
                                 value="{{ $type }}"
-                                {{ $type->isEqual($marriage->second_event_type) ? 'selected' : '' }}>
+                                {{ $type->isEqual(old('second_event_type') ?? $marriage->second_event_type) ? 'selected' : '' }}>
                                 {{ __('marriages.event_types.' . $type) }}
                             </option>
                         @endforeach
@@ -113,27 +128,40 @@
                 @error('second_event_type')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="second_event_date" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('marriages.second_event_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
-                <input
-                    type="text" class="@error('second_event_date') invalid @enderror"
-                    id="second_event_date" name="second_event_date"
-                    value="{{ $marriage->second_event_date }}">
-                @error('second_event_date')<small class="text-red-500">{{ $message }}</small>@enderror
+        <div class="flex flex-wrap mb-1">
+            <label for="second_event_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.second_event_date') }}</label>
+            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
+                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.between') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('second_event_date_from') invalid @enderror"
+                        id="second_event_date_from" name="second_event_date_from"
+                        value="{{ old('second_event_date_from') ?? optional($marriage->second_event_date_from)->toDateString() }}">
+                    @error('second_event_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
+                <div class="w-full sm:w-1/2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.and') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('second_event_date_to') invalid @enderror"
+                        id="second_event_date_to" name="second_event_date_to"
+                        value="{{ old('second_event_date_to') ?? optional($marriage->second_event_date_to)->toDateString() }}"
+                        class="flex-grow">
+                    @error('second_event_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="second_event_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('marriages.second_event_place') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="second_event_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.second_event_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('second_event_place') invalid @enderror"
                     id="second_event_place" name="second_event_place"
-                    value="{{ $marriage->second_event_place }}">
+                    value="{{ old('second_event_place') ?? $marriage->second_event_place }}">
                 @error('second_event_place')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
     </fieldset>
+
     <fieldset>
         <div class="flex">
             <div class="w-full sm:w-1/2 md:w-1/4 pr-1"></div>

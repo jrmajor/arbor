@@ -108,10 +108,12 @@ class MarriageTest extends TestCase
     {
         $first_marriage = factory(Marriage::class)->create([
             'first_event_type' => 'civil_marriage',
-            'first_event_date' => '2014-06-23',
+            'first_event_date_from' => '2014-06-23',
+            'first_event_date_to' => '2014-06-23',
             'first_event_place' => 'Żnin, Polska',
             'second_event_type' => null,
-            'second_event_date' => null,
+            'second_event_date_from' => null,
+            'second_event_date_to' => null,
             'second_event_place' => null,
         ]);
 
@@ -120,10 +122,12 @@ class MarriageTest extends TestCase
 
         $second_marriage = factory(Marriage::class)->create([
             'first_event_type' => 'concordat_marriage',
-            'first_event_date' => null,
+            'first_event_date_from' => null,
+            'first_event_date_to' => null,
             'first_event_place' => null,
             'second_event_type' => null,
-            'second_event_date' => '1863-01-31',
+            'second_event_date_from' => '1863-01-31',
+            'second_event_date_to' => '1863-01-31',
             'second_event_place' => null,
         ]);
 
@@ -132,10 +136,12 @@ class MarriageTest extends TestCase
 
         $third_marriage = factory(Marriage::class)->create([
             'first_event_type' => null,
-            'first_event_date' => null,
+            'first_event_date_from' => null,
+            'first_event_date_to' => null,
             'first_event_place' => 'Lwów, Litwa',
             'second_event_type' => 'civil_marriage',
-            'second_event_date' => '1863-01-31',
+            'second_event_date_from' => '1863-01-31',
+            'second_event_date_to' => '1863-01-31',
             'second_event_place' => null,
         ]);
 

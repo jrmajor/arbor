@@ -2,7 +2,8 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Carbon\Carbon;
+use Tests\TestCase;
 
 class HelpersTest extends TestCase
 {
@@ -12,6 +13,44 @@ class HelpersTest extends TestCase
         $this->assertEquals('1963-05', format_date('1963-05-00'));
         $this->assertEquals('1984-07-14', format_date('1984-07-14'));
     }
+
+    public function testFormatDateFromPeriod()
+    {
+        $this->assertEquals(
+            '1972-11-28',
+            format_date_from_period(new Carbon('1972-11-28'), new Carbon('1972-11-28'))
+        );
+
+        $this->assertEquals(
+            '2000-04',
+            format_date_from_period(new Carbon('2000-04-01'), new Carbon('2000-04-30'))
+        );
+
+        $this->assertEquals(
+            __('misc.date.between') . ' 2000-01 ' . __('misc.date.and') . ' 2003-07',
+            format_date_from_period(new Carbon('2000-01-01'), new Carbon('2003-07-31'))
+        );
+
+        $this->assertEquals(
+            __('misc.date.between') . ' 2011-01 ' . __('misc.date.and') . ' 2011-02',
+            format_date_from_period(new Carbon('2011-01-01'), new Carbon('2011-02-28'))
+        );
+
+        $this->assertEquals(
+            '1986',
+            format_date_from_period(new Carbon('1986-01-01'), new Carbon('1986-12-31'))
+        );
+
+        $this->assertEquals(
+            '1977-1983',
+            format_date_from_period(new Carbon('1977-01-01'), new Carbon('1983-12-31'))
+        );
+
+        $this->assertEquals(
+            __('misc.date.between') . ' 2002-12-17 ' . __('misc.date.and') . ' 2015-10-31',
+            format_date_from_period(new Carbon('2002-12-17'), new Carbon('2015-10-31'))
+        );
+}
 
     public function testRomanHelper()
     {

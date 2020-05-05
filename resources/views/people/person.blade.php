@@ -173,7 +173,7 @@
                 <dd>
                     @php $some_birth_data_printed = false; @endphp
                     @if($person->birth_date)
-                        {{ format_date($person->birth_date) }}<br>
+                        {{ $person->birth_date }}<br>
                         @php $some_birth_data_printed = true; @endphp
                     @endif
                     @if($person->birth_place)
@@ -183,6 +183,7 @@
                         {{ $person->birth_place }}<br>
                         @php $some_birth_data_printed = true; @endphp
                     @endif
+                    {{--
                     @if(! $person->dead && $person->currentAge())
                         @if($some_birth_data_printed)
                             &nbsp;&nbsp;
@@ -191,6 +192,8 @@
                         <br>
                         @php $some_birth_data_printed = true; @endphp
                     @endif
+                    --}}
+                    {{--
                     @if(
                         (! $person->birth_date || optional(auth()->user())->isSuperAdmin())
                         && $person->estimatedBirthDateError()
@@ -206,6 +209,7 @@
                             </small>
                         @endif
                     @endif
+                    --}}
                 </dd>
             @else
                 <dt>{{ __('people.birth') }}&nbsp;</dt>
@@ -222,7 +226,7 @@
                 <dd>
                     @php $some_death_data_printed = false; @endphp
                     @if($person->death_date)
-                        {{ format_date($person->death_date) }}<br>
+                        {{ $person->death_date }}<br>
                         @php $some_death_data_printed = true; @endphp
                     @endif
                     @if($person->death_place)
@@ -239,12 +243,14 @@
                         {{ $person->death_cause }}<br>
                         @php $some_death_data_printed = true; @endphp
                     @endif
+                    {{--
                     @if($person->ageAtDeath())
                         @if($some_death_data_printed)
                             &nbsp;&nbsp;
                         @endif
                         {{ __('people.death_age') }}: {{ trans_choice('misc.year', $person->ageAtDeath()) }}
                     @endif
+                    --}}
                 </dd>
             @else
                 <dd>&#10013;</dd>
@@ -255,13 +261,13 @@
         @if($person->funeral_date || $person->funeral_place)
             @if($person->funeral_date && ! $person->funeral_place)
                 <dt>{{ __('people.funeral') }}&nbsp;</dt>
-                <dd>{{ format_date($person->funeral_date) }}</dd>
+                <dd>{{ $person->funeral_date }}</dd>
             @elseif($person->funeral_place && ! $person->funeral_date)
                 <dt>{{ __('people.funeral') }}&nbsp;</dt>
                 <dd>{{ $person->funeral_place }}</dd>
             @elseif($person->funeral_place && $person->funeral_date)
                 <dt>{{ __('people.funeral') }}&nbsp;</dt>
-                <dd>{{ format_date($person->funeral_date) }}<br/>&nbsp;&nbsp;{{ $person->funeral_place }}</dd>
+                <dd>{{ $person->funeral_date }}<br/>&nbsp;&nbsp;{{ $person->funeral_place }}</dd>
             @endif
         @endif
 
@@ -269,13 +275,13 @@
         @if($person->burial_date || $person->burial_place)
             @if($person->burial_date && ! $person->burial_place)
                 <dt>{{ __('people.burial') }}&nbsp;</dt>
-                <dd>{{ format_date($person->burial_date) }}</dd>
+                <dd>{{ $person->burial_date }}</dd>
             @elseif($person->burial_place && ! $person->burial_date)
                 <dt>{{ __('people.burial') }}&nbsp;</dt>
                 <dd>{{ $person->burial_place }}</dd>
             @elseif($person->burial_place && $person->burial_date)
                 <dt>{{ __('people.burial') }}&nbsp;</dt>
-                <dd>{{ format_date($person->burial_date) }}<br/>&nbsp;&nbsp;{{ $person->burial_place }}</dd>
+                <dd>{{ $person->burial_date }}<br/>&nbsp;&nbsp;{{ $person->burial_place }}</dd>
             @endif
         @endif
 
@@ -361,11 +367,11 @@
                                     <br>&nbsp;
                                 @endif
                                 @if($marriage->first_event_place && $marriage->first_event_date)
-                                    {{ $marriage->first_event_place }}, {{ format_date($marriage->first_event_date) }}
+                                    {{ $marriage->first_event_place }}, {{ $marriage->first_event_date }}
                                 @elseif($marriage->first_event_place)
                                     {{ $marriage->first_event_place }}
                                 @elseif($marriage->first_event_date)
-                                    {{ format_date($marriage->first_event_date) }}
+                                    {{ $marriage->first_event_date }}
                                 @endif
                             @endif
                             @if($marriage->hasSecondEvent())
@@ -375,16 +381,16 @@
                                     <br>&nbsp;
                                 @endif
                                 @if($marriage->second_event_place && $marriage->second_event_date)
-                                    {{ $marriage->second_event_place }}, {{ format_date($marriage->second_event_date) }}
+                                    {{ $marriage->second_event_place }}, {{ $marriage->second_event_date }}
                                 @elseif($marriage->second_event_place)
                                     {{ $marriage->second_event_place }}
                                 @elseif($marriage->second_event_date)
-                                    {{ format_date($marriage->second_event_date) }}
+                                    {{ $marriage->second_event_date }}
                                 @endif
                             @endif
 
                             @if($marriage->ended && $marriage->end_date)
-                                <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}: {{ format_date($marriage->end_date) }}
+                                <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}: {{ $marriage->end_date }}
                             @elseif($marriage->ended)
                                 <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}
                             @endif

@@ -5,6 +5,7 @@ namespace Tests\Feature\People;
 use App\Person;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class CreatePersonTest extends TestCase
@@ -21,15 +22,15 @@ class CreatePersonTest extends TestCase
             'middle_name' => 'Erazm',
             'family_name' => 'Gąsiorowski',
             'last_name' => 'Jakże to',
-            'birth_date' => '1878-04-01',
+            'birth_date_from' => '1878-04-01',
             'birth_place' => 'Zaleszczyki, Polska',
             'dead' => true,
-            'death_date' => '1947-01-17',
+            'death_date_from' => '1947-01-17',
             'death_place' => 'Grudziądz, Polska',
             'death_cause' => 'rak',
-            'funeral_date' => '1947-01-21',
+            'funeral_date_from' => '1947-01-21',
             'funeral_place' => 'Grudziądz, Polska',
-            'burial_date' => '1947-01-21',
+            'burial_date_from' => '1947-01-21',
             'burial_place' => 'Grudziądz, Polska',
             // 'visibility' => true,
         ], $overrides);
@@ -109,9 +110,26 @@ class CreatePersonTest extends TestCase
         $response->assertRedirect("people/$person->id");
         $this->assertEquals(3, Person::count());
 
-        foreach ($validAttributes as $key => $attribute) {
+        $attributesToCheck = Arr::except($validAttributes, [
+            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
+            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $attribute) {
             $this->assertEquals($attribute, $person->fresh()[$key]);
         }
+
+        $this->assertTrue($validAttributes['birth_date_from'] == $person->fresh()['birth_date_from']->toDateString());
+        $this->assertTrue($validAttributes['birth_date_from'] == $person->fresh()['birth_date_to']->toDateString());
+
+        $this->assertTrue($validAttributes['death_date_from'] == $person->fresh()['death_date_from']->toDateString());
+        $this->assertTrue($validAttributes['death_date_from'] == $person->fresh()['death_date_to']->toDateString());
+
+        $this->assertTrue($validAttributes['funeral_date_from'] == $person->fresh()['funeral_date_from']->toDateString());
+        $this->assertTrue($validAttributes['funeral_date_from'] == $person->fresh()['funeral_date_to']->toDateString());
+
+        $this->assertTrue($validAttributes['burial_date_from'] == $person->fresh()['burial_date_from']->toDateString());
+        $this->assertTrue($validAttributes['burial_date_from'] == $person->fresh()['burial_date_to']->toDateString());
     }
 
     public function testYouCanPassParentsToFormByGetRequestParameters()

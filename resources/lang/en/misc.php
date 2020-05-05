@@ -12,6 +12,10 @@ return [
         //'add_user' => 'add user',
         //'manage_users' => 'manage users',
     ],
+    'date' => [
+        'between' => 'between',
+        'and' => 'and',
+    ],
     'hidden' => 'hidden',
     'submit' => 'Submit',
     'language' => 'language',

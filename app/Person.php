@@ -9,6 +9,7 @@ use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,17 @@ class Person extends Model
     protected static $logAttributesToIgnore = ['id', 'created_at'];
 
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
+
+    protected $dates = [
+        'birth_date_from',
+        'birth_date_to',
+        'death_date_from',
+        'death_date_to',
+        'funeral_date_from',
+        'funeral_date_to',
+        'burial_date_from',
+        'burial_date_to',
+    ];
 
     protected $casts = [
         'dead' => 'boolean',
@@ -143,127 +155,193 @@ class Person extends Model
 
     public function getBirthYearAttribute(): ?int
     {
-        return (int) substr($this->birth_date, 0, 4) ?: null;
-    }
+        if (
+            Arr::exists($this->attributes, 'birth_date')
+            && $this->attributes['birth_date']
+        ) {
+            return (int) substr($this->birth_date, 0, 4) ?: null;
+        }
 
-    public function getBirthMonthAttribute(): ?int
-    {
-        return (int) substr($this->birth_date, 5, 2) ?: null;
-    }
+        if (optional($this->birth_date_from)->year == optional($this->birth_date_to)->year) {
+            return optional($this->birth_date_from)->year;
+        }
 
-    public function getBirthDayAttribute(): ?int
-    {
-        return (int) substr($this->birth_date, 8, 2) ?: null;
+        return null;
     }
 
     public function getDeathYearAttribute(): ?int
     {
-        return (int) substr($this->death_date, 0, 4) ?: null;
+        if (
+            Arr::exists($this->attributes, 'death_date')
+            && $this->attributes['death_date']
+        ) {
+            return (int) substr($this->death_date, 0, 4) ?: null;
+        }
+
+        if (optional($this->death_date_from)->year == optional($this->death_date_to)->year) {
+            return optional($this->death_date_from)->year;
+        }
+
+        return null;
     }
 
-    public function getDeathMonthAttribute(): ?int
+    public function getBirthDateAttribute(): ?string
     {
-        return (int) substr($this->death_date, 5, 2) ?: null;
+        if (
+            Arr::exists($this->attributes, 'birth_date')
+            && $this->attributes['birth_date']
+        ) {
+            return format_date($this->attributes['birth_date']);
+        }
+
+        if ($this->birth_date_from && $this->birth_date_to) {
+            return format_date_from_period($this->birth_date_from, $this->birth_date_to);
+        }
+
+        return null;
     }
 
-    public function getDeathDayAttribute(): ?int
+    public function getDeathDateAttribute(): ?string
     {
-        return (int) substr($this->death_date, 8, 2) ?: null;
+        if (
+            Arr::exists($this->attributes, 'death_date')
+            && $this->attributes['death_date']
+        ) {
+            return format_date($this->attributes['death_date']);
+        }
+
+        if ($this->death_date_from && $this->death_date_to) {
+            return format_date_from_period($this->death_date_from, $this->death_date_to);
+        }
+
+        return null;
     }
 
-    public function age(array $to, $raw = false)
+    public function getFuneralDateAttribute(): ?string
     {
-        if (! $this->birth_date) {
-            return null;
+        if (
+            Arr::exists($this->attributes, 'funeral_date')
+            && $this->attributes['funeral_date']
+        ) {
+            return format_date($this->attributes['funeral_date']);
         }
 
-        if ($this->birth_month === null || $to['m'] === null) {
-            return (! $raw ? '~' : '') . ($to['y'] - $this->birth_year);
+        if ($this->funeral_date_from && $this->funeral_date_to) {
+            return format_date_from_period($this->funeral_date_from, $this->funeral_date_to);
         }
 
-        if ($to['m'] > $this->birth_month) {
-            return $to['y'] - $this->birth_year;
-        } elseif ($to['m'] < $this->birth_month) {
-            return $to['y'] - $this->birth_year - 1;
-        }
-
-        if ($this->birth_day === null || $to['d'] === null) {
-            return (! $raw ? '~' : '') . ($to['y'] - $this->birth_year);
-        }
-
-        if ($to['d'] < $this->birth_day) {
-            return $to['y'] - $this->birth_year - 1;
-        } else {
-            return $to['y'] - $this->birth_year;
-        }
+        return null;
     }
 
-    public function currentAge($raw = false)
+    public function getBurialDateAttribute(): ?string
     {
-        $now = [
-            'y' => Carbon::now()->format('Y'),
-            'm' => Carbon::now()->format('m'),
-            'd' => Carbon::now()->format('d'),
-        ];
-
-        return $this->age($now, $raw);
-    }
-
-    public function ageAtDeath($raw = false)
-    {
-        if (! $this->death_date) {
-            return null;
+        if (
+            Arr::exists($this->attributes, 'burial_date')
+            && $this->attributes['burial_date']
+        ) {
+            return format_date($this->attributes['burial_date']);
         }
 
-        $death = [
-            'y' => $this->death_year,
-            'm' => $this->death_month,
-            'd' => $this->death_day,
-        ];
-
-        return $this->age($death, $raw);
-    }
-
-    public function estimatedBirthDate()
-    {
-        $interval = self::generationInterval;
-        $prediction = collect();
-
-        $mother_age = optional($this->mother)->birth_year;
-        $father_age = optional($this->father)->birth_year;
-        if ($mother_age && $father_age) {
-            $prediction->put('parents', (($mother_age + $father_age) / 2) + $interval);
-        } elseif ($mother_age || $father_age) {
-            $prediction->put('parents', $mother_age + $father_age + $interval);
+        if ($this->burial_date_from && $this->burial_date_to) {
+            return format_date_from_period($this->burial_date_from, $this->burial_date_to);
         }
 
-        $prediction->put('children',
-            $this->children->avg->birth_year ? $this->children->avg->birth_year - $interval : null
-        );
-
-        $prediction->put('partners',
-            $this->marriages
-                ->map->partner($this)
-                ->avg->birth_year
-        );
-
-        $prediction->put('siblings',
-            $this->siblings
-                ->merge($this->siblings_mother)
-                ->merge($this->siblings_father)
-                ->avg->birth_year
-        );
-
-        return $prediction->avg() ? round($prediction->avg()) : null;
+        return null;
     }
 
-    public function estimatedBirthDateError(): ?int
-    {
-        if (! $this->estimatedBirthDate() || ! $this->birth_year) {
-            return null;
-        }
-        return abs($this->estimatedBirthDate() - $this->birth_year);
-    }
+    // public function age(array $to, $raw = false)
+    // {
+    //     if (! $this->birth_date) {
+    //         return null;
+    //     }
+
+    //     if ($this->birth_month === null || $to['m'] === null) {
+    //         return (! $raw ? '~' : '') . ($to['y'] - $this->birth_year);
+    //     }
+
+    //     if ($to['m'] > $this->birth_month) {
+    //         return $to['y'] - $this->birth_year;
+    //     } elseif ($to['m'] < $this->birth_month) {
+    //         return $to['y'] - $this->birth_year - 1;
+    //     }
+
+    //     if ($this->birth_day === null || $to['d'] === null) {
+    //         return (! $raw ? '~' : '') . ($to['y'] - $this->birth_year);
+    //     }
+
+    //     if ($to['d'] < $this->birth_day) {
+    //         return $to['y'] - $this->birth_year - 1;
+    //     } else {
+    //         return $to['y'] - $this->birth_year;
+    //     }
+    // }
+
+    // public function currentAge($raw = false)
+    // {
+    //     $now = [
+    //         'y' => Carbon::now()->format('Y'),
+    //         'm' => Carbon::now()->format('m'),
+    //         'd' => Carbon::now()->format('d'),
+    //     ];
+
+    //     return $this->age($now, $raw);
+    // }
+
+    // public function ageAtDeath($raw = false)
+    // {
+    //     if (! $this->death_date) {
+    //         return null;
+    //     }
+
+    //     $death = [
+    //         'y' => $this->death_year,
+    //         'm' => $this->death_month,
+    //         'd' => $this->death_day,
+    //     ];
+
+    //     return $this->age($death, $raw);
+    // }
+
+    // public function estimatedBirthDate()
+    // {
+    //     $interval = self::generationInterval;
+    //     $prediction = collect();
+
+    //     $mother_age = optional($this->mother)->birth_year;
+    //     $father_age = optional($this->father)->birth_year;
+    //     if ($mother_age && $father_age) {
+    //         $prediction->put('parents', (($mother_age + $father_age) / 2) + $interval);
+    //     } elseif ($mother_age || $father_age) {
+    //         $prediction->put('parents', $mother_age + $father_age + $interval);
+    //     }
+
+    //     $prediction->put('children',
+    //         $this->children->avg->birth_year ? $this->children->avg->birth_year - $interval : null
+    //     );
+
+    //     $prediction->put('partners',
+    //         $this->marriages
+    //             ->map->partner($this)
+    //             ->avg->birth_year
+    //     );
+
+    //     $prediction->put('siblings',
+    //         $this->siblings
+    //             ->merge($this->siblings_mother)
+    //             ->merge($this->siblings_father)
+    //             ->avg->birth_year
+    //     );
+
+    //     return $prediction->avg() ? round($prediction->avg()) : null;
+    // }
+
+    // public function estimatedBirthDateError(): ?int
+    // {
+    //     if (! $this->estimatedBirthDate() || ! $this->birth_year) {
+    //         return null;
+    //     }
+    //     return abs($this->estimatedBirthDate() - $this->birth_year);
+    // }
 
     public function formatName(): string
     {

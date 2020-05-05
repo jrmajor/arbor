@@ -6,6 +6,7 @@ use App\Marriage;
 use App\Person;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class EditMarriageTest extends TestCase
@@ -19,14 +20,17 @@ class EditMarriageTest extends TestCase
             'man_order' => 2,
             'rite' => 'roman_catholic',
             'first_event_type' => 'civil_marriage',
-            'first_event_date' => '1968-04-14',
+            'first_event_date_from' => '1968-04-14',
+            'first_event_date_to' => '1968-04-14',
             'first_event_place' => 'Sępólno Krajeńskie, Polska',
             'second_event_type' => 'church_marriage',
-            'second_event_date' => '1968-04-13',
+            'second_event_date_from' => '1968-04-13',
+            'second_event_date_to' => '1968-04-13',
             'second_event_place' => 'Sępólno Krajeńskie, Polska',
             'ended' => true,
             'end_cause' => 'rozwód',
-            'end_date' => '2001-10-27'
+            'end_date_from' => '2001-10-27',
+            'end_date_to' => '2001-10-27',
         ], $overrides);
     }
 
@@ -37,14 +41,14 @@ class EditMarriageTest extends TestCase
             'man_order' => 1,
             'rite' => 'civil',
             'first_event_type' => 'concordat_marriage',
-            'first_event_date' => '2000-09-02',
+            'first_event_date_from' => '2000-09-02',
             'first_event_place' => 'Warszawa, Polska',
             'second_event_type' => 'civil_marriage',
-            'second_event_date' => '2000-09-05',
+            'second_event_date_from' => '2000-09-05',
             'second_event_place' => 'Warszawa, Polska',
             'ended' => false,
             'end_cause' => 'bo tak',
-            'end_date' => '2020-03-27'
+            'end_date_from' => '2020-03-27',
         ], $overrides);
     }
 
@@ -117,7 +121,12 @@ class EditMarriageTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('login');
 
-        foreach ($oldAttributes as $key => $attribute) {
+        $attributesToCheck = Arr::except($oldAttributes, [
+            'first_event_date_from', 'second_event_date_from', 'end_date_from',
+            'first_event_date_to', 'second_event_date_to', 'end_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $attribute) {
             $this->assertEquals($attribute, $marriage->fresh()[$key]);
         }
     }
@@ -150,7 +159,12 @@ class EditMarriageTest extends TestCase
 
         $response->assertStatus(403);
 
-        foreach ($oldAttributes as $key => $attribute) {
+        $attributesToCheck = Arr::except($oldAttributes, [
+            'first_event_date_from', 'second_event_date_from', 'end_date_from',
+            'first_event_date_to', 'second_event_date_to', 'end_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $attribute) {
             $this->assertEquals($attribute, $marriage->fresh()[$key]);
         }
     }
@@ -185,9 +199,23 @@ class EditMarriageTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect("people/$marriage->woman_id");
 
-        foreach ($newAttributes as $key => $attribute) {
-            $this->assertEquals($attribute, $marriage[$key]);
+        $attributesToCheck = Arr::except($newAttributes, [
+            'first_event_date_from', 'second_event_date_from', 'end_date_from',
+            'first_event_date_to', 'second_event_date_to', 'end_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $attribute) {
+            $this->assertEquals($attribute, $marriage->fresh()[$key]);
         }
+
+        $this->assertTrue($newAttributes['first_event_date_from'] == $marriage->fresh()['first_event_date_from']->toDateString());
+        $this->assertTrue($newAttributes['first_event_date_from'] == $marriage->fresh()['first_event_date_to']->toDateString());
+
+        $this->assertTrue($newAttributes['second_event_date_from'] == $marriage->fresh()['second_event_date_from']->toDateString());
+        $this->assertTrue($newAttributes['second_event_date_from'] == $marriage->fresh()['second_event_date_to']->toDateString());
+
+        $this->assertTrue($newAttributes['end_date_from'] == $marriage->fresh()['end_date_from']->toDateString());
+        $this->assertTrue($newAttributes['end_date_from'] == $marriage->fresh()['end_date_to']->toDateString());
     }
 
     public function testDataIsValidatedUsingAppropriateFormRequest()

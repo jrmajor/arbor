@@ -10,8 +10,8 @@
     @csrf
 
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <legend class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.sex') }}</legend>
+        <div class="flex flex-wrap mb-1">
+            <legend class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.sex') }}</legend>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
                         type="radio" class="mb-1"
@@ -29,8 +29,8 @@
         </div>
     </fieldset>
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="name" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.name') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="name" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.name') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('name') invalid @enderror"
@@ -39,8 +39,8 @@
                 @error('name')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="middle_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.middle_name') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="middle_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.middle_name') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('middle_name') invalid @enderror"
@@ -49,8 +49,8 @@
                 @error('middle_name')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="family_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.family_name') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="family_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.family_name') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('family_name') invalid @enderror"
@@ -59,8 +59,8 @@
                 @error('family_name')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="last_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.last_name') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="last_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.last_name') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('last_name') invalid @enderror"
@@ -71,8 +71,8 @@
         </div>
     </fieldset>
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="id_wielcy" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{!! __('people.wielcy.id') !!}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="id_wielcy" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{!! __('people.wielcy.id') !!}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
                 <div class="w-full sm:w-1/4 md:w-3/8 sm:pr-2 mb-1">
                     <input
@@ -95,7 +95,7 @@
         <livewire:pytlewski-picker :person="$person">
     </fieldset>
     {{--
-    <div class="flex flex-wrap items-end mb-2">
+    <div class="flex flex-wrap mb-2">
         <label class="w-full sm:w-1/2 md:w-1/4 pr-1">{{ __('people.pytlewski.guess') }}</label>
         <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
             <div class="w-1/3">
@@ -123,18 +123,30 @@
     </div>
     --}}
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="birth_date" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.birth_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
-                <input
-                    type="text" class="@error('birth_date') invalid @enderror"
-                    id="birth_date" name="birth_date"
-                    value="{{ old('birth_date') ?? $person->birth_date }}">
-                @error('birth_date')<small class="text-red-500">{{ $message }}</small>@enderror
+        <div class="flex flex-wrap mb-1">
+            <label for="birth_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.birth_date') }}</label>
+            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
+                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.between') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('birth_date_from') invalid @enderror"
+                        id="birth_date_from" name="birth_date_from"
+                        value="{{ old('birth_date_from') ?? optional($person->birth_date_from)->toDateString() }}">
+                    @error('birth_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
+                <div class="w-full sm:w-1/2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.and') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('birth_date_to') invalid @enderror"
+                        id="birth_date_to" name="birth_date_to"
+                        value="{{ old('birth_date_to') ?? optional($person->birth_date_to)->toDateString() }}"
+                        class="flex-grow">
+                    @error('birth_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="birth_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.birth_place') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="birth_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.birth_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('birth_place') invalid @enderror"
@@ -145,8 +157,8 @@
         </div>
     </fieldset>
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <div class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.dead') }}</div>
+        <div class="flex flex-wrap mb-1">
+            <div class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.dead') }}</div>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="hidden" id="dead-hidden" name="dead" value="0">
@@ -157,18 +169,30 @@
                 <label for="dead">&nbsp;{{ __('people.dead') }}</label>
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="death_date" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.death_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
-                <input
-                    type="text" class="@error('death_date') invalid @enderror"
-                    id="death_date" name="death_date"
-                    value="{{ old('death_date') ?? $person->death_date }}">
-                @error('death_date')<small class="text-red-500">{{ $message }}</small>@enderror
+        <div class="flex flex-wrap mb-1">
+            <label for="death_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.death_date') }}</label>
+            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
+                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.between') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('death_date_from') invalid @enderror"
+                        id="death_date_from" name="death_date_from"
+                        value="{{ old('death_date_from') ?? optional($person->death_date_from)->toDateString() }}">
+                    @error('death_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
+                <div class="w-full sm:w-1/2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.and') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('death_date_to') invalid @enderror"
+                        id="death_date_to" name="death_date_to"
+                        value="{{ old('death_date_to') ?? optional($person->death_date_to)->toDateString() }}"
+                        class="flex-grow">
+                    @error('death_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="death_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.death_place') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="death_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.death_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('death_place') invalid @enderror"
@@ -177,8 +201,8 @@
                 @error('death_place')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="death_cause" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.death_cause') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="death_cause" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.death_cause') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('death_cause') invalid @enderror"
@@ -189,18 +213,30 @@
         </div>
     </fieldset>
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="funeral_date" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.funeral_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
-                <input
-                    type="text" class="@error('funeral_date') invalid @enderror"
-                    id="funeral_date" name="funeral_date"
-                    value="{{ old('funeral_date') ?? $person->funeral_date }}">
-                @error('funareal_date')<small class="text-red-500">{{ $message }}</small>@enderror
+        <div class="flex flex-wrap mb-1">
+            <label for="funeral_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.funeral_date') }}</label>
+            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
+                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.between') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('funeral_date_from') invalid @enderror"
+                        id="funeral_date_from" name="funeral_date_from"
+                        value="{{ old('funeral_date_from') ?? optional($person->funeral_date_from)->toDateString() }}">
+                    @error('funeral_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
+                <div class="w-full sm:w-1/2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.and') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('funeral_date_to') invalid @enderror"
+                        id="funeral_date_to" name="funeral_date_to"
+                        value="{{ old('funeral_date_to') ?? optional($person->funeral_date_to)->toDateString() }}"
+                        class="flex-grow">
+                    @error('funeral_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="funeral_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.funeral_place') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="funeral_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.funeral_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('funeral_place') invalid @enderror"
@@ -211,18 +247,30 @@
         </div>
     </fieldset>
     <fieldset class="mb-2">
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="burial_date" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.burial_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
-                <input
-                    type="text" class="@error('burial_date') invalid @enderror"
-                    id="burial_date" name="burial_date"
-                    value="{{ old('burial_date') ?? $person->burial_date }}">
-                @error('burial_date')<small class="text-red-500">{{ $message }}</small>@enderror
+        <div class="flex flex-wrap mb-1">
+            <label for="burial_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.burial_date') }}</label>
+            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
+                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.between') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('burial_date_from') invalid @enderror"
+                        id="burial_date_from" name="burial_date_from"
+                        value="{{ old('burial_date_from') ?? optional($person->burial_date_from)->toDateString() }}">
+                    @error('burial_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
+                <div class="w-full sm:w-1/2 mb-1 flex items-center">
+                    <p>{{ __('misc.date.and') }}&nbsp;</p>
+                    <input
+                        type="text" class="@error('burial_date_to') invalid @enderror"
+                        id="burial_date_to" name="burial_date_to"
+                        value="{{ old('burial_date_to') ?? optional($person->burial_date_to)->toDateString() }}"
+                        class="flex-grow">
+                    @error('burial_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
+                </div>
             </div>
         </div>
-        <div class="flex flex-wrap items-end mb-1">
-            <label for="burial_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ __('people.burial_place') }}</label>
+        <div class="flex flex-wrap mb-1">
+            <label for="burial_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.burial_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
                 <input
                     type="text" class="@error('burial_place') invalid @enderror"

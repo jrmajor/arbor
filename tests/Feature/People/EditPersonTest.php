@@ -5,6 +5,7 @@ namespace Tests\Feature\People;
 use App\Person;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class EditPersonTest extends TestCase
@@ -21,15 +22,19 @@ class EditPersonTest extends TestCase
             'middle_name' => 'Henryka',
             'family_name' => 'Stecher de Sebenitz',
             'last_name' => 'Gąsiorowska',
-            'birth_date' => '1854-01-12',
+            'birth_date_from' => '1854-01-12',
+            'birth_date_to' => '1854-01-12',
             'birth_place' => 'Zaleszczyki, Ukraina',
             'dead' => true,
-            'death_date' => '1918-01-02',
+            'death_date_from' => '1918-01-02',
+            'death_date_to' => '1918-01-02',
             'death_place' => 'Załuż k/Sanoka, Polska',
             'death_cause' => 'rak',
-            'funeral_date' => '1918-01-05',
+            'funeral_date_from' => '1918-01-05',
+            'funeral_date_to' => '1918-01-05',
             'funeral_place' => 'Załuż k/Sanoka, Polska',
-            'burial_date' => '1918-01-05',
+            'burial_date_from' => '1918-01-05',
+            'burial_date_to' => '1918-01-05',
             'burial_place' => 'Załuż k/Sanoka, Polska',
             // 'visibility' => false,
         ], $overrides);
@@ -45,15 +50,15 @@ class EditPersonTest extends TestCase
             'middle_name' => 'Erazm',
             'family_name' => 'Gąsiorowski',
             'last_name' => 'Jakże to',
-            'birth_date' => '1878-04-01',
+            'birth_date_from' => '1878-04-01',
             'birth_place' => 'Zaleszczyki, Polska',
             'dead' => true,
-            'death_date' => '1947-01-17',
+            'death_date_from' => '1947-01-17',
             'death_place' => 'Grudziądz, Polska',
             'death_cause' => 'rak',
-            'funeral_date' => '1947-01-21',
+            'funeral_date_from' => '1947-01-21',
             'funeral_place' => 'Grudziądz, Polska',
-            'burial_date' => '1947-01-21',
+            'burial_date_from' => '1947-01-21',
             'burial_place' => 'Grudziądz, Polska',
             // 'visibility' => true,
         ], $overrides);
@@ -112,7 +117,12 @@ class EditPersonTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('login');
 
-        foreach ($this->oldAttributes() as $key => $attribute) {
+        $attributesToCheck = Arr::except($this->oldAttributes(), [
+            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
+            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $attribute) {
             $this->assertEquals($attribute, $person->fresh()[$key]);
         }
     }
@@ -129,7 +139,12 @@ class EditPersonTest extends TestCase
 
         $response->assertStatus(403);
 
-        foreach ($this->oldAttributes() as $key => $attribute) {
+        $attributesToCheck = Arr::except($this->oldAttributes(), [
+            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
+            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $attribute) {
             $this->assertEquals($attribute, $person->fresh()[$key]);
         }
     }
@@ -155,9 +170,26 @@ class EditPersonTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect("people/$person->id");
 
-        foreach ($newAttributes as $key => $attribute) {
+        $attributesToCheck = Arr::except($newAttributes, [
+            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
+            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $attribute) {
             $this->assertEquals($attribute, $person->fresh()[$key]);
         }
+
+        $this->assertTrue($newAttributes['birth_date_from'] == $person->fresh()['birth_date_from']->toDateString());
+        $this->assertTrue($newAttributes['birth_date_from'] == $person->fresh()['birth_date_to']->toDateString());
+
+        $this->assertTrue($newAttributes['death_date_from'] == $person->fresh()['death_date_from']->toDateString());
+        $this->assertTrue($newAttributes['death_date_from'] == $person->fresh()['death_date_to']->toDateString());
+
+        $this->assertTrue($newAttributes['funeral_date_from'] == $person->fresh()['funeral_date_from']->toDateString());
+        $this->assertTrue($newAttributes['funeral_date_from'] == $person->fresh()['funeral_date_to']->toDateString());
+
+        $this->assertTrue($newAttributes['burial_date_from'] == $person->fresh()['burial_date_from']->toDateString());
+        $this->assertTrue($newAttributes['burial_date_from'] == $person->fresh()['burial_date_to']->toDateString());
     }
 
     public function testDataIsValidatedUsingAppropriateFormRequest()

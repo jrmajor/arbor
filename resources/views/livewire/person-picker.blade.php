@@ -1,5 +1,5 @@
-<div class="flex flex-wrap items-end mb-1">
-    <label for="{{ $name }}_id" class="w-full sm:w-1/2 md:w-1/4 pr-1 mb-1">{{ $label }}</label>
+<div class="flex flex-wrap mb-1">
+    <label for="{{ $name }}_id" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ $label }}</label>
     <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
         <div class="w-full sm:w-1/4 md:w-3/8 sm:pr-2 mb-1">
             <input
