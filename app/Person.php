@@ -140,13 +140,14 @@ class Person extends Model
                     )->orderBy('birth_date_from', 'asc');
     }
 
-    public function getMarriagesAttribute(): Collection
+    public function marriages(): HasMany
     {
-        return Marriage::where('man_id', $this->id)
-                            ->orWhere('woman_id', $this->id)
-                            ->orderBy($this->sex == 'xx' ? 'woman_order' : 'man_order')
-                            ->with('woman')
-                            ->get();
+        return $this->hasMany('App\Marriage', 'id', 'id')
+                    ->where('id', '!=', $this->id)
+                    ->orWhere(fn ($q) =>
+                        $q->where('woman_id', $this->id)
+                            ->orWhere('man_id', $this->id)
+                    )->orderBy('first_event_date_from', 'asc');
     }
 
     public function children(): HasMany
