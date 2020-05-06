@@ -20,6 +20,7 @@ return [
     'submit' => 'Submit',
     'language' => 'language',
     'coming_soon' => 'coming soon...',
-    'year' => '{1} one year|[2,*] :count years',
+    'year' => 'one year|:age years',
+    'years_of_error' => 'year of error|years of error',
 
 ];

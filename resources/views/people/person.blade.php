@@ -183,17 +183,24 @@
                         {{ $person->birth_place }}<br>
                         @php $some_birth_data_printed = true; @endphp
                     @endif
-                    @if(! $person->dead && $person->currentAge())
+                    @if(! $person->dead && $person->currentAge() !== null)
                         @if($some_birth_data_printed)
                             &nbsp;&nbsp;
                         @endif
-                        {{ __('people.current_age') }}: {!! trans_choice('misc.year', $person->currentAge('now')) !!}
+                        {{ __('people.current_age') }}:
+                        {{
+                            trans_choice(
+                                'misc.year',
+                                $person->currentAge(true),
+                                ['age' => $person->currentAge()]
+                            )
+                        }}
                         <br>
                         @php $some_birth_data_printed = true; @endphp
                     @endif
                     @if(
                         (! $person->birth_date || optional(auth()->user())->isSuperAdmin())
-                        && $person->estimatedBirthDateError()
+                        && $person->estimatedBirthDate()
                     )
                         @if($some_birth_data_printed == true)
                             &nbsp;&nbsp;
@@ -202,7 +209,7 @@
                         @if($person->estimatedBirthDateError())
                             <small>
                                 (<strong>{{ $person->estimatedBirthDateError() }}</strong>
-                                {{ __('people.years_of_error') }})
+                                {{ trans_choice('misc.years_of_error', $person->estimatedBirthDateError()) }})
                             </small>
                         @endif
                     @endif
@@ -239,11 +246,18 @@
                         {{ $person->death_cause }}<br>
                         @php $some_death_data_printed = true; @endphp
                     @endif
-                    @if($person->ageAtDeath())
+                    @if($person->ageAtDeath() !== null)
                         @if($some_death_data_printed)
                             &nbsp;&nbsp;
                         @endif
-                        {{ __('people.death_age') }}: {{ trans_choice('misc.year', $person->ageAtDeath()) }}
+                        {{ __('people.death_age') }}:
+                        {{
+                            trans_choice(
+                                'misc.year',
+                                $person->ageAtDeath(true),
+                                ['age' => $person->ageAtDeath()]
+                            )
+                        }}
                     @endif
                 </dd>
             @else

@@ -20,6 +20,7 @@ return [
     'submit' => 'Potwierdź',
     'language' => 'język',
     'coming_soon' => 'dostępne wkrótce...',
-    'year' => '{1} jeden rok|[2,*] :count lat',
+    'year' => 'jeden rok|:age lata|:age lat',
+    'years_of_error' => 'rok błędu|lata błędu|lat błędu',
 
 ];

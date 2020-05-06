@@ -212,9 +212,9 @@ class PersonTest extends TestCase
 
         $this->assertEquals(39, $person_without_day->age($at_diffrent_month, true));
         $this->assertEquals(39, $person_without_day->age($at_diffrent_month));
-        $this->assertEquals(27, $person_without_day->age($at_same_month, true)); // 27-28
+        $this->assertEquals(28, $person_without_day->age($at_same_month, true)); // 27-28
         $this->assertEquals('27-28', $person_without_day->age($at_same_month));
-        $this->assertEquals(34, $person_without_month->age($at_diffrent_month, true)); // 34-35
+        $this->assertEquals(35, $person_without_month->age($at_diffrent_month, true)); // 34-35
         $this->assertEquals('34-35', $person_without_month->age($at_diffrent_month));
     }
 
@@ -233,9 +233,9 @@ class PersonTest extends TestCase
 
         $this->assertEquals(38, $person->age($without_day, true));
         $this->assertEquals(38, $person->age($without_day));
-        $this->assertEquals(39, $person->age($without_day_in_same_month, true)); // 39-40
+        $this->assertEquals(40, $person->age($without_day_in_same_month, true)); // 39-40
         $this->assertEquals('39-40', $person->age($without_day_in_same_month));
-        $this->assertEquals(40, $person->age($without_month, true)); // 40-41
+        $this->assertEquals(41, $person->age($without_month, true)); // 40-41
         $this->assertEquals('40-41', $person->age($without_month));
     }
 
@@ -248,7 +248,7 @@ class PersonTest extends TestCase
 
         $at = [Carbon::create(2010, 7, 01), Carbon::create(2010, 7, 31)];
 
-        $this->assertEquals(17, $person->age($at, true)); // 17-18
+        $this->assertEquals(18, $person->age($at, true)); // 17-18
         $this->assertEquals('17-18', $person->age($at));
     }
 
