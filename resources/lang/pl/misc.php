@@ -22,5 +22,8 @@ return [
     'coming_soon' => 'dostępne wkrótce...',
     'year' => 'jeden rok|:age lata|:age lat',
     'years_of_error' => 'rok błędu|lata błędu|lat błędu',
+    'yes' => 'tak',
+    'no' => 'nie',
+    'null' => 'brak',
 
 ];

@@ -44,4 +44,9 @@ class PersonPolicy
     {
         return $user->isSuperAdmin();
     }
+
+    public function viewHistory(User $user, Person $person)
+    {
+        return $user->isSuperAdmin();
+    }
 }

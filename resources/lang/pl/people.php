@@ -11,6 +11,8 @@ return [
     'add_a_new_person' => 'Dodaj nową osobę',
     'edit_this_person' => 'Edytuj tę osobę',
 
+    'edits_history' => 'Historia edycji',
+
     'return_to_person_overwiew' => 'Wróc do widoku osoby',
     'delete' => 'usuń',
     'cant_delete_person_with_relationships' => 'Aby usunąć tę osobę, usuń najpierw jej związki.',

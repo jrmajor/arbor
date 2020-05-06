@@ -113,4 +113,24 @@ class PersonController extends Controller
 
         return redirect()->route('people.index');
     }
+
+    public function history(Person $person)
+    {
+        $this->authorize('viewHistory', $person);
+
+        $activities = $person->activities
+            ->reverse()
+            ->map(fn ($activity) => [
+                'model' => $activity,
+                'causer' => $activity->causer,
+                'description' => $activity->description,
+                'old' => $activity->properties['old'] ?? false,
+                'attributes' => $activity->properties['attributes'],
+            ]);
+
+        return view('people.history', [
+            'person' => $person,
+            'activities' => $activities,
+        ]);
+    }
 }

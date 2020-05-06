@@ -125,6 +125,10 @@ dd {
     }
 }
 
+td {
+    @apply px-1;
+}
+
 .external-small-container {
     width: 10px;
     height: 14px;

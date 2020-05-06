@@ -22,5 +22,8 @@ return [
     'coming_soon' => 'coming soon...',
     'year' => 'one year|:age years',
     'years_of_error' => 'year of error|years of error',
+    'yes' => 'yes',
+    'no' => 'no',
+    'null' => 'null',
 
 ];
