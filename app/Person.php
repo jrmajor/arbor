@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Services\Pytlewski\Pytlewski;
+use App\Traits\TapsActivity;
 use App\Wielcy;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
@@ -10,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -20,31 +20,35 @@ use Spatie\Regex\Regex;
 
 class Person extends Model
 {
-    use LogsActivity, SoftDeletes;
+    use LogsActivity, SoftDeletes, TapsActivity;
 
     const generationInterval = 32;
 
     protected static $logName = 'people';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['*'];
-    protected static $logAttributesToIgnore = ['id', 'created_at'];
+    protected static $logAttributesToIgnore = ['id'];
 
-    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
-
-    protected $dates = [
-        'birth_date_from',
-        'birth_date_to',
-        'death_date_from',
-        'death_date_to',
-        'funeral_date_from',
-        'funeral_date_to',
-        'burial_date_from',
-        'burial_date_to',
-    ];
+    protected $guarded = ['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
         'dead' => 'boolean',
         'visibility' => 'boolean',
+        'birth_date_from' => 'datetime:Y-m-d',
+        'birth_date_to' => 'datetime:Y-m-d',
+        'death_date_from' => 'datetime:Y-m-d',
+        'death_date_to' => 'datetime:Y-m-d',
+        'funeral_date_from' => 'datetime:Y-m-d',
+        'funeral_date_to' => 'datetime:Y-m-d',
+        'burial_date_from' => 'datetime:Y-m-d',
+        'burial_date_to' => 'datetime:Y-m-d',
+    ];
+
+    protected $dateTuples = [
+        'birth_date',
+        'death_date',
+        'funeral_date',
+        'burial_date',
     ];
 
     protected ?Wielcy $wielcy = null;

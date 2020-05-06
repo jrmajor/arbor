@@ -4,6 +4,7 @@ namespace Tests\Feature\People;
 
 use App\Person;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
@@ -157,6 +158,79 @@ class CreatePersonTest extends TestCase
             \App\Http\Controllers\PersonController::class,
             'store',
             \App\Http\Requests\StorePerson::class
+        );
+    }
+
+    public function testPersonCreationIsLogged()
+    {
+        $person = factory(Person::class)->state('dead')->create();
+
+        $log = $this->latestLog();
+
+        $this->assertEquals('people', $log->log_name);
+        $this->assertEquals('created', $log->description);
+        $this->assertTrue($person->is($log->subject));
+
+        $attributesToCheck = Arr::except($person->getAttributes(), [
+            'id', 'created_at', 'updated_at',
+            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
+            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $value) {
+            $this->assertEquals(
+                $value,
+                $log->properties['attributes'][$key],
+                'Failed asserting that attribute '.$key.' has the same value in log.'
+            );
+        }
+
+        $this->assertEquals($person->created_at, $log->created_at);
+        $this->assertEquals($person->updated_at, $log->created_at);
+
+        $this->assertEquals(
+            $person->created_at,
+            Carbon::create($log->properties['attributes']['created_at'])
+        );
+        $this->assertEquals(
+            $person->updated_at,
+            Carbon::create($log->properties['attributes']['updated_at'])
+        );
+
+        $this->assertEquals(
+            $person->birth_date_from,
+            Carbon::create($log->properties['attributes']['birth_date_from'])
+        );
+        $this->assertEquals(
+            $person->birth_date_to,
+            Carbon::create($log->properties['attributes']['birth_date_to'])
+        );
+
+        $this->assertEquals(
+            $person->death_date_from,
+            Carbon::create($log->properties['attributes']['death_date_from'])
+        );
+        $this->assertEquals(
+            $person->death_date_to,
+            Carbon::create($log->properties['attributes']['death_date_to'])
+        );
+
+        $this->assertEquals(
+            $person->funeral_date_from,
+            Carbon::create($log->properties['attributes']['funeral_date_from'])
+        );
+        $this->assertEquals(
+            $person->funeral_date_to,
+            Carbon::create($log->properties['attributes']['funeral_date_to'])
+        );
+
+        $this->assertEquals(
+            $person->burial_date_from,
+            Carbon::create($log->properties['attributes']['burial_date_from'])
+        );
+        $this->assertEquals(
+            $person->burial_date_to,
+            Carbon::create($log->properties['attributes']['burial_date_to'])
         );
     }
 }

@@ -5,10 +5,16 @@ namespace Tests;
 use App\Person;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Testing\Assert;
+use Spatie\Activitylog\Models\Activity;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+
+    public function latestLog()
+    {
+        return Activity::orderBy('id', 'desc')->first();
+    }
 
     public function assertRouteUsesFormRequest(string $routeName, string $formRequest)
     {
