@@ -43,7 +43,7 @@
             <small class="text-lg">[№{{ $person->id }}]</small>
         @endif
         @if(optional(auth()->user())->isSuperAdmin())
-            <a href="{{ route('people.history', ['person' => $person->id]) }}">
+            <a href="{{ route('people.history', ['maybe_trashed_person' => $person->id]) }}">
                 <small class="text-lg">
                     [{{ strtolower(__('people.edits_history')) }}]
                 </small>

@@ -36,7 +36,7 @@
             <dt>
                 {{ __('activities.'.$activity['description']) }}
                 <span class="font-normal">{{ __('activities.by') }}</span>
-                {{ $activity['causer']->username }}
+                {{ optional($activity['causer'])->username }}
                 <br>
                 <small>{{ $activity['model']->created_at->format('Y-m-d H:i') }}</small>
             </dt>
@@ -47,6 +47,7 @@
                         :label="__('people.pytlewski.id')"/>
                     <x-history.td-text :activity="$activity" :attribute="'id_wielcy'"
                         :label="__('people.wielcy.id')"/>
+                    <x-history.td-sex :activity="$activity"/>
                     <x-history.td-text :activity="$activity" :attribute="'name'"/>
                     <x-history.td-text :activity="$activity" :attribute="'middle_name'"/>
                     <x-history.td-text :activity="$activity" :attribute="'family_name'"/>
