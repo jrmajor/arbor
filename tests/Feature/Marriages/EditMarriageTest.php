@@ -5,6 +5,7 @@ namespace Tests\Feature\Marriages;
 use App\Marriage;
 use App\Person;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
@@ -41,14 +42,14 @@ class EditMarriageTest extends TestCase
             'man_order' => 1,
             'rite' => 'civil',
             'first_event_type' => 'concordat_marriage',
-            'first_event_date_from' => '2000-09-02',
+            'first_event_date_from' => '1960-09-02',
             'first_event_place' => 'Warszawa, Polska',
             'second_event_type' => 'civil_marriage',
-            'second_event_date_from' => '2000-09-05',
+            'second_event_date_from' => '1960-09-05',
             'second_event_place' => 'Warszawa, Polska',
             'ended' => false,
             'end_cause' => 'bo tak',
-            'end_date_from' => '2020-03-27',
+            'end_date_from' => '2000-03-27',
         ], $overrides);
     }
 
@@ -224,6 +225,111 @@ class EditMarriageTest extends TestCase
             \App\Http\Controllers\MarriageController::class,
             'update',
             \App\Http\Requests\StoreMarriage::class
+        );
+    }
+
+    public function testPersonEditionIsLogged()
+    {
+        $marriage = factory(Marriage::class)->create($this->oldAttributes());
+
+        sleep(1);
+        $marriage->fill($this->newAttributes())->save();
+
+        $marriage = $marriage->fresh();
+
+        $log = $this->latestLog();
+
+        $this->assertEquals('marriages', $log->log_name);
+        $this->assertEquals('updated', $log->description);
+        $this->assertTrue($marriage->is($log->subject));
+
+        $oldToCheck = Arr::except($this->oldAttributes(), [
+            'id', 'created_at', 'updated_at',
+            'first_event_date_from', 'second_event_date_from', 'end_date_from',
+            'first_event_date_to', 'second_event_date_to', 'end_date_to',
+        ]);
+
+        foreach ($oldToCheck as $key => $value) {
+            $this->assertEquals(
+                $value,
+                $log->properties['old'][$key],
+                'Failed asserting that old attribute '.$key.' has the same value in log.'
+            );
+        }
+
+        $attributesToCheck = Arr::except($this->newAttributes(), [
+            'id', 'created_at', 'updated_at',
+            'first_event_date_from', 'second_event_date_from', 'end_date_from',
+            'first_event_date_to', 'second_event_date_to', 'end_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $value) {
+            $this->assertEquals(
+                $value,
+                $log->properties['attributes'][$key],
+                'Failed asserting that attribute '.$key.' has the same value in log.'
+            );
+        }
+
+        $this->assertArrayNotHasKey('created_at', $log->properties['old']);
+        $this->assertArrayNotHasKey('created_at', $log->properties['attributes']);
+
+        $this->assertEquals($marriage->updated_at, $log->created_at);
+
+        $this->assertEquals(
+            $marriage->updated_at,
+            Carbon::create($log->properties['attributes']['updated_at'])
+        );
+
+        $this->assertEquals(
+            $this->oldAttributes()['first_event_date_from'],
+            $log->properties['old']['first_event_date_from']
+        );
+        $this->assertEquals(
+            $this->newAttributes()['first_event_date_from'],
+            $log->properties['attributes']['first_event_date_from']
+        );
+        $this->assertEquals(
+            $this->oldAttributes()['first_event_date_to'],
+            $log->properties['old']['first_event_date_to']
+        );
+        $this->assertEquals(
+            $this->oldAttributes()['first_event_date_to'],
+            $log->properties['attributes']['first_event_date_to']
+        );
+
+        $this->assertEquals(
+            $this->oldAttributes()['second_event_date_from'],
+            $log->properties['old']['second_event_date_from']
+        );
+        $this->assertEquals(
+            $this->newAttributes()['second_event_date_from'],
+            $log->properties['attributes']['second_event_date_from']
+        );
+        $this->assertEquals(
+            $this->oldAttributes()['second_event_date_to'],
+            $log->properties['old']['second_event_date_to']
+        );
+        $this->assertEquals(
+            $this->oldAttributes()['second_event_date_to'],
+            $log->properties['attributes']['second_event_date_to']
+        );
+
+        $this->assertEquals(
+            $this->oldAttributes()['end_date_from'],
+            $log->properties['old']['end_date_from']
+        );
+        $this->assertEquals(
+            $this->newAttributes()['end_date_from'],
+            $log->properties['attributes']['end_date_from']
+        );
+        $this->assertEquals(
+            $this->oldAttributes()['end_date_to'],
+            $log->properties['old']['end_date_to']
+        );
+        $this->assertEquals(
+            $this->oldAttributes()['end_date_to'],
+            $log->properties['attributes']['end_date_to']
         );
     }
 }

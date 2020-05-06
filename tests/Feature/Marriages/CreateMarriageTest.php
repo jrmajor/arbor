@@ -5,6 +5,7 @@ namespace Tests\Feature\Marriages;
 use App\Marriage;
 use App\Person;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
@@ -164,6 +165,70 @@ class CreateMarriageTest extends TestCase
             \App\Http\Controllers\MarriageController::class,
             'store',
             \App\Http\Requests\StoreMarriage::class
+        );
+    }
+
+    public function testMarriageCreationIsLogged()
+    {
+        $marriage = factory(Marriage::class)->state('ended')->create();
+
+        $log = $this->latestLog();
+
+        $this->assertEquals('marriages', $log->log_name);
+        $this->assertEquals('created', $log->description);
+        $this->assertTrue($marriage->is($log->subject));
+
+        $attributesToCheck = Arr::except($marriage->getAttributes(), [
+            'id', 'created_at', 'updated_at',
+            'first_event_date_from', 'second_event_date_from', 'end_date_from',
+            'first_event_date_to', 'second_event_date_to', 'end_date_to',
+        ]);
+
+        foreach ($attributesToCheck as $key => $value) {
+            $this->assertEquals(
+                $value,
+                $log->properties['attributes'][$key],
+                'Failed asserting that attribute '.$key.' has the same value in log.'
+            );
+        }
+
+        $this->assertEquals($marriage->created_at, $log->created_at);
+        $this->assertEquals($marriage->updated_at, $log->created_at);
+
+        $this->assertEquals(
+            $marriage->created_at,
+            Carbon::create($log->properties['attributes']['created_at'])
+        );
+        $this->assertEquals(
+            $marriage->updated_at,
+            Carbon::create($log->properties['attributes']['updated_at'])
+        );
+
+        $this->assertEquals(
+            $marriage->first_event_date_from->format('Y-m-d'),
+            $log->properties['attributes']['first_event_date_from']
+        );
+        $this->assertEquals(
+            $marriage->first_event_date_to->format('Y-m-d'),
+            $log->properties['attributes']['first_event_date_to']
+        );
+
+        $this->assertEquals(
+            $marriage->second_event_date_from->format('Y-m-d'),
+            $log->properties['attributes']['second_event_date_from']
+        );
+        $this->assertEquals(
+            $marriage->second_event_date_to->format('Y-m-d'),
+            $log->properties['attributes']['second_event_date_to']
+        );
+
+        $this->assertEquals(
+            $marriage->end_date_from->format('Y-m-d'),
+            $log->properties['attributes']['end_date_from']
+        );
+        $this->assertEquals(
+            $marriage->end_date_to->format('Y-m-d'),
+            $log->properties['attributes']['end_date_to']
         );
     }
 }

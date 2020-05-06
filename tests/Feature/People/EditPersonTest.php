@@ -262,71 +262,71 @@ class EditPersonTest extends TestCase
         );
 
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['birth_date_from']),
-            Carbon::create($log->properties['old']['birth_date_from'])
+            $this->oldAttributes()['birth_date_from'],
+            $log->properties['old']['birth_date_from']
         );
         $this->assertEquals(
-            Carbon::create($this->newAttributes()['birth_date_from']),
-            Carbon::create($log->properties['attributes']['birth_date_from'])
+            $this->newAttributes()['birth_date_from'],
+            $log->properties['attributes']['birth_date_from']
         );
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['birth_date_to']),
-            Carbon::create($log->properties['old']['birth_date_to'])
+            $this->oldAttributes()['birth_date_to'],
+            $log->properties['old']['birth_date_to']
         );
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['birth_date_to']),
-            Carbon::create($log->properties['attributes']['birth_date_to'])
-        );
-
-        $this->assertEquals(
-            Carbon::create($this->oldAttributes()['death_date_from']),
-            Carbon::create($log->properties['old']['death_date_from'])
-        );
-        $this->assertEquals(
-            Carbon::create($this->newAttributes()['death_date_from']),
-            Carbon::create($log->properties['attributes']['death_date_from'])
-        );
-        $this->assertEquals(
-            Carbon::create($this->oldAttributes()['death_date_to']),
-            Carbon::create($log->properties['old']['death_date_to'])
-        );
-        $this->assertEquals(
-            Carbon::create($this->oldAttributes()['death_date_to']),
-            Carbon::create($log->properties['attributes']['death_date_to'])
+            $this->oldAttributes()['birth_date_to'],
+            $log->properties['attributes']['birth_date_to']
         );
 
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['funeral_date_from']),
-            Carbon::create($log->properties['old']['funeral_date_from'])
+            $this->oldAttributes()['death_date_from'],
+            $log->properties['old']['death_date_from']
         );
         $this->assertEquals(
-            Carbon::create($this->newAttributes()['funeral_date_from']),
-            Carbon::create($log->properties['attributes']['funeral_date_from'])
+            $this->newAttributes()['death_date_from'],
+            $log->properties['attributes']['death_date_from']
         );
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['funeral_date_to']),
-            Carbon::create($log->properties['old']['funeral_date_to'])
+            $this->oldAttributes()['death_date_to'],
+            $log->properties['old']['death_date_to']
         );
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['funeral_date_to']),
-            Carbon::create($log->properties['attributes']['funeral_date_to'])
+            $this->oldAttributes()['death_date_to'],
+            $log->properties['attributes']['death_date_to']
         );
 
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['burial_date_from']),
-            Carbon::create($log->properties['old']['burial_date_from'])
+            $this->oldAttributes()['funeral_date_from'],
+            $log->properties['old']['funeral_date_from']
         );
         $this->assertEquals(
-            Carbon::create($this->newAttributes()['burial_date_from']),
-            Carbon::create($log->properties['attributes']['burial_date_from'])
+            $this->newAttributes()['funeral_date_from'],
+            $log->properties['attributes']['funeral_date_from']
         );
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['burial_date_to']),
-            Carbon::create($log->properties['old']['burial_date_to'])
+            $this->oldAttributes()['funeral_date_to'],
+            $log->properties['old']['funeral_date_to']
         );
         $this->assertEquals(
-            Carbon::create($this->oldAttributes()['burial_date_to']),
-            Carbon::create($log->properties['attributes']['burial_date_to'])
+            $this->oldAttributes()['funeral_date_to'],
+            $log->properties['attributes']['funeral_date_to']
+        );
+
+        $this->assertEquals(
+            $this->oldAttributes()['burial_date_from'],
+            $log->properties['old']['burial_date_from']
+        );
+        $this->assertEquals(
+            $this->newAttributes()['burial_date_from'],
+            $log->properties['attributes']['burial_date_from']
+        );
+        $this->assertEquals(
+            $this->oldAttributes()['burial_date_to'],
+            $log->properties['old']['burial_date_to']
+        );
+        $this->assertEquals(
+            $this->oldAttributes()['burial_date_to'],
+            $log->properties['attributes']['burial_date_to']
         );
     }
 }

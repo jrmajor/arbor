@@ -24,3 +24,11 @@ $factory->define(Marriage::class, function (Faker $faker) {
         'second_event_place' => fn (array $marriage) => $marriage['first_event_place'],
     ];
 });
+
+$factory->state(Marriage::class, 'ended', function (Faker $faker) {
+    return [
+        'ended' => true,
+        'end_date_from' => $faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
+        'end_date_to' => fn (array $person) => $person['end_date_from'],
+    ];
+});

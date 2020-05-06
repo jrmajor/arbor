@@ -198,39 +198,39 @@ class CreatePersonTest extends TestCase
         );
 
         $this->assertEquals(
-            $person->birth_date_from,
-            Carbon::create($log->properties['attributes']['birth_date_from'])
+            $person->birth_date_from->format('Y-m-d'),
+            $log->properties['attributes']['birth_date_from']
         );
         $this->assertEquals(
-            $person->birth_date_to,
-            Carbon::create($log->properties['attributes']['birth_date_to'])
-        );
-
-        $this->assertEquals(
-            $person->death_date_from,
-            Carbon::create($log->properties['attributes']['death_date_from'])
-        );
-        $this->assertEquals(
-            $person->death_date_to,
-            Carbon::create($log->properties['attributes']['death_date_to'])
+            $person->birth_date_to->format('Y-m-d'),
+            $log->properties['attributes']['birth_date_to']
         );
 
         $this->assertEquals(
-            $person->funeral_date_from,
-            Carbon::create($log->properties['attributes']['funeral_date_from'])
+            $person->death_date_from->format('Y-m-d'),
+            $log->properties['attributes']['death_date_from']
         );
         $this->assertEquals(
-            $person->funeral_date_to,
-            Carbon::create($log->properties['attributes']['funeral_date_to'])
+            $person->death_date_to->format('Y-m-d'),
+            $log->properties['attributes']['death_date_to']
         );
 
         $this->assertEquals(
-            $person->burial_date_from,
-            Carbon::create($log->properties['attributes']['burial_date_from'])
+            $person->funeral_date_from->format('Y-m-d'),
+            $log->properties['attributes']['funeral_date_from']
         );
         $this->assertEquals(
-            $person->burial_date_to,
-            Carbon::create($log->properties['attributes']['burial_date_to'])
+            $person->funeral_date_to->format('Y-m-d'),
+            $log->properties['attributes']['funeral_date_to']
+        );
+
+        $this->assertEquals(
+            $person->burial_date_from->format('Y-m-d'),
+            $log->properties['attributes']['burial_date_from']
+        );
+        $this->assertEquals(
+            $person->burial_date_to->format('Y-m-d'),
+            $log->properties['attributes']['burial_date_to']
         );
     }
 }

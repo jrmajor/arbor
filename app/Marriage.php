@@ -4,6 +4,7 @@ namespace App;
 
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
+use App\Traits\TapsActivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +15,7 @@ use Spatie\Enum\Laravel\HasEnums;
 class Marriage extends Model
 {
 
-    use HasEnums, LogsActivity, SoftDeletes;
+    use HasEnums, LogsActivity, SoftDeletes, TapsActivity;
 
     protected $enums = [
         'rite' => MarriageRiteEnum::class.':nullable',
@@ -25,17 +26,23 @@ class Marriage extends Model
     protected static $logName = 'marriages';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['*'];
-    protected static $logAttributesToIgnore = ['id', 'created_at'];
+    protected static $logAttributesToIgnore = ['id'];
 
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
-    protected $dates = [
-        'first_event_date_from',
-        'first_event_date_to',
-        'second_event_date_from',
-        'second_event_date_to',
-        'end_date_from',
-        'end_date_to',
+    protected $casts = [
+        'first_event_date_from' => 'datetime:Y-m-d',
+        'first_event_date_to' => 'datetime:Y-m-d',
+        'second_event_date_from' => 'datetime:Y-m-d',
+        'second_event_date_to' => 'datetime:Y-m-d',
+        'end_date_from' => 'datetime:Y-m-d',
+        'end_date_to' => 'datetime:Y-m-d',
+    ];
+
+    protected $dateTuples = [
+        'first_event_date',
+        'second_event_date',
+        'end_date',
     ];
 
     public function woman(): BelongsTo

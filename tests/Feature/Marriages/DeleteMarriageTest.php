@@ -4,6 +4,7 @@ namespace Tests\Feature\Marriages;
 
 use App\Marriage;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -52,6 +53,29 @@ class MarriagesDeleteMarriageTest extends TestCase
         $response->assertRedirect("people/$marriage->woman_id");
 
         $this->assertTrue($marriage->fresh()->trashed());
+    }
+
+    public function testPersonDeletionIsLogged()
+    {
+        $marriage = factory(Marriage::class)->create();
+
+        $marriage->delete();
+
+        $log = $this->latestLog();
+
+        $this->assertEquals('marriages', $log->log_name);
+        $this->assertEquals('deleted', $log->description);
+        $this->assertTrue($marriage->is($log->subject));
+
+        $this->assertEquals($marriage->deleted_at, $log->created_at);
+
+        $this->assertEquals(
+            $marriage->deleted_at,
+            Carbon::create($log->properties['attributes']['deleted_at'])
+        );
+
+        $this->assertEquals(1, count($log->properties));
+        $this->assertEquals(1, count($log->properties['attributes']));
     }
 }
 
