@@ -18,7 +18,7 @@ class ViewPeopleIndexListingTest extends TestCase
         $response->assertSeeText('total: 0');
     }
 
-    public function testItWorks()
+    public function testItWorksWithPeople()
     {
         factory(Person::class)->create([
             'family_name' => 'Zbyrowski',

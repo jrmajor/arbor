@@ -18,7 +18,7 @@ class ViewPeopleLetterListingTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function testItWorks()
+    public function testItWorksWithPeople()
     {
         $this->actingAs(factory(User::class)->create(['permissions' => 1]));
 

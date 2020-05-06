@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Services\Pytlewski\Pytlewski;
+use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
 use App\Wielcy;
 use Carbon\Carbon;
@@ -20,7 +21,10 @@ use Spatie\Regex\Regex;
 
 class Person extends Model
 {
-    use LogsActivity, SoftDeletes, TapsActivity;
+    use HasDateTuples,
+        SoftDeletes,
+        LogsActivity,
+        TapsActivity;
 
     const generationInterval = 32;
 
@@ -34,14 +38,6 @@ class Person extends Model
     protected $casts = [
         'dead' => 'boolean',
         'visibility' => 'boolean',
-        'birth_date_from' => 'datetime:Y-m-d',
-        'birth_date_to' => 'datetime:Y-m-d',
-        'death_date_from' => 'datetime:Y-m-d',
-        'death_date_to' => 'datetime:Y-m-d',
-        'funeral_date_from' => 'datetime:Y-m-d',
-        'funeral_date_to' => 'datetime:Y-m-d',
-        'burial_date_from' => 'datetime:Y-m-d',
-        'burial_date_to' => 'datetime:Y-m-d',
     ];
 
     protected $dateTuples = [
