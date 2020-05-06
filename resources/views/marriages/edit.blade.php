@@ -10,6 +10,13 @@
             onclick="event.preventDefault();document.getElementById('delete-marriage-form').submit();">
             <small class="text-lg text-red-500">[{{ __('marriages.delete') }}]</small>
         </a>
+        @if(optional(auth()->user())->isSuperAdmin())
+            <a href="{{ route('marriages.history', ['maybe_trashed_marriage' => $marriage->id]) }}">
+                <small class="text-lg">
+                    [{{ strtolower(__('marriages.edits_history')) }}]
+                </small>
+            </a>
+        @endif
     </h3>
 
     <form

@@ -34,4 +34,9 @@ class MarriagePolicy
     {
         return $user->isSuperAdmin();
     }
+
+    public function viewHistory(User $user, Marriage $marriage)
+    {
+        return $user->isSuperAdmin();
+    }
 }

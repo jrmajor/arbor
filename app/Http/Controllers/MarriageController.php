@@ -59,4 +59,24 @@ class MarriageController extends Controller
 
         return redirect()->route('people.show', ['person' => $marriage->woman_id]);
     }
+
+    public function history(Marriage $marriage)
+    {
+        $this->authorize('viewHistory', $marriage);
+
+        $activities = $marriage->activities
+            ->reverse()
+            ->map(fn ($activity) => [
+                'model' => $activity,
+                'causer' => $activity->causer,
+                'description' => $activity->description,
+                'old' => $activity->properties['old'] ?? false,
+                'attributes' => $activity->properties['attributes'],
+            ]);
+
+        return view('marriages.history', [
+            'marriage' => $marriage,
+            'activities' => $activities,
+        ]);
+    }
 }

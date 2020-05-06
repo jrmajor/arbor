@@ -9,6 +9,9 @@ return [
     'edit_marriage' => 'Edytuj związek',
     'add_child' => 'Dodaj dziecko',
 
+    'edits_history' => 'Historia edycji',
+    'return_to_marriage_edition' => 'Wróć do edycji związku',
+
     'delete' => 'usuń',
 
     'woman' => 'Kobieta',

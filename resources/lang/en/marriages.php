@@ -9,6 +9,9 @@ return [
     'edit_marriage' => 'Edit marriage',
     'add_child' => 'Add child',
 
+    'edits_history' => 'Edits history',
+    'return_to_marriage_edition' => 'Return to marriage edition',
+
     'delete' => 'delete',
 
     'woman' => 'Woman',

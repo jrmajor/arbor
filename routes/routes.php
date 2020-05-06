@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('marriages/{marriage}/edit', 'MarriageController@edit')->name('marriages.edit');
     Route::match(['put', 'patch'], 'marriages/{marriage}', 'MarriageController@update')->name('marriages.update');
     Route::delete('marriages/{marriage}', 'MarriageController@destroy')->name('marriages.destroy');
+    Route::get('marriages/{maybe_trashed_marriage}/history', 'MarriageController@history')->name('marriages.history');
 });
 
 Route::middleware('auth')->group(function () {

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Marriage;
 use App\Person;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('maybe_trashed_person', fn ($id) =>
             Person::withTrashed()->findOrFail($id)
+        );
+
+        Route::bind('maybe_trashed_marriage', fn ($id) =>
+            Marriage::withTrashed()->findOrFail($id)
         );
     }
 }

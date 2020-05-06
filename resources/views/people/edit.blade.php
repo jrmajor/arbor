@@ -35,6 +35,13 @@
         <a href="{{ route('marriages.create') }}">
             <small class="text-lg">[{{ strtolower(__('marriages.add_a_new_marriage')) }}]</small>
         </a>
+        @if(optional(auth()->user())->isSuperAdmin())
+            <a href="{{ route('people.history', ['maybe_trashed_person' => $person->id]) }}">
+                <small class="text-lg">
+                    [{{ strtolower(__('people.edits_history')) }}]
+                </small>
+            </a>
+        @endif
     </h3>
 
     <form id="delete-person-form" method="POST" style="display: none"
