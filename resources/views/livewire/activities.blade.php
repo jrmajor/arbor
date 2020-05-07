@@ -4,6 +4,17 @@
 @endpush
 
 <div>
+    <input class="m-1" type="checkbox"
+        id="filterLogins" wire:model="filterLogins">
+    <label for="filterLogins">Logins</label>
+    <input class="m-1" type="checkbox"
+        id="filterUsers" wire:model="filterUsers">
+    <label for="filterUsers">Users</label>
+    <br>
+    <input class="m-1" type="checkbox"
+        id="filterEditions" wire:model="filterEditions">
+    <label for="filterEditions">People / Marriages</label>
+
     <table>
         @foreach ($activities as $activity)
             <tr wire:key="{{ $activity->id }}">
