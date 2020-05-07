@@ -42,24 +42,24 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => [], // ['mail'],
-            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => [], // ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => [], // ['mail'],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => [], // ['mail'],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => [], // ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => [], // ['mail'],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['mail'],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['mail'],
         ],
 
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
-        // 'mail' => [
-        //     'to' => 'your@example.com',
+        'mail' => [
+            'to' => env('ADMIN_MAIL'),
 
-        //     'from' => [
-        //         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        //         'name' => env('MAIL_FROM_NAME', 'Example'),
-        //     ],
-        // ],
+            'from' => [
+                'address' => env('MAIL_FROM_ADDRESS', 'arbor@npng.pl'),
+                'name' => env('MAIL_FROM_NAME', 'Arbor'),
+            ],
+        ],
 
     ],
 
