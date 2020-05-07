@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class MarriagesDeleteMarriageTest extends TestCase
+class DeleteMarriageTest extends TestCase
 {
     use RefreshDatabase;
 
