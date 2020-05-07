@@ -147,7 +147,7 @@ class Person extends Model
                     ->orWhere(fn ($q) =>
                         $q->where('woman_id', $this->id)
                             ->orWhere('man_id', $this->id)
-                    )->orderBy('first_event_date_from', 'asc');
+                    )->orderBy($this->sex == 'xx' ? 'woman_order' : 'man_order');
     }
 
     public function children(): HasMany
