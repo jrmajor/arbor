@@ -22,13 +22,14 @@ return [
             'databases' => [
                 'mysql',
             ],
+
         ],
 
         'database_dump_compressor' => null,
 
         'destination' => [
 
-            'filename_prefix' => 'arbor-',
+            'filename_prefix' => 'backup-',
 
             'disks' => [
                 'backup',

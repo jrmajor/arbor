@@ -22,20 +22,20 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'endpoint' => env('AWS_URL'),
+            'key' => env('S3_ACCESS_KEY_ID'),
+            'secret' => env('S3_SECRET_ACCESS_KEY'),
+            'region' => env('S3_DEFAULT_REGION'),
+            'bucket' => env('S3_BUCKET'),
+            'endpoint' => env('S3_URL'),
         ],
 
         'backup' => [
             'driver' => 's3',
-            'key' => env('BACKUP_AWS_ACCESS_KEY_ID'),
-            'secret' => env('BACKUP_AWS_SECRET_ACCESS_KEY'),
-            'region' => env('BACKUP_AWS_DEFAULT_REGION'),
-            'bucket' => env('BACKUP_AWS_BUCKET'),
-            'endpoint' => env('BACKUP_AWS_URL'),
+            'key' => env('BACKUP_S3_ACCESS_KEY_ID'),
+            'secret' => env('BACKUP_S3_SECRET_ACCESS_KEY'),
+            'region' => env('BACKUP_S3_DEFAULT_REGION'),
+            'bucket' => env('BACKUP_S3_BUCKET'),
+            'endpoint' => env('BACKUP_S3_URL'),
         ],
 
     ],
