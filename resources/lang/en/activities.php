@@ -8,4 +8,6 @@ return [
 
     'by' => 'by',
 
+    'logged_in' => 'logged in',
+
 ];

@@ -2,6 +2,8 @@
 
 return [
 
+    'person' => 'osoba',
+
     'index' => [
         'by_family_name' => 'Po nazwisku rodowym',
         'by_last_name' => 'Po nazwisku',

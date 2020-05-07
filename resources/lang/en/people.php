@@ -2,6 +2,8 @@
 
 return [
 
+    'person' => 'person',
+
     'index' => [
         'by_family_name' => 'By family name',
         'by_last_name' => 'By last name',

@@ -11,6 +11,7 @@ return [
         'add_marriage' => 'add marriage',
         //'add_user' => 'add user',
         //'manage_users' => 'manage users',
+        'activities' => 'activities',
     ],
     'date' => [
         'between' => 'between',

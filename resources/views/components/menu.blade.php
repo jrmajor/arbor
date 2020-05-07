@@ -10,10 +10,11 @@
         <div class="hidden md:block">
             <a href="{{ route('people.create') }}"><small>{{ __('misc.menu.add_person') }}</small></a>
             | <a href="{{ route('marriages.create') }}"><small>{{ __('misc.menu.add_marriage') }}</small></a>
-            {{--@if($user())->isSuperAdmin())
-                | <a href="{{ route('users.create') }}"><small>{{ __('misc.menu.add_user') }}</small></a>
-                | <a href="{{ route('users.index') }}"><small>{{ __('misc.menu.manage_users') }}</small></a>
-            @endif--}}
+            @if($user->isSuperAdmin())
+                {{--| <a href="{{ route('users.create') }}"><small>{{ __('misc.menu.add_user') }}</small></a>
+                | <a href="{{ route('users.index') }}"><small>{{ __('misc.menu.manage_users') }}</small></a>--}}
+                | <a href="{{ route('activities.index') }}"><small>{{ __('misc.menu.activities') }}</small></a>
+            @endif
         </div>
     @endif
 

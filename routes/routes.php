@@ -45,9 +45,6 @@ Route::middleware('auth')->group(function () {
     Route::get('marriages/{maybe_trashed_marriage}/history', 'MarriageController@history')->name('marriages.history');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::post('ajax/person', 'AjaxController@person')->name('ajax.person');
-    Route::post('ajax/pytlewski', 'AjaxController@pytlewski')->name('ajax.pytlewski');
-});
+Route::livewire('activities', 'activities')->name('activities.index')->middleware('auth');
 
 Route::post('locale', 'LocaleController')->name('locale.set');

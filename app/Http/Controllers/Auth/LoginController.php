@@ -30,7 +30,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        activity()
+        activity('logins')
             ->causedBy($user)
             ->withProperties($this->getAgent())
             ->log('logged-in');
