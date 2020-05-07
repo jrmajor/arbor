@@ -32,8 +32,8 @@
                         @endif
                     @elseif($activity->log_name == 'marriages')
                         {{ __('marriages.marriage').' №'.$activity->subject->id }}
-                        (<a href="{{ route('people.show', [$activity->subject]) }}">{{ strtolower(__('marriages.woman')) }}</a>,
-                        <a href="{{ route('people.show', [$activity->subject]) }}">{{ strtolower(__('marriages.man')) }}</a>)
+                        (<a href="{{ route('people.show', [$activity->subject->woman]) }}">{{ strtolower(__('marriages.woman')) }}</a>,
+                        <a href="{{ route('people.show', [$activity->subject->man]) }}">{{ strtolower(__('marriages.man')) }}</a>)
                         {{ __('activities.'.$activity['description']) }}
                         @if($activity->causer)
                             {{ __('activities.by') }} <strong>{{ $activity->causer->username }}</strong>

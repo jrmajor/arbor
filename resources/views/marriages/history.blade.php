@@ -25,11 +25,11 @@
             <dd>
                 <table>
                     <x-history.td-text :activity="$activity" :attribute="'woman_id'"
-                        :label="__('people.mother')"/>
+                        :label="__('marriages.woman')"/>
                     <x-history.td-text :activity="$activity" :attribute="'woman_order'"/>
 
                     <x-history.td-text :activity="$activity" :attribute="'man_id'"
-                        :label="__('people.father')"/>
+                        :label="__('marriages.man')"/>
                     <x-history.td-text :activity="$activity" :attribute="'man_order'"/>
 
                     <x-history.td-enum :activity="$activity" :attribute="'rite'"
