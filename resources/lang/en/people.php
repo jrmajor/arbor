@@ -13,6 +13,9 @@ return [
     'add_a_new_person' => 'Add a new person',
     'edit_this_person' => 'Edit this person',
 
+    'make_invisible' => 'make invisible',
+    'make_visible' => 'make visible',
+
     'edits_history' => 'Edits history',
 
     'return_to_person_overwiew' => 'Return to person overwiew',

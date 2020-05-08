@@ -93,6 +93,21 @@ class PersonController extends Controller
         return redirect()->route('people.show', [$person]);
     }
 
+    public function changeVisibility(Request $request, Person $person)
+    {
+        $this->authorize('changeVisibility', $person);
+
+        $request->validate([
+            'visibility' => 'required|boolean',
+        ]);
+
+        if (! $person->changeVisibility($request['visibility'])) {
+            return abort(500);
+        }
+
+        return redirect()->route('people.show', [$person]);
+    }
+
     public function destroy(Person $person)
     {
         $this->authorize('delete', $person);

@@ -13,6 +13,9 @@ return [
     'add_a_new_person' => 'Dodaj nową osobę',
     'edit_this_person' => 'Edytuj tę osobę',
 
+    'make_invisible' => 'sprywatyzuj',
+    'make_visible' => 'opublicznij',
+
     'edits_history' => 'Historia edycji',
 
     'return_to_person_overwiew' => 'Wróc do widoku osoby',

@@ -30,6 +30,11 @@ class PersonPolicy
         return $user->canWrite();
     }
 
+    public function changeVisibility(User $user, Person $person)
+    {
+        return $user->isSuperAdmin();
+    }
+
     public function delete(User $user, Person $person)
     {
         return $user->canDestroy();

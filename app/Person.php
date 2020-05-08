@@ -16,6 +16,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
+use Spatie\Activitylog\ActivityLogger;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Regex\Regex;
 
@@ -31,7 +32,8 @@ class Person extends Model
     protected static $logName = 'people';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['*'];
-    protected static $logAttributesToIgnore = ['id'];
+    protected static $logAttributesToIgnore = ['id', 'visibility'];
+    protected static $submitEmptyLogs = false;
 
     protected $guarded = ['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'];
 
@@ -59,6 +61,45 @@ class Person extends Model
     public function canBeViewedBy(?User $user): bool
     {
         return optional($user)->canRead() || $this->isVisible();
+    }
+
+    public function changeVisibility($visibility)
+    {
+        if ($this->visibility === $visibility) {
+            return false;
+        }
+
+        $this->visibility = $visibility;
+
+        $saved = $this->save();
+
+        if ($saved) {
+            $description = $this->getDescriptionForEvent('changed-visibility');
+
+            $logName = $this->getLogNameToUse('changed-visibility');
+
+            if ($description == '') {
+                return;
+            }
+
+            $attrs = [
+                'old' => ['visibility' => ! $visibility],
+                'attributes' => ['visibility' => $visibility],
+            ];
+
+            $logger = app(ActivityLogger::class)
+                ->useLog($logName)
+                ->performedOn($this)
+                ->withProperties($attrs);
+
+            if (method_exists($this, 'tapActivity')) {
+                $logger->tap([$this, 'tapActivity'], 'changed-visibility');
+            }
+
+            $logger->log($description);
+        }
+
+        return $saved;
     }
 
     public function mother(): BelongsTo

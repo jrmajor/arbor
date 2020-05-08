@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::post('people', 'PersonController@store')->name('people.store');
     Route::get('people/{person}/edit', 'PersonController@edit')->name('people.edit');
     Route::match(['put', 'patch'], 'people/{person}', 'PersonController@update')->name('people.update');
+    Route::put('people/{person}/visibility', 'PersonController@changeVisibility')->name('people.changeVisibility');
     Route::delete('people/{person}', 'PersonController@destroy')->name('people.destroy');
     Route::get('people/{maybe_trashed_person}/history', 'PersonController@history')->name('people.history');
 });

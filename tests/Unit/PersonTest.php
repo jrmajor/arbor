@@ -64,6 +64,21 @@ class PersonTest extends TestCase
         $this->assertTrue($person->canBeViewedBy(null));
     }
 
+    public function testChangeVisibilityMethod()
+    {
+        $person = factory(Person::class)->create();
+
+        $this->assertFalse($person->isVisible());
+
+        $person->changeVisibility(true);
+
+        $this->assertTrue($person->isVisible());
+
+        $person->changeVisibility(false);
+
+        $this->assertFalse($person->isVisible());
+    }
+
     public function testCanGetMother()
     {
         $mother = factory(Person::class)->state('woman')->create();
