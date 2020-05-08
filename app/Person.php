@@ -53,7 +53,7 @@ class Person extends Model
 
     public function isVisible(): bool
     {
-        return $this->dead || $this->visibility > 0;
+        return $this->visibility === true;
     }
 
     public function canBeViewedBy(?User $user): bool

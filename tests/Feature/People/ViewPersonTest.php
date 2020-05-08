@@ -20,18 +20,29 @@ class ViewPersonTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function testGuestCanSeeDeadPerson()
+    public function testGuestCannotSeeHiddenDeadPerson()
     {
         $person = factory(Person::class)->states('dead')->create();
+
+        $response = $this->get("people/$person->id");
+
+        $response->assertStatus(403);
+    }
+
+    public function testGuestCanSeeVisibleAlivePerson()
+    {
+        $person = factory(Person::class)->states('alive')->create([
+            'visibility' => 1,
+        ]);
 
         $response = $this->get("people/$person->id");
 
         $response->assertStatus(200);
     }
 
-    public function testGuestCanSeeVisibleAlivePerson()
+    public function testGuestCanSeeVisibleDeadPerson()
     {
-        $person = factory(Person::class)->states('alive')->create([
+        $person = factory(Person::class)->states('dead')->create([
             'visibility' => 1,
         ]);
 
@@ -53,7 +64,7 @@ class ViewPersonTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testUserWithPersmissionsCanSeeDeadPerson()
+    public function testUserWithPersmissionsCanSeeHiddenDeadPerson()
     {
         $user = factory(User::class)->create([
             'permissions' => 1,
@@ -73,6 +84,21 @@ class ViewPersonTest extends TestCase
         ]);
 
         $person = factory(Person::class)->states('alive')->create([
+            'visibility' => 1,
+        ]);
+
+        $response = $this->actingAs($user)->get("people/$person->id");
+
+        $response->assertStatus(200);
+    }
+
+    public function testUserWithPersmissionsCanSeeVisibleDeadPerson()
+    {
+        $user = factory(User::class)->create([
+            'permissions' => 1,
+        ]);
+
+        $person = factory(Person::class)->states('dead')->create([
             'visibility' => 1,
         ]);
 

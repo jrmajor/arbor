@@ -25,7 +25,7 @@ class PersonTest extends TestCase
         $this->assertTrue($alive->isVisible());
 
         $dead->visibility = false;
-        $this->assertTrue($dead->isVisible());
+        $this->assertFalse($dead->isVisible());
         $dead->visibility = true;
         $this->assertTrue($dead->isVisible());
     }
@@ -33,13 +33,35 @@ class PersonTest extends TestCase
     public function testTellsIfCanBeViewedByGivenUser()
     {
         $user = factory(User::class)->create();
-        $person = factory(Person::class)->state('alive')->create();
 
-        $this->assertFalse($person->canBeViewedBy($user));
+        $hiddenPerson = factory(Person::class)->create([
+            'visibility' => false
+        ]);
+
+        $visiblePerson = factory(Person::class)->create([
+            'visibility' => true
+        ]);
+
+        $this->assertFalse($hiddenPerson->canBeViewedBy($user));
+        $this->assertTrue($visiblePerson->canBeViewedBy($user));
+
         $user->permissions = 1;
-        $this->assertTrue($person->canBeViewedBy($user));
+
+        $this->assertTrue($hiddenPerson->canBeViewedBy($user));
+        $this->assertTrue($visiblePerson->canBeViewedBy($user));
+    }
+
+    public function testTellsIfCanBeViewedByGuest()
+    {
+        $user = factory(User::class)->create();
+
+        $person = factory(Person::class)->create();
 
         $this->assertFalse($person->canBeViewedBy(null));
+
+        $person->visibility = true;
+
+        $this->assertTrue($person->canBeViewedBy(null));
     }
 
     public function testCanGetMother()
