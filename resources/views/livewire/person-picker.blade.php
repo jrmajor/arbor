@@ -6,8 +6,7 @@
                 type="text"
                 id="{{ $name }}_search" name="{{ $name }}_search"
                 autocomplete=off
-                wire:model="search"
-                wire:keyup="search">
+                wire:model="search">
             <small class="text-red-500">
                 @error($name.'_id'){{ $message }}@enderror
             </small>
@@ -19,8 +18,8 @@
                         <option value=""></option>
                     @else
                         @foreach($people as $person)
-                            <option value="{{ $person['id'] }}">
-                                {{ $person['name'] }}
+                            <option value="{{ $person->id }}">
+                                {{ $person->formatName() }}
                             </option>
                         @endforeach
                         @if($nullable)

@@ -17,17 +17,21 @@ class PersonPicker extends Component
 
     public ?string $sex;
 
-    public array $people = [];
+    public ?int $initial;
 
     public ?string $search;
 
-    public function search()
+    public function getPeople()
     {
         if (! optional(Auth::user())->canRead()) {
             return;
         }
 
-        $this->people = Person::
+        if (! isset($this->search) || blank($this->search)) {
+            return Person::where('id', $this->initial)->get();
+        }
+
+        return Person::
             where(function ($q) {
                 $q->where('id', $this->search)
                     ->orWhere(function ($q) {
@@ -45,11 +49,7 @@ class PersonPicker extends Component
                 )
             )
             ->limit(10)
-            ->get()
-            ->map(fn ($person) => [
-                'id' => $person->id,
-                'name' => $person->formatName(),
-            ])->all();
+            ->get();
     }
 
     public function mount($label, $name, $nullable, $sex, $initial)
@@ -59,20 +59,14 @@ class PersonPicker extends Component
             'name' => $name,
             'nullable' => $nullable,
             'sex' => $sex,
+            'initial' => $initial,
         ]);
-
-        $person = Person::find($initial);
-
-        if ($person) {
-            $this->people[] = [
-                'id' => $person->id,
-                'name' => $person->formatName(),
-            ];
-        }
     }
 
     public function render()
     {
-        return view('livewire.person-picker');
+        return view('livewire.person-picker', [
+            'people' => $this->getPeople(),
+        ]);
     }
 }
