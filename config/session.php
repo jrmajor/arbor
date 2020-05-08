@@ -22,14 +22,13 @@ return [
 
     'lottery' => [2, 100],
 
-    'cookie' => env('SESSION_COOKIE', 'arbor_session'
-    ),
+    'cookie' => env('SESSION_COOKIE', 'arbor_session'),
 
     'path' => '/',
 
     'domain' => env('SESSION_DOMAIN', null),
 
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    'secure' => env('SESSION_SECURE_COOKIE', null),
 
     'http_only' => true,
 
