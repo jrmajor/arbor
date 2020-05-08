@@ -17,9 +17,9 @@ class StoreMarriage extends FormRequest
     public function rules()
     {
         return [
-            'woman_id' => 'integer|exists:people,id',
+            'woman_id' => 'required|integer|exists:people,id',
             'woman_order' => 'integer|nullable',
-            'man_id' => 'integer|exists:people,id',
+            'man_id' => 'required|integer|exists:people,id',
             'man_order' => 'integer|nullable',
             'rite' => [new EnumRule(MarriageRiteEnum::class), 'nullable'],
             'first_event_type' => [new EnumRule(MarriageEventTypeEnum::class), 'nullable'],
