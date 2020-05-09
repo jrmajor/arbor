@@ -55,7 +55,7 @@ class DeleteMarriageTest extends TestCase
         $this->assertTrue($marriage->fresh()->trashed());
     }
 
-    public function testPersonDeletionIsLogged()
+    public function testMarriageDeletionIsLogged()
     {
         $marriage = factory(Marriage::class)->create();
 

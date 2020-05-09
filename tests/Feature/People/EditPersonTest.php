@@ -37,7 +37,6 @@ class EditPersonTest extends TestCase
             'burial_date_from' => '1918-01-05',
             'burial_date_to' => '1918-01-05',
             'burial_place' => 'Załuż k/Sanoka, Polska',
-            // 'visibility' => false,
         ], $overrides);
     }
 
@@ -206,8 +205,10 @@ class EditPersonTest extends TestCase
     {
         $person = factory(Person::class)->create($this->oldAttributes());
 
-        sleep(1);
+        $changeTimestamp = Carbon::now()->addMinute();
+        Carbon::setTestNow($changeTimestamp);
         $person->fill($this->newAttributes())->save();
+        Carbon::setTestNow();
 
         $person = $person->fresh();
 

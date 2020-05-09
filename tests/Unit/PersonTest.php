@@ -19,15 +19,30 @@ class PersonTest extends TestCase
         $alive = factory(Person::class)->state('alive')->create();
         $dead = factory(Person::class)->state('dead')->create();
 
-        $alive->visibility = false;
+        $alive->changeVisibility(false);
         $this->assertFalse($alive->isVisible());
-        $alive->visibility = true;
+        $alive->changeVisibility(true);
         $this->assertTrue($alive->isVisible());
 
-        $dead->visibility = false;
+        $dead->changeVisibility(false);
         $this->assertFalse($dead->isVisible());
-        $dead->visibility = true;
+        $dead->changeVisibility(true);
         $this->assertTrue($dead->isVisible());
+    }
+
+    public function testChangeVisibilityMethod()
+    {
+        $person = factory(Person::class)->create();
+
+        $this->assertFalse($person->isVisible());
+
+        $person->changeVisibility(true);
+
+        $this->assertTrue($person->isVisible());
+
+        $person->changeVisibility(false);
+
+        $this->assertFalse($person->isVisible());
     }
 
     public function testTellsIfCanBeViewedByGivenUser()
@@ -62,21 +77,6 @@ class PersonTest extends TestCase
         $person->visibility = true;
 
         $this->assertTrue($person->canBeViewedBy(null));
-    }
-
-    public function testChangeVisibilityMethod()
-    {
-        $person = factory(Person::class)->create();
-
-        $this->assertFalse($person->isVisible());
-
-        $person->changeVisibility(true);
-
-        $this->assertTrue($person->isVisible());
-
-        $person->changeVisibility(false);
-
-        $this->assertFalse($person->isVisible());
     }
 
     public function testCanGetMother()

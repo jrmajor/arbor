@@ -33,7 +33,6 @@ class CreatePersonTest extends TestCase
             'funeral_place' => 'Grudziądz, Polska',
             'burial_date_from' => '1947-01-21',
             'burial_place' => 'Grudziądz, Polska',
-            // 'visibility' => true,
         ], $overrides);
     }
 
@@ -133,7 +132,7 @@ class CreatePersonTest extends TestCase
         $this->assertTrue($validAttributes['burial_date_from'] == $person->fresh()['burial_date_to']->toDateString());
     }
 
-    public function testYouCanPassParentsToFormByGetRequestParameters()
+    public function testYouCanPassParentsIdsToFormByGetRequestParameters()
     {
         $user = factory(User::class)->create([
             'permissions' => 2,

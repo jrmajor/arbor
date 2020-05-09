@@ -97,7 +97,7 @@ class EditMarriageTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testGuestsCannotEditPerson()
+    public function testGuestsCannotEditMarriage()
     {
         $oldWoman = factory(Person::class)->state('woman')->create();
         $oldMan = factory(Person::class)->state('man')->create();
@@ -132,7 +132,7 @@ class EditMarriageTest extends TestCase
         }
     }
 
-    public function testUsersWithoutPermissionsCannotEditPerson()
+    public function testUsersWithoutPermissionsCannotEditMarriage()
     {
         $oldWoman = factory(Person::class)->state('woman')->create();
         $oldMan = factory(Person::class)->state('man')->create();
@@ -170,7 +170,7 @@ class EditMarriageTest extends TestCase
         }
     }
 
-    public function testUsersWithPermissionsCanEditPerson()
+    public function testUsersWithPermissionsCanEditMarriage()
     {
         $oldWoman = factory(Person::class)->state('woman')->create();
         $oldMan = factory(Person::class)->state('man')->create();
@@ -228,12 +228,14 @@ class EditMarriageTest extends TestCase
         );
     }
 
-    public function testPersonEditionIsLogged()
+    public function testMarriageEditionIsLogged()
     {
         $marriage = factory(Marriage::class)->create($this->oldAttributes());
 
-        sleep(1);
+        $changeTimestamp = Carbon::now()->addMinute();
+        Carbon::setTestNow($changeTimestamp);
         $marriage->fill($this->newAttributes())->save();
+        Carbon::setTestNow();
 
         $marriage = $marriage->fresh();
 

@@ -7,7 +7,6 @@ use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
 use App\Wielcy;
 use Carbon\Carbon;
-use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,7 +17,6 @@ use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Spatie\Activitylog\ActivityLogger;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Regex\Regex;
 
 class Person extends Model
 {
