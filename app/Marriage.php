@@ -33,6 +33,10 @@ class Marriage extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
+    protected $casts = [
+        'ended' => 'boolean',
+    ];
+
     protected $dateTuples = [
         'first_event_date',
         'second_event_date',
