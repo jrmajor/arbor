@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
                     }
                 }
             }
+
             return $array;
         });
 

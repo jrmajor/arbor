@@ -50,6 +50,7 @@ if (! function_exists('roman')) {
                 }
             }
         }
+
         return $returnValue;
     }
 }

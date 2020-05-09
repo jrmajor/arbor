@@ -78,4 +78,3 @@ class DeletePersonTest extends TestCase
         $this->assertEquals(1, count($log->properties['attributes']));
     }
 }
-

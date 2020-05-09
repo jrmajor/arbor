@@ -46,8 +46,6 @@ class Pytlewski
         if (isset($this->attributes[$key])) {
             return $this->attributes[$key];
         }
-
-        return;
     }
 
     public function __set($key, $value)

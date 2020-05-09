@@ -80,7 +80,7 @@ class Wielcy
     public function __get($key)
     {
         if (! $key) {
-            return null;
+            return;
         }
 
         if ($key == 'id') {
@@ -94,8 +94,6 @@ class Wielcy
         if (array_key_exists($key, $this->attributes)) {
             return $this->attributes[$key];
         }
-
-        return;
     }
 
     public function __set($key, $value)

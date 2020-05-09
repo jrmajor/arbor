@@ -331,4 +331,3 @@ class EditPersonTest extends TestCase
         );
     }
 }
-
