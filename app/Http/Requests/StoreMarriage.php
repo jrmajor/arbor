@@ -4,11 +4,15 @@ namespace App\Http\Requests;
 
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
+use App\Marriage;
+use App\Traits\ValidatesDateTuples;
 use Illuminate\Foundation\Http\FormRequest;
 use Spatie\Enum\Laravel\Rules\EnumRule;
 
 class StoreMarriage extends FormRequest
 {
+    use ValidatesDateTuples;
+
     public function authorize()
     {
         return true;
@@ -39,25 +43,6 @@ class StoreMarriage extends FormRequest
 
     protected function prepareForValidation()
     {
-        if (
-            $this['first_event_date_from'] != null
-            && $this['first_event_date_to'] == null
-        ) {
-            $this['first_event_date_to'] = $this['first_event_date_from'];
-        }
-
-        if (
-            $this['second_event_date_from'] != null
-            && $this['second_event_date_to'] == null
-        ) {
-            $this['second_event_date_to'] = $this['second_event_date_from'];
-        }
-
-        if (
-            $this['end_date_from'] != null
-            && $this['end_date_to'] == null
-        ) {
-            $this['end_date_to'] = $this['end_date_from'];
-        }
+        $this->prepareDateTuples(Marriage::class);
     }
 }

@@ -37,7 +37,7 @@ class Marriage extends Model
         'ended' => 'boolean',
     ];
 
-    protected $dateTuples = [
+    protected static $dateTuples = [
         'first_event_date',
         'second_event_date',
         'end_date',

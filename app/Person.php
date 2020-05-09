@@ -39,7 +39,7 @@ class Person extends Model
         'visibility' => 'boolean',
     ];
 
-    protected $dateTuples = [
+    protected static $dateTuples = [
         'birth_date',
         'death_date',
         'funeral_date',

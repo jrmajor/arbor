@@ -2,10 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\ValidatesDateTuples;
+use App\Person;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePerson extends FormRequest
 {
+    use ValidatesDateTuples;
+
     public function authorize()
     {
         return true;
@@ -42,32 +46,6 @@ class StorePerson extends FormRequest
 
     protected function prepareForValidation()
     {
-        if (
-            $this['birth_date_from'] != null
-            && $this['birth_date_to'] == null
-        ) {
-            $this['birth_date_to'] = $this['birth_date_from'];
-        }
-
-        if (
-            $this['death_date_from'] != null
-            && $this['death_date_to'] == null
-        ) {
-            $this['death_date_to'] = $this['death_date_from'];
-        }
-
-        if (
-            $this['funeral_date_from'] != null
-            && $this['funeral_date_to'] == null
-        ) {
-            $this['funeral_date_to'] = $this['funeral_date_from'];
-        }
-
-        if (
-            $this['burial_date_from'] != null
-            && $this['burial_date_to'] == null
-        ) {
-            $this['burial_date_to'] = $this['burial_date_from'];
-        }
+        $this->prepareDateTuples(Person::class);
     }
 }
