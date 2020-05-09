@@ -78,4 +78,3 @@ class DeleteMarriageTest extends TestCase
         $this->assertEquals(1, count($log->properties['attributes']));
     }
 }
-

@@ -144,7 +144,7 @@ class CreatePersonTest extends TestCase
         $mother = factory(Person::class)->state('woman')->create();
         $father = factory(Person::class)->state('man')->create();
 
-        $response =  $this->actingAs($user)->get("people/create?mother=$mother->id&father=$father->id");
+        $response = $this->actingAs($user)->get("people/create?mother=$mother->id&father=$father->id");
 
         $response->assertStatus(200);
         $response->assertSee($mother->id);

@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Arr::macro('trim', function ($array) {
-            foreach($array as $key => $value) {
+            foreach ($array as $key => $value) {
                 if (is_array($value)) {
                     $array[$key] = Arr::trim($value);
                     if (blank($array[$key])) {

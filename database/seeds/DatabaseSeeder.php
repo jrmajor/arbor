@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
                 continue;
             }
 
-            $this->command->line('<comment>Seeding: </comment>' . $seed->getFilename());
+            $this->command->line('<comment>Seeding: </comment>'.$seed->getFilename());
 
             DB::unprepared($seed->getContents());
 
-            $this->command->line('<info>Seeded:  </info>' . $seed->getFilename());
+            $this->command->line('<info>Seeded:  </info>'.$seed->getFilename());
         }
     }
 }

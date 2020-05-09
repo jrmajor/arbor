@@ -13,6 +13,7 @@ class WelcomePageTest extends TestCase
 
         $response->assertStatus(200);
     }
+
     public function testItRedirectsLoggedUsers()
     {
         $this->actingAs(factory(User::class)->create());

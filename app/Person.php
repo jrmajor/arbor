@@ -5,7 +5,6 @@ namespace App;
 use App\Services\Pytlewski\Pytlewski;
 use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
-use App\Wielcy;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -256,7 +255,7 @@ class Person extends Model
     public function age($to, $raw = false)
     {
         if (! $this->birth_date) {
-            return null;
+            return;
         }
 
         [$to_from, $to_to] = is_array($to) ? $to : [$to, $to];
@@ -264,7 +263,7 @@ class Person extends Model
         $either = $this->birth_date_to->diffInYears($to_from);
         $or = $this->birth_date_from->diffInYears($to_to);
 
-        if($raw) {
+        if ($raw) {
             return (int) $or;
         } else {
             return $either == $or ? $either : $either.'-'.$or;
@@ -279,7 +278,7 @@ class Person extends Model
     public function ageAtDeath($raw = false)
     {
         if (! $this->death_date) {
-            return null;
+            return;
         }
 
         return $this->age([$this->death_date_from, $this->death_date_to], $raw);
@@ -329,28 +328,28 @@ class Person extends Model
 
     public function formatName(): string
     {
-        $name = $this->name . ' ';
+        $name = $this->name.' ';
 
-        if(! $this->last_name) {
+        if (! $this->last_name) {
             $name .= $this->family_name;
         } else {
             $name .= "{$this->last_name} (z d. {$this->family_name})";
         }
 
-        if ($this->birth_year && $this->death_year){
+        if ($this->birth_year && $this->death_year) {
             $name .= " (∗$this->birth_year, ✝$this->death_year)";
         } elseif ($this->birth_year) {
             $name .= " (∗{$this->birth_year})";
-        } elseif($this->death_year) {
+        } elseif ($this->death_year) {
             $name .= " (✝{$this->death_year})";
         }
 
         return $name .= " [№{$this->id}]";
     }
 
-    public static function findByPytlewskiId($id): ?Person
+    public static function findByPytlewskiId($id): ?self
     {
-        return Person::where('id_pytlewski', $id)->first();
+        return self::where('id_pytlewski', $id)->first();
     }
 
     public static function letters($type): Collection
@@ -363,7 +362,7 @@ class Person extends Model
             "letters_$type",
             fn () => DB::table('people')
                     ->selectRaw(
-                        'left(' . ($type == 'family' ? 'family_name' : 'ifnull(last_name, family_name)') . ', 1)
+                        'left('.($type == 'family' ? 'family_name' : 'ifnull(last_name, family_name)').', 1)
                         collate utf8mb4_0900_as_ci as letter,
                         count(*) as total'
                     )->groupBy('letter')

@@ -76,7 +76,7 @@ class EditPersonTest extends TestCase
 
     public function testGuestsAreAskedToLogInWhenAttemptingToViewEditFormForNonexistentPerson()
     {
-        $response = $this->get("people/1/edit");
+        $response = $this->get('people/1/edit');
 
         $response->assertStatus(302);
         $response->assertRedirect('login');

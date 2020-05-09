@@ -61,7 +61,6 @@ class ChangeVisibilityTest extends TestCase
 
     public function testVisibilityChangeIsLogged()
     {
-
         $person = factory(Person::class)->create();
 
         $this->assertFalse($person->isVisible());
@@ -93,4 +92,3 @@ class ChangeVisibilityTest extends TestCase
         $this->assertEquals(true, $log->properties['attributes']['visibility']);
     }
 }
-

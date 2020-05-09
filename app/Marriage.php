@@ -14,7 +14,6 @@ use Spatie\Enum\Laravel\HasEnums;
 
 class Marriage extends Model
 {
-
     use HasDateTuples,
         HasEnums,
         SoftDeletes,

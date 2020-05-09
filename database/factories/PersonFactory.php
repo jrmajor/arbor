@@ -19,11 +19,11 @@ $factory->define(Person::class, function (Faker $faker) {
         'last_name' => $sex == 'female' && $faker->boolean ? $faker->lastName($sex) : null,
         'birth_date_from' => $faker->dateTimeBetween('-80 years', '-30 years')->format('Y-m-d'),
         'birth_date_to' => fn (array $person) => $person['birth_date_from'],
-        'birth_place' => $faker->city . ', Polska',
+        'birth_place' => $faker->city.', Polska',
         'dead' => $dead,
         'death_date_from' => $dead ? $faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d') : null,
         'death_date_to' => fn (array $person) => $person['death_date_from'],
-        'death_place' => $dead ? $faker->city . ', Polska' : null,
+        'death_place' => $dead ? $faker->city.', Polska' : null,
         'funeral_date_from' => fn (array $person)
             => $dead ? (new Carbon($person['death_date_from']))->add(CarbonInterval::days(5))->format('Y-m-d') : null,
         'funeral_date_to' => fn (array $person) => $person['funeral_date_from'],
@@ -74,7 +74,7 @@ $factory->state(Person::class, 'dead', function (Faker $faker) {
         'dead' => true,
         'death_date_from' => $faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
         'death_date_to' => fn (array $person) => $person['death_date_from'],
-        'death_place' => $faker->city . ', Polska',
+        'death_place' => $faker->city.', Polska',
         'funeral_date_from' => fn (array $person)
             => (new Carbon($person['death_date_from']))->add(CarbonInterval::days(5))->format('Y-m-d'),
         'funeral_date_to' => fn (array $person) => $person['funeral_date_from'],

@@ -43,11 +43,11 @@ class Pytlewski
             return self::url($this->id);
         }
 
-        if(isset($this->attributes[$key])) {
+        if (isset($this->attributes[$key])) {
             return $this->attributes[$key];
         }
 
-        return null;
+        return;
     }
 
     public function __set($key, $value)
@@ -59,7 +59,7 @@ class Pytlewski
 
     public static function url($id): string
     {
-        return 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=' . $id;
+        return 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id='.$id;
     }
 
     private function getSource(): string

@@ -42,5 +42,4 @@ class UserTest extends TestCase
         $this->assertTrue($user->canDestroy());
         $this->assertTrue($user->isSuperAdmin());
     }
-
 }

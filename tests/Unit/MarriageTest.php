@@ -16,7 +16,7 @@ class MarriageTest extends TestCase
     public function testItCastsRiteToEnum()
     {
         $marriage = factory(Marriage::class)->create([
-            'rite' => 'roman_catholic'
+            'rite' => 'roman_catholic',
         ]);
 
         $this->assertInstanceOf(MarriageRiteEnum::class, $marriage->rite);

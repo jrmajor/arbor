@@ -50,11 +50,11 @@ class PersonTest extends TestCase
         $user = factory(User::class)->create();
 
         $hiddenPerson = factory(Person::class)->create([
-            'visibility' => false
+            'visibility' => false,
         ]);
 
         $visiblePerson = factory(Person::class)->create([
-            'visibility' => true
+            'visibility' => true,
         ]);
 
         $this->assertFalse($hiddenPerson->canBeViewedBy($user));
@@ -143,7 +143,7 @@ class PersonTest extends TestCase
         $person = factory(Person::class)->state('woman')->create();
 
         factory(Person::class, 3)->state('man')->create()
-            ->each(function ($partner) use ($person){
+            ->each(function ($partner) use ($person) {
                 factory(Marriage::class)->create([
                     'woman_id' => $person->id,
                     'man_id' => $partner->id,
@@ -158,7 +158,7 @@ class PersonTest extends TestCase
         $father = factory(Person::class)->state('man')->create();
 
         factory(Person::class, 2)->state('woman')->create()
-            ->each(function ($mother) use ($father){
+            ->each(function ($mother) use ($father) {
                 factory(Person::class)->create([
                     'mother_id' => $mother->id,
                     'father_id' => $father->id,

@@ -22,8 +22,8 @@ abstract class TestCase extends BaseTestCase
             return $route->getName() == $routeName;
         })->pluck('action.controller');
 
-        Assert::assertNotEmpty($controllerAction, 'Route "' . $routeName . '" is not defined.');
-        Assert::assertCount(1, $controllerAction, 'Route "' . $routeName . '" is defined multiple times, route names should be unique.');
+        Assert::assertNotEmpty($controllerAction, 'Route "'.$routeName.'" is not defined.');
+        Assert::assertCount(1, $controllerAction, 'Route "'.$routeName.'" is defined multiple times, route names should be unique.');
 
         $controller = $controllerAction->first();
         $method = '__invoke';
@@ -36,22 +36,22 @@ abstract class TestCase extends BaseTestCase
 
     public function assertActionUsesFormRequest(string $controller, string $method, string $formRequest)
     {
-        Assert::assertTrue(is_subclass_of($formRequest, 'Illuminate\\Foundation\\Http\\FormRequest'), $formRequest . ' is not a type of Form Request');
+        Assert::assertTrue(is_subclass_of($formRequest, 'Illuminate\\Foundation\\Http\\FormRequest'), $formRequest.' is not a type of Form Request');
 
         try {
             $reflector = new \ReflectionClass($controller);
             $action = $reflector->getMethod($method);
         } catch (\ReflectionException $exception) {
-            Assert::fail('Controller action could not be found: ' . $controller . '@' . $method);
+            Assert::fail('Controller action could not be found: '.$controller.'@'.$method);
         }
 
-        Assert::assertTrue($action->isPublic(), 'Action "' . $method . '" is not public, controller actions must be public.');
+        Assert::assertTrue($action->isPublic(), 'Action "'.$method.'" is not public, controller actions must be public.');
 
         $actual = collect($action->getParameters())->contains(function ($parameter) use ($formRequest) {
             return $parameter->getType() instanceof \ReflectionNamedType && $parameter->getType()->getName() === $formRequest;
         });
 
-        Assert::assertTrue($actual, 'Action "' . $method . '" does not have validation using the "' . $formRequest . '" Form Request.');
+        Assert::assertTrue($actual, 'Action "'.$method.'" does not have validation using the "'.$formRequest.'" Form Request.');
     }
 
     protected function personWithParents()

@@ -20,12 +20,12 @@ class HelpersTest extends TestCase
         );
 
         $this->assertEquals(
-            __('misc.date.between') . ' 2000-01 ' . __('misc.date.and') . ' 2003-07',
+            __('misc.date.between').' 2000-01 '.__('misc.date.and').' 2003-07',
             format_date_from_period(new Carbon('2000-01-01'), new Carbon('2003-07-31'))
         );
 
         $this->assertEquals(
-            __('misc.date.between') . ' 2011-01 ' . __('misc.date.and') . ' 2011-02',
+            __('misc.date.between').' 2011-01 '.__('misc.date.and').' 2011-02',
             format_date_from_period(new Carbon('2011-01-01'), new Carbon('2011-02-28'))
         );
 
@@ -40,10 +40,10 @@ class HelpersTest extends TestCase
         );
 
         $this->assertEquals(
-            __('misc.date.between') . ' 2002-12-17 ' . __('misc.date.and') . ' 2015-10-31',
+            __('misc.date.between').' 2002-12-17 '.__('misc.date.and').' 2015-10-31',
             format_date_from_period(new Carbon('2002-12-17'), new Carbon('2015-10-31'))
         );
-}
+    }
 
     public function testRomanHelper()
     {

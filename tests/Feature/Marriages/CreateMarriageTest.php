@@ -152,7 +152,7 @@ class CreateMarriageTest extends TestCase
         $woman = factory(Person::class)->state('woman')->create();
         $man = factory(Person::class)->state('man')->create();
 
-        $response =  $this->actingAs($user)->get("marriages/create?woman=$woman->id&man=$man->id");
+        $response = $this->actingAs($user)->get("marriages/create?woman=$woman->id&man=$man->id");
 
         $response->assertStatus(200);
         $response->assertSee($woman->id);

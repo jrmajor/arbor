@@ -15,11 +15,10 @@ class EstimatorInfo extends Command
     public function handle()
     {
         $people = Person::whereNotNull('birth_date_from')->get()
-            ->filter(fn ($person) =>
-                $person->birth_year
-            )->map(fn ($person) => (object) [
+            ->filter(fn ($person) => $person->birth_year)
+            ->map(fn ($person) => (object) [
                 'person' => $person,
-                'error' => $person->estimatedBirthDateError()
+                'error' => $person->estimatedBirthDateError(),
             ])->whereNotNull('error')
             ->sortByDesc->error;
 
@@ -29,9 +28,8 @@ class EstimatorInfo extends Command
                 Person::whereNotNull('birth_date_from')
                     ->whereNotNull('father_id')
             )->get()
-            ->filter(fn ($person) =>
-                $person->birth_year
-            )->map(fn ($person) => [
+            ->filter(fn ($person) => $person->birth_year)
+            ->map(fn ($person) => [
                 optional($person->mother)->birth_year
                     ? $person->birth_year - $person->mother->birth_year
                     : null,
@@ -43,11 +41,11 @@ class EstimatorInfo extends Command
         (new Table($this->output))->setRows([
             [
                 'minimal error',
-                $people->first()->error . ' (person №'.$people->first()->person->id.')',
+                $people->first()->error.' (person №'.$people->first()->person->id.')',
             ],
             [
                 'maximal error',
-                $people->reverse()->first()->error . ' (person №'.$people->reverse()->first()->person->id.')',
+                $people->reverse()->first()->error.' (person №'.$people->reverse()->first()->person->id.')',
             ],
             [
                 'average error',
@@ -68,7 +66,7 @@ class EstimatorInfo extends Command
             ],
             [
                 'interval',
-                round($generationInterval, 2) . ' (using '.Person::generationInterval.')',
+                round($generationInterval, 2).' (using '.Person::generationInterval.')',
             ],
         ])->setStyle('default')
         ->render();

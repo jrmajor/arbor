@@ -29,9 +29,9 @@ trait ScrapesPytlewski
             strpos($source, '<font class="czcionka"><font size=3>') + 36
         );
         $name = substr($name, 0, strpos($name, '</font>'));
-        $name =  str_replace('<br>', ' ', $name);
-        $name =  str_replace('<i>', '', $name);
-        $name =  str_replace('</i>', '', $name);
+        $name = str_replace('<br>', ' ', $name);
+        $name = str_replace('<i>', '', $name);
+        $name = str_replace('</i>', '', $name);
 
         return ['basic_name' => $name];
     }
@@ -56,10 +56,10 @@ trait ScrapesPytlewski
             if ($birth->hasMatch()) {
                 $attr['birth_date'] = $birth->group(3);
                 if (filled($birth->group(2))) {
-                    $attr['birth_date'] .= '-' . str_pad($birth->group(2), 2, '0', STR_PAD_LEFT);
+                    $attr['birth_date'] .= '-'.str_pad($birth->group(2), 2, '0', STR_PAD_LEFT);
                 }
                 if (filled($birth->group(1))) {
-                    $attr['birth_date'] .= '-' . str_pad($birth->group(1), 2, '0', STR_PAD_LEFT);
+                    $attr['birth_date'] .= '-'.str_pad($birth->group(1), 2, '0', STR_PAD_LEFT);
                 }
             }
 
@@ -71,10 +71,10 @@ trait ScrapesPytlewski
             if ($death->hasMatch()) {
                 $attr['death_date'] = $death->group(3);
                 if (filled($death->group(2))) {
-                    $attr['death_date'] .= '-' . str_pad($death->group(2), 2, '0', STR_PAD_LEFT);
+                    $attr['death_date'] .= '-'.str_pad($death->group(2), 2, '0', STR_PAD_LEFT);
                 }
                 if (filled($death->group(1))) {
-                    $attr['death_date'] .= '-' . str_pad($death->group(1), 2, '0', STR_PAD_LEFT);
+                    $attr['death_date'] .= '-'.str_pad($death->group(1), 2, '0', STR_PAD_LEFT);
                 }
             }
 
@@ -111,7 +111,7 @@ trait ScrapesPytlewski
         $matches = Regex::match('/tablica_06.jpg" width="125" height="165" align=center>(?:\S|\s)*(foto\/[0-9]*\.jpg|brak<br>zdj)/', $source);
 
         if ($matches->hasMatch()) {
-            $photo = 'http://www.pytlewski.pl/index/drzewo/' . $matches->group(1);
+            $photo = 'http://www.pytlewski.pl/index/drzewo/'.$matches->group(1);
         }
 
         return ['photo' => $photo ?? null];
@@ -126,19 +126,19 @@ trait ScrapesPytlewski
         if ($matches->hasMatch()) {
             $attr['total_marriages'] = $matches->group(1);
             $attr['marriages'] = $this->marriagesHelper($matches->group(2));
-            if ($attr['total_marriages'] == '' || $attr['total_marriages'] == 'brak'){
+            if ($attr['total_marriages'] == '' || $attr['total_marriages'] == 'brak') {
                 $attr['total_marriages'] = '0';
             }
 
             $attr['total_children'] = $matches->group(3);
             $attr['children'] = $this->childrenHelper($matches->group(4));
-            if ($attr['total_children'] == '' || $attr['total_children'] == 'brak'){
+            if ($attr['total_children'] == '' || $attr['total_children'] == 'brak') {
                 $attr['total_children'] = '0';
             }
 
             $attr['total_siblings'] = $matches->group(5);
             $attr['siblings'] = $this->siblingsHelper($matches->group(6));
-            if ($attr['total_siblings'] == '' || $attr['total_siblings'] == 'brak'){
+            if ($attr['total_siblings'] == '' || $attr['total_siblings'] == 'brak') {
                 $attr['total_siblings'] = '0';
             }
         }
@@ -150,7 +150,7 @@ trait ScrapesPytlewski
     {
         $attr = explode('<br>', $data);
 
-        foreach($attr as $key => $val) {
+        foreach ($attr as $key => $val) {
             $matches = Regex::match('/(?:<u><a href="index\.php\?view=true&id=([0-9]*)">)?([^<>(]+)(?:<\/a><\/u>)? ?(?:\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\))?/', $val);
             if ($matches->hasMatch() && ! Str::startsWith($matches->groupOr(2, ''), 'Nie zawar')) {
                 $attr[$key] = [];
@@ -170,9 +170,9 @@ trait ScrapesPytlewski
     {
         $attr = explode('; ', $data);
 
-        foreach($attr as $key => $val) {
+        foreach ($attr as $key => $val) {
             $matches = Regex::match('/(?:<u><a href="index\.php\?view=true&id=([0-9]*)">)?([^<>]+)(?:<\/a><\/u>)?/', $val);
-            if($matches->hasMatch() && ! Str::startsWith($matches->groupOr(2, ''), 'Nie ma')) {
+            if ($matches->hasMatch() && ! Str::startsWith($matches->groupOr(2, ''), 'Nie ma')) {
                 $attr[$key] = [];
                 $attr[$key]['id'] = $matches->groupOr(1, '');
                 $attr[$key]['name'] = $matches->groupOr(2, '');
@@ -188,9 +188,9 @@ trait ScrapesPytlewski
     {
         $attr = explode('; ', $data);
 
-        foreach($attr as $key => $val) {
+        foreach ($attr as $key => $val) {
             $matches = Regex::match('/(?:<u><a href="index\.php\?view=true&id=([0-9]*)">)?([^<>]+)(?:<\/a><\/u>)?/', $val);
-            if($matches->hasMatch() && ! Str::startsWith($matches->groupOr(2, ''), 'Nie ma')) {
+            if ($matches->hasMatch() && ! Str::startsWith($matches->groupOr(2, ''), 'Nie ma')) {
                 $attr[$key] = [];
                 $attr[$key]['id'] = $matches->groupOr(1, '');
                 $attr[$key]['name'] = $matches->groupOr(2, '');

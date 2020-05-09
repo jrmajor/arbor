@@ -23,7 +23,7 @@ trait TapsActivity
         $old = $activity->properties['old'];
         $attributes = $activity->properties['attributes'];
 
-        foreach($this->dateTuples as $date) {
+        foreach ($this->dateTuples as $date) {
             if (
                 Arr::has($attributes, $date.'_from')
                 && ! Arr::has($attributes, $date.'_to')

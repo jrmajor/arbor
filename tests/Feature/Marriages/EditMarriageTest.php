@@ -65,7 +65,7 @@ class EditMarriageTest extends TestCase
 
     public function testGuestsAreAskedToLogInWhenAttemptingToViewEditFormForNonexistentMarriage()
     {
-        $response = $this->get("marriages/1/edit");
+        $response = $this->get('marriages/1/edit');
 
         $response->assertStatus(302);
         $response->assertRedirect('login');
@@ -335,4 +335,3 @@ class EditMarriageTest extends TestCase
         );
     }
 }
-

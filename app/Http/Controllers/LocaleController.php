@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
 
 class LocaleController extends Controller
 {
@@ -12,7 +11,7 @@ class LocaleController extends Controller
     {
         $this->validate($request, ['language' => [
             'required',
-            'in:' . implode(',', config('app.available_locales')),
+            'in:'.implode(',', config('app.available_locales')),
         ]]);
 
         Session::put('locale', $request->input('language'));

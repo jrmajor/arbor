@@ -50,7 +50,7 @@ class DeletePersonTest extends TestCase
         $response = $this->actingAs($user)->delete("people/$person->id");
 
         $response->assertStatus(302);
-        $response->assertRedirect("people");
+        $response->assertRedirect('people');
 
         $this->assertTrue($person->fresh()->trashed());
     }

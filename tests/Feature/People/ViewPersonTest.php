@@ -109,7 +109,7 @@ class ViewPersonTest extends TestCase
 
     public function testGuestSee_404WhenAttemtingToViewNonexistentPerson()
     {
-        $response = $this->get("people/1");
+        $response = $this->get('people/1');
 
         $response->assertStatus(404);
     }
@@ -120,7 +120,7 @@ class ViewPersonTest extends TestCase
             'permissions' => 1,
         ]);
 
-        $response = $this->actingAs($user)->get("people/1");
+        $response = $this->actingAs($user)->get('people/1');
 
         $response->assertStatus(404);
     }

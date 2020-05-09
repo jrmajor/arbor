@@ -23,7 +23,7 @@ class Wielcy
 
     public static function url($id)
     {
-        return 'http://www.sejm-wielki.pl/s/?m=NG&t=PN&n=' . $id;
+        return 'http://www.sejm-wielki.pl/s/?m=NG&t=PN&n='.$id;
     }
 
     private function prepareSource()
@@ -69,8 +69,7 @@ class Wielcy
     private function parseBio()
     {
         $regex = '/<center>\s<table border="0" cellspacing="0" cellpadding="0">\s<tr><td><center>\s<em>\s([\s\S]+)<\/em><br>\s<\/center>\s<\/td><\/tr>\s<\/table>\s<\/center><p>/';
-        if (preg_match($regex, $this->source, $matches) == 1)
-        {
+        if (preg_match($regex, $this->source, $matches) == 1) {
             $matches = Arr::trim($matches);
             if (filled($matches[1])) {
                 $this->bio = $matches[1];
@@ -80,19 +79,29 @@ class Wielcy
 
     public function __get($key)
     {
-        if (! $key)
+        if (! $key) {
             return null;
-        if ($key == 'id')
+        }
+
+        if ($key == 'id') {
             return $this->id;
-        if ($key == 'url')
+        }
+
+        if ($key == 'url') {
             return $this->url;
-        if (array_key_exists($key, $this->attributes))
+        }
+
+        if (array_key_exists($key, $this->attributes)) {
             return $this->attributes[$key];
+        }
+
+        return;
     }
 
     public function __set($key, $value)
     {
         $this->attributes[$key] = $value;
+
         return $this;
     }
 }
