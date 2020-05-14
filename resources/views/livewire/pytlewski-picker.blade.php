@@ -5,7 +5,7 @@
     <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
         <div class="w-full sm:w-1/4 md:w-3/8 sm:pr-2 mb-1">
             <input
-                type="text"
+                type="text" class="@error('id_pytlewski') invalid @enderror"
                 id="id_pytlewski" name="id_pytlewski"
                 autocomplete=off
                 wire:model="pytlewskiId"
