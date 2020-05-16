@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['*'];
     protected static $logAttributesToIgnore = ['id', 'created_at', 'remember_token'];
+    protected static $submitEmptyLogs = false;
 
     protected $fillable = [
         'name', 'email', 'password',
