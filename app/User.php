@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\CausesActivity;
@@ -10,7 +11,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
-    use CausesActivity, LogsActivity, Notifiable;
+    use CausesActivity,
+        LogsActivity,
+        Notifiable,
+        SoftDeletes;
 
     protected static $logName = 'users';
     protected static $logOnlyDirty = true;

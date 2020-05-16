@@ -11,7 +11,8 @@ return [
         'add_marriage' => 'dodaj małżeństwo',
         //'add_user' => 'add user',
         //'manage_users' => 'manage users',
-        'activities' => 'activities',
+        'logins' => 'logowania',
+        'activities' => 'aktywności',
     ],
     'date' => [
         'between' => 'pomiędzy',

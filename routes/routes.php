@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::get('marriages/{maybe_trashed_marriage}/history', 'MarriageController@history')->name('marriages.history');
 });
 
-Route::livewire('activities', 'activities')->name('activities.index')->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::livewire('activities/logins', 'login-activities')->name('activities.logins');
+    Route::livewire('activities/models', 'model-activities')->name('activities.models');
+});
 
 Route::post('locale', 'LocaleController')->name('locale.set');

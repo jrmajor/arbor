@@ -8,6 +8,4 @@ return [
 
     'by' => 'przez',
 
-    'logged_in' => 'zalogował się',
-
 ];
