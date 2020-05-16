@@ -60,16 +60,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.138.1",
+            "version": "3.138.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "66df78e714c7ac87a9ea2bbb77cde586649d0141"
+                "reference": "20397150ba28912a599838c44f50f6113cae5a2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/66df78e714c7ac87a9ea2bbb77cde586649d0141",
-                "reference": "66df78e714c7ac87a9ea2bbb77cde586649d0141",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/20397150ba28912a599838c44f50f6113cae5a2b",
+                "reference": "20397150ba28912a599838c44f50f6113cae5a2b",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-05-14T18:17:11+00:00"
+            "time": "2020-05-15T18:19:33+00:00"
         },
         {
             "name": "brick/math",
@@ -1678,16 +1678,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v1.0.14",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "a6b43843c89304fe96f9f98fcb3f1e2660b0deae"
+                "reference": "ee22192220ca7b4f50dec2b0b6ea4da9e49ccf11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/a6b43843c89304fe96f9f98fcb3f1e2660b0deae",
-                "reference": "a6b43843c89304fe96f9f98fcb3f1e2660b0deae",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/ee22192220ca7b4f50dec2b0b6ea4da9e49ccf11",
+                "reference": "ee22192220ca7b4f50dec2b0b6ea4da9e49ccf11",
                 "shasum": ""
             },
             "require": {
@@ -1731,7 +1731,7 @@
                 }
             ],
             "description": "A front-end framework for Laravel.",
-            "time": "2020-04-27T13:47:28+00:00"
+            "time": "2020-05-13T15:22:11+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

@@ -5,14 +5,11 @@ namespace App\Http\Requests;
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
 use App\Marriage;
-use App\Traits\ValidatesDateTuples;
 use Illuminate\Foundation\Http\FormRequest;
 use Spatie\Enum\Laravel\Rules\EnumRule;
 
 class StoreMarriage extends FormRequest
 {
-    use ValidatesDateTuples;
-
     public function authorize()
     {
         return true;
@@ -39,10 +36,5 @@ class StoreMarriage extends FormRequest
             'end_date_from' => ['date_format:Y-m-d', 'required_with:end_date_to', 'nullable'],
             'end_date_to' => ['date_format:Y-m-d', 'after_or_equal:end_date_from', 'nullable'],
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->prepareDateTuples(Marriage::class);
     }
 }

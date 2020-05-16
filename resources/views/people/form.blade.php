@@ -133,28 +133,10 @@
     </div>
     --}}
     <fieldset class="mb-2">
-        <div class="flex flex-wrap mb-1">
-            <label for="birth_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.birth_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
-                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.between') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('birth_date_from') invalid @enderror"
-                        id="birth_date_from" name="birth_date_from"
-                        value="{{ old('birth_date_from') ?? optional($person->birth_date_from)->toDateString() }}">
-                    @error('birth_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-                <div class="w-full sm:w-1/2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.and') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('birth_date_to') invalid @enderror"
-                        id="birth_date_to" name="birth_date_to"
-                        value="{{ old('birth_date_to') ?? optional($person->birth_date_to)->toDateString() }}"
-                        class="flex-grow">
-                    @error('birth_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-            </div>
-        </div>
+        <x-date-tuple-picker
+            name="birth_date" :label="__('people.birth_date')"
+            :initial-from="old('birth_date_from') ?? $person->birth_date_from"
+            :initial-to="old('birth_date_to') ?? $person->birth_date_to"/>
         <div class="flex flex-wrap mb-1">
             <label for="birth_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.birth_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
@@ -185,28 +167,10 @@
                 </label>
             </div>
         </div>
-        <div class="flex flex-wrap mb-1">
-            <label for="death_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.death_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
-                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.between') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('death_date_from') invalid @enderror"
-                        id="death_date_from" name="death_date_from"
-                        value="{{ old('death_date_from') ?? optional($person->death_date_from)->toDateString() }}">
-                    @error('death_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-                <div class="w-full sm:w-1/2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.and') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('death_date_to') invalid @enderror"
-                        id="death_date_to" name="death_date_to"
-                        value="{{ old('death_date_to') ?? optional($person->death_date_to)->toDateString() }}"
-                        class="flex-grow">
-                    @error('death_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-            </div>
-        </div>
+        <x-date-tuple-picker
+            name="death_date" :label="__('people.death_date')"
+            :initial-from="old('death_date_from') ?? $person->death_date_from"
+            :initial-to="old('death_date_to') ?? $person->death_date_to"/>
         <div class="flex flex-wrap mb-1">
             <label for="death_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.death_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
@@ -229,28 +193,10 @@
         </div>
     </fieldset>
     <fieldset class="mb-2">
-        <div class="flex flex-wrap mb-1">
-            <label for="funeral_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.funeral_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
-                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.between') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('funeral_date_from') invalid @enderror"
-                        id="funeral_date_from" name="funeral_date_from"
-                        value="{{ old('funeral_date_from') ?? optional($person->funeral_date_from)->toDateString() }}">
-                    @error('funeral_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-                <div class="w-full sm:w-1/2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.and') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('funeral_date_to') invalid @enderror"
-                        id="funeral_date_to" name="funeral_date_to"
-                        value="{{ old('funeral_date_to') ?? optional($person->funeral_date_to)->toDateString() }}"
-                        class="flex-grow">
-                    @error('funeral_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-            </div>
-        </div>
+        <x-date-tuple-picker
+            name="funeral_date" :label="__('people.funeral_date')"
+            :initial-from="old('funeral_date_from') ?? $person->funeral_date_from"
+            :initial-to="old('funeral_date_to') ?? $person->funeral_date_to"/>
         <div class="flex flex-wrap mb-1">
             <label for="funeral_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.funeral_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
@@ -263,28 +209,10 @@
         </div>
     </fieldset>
     <fieldset class="mb-2">
-        <div class="flex flex-wrap mb-1">
-            <label for="burial_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.burial_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
-                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.between') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('burial_date_from') invalid @enderror"
-                        id="burial_date_from" name="burial_date_from"
-                        value="{{ old('burial_date_from') ?? optional($person->burial_date_from)->toDateString() }}">
-                    @error('burial_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-                <div class="w-full sm:w-1/2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.and') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('burial_date_to') invalid @enderror"
-                        id="burial_date_to" name="burial_date_to"
-                        value="{{ old('burial_date_to') ?? optional($person->burial_date_to)->toDateString() }}"
-                        class="flex-grow">
-                    @error('burial_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-            </div>
-        </div>
+        <x-date-tuple-picker
+            name="burial_date" :label="__('people.burial_date')"
+            :initial-from="old('burial_date_from') ?? $person->burial_date_from"
+            :initial-to="old('burial_date_to') ?? $person->burial_date_to"/>
         <div class="flex flex-wrap mb-1">
             <label for="burial_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.burial_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">

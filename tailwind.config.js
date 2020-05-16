@@ -35,6 +35,10 @@ module.exports = {
         },
         extend: {}
     },
-    variants: {},
-    plugins: []
+    variants: {
+        width: ['responsive', 'important'],
+    },
+    plugins: [
+        require('tailwindcss-important')()
+    ]
 }

@@ -70,28 +70,10 @@
                 @error('first_event_type')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
-        <div class="flex flex-wrap mb-1">
-            <label for="first_event_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.first_event_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
-                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.between') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('first_event_date_from') invalid @enderror"
-                        id="first_event_date_from" name="first_event_date_from"
-                        value="{{ old('first_event_date_from') ?? optional($marriage->first_event_date_from)->toDateString() }}">
-                    @error('first_event_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-                <div class="w-full sm:w-1/2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.and') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('first_event_date_to') invalid @enderror"
-                        id="first_event_date_to" name="first_event_date_to"
-                        value="{{ old('first_event_date_to') ?? optional($marriage->first_event_date_to)->toDateString() }}"
-                        class="flex-grow">
-                    @error('first_event_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-            </div>
-        </div>
+        <x-date-tuple-picker
+            name="first_event_date" :label="__('marriages.first_event_date')"
+            :initial-from="old('first_event_date_from') ?? $marriage->first_event_date_from"
+            :initial-to="old('first_event_date_to') ?? $marriage->first_event_date_to"/>
         <div class="flex flex-wrap mb-1">
             <label for="first_event_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.first_event_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">
@@ -128,28 +110,10 @@
                 @error('second_event_type')<small class="text-red-500">{{ $message }}</small>@enderror
             </div>
         </div>
-        <div class="flex flex-wrap mb-1">
-            <label for="second_event_date_from" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.second_event_date') }}</label>
-            <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
-                <div class="w-full sm:w-1/2 sm:pr-2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.between') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('second_event_date_from') invalid @enderror"
-                        id="second_event_date_from" name="second_event_date_from"
-                        value="{{ old('second_event_date_from') ?? optional($marriage->second_event_date_from)->toDateString() }}">
-                    @error('second_event_date_from')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-                <div class="w-full sm:w-1/2 mb-1 flex items-center">
-                    <p>{{ __('misc.date.and') }}&nbsp;</p>
-                    <input
-                        type="text" class="@error('second_event_date_to') invalid @enderror"
-                        id="second_event_date_to" name="second_event_date_to"
-                        value="{{ old('second_event_date_to') ?? optional($marriage->second_event_date_to)->toDateString() }}"
-                        class="flex-grow">
-                    @error('second_event_date_to')<small class="text-red-500">{{ $message }}</small>@enderror
-                </div>
-            </div>
-        </div>
+        <x-date-tuple-picker
+            name="second_event_date" :label="__('marriages.second_event_date')"
+            :initial-from="old('second_event_date_from') ?? $marriage->second_event_date_from"
+            :initial-to="old('second_event_date_to') ?? $marriage->second_event_date_to"/>
         <div class="flex flex-wrap mb-1">
             <label for="second_event_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.second_event_place') }}</label>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 mb-1">

@@ -51,14 +51,18 @@ class EditPersonTest extends TestCase
             'family_name' => 'Gąsiorowski',
             'last_name' => 'Jakże to',
             'birth_date_from' => '1878-04-01',
+            'birth_date_to' => '1878-04-01',
             'birth_place' => 'Zaleszczyki, Polska',
             'dead' => true,
             'death_date_from' => '1947-01-17',
+            'death_date_to' => '1947-01-17',
             'death_place' => 'Grudziądz, Polska',
             'death_cause' => 'rak',
             'funeral_date_from' => '1947-01-21',
+            'funeral_date_to' => '1947-01-21',
             'funeral_place' => 'Grudziądz, Polska',
             'burial_date_from' => '1947-01-21',
+            'burial_date_to' => '1947-01-21',
             'burial_place' => 'Grudziądz, Polska',
             // 'visibility' => true,
         ], $overrides);
@@ -180,16 +184,16 @@ class EditPersonTest extends TestCase
         }
 
         $this->assertTrue($newAttributes['birth_date_from'] == $person->fresh()['birth_date_from']->toDateString());
-        $this->assertTrue($newAttributes['birth_date_from'] == $person->fresh()['birth_date_to']->toDateString());
+        $this->assertTrue($newAttributes['birth_date_to'] == $person->fresh()['birth_date_to']->toDateString());
 
         $this->assertTrue($newAttributes['death_date_from'] == $person->fresh()['death_date_from']->toDateString());
-        $this->assertTrue($newAttributes['death_date_from'] == $person->fresh()['death_date_to']->toDateString());
+        $this->assertTrue($newAttributes['death_date_to'] == $person->fresh()['death_date_to']->toDateString());
 
         $this->assertTrue($newAttributes['funeral_date_from'] == $person->fresh()['funeral_date_from']->toDateString());
-        $this->assertTrue($newAttributes['funeral_date_from'] == $person->fresh()['funeral_date_to']->toDateString());
+        $this->assertTrue($newAttributes['funeral_date_to'] == $person->fresh()['funeral_date_to']->toDateString());
 
         $this->assertTrue($newAttributes['burial_date_from'] == $person->fresh()['burial_date_from']->toDateString());
-        $this->assertTrue($newAttributes['burial_date_from'] == $person->fresh()['burial_date_to']->toDateString());
+        $this->assertTrue($newAttributes['burial_date_to'] == $person->fresh()['burial_date_to']->toDateString());
     }
 
     public function testDataIsValidatedUsingAppropriateFormRequest()
@@ -275,7 +279,7 @@ class EditPersonTest extends TestCase
             $log->properties['old']['birth_date_to']
         );
         $this->assertEquals(
-            $this->oldAttributes()['birth_date_to'],
+            $this->newAttributes()['birth_date_to'],
             $log->properties['attributes']['birth_date_to']
         );
 
@@ -292,7 +296,7 @@ class EditPersonTest extends TestCase
             $log->properties['old']['death_date_to']
         );
         $this->assertEquals(
-            $this->oldAttributes()['death_date_to'],
+            $this->newAttributes()['death_date_to'],
             $log->properties['attributes']['death_date_to']
         );
 
@@ -309,7 +313,7 @@ class EditPersonTest extends TestCase
             $log->properties['old']['funeral_date_to']
         );
         $this->assertEquals(
-            $this->oldAttributes()['funeral_date_to'],
+            $this->newAttributes()['funeral_date_to'],
             $log->properties['attributes']['funeral_date_to']
         );
 
@@ -326,7 +330,7 @@ class EditPersonTest extends TestCase
             $log->properties['old']['burial_date_to']
         );
         $this->assertEquals(
-            $this->oldAttributes()['burial_date_to'],
+            $this->newAttributes()['burial_date_to'],
             $log->properties['attributes']['burial_date_to']
         );
     }

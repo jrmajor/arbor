@@ -12,5 +12,5 @@ mix.sass('resources/sass/app.scss', 'public/css')
         processCssUrls: false,
         postCss: [ tailwindcss('tailwind.config.js') ],
     }).purgeCss({
-        extractorPattern: /[\w-/:]+(?<!:)/g
+        extractorPattern: /[\w-/:!]+(?<!:)/g
     }).version()

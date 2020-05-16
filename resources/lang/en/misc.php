@@ -16,6 +16,12 @@ return [
     'date' => [
         'between' => 'between',
         'and' => 'and',
+        'yyyy' => 'YYYY',
+        'mm' => 'MM',
+        'dd' => 'DD',
+        'format' => 'YYYY-MM-DD',
+        'simple' => 'simple',
+        'advanced' => 'advanced',
     ],
     'hidden' => 'hidden',
     'submit' => 'Submit',

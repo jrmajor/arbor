@@ -21,6 +21,7 @@
     "dependencies": {
         "alpinejs": "^2.3.3",
         "tailwindcss": "^1.4.6",
+        "tailwindcss-important": "^1.0.0",
         "tippy.js": "^6.2.3"
     }
 }

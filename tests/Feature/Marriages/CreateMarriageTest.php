@@ -22,13 +22,16 @@ class CreateMarriageTest extends TestCase
             'rite' => 'roman_catholic',
             'first_event_type' => 'civil_marriage',
             'first_event_date_from' => '1968-04-14',
+            'first_event_date_to' => '1968-04-14',
             'first_event_place' => 'Sępólno Krajeńskie, Polska',
             'second_event_type' => 'church_marriage',
             'second_event_date_from' => '1968-04-13',
+            'second_event_date_to' => '1968-04-13',
             'second_event_place' => 'Sępólno Krajeńskie, Polska',
             'ended' => '1',
             'end_cause' => 'rozwód',
             'end_date_from' => '2001-10-27',
+            'end_date_to' => '2001-10-27',
         ], $overrides);
     }
 
@@ -124,6 +127,7 @@ class CreateMarriageTest extends TestCase
 
         $attributesToCheck = Arr::except($validAttributes, [
             'first_event_date_from', 'second_event_date_from', 'end_date_from',
+            'first_event_date_to', 'second_event_date_to', 'end_date_to',
         ]);
 
         foreach ($attributesToCheck as $key => $attribute) {
@@ -131,13 +135,13 @@ class CreateMarriageTest extends TestCase
         }
 
         $this->assertTrue($validAttributes['first_event_date_from'] == $marriage->fresh()['first_event_date_from']->toDateString());
-        $this->assertTrue($validAttributes['first_event_date_from'] == $marriage->fresh()['first_event_date_to']->toDateString());
+        $this->assertTrue($validAttributes['first_event_date_to'] == $marriage->fresh()['first_event_date_to']->toDateString());
 
         $this->assertTrue($validAttributes['second_event_date_from'] == $marriage->fresh()['second_event_date_from']->toDateString());
-        $this->assertTrue($validAttributes['second_event_date_from'] == $marriage->fresh()['second_event_date_to']->toDateString());
+        $this->assertTrue($validAttributes['second_event_date_to'] == $marriage->fresh()['second_event_date_to']->toDateString());
 
         $this->assertTrue($validAttributes['end_date_from'] == $marriage->fresh()['end_date_from']->toDateString());
-        $this->assertTrue($validAttributes['end_date_from'] == $marriage->fresh()['end_date_to']->toDateString());
+        $this->assertTrue($validAttributes['end_date_to'] == $marriage->fresh()['end_date_to']->toDateString());
     }
 
     public function testYouCanPassSpouseToFormByGetRequestParameters()

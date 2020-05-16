@@ -16,6 +16,12 @@ return [
     'date' => [
         'between' => 'pomiędzy',
         'and' => 'i',
+        'yyyy' => 'RRRR',
+        'mm' => 'MM',
+        'dd' => 'DD',
+        'format' => 'YYYY-MM-DD',
+        'simple' => 'proste',
+        'advanced' => 'zaawansowane',
     ],
     'hidden' => 'ukryte',
     'submit' => 'Potwierdź',

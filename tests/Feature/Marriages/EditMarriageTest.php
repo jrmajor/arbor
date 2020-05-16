@@ -43,13 +43,16 @@ class EditMarriageTest extends TestCase
             'rite' => 'civil',
             'first_event_type' => 'concordat_marriage',
             'first_event_date_from' => '1960-09-02',
+            'first_event_date_to' => '1968-04-14',
             'first_event_place' => 'Warszawa, Polska',
             'second_event_type' => 'civil_marriage',
             'second_event_date_from' => '1960-09-05',
+            'second_event_date_to' => '1960-09-05',
             'second_event_place' => 'Warszawa, Polska',
             'ended' => false,
             'end_cause' => 'bo tak',
             'end_date_from' => '2000-03-27',
+            'end_date_to' => '2000-03-27',
         ], $overrides);
     }
 
@@ -210,13 +213,13 @@ class EditMarriageTest extends TestCase
         }
 
         $this->assertTrue($newAttributes['first_event_date_from'] == $marriage->fresh()['first_event_date_from']->toDateString());
-        $this->assertTrue($newAttributes['first_event_date_from'] == $marriage->fresh()['first_event_date_to']->toDateString());
+        $this->assertTrue($newAttributes['first_event_date_to'] == $marriage->fresh()['first_event_date_to']->toDateString());
 
         $this->assertTrue($newAttributes['second_event_date_from'] == $marriage->fresh()['second_event_date_from']->toDateString());
-        $this->assertTrue($newAttributes['second_event_date_from'] == $marriage->fresh()['second_event_date_to']->toDateString());
+        $this->assertTrue($newAttributes['second_event_date_to'] == $marriage->fresh()['second_event_date_to']->toDateString());
 
         $this->assertTrue($newAttributes['end_date_from'] == $marriage->fresh()['end_date_from']->toDateString());
-        $this->assertTrue($newAttributes['end_date_from'] == $marriage->fresh()['end_date_to']->toDateString());
+        $this->assertTrue($newAttributes['end_date_to'] == $marriage->fresh()['end_date_to']->toDateString());
     }
 
     public function testDataIsValidatedUsingAppropriateFormRequest()
@@ -296,7 +299,7 @@ class EditMarriageTest extends TestCase
             $log->properties['old']['first_event_date_to']
         );
         $this->assertEquals(
-            $this->oldAttributes()['first_event_date_to'],
+            $this->newAttributes()['first_event_date_to'],
             $log->properties['attributes']['first_event_date_to']
         );
 
@@ -313,7 +316,7 @@ class EditMarriageTest extends TestCase
             $log->properties['old']['second_event_date_to']
         );
         $this->assertEquals(
-            $this->oldAttributes()['second_event_date_to'],
+            $this->newAttributes()['second_event_date_to'],
             $log->properties['attributes']['second_event_date_to']
         );
 
@@ -330,7 +333,7 @@ class EditMarriageTest extends TestCase
             $log->properties['old']['end_date_to']
         );
         $this->assertEquals(
-            $this->oldAttributes()['end_date_to'],
+            $this->newAttributes()['end_date_to'],
             $log->properties['attributes']['end_date_to']
         );
     }

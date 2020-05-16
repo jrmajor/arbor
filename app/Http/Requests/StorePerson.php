@@ -2,14 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Traits\ValidatesDateTuples;
 use App\Person;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePerson extends FormRequest
 {
-    use ValidatesDateTuples;
-
     public function authorize()
     {
         return true;
@@ -42,10 +39,5 @@ class StorePerson extends FormRequest
             'burial_date_to' => ['date_format:Y-m-d', 'after_or_equal:burial_date_from', 'nullable'],
             'burial_place' => 'string|max:100|nullable',
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->prepareDateTuples(Person::class);
     }
 }
