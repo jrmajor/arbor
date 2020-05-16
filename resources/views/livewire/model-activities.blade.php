@@ -12,7 +12,7 @@
                 </td>
                 <td>
                     @if($activity->log_name == 'people')
-                        <a href="{{ route('people.show', [$activity->subject]) }}">
+                        <a href="{{ route('people.history', [$activity->subject]) }}">
                             {{ __('people.person').' №'.$activity->subject->id }}
                         </a>
                         {{ __('activities.'.$activity['description']) }}
@@ -20,7 +20,9 @@
                             {{ __('activities.by') }} <strong>{{ $activity->causer->username }}</strong>
                         @endif
                     @elseif($activity->log_name == 'marriages')
-                        {{ __('marriages.marriage').' №'.$activity->subject->id }}
+                        <a href="{{ route('marriages.history', [$activity->subject]) }}">
+                            {{ __('marriages.marriage').' №'.$activity->subject->id }}
+                        </a>
                         (<a href="{{ route('people.show', [$activity->subject->woman_id]) }}">{{ strtolower(__('marriages.woman')) }}</a>,
                         <a href="{{ route('people.show', [$activity->subject->man_id]) }}">{{ strtolower(__('marriages.man')) }}</a>)
                         {{ __('activities.'.$activity['description']) }}
