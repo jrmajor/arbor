@@ -23,7 +23,7 @@
             </i>
         @endif
 
-        <a href="{{ route('people.show', ['person' => $person->id]) }}"
+        <a href="{{ route('people.show', $person) }}"
             data-tippy-content="{{ __('people.return_to_person_overwiew') }}">
             <small class="text-lg">
                 [№{{ $person->id }}]

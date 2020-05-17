@@ -38,7 +38,7 @@
 @endif
 
 @if(! $raw && $person->canBeViewedBy(auth()->user()))
-    <a href="{{ route('people.show', $person->id) }}">
+    <a href="{{ route('people.show', $person) }}">
 @endif
 
     @if($person->dead && ! $raw)
@@ -88,7 +88,7 @@
 
 @if(! $raw && $edit)
     <a
-        href="{{ route('people.edit', $person->id) }}"
+        href="{{ route('people.edit', $person) }}"
         data-tippy-content="{{ __('people.edit_this_person') }}">
 @endif
 @if(! $raw)

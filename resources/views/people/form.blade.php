@@ -5,7 +5,7 @@
 
 <form
     method="POST"
-    action="{{ $action == 'create' ? route('people.store') : route('people.update', ['person' => $person->id]) }}"
+    action="{{ $action == 'create' ? route('people.store') : route('people.update', $person) }}"
     x-data="{ sex: '{{ old('sex') ?? $person->sex }}' }">
     @method($action == 'create' ? 'post' : 'put')
     @csrf

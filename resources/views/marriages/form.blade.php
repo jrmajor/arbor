@@ -5,7 +5,7 @@
 
 <form
     method="POST"
-    action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', ['marriage' => $marriage->id]) }}">
+    action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}">
     @method($action == 'create' ? 'post' : 'put')
     @csrf
 

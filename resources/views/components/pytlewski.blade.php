@@ -12,7 +12,7 @@
         </a>
     @else
         <a
-            href="{{ route('people.show', $person->id) }}"
+            href="{{ route('people.show', $person) }}"
             class="text-green-600 hover:text-green-800">
             {{ $slot }}
         </a>

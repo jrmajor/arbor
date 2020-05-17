@@ -6,12 +6,12 @@
 
         <small class="text-lg">[№{{ $marriage->id }}]</small>
         <a
-            href="{{ route('marriages.destroy', ['marriage' => $marriage->id]) }}"
+            href="{{ route('marriages.destroy', $marriage) }}"
             onclick="event.preventDefault();document.getElementById('delete-marriage-form').submit();">
             <small class="text-lg text-red-500">[{{ __('marriages.delete') }}]</small>
         </a>
         @if(optional(auth()->user())->isSuperAdmin())
-            <a href="{{ route('marriages.history', ['maybe_trashed_marriage' => $marriage->id]) }}">
+            <a href="{{ route('marriages.history', $marriage) }}">
                 <small class="text-lg">
                     [{{ strtolower(__('marriages.edits_history')) }}]
                 </small>
@@ -21,7 +21,7 @@
 
     <form
         id="delete-marriage-form" method="POST" style="display: none"
-        action="{{ route('marriages.destroy', ['marriage' => $marriage->id]) }}">
+        action="{{ route('marriages.destroy', $marriage) }}">
         @method('DELETE')
         @csrf
     </form>

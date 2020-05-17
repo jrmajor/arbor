@@ -4,7 +4,7 @@
     <h3>
         {{ __('people.edits_history') }}
 
-        <a href="{{ route('marriages.edit', ['marriage' => $marriage->id]) }}"
+        <a href="{{ route('marriages.edit', $marriage) }}"
             data-tippy-content="{{ __('marriages.return_to_marriage_edition') }}">
             <small class="text-lg">
                 [№{{ $marriage->id }}]

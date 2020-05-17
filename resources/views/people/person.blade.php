@@ -28,13 +28,13 @@
         @endif
 
         @if(optional(auth()->user())->canWrite())
-            <a href="{{ route('people.edit', ['person' => $person->id]) }}"
+            <a href="{{ route('people.edit', $person) }}"
                 data-tippy-content="{{ __('people.edit_this_person') }}">
                 <small class="text-lg">
                     [№{{ $person->id }}]
                 </small>
             </a>
-            <a href="{{ route('marriages.create') }}?{{ $person->sex == 'xx' ? 'woman' : 'man' }}={{ $person->id }}">
+            <a href="{{ route('marriages.create', [$person->sex == 'xx' ? 'woman' : 'man' => $person->id]) }}">
                 <small class="text-lg">
                     [{{ strtolower(__('marriages.add_a_new_marriage')) }}]
                 </small>
@@ -43,20 +43,20 @@
             <small class="text-lg">[№{{ $person->id }}]</small>
         @endif
         @if(optional(auth()->user())->isSuperAdmin())
-            <a href="{{ route('people.history', ['maybe_trashed_person' => $person->id]) }}">
+            <a href="{{ route('people.history', $person) }}">
                 <small class="text-lg">
                     [{{ strtolower(__('people.edits_history')) }}]
                 </small>
             </a>
             <a
-                href="{{ route('people.changeVisibility', ['person' => $person->id]) }}"
+                href="{{ route('people.changeVisibility', $person) }}"
                 onclick="event.preventDefault();document.getElementById('change-visibility-form').submit();">
                 <small class="text-lg text-red-500">
                     [{{ $person->isVisible() ? __('people.make_invisible') : __('people.make_visible') }}]
                 </small>
             </a>
             <form id="change-visibility-form" method="POST" style="display: none"
-            action="{{ route('people.changeVisibility', ['person' => $person->id]) }}">
+            action="{{ route('people.changeVisibility', $person) }}">
                 @method('PUT')
                 @csrf
                 <input type="hidden" name="visibility" value="{{ $person->isVisible() ? '0' : '1' }}">
@@ -381,7 +381,10 @@
                                     data-tippy-content="{{ __('marriages.edit_this_marriage') }}">
                                     <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                                 </a>
-                                <a href="{{ route('people.create') }}?mother={{ $marriage->woman_id }}&father={{ $marriage->man_id }}"
+                                <a href="{{ route('people.create', [
+                                                        'mother' => $marriage->woman_id,
+                                                        'father' => $marriage->man_id,
+                                    ]) }}"
                                     data-tippy-content="{{ __('marriages.add_child') }}">
                                     <small>[+]</small>
                                 </a>
