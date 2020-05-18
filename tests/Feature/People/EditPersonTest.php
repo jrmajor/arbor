@@ -261,10 +261,8 @@ class EditPersonTest extends TestCase
 
         $this->assertEquals($person->updated_at, $log->created_at);
 
-        $this->assertEquals(
-            $person->updated_at,
-            Carbon::create($log->properties['attributes']['updated_at'])
-        );
+        $this->assertArrayNotHasKey('updated_at', $log->properties['old']);
+        $this->assertArrayNotHasKey('updated_at', $log->properties['attributes']);
 
         $this->assertEquals(
             $this->oldAttributes()['birth_date_from'],

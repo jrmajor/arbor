@@ -281,10 +281,8 @@ class EditMarriageTest extends TestCase
 
         $this->assertEquals($marriage->updated_at, $log->created_at);
 
-        $this->assertEquals(
-            $marriage->updated_at,
-            Carbon::create($log->properties['attributes']['updated_at'])
-        );
+        $this->assertArrayNotHasKey('updated_at', $log->properties['old']);
+        $this->assertArrayNotHasKey('updated_at', $log->properties['attributes']);
 
         $this->assertEquals(
             $this->oldAttributes()['first_event_date_from'],

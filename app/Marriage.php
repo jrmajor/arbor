@@ -29,7 +29,7 @@ class Marriage extends Model
     protected static $logName = 'marriages';
     protected static $logOnlyDirty = true;
     protected static $logAttributes = ['*'];
-    protected static $logAttributesToIgnore = ['id'];
+    protected static $logAttributesToIgnore = ['id', 'created_at', 'updated_at'];
 
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 

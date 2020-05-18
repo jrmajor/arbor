@@ -191,14 +191,8 @@ class CreatePersonTest extends TestCase
         $this->assertEquals($person->created_at, $log->created_at);
         $this->assertEquals($person->updated_at, $log->created_at);
 
-        $this->assertEquals(
-            $person->created_at,
-            Carbon::create($log->properties['attributes']['created_at'])
-        );
-        $this->assertEquals(
-            $person->updated_at,
-            Carbon::create($log->properties['attributes']['updated_at'])
-        );
+        $this->assertArrayNotHasKey('created_at', $log->properties['attributes']);
+        $this->assertArrayNotHasKey('updated_at', $log->properties['attributes']);
 
         $this->assertEquals(
             $person->birth_date_from->format('Y-m-d'),

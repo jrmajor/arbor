@@ -4,6 +4,7 @@ namespace Tests\Feature\People;
 
 use App\Person;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Activitylog\Models\Activity;
 use Tests\TestCase;
@@ -71,18 +72,23 @@ class ChangeVisibilityTest extends TestCase
 
         Activity::all()->each->delete();
 
+        $changeTimestamp = Carbon::now()->addMinute();
+        Carbon::setTestNow($changeTimestamp);
+
         $response = $this->actingAs($user)->put("people/$person->id/visibility", [
             'visibility' => true,
         ]);
+
+        Carbon::setTestNow();
 
         $this->assertCount(1, Activity::all());
         $log = $this->latestLog();
 
         $this->assertEquals('people', $log->log_name);
         $this->assertEquals('changed-visibility', $log->description);
-        $this->assertTrue($person->is($log->subject));
+        $this->assertTrue($person->fresh()->is($log->subject));
 
-        $this->assertEquals($person->updated_at, $log->created_at);
+        $this->assertEquals($person->fresh()->updated_at, $log->created_at);
 
         $this->assertEquals(2, count($log->properties));
         $this->assertEquals(1, count($log->properties['old']));
