@@ -10,15 +10,13 @@
 
 @section('content')
 
-    @component('components.letters', ['active' => $active])
-    @endcomponent
+    <x-letters :active="$active"/>
 
     @if(isset($list))
         <ul>
             @foreach($list as $person)
                 <li>
-                    @component('components.name', ['person' => $person, 'bold' => $active['type']])
-                    @endcomponent
+                    <x-name :person="$person" :bold="$active['type']"/>
                 </li>
             @endforeach
         </ul>

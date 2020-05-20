@@ -4,7 +4,7 @@
 <strong>should be dead:</strong>
 <ul>
 @forelse ($shouldBeDead as $person)
-    <li>@component('components.name', ['person' => $person])@endcomponent</li>
+    <li><x-name :person="$person"/></li>
 @empty
     <li>all ok</li>
 @endforelse
@@ -13,7 +13,7 @@
 <strong>visible alive:</strong>
 <ul>
 @forelse ($visibleAlive as $person)
-    <li>@component('components.name', ['person' => $person])@endcomponent</li>
+    <li><x-name :person="$person"/></li>
 @empty
     <li>all ok</li>
 @endforelse
@@ -22,7 +22,7 @@
 <strong>invisible dead:</strong>
 <ul>
 @forelse ($invisibleDead as $person)
-    <li>@component('components.name', ['person' => $person])@endcomponent</li>
+    <li><x-name :person="$person"/></li>
 @empty
     <li>all ok</li>
 @endforelse

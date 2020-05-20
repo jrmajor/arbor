@@ -72,6 +72,5 @@
     </dl>
 
     <br>
-    @component('components.letters')
-    @endcomponent
+    <x-letters/>
 @endsection

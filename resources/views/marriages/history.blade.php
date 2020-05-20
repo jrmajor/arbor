@@ -2,7 +2,7 @@
 
 @section('content')
     <h3>
-        {{ __('people.edits_history') }}
+        {{ __('marriages.edits_history') }}
 
         <a href="{{ route('marriages.edit', $marriage) }}"
             data-tippy-content="{{ __('marriages.return_to_marriage_edition') }}">
@@ -53,6 +53,5 @@
     </dl>
 
     <br>
-    @component('components.letters')
-    @endcomponent
+    <x-letters/>
 @endsection

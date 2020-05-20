@@ -88,14 +88,14 @@
                         @if($pytlewski->parents)
                             &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}: <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            @component('components.pytlewski', ['id' => $pytlewski->mother_id])
+                            <x-pytlewski :id="$pytlewski->mother_id">
                                 {{ $pytlewski->mother_surname }}, {{ $pytlewski->mother_name }}
-                            @endcomponent
+                            </x-pytlewski>
                             <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            @component('components.pytlewski', ['id' => $pytlewski->father_id])
+                            <x-pytlewski :id="$pytlewski->father_id">
                                 {{ $pytlewski->father_surname }}, {{ $pytlewski->father_name }}
-                            @endcomponent
+                            </x-pytlewski>
                             <br>
                         @endif
 
@@ -103,9 +103,9 @@
                             &nbsp;&nbsp;{{ __('people.pytlewski.marriages') }}: {{ $pytlewski->total_marriages }}<br>
                             @foreach($pytlewski->marriages as $key => $val)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                @component('components.pytlewski', ['id' => isset($val['id']) ? $val['id'] : null])
+                                <x-pytlewski :id="isset($val['id']) ? $val['id'] : null">
                                     {{ $val['name'] }}
-                                @endcomponent
+                                </x-pytlewski>
                                 <br>
                             @endforeach
                         @endif
@@ -114,9 +114,9 @@
                             &nbsp;&nbsp;{{ __('people.pytlewski.children') }}: {{ $pytlewski->total_children }}<br>
                             @foreach($pytlewski->children as $key => $val)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                @component('components.pytlewski', ['id' => isset($val['id']) ? $val['id'] : null])
+                                <x-pytlewski :id="isset($val['id']) ? $val['id'] : null">
                                     {{ $val['name'] }}
-                                @endcomponent
+                                </x-pytlewski>
                                 <br>
                             @endforeach
                         @endif
@@ -125,9 +125,9 @@
                             &nbsp;&nbsp;{{ __('people.pytlewski.siblings') }}: {{ $pytlewski->total_siblings }}<br>
                             @foreach($pytlewski->siblings as $key => $val)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                @component('components.pytlewski', ['id' => isset($val['id']) ? $val['id'] : null])
+                                <x-pytlewski :id="isset($val['id']) ? $val['id'] : null">
                                     {{ $val['name'] }}
-                                @endcomponent
+                                </x-pytlewski>
                                 <br>
                             @endforeach
                         @endif
@@ -316,11 +316,11 @@
         {{-- parents --}}
         @if($person->mother)
             <dt>{{ __('people.mother') }}&nbsp;</dt>
-            <dd>@component('components.name', ['person' => $person->mother])@endcomponent</dd>
+            <dd><x-name :person="$person->mother"/></dd>
         @endif
         @if($person->father)
             <dt>{{ __('people.father') }}&nbsp;</dt>
-            <dd>@component('components.name', ['person' => $person->father])@endcomponent</dd>
+            <dd><x-name :person="$person->father"/></dd>
         @endif
 
         {{-- siblings --}}
@@ -329,7 +329,7 @@
             <dd>
                 <ul>
                     @foreach($person->siblings as $sibling)
-                        <li>@component('components.name', ['person' => $sibling])@endcomponent</li>
+                        <li><x-name :person="$sibling"/></li>
                     @endforeach
                 </ul>
             </dd>
@@ -341,7 +341,7 @@
             <dd>
                 <ul>
                     @foreach($person->siblings_mother as $sibling)
-                        <li>@component('components.name', ['person' => $sibling])@endcomponent</li>
+                        <li><x-name :person="$sibling"/></li>
                     @endforeach
                 </ul>
             </dd>
@@ -353,7 +353,7 @@
             <dd>
                 <ul>
                     @foreach($person->siblings_father as $sibling)
-                        <li>@component('components.name', ['person' => $sibling])@endcomponent</li>
+                        <li><x-name :person="$sibling"/></li>
                     @endforeach
                 </ul>
             </dd>
@@ -373,7 +373,7 @@
                                 <strong>{{ __('marriages.rites.' . $marriage->rite) }}:</strong>
                             @endif
 
-                            @component('components.name', ['person' => $marriage->partner($person)])@endcomponent
+                            <x-name :person="$marriage->partner($person)"/>
 
                             @if(optional(auth()->user())->canWrite())
                                 <a
@@ -437,7 +437,7 @@
             <dd>
                 <ul>
                     @foreach($person->children as $child)
-                        <li>@component('components.name', ['person' => $child])@endcomponent</li>
+                        <li><x-name :person="$child"/></li>
                     @endforeach
                 </ul>
             </dd>
@@ -464,6 +464,5 @@
     </dl>
 
     <br>
-    @component('components.letters')
-    @endcomponent
+    <x-letters/>
 @endsection
