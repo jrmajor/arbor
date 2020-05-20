@@ -43,19 +43,6 @@
                     [{{ strtolower(__('people.edits_history')) }}]
                 </small>
             </a>
-            <a
-                href="{{ route('people.changeVisibility', $person) }}"
-                onclick="event.preventDefault();document.getElementById('change-visibility-form').submit();">
-                <small class="text-lg text-red-500">
-                    [{{ $person->isVisible() ? __('people.make_invisible') : __('people.make_visible') }}]
-                </small>
-            </a>
-            <form id="change-visibility-form" method="POST" style="display: none"
-            action="{{ route('people.changeVisibility', $person) }}">
-                @method('PUT')
-                @csrf
-                <input type="hidden" name="visibility" value="{{ $person->isVisible() ? '0' : '1' }}">
-            </form>
         @endif
     </h3>
 

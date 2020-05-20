@@ -51,7 +51,7 @@
             <a
                 href="{{ route('people.changeVisibility', $person) }}"
                 onclick="event.preventDefault();document.getElementById('change-visibility-form').submit();">
-                <small class="text-lg text-red-500">
+                <small class="text-lg {{ ! $person->isVisible() ? 'text-red-500' : '' }}">
                     [{{ $person->isVisible() ? __('people.make_invisible') : __('people.make_visible') }}]
                 </small>
             </a>
