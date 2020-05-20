@@ -8,8 +8,8 @@ class ReportController extends Controller
 {
     public function __invoke()
     {
-        if (! optional(auth()->user())->isSuperAdmin()) {
-            return abort(403, 'Unauthorized action.');
+        if (! auth()->user()->isSuperAdmin()) {
+            return abort(403);
         }
 
         $shouldBeDead = Person::where('dead', false)
