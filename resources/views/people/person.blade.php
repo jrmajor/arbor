@@ -434,6 +434,7 @@
                                 @endif
 
                                 <small>[{{ __('misc.hidden') }}]</small>
+                                <small>[marriage №{{ $marriage->id }}]</small>
                             </li>
                         @endif
                     @endforeach
