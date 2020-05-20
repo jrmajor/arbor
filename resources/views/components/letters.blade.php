@@ -12,10 +12,12 @@
     <small class="text-muted">
         [{{ __('people.index.total') }}: <strong>{{ App\Person::count() }}</strong>]
     </small>
-    <a href="{{ route('people.create') }}"
-        data-tippy-content="{{ __('people.add_a_new_person') }}">
-        <small>[+]</small>
-    </a>
+    @if(optional(auth()->user())->canWrite())
+        <a href="{{ route('people.create') }}"
+            data-tippy-content="{{ __('people.add_a_new_person') }}">
+            <small>[+]</small>
+        </a>
+    @endif
     <br>&nbsp;&nbsp;
 
     @foreach(App\Person::letters('family') as $letter)
@@ -40,10 +42,12 @@
     <small class="text-muted">
         [{{ __('people.index.total') }}: <strong>{{ App\Person::count() }}</strong>]
     </small>
-    <a href="{{ route('people.create') }}"
-        data-tippy-content="{{ __('people.add_a_new_person') }}">
-        <small>[+]</small>
-    </a>
+    @if(optional(auth()->user())->canWrite())
+        <a href="{{ route('people.create') }}"
+            data-tippy-content="{{ __('people.add_a_new_person') }}">
+            <small>[+]</small>
+        </a>
+    @endif
     <br>&nbsp;&nbsp;
 
     @foreach(App\Person::letters('last') as $letter)
