@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $person->formatSimpleName())
+
 @section('content')
     <h3>
         @if($person->sex == 'xx')

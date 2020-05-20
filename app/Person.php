@@ -347,6 +347,19 @@ class Person extends Model
         return $name .= " [№{$this->id}]";
     }
 
+    public function formatSimpleName(): string
+    {
+        $name = $this->name.' ';
+
+        if (! $this->last_name) {
+            $name .= $this->family_name;
+        } else {
+            $name .= "{$this->last_name} (z d. {$this->family_name})";
+        }
+
+        return $name;
+    }
+
     public static function findByPytlewskiId($id): ?self
     {
         return self::where('id_pytlewski', $id)->first();

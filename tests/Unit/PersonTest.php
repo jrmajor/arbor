@@ -348,6 +348,22 @@ class PersonTest extends TestCase
         $this->assertEquals("Zenona Skwierczyńska (✝1945) [№$person->id]", $person->formatName());
     }
 
+    public function testCanFormatSimpleName()
+    {
+        $person = factory(Person::class)->state('alive')->create([
+            'name' => 'Zenona',
+            'middle_name' => 'Ludmiła',
+            'family_name' => 'Skwierczyńska',
+            'last_name' => null,
+        ]);
+
+        $this->assertEquals("Zenona Skwierczyńska", $person->formatSimpleName());
+
+        $person->last_name = 'Wojtyła';
+
+        $this->assertEquals("Zenona Wojtyła (z d. Skwierczyńska)", $person->formatSimpleName());
+    }
+
     public function testCanFindByPytlewskiId()
     {
         $person = factory(Person::class)->create([
