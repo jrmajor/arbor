@@ -68,13 +68,11 @@ class PersonTest extends TestCase
 
     public function testTellsIfCanBeViewedByGuest()
     {
-        $user = factory(User::class)->create();
-
         $person = factory(Person::class)->create();
 
         $this->assertFalse($person->canBeViewedBy(null));
 
-        $person->visibility = true;
+        $person->changeVisibility(true);
 
         $this->assertTrue($person->canBeViewedBy(null));
     }

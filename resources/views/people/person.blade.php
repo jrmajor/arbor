@@ -365,67 +365,77 @@
             <dd>
                 <ul>
                     @foreach($person->marriages as $marriage)
-                        <li>
-                            @if($marriage->order($person))
-                                {{ strtolower(roman($marriage->order($person))) }}.
-                            @endif
-                            @if($marriage->rite)
-                                <strong>{{ __('marriages.rites.' . $marriage->rite) }}:</strong>
-                            @endif
+                        @if($marriage->canBeViewedBy(auth()->user()))
+                            <li>
+                                @if($marriage->order($person))
+                                    {{ strtolower(roman($marriage->order($person))) }}.
+                                @endif
+                                @if($marriage->rite)
+                                    <strong>{{ __('marriages.rites.' . $marriage->rite) }}:</strong>
+                                @endif
 
-                            <x-name :person="$marriage->partner($person)"/>
+                                <x-name :person="$marriage->partner($person)"/>
 
-                            @if(optional(auth()->user())->canWrite())
-                                <a
-                                    href="{{ route('marriages.edit', ['marriage' => $marriage]) }}"
-                                    data-tippy-content="{{ __('marriages.edit_this_marriage') }}">
-                                    <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
-                                </a>
-                                <a href="{{ route('people.create', [
-                                                        'mother' => $marriage->woman_id,
-                                                        'father' => $marriage->man_id,
-                                    ]) }}"
-                                    data-tippy-content="{{ __('marriages.add_child') }}">
-                                    <small>[+]</small>
-                                </a>
-                            @else
-                                <small>[marriage №{{ $marriage->id }}]</small>
-                            @endif
-                            @if($marriage->hasFirstEvent())
-                                @if($marriage->first_event_type)
-                                    <br>&nbsp;&nbsp;{{ __('marriages.event_types.'.$marriage->first_event_type) }}:
+                                @if(optional(auth()->user())->canWrite())
+                                    <a
+                                        href="{{ route('marriages.edit', ['marriage' => $marriage]) }}"
+                                        data-tippy-content="{{ __('marriages.edit_this_marriage') }}">
+                                        <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
+                                    </a>
+                                    <a href="{{ route('people.create', [
+                                                            'mother' => $marriage->woman_id,
+                                                            'father' => $marriage->man_id,
+                                        ]) }}"
+                                        data-tippy-content="{{ __('marriages.add_child') }}">
+                                        <small>[+]</small>
+                                    </a>
                                 @else
-                                    <br>&nbsp;
+                                    <small>[marriage №{{ $marriage->id }}]</small>
                                 @endif
-                                @if($marriage->first_event_place && $marriage->first_event_date)
-                                    {{ $marriage->first_event_place }}, {{ $marriage->first_event_date }}
-                                @elseif($marriage->first_event_place)
-                                    {{ $marriage->first_event_place }}
-                                @elseif($marriage->first_event_date)
-                                    {{ $marriage->first_event_date }}
+                                @if($marriage->hasFirstEvent())
+                                    @if($marriage->first_event_type)
+                                        <br>&nbsp;&nbsp;{{ __('marriages.event_types.'.$marriage->first_event_type) }}:
+                                    @else
+                                        <br>&nbsp;
+                                    @endif
+                                    @if($marriage->first_event_place && $marriage->first_event_date)
+                                        {{ $marriage->first_event_place }}, {{ $marriage->first_event_date }}
+                                    @elseif($marriage->first_event_place)
+                                        {{ $marriage->first_event_place }}
+                                    @elseif($marriage->first_event_date)
+                                        {{ $marriage->first_event_date }}
+                                    @endif
                                 @endif
-                            @endif
-                            @if($marriage->hasSecondEvent())
-                                @if($marriage->second_event_type)
-                                    <br>&nbsp;&nbsp;{{ __('marriages.event_types.'.$marriage->second_event_type) }}:
-                                @else
-                                    <br>&nbsp;
+                                @if($marriage->hasSecondEvent())
+                                    @if($marriage->second_event_type)
+                                        <br>&nbsp;&nbsp;{{ __('marriages.event_types.'.$marriage->second_event_type) }}:
+                                    @else
+                                        <br>&nbsp;
+                                    @endif
+                                    @if($marriage->second_event_place && $marriage->second_event_date)
+                                        {{ $marriage->second_event_place }}, {{ $marriage->second_event_date }}
+                                    @elseif($marriage->second_event_place)
+                                        {{ $marriage->second_event_place }}
+                                    @elseif($marriage->second_event_date)
+                                        {{ $marriage->second_event_date }}
+                                    @endif
                                 @endif
-                                @if($marriage->second_event_place && $marriage->second_event_date)
-                                    {{ $marriage->second_event_place }}, {{ $marriage->second_event_date }}
-                                @elseif($marriage->second_event_place)
-                                    {{ $marriage->second_event_place }}
-                                @elseif($marriage->second_event_date)
-                                    {{ $marriage->second_event_date }}
-                                @endif
-                            @endif
 
-                            @if($marriage->ended && $marriage->end_date)
-                                <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}: {{ $marriage->end_date }}
-                            @elseif($marriage->ended)
-                                <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}
-                            @endif
-                        </li>
+                                @if($marriage->ended && $marriage->end_date)
+                                    <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}: {{ $marriage->end_date }}
+                                @elseif($marriage->ended)
+                                    <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}
+                                @endif
+                            </li>
+                        @else
+                            <li>
+                                @if($marriage->order($person))
+                                    {{ strtolower(roman($marriage->order($person))) }}.
+                                @endif
+
+                                <small>[{{ __('misc.hidden') }}]</small>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </dd>

@@ -6,12 +6,56 @@ use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
 use App\Marriage;
 use App\Person;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class MarriageTest extends TestCase
 {
     use RefreshDatabase;
+
+
+    public function testCanDetermineItsVisibility()
+    {
+        $marriage = factory(Marriage::class)->create();
+
+        $this->assertFalse($marriage->isVisible());
+        $marriage->woman->changeVisibility(true);
+        $this->assertFalse($marriage->isVisible());
+        $marriage->man->changeVisibility(true);
+        $this->assertTrue($marriage->isVisible());
+    }
+
+    public function testTellsIfCanBeViewedByGivenUser()
+    {
+        $user = factory(User::class)->create();
+
+        $hiddenMarriage = factory(Marriage::class)->create();
+
+        $visibleMarriage = factory(Marriage::class)->create();
+        $visibleMarriage->woman->changeVisibility(true);
+        $visibleMarriage->man->changeVisibility(true);
+
+        $this->assertFalse($hiddenMarriage->canBeViewedBy($user));
+        $this->assertTrue($visibleMarriage->canBeViewedBy($user));
+
+        $user->permissions = 1;
+
+        $this->assertTrue($hiddenMarriage->canBeViewedBy($user));
+        $this->assertTrue($visibleMarriage->canBeViewedBy($user));
+    }
+
+    public function testTellsIfCanBeViewedByGuest()
+    {
+        $marriage = factory(Marriage::class)->create();
+
+        $this->assertFalse($marriage->canBeViewedBy(null));
+
+        $marriage->woman->changeVisibility(true);
+        $marriage->man->changeVisibility(true);
+
+        $this->assertTrue($marriage->canBeViewedBy(null));
+    }
 
     public function testItCastsRiteToEnum()
     {

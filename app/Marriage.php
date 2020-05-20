@@ -43,6 +43,16 @@ class Marriage extends Model
         'end_date',
     ];
 
+    public function isVisible(): bool
+    {
+        return $this->woman->isVisible() && $this->man->isVisible();
+    }
+
+    public function canBeViewedBy(?User $user): bool
+    {
+        return optional($user)->canRead() || $this->isVisible();
+    }
+
     public function woman(): BelongsTo
     {
         return $this->belongsTo('App\Person');
