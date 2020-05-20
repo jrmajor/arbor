@@ -15,6 +15,7 @@
                 | <a href="{{ route('users.index') }}"><small>{{ __('misc.menu.manage_users') }}</small></a>--}}
                 | <a href="{{ route('activities.logins') }}"><small>{{ __('misc.menu.logins') }}</small></a>
                 | <a href="{{ route('activities.models') }}"><small>{{ __('misc.menu.activities') }}</small></a>
+                | <a href="{{ route('reports') }}"><small>{{ __('misc.menu.reports') }}</small></a>
             @endif
         </div>
     @endif

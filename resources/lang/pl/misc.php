@@ -13,6 +13,7 @@ return [
         //'manage_users' => 'manage users',
         'logins' => 'logowania',
         'activities' => 'aktywności',
+        'reports' => 'raporty',
     ],
     'date' => [
         'between' => 'pomiędzy',
