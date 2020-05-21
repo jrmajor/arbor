@@ -4,6 +4,8 @@ module.exports = {
         fontFamily: {
             sans: [
                 'Inter',
+                'Zapf Dingbats',
+                'Arial Unicode MS',
                 'system-ui',
                 '-apple-system',
                 'BlinkMacSystemFont',
