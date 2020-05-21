@@ -5,9 +5,9 @@
 @section('content')
     <h3>
         @if($person->sex == 'xx')
-            &#9792;
+            &#9792;&#xFE0E;
         @elseif($person->sex == 'xy')
-            &#9794;
+            &#9794;&#xFE0E;
         @endif
 
         @if($person->dead)
@@ -283,7 +283,7 @@
                     @endif
                 </dd>
             @else
-                <dd>&#10013;</dd>
+                <dd>&#10013;&#xFE0E;</dd>
             @endif
         @endif
 

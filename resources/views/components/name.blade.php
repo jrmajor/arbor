@@ -68,7 +68,7 @@
             @endif
 
             @if($person->birth_year && $person->death_year)
-                (&#8727;{{ $person->birth_year }}, &#10013;{{ $person->death_year }})
+                (&#8727;&#xFE0E;{{ $person->birth_year }}, &#10013;&#xFE0E;{{ $person->death_year }})
             @elseif($person->birth_year)
                 (&#8727;{{ $person->birth_year }})
             @elseif($person->death_year)
