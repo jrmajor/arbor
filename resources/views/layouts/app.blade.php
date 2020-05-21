@@ -13,13 +13,36 @@
         <script src="{{ mix('/js/app.js') }}" defer></script>
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     </head>
-    <body class="font-sans">
-        <div class="container mx-auto my-5 p-4" id="app">
+    <body class="font-sans bg-gray-100">
+        <div class="container mx-auto my-1 p-1" id="app">
             <x:menu/>
 
-            <div class="p-1 sm:p-2">
-                @yield('content')
-            </div>
+            @hasSection('raw')
+                @yield('raw')
+            @else
+                @hasSection('title-bar')
+                    <h1 class="mx-2 mb-1 mt-5 leading-none text-3xl font-medium">@yield('title-bar')</h1>
+                @endif
+
+                @hasSection('sidebar-menu')
+                    <div class="flex flex-col lg:flex-row">
+                        <div class="flex-grow m-1 p-4 bg-white rounded-lg shadow-lg">
+                            @yield('content')
+                        </div>
+                        <div class="flex-shrink-0 m-1 p-1">
+                            @yield('sidebar-menu')
+                        </div>
+                    </div>
+                @else
+                    <div class="m-1 mb-2 p-4 bg-white rounded-lg shadow-lg">
+                        @yield('content')
+                    </div>
+                @endif
+
+                <div class="m-1 p-3 pt-2">
+                    <x-letters/>
+                </div>
+            @endif
         </div>
     </body>
 </html>

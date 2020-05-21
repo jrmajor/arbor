@@ -49,7 +49,7 @@
                                 <label class="" for="remember"><small>{{ __('auth.remember') }}</small></label>
                             </div>
                             <div>
-                                <a href="{{ route('password.request') }}" class="mr-1"><small>{{ __('auth.forgot_password') }}</small></a>
+                                <a href="{{ route('password.request') }}" class="a mr-1"><small>{{ __('auth.forgot_password') }}</small></a>
                                 <button type="submit" class="ml-1">
                                     {{ __('auth.login') }}
                                 </button>

@@ -1,21 +1,37 @@
-<nav class="mb-2 p-4 bg-gray-200 rounded flex flex-row items-center justify-between">
+<nav class="m-1 p-4 bg-white rounded-lg shadow flex flex-row items-center justify-between">
     <div>
-        <a class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-300" href="{{ route('people.index') }}">arbor</a>
-        <a class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-300" href="{{ route('people.index') }}">
+        <a href="{{ route('people.index') }}"
+            class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out" >arbor</a>
+        <a href="{{ route('people.index') }}"
+            class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
             <img class="inline-block h-4" src="{{ asset('img/genealogy.png') }}" height="15px">&nbsp;{{ __('misc.menu.tree') }}
         </a>
     </div>
 
     @if($user->canWrite())
         <div class="hidden md:block">
-            <a href="{{ route('people.create') }}"><small>{{ __('misc.menu.add_person') }}</small></a>
-            | <a href="{{ route('marriages.create') }}"><small>{{ __('misc.menu.add_marriage') }}</small></a>
+            <a href="{{ route('people.create') }}" class="a">
+                <small>{{ __('misc.menu.add_person') }}</small>
+            </a>
+            | <a href="{{ route('marriages.create') }}" class="a">
+                <small>{{ __('misc.menu.add_marriage') }}</small>
+            </a>
             @if($user->isSuperAdmin())
-                {{--| <a href="{{ route('users.create') }}"><small>{{ __('misc.menu.add_user') }}</small></a>
-                | <a href="{{ route('users.index') }}"><small>{{ __('misc.menu.manage_users') }}</small></a>--}}
-                | <a href="{{ route('activities.logins') }}"><small>{{ __('misc.menu.logins') }}</small></a>
-                | <a href="{{ route('activities.models') }}"><small>{{ __('misc.menu.activities') }}</small></a>
-                | <a href="{{ route('reports') }}"><small>{{ __('misc.menu.reports') }}</small></a>
+                {{--| <a href="{{ route('users.create') }}" class="a">
+                <small>{{ __('misc.menu.add_user') }}</small>
+                </a>
+                | <a href="{{ route('users.index') }}" class="a">
+                    <small>{{ __('misc.menu.manage_users') }}</small>
+                </a>--}}
+                | <a href="{{ route('activities.logins') }}" class="a">
+                    <small>{{ __('misc.menu.logins') }}</small>
+                </a>
+                | <a href="{{ route('activities.models') }}" class="a">
+                    <small>{{ __('misc.menu.activities') }}</small>
+                </a>
+                | <a href="{{ route('reports') }}" class="a">
+                    <small>{{ __('misc.menu.reports') }}</small>
+                </a>
             @endif
         </div>
     @endif
@@ -39,11 +55,14 @@
         </div>
         <div>
             @guest
-                <a class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-300" href="{{ route('login') }}">
+                <a href="{{ route('login') }}"
+                    class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
                     <img class="inline-block h-4" src="{{ asset('img/import.png') }}" height="15px">&nbsp;{{ __('misc.menu.login') }}
                 </a>
             @else
-                <a class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-300" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                    class="p-2 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
                     <img class="inline-block h-4" src="{{ asset('img/export.png') }}" height="15px">&nbsp;{{ __('misc.menu.logout') }}
                     <small class="hidden md:inline">[{{ $user->username }}]</small>
                 </a>

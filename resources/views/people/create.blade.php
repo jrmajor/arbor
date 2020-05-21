@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
-    <h3>{{ __('people.add_a_new_person') }}</h3>
+@section('title-bar')
+    {{ __('people.add_a_new_person') }}
+@endsection
 
+@section('content')
     @component('people.form', ['person' => $person, 'action' => 'create'])
     @endcomponent
 @endsection

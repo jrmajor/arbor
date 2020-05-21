@@ -11,15 +11,20 @@ return [
     ],
 
     'add_a_new_person' => 'Add a new person',
+
+    'menu' => [
+        'overview' => 'Overview',
+        'edit_person' => 'Edit person',
+        'edits_history' => 'Edits history',
+
+        'make_invisible' => 'Make invisible',
+        'make_visible' => 'Make visible',
+
+        'delete' => 'Delete',
+    ],
+
     'edit_this_person' => 'Edit this person',
 
-    'make_invisible' => 'make invisible',
-    'make_visible' => 'make visible',
-
-    'edits_history' => 'Edits history',
-
-    'return_to_person_overwiew' => 'Return to person overwiew',
-    'delete' => 'delete',
     'cant_delete_person_with_relationships' => 'In order to delete this person, first delete relationships.',
     'cant_delete_person_with_children' => 'In order to delete this person, first delete children.',
 
@@ -28,7 +33,7 @@ return [
     'male' => 'male',
     'unknown' => 'unknown',
     'pytlewski' => [
-        'id' => 'ID in <a href="http://www.pytlewski.pl/index/drzewo/" target="_blank">pytlewski.pl</a>',
+        'id' => 'ID in <a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>',
         'as' => 'as',
         'show_more' => 'show more',
         'parents' => 'Parents',
@@ -42,7 +47,7 @@ return [
         // 'death' => 'Death',
     ],
     'wielcy' => [
-        'id' => 'ID in <a href="http://www.wielcy.pl/" target="_blank">wielcy.pl</a>',
+        'id' => 'ID in <a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>',
         'as' => 'as',
     ],
     'name' => 'Name',

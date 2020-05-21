@@ -18,11 +18,11 @@
                     arbor
                 </h1>
                 <p class="uppercase" style="letter-spacing: 0.4em">
-                    <a href="{{ route('login') }}">
+                    <a href="{{ route('login') }}" class="a">
                         {{ __('welcome.login') }}
                     </a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="{{ route('people.index') }}">
+                    <a href="{{ route('people.index') }}" class="a">
                         {{ __('welcome.guest') }}
                     </a>
                 </p>

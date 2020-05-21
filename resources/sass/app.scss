@@ -4,16 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-h3 {
-    @apply text-3xl font-medium;
-}
-
-a {
+.a {
     @apply text-blue-600;
     @apply transition-colors duration-200 ease-out;
 }
 
-a:hover {
+.a:hover {
     @apply text-blue-800;
 }
 
@@ -21,11 +17,11 @@ small {
     @apply text-gray-600 font-normal;
 }
 
-a > small {
+.a > small {
     @apply transition-colors duration-200 ease-out;
 }
 
-a:hover > small {
+.a:hover > small {
     @apply text-gray-800;
 }
 

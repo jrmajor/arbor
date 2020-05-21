@@ -8,18 +8,22 @@
 
 @extends('layouts.app')
 
-@section('content')
+@section('raw')
 
-    <x-letters :active="$active"/>
+    <div class="my-2 mx-1 p-4 bg-white rounded-lg shadow-lg">
+        <x-letters :active="$active"/>
 
     @if(isset($list))
-        <ul>
-            @foreach($list as $person)
-                <li>
-                    <x-name :person="$person" :bold="$active['type']"/>
-                </li>
-            @endforeach
-        </ul>
+            <hr class="-mx-4 my-3 border-t-2 border-dashed">
+
+            <ul>
+                @foreach($list as $person)
+                    <li>
+                        <x-name :person="$person" :bold="$active['type']"/>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
 @endsection

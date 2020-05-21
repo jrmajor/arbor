@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
-    <h3>{{ __('passwords.reset_password') }}</h3>
+@section('title-bar')
+    {{ __('passwords.reset_password') }}
+@endsection
 
+@section('content')
     @if (session('status'))
 
         <strong class="text-green-500">

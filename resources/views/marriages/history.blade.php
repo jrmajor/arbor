@@ -1,18 +1,16 @@
 @extends('layouts.app')
 
+@section('title-bar')
+    {{ __('marriages.menu.edits_history') }}
+    <small class="text-lg">[№{{ $marriage->id }}]</small>
+@endsection
+
+@section('sidebar-menu')
+    <x-marriage-menu active="history" :marriage="$marriage"/>
+@endsection
+
 @section('content')
-    <h3>
-        {{ __('marriages.edits_history') }}
-
-        <a href="{{ route('marriages.edit', $marriage) }}"
-            data-tippy-content="{{ __('marriages.return_to_marriage_edition') }}">
-            <small class="text-lg">
-                [№{{ $marriage->id }}]
-            </small>
-        </a>
-    </h3>
-
-    <dl class="mb-3">
+    <dl>
         @foreach($activities as $activity)
             <dt>
                 {{ __('activities.'.$activity['description']) }}
@@ -51,7 +49,4 @@
             </dd>
         @endforeach
     </dl>
-
-    <br>
-    <x-letters/>
 @endsection

@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
-    <h3>{{ __('passwords.reset_password') }}</h3>
+@section('title-bar')
+    {{ __('passwords.reset_password') }}
+@endsection
 
+@section('content')
     <form method="POST" action="{{ route('password.update') }}">
         @csrf
 
@@ -56,5 +58,4 @@
             </div>
         </fieldset>
     </form>
-</div>
 @endsection

@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
-    <h3>{{ __('marriages.add_a_new_marriage') }}</h3>
+@section('title-bar')
+    {{ __('marriages.add_a_new_marriage') }}
+@endsection
 
-    @component('marriages.form', ['marriage' => $marriage, 'action' => 'create']) @endcomponent
+@section('content')
+    @component('marriages.form', ['marriage' => $marriage, 'action' => 'create'])
+    @endcomponent
 @endsection

@@ -5,28 +5,34 @@ return [
     'marriage' => 'małżeństwo',
 
     'add_a_new_marriage' => 'Dodaj związek',
+
+    'menu' => [
+        'edit_marriage' => 'Edytuj związek',
+        'edits_history' => 'Historia edycji',
+
+        'delete' => 'usuń',
+    ],
+
     'edit_this_marriage' => 'Edytuj ten związek',
-    'edit_marriage' => 'Edytuj związek',
     'add_child' => 'Dodaj dziecko',
-
-    'edits_history' => 'Historia edycji',
-    'return_to_marriage_edition' => 'Wróć do edycji związku',
-
-    'delete' => 'usuń',
 
     'woman' => 'Kobieta',
     'man' => 'Mężczyzna',
+
     'rite' => 'Obrządek',
     'rites' => [
         'civil' => 'cywilny',
         'roman_catholic' => 'rzymskokatolicki',
     ],
+
     'first_event_type' => 'Typ pierwszego wydarzenia',
     'first_event_date' => 'Data pierwszego wydarzenia',
     'first_event_place' => 'Miejsce pierwszego wydarzenia',
+
     'second_event_type' => 'Typ drugiego wydarzenia',
     'second_event_date' => 'Data drugiego wydarzenia',
     'second_event_place' => 'Miejsce drugiego wydarzenia',
+
     'event_types' => [
         'marriage' => 'ślub',
         'church_marriage' => 'ślub kościelny',

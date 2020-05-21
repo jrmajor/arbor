@@ -3,6 +3,10 @@
     <livewire:scripts>
 @endpush
 
+@section('title-bar')
+    {{ __('activities.login-activities') }}
+@endsection
+
 <div>
     <table>
         @foreach ($activities as $activity)

@@ -2,76 +2,27 @@
 
 @section('title', $person->formatSimpleName())
 
+@section('title-bar')
+    <x-person-title-bar :person="$person"/>
+@endsection
+
+@if(optional(auth()->user())->canWrite())
+    @section('sidebar-menu')
+        <x-person-menu active="show" :person="$person"/>
+    @endsection
+@endif
+
 @section('content')
-    <h3>
-        @if($person->sex == 'xx')
-            &#9792;&#xFE0E;
-        @elseif($person->sex == 'xy')
-            &#9794;&#xFE0E;
-        @endif
+    @error('deleting')
+        <p class="text-red-500">{{ $message }}</p>
+    @enderror
 
-        @if($person->dead)
-            <i>
-        @endif
-
-            @if($person->canBeViewedBy(auth()->user()))
-                {{ $person->name }}
-                @if($person->last_name)
-                    {{ $person->last_name }} (z d. {{ $person->family_name }})
-                @else
-                    {{ $person->family_name }}
-                @endif
-            @else
-                [{{ __('misc.hidden') }}]
-            @endif
-
-        @if($person->dead)
-            </i>
-        @endif
-
-        @if(optional(auth()->user())->canWrite())
-            <a href="{{ route('people.edit', $person) }}"
-                data-tippy-content="{{ __('people.edit_this_person') }}">
-                <small class="text-lg">
-                    [№{{ $person->id }}]
-                </small>
-            </a>
-            <a href="{{ route('marriages.create', [$person->sex == 'xx' ? 'woman' : 'man' => $person->id]) }}">
-                <small class="text-lg">
-                    [{{ strtolower(__('marriages.add_a_new_marriage')) }}]
-                </small>
-            </a>
-        @else
-            <small class="text-lg">[№{{ $person->id }}]</small>
-        @endif
-        @if(optional(auth()->user())->isSuperAdmin())
-            <a href="{{ route('people.history', $person) }}">
-                <small class="text-lg">
-                    [{{ strtolower(__('people.edits_history')) }}]
-                </small>
-            </a>
-            <a
-                href="{{ route('people.changeVisibility', $person) }}"
-                onclick="event.preventDefault();document.getElementById('change-visibility-form').submit();">
-                <small class="text-lg {{ ! $person->isVisible() ? 'text-red-500' : '' }}">
-                    [{{ $person->isVisible() ? __('people.make_invisible') : __('people.make_visible') }}]
-                </small>
-            </a>
-            <form id="change-visibility-form" method="POST" style="display: none"
-            action="{{ route('people.changeVisibility', $person) }}">
-                @method('PUT')
-                @csrf
-                <input type="hidden" name="visibility" value="{{ $person->isVisible() ? '0' : '1' }}">
-            </form>
-        @endif
-    </h3>
-
-    <dl class="mb-3">
+    <dl>
         {{-- pytlewski --}}
         @if($pytlewski = $person->pytlewski)
             <dt>@lang('people.pytlewski.id')&nbsp;</dt>
             <dd x-data="{ open: false }">
-                <a href="{{ $pytlewski->url }}" target="_blank">
+                <a href="{{ $pytlewski->url }}" target="_blank" class="a">
                     {{ $pytlewski->id}}
                     @if($pytlewski->basic_name)
                         <small>
@@ -142,7 +93,7 @@
         @if($wielcy = $person->wielcy)
             <dt>@lang('people.wielcy.id')&nbsp;</dt>
             <dd>
-                <a href="{{ $wielcy->url }}" target="_blank">
+                <a href="{{ $wielcy->url }}" target="_blank" class="a">
                     {{ $wielcy->id }}
                     <small>{{ __('people.wielcy.as') }} {!! $wielcy->name !!}</small>
                 </a>
@@ -381,14 +332,16 @@
                                 @if(optional(auth()->user())->canWrite())
                                     <a
                                         href="{{ route('marriages.edit', ['marriage' => $marriage]) }}"
-                                        data-tippy-content="{{ __('marriages.edit_this_marriage') }}">
+                                        data-tippy-content="{{ __('marriages.edit_this_marriage') }}"
+                                        class="a">
                                         <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                                     </a>
                                     <a href="{{ route('people.create', [
                                                             'mother' => $marriage->woman_id,
                                                             'father' => $marriage->man_id,
                                         ]) }}"
-                                        data-tippy-content="{{ __('marriages.add_child') }}">
+                                        data-tippy-content="{{ __('marriages.add_child') }}"
+                                        class="a">
                                         <small>[+]</small>
                                     </a>
                                 @else
@@ -457,7 +410,8 @@
         @endif
 
         {{-- notes --}}
-        {{--<dt>
+        {{--
+        <dt>
             Notes
             <a href="" data-toggle="tooltip" data-html="true" title="show_notes_versions">
                 <small>[total 234_version]</small>
@@ -473,9 +427,7 @@
         <dt>Notes <small>[no_notes]</small>&nbsp</dt>
         <dd>
             <a href="" data-toggle="tooltip" data-html="true" title="click_to_create_note" target="_blank">[+]</a>
-        </dd>--}}
+        </dd>
+        --}}
     </dl>
-
-    <br>
-    <x-letters/>
 @endsection
