@@ -8,6 +8,8 @@ return [
         'login' => 'zaloguj',
         'logout' => 'wyloguj',
 
+        'add_person' => 'dodaj osobę',
+
         'logins' => 'logowania',
         'activities' => 'aktywności',
         'reports' => 'raporty',

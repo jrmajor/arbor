@@ -25,6 +25,15 @@
                 class="flex-col w-full mt-4 md:flex md:flex-row md:w-auto md:mt-0"
                 :class="{ 'flex': open, 'hidden': ! open }"
                 @click.away="open = false">
+
+                @if($user->canWrite())
+                    <a
+                        href="{{ route('people.create') }}"
+                        class="px-2 py-1 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
+                        {{ __('misc.menu.add_person') }}
+                    </a>
+                @endif
+
                 @if($user->isSuperAdmin())
                     <a
                         href="{{ route('activities.logins') }}"
