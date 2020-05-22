@@ -27,7 +27,7 @@
                 @endif
 
                 @hasSection('sidebar-menu')
-                    <div class="flex flex-col lg:flex-row">
+                    <div class="flex flex-col md:flex-row">
                         <div class="flex-grow m-1 p-4 bg-white rounded-lg shadow-lg">
                             @yield('content')
                         </div>
