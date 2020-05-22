@@ -51,7 +51,7 @@
             <div class="flex">
                 <div class="w-full sm:w-1/2 md:w-1/4 pr-1"></div>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex justify-end">
-                    <button type="submit">
+                    <button type="submit" class="btn">
                         {{ __('passwords.reset_password') }}
                     </button>
                 </div>

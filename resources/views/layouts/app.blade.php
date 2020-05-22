@@ -14,8 +14,10 @@
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     </head>
     <body class="font-sans bg-gray-100">
+
+        <x:menu/>
+
         <div class="container mx-auto my-1 p-1" id="app">
-            <x:menu/>
 
             @hasSection('raw')
                 @yield('raw')
@@ -44,5 +46,6 @@
                 </div>
             @endif
         </div>
+
     </body>
 </html>

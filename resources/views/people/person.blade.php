@@ -32,7 +32,7 @@
                     @endif
                 </a>
                 <button @click="open = true"
-                    class="leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
+                    class="btn leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
                     {{ __('people.pytlewski.show_more') }}
                 </button>
                 <br>

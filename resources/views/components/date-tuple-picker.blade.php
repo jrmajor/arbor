@@ -108,7 +108,7 @@
         <div class="flex items-center ml-1">
             <button @click.prevent="advancedPicker = ! advancedPicker"
                 x-text="advancedPicker ? '{{ __('misc.date.simple') }}' : '{{ __('misc.date.advanced') }}'"
-                class="leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
+                class=" btn leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
                 toggle
             </button>
             <input type="hidden" name="{{ $name }}[picker]"

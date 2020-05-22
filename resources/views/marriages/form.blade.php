@@ -131,7 +131,7 @@
             <div class="w-full sm:w-1/2 md:w-1/4 pr-1"></div>
             <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex justify-end">
                 <button
-                    type="submit" class=" "
+                    type="submit" class="btn"
                     id="submit" name="submit"
                     value="submit">
                     {{ __('misc.submit') }}

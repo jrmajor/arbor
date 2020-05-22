@@ -29,22 +29,22 @@ small {
     font-feature-settings: "tnum";
 }
 
-button {
+.btn {
     @apply px-4 py-1;
     @apply rounded border border-blue-600 text-blue-600;
     @apply transition-colors duration-200 ease-out;
 }
 
-button[disabled] {
+.btn[disabled] {
     @apply rounded border border-gray-600 text-gray-600;
     @apply transition-colors duration-200 ease-out;
 }
 
-button:hover {
+.btn:hover {
     @apply bg-blue-100 text-blue-700;
 }
 
-button:focus {
+.btn:focus {
     @apply outline-none;
     @apply bg-blue-600 text-blue-100;
 }

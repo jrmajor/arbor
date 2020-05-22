@@ -4,13 +4,10 @@ return [
 
     'menu' => [
         'tree' => 'tree',
-        // 'search' => 'search',
+
         'login' => 'login',
         'logout' => 'logout',
-        'add_person' => 'add person',
-        'add_marriage' => 'add marriage',
-        //'add_user' => 'add user',
-        //'manage_users' => 'manage users',
+
         'logins' => 'logins',
         'activities' => 'activities',
         'reports' => 'reports',

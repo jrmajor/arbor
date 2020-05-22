@@ -50,7 +50,7 @@
                             </div>
                             <div>
                                 <a href="{{ route('password.request') }}" class="a mr-1"><small>{{ __('auth.forgot_password') }}</small></a>
-                                <button type="submit" class="ml-1">
+                                <button type="submit" class="btn ml-1">
                                     {{ __('auth.login') }}
                                 </button>
                             </div>

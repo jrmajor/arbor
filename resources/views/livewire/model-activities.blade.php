@@ -4,7 +4,7 @@
 @endpush
 
 @section('title-bar')
-    {{ __('activities.login-activities') }}
+    {{ __('activities.model-activities') }}
 @endsection
 
 <div>
