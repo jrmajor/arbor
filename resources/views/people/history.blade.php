@@ -16,7 +16,15 @@
     <dl>
         @foreach($activities as $activity)
             <dt>
-                {{ __('activities.'.$activity['description']) }}
+                @if($activity['description'] == 'changed-visibility')
+                    @if($activity['attributes']['visibility'])
+                        {{ __('activities.made_visible') }}
+                    @else
+                        {{ __('activities.made_invisible') }}
+                    @endif
+                @else
+                    {{ __('activities.'.$activity['description']) }}
+                @endif
                 <span class="font-normal">{{ __('activities.by') }}</span>
                 {{ optional($activity['causer'])->username }}
                 <br>

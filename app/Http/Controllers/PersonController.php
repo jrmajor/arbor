@@ -105,7 +105,7 @@ class PersonController extends Controller
             return abort(500);
         }
 
-        return redirect()->route('people.show', [$person]);
+        return back();
     }
 
     public function destroy(Person $person)
