@@ -24,6 +24,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 // Route::match(['put', 'patch'], 'users/{user}', 'UsersController@update')->name('users.update');
 // Route::delete('users/{user}', 'UsersController@destroy')->name('users.destroy');
 
+Route::livewire('search', 'search')->name('search');
+
 Route::middleware('auth')->group(function () {
     Route::get('people/create', 'PersonController@create')->name('people.create');
     Route::post('people', 'PersonController@store')->name('people.store');

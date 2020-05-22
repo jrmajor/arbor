@@ -50,6 +50,7 @@ small {
 }
 
 input[type=text],
+input[type=search],
 input[type=email],
 input[type=username],
 input[type=password],
@@ -61,6 +62,7 @@ select {
 }
 
 input[type=text].invalid,
+input[type=search].invalid,
 input[type=email].invalid,
 input[type=username].invalid,
 input[type=password].invalid,
@@ -69,6 +71,7 @@ select.invalid {
 }
 
 input[type=text][disabled],
+input[type=search][disabled],
 input[type=email][disabled],
 input[type=username][disabled],
 input[type=password][disabled],
@@ -77,6 +80,7 @@ select[disabled] {
 }
 
 input[type=text]:focus,
+input[type=search]:focus,
 input[type=email]:focus,
 input[type=username]:focus,
 input[type=password]:focus,

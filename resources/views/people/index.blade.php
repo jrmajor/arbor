@@ -8,10 +8,8 @@
 
 @extends('layouts.app')
 
-@section('raw')
-
-    <div class="my-2 mx-1 p-4 bg-white rounded-lg shadow-lg">
-        <x-letters :active="$active"/>
+@section('content')
+    <x-letters :active="$active"/>
 
     @if(isset($list))
             <hr class="-mx-4 my-3 border-t-2 border-dashed">
@@ -23,7 +21,5 @@
                     </li>
                 @endforeach
             </ul>
-        </div>
     @endif
-
 @endsection

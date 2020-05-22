@@ -40,10 +40,6 @@
                         @yield('content')
                     </div>
                 @endif
-
-                <div class="m-1 p-3 pt-2">
-                    <x-letters/>
-                </div>
             @endif
         </div>
 

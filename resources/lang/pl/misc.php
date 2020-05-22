@@ -14,6 +14,7 @@ return [
         'activities' => 'aktywności',
         'reports' => 'raporty',
     ],
+
     'date' => [
         'between' => 'pomiędzy',
         'and' => 'i',
@@ -24,14 +25,22 @@ return [
         'simple' => 'proste',
         'advanced' => 'zaawansowane',
     ],
+
     'hidden' => 'ukryte',
+
     'submit' => 'Potwierdź',
+
     'language' => 'język',
+
     'coming_soon' => 'dostępne wkrótce...',
+
     'year' => 'jeden rok|:age lata|:age lat',
     'years_of_error' => 'rok błędu|lata błędu|lat błędu',
+
     'yes' => 'tak',
     'no' => 'nie',
     'null' => 'brak',
+
+    'no_results' => 'Brak wyników',
 
 ];
