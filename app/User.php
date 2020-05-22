@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected static $submitEmptyLogs = false;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password',
     ];
 
     protected $hidden = [
