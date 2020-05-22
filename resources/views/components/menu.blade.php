@@ -29,7 +29,7 @@
                 @if($user->canWrite())
                     <a
                         href="{{ route('people.create') }}"
-                        class="px-2 py-1 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
+                        class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
                         {{ __('misc.menu.add_person') }}
                     </a>
                 @endif
@@ -37,24 +37,24 @@
                 @if($user->isSuperAdmin())
                     <a
                         href="{{ route('activities.logins') }}"
-                        class="px-2 py-1 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
+                        class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
                         {{ __('misc.menu.logins') }}
                     </a>
                     <a
                         href="{{ route('activities.models') }}"
-                        class="px-2 py-1 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
+                        class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
                         {{ __('misc.menu.activities') }}
                     </a>
                     <a
                         href="{{ route('reports') }}"
-                        class="px-2 py-1 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
+                        class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
                         {{ __('misc.menu.reports') }}
                     </a>
                 @endif
 
                 <form
                     action="{{ route('locale.set') }}" method="POST"
-                    class="px-2 py-1 text-gray-800 text-sm flex items-center">
+                    class="px-2 py-1 text-gray-700 text-sm flex items-center">
                     @csrf
                     {{ __('misc.language') }}:&nbsp;
                     @unless(app()->isLocale('en'))
@@ -71,13 +71,13 @@
 
                 @guest
                     <a href="{{ route('login') }}"
-                        class="px-2 py-1 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
+                        class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
                         <img class="inline-block h-4" src="{{ asset('img/import.png') }}" height="15px">&nbsp;{{ __('misc.menu.login') }}
                     </a>
                 @else
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                        class="px-2 py-1 text-gray-800 rounded hover:text-black hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
+                        class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out">
                         <img class="inline-block h-4" src="{{ asset('img/export.png') }}" height="15px">&nbsp;{{ __('misc.menu.logout') }}
                         <small>[{{ $user->username }}]</small>
                     </a>
