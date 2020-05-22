@@ -41,6 +41,10 @@
                     </div>
                 @endif
             @endif
+
+            <div class="m-1 px-3 pt-2 text-center text-gray-700 text-sm">
+                &copy; 2018-{{ now()->year }} Jeremiah Major
+            </div>
         </div>
 
     </body>
