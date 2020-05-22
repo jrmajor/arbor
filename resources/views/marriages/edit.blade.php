@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('title-bar')
-    {{ __('marriages.edit_this_marriage') }}
-    <small class="text-lg">[№{{ $marriage->id }}]</small>
+    <x-marriage-title-bar :marriage="$marriage"/>
 @endsection
 
 @section('sidebar-menu')
