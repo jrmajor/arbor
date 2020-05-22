@@ -13,6 +13,8 @@ return [
         'logins' => 'logins',
         'activities' => 'activities',
         'reports' => 'reports',
+
+        'contact' => 'contact',
     ],
 
     'date' => [

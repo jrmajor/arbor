@@ -62,6 +62,7 @@
                         </svg>
                         {{ __('misc.menu.logins') }}
                     </a>
+
                     <a
                         href="{{ route('activities.models') }}"
                         class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out flex items-center">
@@ -70,6 +71,7 @@
                         </svg>
                         {{ __('misc.menu.activities') }}
                     </a>
+
                     <a
                         href="{{ route('reports') }}"
                         class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out flex items-center">
@@ -98,6 +100,15 @@
                 </form>
 
                 @guest
+                    <a
+                        href="mailto:jeremiah.major@npng.pl"
+                        class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out flex items-center">
+                        <svg class="fill-current h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M13.6 13.47A4.99 4.99 0 0 1 5 10a5 5 0 0 1 8-4V5h2v6.5a1.5 1.5 0 0 0 3 0V10a8 8 0 1 0-4.42 7.16l.9 1.79A10 10 0 1 1 20 10h-.18.17v1.5a3.5 3.5 0 0 1-6.4 1.97zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                        {{ __('misc.menu.contact') }}
+                    </a>
+
                     <a href="{{ route('login') }}"
                         class="px-2 py-1 text-gray-700 rounded hover:text-gray-900 hover:no-underline hover:bg-gray-100 transition-colors duration-200 ease-out flex items-center">
                         <svg class="stroke-current h-5 w-5 -ml-1 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -120,6 +131,7 @@
                         @csrf
                     </form>
                 @endguest
+
             </div>
 
         </div>
