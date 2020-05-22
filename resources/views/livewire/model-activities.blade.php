@@ -16,19 +16,27 @@
                 </td>
                 <td>
                     @if($activity->log_name == 'people')
-                        <a href="{{ route('people.history', $activity->subject) }}">
+                        <a href="{{ route('people.history', $activity->subject) }}" class="a">
                             {{ __('people.person').' №'.$activity->subject->id }}
                         </a>
-                        {{ __('activities.'.$activity['description']) }}
+                        @if($activity->description == 'changed-visibility')
+                            @if($activity->properties['attributes']['visibility'])
+                                {{ __('activities.made_visible') }}
+                            @else
+                                {{ __('activities.made_invisible') }}
+                            @endif
+                        @else
+                            {{ __('activities.'.$activity['description']) }}
+                        @endif
                         @if($activity->causer)
                             {{ __('activities.by') }} <strong>{{ $activity->causer->username }}</strong>
                         @endif
                     @elseif($activity->log_name == 'marriages')
-                        <a href="{{ route('marriages.history', $activity->subject) }}">
+                        <a href="{{ route('marriages.history', $activity->subject) }}" class="a">
                             {{ __('marriages.marriage').' №'.$activity->subject->id }}
                         </a>
-                        (<a href="{{ route('people.show', $activity->subject->woman_id) }}">{{ strtolower(__('marriages.woman')) }}</a>,
-                        <a href="{{ route('people.show', $activity->subject->man_id) }}">{{ strtolower(__('marriages.man')) }}</a>)
+                        (<a href="{{ route('people.show', $activity->subject->woman_id) }}" class="a">{{ strtolower(__('marriages.woman')) }}</a>,
+                        <a href="{{ route('people.show', $activity->subject->man_id) }}" class="a">{{ strtolower(__('marriages.man')) }}</a>)
                         {{ __('activities.'.$activity['description']) }}
                         @if($activity->causer)
                             {{ __('activities.by') }} <strong>{{ $activity->causer->username }}</strong>

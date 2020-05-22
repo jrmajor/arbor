@@ -60,7 +60,7 @@ class Person extends Model
         return optional($user)->canRead() || $this->isVisible();
     }
 
-    public function changeVisibility($visibility)
+    public function changeVisibility(bool $visibility): bool
     {
         if ($this->visibility === $visibility) {
             return false;
@@ -74,10 +74,6 @@ class Person extends Model
             $description = $this->getDescriptionForEvent('changed-visibility');
 
             $logName = $this->getLogNameToUse('changed-visibility');
-
-            if ($description == '') {
-                return;
-            }
 
             $attrs = [
                 'old' => ['visibility' => ! $visibility],
