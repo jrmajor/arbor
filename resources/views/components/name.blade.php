@@ -1,22 +1,4 @@
-@php
-
-    if (! isset($raw)) {
-        $raw = false;
-    }
-
-    if (! isset($bold)) {
-        $bold = false;
-    }
-
-    if (! $raw && optional(auth()->user())->canWrite()) {
-        $edit = true;
-    } else {
-        $edit = false;
-    }
-
-@endphp
-
-@if($person->id_wielcy || $person->id_pytlewski AND ! $raw)
+@if($person->id_wielcy || $person->id_pytlewski)
     <div class="external-small-container">
         @if($person->id_wielcy)
             <a
@@ -37,11 +19,11 @@
     </div>
 @endif
 
-@if(! $raw && $person->canBeViewedBy(auth()->user()))
+@if($person->canBeViewedBy(auth()->user()))
     <a href="{{ route('people.show', $person) }}" class="a">
 @endif
 
-    @if($person->dead && ! $raw)
+    @if($person->dead)
         <i>
     @endif
 
@@ -49,22 +31,14 @@
             {{ $person->name }}
 
             @if(! $person->last_name)
-                @if($bold)
-                    <b>
-                @endif
+                @if($bold ?? false)<b>@endif
                     {{ $person->family_name }}
-                @if($bold)
-                    </b>
-                @endif
+                @if($bold ?? false)</b>@endif
             @else
-                @if($bold == 'l')
-                    <b>
-                @endif
+                @if(($bold ?? false) == 'l')<b>@endif
                     {{ $person->last_name }}
-                @if($bold == 'l')
-                    </b>
-                @endif
-                (z d. @if($bold == 'f')<b>@endif{{ $person->family_name }}@if($bold == 'f')</b>@endif)
+                @if(($bold ?? false) == 'l')</b>@endif
+                (z d. @if(($bold ?? false) == 'f')<b>@endif{{ $person->family_name }}@if(($bold ?? false) == 'f')</b>@endif)
             @endif
 
             @if($person->birth_year && $person->death_year)
@@ -78,27 +52,21 @@
             <small>[{{ __('misc.hidden') }}]</small>
         @endif
 
-    @if($person->dead && ! $raw)
+    @if($person->dead)
         </i>
     @endif
 
-@if(! $raw && $person->canBeViewedBy(auth()->user()))
+@if($person->canBeViewedBy(auth()->user()))
     </a>
 @endif
 
-@if(! $raw && $edit)
+@if(optional(auth()->user())->canWrite())
     <a
         href="{{ route('people.edit', $person) }}"
         data-tippy-content="{{ __('people.edit_this_person') }}"
         class="a">
-@endif
-@if(! $raw)
-    <small class="text-muted">
-@endif
-    [№{{ $person->id }}]
-@if(! $raw)
-    </small>
-@endif
-@if(! $raw && $edit)
+        <small>
+            [№{{ $person->id }}]
+        </small>
     </a>
 @endif
