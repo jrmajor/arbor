@@ -41,12 +41,14 @@
                 (@if(($bold ?? false) == 'f')<b>@endif{{ $person->family_name }}@if(($bold ?? false) == 'f')</b>@endif)
             @endif
 
-            @if($person->birth_year && $person->death_year)
-                (&#8727;&#xFE0E;{{ $person->birth_year }}, &#10013;&#xFE0E;{{ $person->death_year }})
-            @elseif($person->birth_year)
-                (&#8727;&#xFE0E;{{ $person->birth_year }})
-            @elseif($person->death_year)
-                (&#10013;&#xFE0E;{{ $person->death_year }})
+            @if($years ?? true)
+                @if($person->birth_year && $person->death_year)
+                    (&#8727;&#xFE0E;{{ $person->birth_year }}, &#10013;&#xFE0E;{{ $person->death_year }})
+                @elseif($person->birth_year)
+                    (&#8727;&#xFE0E;{{ $person->birth_year }})
+                @elseif($person->death_year)
+                    (&#10013;&#xFE0E;{{ $person->death_year }})
+                @endif
             @endif
         @else
             <small>[{{ __('misc.hidden') }}]</small>

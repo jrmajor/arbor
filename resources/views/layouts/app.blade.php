@@ -28,17 +28,39 @@
 
                 @hasSection('sidebar-menu')
                     <div class="flex flex-col md:flex-row">
-                        <div class="flex-grow m-1 p-4 bg-white rounded-lg shadow-lg">
-                            @yield('content')
-                        </div>
+                        @hasSection('more-content')
+                            <div class="flex-grow">
+                                <div class="m-1 p-4 bg-white rounded-lg shadow-lg">
+                                    @yield('content')
+                                </div>
+                                <div class="m-1 mt-2 p-4 bg-white rounded-lg shadow-lg">
+                                    @yield('more-content')
+                                </div>
+                            </div>
+                        @else
+                            <div class="flex-grow m-1 p-4 bg-white rounded-lg shadow-lg">
+                                @yield('content')
+                            </div>
+                        @endif
                         <div class="flex-shrink-0 m-1 p-1">
                             @yield('sidebar-menu')
                         </div>
                     </div>
                 @else
-                    <div class="m-1 mb-2 p-4 bg-white rounded-lg shadow-lg">
-                        @yield('content')
-                    </div>
+                    @hasSection('more-content')
+                        <div>
+                            <div class="m-1 p-4 bg-white rounded-lg shadow-lg">
+                                @yield('content')
+                            </div>
+                            <div class="m-1 mt-2 p-4 bg-white rounded-lg shadow-lg">
+                                @yield('more-content')
+                            </div>
+                        </div>
+                    @else
+                        <div class="m-1 p-4 bg-white rounded-lg shadow-lg">
+                            @yield('content')
+                        </div>
+                    @endif
                 @endif
             @endif
 
