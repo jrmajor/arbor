@@ -26,6 +26,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 Route::livewire('search', 'search')->name('search');
 
+Route::livewire('settings', 'settings')->name('settings')->middleware('auth');
+
 Route::middleware('auth')->group(function () {
     Route::get('people/create', 'PersonController@create')->name('people.create');
     Route::post('people', 'PersonController@store')->name('people.store');

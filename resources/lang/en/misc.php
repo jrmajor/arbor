@@ -7,6 +7,7 @@ return [
 
         'login' => 'login',
         'logout' => 'logout',
+        'settings' => 'settings',
 
         'add_person' => 'add person',
 

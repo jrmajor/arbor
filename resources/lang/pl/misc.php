@@ -7,6 +7,7 @@ return [
 
         'login' => 'zaloguj',
         'logout' => 'wyloguj',
+        'settings' => 'ustawienia',
 
         'add_person' => 'dodaj osobę',
 
