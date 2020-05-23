@@ -55,12 +55,12 @@ class Marriage extends Model
 
     public function woman(): BelongsTo
     {
-        return $this->belongsTo('App\Person');
+        return $this->belongsTo('App\Person')->withTrashed();
     }
 
     public function man(): BelongsTo
     {
-        return $this->belongsTo('App\Person');
+        return $this->belongsTo('App\Person')->withTrashed();
     }
 
     public function partner($person): ?Person
