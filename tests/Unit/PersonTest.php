@@ -331,7 +331,7 @@ class PersonTest extends TestCase
         $this->assertEquals("Zenona Skwierczyńska [№$person->id]", $person->formatName());
 
         $person->last_name = 'Wojtyła';
-        $this->assertEquals("Zenona Wojtyła (z d. Skwierczyńska) [№$person->id]", $person->formatName());
+        $this->assertEquals("Zenona Wojtyła (Skwierczyńska) [№$person->id]", $person->formatName());
         $person->last_name = null;
 
         $person->birth_date_from = '1913-05-01';
@@ -361,7 +361,7 @@ class PersonTest extends TestCase
 
         $person->last_name = 'Wojtyła';
 
-        $this->assertEquals("Zenona Wojtyła (z d. Skwierczyńska)", $person->formatSimpleName());
+        $this->assertEquals("Zenona Wojtyła (Skwierczyńska)", $person->formatSimpleName());
     }
 
     public function testCanFindByPytlewskiId()

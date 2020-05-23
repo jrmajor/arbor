@@ -38,7 +38,7 @@
                 @if(($bold ?? false) == 'l')<b>@endif
                     {{ $person->last_name }}
                 @if(($bold ?? false) == 'l')</b>@endif
-                (z d. @if(($bold ?? false) == 'f')<b>@endif{{ $person->family_name }}@if(($bold ?? false) == 'f')</b>@endif)
+                (@if(($bold ?? false) == 'f')<b>@endif{{ $person->family_name }}@if(($bold ?? false) == 'f')</b>@endif)
             @endif
 
             @if($person->birth_year && $person->death_year)

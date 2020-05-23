@@ -329,7 +329,7 @@ class Person extends Model
         if (! $this->last_name) {
             $name .= $this->family_name;
         } else {
-            $name .= "{$this->last_name} (z d. {$this->family_name})";
+            $name .= "{$this->last_name} ({$this->family_name})";
         }
 
         if ($this->birth_year && $this->death_year) {
@@ -350,7 +350,7 @@ class Person extends Model
         if (! $this->last_name) {
             $name .= $this->family_name;
         } else {
-            $name .= "{$this->last_name} (z d. {$this->family_name})";
+            $name .= "{$this->last_name} ({$this->family_name})";
         }
 
         return $name;

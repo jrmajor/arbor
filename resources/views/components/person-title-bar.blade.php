@@ -9,9 +9,9 @@
 @endif
 
     @if($person->canBeViewedBy(auth()->user()))
-        {{ $person->name }}
+        <span class="font-normal">{{ $person->name }}</span>
         @if($person->last_name)
-            {{ $person->last_name }} (z d. {{ $person->family_name }})
+            {{ $person->last_name }} ({{ $person->family_name }})
         @else
             {{ $person->family_name }}
         @endif
