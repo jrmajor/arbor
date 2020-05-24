@@ -42,20 +42,24 @@ class ChangeVisibilityTest extends TestCase
 
     public function testUsersWithPermissionsCanChangePersonsVisibility()
     {
-        $person = factory(Person::class)->create();
-
-        $this->assertFalse($person->isVisible());
-
         $user = factory(User::class)->create([
             'permissions' => 4,
         ]);
 
-        $response = $this->actingAs($user)->put("people/$person->id/visibility", [
+        $this->be($user);
+
+        $person = factory(Person::class)->create();
+
+        $this->assertFalse($person->isVisible());
+
+        $this->get("people/$person->id/edit");
+
+        $response = $this->put("people/$person->id/visibility", [
             'visibility' => true,
         ]);
 
         $response->assertStatus(302);
-        $response->assertRedirect("people/$person->id");
+        $response->assertRedirect("people/$person->id/edit");
 
         $this->assertTrue($person->fresh()->isVisible());
     }
