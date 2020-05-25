@@ -88,12 +88,12 @@
                     @csrf
                     {{ __('misc.language') }}:&nbsp;
                     @unless(app()->isLocale('en'))
-                        <button name="language" value="en" class="btn leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
+                        <button name="language" value="en" class="btn leading-none text-xs !px-2 py-1 normal-case font-normal tracking-normal">
                             EN
                         </button>
                     @endunless
                     @unless(app()->isLocale('pl'))
-                        <button name="language" value="pl" class="btn leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
+                        <button name="language" value="pl" class="btn leading-none text-xs !px-2 py-1 normal-case font-normal tracking-normal">
                             PL
                         </button>
                     @endunless
