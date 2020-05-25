@@ -33,6 +33,9 @@ module.exports = {
                 '9xl': '7rem',
                 '10xl': '8rem',
             },
+            strokeWidth: {
+                '3': '3',
+            },
         },
     },
     variants: {
