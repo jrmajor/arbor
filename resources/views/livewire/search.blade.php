@@ -18,7 +18,7 @@
     <hr class="-mx-4 my-3 border-t-2 border-dashed">
 
     @if($people->isNotEmpty())
-        <ul class="mb-2">
+        <ul>
             @foreach($people as $person)
                 <li wire:key="{{ $person->id }}">
                     <x-name :person="$person"/>
@@ -26,7 +26,11 @@
             @endforeach
         </ul>
 
-        {{ $people->links() }}
+        @if($people->hasPages())
+            <div class="mt-2">
+                {{ $people->links() }}
+            </div>
+        @endif
     @else
         <p>{{ __('misc.no_results') }}</p>
     @endif
