@@ -1,18 +1,16 @@
 @if ($paginator->hasPages())
-    <ul class="flex" role="navigation">
+    <ul class="flex space-x-3" role="navigation">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li>
-                <button class="btn mx-1" type="button" disabled>
-                    <span>&lsaquo;</span>
-                    <span>{{ __('pagination.previous') }}</span>
+                <button class="btn" type="button" disabled>
+                    &lsaquo;
                 </button>
             </li>
         @else
             <li>
-                <button class="btn mx-1" type="button" wire:click="previousPage" rel="prev">
-                    <span>&lsaquo;</span>
-                    <span>{{ __('pagination.previous') }}</span>
+                <button class="btn" type="button" wire:click="previousPage" rel="prev">
+                    &lsaquo;
                 </button>
             </li>
         @endif
@@ -28,9 +26,9 @@
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <li><button class="btn mx-1" type="button" disabled>{{ $page }}</button></li>
+                        <li><button class="btn" type="button" disabled>{{ $page }}</button></li>
                     @else
-                        <li><button class="btn mx-1" type="button" wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
+                        <li><button class="btn" type="button" wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
                     @endif
                 @endforeach
             @endif
@@ -39,16 +37,14 @@
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
             <li>
-                <button class="btn mx-1" type="button" wire:click="nextPage" rel="next">
-                    <span>{{ __('pagination.next') }}</span>
-                    <span>&rsaquo;</span>
+                <button class="btn" type="button" wire:click="nextPage" rel="next">
+                    &rsaquo;
                 </button>
             </li>
         @else
             <li>
-                <button class="btn mx-1" type="button" disabled>
-                    <span>{{ __('pagination.next') }}</span>
-                    <span>&rsaquo;</span>
+                <button class="btn" type="button" disabled>
+                    &rsaquo;
                 </button>
             </li>
         @endif
