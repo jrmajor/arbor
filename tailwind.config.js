@@ -39,6 +39,7 @@ module.exports = {
         },
     },
     variants: {
+        padding: ['responsive', 'important'],
         width: ['responsive', 'important'],
     },
     plugins: [

@@ -1,7 +1,7 @@
-<div class="flex flex-wrap mb-1">
+<div class="flex flex-wrap">
     <label for="{{ $name }}_id" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ $label }}</label>
-    <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap">
-        <div class="w-full sm:w-1/4 md:w-3/8 sm:pr-2 mb-1">
+    <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap sm:flex-no-wrap space-y-2 sm:space-y-0 sm:space-x-2">
+        <div class="w-full sm:w-1/4 md:w-3/8">
             <input
                 type="text"
                 id="{{ $name }}_search" name="{{ $name }}_search"
@@ -11,7 +11,7 @@
                 @error($name.'_id'){{ $message }}@enderror
             </small>
         </div>
-        <div class="w-full sm:w-3/4 md:w-5/8 mb-1">
+        <div class="w-full sm:w-3/4 md:w-5/8">
             <div class="inline-block relative w-full">
                 <select id="{{ $name }}_id" name="{{ $name }}_id">
                     @if(empty($people))

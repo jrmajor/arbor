@@ -55,12 +55,12 @@
             $refs.{{ $name }}_day.classList.add('invalid');
         }
     "
-    class="flex flex-wrap mb-1">
+    class="flex flex-wrap">
     <label for="{{ $name }}_year" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ $label }}</label>
     <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-nowrap items-center justify-between">
         <div x-show="! advancedPicker"
             class="flex-grow flex-shrink flex">
-            <div class="flex items-center">
+            <div class="flex items-center space-x-1">
                 <input
                     type="text" class="!w-16 @error($name) invalid @enderror"
                     x-ref="{{ $name }}_year"
@@ -69,14 +69,14 @@
                     placeholder="{{ __('misc.date.yyyy') }}"
                     maxlength=4>
                 <input
-                    type="text" class="!w-12 ml-1 @error($name) invalid @enderror"
+                    type="text" class="!w-12 @error($name) invalid @enderror"
                     x-ref="{{ $name }}_month"
                     @keyup="$dispatch('update-advanced')"
                     value="{{ $initialSimplePickerValues()['m'] }}"
                     placeholder="{{ __('misc.date.mm') }}"
                     maxlength=2>
                 <input
-                    type="text" class="!w-12 ml-1 @error($name) invalid @enderror"
+                    type="text" class="!w-12 @error($name) invalid @enderror"
                     x-ref="{{ $name }}_day"
                     @keyup="$dispatch('update-advanced')"
                     value="{{ $initialSimplePickerValues()['d'] }}"
@@ -85,9 +85,9 @@
             </div>
         </div>
         <div x-show="advancedPicker"
-            class="flex-grow flex-shrink flex flex-wrap">
-            <div class="flex-grow-0 flex items-center mr-1">
-                <p>{{ __('misc.date.between') }}&nbsp;</p>
+            class="flex-grow flex-shrink flex flex-wrap space-x-1">
+            <div class="flex-grow-0 flex items-center space-x-1">
+                <p>{{ __('misc.date.between') }}</p>
                 <input
                     type="text" class="!w-auto @error($name) invalid @enderror"
                     x-ref="{{ $name }}_from" name="{{ $name }}_from"
@@ -95,8 +95,8 @@
                     placeholder="{{ __('misc.date.format') }}"
                     size="12" maxlength=10>
             </div>
-            <div class="flex-grow-0 flex items-center">
-                <p>{{ __('misc.date.and') }}&nbsp;</p>
+            <div class="flex-grow-0 flex items-center space-x-1">
+                <p>{{ __('misc.date.and') }}</p>
                 <input
                     type="text" class="!w-auto @error($name) invalid @enderror"
                     x-ref="{{ $name }}_to" name="{{ $name }}_to"
@@ -108,7 +108,7 @@
         <div class="flex items-center ml-1">
             <button @click.prevent="advancedPicker = ! advancedPicker"
                 x-text="advancedPicker ? '{{ __('misc.date.simple') }}' : '{{ __('misc.date.advanced') }}'"
-                class=" btn leading-none text-xs px-2 py-1 normal-case font-normal tracking-normal">
+                class=" btn leading-none text-xs !px-2 py-1 normal-case font-normal tracking-normal">
                 toggle
             </button>
             <input type="hidden" name="{{ $name }}[picker]"
