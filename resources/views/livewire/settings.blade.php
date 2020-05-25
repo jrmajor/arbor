@@ -51,7 +51,7 @@
         <fieldset class="w-full lg:w-3/4 flex justify-end">
             <button
                 type="submit" class="btn">
-                {{ __('misc.submit') }}
+                {{ __('misc.save') }}
             </button>
         </fieldset>
     </form>

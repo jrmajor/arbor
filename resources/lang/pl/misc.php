@@ -31,7 +31,7 @@ return [
 
     'hidden' => 'ukryte',
 
-    'submit' => 'Potwierdź',
+    'save' => 'Zapisz',
 
     'language' => 'język',
 

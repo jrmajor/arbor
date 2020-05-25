@@ -31,7 +31,7 @@ return [
 
     'hidden' => 'hidden',
 
-    'submit' => 'Submit',
+    'save' => 'Save',
 
     'language' => 'language',
 

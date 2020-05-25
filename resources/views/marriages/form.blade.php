@@ -132,7 +132,7 @@
                 type="submit" class="btn"
                 id="submit" name="submit"
                 value="submit">
-                {{ __('misc.submit') }}
+                {{ __('misc.save') }}
             </button>
         </fieldset>
     </div>
