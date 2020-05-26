@@ -7,53 +7,61 @@
 
 @section('title-bar', __('settings.user').': '.$user->username)
 
-<div>
+<div class="space-y-4">
 
-    <form wire:submit.prevent="submit"
-        class="space-y-4">
+    <div>
+        <h2 class="mb-1 leading-none text-2xl font-medium">{{ __('settings.email') }}</h2>
 
-        <fieldset class="space-y-2">
-            <div class="flex flex-wrap">
-                <label for="email" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('settings.email') }}</label>
-                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+        <div class="flex flex-wrap sm:flex-no-wrap space-y-2 sm:space-y-0 sm:space-x-2 items-center">
+            <div class="w-full flex sm:w-3/4 lg:w-1/2 items-center">
+                <label for="email" class="mr-2">{{ __('settings.email') }}</label>
+                <div class="flex-grow">
                     <input
-                        type="text" class="@error('email') invalid @enderror"
-                        wire:model.lazy="email"
-                    @error('email')
-                        <small class="text-red-500">{{ $message }}</small>
-                    @enderror
+                        type="email" class="@error('email') invalid @enderror"
+                        wire:model.lazy="email">
                 </div>
             </div>
-        </fieldset>
+            <div class="w-full flex sm:w-1/4 justify-end">
+                <button
+                    type="button" class="btn"
+                    wire:click="saveEmail">
+                    {{ __('misc.save') }}
+                </button>
+            </div>
+        </div>
+    </div>
 
-        <fieldset class="space-y-2">
-            <div class="flex flex-wrap">
-                <label for="password" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('settings.password') }}</label>
-                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+    <div>
+        <h2 class="mb-1 leading-none text-2xl font-medium">{{ __('settings.change_password') }}</h2>
+
+        <div class="flex flex-wrap sm:flex-no-wrap space-y-2 sm:space-y-0 sm:space-x-2 items-center">
+            <div class="flex w-full flex-wrap sm:flex-no-wrap items-center sm:space-x-2 sm:w-3/4 lg:w-1/2">
+                <label for="password" class="w-full sm:w-auto">{{ __('settings.password') }}</label>
+                <div class="w-full sm:w-auto flex-grow">
                     <input
                         type="password" class="@error('password') invalid @enderror"
-                        wire:model.lazy="password">
+                        wire:model.lazy="password"
+                        placeholder="{{ strtolower(__('settings.password')) }}">
                 </div>
-            </div>
-            <div class="flex flex-wrap">
-                <label for="password_confirmation" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('settings.confirm_password') }}</label>
-                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+                <div class="w-full mt-2 sm:mt-0 sm:w-auto flex-grow">
                     <input
                         type="password" class="@error('password') invalid @enderror"
-                        wire:model.lazy="password_confirmation">
-                    @error('password')
-                        <small class="text-red-500">{{ $message }}</small>
-                    @enderror
+                        wire:model.lazy="password_confirmation"
+                        placeholder="{{ strtolower(__('settings.confirm_password')) }}">
                 </div>
+                @error('password')
+                    <small class="text-red-500">{{ $message }}</small>
+                @enderror
             </div>
-        </fieldset>
 
-        <fieldset class="w-full lg:w-3/4 flex justify-end">
-            <button
-                type="submit" class="btn">
-                {{ __('misc.save') }}
-            </button>
-        </fieldset>
-    </form>
+            <div class="w-full flex justify-end sm:w-1/4">
+                <button
+                    type="button" class="btn"
+                    wire:click="savePassword">
+                    {{ __('misc.save') }}
+                </button>
+            </div>
+        </div>
+    </div>
 
 </div>

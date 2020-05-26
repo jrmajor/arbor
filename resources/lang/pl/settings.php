@@ -2,12 +2,17 @@
 
 return [
 
-'settings' => 'Ustawienia',
+    'settings' => 'Ustawienia',
 
-'user' => 'Użytkownik',
-'email' => 'Email',
+    'user' => 'Użytkownik',
 
-'password' => 'Hasło',
-'confirm_password' => 'Potwierdź hasło',
+    'email' => 'Email',
+
+    'change_password' => 'Zmiana hasła',
+    'password' => 'Hasło',
+    'confirm_password' => 'Potwierdź hasło',
+
+    'logout_other_devices' => 'Wyloguj z innych urządzeń',
+    'logout' => 'Wyloguj',
 
 ];
