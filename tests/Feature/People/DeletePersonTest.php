@@ -1,80 +1,53 @@
 <?php
 
-namespace Tests\Feature\People;
-
 use App\Person;
-use App\User;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class DeletePersonTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(
+    fn () => $this->person = factory(Person::class)->create()
+);
 
-    public function testGuestsCannotDeletePerson()
-    {
-        $person = factory(Person::class)->create();
+test('guests cannot delete person', function () {
+    delete('people/'.$this->person->id)
+        ->assertStatus(302)
+        ->assertRedirect('login');
 
-        $response = $this->delete("people/$person->id");
+    assertFalse($this->person->fresh()->trashed());
+});
 
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
+test('users without permissions cannot delete person', function () {
+    withPermissions(1)
+        ->delete('people/'.$this->person->id)
+        ->assertStatus(403);
 
-        $this->assertFalse($person->fresh()->trashed());
-    }
+    assertFalse($this->person->fresh()->trashed());
+});
 
-    public function testUsersWithoutPermissionsCannotDeletePerson()
-    {
-        $person = factory(Person::class)->create();
+test('users with permissions can delete person', function () {
+    withPermissions(3)
+        ->delete('people/'.$this->person->id)
+        ->assertStatus(302)
+        ->assertRedirect('people');
 
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
+    assertTrue($this->person->fresh()->trashed());
+});
 
-        $response = $this->actingAs($user)->delete("people/$person->id");
+test('person deletion is logged', function () {
+    $this->person->delete();
 
-        $response->assertStatus(403);
+    $log = latestLog();
 
-        $this->assertFalse($person->fresh()->trashed());
-    }
+    assertEquals('people', $log->log_name);
+    assertEquals('deleted', $log->description);
+    assertTrue($this->person->is($log->subject));
 
-    public function testUsersWithPermissionsCanDeletePerson()
-    {
-        $person = factory(Person::class)->create();
+    assertEquals($this->person->deleted_at, $log->created_at);
 
-        $user = factory(User::class)->create([
-            'permissions' => 3,
-        ]);
+    assertEquals(
+        $this->person->deleted_at,
+        Carbon::create($log->properties['attributes']['deleted_at'])
+    );
 
-        $response = $this->actingAs($user)->delete("people/$person->id");
-
-        $response->assertStatus(302);
-        $response->assertRedirect('people');
-
-        $this->assertTrue($person->fresh()->trashed());
-    }
-
-    public function testPersonDeletionIsLogged()
-    {
-        $person = factory(Person::class)->create();
-
-        $person->delete();
-
-        $log = $this->latestLog();
-
-        $this->assertEquals('people', $log->log_name);
-        $this->assertEquals('deleted', $log->description);
-        $this->assertTrue($person->is($log->subject));
-
-        $this->assertEquals($person->deleted_at, $log->created_at);
-
-        $this->assertEquals(
-            $person->deleted_at,
-            Carbon::create($log->properties['attributes']['deleted_at'])
-        );
-
-        $this->assertEquals(1, count($log->properties));
-        $this->assertEquals(1, count($log->properties['attributes']));
-    }
-}
+    assertEquals(1, count($log->properties));
+    assertEquals(1, count($log->properties['attributes']));
+});

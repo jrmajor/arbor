@@ -1,41 +1,16 @@
 <?php
 
-namespace Tests\Feature\Activities;
+test('guests are asked to log in when attempting to view model activites')
+    ->get('activities/models')
+    ->assertStatus(302)
+    ->assertRedirect('login');
 
-use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+test('users without permissions cannot view model activites')
+    ->withPermissions(3)
+    ->get('activities/models')
+    ->assertStatus(403);
 
-class ModelActivitiesTest extends TestCase
-{
-    public function testGuestAreAskedToLogInWhenAttemptingToViewModelActivites()
-    {
-        $response = $this->get('activities/models');
-
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
-    }
-
-    public function testUsersWithoutPermissionsCannotViewModelActivitess()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 3,
-        ]);
-
-        $response = $this->actingAs($user)->get('activities/models');
-
-        $response->assertStatus(403);
-    }
-
-    public function testUsersWithPermissionsCanViewModelActivites()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 4,
-        ]);
-
-        $response = $this->actingAs($user)->get('activities/models');
-
-        $response->assertStatus(200);
-    }
-}
+test('users with permissions can view model activites')
+    ->withPermissions(4)
+    ->get('activities/models')
+    ->assertStatus(200);

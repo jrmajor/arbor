@@ -1,39 +1,26 @@
 <?php
 
-namespace Tests\Feature\People;
-
 use App\Person;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class ViewPeopleIndexListingTest extends TestCase
-{
-    use RefreshDatabase;
+it('works with no people')
+    ->get('/people')
+    ->assertStatus(200)
+    ->assertSeeText('total: 0');
 
-    public function testItWorksWithNoPeople()
-    {
-        $response = $this->get('/people');
+it('works with people', function () {
+    factory(Person::class)->create([
+        'family_name' => 'Zbyrowski',
+        'last_name' => null,
+    ]);
 
-        $response->assertStatus(200);
-        $response->assertSeeText('total: 0');
-    }
+    factory(Person::class)->create([
+        'family_name' => 'Ziobro',
+        'last_name' => 'Mikke',
+    ]);
 
-    public function testItWorksWithPeople()
-    {
-        factory(Person::class)->create([
-            'family_name' => 'Zbyrowski',
-            'last_name' => null,
-        ]);
-        factory(Person::class)->create([
-            'family_name' => 'Ziobro',
-            'last_name' => 'Mikke',
-        ]);
-
-        $response = $this->get('/people');
-
-        $response->assertStatus(200);
-        $response->assertSeeText('Z [2]');
-        $response->assertSeeText('M [1]');
-        $response->assertSeeText('Z [1]');
-    }
-}
+    get('/people')
+        ->assertStatus(200)
+        ->assertSeeText('Z [2]')
+        ->assertSeeText('M [1]')
+        ->assertSeeText('Z [1]');
+});

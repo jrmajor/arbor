@@ -1,25 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+it('can be accessed by guests')
+    ->get('/')
+    ->assertStatus(200);
 
-use App\User;
-use Tests\TestCase;
-
-class WelcomePageTest extends TestCase
-{
-    public function testItCanBeAccessedByGuests()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
-    public function testItRedirectsLoggedUsers()
-    {
-        $this->actingAs(factory(User::class)->create());
-
-        $response = $this->get('/');
-
-        $response->assertRedirect('/people');
-    }
-}
+it('redirects logged users')
+    ->withPermissions(0)
+    ->get('/')
+    ->assertRedirect('/people');

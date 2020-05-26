@@ -1,104 +1,69 @@
 <?php
 
-namespace Tests\Feature\People;
-
 use App\Person;
-use App\User;
-use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Activitylog\Models\Activity;
-use Tests\TestCase;
 
-class ChangeVisibilityTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(
+    fn () => $this->person = factory(Person::class)->create()
+);
 
-    public function testGuestsCannotChangePersonsVisibility()
-    {
-        $person = factory(Person::class)->create();
+test('guests cannot change persons visibility', function () {
+    put('people/'.$this->person->id.'/visibility')
+        ->assertStatus(302)
+        ->assertRedirect('login');
 
-        $response = $this->put("people/$person->id/visibility");
+    assertFalse($this->person->fresh()->isVisible());
+});
 
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
+test('users without permissions cannot change persons visibility', function () {
+    withPermissions(3)
+        ->put('people/'.$this->person->id.'/visibility')
+        ->assertStatus(403);
 
-        $this->assertFalse($person->isVisible());
-    }
+    assertFalse($this->person->fresh()->isVisible());
+});
 
-    public function testUsersWithoutPermissionsCannotChangePersonsVisibility()
-    {
-        $person = factory(Person::class)->create();
+test('users with permissions can change persons visibility', function () {
+    assertFalse($this->person->isVisible());
 
-        $user = factory(User::class)->create([
-            'permissions' => 3,
-        ]);
+    withPermissions(4)
+        ->from('people/'.$this->person->id.'/edit')
+        ->put('people/'.$this->person->id.'/visibility', [
+            'visibility' => true,
+        ])->assertStatus(302)
+        ->assertRedirect('people/'.$this->person->id.'/edit');
 
-        $response = $this->actingAs($user)->put("people/$person->id/visibility");
+    assertTrue($this->person->fresh()->isVisible());
+});
 
-        $response->assertStatus(403);
+test('visibility change is logged', function () {
+    assertFalse($this->person->isVisible());
 
-        $this->assertFalse($person->isVisible());
-    }
+    $count = Activity::count();
 
-    public function testUsersWithPermissionsCanChangePersonsVisibility()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 4,
-        ]);
+    travel('+1 minute');
 
-        $this->be($user);
-
-        $person = factory(Person::class)->create();
-
-        $this->assertFalse($person->isVisible());
-
-        $this->get("people/$person->id/edit");
-
-        $response = $this->put("people/$person->id/visibility", [
+    withPermissions(4)
+        ->put('people/'.$this->person->id.'/visibility', [
             'visibility' => true,
         ]);
 
-        $response->assertStatus(302);
-        $response->assertRedirect("people/$person->id/edit");
+    travel('back');
 
-        $this->assertTrue($person->fresh()->isVisible());
-    }
+    assertCount($count + 2, Activity::all()); // visibility change and user creation
 
-    public function testVisibilityChangeIsLogged()
-    {
-        $person = factory(Person::class)->create();
+    $log = latestLog();
 
-        $this->assertFalse($person->isVisible());
+    assertEquals('people', $log->log_name);
+    assertEquals('changed-visibility', $log->description);
+    assertTrue($this->person->fresh()->is($log->subject));
 
-        $user = factory(User::class)->create([
-            'permissions' => 4,
-        ]);
+    assertEquals($this->person->fresh()->updated_at, $log->created_at);
 
-        Activity::all()->each->delete();
+    assertEquals(2, count($log->properties));
+    assertEquals(1, count($log->properties['old']));
+    assertEquals(1, count($log->properties['attributes']));
 
-        $changeTimestamp = Carbon::now()->addMinute();
-        Carbon::setTestNow($changeTimestamp);
-
-        $response = $this->actingAs($user)->put("people/$person->id/visibility", [
-            'visibility' => true,
-        ]);
-
-        Carbon::setTestNow();
-
-        $this->assertCount(1, Activity::all());
-        $log = $this->latestLog();
-
-        $this->assertEquals('people', $log->log_name);
-        $this->assertEquals('changed-visibility', $log->description);
-        $this->assertTrue($person->fresh()->is($log->subject));
-
-        $this->assertEquals($person->fresh()->updated_at, $log->created_at);
-
-        $this->assertEquals(2, count($log->properties));
-        $this->assertEquals(1, count($log->properties['old']));
-        $this->assertEquals(1, count($log->properties['attributes']));
-
-        $this->assertEquals(false, $log->properties['old']['visibility']);
-        $this->assertEquals(true, $log->properties['attributes']['visibility']);
-    }
-}
+    assertEquals(false, $log->properties['old']['visibility']);
+    assertEquals(true, $log->properties['attributes']['visibility']);
+});

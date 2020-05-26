@@ -1,338 +1,182 @@
 <?php
 
-namespace Tests\Feature\Marriages;
-
 use App\Marriage;
 use App\Person;
-use App\User;
-use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
-use Tests\TestCase;
 
-class EditMarriageTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(function () {
+    $this->dates = [
+        'first_event_date_from', 'second_event_date_from', 'end_date_from',
+        'first_event_date_to', 'second_event_date_to', 'end_date_to',
+    ];
 
-    private function oldAttributes($overrides = [])
-    {
-        return array_merge([
-            'woman_order' => 1,
-            'man_order' => 2,
-            'rite' => 'roman_catholic',
-            'first_event_type' => 'civil_marriage',
-            'first_event_date_from' => '1968-04-14',
-            'first_event_date_to' => '1968-04-14',
-            'first_event_place' => 'Sępólno Krajeńskie, Polska',
-            'second_event_type' => 'church_marriage',
-            'second_event_date_from' => '1968-04-13',
-            'second_event_date_to' => '1968-04-13',
-            'second_event_place' => 'Sępólno Krajeńskie, Polska',
-            'ended' => true,
-            'end_cause' => 'rozwód',
-            'end_date_from' => '2001-10-27',
-            'end_date_to' => '2001-10-27',
-        ], $overrides);
+    $this->oldAttributes = [
+        'woman_id' => factory(Person::class)->state('woman')->create()->id,
+        'woman_order' => 1,
+        'man_id' => factory(Person::class)->state('man')->create()->id,
+        'man_order' => 2,
+        'rite' => 'roman_catholic',
+        'first_event_type' => 'civil_marriage',
+        'first_event_date_from' => '1968-04-14',
+        'first_event_date_to' => '1968-04-14',
+        'first_event_place' => 'Sępólno Krajeńskie, Polska',
+        'second_event_type' => 'church_marriage',
+        'second_event_date_from' => '1968-04-13',
+        'second_event_date_to' => '1968-04-13',
+        'second_event_place' => 'Sępólno Krajeńskie, Polska',
+        'ended' => true,
+        'end_cause' => 'rozwód',
+        'end_date_from' => '2001-10-27',
+        'end_date_to' => '2001-10-27',
+    ];
+
+    $this->newAttributes = [
+        'woman_id' => factory(Person::class)->state('woman')->create()->id,
+        'woman_order' => 2,
+        'man_id' => factory(Person::class)->state('man')->create()->id,
+        'man_order' => 1,
+        'rite' => 'civil',
+        'first_event_type' => 'concordat_marriage',
+        'first_event_date_from' => '1960-09-02',
+        'first_event_date_to' => '1968-04-14',
+        'first_event_place' => 'Warszawa, Polska',
+        'second_event_type' => 'civil_marriage',
+        'second_event_date_from' => '1960-09-05',
+        'second_event_date_to' => '1960-09-05',
+        'second_event_place' => 'Warszawa, Polska',
+        'ended' => false,
+        'end_cause' => 'bo tak',
+        'end_date_from' => '2000-03-27',
+        'end_date_to' => '2000-03-27',
+    ];
+
+    $this->marriage = factory(Marriage::class)->create($this->oldAttributes);
+});
+
+test('guests are asked to log in when attempting to view edit marriage form', function () {
+    get('marriages/'.$this->marriage->id.'/edit')
+        ->assertStatus(302)
+        ->assertRedirect('login');
+});
+
+test('guests are asked to log in when attempting to view edit form for nonexistent marriage')
+    ->get('marriages/2137/edit')
+    ->assertStatus(302)
+    ->assertRedirect('login');
+
+test('users without permissions cannot view edit marriage form', function () {
+    withPermissions(1)
+        ->get('marriages/'.$this->marriage->id.'/edit')
+        ->assertStatus(403);
+});
+
+test('users with permissions can view edit marriage form', function () {
+    withPermissions(2)
+        ->get('marriages/'.$this->marriage->id.'/edit')
+        ->assertStatus(200);
+});
+
+test('guests cannot edit marriage', function () {
+    put('marriages/'.$this->marriage->id, $this->newAttributes)
+        ->assertStatus(302)
+        ->assertRedirect('login');
+
+    $attributesToCheck = Arr::except($this->oldAttributes, [
+        'first_event_date_from', 'second_event_date_from', 'end_date_from',
+        'first_event_date_to', 'second_event_date_to', 'end_date_to',
+    ]);
+
+    $this->marriage = $this->marriage->fresh();
+
+    foreach ($attributesToCheck as $key => $attribute) {
+        assertEquals($attribute, $this->marriage->$key);
+    }
+});
+
+test('users without permissions cannot edit marriage', function () {
+    withPermissions(1)
+        ->put('marriages/'.$this->marriage->id, $this->newAttributes)
+        ->assertStatus(403);
+
+    $this->marriage = $this->marriage->fresh();
+
+    foreach (Arr::except($this->oldAttributes, $this->dates) as $key => $attribute) {
+        assertEquals($attribute, $this->marriage->$key);
+    }
+});
+
+test('users with permissions can edit marriage', function () {
+    $response = withPermissions(2)
+        ->put('marriages/'.$this->marriage->id, $this->newAttributes)
+        ->assertStatus(302);
+
+    $this->marriage = $this->marriage->fresh();
+
+    $response->assertRedirect('people/'.$this->marriage->woman_id);
+
+    foreach (Arr::except($this->newAttributes, $this->dates) as $key => $attribute) {
+        assertEquals($attribute, $this->marriage->$key);
     }
 
-    private function newAttributes($overrides = [])
-    {
-        return array_merge([
-            'woman_order' => 2,
-            'man_order' => 1,
-            'rite' => 'civil',
-            'first_event_type' => 'concordat_marriage',
-            'first_event_date_from' => '1960-09-02',
-            'first_event_date_to' => '1968-04-14',
-            'first_event_place' => 'Warszawa, Polska',
-            'second_event_type' => 'civil_marriage',
-            'second_event_date_from' => '1960-09-05',
-            'second_event_date_to' => '1960-09-05',
-            'second_event_place' => 'Warszawa, Polska',
-            'ended' => false,
-            'end_cause' => 'bo tak',
-            'end_date_from' => '2000-03-27',
-            'end_date_to' => '2000-03-27',
-        ], $overrides);
+    foreach ($this->dates as $date) {
+        assertEquals($this->newAttributes[$date], $this->marriage->$date->toDateString());
     }
+});
 
-    public function testGuestsAreAskedToLogInWhenAttemptingToViewEditMarriageForm()
-    {
-        $marriage = factory(Marriage::class)->create();
+test('data is validated using appropriate form request')
+    ->assertActionUsesFormRequest(
+        \App\Http\Controllers\MarriageController::class, 'update',
+        \App\Http\Requests\StoreMarriage::class
+    );
 
-        $response = $this->get("marriages/$marriage->id/edit");
+test('marriage edition is logged', function () {
+    travel(
+        '+1 minute',
+        fn () => $this->marriage->fill($this->newAttributes)->save()
+    );
 
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
-    }
+    $this->marriage = $this->marriage->fresh();
 
-    public function testGuestsAreAskedToLogInWhenAttemptingToViewEditFormForNonexistentMarriage()
-    {
-        $response = $this->get('marriages/1/edit');
+    $log = latestLog();
 
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
-    }
+    assertEquals('marriages', $log->log_name);
+    assertEquals('updated', $log->description);
+    assertTrue($this->marriage->is($log->subject));
 
-    public function testUsersWithoutPermissionsCannotViewEditMarriageForm()
-    {
-        $marriage = factory(Marriage::class)->create();
+    $oldToCheck = Arr::except($this->oldAttributes, [
+        'id', 'created_at', 'updated_at',
+        ...$this->dates,
+    ]);
 
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
-
-        $response = $this->actingAs($user)->get("marriages/$marriage->id/edit");
-
-        $response->assertStatus(403);
-    }
-
-    public function testUsersWithPermissionsCanViewEditMarriageForm()
-    {
-        $marriage = factory(Marriage::class)->create();
-
-        $user = factory(User::class)->create([
-            'permissions' => 2,
-        ]);
-
-        $response = $this->actingAs($user)->get("marriages/$marriage->id/edit");
-
-        $response->assertStatus(200);
-    }
-
-    public function testGuestsCannotEditMarriage()
-    {
-        $oldWoman = factory(Person::class)->state('woman')->create();
-        $oldMan = factory(Person::class)->state('man')->create();
-
-        $oldAttributes = $this->oldAttributes([
-            'woman_id' => $oldWoman->id,
-            'man_id' => $oldMan->id,
-        ]);
-
-        $marriage = factory(Marriage::class)->create($oldAttributes);
-
-        $newWoman = factory(Person::class)->state('woman')->create();
-        $newMan = factory(Person::class)->state('man')->create();
-
-        $newAttributes = $this->newAttributes([
-            'woman_id' => $newWoman->id,
-            'man_id' => $newMan->id,
-        ]);
-
-        $response = $this->put("marriages/$marriage->id", $newAttributes);
-
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
-
-        $attributesToCheck = Arr::except($oldAttributes, [
-            'first_event_date_from', 'second_event_date_from', 'end_date_from',
-            'first_event_date_to', 'second_event_date_to', 'end_date_to',
-        ]);
-
-        foreach ($attributesToCheck as $key => $attribute) {
-            $this->assertEquals($attribute, $marriage->fresh()[$key]);
-        }
-    }
-
-    public function testUsersWithoutPermissionsCannotEditMarriage()
-    {
-        $oldWoman = factory(Person::class)->state('woman')->create();
-        $oldMan = factory(Person::class)->state('man')->create();
-
-        $oldAttributes = $this->oldAttributes([
-            'woman_id' => $oldWoman->id,
-            'man_id' => $oldMan->id,
-        ]);
-
-        $marriage = factory(Marriage::class)->create($oldAttributes);
-
-        $newWoman = factory(Person::class)->state('woman')->create();
-        $newMan = factory(Person::class)->state('man')->create();
-
-        $newAttributes = $this->newAttributes([
-            'woman_id' => $newWoman->id,
-            'man_id' => $newMan->id,
-        ]);
-
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
-
-        $response = $this->actingAs($user)->put("marriages/$marriage->id", $newAttributes);
-
-        $response->assertStatus(403);
-
-        $attributesToCheck = Arr::except($oldAttributes, [
-            'first_event_date_from', 'second_event_date_from', 'end_date_from',
-            'first_event_date_to', 'second_event_date_to', 'end_date_to',
-        ]);
-
-        foreach ($attributesToCheck as $key => $attribute) {
-            $this->assertEquals($attribute, $marriage->fresh()[$key]);
-        }
-    }
-
-    public function testUsersWithPermissionsCanEditMarriage()
-    {
-        $oldWoman = factory(Person::class)->state('woman')->create();
-        $oldMan = factory(Person::class)->state('man')->create();
-
-        $oldAttributes = $this->oldAttributes([
-            'woman_id' => $oldWoman->id,
-            'man_id' => $oldMan->id,
-        ]);
-
-        $marriage = factory(Marriage::class)->create($oldAttributes);
-
-        $newWoman = factory(Person::class)->state('woman')->create();
-        $newMan = factory(Person::class)->state('man')->create();
-
-        $newAttributes = $this->newAttributes([
-            'woman_id' => $newWoman->id,
-            'man_id' => $newMan->id,
-        ]);
-
-        $user = factory(User::class)->create([
-            'permissions' => 2,
-        ]);
-
-        $response = $this->actingAs($user)->put("marriages/$marriage->id", $newAttributes);
-        $marriage = $marriage->fresh();
-
-        $response->assertStatus(302);
-        $response->assertRedirect("people/$marriage->woman_id");
-
-        $attributesToCheck = Arr::except($newAttributes, [
-            'first_event_date_from', 'second_event_date_from', 'end_date_from',
-            'first_event_date_to', 'second_event_date_to', 'end_date_to',
-        ]);
-
-        foreach ($attributesToCheck as $key => $attribute) {
-            $this->assertEquals($attribute, $marriage->fresh()[$key]);
-        }
-
-        $this->assertTrue($newAttributes['first_event_date_from'] == $marriage->fresh()['first_event_date_from']->toDateString());
-        $this->assertTrue($newAttributes['first_event_date_to'] == $marriage->fresh()['first_event_date_to']->toDateString());
-
-        $this->assertTrue($newAttributes['second_event_date_from'] == $marriage->fresh()['second_event_date_from']->toDateString());
-        $this->assertTrue($newAttributes['second_event_date_to'] == $marriage->fresh()['second_event_date_to']->toDateString());
-
-        $this->assertTrue($newAttributes['end_date_from'] == $marriage->fresh()['end_date_from']->toDateString());
-        $this->assertTrue($newAttributes['end_date_to'] == $marriage->fresh()['end_date_to']->toDateString());
-    }
-
-    public function testDataIsValidatedUsingAppropriateFormRequest()
-    {
-        $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\MarriageController::class,
-            'update',
-            \App\Http\Requests\StoreMarriage::class
+    foreach ($oldToCheck as $key => $value) {
+        assertEquals(
+            $value, $log->properties['old'][$key],
+            'Failed asserting that old attribute '.$key.' has the same value in log.'
         );
     }
 
-    public function testMarriageEditionIsLogged()
-    {
-        $marriage = factory(Marriage::class)->create($this->oldAttributes());
+    $attributesToCheck = Arr::except($this->newAttributes, [
+        'id', 'created_at', 'updated_at',
+        ...$this->dates,
+    ]);
 
-        $changeTimestamp = Carbon::now()->addMinute();
-        Carbon::setTestNow($changeTimestamp);
-        $marriage->fill($this->newAttributes())->save();
-        Carbon::setTestNow();
-
-        $marriage = $marriage->fresh();
-
-        $log = $this->latestLog();
-
-        $this->assertEquals('marriages', $log->log_name);
-        $this->assertEquals('updated', $log->description);
-        $this->assertTrue($marriage->is($log->subject));
-
-        $oldToCheck = Arr::except($this->oldAttributes(), [
-            'id', 'created_at', 'updated_at',
-            'first_event_date_from', 'second_event_date_from', 'end_date_from',
-            'first_event_date_to', 'second_event_date_to', 'end_date_to',
-        ]);
-
-        foreach ($oldToCheck as $key => $value) {
-            $this->assertEquals(
-                $value,
-                $log->properties['old'][$key],
-                'Failed asserting that old attribute '.$key.' has the same value in log.'
-            );
-        }
-
-        $attributesToCheck = Arr::except($this->newAttributes(), [
-            'id', 'created_at', 'updated_at',
-            'first_event_date_from', 'second_event_date_from', 'end_date_from',
-            'first_event_date_to', 'second_event_date_to', 'end_date_to',
-        ]);
-
-        foreach ($attributesToCheck as $key => $value) {
-            $this->assertEquals(
-                $value,
-                $log->properties['attributes'][$key],
-                'Failed asserting that attribute '.$key.' has the same value in log.'
-            );
-        }
-
-        $this->assertArrayNotHasKey('created_at', $log->properties['old']);
-        $this->assertArrayNotHasKey('created_at', $log->properties['attributes']);
-
-        $this->assertEquals($marriage->updated_at, $log->created_at);
-
-        $this->assertArrayNotHasKey('updated_at', $log->properties['old']);
-        $this->assertArrayNotHasKey('updated_at', $log->properties['attributes']);
-
-        $this->assertEquals(
-            $this->oldAttributes()['first_event_date_from'],
-            $log->properties['old']['first_event_date_from']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['first_event_date_from'],
-            $log->properties['attributes']['first_event_date_from']
-        );
-        $this->assertEquals(
-            $this->oldAttributes()['first_event_date_to'],
-            $log->properties['old']['first_event_date_to']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['first_event_date_to'],
-            $log->properties['attributes']['first_event_date_to']
-        );
-
-        $this->assertEquals(
-            $this->oldAttributes()['second_event_date_from'],
-            $log->properties['old']['second_event_date_from']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['second_event_date_from'],
-            $log->properties['attributes']['second_event_date_from']
-        );
-        $this->assertEquals(
-            $this->oldAttributes()['second_event_date_to'],
-            $log->properties['old']['second_event_date_to']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['second_event_date_to'],
-            $log->properties['attributes']['second_event_date_to']
-        );
-
-        $this->assertEquals(
-            $this->oldAttributes()['end_date_from'],
-            $log->properties['old']['end_date_from']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['end_date_from'],
-            $log->properties['attributes']['end_date_from']
-        );
-        $this->assertEquals(
-            $this->oldAttributes()['end_date_to'],
-            $log->properties['old']['end_date_to']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['end_date_to'],
-            $log->properties['attributes']['end_date_to']
+    foreach ($attributesToCheck as $key => $value) {
+        assertEquals(
+            $value, $log->properties['attributes'][$key],
+            'Failed asserting that attribute '.$key.' has the same value in log.'
         );
     }
-}
+
+    assertArrayNotHasKey('created_at', $log->properties['old']);
+    assertArrayNotHasKey('created_at', $log->properties['attributes']);
+
+    assertEquals($this->marriage->updated_at, $log->created_at);
+
+    assertArrayNotHasKey('updated_at', $log->properties['old']);
+    assertArrayNotHasKey('updated_at', $log->properties['attributes']);
+
+    foreach ($this->dates as $date) {
+        assertEquals($this->oldAttributes[$date], $log->properties['old'][$date]);
+        assertEquals($this->newAttributes[$date], $log->properties['attributes'][$date]);
+    }
+});

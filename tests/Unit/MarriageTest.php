@@ -7,189 +7,170 @@ use App\Enums\MarriageRiteEnum;
 use App\Marriage;
 use App\Person;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class MarriageTest extends TestCase
-{
-    use RefreshDatabase;
+it('can determine its visibility', function () {
+    $marriage = factory(Marriage::class)->create();
 
+    assertFalse($marriage->isVisible());
+    $marriage->woman->changeVisibility(true);
+    assertFalse($marriage->isVisible());
+    $marriage->man->changeVisibility(true);
+    assertTrue($marriage->isVisible());
+});
 
-    public function testCanDetermineItsVisibility()
-    {
-        $marriage = factory(Marriage::class)->create();
+it('tells if can be viewed by given user', function () {
+    $user = factory(User::class)->create();
 
-        $this->assertFalse($marriage->isVisible());
-        $marriage->woman->changeVisibility(true);
-        $this->assertFalse($marriage->isVisible());
-        $marriage->man->changeVisibility(true);
-        $this->assertTrue($marriage->isVisible());
-    }
+    $hiddenMarriage = factory(Marriage::class)->create();
 
-    public function testTellsIfCanBeViewedByGivenUser()
-    {
-        $user = factory(User::class)->create();
+    $visibleMarriage = factory(Marriage::class)->create();
+    $visibleMarriage->woman->changeVisibility(true);
+    $visibleMarriage->man->changeVisibility(true);
 
-        $hiddenMarriage = factory(Marriage::class)->create();
+    assertFalse($hiddenMarriage->canBeViewedBy($user));
+    assertTrue($visibleMarriage->canBeViewedBy($user));
 
-        $visibleMarriage = factory(Marriage::class)->create();
-        $visibleMarriage->woman->changeVisibility(true);
-        $visibleMarriage->man->changeVisibility(true);
+    $user->permissions = 1;
 
-        $this->assertFalse($hiddenMarriage->canBeViewedBy($user));
-        $this->assertTrue($visibleMarriage->canBeViewedBy($user));
+    assertTrue($hiddenMarriage->canBeViewedBy($user));
+    assertTrue($visibleMarriage->canBeViewedBy($user));
+});
 
-        $user->permissions = 1;
+it('tells if can be viewed by guest', function () {
+    $marriage = factory(Marriage::class)->create();
 
-        $this->assertTrue($hiddenMarriage->canBeViewedBy($user));
-        $this->assertTrue($visibleMarriage->canBeViewedBy($user));
-    }
+    assertFalse($marriage->canBeViewedBy(null));
 
-    public function testTellsIfCanBeViewedByGuest()
-    {
-        $marriage = factory(Marriage::class)->create();
+    $marriage->woman->changeVisibility(true);
+    $marriage->man->changeVisibility(true);
 
-        $this->assertFalse($marriage->canBeViewedBy(null));
+    assertTrue($marriage->canBeViewedBy(null));
+});
 
-        $marriage->woman->changeVisibility(true);
-        $marriage->man->changeVisibility(true);
+it('casts rite to enum', function () {
+    $marriage = factory(Marriage::class)->create([
+        'rite' => 'roman_catholic',
+    ]);
 
-        $this->assertTrue($marriage->canBeViewedBy(null));
-    }
+    assertInstanceOf(MarriageRiteEnum::class, $marriage->rite);
+    assertTrue($marriage->rite->isEqual(MarriageRiteEnum::roman_catholic()));
+});
 
-    public function testItCastsRiteToEnum()
-    {
-        $marriage = factory(Marriage::class)->create([
-            'rite' => 'roman_catholic',
-        ]);
+test('rite is nullable', function () {
+    $marriage = factory(Marriage::class)->create([
+        'rite' => null,
+    ]);
 
-        $this->assertInstanceOf(MarriageRiteEnum::class, $marriage->rite);
-        $this->assertTrue($marriage->rite->isEqual(MarriageRiteEnum::roman_catholic()));
-    }
+    assertNull($marriage->rite);
+});
 
-    public function testRiteIsNullable()
-    {
-        $marriage = factory(Marriage::class)->create([
-            'rite' => null,
-        ]);
+it('casts events types to enums', function () {
+    $marriage = factory(Marriage::class)->create([
+        'first_event_type' => 'civil_marriage',
+        'second_event_type' => 'church_marriage',
+    ]);
 
-        $this->assertNull($marriage->rite);
-    }
+    assertInstanceOf(MarriageEventTypeEnum::class, $marriage->first_event_type);
+    assertTrue($marriage->first_event_type->isEqual(MarriageEventTypeEnum::civil_marriage()));
 
-    public function testItCastsEventsTypesToEnums()
-    {
-        $marriage = factory(Marriage::class)->create([
-            'first_event_type' => 'civil_marriage',
-            'second_event_type' => 'church_marriage',
-        ]);
+    assertInstanceOf(MarriageEventTypeEnum::class, $marriage->second_event_type);
+    assertTrue($marriage->second_event_type->isEqual(MarriageEventTypeEnum::church_marriage()));
+});
 
-        $this->assertInstanceOf(MarriageEventTypeEnum::class, $marriage->first_event_type);
-        $this->assertTrue($marriage->first_event_type->isEqual(MarriageEventTypeEnum::civil_marriage()));
+test('events types are nullable', function () {
+    $marriage = factory(Marriage::class)->create([
+        'first_event_type' => null,
+        'second_event_type' => null,
+    ]);
 
-        $this->assertInstanceOf(MarriageEventTypeEnum::class, $marriage->second_event_type);
-        $this->assertTrue($marriage->second_event_type->isEqual(MarriageEventTypeEnum::church_marriage()));
-    }
+    assertNull($marriage->first_event_type);
+    assertNull($marriage->second_event_type);
+});
 
-    public function testEventsTypesAreNullable()
-    {
-        $marriage = factory(Marriage::class)->create([
-            'first_event_type' => null,
-            'second_event_type' => null,
-        ]);
+it('can get man and woman', function () {
+    $woman = factory(Person::class)->states('woman')->create();
+    $man = factory(Person::class)->states('man')->create();
+    $marriage = factory(Marriage::class)->create([
+        'woman_id' => $woman->id,
+        'man_id' => $man->id,
+    ]);
 
-        $this->assertNull($marriage->first_event_type);
-        $this->assertNull($marriage->second_event_type);
-    }
+    assertTrue($woman->is($marriage->woman));
+    assertTrue($man->is($marriage->man));
+});
 
-    public function testCanGetManAndWoman()
-    {
-        $woman = factory(Person::class)->states('woman')->create();
-        $man = factory(Person::class)->states('man')->create();
-        $marriage = factory(Marriage::class)->create([
-            'woman_id' => $woman->id,
-            'man_id' => $man->id,
-        ]);
+it('can get partner', function () {
+    $woman = factory(Person::class)->states('woman')->create();
+    $man = factory(Person::class)->states('man')->create();
+    $marriage = factory(Marriage::class)->create([
+        'woman_id' => $woman->id,
+        'man_id' => $man->id,
+    ]);
 
-        $this->assertTrue($woman->is($marriage->woman));
-        $this->assertTrue($man->is($marriage->man));
-    }
+    assertTrue($woman->is($marriage->partner($man)));
+    assertTrue($man->is($marriage->partner($woman)));
+});
 
-    public function testCanGetPartner()
-    {
-        $woman = factory(Person::class)->states('woman')->create();
-        $man = factory(Person::class)->states('man')->create();
-        $marriage = factory(Marriage::class)->create([
-            'woman_id' => $woman->id,
-            'man_id' => $man->id,
-        ]);
+it('can get order in given person marriages', function () {
+    $woman = factory(Person::class)->states('woman')->create();
+    $man = factory(Person::class)->states('man')->create();
 
-        $this->assertTrue($woman->is($marriage->partner($man)));
-        $this->assertTrue($man->is($marriage->partner($woman)));
-    }
+    $first_marriage = factory(Marriage::class)->create([
+        'woman_id' => $woman->id,
+        'woman_order' => null,
+        'man_id' => $man->id,
+        'man_order' => 1,
+    ]);
+    $second_marriage = factory(Marriage::class)->create([
+        'man_id' => $man->id,
+        'man_order' => 2,
+    ]);
 
-    public function testCanGetOrderInGivenPersonMarriages()
-    {
-        $woman = factory(Person::class)->states('woman')->create();
-        $man = factory(Person::class)->states('man')->create();
+    assertNull($first_marriage->order($woman));
+    assertEquals(1, $first_marriage->order($man));
+    assertEquals(2, $second_marriage->order($man));
+});
 
-        $first_marriage = factory(Marriage::class)->create([
-            'woman_id' => $woman->id,
-            'woman_order' => null,
-            'man_id' => $man->id,
-            'man_order' => 1,
-        ]);
-        $second_marriage = factory(Marriage::class)->create([
-            'man_id' => $man->id,
-            'man_order' => 2,
-        ]);
+it('can determine if has events', function () {
+    $first_marriage = factory(Marriage::class)->create([
+        'first_event_type' => 'civil_marriage',
+        'first_event_date_from' => '2014-06-23',
+        'first_event_date_to' => '2014-06-23',
+        'first_event_place' => 'Żnin, Polska',
+        'second_event_type' => null,
+        'second_event_date_from' => null,
+        'second_event_date_to' => null,
+        'second_event_place' => null,
+    ]);
 
-        $this->assertNull($first_marriage->order($woman));
-        $this->assertEquals(1, $first_marriage->order($man));
-        $this->assertEquals(2, $second_marriage->order($man));
-    }
+    assertTrue($first_marriage->hasFirstEvent());
+    assertFalse($first_marriage->hasSecondEvent());
 
-    public function testItCanDetermineIfHasEvents()
-    {
-        $first_marriage = factory(Marriage::class)->create([
-            'first_event_type' => 'civil_marriage',
-            'first_event_date_from' => '2014-06-23',
-            'first_event_date_to' => '2014-06-23',
-            'first_event_place' => 'Żnin, Polska',
-            'second_event_type' => null,
-            'second_event_date_from' => null,
-            'second_event_date_to' => null,
-            'second_event_place' => null,
-        ]);
+    $second_marriage = factory(Marriage::class)->create([
+        'first_event_type' => 'concordat_marriage',
+        'first_event_date_from' => null,
+        'first_event_date_to' => null,
+        'first_event_place' => null,
+        'second_event_type' => null,
+        'second_event_date_from' => '1863-01-31',
+        'second_event_date_to' => '1863-01-31',
+        'second_event_place' => null,
+    ]);
 
-        $this->assertTrue($first_marriage->hasFirstEvent());
-        $this->assertFalse($first_marriage->hasSecondEvent());
+    assertTrue($second_marriage->hasFirstEvent());
+    assertTrue($second_marriage->hasSecondEvent());
 
-        $second_marriage = factory(Marriage::class)->create([
-            'first_event_type' => 'concordat_marriage',
-            'first_event_date_from' => null,
-            'first_event_date_to' => null,
-            'first_event_place' => null,
-            'second_event_type' => null,
-            'second_event_date_from' => '1863-01-31',
-            'second_event_date_to' => '1863-01-31',
-            'second_event_place' => null,
-        ]);
+    $third_marriage = factory(Marriage::class)->create([
+        'first_event_type' => null,
+        'first_event_date_from' => null,
+        'first_event_date_to' => null,
+        'first_event_place' => 'Lwów, Litwa',
+        'second_event_type' => 'civil_marriage',
+        'second_event_date_from' => '1863-01-31',
+        'second_event_date_to' => '1863-01-31',
+        'second_event_place' => null,
+    ]);
 
-        $this->assertTrue($second_marriage->hasFirstEvent());
-        $this->assertTrue($second_marriage->hasSecondEvent());
-
-        $third_marriage = factory(Marriage::class)->create([
-            'first_event_type' => null,
-            'first_event_date_from' => null,
-            'first_event_date_to' => null,
-            'first_event_place' => 'Lwów, Litwa',
-            'second_event_type' => 'civil_marriage',
-            'second_event_date_from' => '1863-01-31',
-            'second_event_date_to' => '1863-01-31',
-            'second_event_place' => null,
-        ]);
-
-        $this->assertTrue($third_marriage->hasFirstEvent());
-        $this->assertTrue($third_marriage->hasSecondEvent());
-    }
-}
+    assertTrue($third_marriage->hasFirstEvent());
+    assertTrue($third_marriage->hasSecondEvent());
+});

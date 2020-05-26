@@ -1,67 +1,49 @@
 <?php
 
-namespace Tests\Feature\People;
-
 use App\Person;
-use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class ViewPeopleLetterListingTest extends TestCase
-{
-    use RefreshDatabase;
+it('works with no people')
+    ->get('/people/f/H')
+    ->assertStatus(404);
 
-    public function testItWorksWithNoPeople()
-    {
-        $response = $this->get('/people/f/H');
+it('works with people', function () {
+    withPermissions(1);
 
-        $response->assertStatus(404);
-    }
+    factory(Person::class)->create([
+        'family_name' => 'Zbyrowski',
+        'last_name' => null,
+    ]);
 
-    public function testItWorksWithPeople()
-    {
-        $this->actingAs(factory(User::class)->create(['permissions' => 1]));
+    factory(Person::class)->create([
+        'family_name' => 'Ziobro',
+        'last_name' => 'Mikke',
+    ]);
 
-        factory(Person::class)->create([
-            'family_name' => 'Zbyrowski',
-            'last_name' => null,
-        ]);
-        factory(Person::class)->create([
-            'family_name' => 'Ziobro',
-            'last_name' => 'Mikke',
-        ]);
+    get('/people/f/Z')
+        ->assertStatus(200)
+        ->assertSeeText('Ziobro')
+        ->assertSeeText('Mikke');
 
-        $response = $this->get('/people/f/Z');
+    get('/people/l/Z')
+        ->assertStatus(200)
+        ->assertSeeText('Zbyrowski')
+        ->assertDontSeeText('Mikke');
 
-        $response->assertStatus(200);
-        $response->assertSeeText('Ziobro');
-        $response->assertSeeText('Mikke');
+    get('/people/l/M')
+        ->assertStatus(200)
+        ->assertDontSeeText('Zbyrowski')
+        ->assertSeeText('Mikke');
+});
 
-        $response = $this->get('/people/l/Z');
+it('hides sensitive data to guests', function () {
+    factory(Person::class)->state('alive')->create([
+        'family_name' => 'Ziobro',
+        'last_name' => 'Mikke',
+    ]);
 
-        $response->assertStatus(200);
-        $response->assertSeeText('Zbyrowski');
-        $response->assertDontSeeText('Mikke');
-
-        $response = $this->get('/people/l/M');
-
-        $response->assertStatus(200);
-        $response->assertDontSeeText('Zbyrowski');
-        $response->assertSeeText('Mikke');
-    }
-
-    public function testItHidesSensitiveDataToGuests()
-    {
-        factory(Person::class)->state('alive')->create([
-            'family_name' => 'Ziobro',
-            'last_name' => 'Mikke',
-        ]);
-
-        $response = $this->get('/people/f/Z');
-
-        $response->assertStatus(200);
-        $response->assertSeeText('[hidden]');
-        $response->assertDontSeeText('Ziobro');
-        $response->assertDontSeeText('Mikke');
-    }
-}
+    get('/people/f/Z')
+        ->assertStatus(200)
+        ->assertSeeText('[hidden]')
+        ->assertDontSeeText('Ziobro')
+        ->assertDontSeeText('Mikke');
+});

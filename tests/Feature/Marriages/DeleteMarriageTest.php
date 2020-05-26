@@ -1,80 +1,53 @@
 <?php
 
-namespace Tests\Feature\Marriages;
-
 use App\Marriage;
-use App\User;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class DeleteMarriageTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(
+    fn () => $this->marriage = factory(Marriage::class)->create()
+);
 
-    public function testGuestsCannotDeleteMarriage()
-    {
-        $marriage = factory(Marriage::class)->create();
+test('guests cannot delete marriage', function () {
+    delete('marriages/'.$this->marriage->id)
+        ->assertStatus(302)
+        ->assertRedirect('login');
 
-        $response = $this->delete("marriages/$marriage->id");
+    assertFalse($this->marriage->fresh()->trashed());
+});
 
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
+test('users without permissions cannot edit marriage', function () {
+    withPermissions(1)
+        ->delete('marriages/'.$this->marriage->id)
+        ->assertStatus(403);
 
-        $this->assertFalse($marriage->fresh()->trashed());
-    }
+    assertFalse($this->marriage->fresh()->trashed());
+});
 
-    public function testUsersWithoutPermissionsCannotEditMarriage()
-    {
-        $marriage = factory(Marriage::class)->create();
+test('users with permissions can edit marriage', function () {
+    withPermissions(3)
+        ->delete('marriages/'.$this->marriage->id)
+        ->assertStatus(302)
+        ->assertRedirect('people/'.$this->marriage->woman_id);
 
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
+    assertTrue($this->marriage->fresh()->trashed());
+});
 
-        $response = $this->actingAs($user)->delete("marriages/$marriage->id");
+test('marriage deletion is logged', function () {
+    $this->marriage->delete();
 
-        $response->assertStatus(403);
+    $log = latestLog();
 
-        $this->assertFalse($marriage->fresh()->trashed());
-    }
+    assertEquals('marriages', $log->log_name);
+    assertEquals('deleted', $log->description);
+    assertTrue($this->marriage->is($log->subject));
 
-    public function testUsersWithPermissionsCanEditMarriage()
-    {
-        $marriage = factory(Marriage::class)->create();
+    assertEquals($this->marriage->deleted_at, $log->created_at);
 
-        $user = factory(User::class)->create([
-            'permissions' => 3,
-        ]);
+    assertEquals(
+        $this->marriage->deleted_at,
+        Carbon::create($log->properties['attributes']['deleted_at'])
+    );
 
-        $response = $this->actingAs($user)->delete("marriages/$marriage->id");
-
-        $response->assertStatus(302);
-        $response->assertRedirect("people/$marriage->woman_id");
-
-        $this->assertTrue($marriage->fresh()->trashed());
-    }
-
-    public function testMarriageDeletionIsLogged()
-    {
-        $marriage = factory(Marriage::class)->create();
-
-        $marriage->delete();
-
-        $log = $this->latestLog();
-
-        $this->assertEquals('marriages', $log->log_name);
-        $this->assertEquals('deleted', $log->description);
-        $this->assertTrue($marriage->is($log->subject));
-
-        $this->assertEquals($marriage->deleted_at, $log->created_at);
-
-        $this->assertEquals(
-            $marriage->deleted_at,
-            Carbon::create($log->properties['attributes']['deleted_at'])
-        );
-
-        $this->assertEquals(1, count($log->properties));
-        $this->assertEquals(1, count($log->properties['attributes']));
-    }
-}
+    assertEquals(1, count($log->properties));
+    assertEquals(1, count($log->properties['attributes']));
+});

@@ -1,41 +1,15 @@
 <?php
 
-namespace Tests\Feature;
+test('guest are asked to log in when attempting to view reports')
+    ->get('reports')
+    ->assertStatus(302)
+    ->assertRedirect('login');
 
-use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+test('users without permissions cannot view reports')
+    ->withPermissions(3)
+    ->get('reports')
+    ->assertStatus(403);
 
-class ReportsTest extends TestCase
-{
-    public function testGuestAreAskedToLogInWhenAttemptingToViewReports()
-    {
-        $response = $this->get('reports');
-
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
-    }
-
-    public function testUsersWithoutPermissionsCannotViewReports()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 3,
-        ]);
-
-        $response = $this->actingAs($user)->get('reports');
-
-        $response->assertStatus(403);
-    }
-
-    public function testUsersWithPermissionsCanViewReports()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 4,
-        ]);
-
-        $response = $this->actingAs($user)->get('reports');
-
-        $response->assertStatus(200);
-    }
-}
+test('users with permissions can view reports')
+    ->withPermissions(4)->get('reports')
+    ->assertStatus(200);

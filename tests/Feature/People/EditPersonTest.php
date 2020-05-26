@@ -1,335 +1,191 @@
 <?php
 
-namespace Tests\Feature\People;
-
 use App\Person;
-use App\User;
-use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
-use Tests\TestCase;
 
-class EditPersonTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(function () {
+    $this->dates = [
+        'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
+        'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
+    ];
 
-    private function oldAttributes($overrides = [])
-    {
-        return array_merge([
-            'id_wielcy' => 'psb.6305.3',
-            'id_pytlewski' => 2115,
-            'sex' => 'xx',
-            'name' => 'Maria',
-            'middle_name' => 'Henryka',
-            'family_name' => 'Stecher de Sebenitz',
-            'last_name' => 'Gąsiorowska',
-            'birth_date_from' => '1854-01-12',
-            'birth_date_to' => '1854-01-12',
-            'birth_place' => 'Zaleszczyki, Ukraina',
-            'dead' => true,
-            'death_date_from' => '1918-01-02',
-            'death_date_to' => '1918-01-02',
-            'death_place' => 'Załuż k/Sanoka, Polska',
-            'death_cause' => 'rak',
-            'funeral_date_from' => '1918-01-05',
-            'funeral_date_to' => '1918-01-05',
-            'funeral_place' => 'Załuż k/Sanoka, Polska',
-            'burial_date_from' => '1918-01-05',
-            'burial_date_to' => '1918-01-05',
-            'burial_place' => 'Załuż k/Sanoka, Polska',
-        ], $overrides);
+    $this->oldAttributes = [
+        'id_wielcy' => 'psb.6305.3',
+        'id_pytlewski' => 2115,
+        'sex' => 'xx',
+        'name' => 'Maria',
+        'middle_name' => 'Henryka',
+        'family_name' => 'Stecher de Sebenitz',
+        'last_name' => 'Gąsiorowska',
+        'birth_date_from' => '1854-01-12',
+        'birth_date_to' => '1854-01-12',
+        'birth_place' => 'Zaleszczyki, Ukraina',
+        'dead' => true,
+        'death_date_from' => '1918-01-02',
+        'death_date_to' => '1918-01-02',
+        'death_place' => 'Załuż k/Sanoka, Polska',
+        'death_cause' => 'rak',
+        'funeral_date_from' => '1918-01-05',
+        'funeral_date_to' => '1918-01-05',
+        'funeral_place' => 'Załuż k/Sanoka, Polska',
+        'burial_date_from' => '1918-01-05',
+        'burial_date_to' => '1918-01-05',
+        'burial_place' => 'Załuż k/Sanoka, Polska',
+    ];
+
+    $this->newAttributes = [
+        'id_wielcy' => 'psb.6305.1',
+        'id_pytlewski' => 2137,
+        'sex' => 'xy',
+        'name' => 'Henryk',
+        'middle_name' => 'Erazm',
+        'family_name' => 'Gąsiorowski',
+        'last_name' => 'Jakże to',
+        'birth_date_from' => '1878-04-01',
+        'birth_date_to' => '1878-04-01',
+        'birth_place' => 'Zaleszczyki, Polska',
+        'dead' => true,
+        'death_date_from' => '1947-01-17',
+        'death_date_to' => '1947-01-17',
+        'death_place' => 'Grudziądz, Polska',
+        'death_cause' => 'rak',
+        'funeral_date_from' => '1947-01-21',
+        'funeral_date_to' => '1947-01-21',
+        'funeral_place' => 'Grudziądz, Polska',
+        'burial_date_from' => '1947-01-21',
+        'burial_date_to' => '1947-01-21',
+        'burial_place' => 'Grudziądz, Polska',
+    ];
+
+    $this->person = factory(Person::class)->create($this->oldAttributes);
+});
+
+test('guests are asked to log in when attempting to view edit person form', function () {
+    get('people/'.$this->person->id.'/edit')
+        ->assertStatus(302)
+        ->assertRedirect('login');
+});
+
+test('guests are asked to log in when attempting to view edit form for nonexistent person')
+    ->get('people/2137/edit')
+    ->assertStatus(302)
+    ->assertRedirect('login');
+
+test('users without permissions cannot view edit person form', function () {
+    withPermissions(1)
+        ->get('people/'.$this->person->id.'/edit')
+        ->assertStatus(403);
+});
+
+test('users with permissions can view edit person form', function () {
+    withPermissions(2)
+        ->get('people/'.$this->person->id.'/edit')
+        ->assertStatus(200);
+});
+
+test('guests cannot edit person', function () {
+    put('people/'.$this->person->id, $this->newAttributes)
+        ->assertStatus(302)
+        ->assertRedirect('login');
+
+    $this->person = $this->person->fresh();
+
+    foreach (Arr::except($this->oldAttributes, $this->dates) as $key => $attribute) {
+        assertEquals($attribute, $this->person->$key);
+    }
+});
+
+test('users without permissions cannot edit person', function () {
+    withPermissions(1)
+        ->put('people/'.$this->person->id, $this->newAttributes)
+        ->assertStatus(403);
+
+    $this->person = $this->person->fresh();
+
+    foreach (Arr::except($this->oldAttributes, $this->dates) as $key => $attribute) {
+        assertEquals($attribute, $this->person->$key);
+    }
+});
+
+test('users with permissions can edit person', function () {
+    withPermissions(2)
+        ->put('people/'.$this->person->id, $this->newAttributes)
+        ->assertStatus(302)
+        ->assertRedirect('people/'.$this->person->id);
+
+    $this->person = $this->person->fresh();
+
+    foreach (Arr::except($this->newAttributes, $this->dates) as $key => $attribute) {
+        assertEquals($attribute, $this->person->$key);
     }
 
-    private function newAttributes($overrides = [])
-    {
-        return array_merge([
-            'id_wielcy' => 'psb.6305.1',
-            'id_pytlewski' => 2137,
-            'sex' => 'xy',
-            'name' => 'Henryk',
-            'middle_name' => 'Erazm',
-            'family_name' => 'Gąsiorowski',
-            'last_name' => 'Jakże to',
-            'birth_date_from' => '1878-04-01',
-            'birth_date_to' => '1878-04-01',
-            'birth_place' => 'Zaleszczyki, Polska',
-            'dead' => true,
-            'death_date_from' => '1947-01-17',
-            'death_date_to' => '1947-01-17',
-            'death_place' => 'Grudziądz, Polska',
-            'death_cause' => 'rak',
-            'funeral_date_from' => '1947-01-21',
-            'funeral_date_to' => '1947-01-21',
-            'funeral_place' => 'Grudziądz, Polska',
-            'burial_date_from' => '1947-01-21',
-            'burial_date_to' => '1947-01-21',
-            'burial_place' => 'Grudziądz, Polska',
-            // 'visibility' => true,
-        ], $overrides);
+    foreach ($this->dates as $date) {
+        assertEquals($this->newAttributes[$date], $this->person->$date->toDateString());
     }
+});
 
-    public function testGuestsAreAskedToLogInWhenAttemptingToViewEditPersonForm()
-    {
-        $person = factory(Person::class)->create();
+test('data is validated using appropriate form request')
+    ->assertActionUsesFormRequest(
+        \App\Http\Controllers\PersonController::class, 'update',
+        \App\Http\Requests\StorePerson::class
+    );
 
-        $response = $this->get("people/$person->id/edit");
+test('person edition is logged', function () {
+    travel(
+        '+1 minute',
+        fn () => $this->person->fill($this->newAttributes)->save()
+    );
 
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
-    }
+    $this->person = $this->person->fresh();
 
-    public function testGuestsAreAskedToLogInWhenAttemptingToViewEditFormForNonexistentPerson()
-    {
-        $response = $this->get('people/1/edit');
+    $log = latestLog();
 
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
-    }
+    assertEquals('people', $log->log_name);
+    assertEquals('updated', $log->description);
+    assertTrue($this->person->is($log->subject));
 
-    public function testUsersWithoutPermissionsCannotViewEditPersonForm()
-    {
-        $person = factory(Person::class)->create();
+    $oldToCheck = Arr::except($this->oldAttributes, [
+        'id', 'created_at', 'updated_at',
+        'dead', 'death_cause',
+        ...$this->dates,
+    ]);
 
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
-
-        $response = $this->actingAs($user)->get("people/$person->id/edit");
-
-        $response->assertStatus(403);
-    }
-
-    public function testUsersWithPermissionsCanViewEditPersonForm()
-    {
-        $person = factory(Person::class)->create();
-
-        $user = factory(User::class)->create([
-            'permissions' => 2,
-        ]);
-
-        $response = $this->actingAs($user)->get("people/$person->id/edit");
-
-        $response->assertStatus(200);
-    }
-
-    public function testGuestsCannotEditPerson()
-    {
-        $person = factory(Person::class)->create($this->oldAttributes());
-
-        $response = $this->put("people/$person->id", $this->newAttributes());
-
-        $response->assertStatus(302);
-        $response->assertRedirect('login');
-
-        $attributesToCheck = Arr::except($this->oldAttributes(), [
-            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
-            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
-        ]);
-
-        foreach ($attributesToCheck as $key => $attribute) {
-            $this->assertEquals($attribute, $person->fresh()[$key]);
-        }
-    }
-
-    public function testUsersWithoutPermissionsCannotEditPerson()
-    {
-        $person = factory(Person::class)->create($this->oldAttributes());
-
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
-
-        $response = $this->actingAs($user)->put("people/$person->id", $this->newAttributes());
-
-        $response->assertStatus(403);
-
-        $attributesToCheck = Arr::except($this->oldAttributes(), [
-            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
-            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
-        ]);
-
-        foreach ($attributesToCheck as $key => $attribute) {
-            $this->assertEquals($attribute, $person->fresh()[$key]);
-        }
-    }
-
-    public function testUsersWithPermissionsCanEditPerson()
-    {
-        $person = factory(Person::class)->create($this->oldAttributes());
-
-        $user = factory(User::class)->create([
-            'permissions' => 2,
-        ]);
-
-        $mother = factory(Person::class)->state('woman')->create();
-        $father = factory(Person::class)->state('man')->create();
-
-        $newAttributes = $this->newAttributes([
-            'mother_id' => $mother->id,
-            'father_id' => $father->id,
-        ]);
-
-        $response = $this->actingAs($user)->put("people/$person->id", $newAttributes);
-
-        $response->assertStatus(302);
-        $response->assertRedirect("people/$person->id");
-
-        $attributesToCheck = Arr::except($newAttributes, [
-            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
-            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
-        ]);
-
-        foreach ($attributesToCheck as $key => $attribute) {
-            $this->assertEquals($attribute, $person->fresh()[$key]);
-        }
-
-        $this->assertTrue($newAttributes['birth_date_from'] == $person->fresh()['birth_date_from']->toDateString());
-        $this->assertTrue($newAttributes['birth_date_to'] == $person->fresh()['birth_date_to']->toDateString());
-
-        $this->assertTrue($newAttributes['death_date_from'] == $person->fresh()['death_date_from']->toDateString());
-        $this->assertTrue($newAttributes['death_date_to'] == $person->fresh()['death_date_to']->toDateString());
-
-        $this->assertTrue($newAttributes['funeral_date_from'] == $person->fresh()['funeral_date_from']->toDateString());
-        $this->assertTrue($newAttributes['funeral_date_to'] == $person->fresh()['funeral_date_to']->toDateString());
-
-        $this->assertTrue($newAttributes['burial_date_from'] == $person->fresh()['burial_date_from']->toDateString());
-        $this->assertTrue($newAttributes['burial_date_to'] == $person->fresh()['burial_date_to']->toDateString());
-    }
-
-    public function testDataIsValidatedUsingAppropriateFormRequest()
-    {
-        $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\PersonController::class,
-            'update',
-            \App\Http\Requests\StorePerson::class
+    foreach ($oldToCheck as $key => $value) {
+        assertEquals(
+            $value, $log->properties['old'][$key],
+            'Failed asserting that old attribute '.$key.' has the same value in log.'
         );
     }
 
-    public function testPersonEditionIsLogged()
-    {
-        $person = factory(Person::class)->create($this->oldAttributes());
+    $attributesToCheck = Arr::except($this->newAttributes, [
+        'id', 'created_at', 'updated_at',
+        'dead', 'death_cause',
+        ...$this->dates,
+    ]);
 
-        $changeTimestamp = Carbon::now()->addMinute();
-        Carbon::setTestNow($changeTimestamp);
-        $person->fill($this->newAttributes())->save();
-        Carbon::setTestNow();
-
-        $person = $person->fresh();
-
-        $log = $this->latestLog();
-
-        $this->assertEquals('people', $log->log_name);
-        $this->assertEquals('updated', $log->description);
-        $this->assertTrue($person->is($log->subject));
-
-        $oldToCheck = Arr::except($this->oldAttributes(), [
-            'id', 'created_at', 'updated_at', 'dead', 'death_cause',
-            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
-            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
-        ]);
-
-        foreach ($oldToCheck as $key => $value) {
-            $this->assertEquals(
-                $value,
-                $log->properties['old'][$key],
-                'Failed asserting that old attribute '.$key.' has the same value in log.'
-            );
-        }
-
-        $attributesToCheck = Arr::except($this->newAttributes(), [
-            'id', 'created_at', 'updated_at', 'dead', 'death_cause',
-            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
-            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
-        ]);
-
-        foreach ($attributesToCheck as $key => $value) {
-            $this->assertEquals(
-                $value,
-                $log->properties['attributes'][$key],
-                'Failed asserting that attribute '.$key.' has the same value in log.'
-            );
-        }
-
-        $this->assertArrayNotHasKey('dead', $log->properties['old']);
-        $this->assertArrayNotHasKey('dead', $log->properties['attributes']);
-
-        $this->assertArrayNotHasKey('death_cause', $log->properties['old']);
-        $this->assertArrayNotHasKey('death_cause', $log->properties['attributes']);
-
-        $this->assertArrayNotHasKey('created_at', $log->properties['old']);
-        $this->assertArrayNotHasKey('created_at', $log->properties['attributes']);
-
-        $this->assertEquals($person->updated_at, $log->created_at);
-
-        $this->assertArrayNotHasKey('updated_at', $log->properties['old']);
-        $this->assertArrayNotHasKey('updated_at', $log->properties['attributes']);
-
-        $this->assertEquals(
-            $this->oldAttributes()['birth_date_from'],
-            $log->properties['old']['birth_date_from']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['birth_date_from'],
-            $log->properties['attributes']['birth_date_from']
-        );
-        $this->assertEquals(
-            $this->oldAttributes()['birth_date_to'],
-            $log->properties['old']['birth_date_to']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['birth_date_to'],
-            $log->properties['attributes']['birth_date_to']
-        );
-
-        $this->assertEquals(
-            $this->oldAttributes()['death_date_from'],
-            $log->properties['old']['death_date_from']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['death_date_from'],
-            $log->properties['attributes']['death_date_from']
-        );
-        $this->assertEquals(
-            $this->oldAttributes()['death_date_to'],
-            $log->properties['old']['death_date_to']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['death_date_to'],
-            $log->properties['attributes']['death_date_to']
-        );
-
-        $this->assertEquals(
-            $this->oldAttributes()['funeral_date_from'],
-            $log->properties['old']['funeral_date_from']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['funeral_date_from'],
-            $log->properties['attributes']['funeral_date_from']
-        );
-        $this->assertEquals(
-            $this->oldAttributes()['funeral_date_to'],
-            $log->properties['old']['funeral_date_to']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['funeral_date_to'],
-            $log->properties['attributes']['funeral_date_to']
-        );
-
-        $this->assertEquals(
-            $this->oldAttributes()['burial_date_from'],
-            $log->properties['old']['burial_date_from']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['burial_date_from'],
-            $log->properties['attributes']['burial_date_from']
-        );
-        $this->assertEquals(
-            $this->oldAttributes()['burial_date_to'],
-            $log->properties['old']['burial_date_to']
-        );
-        $this->assertEquals(
-            $this->newAttributes()['burial_date_to'],
-            $log->properties['attributes']['burial_date_to']
+    foreach ($attributesToCheck as $key => $value) {
+        assertEquals(
+            $value, $log->properties['attributes'][$key],
+            'Failed asserting that attribute '.$key.' has the same value in log.'
         );
     }
-}
+
+    assertArrayNotHasKey('dead', $log->properties['old']);
+    assertArrayNotHasKey('dead', $log->properties['attributes']);
+
+    assertArrayNotHasKey('death_cause', $log->properties['old']);
+    assertArrayNotHasKey('death_cause', $log->properties['attributes']);
+
+    assertArrayNotHasKey('created_at', $log->properties['old']);
+    assertArrayNotHasKey('created_at', $log->properties['attributes']);
+
+    assertEquals($this->person->updated_at, $log->created_at);
+
+    assertArrayNotHasKey('updated_at', $log->properties['old']);
+    assertArrayNotHasKey('updated_at', $log->properties['attributes']);
+
+    foreach ($this->dates as $date) {
+        assertEquals($this->oldAttributes[$date], $log->properties['old'][$date]);
+        assertEquals($this->newAttributes[$date], $log->properties['attributes'][$date]);
+    }
+});

@@ -1,127 +1,80 @@
 <?php
 
-namespace Tests\Feature\People;
-
 use App\Person;
-use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class ViewPersonTest extends TestCase
-{
-    use RefreshDatabase;
+test('guest cannot see hidden alive person', function () {
+    $person = factory(Person::class)->states('alive')->create();
 
-    public function testGuestCannotSeeHiddenAlivePerson()
-    {
-        $person = factory(Person::class)->states('alive')->create();
+    get("people/$person->id")
+        ->assertStatus(403);
+});
 
-        $response = $this->get("people/$person->id");
+test('guest cannot see hidden dead person', function () {
+    $person = factory(Person::class)->states('dead')->create();
 
-        $response->assertStatus(403);
-    }
+    get("people/$person->id")
+        ->assertStatus(403);
+});
 
-    public function testGuestCannotSeeHiddenDeadPerson()
-    {
-        $person = factory(Person::class)->states('dead')->create();
+test('guest can see visible alive person', function () {
+    $person = factory(Person::class)->states('alive')->create([
+        'visibility' => 1,
+    ]);
 
-        $response = $this->get("people/$person->id");
+    get("people/$person->id")
+        ->assertStatus(200);
+});
 
-        $response->assertStatus(403);
-    }
+test('guest can see visible dead person', function () {
+    $person = factory(Person::class)->states('dead')->create([
+        'visibility' => 1,
+    ]);
 
-    public function testGuestCanSeeVisibleAlivePerson()
-    {
-        $person = factory(Person::class)->states('alive')->create([
-            'visibility' => 1,
-        ]);
+    get("people/$person->id")
+        ->assertStatus(200);
+});
 
-        $response = $this->get("people/$person->id");
+test('user with persmissions can see hidden alive person', function () {
+    $person = factory(Person::class)->states('alive')->create();
 
-        $response->assertStatus(200);
-    }
+    withPermissions(1)
+        ->get("people/$person->id")
+        ->assertStatus(200);
+});
 
-    public function testGuestCanSeeVisibleDeadPerson()
-    {
-        $person = factory(Person::class)->states('dead')->create([
-            'visibility' => 1,
-        ]);
+test('user with persmissions can see hidden dead person', function () {
+    $person = factory(Person::class)->states('dead')->create();
 
-        $response = $this->get("people/$person->id");
+    withPermissions(1)
+        ->get("people/$person->id")
+        ->assertStatus(200);
+});
 
-        $response->assertStatus(200);
-    }
+test('user with persmissions can see visible alive person', function () {
+    $person = factory(Person::class)->states('alive')->create([
+        'visibility' => 1,
+    ]);
 
-    public function testUserWithPersmissionsCanSeeHiddenAlivePerson()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
+    withPermissions(1)
+        ->get("people/$person->id")
+        ->assertStatus(200);
+});
 
-        $person = factory(Person::class)->states('alive')->create();
+test('user with persmissions can see visible dead person', function () {
+    $person = factory(Person::class)->states('dead')->create([
+        'visibility' => 1,
+    ]);
 
-        $response = $this->actingAs($user)->get("people/$person->id");
+    withPermissions(1)
+        ->get("people/$person->id")
+        ->assertStatus(200);
+});
 
-        $response->assertStatus(200);
-    }
+test('guest see 404 when attemting to view nonexistent person')
+    ->get('people/1')
+    ->assertStatus(404);
 
-    public function testUserWithPersmissionsCanSeeHiddenDeadPerson()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
-
-        $person = factory(Person::class)->states('dead')->create();
-
-        $response = $this->actingAs($user)->get("people/$person->id");
-
-        $response->assertStatus(200);
-    }
-
-    public function testUserWithPersmissionsCanSeeVisibleAlivePerson()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
-
-        $person = factory(Person::class)->states('alive')->create([
-            'visibility' => 1,
-        ]);
-
-        $response = $this->actingAs($user)->get("people/$person->id");
-
-        $response->assertStatus(200);
-    }
-
-    public function testUserWithPersmissionsCanSeeVisibleDeadPerson()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
-
-        $person = factory(Person::class)->states('dead')->create([
-            'visibility' => 1,
-        ]);
-
-        $response = $this->actingAs($user)->get("people/$person->id");
-
-        $response->assertStatus(200);
-    }
-
-    public function testGuestSee_404WhenAttemtingToViewNonexistentPerson()
-    {
-        $response = $this->get('people/1');
-
-        $response->assertStatus(404);
-    }
-
-    public function testUserWithPersmissionsSee_404WhenAttemtingToViewNonexistentPerson()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 1,
-        ]);
-
-        $response = $this->actingAs($user)->get('people/1');
-
-        $response->assertStatus(404);
-    }
-}
+test('user with persmissions see 404 when attemting to view nonexistent person')
+    ->withPermissions(1)
+    ->get('people/1')
+    ->assertStatus(404);

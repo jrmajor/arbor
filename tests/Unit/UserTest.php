@@ -1,45 +1,38 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\User;
-use Tests\TestCase;
 
-class UserTest extends TestCase
-{
-    public function testCorrectlyDeterminesItsAbilities()
-    {
-        $user = factory(User::class)->create([
-            'permissions' => 0,
-        ]);
+it('correctly determines its abilities', function () {
+    $user = factory(User::class)->create([
+        'permissions' => 0,
+    ]);
 
-        $this->assertFalse($user->canRead());
-        $this->assertFalse($user->canWrite());
-        $this->assertFalse($user->canDestroy());
-        $this->assertFalse($user->isSuperAdmin());
+    assertFalse($user->canRead());
+    assertFalse($user->canWrite());
+    assertFalse($user->canDestroy());
+    assertFalse($user->isSuperAdmin());
 
-        $user->permissions = 1;
-        $this->assertTrue($user->canRead());
-        $this->assertFalse($user->canWrite());
-        $this->assertFalse($user->canDestroy());
-        $this->assertFalse($user->isSuperAdmin());
+    $user->permissions = 1;
+    assertTrue($user->canRead());
+    assertFalse($user->canWrite());
+    assertFalse($user->canDestroy());
+    assertFalse($user->isSuperAdmin());
 
-        $user->permissions = 2;
-        $this->assertTrue($user->canRead());
-        $this->assertTrue($user->canWrite());
-        $this->assertFalse($user->canDestroy());
-        $this->assertFalse($user->isSuperAdmin());
+    $user->permissions = 2;
+    assertTrue($user->canRead());
+    assertTrue($user->canWrite());
+    assertFalse($user->canDestroy());
+    assertFalse($user->isSuperAdmin());
 
-        $user->permissions = 3;
-        $this->assertTrue($user->canRead());
-        $this->assertTrue($user->canWrite());
-        $this->assertTrue($user->canDestroy());
-        $this->assertFalse($user->isSuperAdmin());
+    $user->permissions = 3;
+    assertTrue($user->canRead());
+    assertTrue($user->canWrite());
+    assertTrue($user->canDestroy());
+    assertFalse($user->isSuperAdmin());
 
-        $user->permissions = 4;
-        $this->assertTrue($user->canRead());
-        $this->assertTrue($user->canWrite());
-        $this->assertTrue($user->canDestroy());
-        $this->assertTrue($user->isSuperAdmin());
-    }
-}
+    $user->permissions = 4;
+    assertTrue($user->canRead());
+    assertTrue($user->canWrite());
+    assertTrue($user->canDestroy());
+    assertTrue($user->isSuperAdmin());
+});
