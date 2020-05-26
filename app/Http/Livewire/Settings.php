@@ -16,7 +16,7 @@ class Settings extends Component
     {
         $this->validate([
             'email' => 'required|email',
-            'password' => 'nullable|confirmed|min:8',
+            'password' => 'nullable|string|confirmed|min:8',
         ]);
 
         $user = auth()->user();
