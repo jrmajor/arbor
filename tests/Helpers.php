@@ -16,6 +16,11 @@ function withPermissions(int $permissions): TestCase
     return test()->withPermissions($permissions);
 }
 
+function livewire($name, $params = [])
+{
+    return test()->livewire($name, $params);
+}
+
 function from(string $url): TestCase
 {
     return test()->from($url);

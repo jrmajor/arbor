@@ -12,30 +12,26 @@ class Settings extends Component
     public $password;
     public $password_confirmation;
 
-    public function changeEmail()
+    public function saveEmail()
     {
         $this->validate([
             'email' => 'required|email',
         ]);
 
-        $user = auth()->user();
-
-        $user->email = $this->email;
-
-        $user->save();
+        auth()->user()->fill([
+            'email' => $this->email,
+        ])->save();
     }
 
-    public function changePassword()
+    public function savePassword()
     {
         $this->validate([
             'password' => 'required|string|confirmed|min:8',
         ]);
 
-        $user = auth()->user();
-
-        $user->password = Hash::make($this->password);
-
-        $user->save();
+        auth()->user()->fill([
+            'password' => Hash::make($this->password),
+        ])->save();
     }
 
     public function mount()

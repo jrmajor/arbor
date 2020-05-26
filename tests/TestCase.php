@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Livewire\Livewire;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -15,6 +16,11 @@ abstract class TestCase extends BaseTestCase
             ->create(['permissions' => $permissions]);
 
         return $this->actingAs($user);
+    }
+
+    public function livewire($name, $params = [])
+    {
+        return Livewire::test($name, $params);
     }
 
     public function assertRouteUsesFormRequest(string $routeName, string $formRequest)

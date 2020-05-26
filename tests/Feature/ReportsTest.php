@@ -11,5 +11,6 @@ test('users without permissions cannot view reports')
     ->assertStatus(403);
 
 test('users with permissions can view reports')
-    ->withPermissions(4)->get('reports')
+    ->withPermissions(4)
+    ->get('reports')
     ->assertStatus(200);
