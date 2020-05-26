@@ -1,14 +1,14 @@
 @if ($paginator->hasPages())
-    <ul class="flex space-x-3" role="navigation">
+    <ul class="flex justify-center lg:justify-start flex-wrap space-x-3 -my-1" role="navigation">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li>
+            <li class="py-1">
                 <button class="btn" type="button" disabled>
                     &lsaquo;
                 </button>
             </li>
         @else
-            <li>
+            <li class="py-1">
                 <button class="btn" type="button" wire:click="previousPage" rel="prev">
                     &lsaquo;
                 </button>
@@ -19,16 +19,16 @@
         @foreach ($elements as $element)
             {{-- "Three Dots" Separator --}}
             @if (is_string($element))
-                <li><span>{{ $element }}</span></li>
+                <li class="py-1"><span class="-m-1">{{ $element }}</span></li>
             @endif
 
             {{-- Array Of Links --}}
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <li><button class="btn" type="button" disabled>{{ $page }}</button></li>
+                        <li class="py-1"><button class="btn" type="button" disabled>{{ $page }}</button></li>
                     @else
-                        <li><button class="btn" type="button" wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
+                        <li class="py-1"><button class="btn" type="button" wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
                     @endif
                 @endforeach
             @endif
@@ -36,13 +36,13 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li>
+            <li class="py-1">
                 <button class="btn" type="button" wire:click="nextPage" rel="next">
                     &rsaquo;
                 </button>
             </li>
         @else
-            <li>
+            <li class="py-1">
                 <button class="btn" type="button" disabled>
                     &rsaquo;
                 </button>
