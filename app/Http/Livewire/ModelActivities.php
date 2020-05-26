@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Activitylog\Models\Activity;
@@ -12,7 +13,7 @@ class ModelActivities extends Component
 
     public function render()
     {
-        if (! auth()->user()->isSuperAdmin()) {
+        if (! Auth::user()->isSuperAdmin()) {
             abort(403);
         }
 

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Person;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
     public function __invoke()
     {
-        if (! auth()->user()->isSuperAdmin()) {
+        if (! Auth::user()->isSuperAdmin()) {
             return abort(403);
         }
 
