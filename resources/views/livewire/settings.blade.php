@@ -67,4 +67,29 @@
         @enderror
     </div>
 
+    <div>
+        <h2 class="mb-1 leading-none text-2xl font-medium">{{ __('settings.logout_other_devices') }}</h2>
+
+        <div class="flex flex-wrap sm:flex-no-wrap space-y-2 sm:space-y-0 sm:space-x-2 items-center">
+            <div class="w-full flex sm:w-3/4 lg:w-1/2 items-center">
+                <label for="password" class="mr-2">{{ __('settings.password') }}</label>
+                <div class="flex-grow">
+                    <input
+                        type="password" class="@error('logout_password') invalid @enderror"
+                        wire:model.lazy="logout_password">
+                </div>
+            </div>
+            <div class="w-full flex sm:w-1/4 justify-end">
+                <button
+                    type="button" class="btn"
+                    wire:click="logoutOtherDevices">
+                    {{ __('settings.logout') }}
+                </button>
+            </div>
+        </div>
+        @error('logout_password')
+            <small class="text-red-500">{{ $message }}</small>
+        @enderror
+    </div>
+
 </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Settings;
 use App\User;
+use Illuminate\Auth\Events\OtherDeviceLogout;
 use Illuminate\Support\Facades\Hash;
 
 test('guest are asked to log in when attempting to view settings page')
@@ -84,7 +85,43 @@ it('can change password', function () {
         ->set('password', $newPassword)
         ->set('password_confirmation', $newPassword)
         ->call('savePassword')
-        ->assertHasNoErrors('email');
+        ->assertHasNoErrors('password')
+        ->assertSet('password', null)
+        ->assertSet('password_confirmation', null);
 
     assertTrue(Hash::check($newPassword, $user->fresh()->password));
+});
+
+it('checks password when logging user out from other devices', function () {
+    Event::fake();
+
+    withPermissions(0)
+        ->livewire(Settings::class)
+
+    ->set('logout_password', null)
+        ->call('logoutOtherDevices')
+        ->assertHasErrors('logout_password')
+
+    ->set('logout_password', 'wrong_password')
+        ->call('logoutOtherDevices')
+        ->assertHasErrors('logout_password');
+
+    Event::assertNotDispatched(OtherDeviceLogout::class);
+});
+
+it('can change logout user from other devices', function () {
+    $user = factory(User::class)->create([
+        'password' => Hash::make($password = faker()->password),
+    ]);
+
+    Event::fake();
+
+    actingAs($user)
+        ->livewire(Settings::class)
+        ->set('logout_password', $password)
+        ->call('logoutOtherDevices')
+        ->assertHasNoErrors('logout_password')
+        ->assertSet('logout_password', null);
+
+    Event::assertDispatched(fn (OtherDeviceLogout $event) => $event->user->is($user));
 });

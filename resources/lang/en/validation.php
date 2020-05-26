@@ -99,6 +99,9 @@ return [
         'end_date_from' => 'divorce date',
         'end_date_to' => 'divorce date',
         'end_cause' => 'divorce cause',
+
+        /* settings */
+        'logout_password' => 'password',
     ],
 
 ];

@@ -14,5 +14,6 @@ return [
 
     'logout_other_devices' => 'Wyloguj z innych urządzeń',
     'logout' => 'Wyloguj',
+    'wrong_password' => 'Podane hasło nie jest poprawne.',
 
 ];

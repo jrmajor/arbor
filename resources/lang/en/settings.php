@@ -14,5 +14,6 @@ return [
 
     'logout_other_devices' => 'Logout from other devices',
     'logout' => 'Logout',
+    'wrong_password' => 'Wrong password, try again.',
 
 ];

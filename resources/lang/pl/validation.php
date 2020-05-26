@@ -123,6 +123,9 @@ return [
         'first_event_place' => 'miejsce pierwszego wydarzenia',
         'second_event_place' => 'miejsce drugiego wydarzenia',
         'end_cause' => 'powód rozwodu',
+
+        /* settings */
+        'logout_password' => 'hasło',
     ],
 
 ];
