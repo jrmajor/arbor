@@ -2,136 +2,103 @@
 
 return [
 
-    'boolean' => 'The :attribute field must be true or false.',
     'confirmed' => 'The :attribute confirmation does not match.',
-    // 'date' => 'The :attribute is not a valid date.',
-    // 'date_equals' => 'The :attribute must be a date equal to :date.',
-    // 'date_format' => 'The :attribute does not match the format :format.',
-    // 'different' => 'The :attribute and :other must be different.',
-    // 'digits' => 'The :attribute must be :digits digits.',
-    // 'digits_between' => 'The :attribute must be between :min and :max digits.',
-    // 'dimensions' => 'The :attribute has invalid image dimensions.',
-    // 'distinct' => 'The :attribute field has a duplicate value.',
-    // 'email' => 'The :attribute must be a valid email address.',
-    // 'ends_with' => 'The :attribute must end with one of the following: :values',
-    'exists' => 'The selected :attribute is invalid.',
-    // 'file' => 'The :attribute must be a file.',
-    // 'filled' => 'The :attribute field must have a value.',
-    // 'gt' => [
-    //     'numeric' => 'The :attribute must be greater than :value.',
-    //     'file' => 'The :attribute must be greater than :value kilobytes.',
-    //     'string' => 'The :attribute must be greater than :value characters.',
-    //     'array' => 'The :attribute must have more than :value items.',
-    // ],
-    // 'gte' => [
-    //     'numeric' => 'The :attribute must be greater than or equal :value.',
-    //     'file' => 'The :attribute must be greater than or equal :value kilobytes.',
-    //     'string' => 'The :attribute must be greater than or equal :value characters.',
-    //     'array' => 'The :attribute must have :value items or more.',
-    // ],
-    // 'image' => 'The :attribute must be an image.',
-    // 'in' => 'The selected :attribute is invalid.',
-    // 'in_array' => 'The :attribute field does not exist in :other.',
+    'date_format' => 'The :attribute does not match the format :format.',
+    'email' => 'The :attribute must be a valid email address.',
     'integer' => 'The :attribute must be an integer.',
-    // 'ip' => 'The :attribute must be a valid IP address.',
-    // 'ipv4' => 'The :attribute must be a valid IPv4 address.',
-    // 'ipv6' => 'The :attribute must be a valid IPv6 address.',
-    // 'json' => 'The :attribute must be a valid JSON string.',
-    // 'lt' => [
-    //     'numeric' => 'The :attribute must be less than :value.',
-    //     'file' => 'The :attribute must be less than :value kilobytes.',
-    //     'string' => 'The :attribute must be less than :value characters.',
-    //     'array' => 'The :attribute must have less than :value items.',
-    // ],
-    // 'lte' => [
-    //     'numeric' => 'The :attribute must be less than or equal :value.',
-    //     'file' => 'The :attribute must be less than or equal :value kilobytes.',
-    //     'string' => 'The :attribute must be less than or equal :value characters.',
-    //     'array' => 'The :attribute must not have more than :value items.',
-    // ],
     'max' => [
-        'numeric' => 'The :attribute may not be greater than :max.',
-        'file' => 'The :attribute may not be greater than :max kilobytes.',
         'string' => 'The :attribute may not be greater than :max characters.',
-        'array' => 'The :attribute may not have more than :max items.',
     ],
-    // 'mimes' => 'The :attribute must be a file of type: :values.',
-    // 'mimetypes' => 'The :attribute must be a file of type: :values.',
-    // 'min' => [
-    //     'numeric' => 'The :attribute must be at least :min.',
-    //     'file' => 'The :attribute must be at least :min kilobytes.',
-    //     'string' => 'The :attribute must be at least :min characters.',
-    //     'array' => 'The :attribute must have at least :min items.',
-    // ],
-    // 'not_in' => 'The selected :attribute is invalid.',
-    // 'not_regex' => 'The :attribute format is invalid.',
-    // 'numeric' => 'The :attribute must be a number.',
-    // 'password' => 'The password is incorrect.',
-    // 'present' => 'The :attribute field must be present.',
-    'regex' => 'The :attribute format is invalid.',
+    'min' => [
+        'string' => 'The :attribute must be at least :min characters.',
+    ],
     'required' => 'The :attribute field is required.',
-    // 'required_if' => 'The :attribute field is required when :other is :value.',
-    // 'required_unless' => 'The :attribute field is required unless :other is in :values.',
-    // 'required_with' => 'The :attribute field is required when :values is present.',
-    // 'required_with_all' => 'The :attribute field is required when :values are present.',
-    // 'required_without' => 'The :attribute field is required when :values is not present.',
-    // 'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    // 'same' => 'The :attribute and :other must match.',
-    // 'size' => [
-    //     'numeric' => 'The :attribute must be :size.',
-    //     'file' => 'The :attribute must be :size kilobytes.',
-    //     'string' => 'The :attribute must be :size characters.',
-    //     'array' => 'The :attribute must contain :size items.',
-    // ],
-    // 'starts_with' => 'The :attribute must start with one of the following: :values',
-    'string' => 'The :attribute must be a string.',
-    // 'timezone' => 'The :attribute must be a valid zone.',
-    // 'unique' => 'The :attribute has already been taken.',
-    // 'uploaded' => 'The :attribute failed to upload.',
-    // 'url' => 'The :attribute format is invalid.',
-    // 'uuid' => 'The :attribute must be a valid UUID.',
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        /* people */
+        'birth_date_from' => [
+            'required_with' => 'Birth date range beginning is required when ending is present.',
+        ],
+        'birth_date_to' => [
+            'required_with' => 'Birth date range ending is required when beginning is present.',
+            'after_or_equal' => 'Birth date range ending must be a date after or equal to beginning.',
+        ],
+
+        'death_date_from' => [
+            'required_with' => 'Death date range beginning is required when ending is present.',
+        ],
+        'death_date_to' => [
+            'required_with' => 'Death date range ending is required when beginning is present.',
+            'after_or_equal' => 'Death date range ending must be a date after or equal to beginning.',
+        ],
+
+        'funeral_date_from' => [
+            'required_with' => 'Funeral date range beginning is required when ending is present.',
+        ],
+        'funeral_date_to' => [
+            'required_with' => 'Funeral date range ending is required when beginning is present.',
+            'after_or_equal' => 'Funeral date range ending must be a date after or equal to beginning.',
+        ],
+
+        'burial_date_from' => [
+            'required_with' => 'Burial date range beginning is required when ending is present.',
+        ],
+        'burial_date_to' => [
+            'required_with' => 'Burial date range ending is required when beginning is present.',
+            'after_or_equal' => 'Burial date range ending must be a date after or equal to beginning.',
+        ],
+
+        /* marriages */
+        'first_event_date_from' => [
+            'required_with' => 'First event date range beginning is required when ending is present.',
+        ],
+        'first_event_date_to' => [
+            'required_with' => 'First event date range ending is required when beginning is present.',
+            'after_or_equal' => 'First event date range ending must be a date after or equal to beginning.',
+        ],
+
+        'second_event_date_from' => [
+            'required_with' => 'Second event date range beginning is required when ending is present.',
+        ],
+        'second_event_date_to' => [
+            'required_with' => 'Second event date range ending is required when beginning is present.',
+            'after_or_equal' => 'Second event date range ending must be a date after or equal to beginning.',
+        ],
+
+        'end_date_from' => [
+            'required_with' => 'Divorce date range beginning is required when ending is present.',
+        ],
+        'end_date_to' => [
+            'required_with' => 'Divorce date range ending is required when beginning is present.',
+            'after_or_equal' => 'Divorce date range ending must be a date after or equal to beginning.',
         ],
     ],
 
     'attributes' => [
-        'id_wielcy' => 'ID in wielcy.pl',
-        'id_pytlewski' => 'ID in pytlewski.pl',
-        // 'sex' => 'sex',
-        // 'name' => 'name',
-        // 'middle_name' => '',
-        // 'family_name' => '',
-        // 'last_name' => '',
-        'mother_id' => 'mother ID',
-        'father_id' => 'father ID',
-        // 'birth_date' => '',
-        // 'birth_place' => '',
-        // 'dead' => '',
-        // 'death_date' => '',
-        // 'death_place' => '',
-        // 'death_cause' => '',
-        // 'funeral_date' => '',
-        // 'funeral_place' => '',
-        // 'burial_date' => '',
-        // 'burial_place' => '',
+        /* people */
+        'id_wielcy' => 'id in wielcy.pl',
+        'id_pytlewski' => 'id in pytlewski.pl',
 
-        // 'woman_id' => '',
+        'birth_date_from' => 'birth date',
+        'birth_date_to' => 'birth date',
+        'death_date_from' => 'death date',
+        'death_date_to' => 'death date',
+        'funeral_date_from' => 'funeral date',
+        'funeral_date_to' => 'funeral date',
+        'burial_date_from' => 'burial date',
+        'burial_date_to' => 'burial date',
+
+        /* marriages */
         'woman_order' => 'order in woman marriages',
-        // 'man_id' => '',
         'man_order' => 'order in man marriages',
-        // 'type' => '',
-        // 'first_event_type' => '',
-        // 'second_event_type' => '',
-        // 'first_event_date' => '',
-        // 'second_event_date' => '',
-        // 'first_event_place' => '',
-        // 'second_event_place' => '',
-        // 'ended' => '',
-        // 'end_cause' => '',
-        // 'end_date' => '',
+
+        'first_event_date_from' => 'first event date',
+        'first_event_date_to' => 'first event date',
+        'second_event_date_from' => 'second event date',
+        'second_event_date_to' => 'second event date',
+        'end_date_from' => 'divorce date',
+        'end_date_to' => 'divorce date',
+        'end_cause' => 'divorce cause',
     ],
 
 ];
