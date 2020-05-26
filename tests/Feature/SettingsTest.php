@@ -3,6 +3,7 @@
 use App\Http\Livewire\Settings;
 use App\User;
 use Illuminate\Auth\Events\OtherDeviceLogout;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 
 test('guest are asked to log in when attempting to view settings page')

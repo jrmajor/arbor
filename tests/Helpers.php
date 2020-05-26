@@ -21,6 +21,21 @@ function livewire($name, $params = [])
     return test()->livewire($name, $params);
 }
 
+function assertGuest($guard = null)
+{
+    return test()->assertGuest($guard);
+}
+
+function assertAuthenticated($guard = null)
+{
+    return test()->assertAuthenticated($guard);
+}
+
+function assertAuthenticatedAs($user, $guard = null)
+{
+    return test()->assertAuthenticatedAs($user, $guard);
+}
+
 function from(string $url): TestCase
 {
     return test()->from($url);
@@ -81,7 +96,6 @@ function travel($date, Closure $callback = null): Carbon
 
 function assertRouteUsesFormRequest(string $routeName, string $formRequest)
 {
-
     return test()->assertRouteUsesFormRequest($routeName, $formRequest);
 }
 
