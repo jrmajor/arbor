@@ -26,7 +26,7 @@ class Settings extends Component
     public function savePassword()
     {
         $this->validate([
-            'password' => 'required|string|confirmed|min:8',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
         auth()->user()->fill([

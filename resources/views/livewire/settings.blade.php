@@ -17,7 +17,7 @@
                 <label for="email" class="mr-2">{{ __('settings.email') }}</label>
                 <div class="flex-grow">
                     <input
-                        type="email" class="@error('email') invalid @enderror"
+                        type="text" class="@error('email') invalid @enderror"
                         wire:model.lazy="email">
                 </div>
             </div>
@@ -29,6 +29,9 @@
                 </button>
             </div>
         </div>
+        @error('email')
+            <small class="text-red-500">{{ $message }}</small>
+        @enderror
     </div>
 
     <div>
@@ -49,9 +52,6 @@
                         wire:model.lazy="password_confirmation"
                         placeholder="{{ strtolower(__('settings.confirm_password')) }}">
                 </div>
-                @error('password')
-                    <small class="text-red-500">{{ $message }}</small>
-                @enderror
             </div>
 
             <div class="w-full flex justify-end sm:w-1/4">
@@ -62,6 +62,9 @@
                 </button>
             </div>
         </div>
+        @error('password')
+            <small class="text-red-500">{{ $message }}</small>
+        @enderror
     </div>
 
 </div>

@@ -7,9 +7,6 @@
                 id="{{ $name }}_search" name="{{ $name }}_search"
                 autocomplete=off
                 wire:model="search">
-            <small class="text-red-500">
-                @error($name.'_id'){{ $message }}@enderror
-            </small>
         </div>
         <div class="w-full sm:w-3/4 md:w-5/8">
             <div class="inline-block relative w-full">

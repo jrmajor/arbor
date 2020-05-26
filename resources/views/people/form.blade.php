@@ -14,7 +14,8 @@
         <fieldset class="space-y-2">
             <div class="flex flex-wrap">
                 <legend class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.sex') }}</legend>
-                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-col">
+                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+                    <div class="w-full flex flex-col">
                         <div>
                             <input
                             type="radio"
@@ -39,7 +40,10 @@
                                 x-model="sex">
                             <label class="" for="sex_3">{{ __('people.unknown') }}</label>
                         </div>
-                        @error('sex')<br><small class="text-red-500">{{ $message }}</small>@enderror
+                    </div>
+                    @error('sex')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -52,7 +56,9 @@
                         type="text" class="@error('name') invalid @enderror"
                         id="name" name="name"
                         value="{{ old('name') ?? $person->name }}">
-                    @error('name')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('name')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
             <div class="flex flex-wrap">
@@ -62,7 +68,9 @@
                         type="text" class="@error('middle_name') invalid @enderror"
                         id="middle_name" name="middle_name"
                         value="{{ old('middle_name') ?? $person->middle_name }}">
-                    @error('middle_name')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('middle_name')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
             <div class="flex flex-wrap">
@@ -72,7 +80,9 @@
                         type="text" class="@error('family_name') invalid @enderror"
                         id="family_name" name="family_name"
                         value="{{ old('family_name') ?? $person->family_name }}">
-                    @error('family_name')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('family_name')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
             <div class="flex flex-wrap">
@@ -82,7 +92,9 @@
                         type="text" class="@error('last_name') invalid @enderror"
                         id="last_name" name="last_name"
                         value="{{ old('last_name') ?? $person->last_name }}">
-                    @error('last_name')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('last_name')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -90,21 +102,25 @@
         <fieldset class="space-y-2">
             <div class="flex flex-wrap">
                 <label for="id_wielcy" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{!! __('people.wielcy.id') !!}</label>
-                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex flex-wrap sm:flex-no-wrap space-y-2 sm:space-y-0 sm:space-x-2">
-                    <div class="w-full sm:w-1/4 md:w-3/8">
-                        <input
-                            type="text" class="@error('id_wielcy') invalid @enderror"
-                            id="id_wielcy" name="id_wielcy"
-                            value="{{ old('id_wielcy') ?? $person->id_wielcy }}">
-                        @error('id_wielcy')<small class="text-red-500">{{ $message }}</small>@enderror
+                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+                    <div class="flex flex-wrap sm:flex-no-wrap space-y-2 sm:space-y-0 sm:space-x-2">
+                        <div class="w-full sm:w-1/4 md:w-3/8">
+                            <input
+                                type="text" class="@error('id_wielcy') invalid @enderror"
+                                id="id_wielcy" name="id_wielcy"
+                                value="{{ old('id_wielcy') ?? $person->id_wielcy }}">
+                        </div>
+                        <div class="w-full sm:w-3/4 md:w-5/8">
+                            <input
+                                type="text"
+                                id="wielcy_search" name="wielcy_search"
+                                placeholder="{{ __('misc.coming_soon') }}"
+                                disabled>
+                        </div>
                     </div>
-                    <div class="w-full sm:w-3/4 md:w-5/8">
-                        <input
-                            type="text"
-                            id="wielcy_search" name="wielcy_search"
-                            placeholder="{{ __('misc.coming_soon') }}"
-                            disabled>
-                    </div>
+                    @error('id_wielcy')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -154,7 +170,9 @@
                         type="text" class="@error('birth_place') invalid @enderror"
                         id="birth_place" name="birth_place"
                         value="{{ old('birth_place') ?? $person->birth_place }}">
-                    @error('birth_place')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('birth_place')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -188,7 +206,9 @@
                         type="text" class="@error('death_place') invalid @enderror"
                         id="death_place" name="death_place"
                         value="{{ old('death_place') ?? $person->death_place }}">
-                    @error('death_place')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('death_place')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
             <div class="flex flex-wrap">
@@ -198,7 +218,9 @@
                         type="text" class="@error('death_cause') invalid @enderror"
                         id="death_cause" name="death_cause"
                         value="{{ old('death_cause') ?? $person->death_cause }}">
-                    @error('death_cause')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('death_cause')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -215,7 +237,9 @@
                         type="text" class="@error('funeral_place') invalid @enderror"
                         id="funeral_place" name="funeral_place"
                         value="{{ old('funeral_place') ?? $person->funeral_place }}">
-                    @error('funeral_place')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('funeral_place')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -232,7 +256,9 @@
                         type="text" class="@error('burial_place') invalid @enderror"
                         id="burial_place" name="burial_place"
                         value="{{ old('burial_place') ?? $person->burial_place }}">
-                    @error('burial_place')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('burial_place')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -249,10 +275,7 @@
         </fieldset>
 
         <fieldset class="w-full lg:w-3/4 flex justify-end">
-            <button
-                type="submit" class="btn"
-                id="submit" name="submit"
-                value="submit">
+            <button type="submit" class="btn">
                 {{ __('misc.save') }}
             </button>
         </fieldset>

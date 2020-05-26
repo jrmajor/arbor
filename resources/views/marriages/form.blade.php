@@ -42,7 +42,6 @@
                             </svg>
                         </div>
                     </div>
-                    @error('type')<small class="text-red-500">{{ $message }}</small>@enderror
                 </div>
             </div>
         </fieldset>
@@ -68,7 +67,6 @@
                             </svg>
                         </div>
                     </div>
-                    @error('first_event_type')<small class="text-red-500">{{ $message }}</small>@enderror
                 </div>
             </div>
             <x-date-tuple-picker
@@ -82,7 +80,9 @@
                         type="text" class="@error('event_place') invalid @enderror"
                         id="first_event_place" name="first_event_place"
                         value="{{ old('first_event_place') ?? $marriage->first_event_place }}">
-                    @error('first_event_place')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('first_event_place')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
@@ -108,7 +108,6 @@
                             </svg>
                         </div>
                     </div>
-                    @error('second_event_type')<small class="text-red-500">{{ $message }}</small>@enderror
                 </div>
             </div>
             <x-date-tuple-picker
@@ -122,16 +121,15 @@
                         type="text" class="@error('second_event_place') invalid @enderror"
                         id="second_event_place" name="second_event_place"
                         value="{{ old('second_event_place') ?? $marriage->second_event_place }}">
-                    @error('second_event_place')<small class="text-red-500">{{ $message }}</small>@enderror
+                    @error('second_event_place')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
                 </div>
             </div>
         </fieldset>
 
         <fieldset class="w-full lg:w-3/4 flex justify-end">
-            <button
-                type="submit" class="btn"
-                id="submit" name="submit"
-                value="submit">
+            <button type="submit" class="btn">
                 {{ __('misc.save') }}
             </button>
         </fieldset>
