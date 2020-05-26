@@ -1,8 +1,6 @@
 <?php
 
 use App\User;
-use Illuminate\Support\Facades\Auth;
-use Jenssegers\Agent\Facades\Agent;
 
 it('logs user logins events', function () {
     $user = factory(User::class)->create();

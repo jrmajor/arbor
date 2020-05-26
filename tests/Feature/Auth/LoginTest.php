@@ -2,8 +2,6 @@
 
 use App\User;
 use Illuminate\Auth\Events\Login;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Hash;
 
 test('authenticated users are redirected when trying to access form', function () {
     withPermissions(0)

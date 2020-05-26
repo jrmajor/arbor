@@ -2,7 +2,6 @@
 
 use App\User;
 use Illuminate\Auth\Events\Logout;
-use Illuminate\Support\Facades\Event;
 
 it('logs user out', function () {
     $user = factory(User::class)->create();
