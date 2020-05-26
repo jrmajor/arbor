@@ -1,7 +1,7 @@
 <?php
 
 use App\User;
-use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\Events\CurrentDeviceLogout;
 
 it('logs user out', function () {
     $user = factory(User::class)->create();
@@ -11,7 +11,7 @@ it('logs user out', function () {
     actingAs($user)
         ->post('/logout');
 
-    Event::assertDispatched(fn (Logout $event) => $event->user->is($user));
+    Event::assertDispatched(fn (CurrentDeviceLogout $event) => $event->user->is($user));
 });
 
 it('redirects to welcome page after logging out')
