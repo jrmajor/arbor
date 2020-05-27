@@ -32,6 +32,9 @@
         @error('email')
             <small class="text-red-500">{{ $message }}</small>
         @enderror
+        @if($success == 'email')
+            <small class="text-green-500">{{ __('settings.alerts.changes_have_been_saved') }}</small>
+        @endif
     </div>
 
     <div>
@@ -65,6 +68,9 @@
         @error('password')
             <small class="text-red-500">{{ $message }}</small>
         @enderror
+        @if($success == 'password')
+            <small class="text-green-500">{{ __('settings.alerts.password_has_been_changed') }}</small>
+        @endif
     </div>
 
     <div>
@@ -90,6 +96,9 @@
         @error('logout_password')
             <small class="text-red-500">{{ $message }}</small>
         @enderror
+        @if($success == 'logout')
+            <small class="text-green-500">{{ __('settings.alerts.logged_out') }}</small>
+        @endif
     </div>
 
 </div>

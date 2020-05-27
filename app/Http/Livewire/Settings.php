@@ -8,6 +8,8 @@ use Livewire\Component;
 
 class Settings extends Component
 {
+    public $success;
+
     public $email;
 
     public $password;
@@ -17,31 +19,49 @@ class Settings extends Component
 
     public function saveEmail()
     {
+        $this->success = null;
+
         $this->validate([
             'email' => 'required|email',
         ]);
 
-        Auth::user()->fill([
+        $result = Auth::user()->fill([
             'email' => $this->email,
         ])->save();
+
+        if ($result) {
+            $this->success = 'email';
+        } else {
+            $this->addError('email', __('misc.an_unknown_error_occurred'));
+        }
     }
 
     public function savePassword()
     {
+        $this->success = null;
+
         $this->validate([
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        Auth::user()->fill([
+        $result = Auth::user()->fill([
             'password' => Hash::make($this->password),
         ])->save();
 
         $this->password = null;
         $this->password_confirmation = null;
+
+        if ($result) {
+            $this->success = 'password';
+        } else {
+            $this->addError('password', __('misc.an_unknown_error_occurred'));
+        }
     }
 
     public function logoutOtherDevices()
     {
+        $this->success = null;
+
         $this->validate([
             'logout_password' => 'required',
         ]);
@@ -51,9 +71,15 @@ class Settings extends Component
             return;
         }
 
-        Auth::guard()->logoutOtherDevices($this->logout_password);
+        $result = Auth::guard()->logoutOtherDevices($this->logout_password);
 
         $this->logout_password = null;
+
+        if ($result) {
+            $this->success = 'logout';
+        } else {
+            $this->addError('logout', __('misc.an_unknown_error_occurred'));
+        }
     }
 
     public function mount()

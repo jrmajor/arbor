@@ -6,7 +6,7 @@
 
     <div class="container mx-auto my-1 p-2" id="app">
 
-    <x:flash/>
+        <x:flash/>
 
         @hasSection('title-bar')
             <h1 class="mx-2 mb-1 mt-5 leading-none text-3xl font-medium">@yield('title-bar')</h1>
