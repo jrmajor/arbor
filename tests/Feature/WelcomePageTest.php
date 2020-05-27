@@ -2,7 +2,7 @@
 
 it('can be accessed by guests')
     ->get('/')
-    ->assertStatus(200);
+    ->assertRedirect('/people');
 
 it('redirects logged users')
     ->withPermissions(0)

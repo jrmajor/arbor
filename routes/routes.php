@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@welcome')->name('welcome');
+Route::get('/', fn () => redirect()->route('people.index'))->name('welcome');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
