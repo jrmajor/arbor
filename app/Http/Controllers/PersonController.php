@@ -65,7 +65,13 @@ class PersonController extends Controller
     {
         $this->authorize('create', Person::class);
 
-        $person = Person::create($request->validated());
+        $person = new Person();
+
+        if ($person->fill($request->validated())->save()) {
+            flash()->success(__('people.alerts.person_have_been_created'));
+        } else {
+            flash()->error(__('misc.an_unknown_error_occurred'));
+        }
 
         return redirect()->route('people.show', [$person]);
     }
@@ -88,7 +94,11 @@ class PersonController extends Controller
     {
         $this->authorize('update', $person);
 
-        $person->fill($request->validated())->save();
+        if ($person->fill($request->validated())->save()) {
+            flash()->success(__('people.alerts.changes_have_been_saved'));
+        } else {
+            flash()->error(__('misc.an_unknown_error_occurred'));
+        }
 
         return redirect()->route('people.show', [$person]);
     }
@@ -101,8 +111,10 @@ class PersonController extends Controller
             'visibility' => 'required|boolean',
         ]);
 
-        if (! $person->changeVisibility($request['visibility'])) {
-            return abort(500);
+        if ($person->changeVisibility($request['visibility'])) {
+            flash()->success(__('people.alerts.visibility_have_been_changed'));
+        } else {
+            flash()->error(__('misc.an_unknown_error_occurred'));
         }
 
         return back();
@@ -113,18 +125,20 @@ class PersonController extends Controller
         $this->authorize('delete', $person);
 
         if ($person->marriages->count() > 0) {
-            return back()->withErrors([
-                'deleting' => __('people.cant_delete_person_with_relationships'),
-            ]);
+            flash()->error(__('people.alerts.cant_delete_person_with_relationships'));
+            return back();
         }
 
         if ($person->children->count() > 0) {
-            return back()->withErrors([
-                'deleting' => __('people.cant_delete_person_with_children'),
-            ]);
+            flash()->error(__('people.alerts.cant_delete_person_with_children'));
+            return back();
         }
 
-        $person->delete();
+        if ($person->delete()) {
+            flash()->success(__('people.alerts.person_have_been_deleted'));
+        } else {
+            flash()->error(__('misc.an_unknown_error_occurred'));
+        }
 
         return redirect()->route('people.index');
     }

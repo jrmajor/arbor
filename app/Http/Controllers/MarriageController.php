@@ -30,7 +30,13 @@ class MarriageController extends Controller
     {
         $this->authorize('create', Marriage::class);
 
-        $marriage = Marriage::create($request->validated());
+        $marriage = new Marriage();
+
+        if ($marriage->fill($request->validated())->save()) {
+            flash()->success(__('marriages.alerts.marriage_have_been_created'));
+        } else {
+            flash()->error(__('misc.an_unknown_error_occurred'));
+        }
 
         return redirect()->route('people.show', [$marriage->woman_id]);
     }
@@ -46,7 +52,11 @@ class MarriageController extends Controller
     {
         $this->authorize('update', $marriage);
 
-        $marriage->fill($request->validated())->save();
+        if ($marriage->fill($request->validated())->save()) {
+            flash()->success(__('marriages.alerts.changes_have_been_saved'));
+        } else {
+            flash()->error(__('misc.an_unknown_error_occurred'));
+        }
 
         return redirect()->route('people.show', [$marriage->woman_id]);
     }
@@ -55,7 +65,11 @@ class MarriageController extends Controller
     {
         $this->authorize('delete', $marriage);
 
-        $marriage->delete();
+        if ($marriage->delete()) {
+            flash()->success(__('marriages.alerts.marriage_have_been_deleted'));
+        } else {
+            flash()->error(__('misc.an_unknown_error_occurred'));
+        }
 
         return redirect()->route('people.show', ['person' => $marriage->woman_id]);
     }

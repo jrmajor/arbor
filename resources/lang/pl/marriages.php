@@ -4,15 +4,20 @@ return [
 
     'marriage' => 'małżeństwo',
 
-    'add_a_new_marriage' => 'Dodaj związek',
-
     'menu' => [
         'edit_marriage' => 'Edytuj związek',
         'edits_history' => 'Historia edycji',
 
-        'delete' => 'usuń',
+        'delete' => 'Usuń',
     ],
 
+    'alerts' => [
+        'marriage_have_been_created' => 'Małżeństwo zostało dodane.',
+        'changes_have_been_saved' => 'Zmiany zostały zapisane.',
+        'marriage_have_been_deleted' => 'Małżeństwo zostało usunięte.',
+    ],
+
+    'add_a_new_marriage' => 'Dodaj związek',
     'edit_this_marriage' => 'Edytuj ten związek',
     'add_child' => 'Dodaj dziecko',
 

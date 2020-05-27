@@ -46,4 +46,6 @@ return [
 
     'no_results' => 'No results',
 
+    'an_unknown_error_occurred' => 'An unknown error occurred.',
+
 ];

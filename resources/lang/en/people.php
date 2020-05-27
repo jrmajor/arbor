@@ -10,10 +10,9 @@ return [
         'total' => 'total',
     ],
 
-    'add_a_new_person' => 'Add a new person',
-
     'menu' => [
         'overview' => 'Overview',
+
         'edit_person' => 'Edit person',
         'edits_history' => 'Edits history',
 
@@ -23,10 +22,17 @@ return [
         'delete' => 'Delete',
     ],
 
-    'edit_this_person' => 'Edit this person',
+    'alerts' => [
+        'person_have_been_created' => 'Person have been created.',
+        'changes_have_been_saved' => 'Changes have been saved.',
+        'visibility_have_been_changed' => 'Visibility have been changed.',
+        'cant_delete_person_with_relationships' => 'In order to delete this person, first delete relationships.',
+        'cant_delete_person_with_children' => 'In order to delete this person, first delete children.',
+        'person_have_been_deleted' => 'Person have been deleted.',
+    ],
 
-    'cant_delete_person_with_relationships' => 'In order to delete this person, first delete relationships.',
-    'cant_delete_person_with_children' => 'In order to delete this person, first delete children.',
+    'add_a_new_person' => 'Add a new person',
+    'edit_this_person' => 'Edit this person',
 
     'sex' => 'Sex',
     'female' => 'female',

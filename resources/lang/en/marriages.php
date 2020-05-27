@@ -4,15 +4,20 @@ return [
 
     'marriage' => 'marriage',
 
-    'add_a_new_marriage' => 'Add marriage',
-
     'menu' => [
         'edit_marriage' => 'Edit marriage',
         'edits_history' => 'Edits history',
 
-        'delete' => 'delete',
+        'delete' => 'Delete',
     ],
 
+    'alerts' => [
+        'marriage_have_been_created' => 'Marriage have been created.',
+        'changes_have_been_saved' => 'Changes have been saved.',
+        'marriage_have_been_deleted' => 'Marriage have been deleted.',
+    ],
+
+    'add_a_new_marriage' => 'Add marriage',
     'edit_this_marriage' => 'Edit this marriage',
     'add_child' => 'Add child',
 

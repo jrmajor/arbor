@@ -10,10 +10,9 @@ return [
         'total' => 'łącznie',
     ],
 
-    'add_a_new_person' => 'Dodaj nową osobę',
-
     'menu' => [
         'overview' => 'Widok osoby',
+
         'edit_person' => 'Edytuj osobę',
         'edits_history' => 'Historia edycji',
 
@@ -23,10 +22,17 @@ return [
         'delete' => 'Usuń',
     ],
 
-    'edit_this_person' => 'Edytuj tę osobę',
+    'alerts' => [
+        'person_have_been_created' => 'Osoba została utworzona.',
+        'changes_have_been_saved' => 'Zmiany zostały zapisane.',
+        'visibility_have_been_changed' => 'Widoczność została zmieniona.',
+        'cant_delete_person_with_relationships' => 'Aby usunąć tę osobę, usuń najpierw jej związki.',
+        'cant_delete_person_with_children' => 'Aby usunąć tę osobę, usuń najpierw jej dzieci.',
+        'person_have_been_deleted' => 'Osoba została usunięta.',
+    ],
 
-    'cant_delete_person_with_relationships' => 'Aby usunąć tę osobę, usuń najpierw jej związki.',
-    'cant_delete_person_with_children' => 'Aby usunąć tę osobę, usuń najpierw jej dzieci.',
+    'add_a_new_person' => 'Dodaj nową osobę',
+    'edit_this_person' => 'Edytuj tę osobę',
 
     'sex' => 'Płeć',
     'female' => 'kobieta',

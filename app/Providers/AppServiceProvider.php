@@ -6,6 +6,7 @@ use App\Observers\PersonObserver;
 use App\Person;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Flash\Flash;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        Person::observe(PersonObserver::class);
+
         Arr::macro('trim', function ($array) {
             foreach ($array as $key => $value) {
                 if (is_array($value)) {
@@ -34,6 +37,10 @@ class AppServiceProvider extends ServiceProvider
             return $array;
         });
 
-        Person::observe(PersonObserver::class);
+        Flash::levels([
+            'success' => 'success',
+            'warning' => 'warning',
+            'error' => 'error',
+        ]);
     }
 }
