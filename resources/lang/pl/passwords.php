@@ -2,11 +2,14 @@
 
 return [
 
-    'reset_password' => 'Resetuj hasło',
+    'resetting_password' => 'Resetowanie hasła',
+
     'email' => 'Adres e-mail',
     'send_link' => 'Wyślij link do resetowania hasła',
+
     'password' => 'Hasło',
     'confirm_password' => 'Potwierdź hasło',
+    'reset_password' => 'Resetuj hasło',
 
     'you_are_recieving' => 'Dostałeś tego maila, ponieważ otrzymaliśmy prośbę o zresetowanie hasła dla twojego konta.',
     'reset_link_will_expire' => 'Link do zresetowania hasła straci ważność za :count minut.',

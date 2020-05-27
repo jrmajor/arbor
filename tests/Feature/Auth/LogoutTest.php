@@ -12,6 +12,8 @@ it('logs user out', function () {
         ->post('/logout');
 
     Event::assertDispatched(fn (CurrentDeviceLogout $event) => $event->user->is($user));
+
+    assertFalse(Auth::check());
 });
 
 it('redirects to welcome page after logging out')

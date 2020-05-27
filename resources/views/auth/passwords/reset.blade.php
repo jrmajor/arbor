@@ -1,60 +1,84 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
-@section('title-bar')
-    {{ __('passwords.reset_password') }}
-@endsection
+@push('scripts')
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+@endpush
+
+@section('title', __('passwords.resetting_password'))
 
 @section('content')
-    <form method="POST" action="{{ route('password.update') }}">
-        @csrf
-        <input type="hidden" name="token" value="{{ $token }}">
 
-        <div class="space-y-4">
-            <fieldset class="space-y-2">
-                <div class="flex flex-wrap">
-                    <label for="email" class="w-full sm:w-1/2 md:w-1/4 pr-1">{{ __('passwords.email') }}</label>
-                    <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+    <div class="flex flex-col items-center w-full">
+        <a href="{{ route('people.index') }}">
+            <h1
+                style="font-family: Nunito; letter-spacing: 0.2em"
+                class="text-6xl xs:text-7xl sm:text-8xl leading-none">
+                arbor
+            </h1>
+        </a>
+        <h2
+            style="font-family: Nunito"
+            class="text-xl font-medium text-gray-700 leading-none">
+            {{ __('passwords.resetting_password') }}
+        </h2>
+        <div class="mt-2 bg-white rounded-lg shadow-lg px-5 py-4 w-full xs:w-5/6 sm:w-3/4 md:w-1/2 lg:w-128">
+            <form method="POST" action="{{ route('password.update') }}">
+                @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
+
+                <div class="flex flex-wrap mb-4">
+                    <div class="w-full">
                         <input
-                            type="email" class="@error('email') invalid @enderror"
-                            id="email" name="email"
-                            value="{{ $email ?? old('email') }}" required
-                            autocomplete="email" autofocus>
-                        @error('email')<small class="text-red-500">{{ $message }}</small>@enderror
+                            id="email" type="text" name="email"
+                            class="@error('email') invalid @enderror"
+                            value="{{ $email ?? old('email') }}"
+                            autocomplete="email"
+                            placeholder="{{ __('passwords.email') }}">
                     </div>
                 </div>
-            </fieldset>
+                @error('email')
+                    <div class="w-full -mt-4 text-left">
+                        <small class="text-red-500">
+                            {{ $message }}
+                        </small>
+                    </div>
+                @enderror
 
-            <fieldset class="space-y-2">
-                <div class="flex flex-wrap">
-                    <label for="password" class="w-full sm:w-1/2 md:w-1/4 pr-1">{{ __('passwords.password') }}</label>
-                    <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+                <div class="flex flex-wrap mb-4">
+                    <div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
                         <input
-                            type="password" class="@error('password') invalid @enderror"
-                            id="password" name="password"
-                            required autocomplete="new-password">
-                        @error('password')<small class="text-red-500">{{ $message }}</small>@enderror
+                            id="password" type="password" name="password"
+                            class="@error('password') invalid @enderror"
+                            value="{{ old('password') }}"
+                            autocomplete="new-password" autofocus
+                            placeholder="{{ strtolower(__('passwords.password')) }}">
+                    </div>
+                    <div class="w-full sm:w-1/2 sm:pl-1">
+                        <input
+                            id="password-confirm" type="password" name="password_confirmation"
+                            class="@error('password') invalid @enderror"
+                            autocomplete="current-password"
+                            placeholder="{{ strtolower(__('passwords.confirm_password')) }}">
                     </div>
                 </div>
-                <div class="flex flex-wrap">
-                    <label for="password-confirm" class="w-full sm:w-1/2 md:w-1/4 pr-1">{{ __('passwords.confirm_password') }}</label>
-                    <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
-                        <input
-                            type="password"
-                            id="password-confirm" name="password_confirmation"
-                            required autocomplete="new-password">
-                        @error('password')<small class="text-red-500">{{ $message }}</small>@enderror
+                @error('password')
+                    <div class="w-full -mt-4 text-left">
+                        <small class="text-red-500">
+                            {{ $message }}
+                        </small>
+                    </div>
+                @enderror
+
+                <div class="flex justify-end">
+                    <div>
+                        <button type="submit" class="btn">
+                            {{ __('passwords.reset_password') }}
+                        </button>
                     </div>
                 </div>
-            </fieldset>
-
-            <fieldset class="w-full lg:w-3/4 flex justify-end">
-                <button
-                    type="submit" class="btn"
-                    id="submit" name="submit"
-                    value="submit">
-                    {{ __('passwords.reset_password') }}
-                </button>
-            </fieldset>
+            </form>
         </div>
-    </form>
+    </div>
+
 @endsection

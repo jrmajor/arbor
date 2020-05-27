@@ -33,6 +33,12 @@ module.exports = {
                 '9xl': '7rem',
                 '10xl': '8rem',
             },
+            spacing: {
+                '80': '20rem',
+                '96': '24rem',
+                '112': '28rem',
+                '128': '32rem',
+            },
             strokeWidth: {
                 '3': '3',
             },

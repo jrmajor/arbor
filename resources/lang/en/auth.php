@@ -2,11 +2,16 @@
 
 return [
 
-    'username' => 'username',
-    'password' => 'password',
+    'signing_in' => 'Sign in',
+
+    'username' => 'Username',
+    'password' => 'Password',
     'remember' => 'Remember me',
+
     'forgot_password' => 'Forgot password?',
-    'login' => 'Login',
+
+    'sign_in' => 'Sign in',
+
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

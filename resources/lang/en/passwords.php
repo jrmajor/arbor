@@ -2,11 +2,14 @@
 
 return [
 
-    'reset_password' => 'Reset password',
+    'resetting_password' => 'Reset password',
+
     'email' => 'E-mail adress',
     'send_link' => 'Send password reset link',
+
     'password' => 'Password',
     'confirm_password' => 'Confirm password',
+    'reset_password' => 'Reset password',
 
     'you_are_recieving' => 'You are receiving this email because we received a password reset request for your account.',
     'reset_link_will_expire' => 'This password reset link will expire in :count minutes.',
