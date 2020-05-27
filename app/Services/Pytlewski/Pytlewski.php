@@ -25,6 +25,10 @@ class Pytlewski
 
     private function runParsers($source): array
     {
+        if ($source === null) {
+            return [];
+        }
+
         $attributes = $this->getParsers()
         ->flatMap(
             fn ($method) => $this->{$method}($source)
@@ -60,7 +64,7 @@ class Pytlewski
         return 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id='.$id;
     }
 
-    private function getSource(): string
+    private function getSource()
     {
         return Cache::remember(
             'pytlewski.'.$this->id,
@@ -69,19 +73,19 @@ class Pytlewski
         );
     }
 
-    private function getSourceFromPytlewski(): string
+    private function getSourceFromPytlewski()
     {
         try {
             $source = Http::timeout(2)->get(self::url($this->id));
         } catch (Exception $e) {
-            return false;
+            return null;
         }
 
         if (! $source->ok()) {
-            return false;
+            return null;
         }
 
-        $source = iconv('Windows-1250', 'UTF-8', $source);
+        $source = iconv('Windows-1250', 'UTF-8', $source->body());
 
         $source = strstr($source, '<table id="metrzyczka" width="481" height="451" border="0" cellpadding="0" cellspacing="0">');
 

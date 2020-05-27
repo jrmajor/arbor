@@ -52,31 +52,13 @@ trait ScrapesPytlewski
             $attr['name'] = $matches->group(3);
             $attr['middle_name'] = str_replace('-', ' ', $matches->group(4));
 
-            $birth = Regex::match('/([0-9]{1|2})?\.?([0-9]{1|2})?\.?([0-9]{3|4})/', $matches->group(5));
-            if ($birth->hasMatch()) {
-                $attr['birth_date'] = $birth->group(3);
-                if (filled($birth->group(2))) {
-                    $attr['birth_date'] .= '-'.str_pad($birth->group(2), 2, '0', STR_PAD_LEFT);
-                }
-                if (filled($birth->group(1))) {
-                    $attr['birth_date'] .= '-'.str_pad($birth->group(1), 2, '0', STR_PAD_LEFT);
-                }
-            }
+            $attr['birth_date'] = $matches->group(5);
 
             if (! Str::contains($matches->group(6), 'brak')) {
                 $attr['birth_place'] = $matches->group(6);
             }
 
-            $death = Regex::match('/([0-9]{1|2})?\.?([0-9]{1|2})?\.?([0-9]{3|4})/', $matches->group(7));
-            if ($death->hasMatch()) {
-                $attr['death_date'] = $death->group(3);
-                if (filled($death->group(2))) {
-                    $attr['death_date'] .= '-'.str_pad($death->group(2), 2, '0', STR_PAD_LEFT);
-                }
-                if (filled($death->group(1))) {
-                    $attr['death_date'] .= '-'.str_pad($death->group(1), 2, '0', STR_PAD_LEFT);
-                }
-            }
+            $attr['death_date'] = $matches->group(7);
 
             if (! Str::contains($matches->group(8), 'brak')) {
                 $attr['death_place'] = $matches->group(8);
@@ -110,7 +92,7 @@ trait ScrapesPytlewski
     {
         $matches = Regex::match('/tablica_06.jpg" width="125" height="165" align=center>(?:\S|\s)*(foto\/[0-9]*\.jpg|brak<br>zdj)/', $source);
 
-        if ($matches->hasMatch()) {
+        if ($matches->hasMatch() && $matches->group(1) != 'brak<br>zdj') {
             $photo = 'http://www.pytlewski.pl/index/drzewo/'.$matches->group(1);
         }
 
