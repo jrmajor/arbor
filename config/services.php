@@ -18,6 +18,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'eu-central-1'),
     ],
 
+    'telegram-bot-api' => [
+        'token' => env('TELEGRAM_BOT_TOKEN'),
+    ],
+
     'stripe' => [
         'model' => App\User::class,
         'key' => env('STRIPE_KEY'),

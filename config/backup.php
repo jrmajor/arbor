@@ -1,5 +1,7 @@
 <?php
 
+use NotificationChannels\Telegram\TelegramChannel;
+
 return [
 
     'backup' => [
@@ -42,23 +44,18 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['mail'],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['mail'],
+            \App\Notifications\Backup\BackupHasFailed::class => [TelegramChannel::class],
+            \App\Notifications\Backup\UnhealthyBackupWasFound::class => [TelegramChannel::class],
+            \App\Notifications\Backup\CleanupHasFailed::class => [TelegramChannel::class],
+            \App\Notifications\Backup\BackupWasSuccessful::class => [TelegramChannel::class],
+            \App\Notifications\Backup\HealthyBackupWasFound::class => [TelegramChannel::class],
+            \App\Notifications\Backup\CleanupWasSuccessful::class => [TelegramChannel::class],
         ],
 
-        'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
+        'notifiable' => \App\Notifications\Backup\Notifiable::class,
 
-        'mail' => [
-            'to' => env('ADMIN_MAIL'),
-
-            'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'arbor@npng.pl'),
-                'name' => env('MAIL_FROM_NAME', 'Arbor'),
-            ],
+        'telegram' => [
+            'to' => env('ADMIN_TELEGRAM'),
         ],
 
     ],
