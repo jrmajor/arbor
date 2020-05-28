@@ -20,6 +20,6 @@ class HealthyBackupWasFound extends BaseNotification
     {
         return (new TelegramMessage)
             ->to(config('backup.notifications.telegram.to'))
-            ->content('*'.trans('backup::notifications.healthy_backup_found_subject', ['application_name' => $this->applicationName()]).'*');
+            ->content('*'.trans('backup::notifications.healthy_backup_found_subject', ['application_name' => $this->applicationName()], 'en').'*');
     }
 }

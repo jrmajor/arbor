@@ -23,18 +23,18 @@ class UnhealthyBackupWasFound extends BaseNotification
             return (new TelegramMessage)
                 ->to(config('backup.notifications.telegram.to'))
                 ->content(
-                    '*'.trans('backup::notifications.unhealthy_backup_found_subject', ['application_name' => $this->applicationName()])."*\n"
+                    '*'.trans('backup::notifications.unhealthy_backup_found_subject', ['application_name' => $this->applicationName()], 'en')."*\n"
                     .$this->problemDescription()
                 );
         } else {
             return (new TelegramMessage)
                 ->to(config('backup.notifications.telegram.to'))
                 ->content(
-                    '*'.trans('backup::notifications.unhealthy_backup_found_subject', ['application_name' => $this->applicationName()])."*\n"
+                    '*'.trans('backup::notifications.unhealthy_backup_found_subject', ['application_name' => $this->applicationName()], 'en')."*\n"
                     .$this->problemDescription()."\n"
                     ."Health check: "
                     .$this->failure()->healthCheck()->name()."\n"
-                    .trans('backup::notifications.exception_message_title').': '
+                    .trans('backup::notifications.exception_message_title', [], 'en').': '
                     .$this->faillure()->exception()->getMessage()
                 );
         }
@@ -43,7 +43,7 @@ class UnhealthyBackupWasFound extends BaseNotification
     protected function problemDescription(): string
     {
         if ($this->failure()->wasUnexpected()) {
-            return trans('backup::notifications.unhealthy_backup_found_unknown');
+            return trans('backup::notifications.unhealthy_backup_found_unknown', [], 'en');
         }
 
         return $this->failure()->exception()->getMessage();

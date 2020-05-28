@@ -20,6 +20,6 @@ class CleanupWasSuccessful extends BaseNotification
     {
         return (new TelegramMessage)
             ->to(config('backup.notifications.telegram.to'))
-            ->content('*'.trans('backup::notifications.cleanup_successful_subject').'*');
+            ->content('*'.trans('backup::notifications.cleanup_successful_subject', ['application_name' => $this->applicationName()]).'*');
     }
 }

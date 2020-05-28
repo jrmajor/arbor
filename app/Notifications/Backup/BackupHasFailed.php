@@ -21,8 +21,8 @@ class BackupHasFailed extends BaseNotification
         return (new TelegramMessage)
             ->to(config('backup.notifications.telegram.to'))
             ->content(
-                '*'.trans('backup::notifications.backup_failed_subject', ['application_name' => $this->applicationName()])."*\n"
-                .trans('backup::notifications.exception_message_title').': '
+                '*'.trans('backup::notifications.backup_failed_subject', ['application_name' => $this->applicationName()], 'en')."*\n"
+                .trans('backup::notifications.exception_message_title', [], 'en').': '
                 .$this->event->exception->getMessage()
             );
     }

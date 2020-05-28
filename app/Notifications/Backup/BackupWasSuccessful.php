@@ -20,6 +20,6 @@ class BackupWasSuccessful extends BaseNotification
     {
         return (new TelegramMessage)
             ->to(config('backup.notifications.telegram.to'))
-            ->content('*'.trans('backup::notifications.backup_successful_subject').'*');
+            ->content('*'.trans('backup::notifications.backup_successful_subject', ['application_name' => $this->applicationName()], 'en').'*');
     }
 }
