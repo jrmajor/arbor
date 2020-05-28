@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -11,5 +12,12 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
+    }
+
+    protected function schedule(Schedule $schedule)
+    {
+       $schedule->command('backup:clean')->daily()->at('01:00');
+       $schedule->command('backup:run')->daily()->at('02:00');
+       $schedule->command('backup:monitor')->daily()->at('03:00');
     }
 }
