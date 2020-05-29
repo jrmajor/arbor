@@ -26,7 +26,9 @@
         "spatie/laravel-enum": "^1.6.0",
         "spatie/laravel-flash": "^1.6",
         "spatie/laravel-sitemap": "^5.7",
-        "spatie/regex": "^1.4"
+        "spatie/regex": "^1.4",
+        "symfony/css-selector": "^5.0",
+        "symfony/dom-crawler": "^5.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",

@@ -2,10 +2,47 @@
 
 dataset('pytlewscy', function () {
     yield [
+        '543',
+        file_get_contents(__DIR__.'/pytlewscy/543.html'),
+        [
+            'family_name' => 'Kosela',
+            'last_name' => null,
+            'name' => 'Franciszek',
+            'middle_name' => null,
+            'birth_date' => '01.02.1940',
+            'birth_place' => 'Grabowcu',
+            'death_date' => null,
+            'death_place' => null,
+            'mother_id' => null,
+            'mother_surname' => 'Krzemińska',
+            'mother_name' => 'Aniela',
+            'father_id' => null,
+            'father_surname' => 'Kosela',
+            'father_name' => 'Stanisław',
+            'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006081743.jpg',
+            'marriages' => [
+                [
+                    'name' => 'Pytlewska, Kornelia',
+                    'date' => '21.07.1963',
+                    'place' => 'Kielce',
+                ],
+            ],
+            'children' => [
+                ['name' => 'Wojciech'],
+                ['name' => 'Iwona'],
+            ],
+            'siblings' => [
+                ['name' => 'Teodora'],
+                ['name' => 'Maria'],
+            ],
+            'bio' => 'Hobby-kolarstwo-wygrał:Mistrz Polski Juniorów w przełaju 1957,Zwycięzca Pasma Gór Swiętokrzyskich w1959 i 1960,Górski Mistrz Polski seniorów 1960 itd',
+        ],
+    ];
+
+    yield [
         '556',
         file_get_contents(__DIR__.'/pytlewscy/556.html'),
         [
-            'basic_name' => '<b>Major</b> Józef',
             'family_name' => 'Major',
             'last_name' => null,
             'name' => 'Józef',
@@ -20,9 +57,7 @@ dataset('pytlewscy', function () {
             'father_id' => null,
             'father_surname' => 'Major',
             'father_name' => 'Jacenty',
-            'parents' => '1',
             'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006104940.jpg',
-            'total_marriages' => '2',
             'marriages' => [
                 [
                     'id' => '1141',
@@ -34,7 +69,6 @@ dataset('pytlewscy', function () {
                     'date' => '05.02.1940',
                 ],
             ],
-            'total_children' => '4',
             'children' => [
                 ['name' => 'Jadwiga'],
                 ['name' => 'Irena'],
@@ -47,13 +81,13 @@ dataset('pytlewscy', function () {
                     'name' => 'Bogdan',
                 ],
             ],
-            'total_siblings' => '4',
             'siblings' => [
                 ['name' => 'Jan'],
                 ['name' => 'Bronisława'],
                 ['name' => 'Stanisław'],
                 ['name' => 'Adam'],
             ],
+            'bio' => null,
         ],
     ];
 
@@ -61,7 +95,6 @@ dataset('pytlewscy', function () {
         '550',
         file_get_contents(__DIR__.'/pytlewscy/550.html'),
         [
-            'basic_name' => '<b>Bobińska (Kosela)</b> Iwona',
             'family_name' => 'Kosela',
             'last_name' => 'Bobińska',
             'name' => 'Iwona',
@@ -76,9 +109,7 @@ dataset('pytlewscy', function () {
             'father_id' => '543',
             'father_surname' => 'Kosela',
             'father_name' => 'Franciszek',
-            'parents' => '1',
             'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006090640.jpg',
-            'total_marriages' => '1',
             'marriages' => [
                 [
                     'name' => 'Bobiński, Jarosław',
@@ -86,15 +117,205 @@ dataset('pytlewscy', function () {
                     'place' => 'Kielce',
                 ],
             ],
-            'total_children' => '2',
             'children' => [
                 ['name' => 'Patryk'],
                 ['name' => 'Chrystian'],
             ],
-            'total_siblings' => '1',
             'siblings' => [
                 ['name' => 'Wojciech'],
             ],
+            'bio' => null,
+        ],
+    ];
+
+    yield [
+        '704',
+        file_get_contents(__DIR__.'/pytlewscy/704.html'),
+        [
+            'family_name' => 'Pytlewski',
+            'last_name' => null,
+            'name' => 'Maciej',
+            'middle_name' => 'Kazimierz',
+            'birth_date' => '17.02.1859',
+            'birth_place' => 'Sulmierzyce',
+            'death_date' => null,
+            'death_place' => null,
+            'mother_id' => '1420',
+            'mother_surname' => 'Ptakowska',
+            'mother_name' => 'Maryanna',
+            'father_id' => '637',
+            'father_surname' => 'Pytlewski',
+            'father_name' => 'Łukasz',
+            'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08222006145226.jpg',
+            'marriages' => [
+                [
+                    'id' => '705',
+                    'name' => 'Frankiewicz, Bronisława',
+                    'date' => '29.09.1885',
+                    'place' => 'Sulmierzyce',
+                ],
+            ],
+            'children' => [
+                [
+                    'id' => '706',
+                    'name' => 'Zygmunt-Stanisław',
+                ],
+                [
+                    'id' => '707',
+                    'name' => 'Seweryn',
+                ],
+                [
+                    'id' => '708',
+                    'name' => 'Maria',
+                ],
+                [
+                    'id' => '709',
+                    'name' => 'Sabina',
+                ],
+                [
+                    'id' => '711',
+                    'name' => 'Jadwiga',
+                ],
+                [
+                    'id' => '4244',
+                    'name' => 'Joanna-Franciszka',
+                ],
+            ],
+            'siblings' => [
+                [
+                    'name' => 'Roch-Tomasz',
+                ],
+                [
+                    'id' => '678',
+                    'name' => 'Katarzyna',
+                ],
+                [
+                    'id' => '691',
+                    'name' => 'Jan',
+                ],
+                [
+                    'id' => '701',
+                    'name' => 'Zuzanna',
+                ],
+                [
+                    'id' => '1423',
+                    'name' => 'Sabina',
+                ],
+                [
+                    'id' => '3296',
+                    'name' => 'Aniela',
+                ],
+                [
+                    'name' => 'Julianna',
+                ],
+                [
+                    'id' => '725',
+                    'name' => 'Florentyna-Franciszka',
+                ],
+                [
+                    'name' => 'Józefa',
+                ],
+                [
+                    'id' => '2908',
+                    'name' => 'Marcjanna',
+                ],
+                [
+                    'id' => '712',
+                    'name' => 'Franciszka',
+                ],
+                [
+                    'id' => '736',
+                    'name' => 'Antonina',
+                ],
+                [
+                    'id' => '2021',
+                    'name' => 'Maryanna',
+                ],
+                [
+                    'id' => '754',
+                    'name' => 'Petronella',
+                ],
+                [
+                    'id' => '4188',
+                ],
+                [
+                    'id' => '3173',
+                    'name' => 'Julian',
+                ],
+                [
+                    'id' => '3169',
+                    'name' => 'Bogumił',
+                ],
+                [
+                    'id' => '3172',
+                    'name' => 'Józef',
+                ],
+                [
+                    'id' => '3174',
+                    'name' => 'Anna',
+                ],
+                [
+                    'id' => '2819',
+                    'name' => 'Agnieszka',
+                ],
+            ],
+            'bio' => null,
+        ],
+    ];
+
+    yield [
+        '1420',
+        file_get_contents(__DIR__.'/pytlewscy/1420.html'),
+        [
+            'family_name' => 'Ptakowska',
+            'last_name' => 'Pytlewska',
+            'name' => 'Maryanna',
+            'middle_name' => null,
+            'birth_date' => '20.10.1825',
+            'birth_place' => 'Kleszczowie',
+            'death_date' => null,
+            'death_place' => null,
+            'mother_id' => '3186',
+            'mother_surname' => 'Bąblewska',
+            'mother_name' => 'Agnieszka',
+            'father_id' => null,
+            'father_surname' => 'Ptakowski',
+            'father_name' => 'Edward',
+            'photo' => null,
+            'marriages' => [
+                [
+                    'id' => '637',
+                    'name' => 'Pytlewski, Łukasz',
+                    'date' => '19.05.1852',
+                    'place' => 'Sulmierzyce',
+                ],
+            ],
+            'children' => [
+                ['name' => 'Julianna'],
+                [
+                    'id' => '725',
+                    'name' => 'Florentyna-Franciszka',
+                ],
+                [
+                    'id' => '1423',
+                    'name' => 'Sabina',
+                ],
+                [
+                    'id' => '704',
+                    'name' => 'Maciej-Kazimierz',
+                ],
+                [
+                    'id' => '712',
+                    'name' => 'Franciszka',
+                ],
+                ['name' => 'Józefa'],
+                [
+                    'id' => '2908',
+                    'name' => 'Marcjanna',
+                ],
+            ],
+            'siblings' => [],
+            'bio' => null,
         ],
     ];
 
@@ -102,7 +323,6 @@ dataset('pytlewscy', function () {
         '1928',
         file_get_contents(__DIR__.'/pytlewscy/1928.html'),
         [
-            'basic_name' => '<b>Chełmońska (Korwin-Szymanowska)</b> Maria-Ludwika',
             'family_name' => 'Korwin-Szymanowska',
             'last_name' => 'Chełmońska',
             'name' => 'Maria',
@@ -117,9 +337,7 @@ dataset('pytlewscy', function () {
             'father_id' => null,
             'father_surname' => 'Szymanowski',
             'father_name' => 'Józef',
-            'parents' => '1',
             'photo' => null,
-            'total_marriages' => '1',
             'marriages' => [
                 [
                     'id' => '1927',
@@ -128,7 +346,6 @@ dataset('pytlewscy', function () {
                     'place' => 'Warszawa',
                 ],
             ],
-            'total_children' => '7',
             'children' => [
                 [
                   'id' => '1953',
@@ -159,8 +376,8 @@ dataset('pytlewscy', function () {
                   'name' => 'Wanda',
                 ],
             ],
-            'total_siblings' => '0',
-            'siblings' => null,
+            'siblings' => [],
+            'bio' => null,
         ],
     ];
 
@@ -168,7 +385,6 @@ dataset('pytlewscy', function () {
         '4613',
         file_get_contents(__DIR__.'/pytlewscy/4613.html'),
         [
-            'basic_name' => '<b>Białkowska (Kolin)</b> Adolfina',
             'family_name' => 'Kolin',
             'last_name' => 'Białkowska',
             'name' => 'Adolfina',
@@ -183,24 +399,21 @@ dataset('pytlewscy', function () {
             'father_id' => null,
             'father_surname' => 'Kolin',
             'father_name' => null,
-            'parents' => '1',
             'photo' => null,
-            'total_marriages' => '1',
             'marriages' => [
                 [
                     'id' => '4612',
                     'name' => 'Białkowski, Wiktor',
                 ],
             ],
-            'total_children' => '1',
             'children' => [
                 [
                     'id' => '4611',
                     'name' => 'Karolina',
                 ],
             ],
-            'total_siblings' => '0',
-            'siblings' => null,
+            'siblings' => [],
+            'bio' => null,
         ],
     ];
 });

@@ -26,10 +26,13 @@
                 <dd x-data="{ open: false }">
                     <a href="{{ $pytlewski->url }}" target="_blank" class="a">
                         {{ $pytlewski->id}}
-                        @if($pytlewski->basic_name)
+                        @if($pytlewski->name || $pytlewski->family_name || $pytlewski->last_name)
                             <small>
                                 {{ __('people.pytlewski.as') }}
-                                {!! $pytlewski->basic_name !!}
+                                <strong>{{ $pytlewski->last_name
+                                                    ? $pytlewski->last_name.' ('.$pytlewski->family_name.')'
+                                                    : $pytlewski->family_name }}</strong>
+                                {{ $pytlewski->name }} {{ $pytlewski->middle_name }}
                             </small>
                         @endif
                     </a>
@@ -40,7 +43,7 @@
                     <br>
                     <div x-show="open" @click.away="open = false" style="display: none;">
                         <small style="display: block; line-height: 1.45">
-                            @if($pytlewski->parents)
+                            @if($pytlewski->hasParents())
                                 &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}: <br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <x-pytlewski :id="$pytlewski->mother_id">
@@ -54,34 +57,34 @@
                                 <br>
                             @endif
 
-                            @if($pytlewski->marriages || $pytlewski->total_marriages != 0)
+                            @if($pytlewski->hasMarriages())
                                 &nbsp;&nbsp;{{ __('people.pytlewski.marriages') }}: {{ $pytlewski->total_marriages }}<br>
-                                @foreach($pytlewski->marriages as $key => $val)
+                                @foreach($pytlewski->marriages as $marriage)
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <x-pytlewski :id="isset($val['id']) ? $val['id'] : null">
-                                        {{ $val['name'] }}
+                                    <x-pytlewski :id="$marriage['id'] ?? null">
+                                        {{ $marriage['name'] }}
                                     </x-pytlewski>
                                     <br>
                                 @endforeach
                             @endif
 
-                            @if($pytlewski->children || $pytlewski->total_children != 0)
+                            @if($pytlewski->hasChildren())
                                 &nbsp;&nbsp;{{ __('people.pytlewski.children') }}: {{ $pytlewski->total_children }}<br>
-                                @foreach($pytlewski->children as $key => $val)
+                                @foreach($pytlewski->children as $child)
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <x-pytlewski :id="isset($val['id']) ? $val['id'] : null">
-                                        {{ $val['name'] }}
+                                    <x-pytlewski :id="$child['id'] ?? null">
+                                        {{ $child['name'] }}
                                     </x-pytlewski>
                                     <br>
                                 @endforeach
                             @endif
 
-                            @if($pytlewski->siblings || $pytlewski->total_siblings != 0)
+                            @if($pytlewski->hasSiblings())
                                 &nbsp;&nbsp;{{ __('people.pytlewski.siblings') }}: {{ $pytlewski->total_siblings }}<br>
-                                @foreach($pytlewski->siblings as $key => $val)
+                                @foreach($pytlewski->siblings as $sibling)
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <x-pytlewski :id="isset($val['id']) ? $val['id'] : null">
-                                        {{ $val['name'] }}
+                                    <x-pytlewski :id="$sibling['id'] ?? null">
+                                        {{ $sibling['name'] }}
                                     </x-pytlewski>
                                     <br>
                                 @endforeach

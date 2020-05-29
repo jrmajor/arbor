@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 
 class Pytlewski
 {
-    use Traits\ScrapesPytlewski;
+    use Concerns\ScrapesPytlewski;
 
     private $id;
     private $source;
@@ -20,21 +20,19 @@ class Pytlewski
     {
         $this->id = $id;
         $source = $this->getSource($id);
-        $this->attributes = $this->runParsers($source);
-    }
+        $this->attributes = $this->scrape($source);
 
-    private function runParsers($source): array
-    {
-        if ($source === null) {
-            return [];
+        if (! isset($this->attributes['marriages'])) {
+            $this->attributes['marriages'] = [];
         }
 
-        $attributes = $this->getParsers()
-        ->flatMap(
-            fn ($method) => $this->{$method}($source)
-        );
+        if (! isset($this->attributes['children'])) {
+            $this->attributes['children'] = [];
+        }
 
-        return Arr::trim($attributes->toArray());
+        if (! isset($this->attributes['siblings'])) {
+            $this->attributes['siblings'] = [];
+        }
     }
 
     public function __get($key)
@@ -52,11 +50,25 @@ class Pytlewski
         }
     }
 
-    public function __set($key, $value)
+    public function hasParents(): bool
     {
-        $this->attributes[$key] = $value;
+        return isset($this->attributes['mother_surname']) || isset($this->attributes['father_surname'])
+                || isset($this->attributes['mother_name']) || isset($this->attributes['father_name']);
+    }
 
-        return $this;
+    public function hasMarriages(): bool
+    {
+        return is_array($this->marriages) && count($this->marriages) > 0;
+    }
+
+    public function hasChildren(): bool
+    {
+        return is_array($this->children) && count($this->children) > 0;
+    }
+
+    public function hasSiblings(): bool
+    {
+        return is_array($this->siblings) && count($this->siblings) > 0;
     }
 
     public static function url($id): string
