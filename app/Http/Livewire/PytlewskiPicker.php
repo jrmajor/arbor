@@ -19,11 +19,15 @@ class PytlewskiPicker extends Component
 
         $pytlewski = new Pytlewski($this->pytlewskiId);
 
-        if (blank(strip_tags($pytlewski->basic_name))) {
+        if (! $pytlewski->name && ! $pytlewski->family_name && ! $pytlewski->last_name) {
             return $this->result = __('people.pytlewski.not_found');
         }
 
-        $this->result = strip_tags($pytlewski->basic_name);
+        $this->result = $pytlewski->name.' ';
+        $this->result .= $pytlewski->middle_name ? $pytlewski->middle_name.' ' : '';
+        $this->result .= $pytlewski->last_name
+                            ? $pytlewski->last_name.' ('.$pytlewski->family_name.')'
+                            : $pytlewski->family_name;
     }
 
     public function mount($person)
