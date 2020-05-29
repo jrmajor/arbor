@@ -28,7 +28,9 @@ class GenerateSitemap extends Command
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
 
         Person::orderBy('id')->chunk(100, function ($people) use ($sitemap) {
-            $people->each(
+            $people->filter(
+                fn ($person) => $person->isVisible()
+            )->each(
                 fn ($person) => $sitemap->add(
                     Url::create('/people/'.$person->id)
                         ->setLastModificationDate($person->updated_at)
