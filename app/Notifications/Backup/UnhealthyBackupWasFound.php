@@ -2,9 +2,9 @@
 
 namespace App\Notifications\Backup;
 
+use App\Notifications\Backup\BaseNotification;
 use NotificationChannels\Telegram\TelegramMessage;
 use Spatie\Backup\Events\UnhealthyBackupWasFound as UnhealthyBackupWasFoundEvent;
-use Spatie\Backup\Notifications\BaseNotification;
 use Spatie\Backup\Tasks\Monitor\HealthCheckFailure;
 
 class UnhealthyBackupWasFound extends BaseNotification
@@ -19,25 +19,24 @@ class UnhealthyBackupWasFound extends BaseNotification
 
     public function toTelegram(): TelegramMessage
     {
-        if (! $this->failure()->wasUnexpected()) {
-            return (new TelegramMessage)
-                ->to(config('backup.notifications.telegram.to'))
-                ->content(
-                    '*'.trans('backup::notifications.unhealthy_backup_found_subject', ['application_name' => $this->applicationName()], 'en')."*\n"
-                    .$this->problemDescription()
-                );
-        } else {
-            return (new TelegramMessage)
-                ->to(config('backup.notifications.telegram.to'))
-                ->content(
-                    '*'.trans('backup::notifications.unhealthy_backup_found_subject', ['application_name' => $this->applicationName()], 'en')."*\n"
-                    .$this->problemDescription()."\n"
-                    ."Health check: "
-                    .$this->failure()->healthCheck()->name()."\n"
-                    .trans('backup::notifications.exception_message_title', [], 'en').': '
-                    .$this->faillure()->exception()->getMessage()
-                );
+        $message =
+            e(trans('backup::notifications.unhealthy_backup_found_subject_title', ['application_name' => $this->applicationName(), 'problem' => $this->problemDescription()], 'en'))
+            ."\n";
+
+        if ($this->failure()->wasUnexpected()) {
+            $message .= "\n<b>Health check:</b> ".e($this->failure()->healthCheck()->name());
+            $message .= "\n<b>".e(trans('backup::notifications.exception_message_title', [], 'en')).':</b> '.e($this->failure()->exception()->getMessage());
         }
+
+
+        foreach ($this->backupDestinationProperties() as $key => $val) {
+            $message .= "\n<b>".e($key).':</b> '.e($val);
+        }
+
+        return (new TelegramMessage)
+            ->to(config('backup.notifications.telegram.to'))
+            ->content($message)
+            ->options(['parse_mode' => 'html']);
     }
 
     protected function problemDescription(): string

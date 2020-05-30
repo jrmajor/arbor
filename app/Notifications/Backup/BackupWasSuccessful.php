@@ -2,9 +2,9 @@
 
 namespace App\Notifications\Backup;
 
+use App\Notifications\Backup\BaseNotification;
 use NotificationChannels\Telegram\TelegramMessage;
 use Spatie\Backup\Events\BackupWasSuccessful as BackupWasSuccessfulEvent;
-use Spatie\Backup\Notifications\BaseNotification;
 
 class BackupWasSuccessful extends BaseNotification
 {
@@ -18,8 +18,17 @@ class BackupWasSuccessful extends BaseNotification
 
     public function toTelegram(): TelegramMessage
     {
+        $message =
+            e(trans('backup::notifications.backup_successful_subject_title', [], 'en'))
+            ."\n";
+
+        foreach ($this->backupDestinationProperties() as $key => $val) {
+            $message .= "\n<b>".e($key).':</b> '.e($val);
+        }
+
         return (new TelegramMessage)
             ->to(config('backup.notifications.telegram.to'))
-            ->content('*'.trans('backup::notifications.backup_successful_subject', ['application_name' => $this->applicationName()], 'en').'*');
+            ->content($message)
+            ->options(['parse_mode' => 'html']);
     }
 }
