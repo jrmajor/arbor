@@ -88,6 +88,7 @@ return [
     'siblings_father' => 'Rodzeństwo od str. ojca',
     'relationships' => 'Związki',
     'children' => 'Dzieci',
+    'sources' => 'Źródła',
     // /*'notes' => 'Notes',
     // 'show_notes_versions' => 'Click to watch earlier<br>versions of notes<br>about this person',
     // 'edit_notes' => 'Edit note about this person',

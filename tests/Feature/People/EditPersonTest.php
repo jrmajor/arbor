@@ -30,6 +30,10 @@ beforeEach(function () {
         'burial_date_from' => '1918-01-05',
         'burial_date_to' => '1918-01-05',
         'burial_place' => 'Załuż k/Sanoka, Polska',
+        'sources' => [
+            '[Henryk Gąsiorowski](https://pl.wikipedia.org/wiki/Henryk_G%C4%85siorowski) w Wikipedii, wolnej encyklopedii, dostęp 2020-06-06',
+            'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
+        ],
     ];
 
     $this->newAttributes = [
@@ -54,6 +58,10 @@ beforeEach(function () {
         'burial_date_from' => '1947-01-21',
         'burial_date_to' => '1947-01-21',
         'burial_place' => 'Grudziądz, Polska',
+        'sources' => [
+            'Witold Jakóbczyk, *Czesław Czypicki* w Wielkopolskim słowniku biograficznym, Warszawa-Poznań, PWN, 1981, ISBN 83-01-02722-3',
+            'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
+        ],
     ];
 
     $this->person = factory(Person::class)->create($this->oldAttributes);
@@ -87,10 +95,14 @@ test('guests cannot edit person', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    $this->person = $this->person->fresh();
+    $person = $this->person->fresh();
 
-    foreach (Arr::except($this->oldAttributes, $this->dates) as $key => $attribute) {
-        assertEquals($attribute, $this->person->$key);
+    $attributesToCheck = Arr::except($this->oldAttributes, [
+        'sources', ...$this->dates
+    ]);
+
+    foreach ($attributesToCheck as $key => $attribute) {
+        assertEquals($attribute, $person->$key);
     }
 });
 
@@ -99,10 +111,14 @@ test('users without permissions cannot edit person', function () {
         ->put('people/'.$this->person->id, $this->newAttributes)
         ->assertStatus(403);
 
-    $this->person = $this->person->fresh();
+    $person = $this->person->fresh();
 
-    foreach (Arr::except($this->oldAttributes, $this->dates) as $key => $attribute) {
-        assertEquals($attribute, $this->person->$key);
+    $attributesToCheck = Arr::except($this->oldAttributes, [
+        'sources', ...$this->dates
+    ]);
+
+    foreach ($attributesToCheck as $key => $attribute) {
+        assertEquals($attribute, $person->$key);
     }
 });
 
@@ -112,14 +128,24 @@ test('users with permissions can edit person', function () {
         ->assertStatus(302)
         ->assertRedirect('people/'.$this->person->id);
 
-    $this->person = $this->person->fresh();
+    $person = $this->person->fresh();
 
-    foreach (Arr::except($this->newAttributes, $this->dates) as $key => $attribute) {
-        assertEquals($attribute, $this->person->$key);
+    $attributesToCheck = Arr::except($this->newAttributes, [
+        'sources', ...$this->dates
+    ]);
+
+    foreach ($attributesToCheck as $key => $attribute) {
+        assertEquals($attribute, $person->$key);
     }
 
+    assertCount(2, $person->sources);
+    assertEquals(
+        $this->newAttributes['sources'],
+        $person->sources->map->raw()->all()
+    );
+
     foreach ($this->dates as $date) {
-        assertEquals($this->newAttributes[$date], $this->person->$date->toDateString());
+        assertEquals($this->newAttributes[$date], $person->$date->toDateString());
     }
 });
 
@@ -130,23 +156,23 @@ test('data is validated using appropriate form request')
     );
 
 test('person edition is logged', function () {
-    travel(
-        '+1 minute',
-        fn () => $this->person->fill($this->newAttributes)->save()
-    );
+    travel('+1 minute');
 
-    $this->person = $this->person->fresh();
+    withPermissions(2)
+        ->put('people/'.$this->person->id, $this->newAttributes);
+
+    travel('back');
+
+    $person = $this->person->fresh();
 
     $log = latestLog();
 
     assertEquals('people', $log->log_name);
     assertEquals('updated', $log->description);
-    assertTrue($this->person->is($log->subject));
+    assertTrue($person->is($log->subject));
 
     $oldToCheck = Arr::except($this->oldAttributes, [
-        'id', 'created_at', 'updated_at',
-        'dead', 'death_cause',
-        ...$this->dates,
+        'dead', 'death_cause', 'sources', ...$this->dates,
     ]);
 
     foreach ($oldToCheck as $key => $value) {
@@ -156,13 +182,11 @@ test('person edition is logged', function () {
         );
     }
 
-    $attributesToCheck = Arr::except($this->newAttributes, [
-        'id', 'created_at', 'updated_at',
-        'dead', 'death_cause',
-        ...$this->dates,
+    $newToCheck = Arr::except($this->newAttributes, [
+        'dead', 'death_cause', 'sources', ...$this->dates,
     ]);
 
-    foreach ($attributesToCheck as $key => $value) {
+    foreach ($newToCheck as $key => $value) {
         assertEquals(
             $value, $log->properties['attributes'][$key],
             'Failed asserting that attribute '.$key.' has the same value in log.'
@@ -178,10 +202,22 @@ test('person edition is logged', function () {
     assertArrayNotHasKey('created_at', $log->properties['old']);
     assertArrayNotHasKey('created_at', $log->properties['attributes']);
 
-    assertEquals($this->person->updated_at, $log->created_at);
+    assertEquals($person->updated_at, $log->created_at);
 
     assertArrayNotHasKey('updated_at', $log->properties['old']);
     assertArrayNotHasKey('updated_at', $log->properties['attributes']);
+
+    assertCount(2, $log->properties['old']['sources']);
+    assertCount(2, $log->properties['attributes']['sources']);
+
+    assertEquals(
+        $this->oldAttributes['sources'],
+        $log->properties['old']['sources']
+    );
+    assertEquals(
+        $this->newAttributes['sources'],
+        $log->properties['attributes']['sources']
+    );
 
     foreach ($this->dates as $date) {
         assertEquals($this->oldAttributes[$date], $log->properties['old'][$date]);

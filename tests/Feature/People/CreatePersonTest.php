@@ -32,6 +32,10 @@ beforeEach(function () {
         'burial_place' => 'Grudziądz, Polska',
         'mother_id' => factory(Person::class)->state('woman')->create()->id,
         'father_id' => factory(Person::class)->state('man')->create()->id,
+        'sources' => [
+            '[Henryk Gąsiorowski](https://pl.wikipedia.org/wiki/Henryk_G%C4%85siorowski) w Wikipedii, wolnej encyklopedii, dostęp 2020-06-06',
+            'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
+        ],
     ];
 });
 
@@ -80,13 +84,25 @@ test('users with permissions can add valid person', function () {
         ->assertStatus(302)
         ->assertRedirect('people/'.Person::latest()->first()->id);
 
+    travel('back');
+
     assertEquals($count + 1, Person::count());
 
     $person = Person::latest()->first();
 
-    foreach (Arr::except($this->validAttributes, $this->dates) as $key => $attribute) {
+    $attributesToCheck = Arr::except($this->validAttributes, [
+        'sources', ...$this->dates
+    ]);
+
+    foreach ($attributesToCheck as $key => $attribute) {
         assertEquals($attribute, $person->$key);
     }
+
+    assertCount(2, $person->sources);
+    assertEquals(
+        $this->validAttributes['sources'],
+        $person->sources->map->raw()->all()
+    );
 
     foreach ($this->dates as $date) {
         assertTrue($this->validAttributes[$date] == $person->$date->toDateString());
@@ -111,7 +127,18 @@ test('data is validated using appropriate form request')
     );
 
 test('person creation is logged', function () {
-    $person = factory(Person::class)->state('dead')->create();
+    $count = Person::count();
+
+    travel('+5 minutes');
+
+    withPermissions(2)
+        ->post('people', $this->validAttributes);
+
+    travel('back');
+
+    assertEquals($count + 1, Person::count());
+
+    $person = Person::latest()->first();
 
     $log = latestLog();
 
@@ -119,9 +146,8 @@ test('person creation is logged', function () {
     assertEquals('created', $log->description);
     assertTrue($person->is($log->subject));
 
-    $attributesToCheck = Arr::except($person->getAttributes(), [
-        'id', 'created_at', 'updated_at',
-        ...$this->dates,
+    $attributesToCheck = Arr::except($this->validAttributes, [
+        'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $value) {
@@ -136,6 +162,12 @@ test('person creation is logged', function () {
 
     assertArrayNotHasKey('created_at', $log->properties['attributes']);
     assertArrayNotHasKey('updated_at', $log->properties['attributes']);
+
+    assertCount(2, $log->properties['attributes']['sources']);
+    assertEquals(
+        $this->validAttributes['sources'],
+        $log->properties['attributes']['sources']
+    );
 
     foreach ($this->dates as $date) {
         assertEquals($person->$date->format('Y-m-d'), $log->properties['attributes'][$date]);

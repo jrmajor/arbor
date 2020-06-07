@@ -109,6 +109,8 @@ return [
         'burial_date_to' => 'data pochówku',
         'burial_place' => 'miejsce pochówku',
 
+        'sources.*' => 'źródło',
+
         /* marriages */
         'woman_order' => 'kolejność w związkach kobiety',
         'man_order' => 'kolejność w związkach mężczyzny',

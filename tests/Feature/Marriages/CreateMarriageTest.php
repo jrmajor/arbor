@@ -68,16 +68,22 @@ test('users without permissions cannot add valid marriage', function () {
 test('users with permissions can add valid marriage', function () {
     $count = Marriage::count();
 
+    travel('+5 minutes');
+
     withPermissions(2)
         ->post('marriages', $this->validAttributes)
         ->assertStatus(302)
         ->assertRedirect('people/'.Marriage::latest()->first()->woman_id);
 
+    travel('back');
+
     assertEquals($count + 1, Marriage::count());
 
     $marriage = Marriage::latest()->first();
 
-    foreach (Arr::except($this->validAttributes, $this->dates) as $key => $attribute) {
+    $attributesToCheck = Arr::except($this->validAttributes, $this->dates);
+
+    foreach ($attributesToCheck as $key => $attribute) {
         assertEquals($attribute, $marriage->$key);
     }
 
@@ -104,7 +110,18 @@ test('data is validated using appropriate form request')
     );
 
 test('marriage creation is logged', function () {
-    $marriage = factory(Marriage::class)->state('ended')->create();
+    $count = Marriage::count();
+
+    travel('+5 minutes');
+
+    withPermissions(2)
+        ->post('marriages', $this->validAttributes);
+
+    travel('back');
+
+    assertEquals($count + 1, Marriage::count());
+
+    $marriage = Marriage::latest()->first();
 
     $log = latestLog();
 
@@ -112,10 +129,7 @@ test('marriage creation is logged', function () {
     assertEquals('created', $log->description);
     assertTrue($marriage->is($log->subject));
 
-    $attributesToCheck = Arr::except($marriage->getAttributes(), [
-        'id', 'created_at', 'updated_at',
-        ...$this->dates
-    ]);
+    $attributesToCheck = Arr::except($this->validAttributes, $this->dates);
 
     foreach ($attributesToCheck as $key => $value) {
         assertEquals(

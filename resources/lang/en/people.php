@@ -88,6 +88,7 @@ return [
     'siblings_father' => 'Half-sibl. f. father\'s side',
     'relationships' => 'Relationships',
     'children' => 'Children',
+    'sources' => 'Sources',
     // /*'notes' => 'Notes',
     // 'show_notes_versions' => 'Click to watch earlier<br>versions of notes<br>about this person',
     // 'edit_notes' => 'Edit note about this person',

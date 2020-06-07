@@ -6,6 +6,7 @@ use App\Marriage;
 use App\Person;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 it('can determine its visibility', function () {
     $alive = factory(Person::class)->state('alive')->create();
@@ -377,6 +378,52 @@ it('can format simple name', function () {
     $person->last_name = 'Wojtyła';
 
     assertEquals("Zenona Wojtyła (Skwierczyńska)", $person->formatSimpleName());
+});
+
+it('casts sources to collection', function() {
+    $sources = factory(Person::class)->create([
+        'sources' => null,
+    ])->sources;
+
+    assertInstanceOf(Collection::class, $sources);
+    assertTrue($sources->isEmpty());
+
+    $sources = factory(Person::class)->create([
+        'sources' => [],
+    ])->sources;
+
+    assertInstanceOf(Collection::class, $sources);
+    assertTrue($sources->isEmpty());
+
+    $sources = factory(Person::class)->create([
+        'sources' => [
+            '[Henryk Gąsiorowski](https://pl.wikipedia.org/wiki/Henryk_G%C4%85siorowski) w Wikipedii, wolnej encyklopedii, dostęp 2020-06-06',
+            'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
+        ],
+    ])->sources;
+
+    assertInstanceOf(Collection::class, $sources);
+    assertCount(2, $sources);
+});
+
+test('sources are sanitized', function () {
+    $unsanitized = [
+        'a' => "     [Henryk    Gąsiorowski](https://pl.wikipedia.org/wiki/Henryk_G%C4%85siorowski)  \t   w Wikipedii,\nwolnej encyklopedii, dostęp 2020-06-06\r\n",
+        'b' => "    \n",
+        null,
+        'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
+    ];
+
+    $sanitized = [
+        '[Henryk Gąsiorowski](https://pl.wikipedia.org/wiki/Henryk_G%C4%85siorowski) w Wikipedii, wolnej encyklopedii, dostęp 2020-06-06',
+        'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
+    ];
+
+    assertEquals(
+        $sanitized,
+        factory(Person::class)->create(['sources' => $unsanitized])
+            ->sources->map->raw()->all()
+    );
 });
 
 it('can be found by pytlewski id', function () {

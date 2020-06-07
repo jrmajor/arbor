@@ -80,6 +80,9 @@ class StorePerson extends FormRequest
                 'nullable'
             ],
             'burial_place' => 'string|max:100|nullable',
+
+            'sources' => 'array|nullable',
+            'sources.*' => 'string|max:256|nullable',
         ];
     }
 }

@@ -80,15 +80,12 @@ test('guests cannot edit marriage', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    $attributesToCheck = Arr::except($this->oldAttributes, [
-        'first_event_date_from', 'second_event_date_from', 'end_date_from',
-        'first_event_date_to', 'second_event_date_to', 'end_date_to',
-    ]);
+    $marriage = $this->marriage->fresh();
 
-    $this->marriage = $this->marriage->fresh();
+    $attributesToCheck = Arr::except($this->oldAttributes, $this->dates);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        assertEquals($attribute, $this->marriage->$key);
+        assertEquals($attribute, $marriage->$key);
     }
 });
 
@@ -97,10 +94,12 @@ test('users without permissions cannot edit marriage', function () {
         ->put('marriages/'.$this->marriage->id, $this->newAttributes)
         ->assertStatus(403);
 
-    $this->marriage = $this->marriage->fresh();
+    $marriage = $this->marriage->fresh();
 
-    foreach (Arr::except($this->oldAttributes, $this->dates) as $key => $attribute) {
-        assertEquals($attribute, $this->marriage->$key);
+    $attributesToCheck = Arr::except($this->oldAttributes, $this->dates);
+
+    foreach ($attributesToCheck as $key => $attribute) {
+        assertEquals($attribute, $marriage->$key);
     }
 });
 
@@ -109,16 +108,18 @@ test('users with permissions can edit marriage', function () {
         ->put('marriages/'.$this->marriage->id, $this->newAttributes)
         ->assertStatus(302);
 
-    $this->marriage = $this->marriage->fresh();
+    $marriage = $this->marriage->fresh();
 
-    $response->assertRedirect('people/'.$this->marriage->woman_id);
+    $response->assertRedirect('people/'.$marriage->woman_id);
 
-    foreach (Arr::except($this->newAttributes, $this->dates) as $key => $attribute) {
-        assertEquals($attribute, $this->marriage->$key);
+    $attributesToCheck = Arr::except($this->newAttributes, $this->dates);
+
+    foreach ($attributesToCheck as $key => $attribute) {
+        assertEquals($attribute, $marriage->$key);
     }
 
     foreach ($this->dates as $date) {
-        assertEquals($this->newAttributes[$date], $this->marriage->$date->toDateString());
+        assertEquals($this->newAttributes[$date], $marriage->$date->toDateString());
     }
 });
 
@@ -129,23 +130,22 @@ test('data is validated using appropriate form request')
     );
 
 test('marriage edition is logged', function () {
-    travel(
-        '+1 minute',
-        fn () => $this->marriage->fill($this->newAttributes)->save()
-    );
+    travel('+1 minute');
 
-    $this->marriage = $this->marriage->fresh();
+    withPermissions(2)
+        ->put('marriages/'.$this->marriage->id, $this->newAttributes);
+
+    travel('back');
+
+    $marriage = $this->marriage->fresh();
 
     $log = latestLog();
 
     assertEquals('marriages', $log->log_name);
     assertEquals('updated', $log->description);
-    assertTrue($this->marriage->is($log->subject));
+    assertTrue($marriage->is($log->subject));
 
-    $oldToCheck = Arr::except($this->oldAttributes, [
-        'id', 'created_at', 'updated_at',
-        ...$this->dates,
-    ]);
+    $oldToCheck = Arr::except($this->oldAttributes, $this->dates);
 
     foreach ($oldToCheck as $key => $value) {
         assertEquals(
@@ -154,12 +154,9 @@ test('marriage edition is logged', function () {
         );
     }
 
-    $attributesToCheck = Arr::except($this->newAttributes, [
-        'id', 'created_at', 'updated_at',
-        ...$this->dates,
-    ]);
+    $newToCheck = Arr::except($this->newAttributes, $this->dates);
 
-    foreach ($attributesToCheck as $key => $value) {
+    foreach ($newToCheck as $key => $value) {
         assertEquals(
             $value, $log->properties['attributes'][$key],
             'Failed asserting that attribute '.$key.' has the same value in log.'
@@ -169,7 +166,7 @@ test('marriage edition is logged', function () {
     assertArrayNotHasKey('created_at', $log->properties['old']);
     assertArrayNotHasKey('created_at', $log->properties['attributes']);
 
-    assertEquals($this->marriage->updated_at, $log->created_at);
+    assertEquals($marriage->updated_at, $log->created_at);
 
     assertArrayNotHasKey('updated_at', $log->properties['old']);
     assertArrayNotHasKey('updated_at', $log->properties['attributes']);

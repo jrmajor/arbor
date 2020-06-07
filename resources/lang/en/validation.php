@@ -88,6 +88,8 @@ return [
         'burial_date_from' => 'burial date',
         'burial_date_to' => 'burial date',
 
+        'sources.*' => 'source',
+
         /* marriages */
         'woman_order' => 'order in woman marriages',
         'man_order' => 'order in man marriages',

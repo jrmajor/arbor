@@ -56,6 +56,7 @@
                         :label="__('people.mother')"/>
                     <x-history.td-text :activity="$activity" :attribute="'father_id'"
                         :label="__('people.father')"/>
+                    <x-history.td-sources :activity="$activity" :attribute="'sources'"/>
                 </table>
             </dd>
         @endforeach

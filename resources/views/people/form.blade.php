@@ -274,6 +274,58 @@
                 :initial="old('father_id') ?? $person->father_id">
         </fieldset>
 
+        <fieldset class="space-y-2">
+            <div class="flex flex-wrap">
+                <label for="sources" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.sources') }}</label>
+                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2"
+                    x-data="{ sources: [
+                        @foreach(old('sources') ?? $person->sources as $source)
+                            '{{ $source instanceof App\Source ? $source->raw() : $source }}',
+                        @endforeach
+                    ]}">
+
+                    <template x-if="sources.length == 0">
+                        <div class="w-full flex flex-no-wrap justify-between items-center space-x-2">
+                            <div>
+                                <input type="hidden" name="sources">
+                            </div>
+                            <button @click.prevent="sources.push('')"
+                                class="btn leading-none text-xs !px-2 py-1 normal-case font-normal tracking-normal">
+                                +
+                            </button>
+                        </div>
+                    </template>
+
+                    <template x-if="sources.length != 0">
+                        <div class="space-y-2">
+                            <template
+                                x-for="(_, index) in sources" :key="index">
+                                <div class="w-full flex flex-no-wrap items-center space-x-2">
+                                    <input type="text" :name="'sources['+index+']'" x-model="sources[index]">
+                                    <div>
+                                        <button @click.prevent="sources.splice(index, 1)"
+                                            class="btn leading-none text-xs !px-2 py-1 normal-case font-normal tracking-normal">
+                                            -
+                                        </button>
+                                    </div>
+                                </div>
+                            </template>
+                            <div class="w-full flex justify-end">
+                                <button @click.prevent="sources.push('')"
+                                    class="btn leading-none text-xs !px-2 py-1 normal-case font-normal tracking-normal">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    @error('sources.*')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+        </fieldset>
+
         <fieldset class="w-full lg:w-3/4 flex justify-end">
             <button type="submit" class="btn">
                 {{ __('misc.save') }}

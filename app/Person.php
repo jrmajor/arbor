@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Casts\Sources;
 use App\Services\Pytlewski\Pytlewski;
 use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
@@ -36,6 +37,7 @@ class Person extends Model
 
     protected $casts = [
         'dead' => 'boolean',
+        'sources' => Sources::class,
         'visibility' => 'boolean',
     ];
 

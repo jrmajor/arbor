@@ -414,6 +414,18 @@
                 </dd>
             @endif
 
+            {{-- sources --}}
+            @if($person->sources->isNotEmpty())
+                <dt>{{ __('people.sources') }}&nbsp;</dt>
+                <dd>
+                    <ul>
+                        @foreach($person->sources as $source)
+                            <li><small class="text-black">{!! $source->markup() !!}</small></li>
+                        @endforeach
+                    </ul>
+                </dd>
+            @endif
+
             {{-- notes --}}
             {{--
             <dt>
