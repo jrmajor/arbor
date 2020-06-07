@@ -48,6 +48,6 @@ test('person deletion is logged', function () {
         Carbon::create($log->properties['attributes']['deleted_at'])
     );
 
-    assertEquals(1, count($log->properties));
-    assertEquals(1, count($log->properties['attributes']));
+    assertCount(1, $log->properties);
+    assertCount(1, $log->properties['attributes']);
 });

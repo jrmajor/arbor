@@ -50,7 +50,7 @@ test('visibility change is logged', function () {
 
     travel('back');
 
-    assertCount($count + 2, Activity::all()); // visibility change and user creation
+    assertEquals($count + 2, Activity::count()); // visibility change and user creation
 
     $log = latestLog();
 
@@ -60,9 +60,9 @@ test('visibility change is logged', function () {
 
     assertEquals($this->person->fresh()->updated_at, $log->created_at);
 
-    assertEquals(2, count($log->properties));
-    assertEquals(1, count($log->properties['old']));
-    assertEquals(1, count($log->properties['attributes']));
+    assertCount(2, $log->properties);
+    assertCount(1, $log->properties['old']);
+    assertCount(1, $log->properties['attributes']);
 
     assertEquals(false, $log->properties['old']['visibility']);
     assertEquals(true, $log->properties['attributes']['visibility']);
