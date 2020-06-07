@@ -89,6 +89,8 @@ return [
     'relationships' => 'Związki',
     'children' => 'Dzieci',
     'sources' => 'Źródła',
+    'isbn_url' => 'https://pl.wikipedia.org/wiki/Specjalna:Książki/',
+    'isbn_in_wikipedia' => 'w Wikipedii',
     // /*'notes' => 'Notes',
     // 'show_notes_versions' => 'Click to watch earlier<br>versions of notes<br>about this person',
     // 'edit_notes' => 'Edit note about this person',

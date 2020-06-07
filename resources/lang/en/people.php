@@ -89,6 +89,8 @@ return [
     'relationships' => 'Relationships',
     'children' => 'Children',
     'sources' => 'Sources',
+    'isbn_url' => 'https://en.wikipedia.org/wiki/Special:BookSources/',
+    'isbn_in_wikipedia' => 'in Wikipedia',
     // /*'notes' => 'Notes',
     // 'show_notes_versions' => 'Click to watch earlier<br>versions of notes<br>about this person',
     // 'edit_notes' => 'Edit note about this person',

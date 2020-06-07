@@ -56,10 +56,11 @@ class Source implements Jsonable
         ':' => ['Url'],
         '[' => ['Link'],
         '*' => ['Italics'],
+        'I' => ['ISBN'],
         '\\' => ['EscapeSequence'],
     ];
 
-    protected $inlineMarkerList = '"&<>:[*\\';
+    protected $inlineMarkerList = '"&<>:[*I\\';
 
     protected function line($text, $nonNestables = [])
     {
@@ -139,8 +140,6 @@ class Source implements Jsonable
             return;
         }
 
-        $marker = $excerpt['text'][0];
-
         if (! preg_match('/^[*]((?:\\\\\*|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*])/s', $excerpt['text'], $matches)) {
             return;
         }
@@ -151,6 +150,35 @@ class Source implements Jsonable
                 'name' => 'i',
                 'handler' => 'line',
                 'text' => $matches[1],
+            ],
+        ];
+    }
+
+    protected function inlineISBN($excerpt)
+    {
+        if (! isset($excerpt['text'][1])) {
+            return;
+        }
+
+        if (! preg_match('/^ISBN ((?:978|979)?[- ]?(?:\d[- ]?){9}[\dXx])(\s|$)/s', $excerpt['text'], $matches)) {
+            return;
+        }
+
+        $number = Str::of($matches[1])
+        ->replace('-', '')
+        ->replace(' ', '');
+
+        return [
+            'extent' => $matches[2] == '' ? strlen($matches[0]) : strlen($matches[0])-1,
+            'element' => [
+                'name' => 'a',
+                'text' => 'ISBN '.$matches[1],
+                'attributes' => [
+                    'href' => __('people.isbn_url').$number,
+                    'target' => '_blank',
+                    'title' => 'ISBN '.$matches[1].' '.__('people.isbn_in_wikipedia'),
+                    'class' => 'a',
+                ],
             ],
         ];
     }
