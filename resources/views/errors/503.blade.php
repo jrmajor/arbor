@@ -1,4 +1,4 @@
 @extends('errors.layout')
 
 @section('code', '503')
-@section('message', __($exception->getMessage() ?: 'Service Unavailable'))
+@section('message', $exception->getMessage() ?: __('errors.503'))
