@@ -24,7 +24,7 @@ return [
         'yyyy' => 'RRRR',
         'mm' => 'MM',
         'dd' => 'DD',
-        'format' => 'YYYY-MM-DD',
+        'format' => 'RRRR-MM-DD',
         'simple' => 'proste',
         'advanced' => 'zaawansowane',
     ],
