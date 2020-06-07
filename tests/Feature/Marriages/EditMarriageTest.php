@@ -5,8 +5,8 @@ use App\Person;
 
 beforeEach(function () {
     $this->dates = [
-        'first_event_date_from', 'second_event_date_from', 'end_date_from',
-        'first_event_date_to', 'second_event_date_to', 'end_date_to',
+        'first_event_date_from', 'second_event_date_from', 'divorce_date_from',
+        'first_event_date_to', 'second_event_date_to', 'divorce_date_to',
     ];
 
     $this->oldAttributes = [
@@ -23,10 +23,10 @@ beforeEach(function () {
         'second_event_date_from' => '1968-04-13',
         'second_event_date_to' => '1968-04-13',
         'second_event_place' => 'Sępólno Krajeńskie, Polska',
-        'ended' => true,
-        'end_cause' => 'rozwód',
-        'end_date_from' => '2001-10-27',
-        'end_date_to' => '2001-10-27',
+        'divorced' => false,
+        'divorce_date_from' => null,
+        'divorce_date_to' => null,
+        'divorce_place' => null,
     ];
 
     $this->newAttributes = [
@@ -43,10 +43,10 @@ beforeEach(function () {
         'second_event_date_from' => '1960-09-05',
         'second_event_date_to' => '1960-09-05',
         'second_event_place' => 'Warszawa, Polska',
-        'ended' => false,
-        'end_cause' => 'bo tak',
-        'end_date_from' => '2000-03-27',
-        'end_date_to' => '2000-03-27',
+        'divorced' => true,
+        'divorce_date_from' => '2001-10-27',
+        'divorce_date_to' => '2001-10-27',
+        'divorce_place' => 'Toruń, Polska',
     ];
 
     $this->marriage = factory(Marriage::class)->create($this->oldAttributes);

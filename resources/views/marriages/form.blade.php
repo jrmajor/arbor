@@ -3,6 +3,14 @@
     <livewire:scripts>
 @endpush
 
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+
 <form
     method="POST"
     action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}">
@@ -122,6 +130,40 @@
                         id="second_event_place" name="second_event_place"
                         value="{{ old('second_event_place') ?? $marriage->second_event_place }}">
                     @error('second_event_place')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="space-y-2">
+            <div class="flex flex-wrap">
+                <div class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">
+                    {{ __('marriages.divorce') }}
+                </div>
+                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2 flex items-center">
+                    <input type="hidden" id="divorced-hidden" name="divorced" value="0">
+                    <input
+                        type="checkbox"
+                        id="divorced" name="divorced"
+                        value="1" {{ old('divorced') ?? $marriage->divorced ? 'checked' : '' }}>
+                    <label for="divorced" class="ml-1">
+                        {{ __('marriages.divorced') }}
+                    </label>
+                </div>
+            </div>
+            <x-date-tuple-picker
+                name="divorce_date" :label="__('marriages.divorce_date')"
+                :initial-from="old('divorce_date_from') ?? $marriage->divorce_date_from"
+                :initial-to="old('divorce_date_to') ?? $marriage->divorce_date_to"/>
+            <div class="flex flex-wrap">
+                <label for="divorce_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.divorce_place') }}</label>
+                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+                    <input
+                        type="text" class="@error('divorce_place') invalid @enderror"
+                        id="divorce_place" name="divorce_place"
+                        value="{{ old('divorce_place') ?? $marriage->divorce_place }}">
+                    @error('divorce_place')
                         <small class="text-red-500">{{ $message }}</small>
                     @enderror
                 </div>

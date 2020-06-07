@@ -65,10 +65,10 @@ return [
             'after_or_equal' => 'Second event date range ending must be a date after or equal to beginning.',
         ],
 
-        'end_date_from' => [
+        'divorce_date_from' => [
             'required_with' => 'Divorce date range beginning is required when ending is present.',
         ],
-        'end_date_to' => [
+        'divorce_date_to' => [
             'required_with' => 'Divorce date range ending is required when beginning is present.',
             'after_or_equal' => 'Divorce date range ending must be a date after or equal to beginning.',
         ],
@@ -98,9 +98,8 @@ return [
         'first_event_date_to' => 'first event date',
         'second_event_date_from' => 'second event date',
         'second_event_date_to' => 'second event date',
-        'end_date_from' => 'divorce date',
-        'end_date_to' => 'divorce date',
-        'end_cause' => 'divorce cause',
+        'divorce_date_from' => 'divorce date',
+        'divorce_date_to' => 'divorce date',
 
         /* settings */
         'logout_password' => 'password',

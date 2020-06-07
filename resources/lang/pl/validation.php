@@ -69,10 +69,10 @@ return [
             'after_or_equal' => 'Zakończenie zakresu daty drugiego wydarzenia musi być datą taką samą lub późniejszą niż rozpoczęcie.',
         ],
 
-        'end_date_from' => [
+        'divorce_date_from' => [
             'required_with' => 'Rozpoczęcie zakresu daty rozwodu nie może być puste jeśli podano zakończenie.',
         ],
-        'end_date_to' => [
+        'divorce_date_to' => [
             'required_with' => 'Zakończenie zakresu daty rozwodu nie może być puste jeśli podano rozpoczęcie.',
             'after_or_equal' => 'Zakończenie zakresu daty rozwodu musi być datą taką samą lub późniejszą niż rozpoczęcie.',
         ],
@@ -119,12 +119,12 @@ return [
         'first_event_date_to' => 'data pierwszego wydarzenia',
         'second_event_date_from' => 'data drugiego wydarzenia',
         'second_event_date_to' => 'data drugiego wydarzenia',
-        'end_date_from' => 'data rozwodu',
-        'end_date_to' => 'data rozwodu',
+        'divorce_date_from' => 'data rozwodu',
+        'divorce_date_to' => 'data rozwodu',
 
         'first_event_place' => 'miejsce pierwszego wydarzenia',
         'second_event_place' => 'miejsce drugiego wydarzenia',
-        'end_cause' => 'powód rozwodu',
+        'divorce_place' => 'miejsce rozwodu',
 
         /* settings */
         'logout_password' => 'hasło',

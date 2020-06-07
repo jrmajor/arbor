@@ -381,10 +381,16 @@
                                         @endif
                                     @endif
 
-                                    @if($marriage->ended && $marriage->end_date)
-                                        <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}: {{ $marriage->end_date }}
-                                    @elseif($marriage->ended)
-                                        <br>&nbsp;&nbsp;{{ $marriage->ended != 1 ? $marriage->ended : 'koniec (?)' }}
+                                    @if($marriage->divorced)
+                                        @if($marriage->divorce_place && $marriage->divorce_date)
+                                            <br>&nbsp;&nbsp;{{ strtolower(__('marriages.divorced')) }}: {{ $marriage->divorce_place }}, {{ $marriage->divorce_date }}
+                                        @elseif($marriage->divorce_place)
+                                            <br>&nbsp;&nbsp;{{ strtolower(__('marriages.divorced')) }}: {{ $marriage->divorce_place }}
+                                        @elseif($marriage->divorce_date)
+                                            <br>&nbsp;&nbsp;{{ strtolower(__('marriages.divorced')) }}: {{ $marriage->divorce_date }}
+                                        @else
+                                            <br>&nbsp;&nbsp;{{ strtolower(__('marriages.divorced')) }}
+                                        @endif
                                     @endif
                                 </li>
                             @else

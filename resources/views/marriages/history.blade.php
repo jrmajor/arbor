@@ -44,6 +44,10 @@
                     <x-history.td-text :activity="$activity" :attribute="'ended'"/>
                     <x-history.td-text :activity="$activity" :attribute="'end_cause'"/>
                     <x-history.td-date :activity="$activity" :attribute="'end_date'"/>
+
+                    <x-history.td-text :activity="$activity" :attribute="'divorced'"/>
+                    <x-history.td-date :activity="$activity" :attribute="'divorce_date'"/>
+                    <x-history.td-text :activity="$activity" :attribute="'divorce_place'"/>
                 </table>
             </dd>
         @endforeach

@@ -78,7 +78,7 @@ it('parses ISBN-10', function() {
         'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/030640615X" target="_blank" title="ISBN 0-306-40615-X w Wikipedii" class="a">ISBN 0-306-40615-X</a> text',
         Source::from('exampIe ISBN 0-306-40615-X text')->markup()
     );
-})->only();
+});
 
 it('parses ISBN-13', function() {
     assertEquals(
@@ -95,4 +95,4 @@ it('parses ISBN-13', function() {
         'exampIe ISBN 999-0-306-40615-7 text',
         Source::from('exampIe ISBN 999-0-306-40615-7 text')->markup()
     );
-})->only();
+});

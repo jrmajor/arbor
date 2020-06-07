@@ -38,6 +38,11 @@ return [
     'second_event_date' => 'Data drugiego wydarzenia',
     'second_event_place' => 'Miejsce drugiego wydarzenia',
 
+    'divorce' => 'Rozwód',
+    'divorced' => 'Rozwiedzeni',
+    'divorce_date' => 'Data rozwodu',
+    'divorce_place' => 'Miejsce rozwodu',
+
     'event_types' => [
         'marriage' => 'ślub',
         'church_marriage' => 'ślub kościelny',

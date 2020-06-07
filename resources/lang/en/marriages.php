@@ -38,6 +38,11 @@ return [
     'second_event_date' => 'Second event date',
     'second_event_place' => 'Second event place',
 
+    'divorce' => 'Divorce',
+    'divorced' => 'Divorced',
+    'divorce_date' => 'Divorce date',
+    'divorce_place' => 'Divorce place',
+
     'event_types' => [
         'marriage' => 'marriage',
         'church_marriage' => 'church marriage',

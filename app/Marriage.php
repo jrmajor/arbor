@@ -34,13 +34,13 @@ class Marriage extends Model
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
-        'ended' => 'boolean',
+        'divorced' => 'boolean',
     ];
 
     protected static $dateTuples = [
         'first_event_date',
         'second_event_date',
-        'end_date',
+        'divorce_date',
     ];
 
     public function isVisible(): bool
@@ -115,10 +115,10 @@ class Marriage extends Model
         return null;
     }
 
-    public function getEndDateAttribute(): ?string
+    public function getDivorceDateAttribute(): ?string
     {
-        if ($this->end_date_from && $this->end_date_to) {
-            return format_date_from_period($this->end_date_from, $this->end_date_to);
+        if ($this->divorce_date_from && $this->divorce_date_to) {
+            return format_date_from_period($this->divorce_date_from, $this->divorce_date_to);
         }
 
         return null;

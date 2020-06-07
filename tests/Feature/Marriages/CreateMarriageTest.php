@@ -5,8 +5,8 @@ use App\Person;
 
 beforeEach(function () {
     $this->dates = [
-        'first_event_date_from', 'second_event_date_from', 'end_date_from',
-        'first_event_date_to', 'second_event_date_to', 'end_date_to',
+        'first_event_date_from', 'second_event_date_from', 'divorce_date_from',
+        'first_event_date_to', 'second_event_date_to', 'divorce_date_to',
     ];
 
     $this->validAttributes = [
@@ -23,10 +23,10 @@ beforeEach(function () {
         'second_event_date_from' => '1968-04-13',
         'second_event_date_to' => '1968-04-13',
         'second_event_place' => 'Sępólno Krajeńskie, Polska',
-        'ended' => '1',
-        'end_cause' => 'rozwód',
-        'end_date_from' => '2001-10-27',
-        'end_date_to' => '2001-10-27',
+        'divorced' => true,
+        'divorce_date_from' => '2001-10-27',
+        'divorce_date_to' => '2001-10-27',
+        'divorce_place' => 'Toruń, Polska',
     ];
 });
 
