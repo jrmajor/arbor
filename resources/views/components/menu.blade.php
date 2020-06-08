@@ -13,7 +13,7 @@
                         focus:outline-none hover:no-underline
                         transition-colors duration-200 ease-out
                         flex items-center">
-                    <svg class="fill-current h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <svg class="fill-current h-4 w-4 mr-2" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                         <path d="M460.8 64V38.4H345.6v64H140.8v140.8H51.2v25.6h89.6v140.8h204.8v64h115.2V448h-89.6V345.6h89.6V320H345.6v64H166.4V128h179.2v64h115.2v-25.6h-89.6V64z"/>
                         <path d="M0 179.8h102.4v152.4H0zM409.6 128H512v102.4H409.6zM409.6 0H512v102.4H409.6zM204.8 64h102.4v102.4H204.8zM204.8 345.6h102.4V448H204.8zM409.6 409.6H512V512H409.6zM409.6 281.6H512V384H409.6z"/>
                     </svg>
