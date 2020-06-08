@@ -10,10 +10,7 @@ return [
         'settings' => 'Settings',
 
         'add_person' => 'Add person',
-
-        'logins' => 'Logins',
-        'activities' => 'Activities',
-        'reports' => 'Reports',
+        'dashboard' => 'Dashboard',
 
         'contact' => 'Contact',
     ],

@@ -10,10 +10,7 @@ return [
         'settings' => 'Ustawienia',
 
         'add_person' => 'Dodaj osobę',
-
-        'logins' => 'Logowania',
-        'activities' => 'Aktywności',
-        'reports' => 'Raporty',
+        'dashboard' => 'Kokpit',
 
         'contact' => 'Kontakt',
     ],
