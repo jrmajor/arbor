@@ -9,7 +9,7 @@
                 <li class="px-3 py-1 rounded
                         {{ $active != 'show' ? 'group-hover:bg-gray-200 group-focus:bg-gray-200' : '' }}
                         transition-colors duration-100 ease-out">
-                    <span class="w-full {{ $active == 'show' ? 'border-b-2 border-dotted border-blue-500 block' : '' }} flex items-center">
+                    <span class="w-full {{ $active == 'show' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
                         <svg class="h-4 w-4 mr-2 fill-current
                                 {{ $active == 'show' ? 'text-blue-600' : 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700' }}
                                 transition-colors duration-100 ease-out"
@@ -28,7 +28,7 @@
                 <li class="px-3 py-1 rounded
                     {{ $active != 'edit' ? 'group-hover:bg-gray-200 group-focus:bg-gray-200' : '' }}
                     transition-colors duration-100 ease-out">
-                    <span class="w-full {{ $active == 'edit' ? 'border-b-2 border-dotted border-blue-500 block' : '' }} flex items-center">
+                    <span class="w-full {{ $active == 'edit' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
                         <svg class="h-4 w-4 mr-2 fill-current
                                 {{ $active == 'edit' ? 'text-blue-600' : 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700' }}
                                 transition-colors duration-100 ease-out"
@@ -48,7 +48,7 @@
                     <li class="px-3 py-1 rounded
                         {{ $active != 'history' ? 'group-hover:bg-gray-200 group-focus:bg-gray-200' : '' }}
                         transition-colors duration-100 ease-out">
-                        <span class="w-full {{ $active == 'history' ? 'border-b-2 border-dotted border-blue-500 block' : '' }} flex items-center">
+                        <span class="w-full {{ $active == 'history' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
                             <svg class="h-4 w-4 mr-2 fill-current
                                     {{ $active == 'history' ? 'text-blue-600' : 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700' }}
                                     transition-colors duration-100 ease-out"
