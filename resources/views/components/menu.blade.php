@@ -36,7 +36,7 @@
                 :class="{ 'flex': open, 'hidden': ! open }"
                 @click.away="open = false">
 
-                @if(request()->route()->getName() != 'search')
+                @if($active != 'search')
                     <form action="{{ route('search') }}"
                         class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3">
                         <input type="search" name="s" required class="lg:text-sm"/>
