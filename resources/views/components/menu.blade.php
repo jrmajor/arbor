@@ -1,6 +1,9 @@
 <nav
     class="mb-1 bg-white shadow-md"
-    x-data="{ open: false }">
+    x-data="{
+        open: false,
+        dropdown: false,
+    }">
     <div class="container mx-auto">
         <div class="px-3 flex items-center justify-between flex-wrap">
 
@@ -26,8 +29,8 @@
                 type="button"
                 class="block lg:hidden px-4 pt-4 pb-3 md:pt-5 md:pb-4 -my-2 text-gray-800 hover:text-gray-900 focus:outline-none">
                 <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path x-show="open" d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/>
                     <path x-show="! open" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                    <path x-show="open" d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/>
                   </svg>
             </button>
 
@@ -57,7 +60,7 @@
                             border-b-2 border-solid border-transparent
                             {{ $active == 'people.create' ? 'lg:border-blue-500' : 'lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500' }}
                             focus:outline-none hover:no-underline
-                            transition-colors duration-100 ease-out">
+                            transition-colors duration-200 ease-out">
                         <div class="w-full {{ $active == 'people.create' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : '' }} flex items-center">
                             <svg class="fill-current h-4 w-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 6H0v2h2v2h2V8h2V6H4V4H2v2zm7 0a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0V6zm11 9.14A15.93 15.93 0 0 0 12 13c-2.91 0-5.65.78-8 2.14V18h16v-2.86z"/>
@@ -76,7 +79,7 @@
                             border-b-2 border-solid border-transparent
                             {{ $active == 'dashboard' ? 'lg:border-blue-500' : 'lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500' }}
                             focus:outline-none hover:no-underline
-                            transition-colors duration-100 ease-out">
+                            transition-colors duration-200 ease-out">
                         <div class="w-full {{ $active == 'dashboard' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : '' }} flex items-center">
                             <svg class="fill-current h-4 w-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"/>
@@ -95,7 +98,7 @@
                             border-b-2 border-solid border-transparent
                             lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500
                             focus:outline-none hover:no-underline
-                            transition-colors duration-100 ease-out
+                            transition-colors duration-200 ease-out
                             flex items-center">
                         <svg class="fill-current h-4 w-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.6 13.47A4.99 4.99 0 0 1 5 10a5 5 0 0 1 8-4V5h2v6.5a1.5 1.5 0 0 0 3 0V10a8 8 0 1 0-4.42 7.16l.9 1.79A10 10 0 1 1 20 10h-.18.17v1.5a3.5 3.5 0 0 1-6.4 1.97zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -111,10 +114,10 @@
                             border-b-2 border-solid border-transparent
                             lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500
                             focus:outline-none hover:no-underline
-                            transition-colors duration-100 ease-out
+                            transition-colors duration-200 ease-out
                             flex items-center">
                         <svg class="stroke-current h-5 w-5 -ml-1 mr-1 lg:hidden" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M192 176v-40a40 40 0 0140-40h160a40 40 0 0140 40v240a40 40 0 01-40 40H240c-22.09 0-48-17.91-48-40v-40" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                            <path d="M192 176v-40a40 40 0 0140-40h160a40 40 0 0140 40v240a40 40 0 01-40 40H240c-22.09 0-48-17.91-48-40v-40" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="38"/>
                             <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="38" d="M288 336l80-80-80-80M80 256h272"/>
                         </svg>
                         {{ __('misc.menu.login') }}
@@ -122,15 +125,14 @@
                 @else
                     <a
                         href="{{ route('settings') }}"
-                        class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
-                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 lg:hover:bg-gray-100 lg:focus:bg-gray-100
-                            rounded lg:rounded-none uppercase lg:normal-case
+                        class="lg:hidden px-3 py-1 text-gray-800
+                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200
+                            rounded uppercase
                             border-b-2 border-solid border-transparent
-                            {{ $active == 'settings' ? 'lg:border-blue-500' : 'lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500' }}
                             focus:outline-none hover:no-underline
-                            transition-colors duration-100 ease-out">
-                        <div class="w-full {{ $active == 'settings' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : '' }} flex items-center">
-                            <svg class="fill-current h-4 w-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            transition-colors duration-200 ease-out">
+                        <div class="w-full {{ $active == 'settings' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
+                            <svg class="fill-current h-4 w-4 mr-2" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.94 6.5L2.22 3.64l1.42-1.42L6.5 3.94c.52-.3 1.1-.54 1.7-.7L9 0h2l.8 3.24c.6.16 1.18.4 1.7.7l2.86-1.72 1.42 1.42-1.72 2.86c.3.52.54 1.1.7 1.7L20 9v2l-3.24.8c-.16.6-.4 1.18-.7 1.7l1.72 2.86-1.42 1.42-2.86-1.72c-.52.3-1.1.54-1.7.7L11 20H9l-.8-3.24c-.6-.16-1.18-.4-1.7-.7l-2.86 1.72-1.42-1.42 1.72-2.86c-.3-.52-.54-1.1-.7-1.7L0 11V9l3.24-.8c.16-.6.4-1.18.7-1.7zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
                             {{ __('misc.menu.settings') }}
@@ -140,13 +142,12 @@
                     <a
                         href="{{ route('logout') }}"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                        class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
-                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 lg:hover:bg-gray-100 lg:focus:bg-gray-100
-                            rounded lg:rounded-none uppercase lg:normal-case
+                        class="lg:hidden px-3 py-1 text-gray-800
+                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200
+                            rounded uppercase
                             border-b-2 border-solid border-transparent
-                            lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500
                             focus:outline-none hover:no-underline
-                            transition-colors duration-100 ease-out
+                            transition-colors duration-200 ease-out
                             flex items-center">
                         <svg class="stroke-current h-5 w-5 mr-1 lg:hidden" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                             <path d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="38"/>
@@ -155,6 +156,58 @@
                             {{ __('misc.menu.logout') }}<small class="ml-1 normal-case">({{ $user->username }})</small>
                         </span>
                     </a>
+
+                    <div class="hidden lg:block relative">
+                        <button
+                            @click="dropdown = ! dropdown"
+                            class="px-3 pt-6 pb-4 text-gray-800
+                                hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
+                                border-b-2 border-solid border-transparent
+                                hover:border-gray-500 focus:border-gray-500 active:border-blue-500
+                                focus:outline-none hover:no-underline
+                                transition-color duration-200 ease-out
+                                flex items-center"
+                            :class="{ 'border-blue-500': dropdown, 'hover:border-blue-500': dropdown, 'focus:border-blue-500': dropdown }">
+                            {{ $user->username }}
+                            <svg class="fill-current h-5 w-5 ml-1" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path x-show="! dropdown" d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                <path x-show="dropdown" d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z"/>
+                            </svg>
+                        </button>
+
+                        <div class="absolute right-0 flex-col z-10 overflow-hidden
+                                bg-white rounded-b-lg shadow-lg"
+                            :class="{ 'flex': dropdown, 'hidden': ! dropdown }"
+                            @click.away="dropdown = false">
+
+                            <a
+                                href="{{ route('settings') }}"
+                                class="px-3 py-4 text-gray-800
+                                    hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
+                                    border-l-2 border-solid border-transparent
+                                    {{ $active == 'settings' ? 'border-blue-500' : 'hover:border-gray-500 focus:border-gray-500 active:border-blue-500' }}
+                                    focus:outline-none hover:no-underline
+                                    transition-colors duration-200 ease-out
+                                    flex items-center">
+                                {{ __('misc.menu.settings') }}
+                            </a>
+
+                            <a
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                                class="px-3 py-4 text-gray-800
+                                    hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
+                                    border-l-2 border-solid border-transparent
+                                    hover:border-gray-500 focus:border-gray-500 active:border-blue-500
+                                    focus:outline-none hover:no-underline
+                                    transition-colors duration-200 ease-out
+                                    flex items-center">
+                                {{ __('misc.menu.logout') }}<small class="ml-1 normal-case">({{ $user->username }})</small>
+                            </a>
+
+                        </div>
+                    </div>
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
                         @csrf
                     </form>
