@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title-bar')
-    Reports
-@endsection
+@section('title-bar', 'Reports')
 
 @section('content')
     <strong>should be dead:</strong>

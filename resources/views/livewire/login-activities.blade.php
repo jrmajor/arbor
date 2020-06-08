@@ -3,9 +3,7 @@
     <livewire:scripts>
 @endpush
 
-@section('title-bar')
-    {{ __('activities.login-activities') }}
-@endsection
+@section('title-bar', __('activities.login-activities'))
 
 <div>
     <input class="m-1" type="checkbox"

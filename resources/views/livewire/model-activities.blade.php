@@ -3,9 +3,7 @@
     <livewire:scripts>
 @endpush
 
-@section('title-bar')
-    {{ __('activities.model-activities') }}
-@endsection
+@section('title-bar', __('activities.model-activities'))
 
 <div>
     <table>
