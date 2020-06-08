@@ -297,13 +297,13 @@
                                 <input type="hidden" name="sources">
                             </div>
                             <button @click.prevent="sources.push('')"
-                                class="w-6 h-6 rounded-full border border-blue-600 text-blue-600 p-2
+                                class="w-6 h-6 rounded-full border border-blue-600 text-blue-600 p-1
                                     hover:bg-blue-100 hover:text-blue-700
                                     focus:bg-blue-100 focus:text-blue-700 focus:outline-none
                                     active:bg-blue-600 active:text-blue-100
                                     transition-colors duration-100 ease-out">
-                                <svg class="fill-current" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 7.5V1h-3v6.5H1v3h6.5V17h3v-6.5H17v-3h-6.5z"/>
+                                <svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 6V2.5H6V6H2.5v2H6v3.5h2V8h3.5V6H8z"/>
                                 </svg>
                             </button>
                         </div>
@@ -317,13 +317,13 @@
                                     <input type="text" :name="'sources['+index+']'" x-model="sources[index]">
                                     <div>
                                         <button @click.prevent="sources.splice(index, 1)"
-                                            class="w-6 h-6 rounded-full border border-blue-600 text-blue-600 p-2
+                                            class="w-6 h-6 rounded-full border border-blue-600 text-blue-600 p-1
                                                 hover:bg-blue-100 hover:text-blue-700
                                                 focus:bg-blue-100 focus:text-blue-700 focus:outline-none
                                                 active:bg-blue-600 active:text-blue-100
                                                 transition-colors duration-100 ease-out">
-                                            <svg class="fill-current" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M17 10.5H1v-3h16v3z"/>
+                                            <svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 8h-9V6h9v2z"/>
                                             </svg>
                                         </button>
                                     </div>
@@ -331,13 +331,13 @@
                             </template>
                             <div class="w-full flex justify-end">
                                 <button @click.prevent="sources.push('')"
-                                    class="w-6 h-6 rounded-full border border-blue-600 text-blue-600 p-2
+                                    class="w-6 h-6 rounded-full border border-blue-600 text-blue-600 p-1
                                         hover:bg-blue-100 hover:text-blue-700
                                         focus:bg-blue-100 focus:text-blue-700 focus:outline-none
                                         active:bg-blue-600 active:text-blue-100
                                         transition-colors duration-100 ease-out">
-                                    <svg class="fill-current" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 7.5V1h-3v6.5H1v3h6.5V17h3v-6.5H17v-3h-6.5z"/>
+                                    <svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 6V2.5H6V6H2.5v2H6v3.5h2V8h3.5V6H8z"/>
                                     </svg>
                                 </button>
                             </div>
