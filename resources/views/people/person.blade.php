@@ -27,7 +27,7 @@
                     <a href="{{ $pytlewski->url }}" target="_blank" class="a">
                         {{ $pytlewski->id}}
                         @if($pytlewski->name || $pytlewski->family_name || $pytlewski->last_name)
-                            <small>
+                            <small class="text-gray-700">
                                 {{ __('people.pytlewski.as') }}
                                 <strong>{{ $pytlewski->last_name
                                                     ? $pytlewski->last_name.' ('.$pytlewski->family_name.')'
@@ -37,7 +37,7 @@
                         @endif
                     </a>
                     <button @click="open = true"
-                        class="btn leading-none text-xs !px-2 py-1 normal-case font-normal tracking-normal">
+                        class="btn leading-none text-xs !px-2">
                         {{ __('people.pytlewski.show_more') }}
                     </button>
                     <br>

@@ -3,19 +3,19 @@
 return [
 
     'menu' => [
-        'tree' => 'drzewo',
+        'tree' => 'Drzewo',
 
-        'login' => 'zaloguj',
-        'logout' => 'wyloguj',
-        'settings' => 'ustawienia',
+        'login' => 'Zaloguj',
+        'logout' => 'Wyloguj',
+        'settings' => 'Ustawienia',
 
-        'add_person' => 'dodaj osobę',
+        'add_person' => 'Dodaj osobę',
 
-        'logins' => 'logowania',
-        'activities' => 'aktywności',
-        'reports' => 'raporty',
+        'logins' => 'Logowania',
+        'activities' => 'Aktywności',
+        'reports' => 'Raporty',
 
-        'contact' => 'kontakt',
+        'contact' => 'Kontakt',
     ],
 
     'date' => [

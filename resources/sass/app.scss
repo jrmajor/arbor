@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .a {
-    @apply text-blue-600;
-    @apply transition-colors duration-200 ease-out;
+    @apply text-blue-700;
+    @apply transition-colors duration-100 ease-out;
 }
 
-.a:hover {
+.a:hover, .a:focus {
     @apply text-blue-800;
 }
 
@@ -16,10 +16,10 @@ small {
 }
 
 .a > small {
-    @apply transition-colors duration-200 ease-out;
+    @apply transition-colors duration-100 ease-out;
 }
 
-.a:hover > small {
+.a:hover > small, .a:focus > small {
     @apply text-gray-800;
 }
 
@@ -29,22 +29,22 @@ small {
 
 .btn {
     @apply px-3 py-1;
-    @apply rounded border border-blue-600 text-blue-600;
-    @apply transition-colors duration-200 ease-out;
+    @apply rounded border border-blue-700 text-blue-700;
+    @apply transition-colors duration-100 ease-out;
 }
 
 .btn[disabled] {
-    @apply rounded border border-gray-600 text-gray-600;
-    @apply transition-colors duration-200 ease-out;
+    @apply rounded border border-gray-700 text-gray-700;
+    @apply cursor-default;
 }
 
-.btn:hover {
-    @apply bg-blue-100 text-blue-700;
-}
-
-.btn:focus {
+.btn:hover:enabled, .btn:focus:enabled {
     @apply outline-none;
-    @apply bg-blue-600 text-blue-100;
+    @apply bg-blue-100 text-blue-800;
+}
+
+.btn:active:enabled {
+    @apply bg-blue-700 text-blue-100;
 }
 
 input[type=text],

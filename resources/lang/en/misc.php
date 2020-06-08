@@ -3,19 +3,19 @@
 return [
 
     'menu' => [
-        'tree' => 'tree',
+        'tree' => 'Tree',
 
-        'login' => 'login',
-        'logout' => 'logout',
-        'settings' => 'settings',
+        'login' => 'Login',
+        'logout' => 'Logout',
+        'settings' => 'Settings',
 
-        'add_person' => 'add person',
+        'add_person' => 'Add person',
 
-        'logins' => 'logins',
-        'activities' => 'activities',
-        'reports' => 'reports',
+        'logins' => 'Logins',
+        'activities' => 'Activities',
+        'reports' => 'Reports',
 
-        'contact' => 'contact',
+        'contact' => 'Contact',
     ],
 
     'date' => [
