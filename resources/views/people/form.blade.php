@@ -6,7 +6,15 @@
 <form
     method="POST"
     action="{{ $action == 'create' ? route('people.store') : route('people.update', $person) }}"
-    x-data="{ sex: '{{ old('sex') ?? $person->sex }}' }">
+    x-data="{
+        sex: '{{ old('sex') ?? $person->sex }}',
+        dead: {{ old('dead') ?? $person->dead ? 'true' : 'false' }},
+        sources: [
+            @foreach(old('sources') ?? $person->sources as $source)
+                '{{ $source instanceof App\Source ? $source->raw() : $source }}',
+            @endforeach
+        ]
+    }">
     @method($action == 'create' ? 'post' : 'put')
     @csrf
 
@@ -177,7 +185,7 @@
             </div>
         </fieldset>
 
-        <fieldset class="space-y-2">
+        <fieldset>
             <div class="flex flex-wrap">
                 <div class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1"
                     x-text="sex == 'xx' ? '{{ __('people.dead_xx') }}' : '{{ __('people.dead_xy') }}'">
@@ -188,13 +196,17 @@
                     <input
                         type="checkbox"
                         id="dead" name="dead"
-                        value="1" {{ old('dead') ?? $person->dead ? 'checked' : '' }}>
+                        value="1"
+                        x-model="dead">
                     <label for="dead" class="ml-1"
                         x-text="sex == 'xx' ? '{{ __('people.dead_xx') }}' : '{{ __('people.dead_xy') }}'">
                         {{ __('people.dead') }}
                     </label>
                 </div>
             </div>
+        </fieldset>
+
+        <fieldset class="space-y-2" x-show="dead">
             <x-date-tuple-picker
                 name="death_date" :label="__('people.death_date')"
                 :initial-from="old('death_date_from') ?? $person->death_date_from"
@@ -225,7 +237,7 @@
             </div>
         </fieldset>
 
-        <fieldset class="space-y-2">
+        <fieldset class="space-y-2" x-show="dead">
             <x-date-tuple-picker
                 name="funeral_date" :label="__('people.funeral_date')"
                 :initial-from="old('funeral_date_from') ?? $person->funeral_date_from"
@@ -244,7 +256,7 @@
             </div>
         </fieldset>
 
-        <fieldset class="space-y-2">
+        <fieldset class="space-y-2" x-show="dead">
             <x-date-tuple-picker
                 name="burial_date" :label="__('people.burial_date')"
                 :initial-from="old('burial_date_from') ?? $person->burial_date_from"
@@ -277,12 +289,7 @@
         <fieldset class="space-y-2">
             <div class="flex flex-wrap">
                 <label for="sources" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.sources') }}</label>
-                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2"
-                    x-data="{ sources: [
-                        @foreach(old('sources') ?? $person->sources as $source)
-                            '{{ $source instanceof App\Source ? $source->raw() : $source }}',
-                        @endforeach
-                    ]}">
+                <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
 
                     <template x-if="sources.length == 0">
                         <div class="w-full flex flex-no-wrap justify-between items-center space-x-2">

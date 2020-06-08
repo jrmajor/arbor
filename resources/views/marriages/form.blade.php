@@ -13,7 +13,10 @@
 
 <form
     method="POST"
-    action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}">
+    action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"
+    x-data="{
+        divorced: {{ old('divorced') ?? $marriage->divorced ? 'true' : 'false' }}
+    }">
     @method($action == 'create' ? 'post' : 'put')
     @csrf
 
@@ -136,7 +139,7 @@
             </div>
         </fieldset>
 
-        <fieldset class="space-y-2">
+        <fieldset>
             <div class="flex flex-wrap">
                 <div class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">
                     {{ __('marriages.divorce') }}
@@ -146,12 +149,16 @@
                     <input
                         type="checkbox"
                         id="divorced" name="divorced"
-                        value="1" {{ old('divorced') ?? $marriage->divorced ? 'checked' : '' }}>
+                        value="1"
+                        x-model="divorced">
                     <label for="divorced" class="ml-1">
                         {{ __('marriages.divorced') }}
                     </label>
                 </div>
             </div>
+        </fieldset>
+
+        <fieldset class="space-y-2" x-show="divorced">
             <x-date-tuple-picker
                 name="divorce_date" :label="__('marriages.divorce_date')"
                 :initial-from="old('divorce_date_from') ?? $marriage->divorce_date_from"
