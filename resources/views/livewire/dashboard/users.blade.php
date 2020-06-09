@@ -7,19 +7,40 @@
 
     <div class="flex-grow p-4 bg-white rounded-lg shadow-lg">
         <table>
-            @foreach ($users as $user)
-
-                <tr wire:key="{{ $user->id }}">
-                    <td>
-                        <strong>{{ $user->username }}</strong>
-                    </td>
-
-                    <td class="tnum">
-                        {{ optional(optional($user->latestLogin)->created_at)->format('Y-m-d h:s') }}
-                    </td>
+            <thead>
+                <tr>
+                    <th class="pr-4 text-left">username</th>
+                    <th class="px-4 text-left">perm.</th>
+                    <th class="px-4 text-left">email</th>
+                    <th class="pl-4 text-right">latest login</th>
                 </tr>
+            </thead>
 
-            @endforeach
+            <tbody>
+                @foreach ($users as $user)
+                    <tr wire:key="{{ $user->id }}">
+                        <td class="pr-4 pt-2">
+                            {{ $user->username }}
+                        </td>
+
+                        <td class="px-4 pt-2">
+                            {{ $user->permissions == 0 ? 'none' : null }}
+                            {{ $user->permissions == 1 ? 'read' : null }}
+                            {{ $user->permissions == 2 ? 'write' : null }}
+                            {{ $user->permissions == 3 ? 'write' : null }}
+                            {{ $user->permissions == 4 ? 'admin' : null }}
+                        </td>
+
+                        <td class="px-4 pt-2">
+                            {{ $user->email ?: 'no email' }}
+                        </td>
+
+                        <td class="pl-4 pt-2 tnum text-right">
+                            {{ optional(optional($user->latestLogin)->created_at)->format('Y-m-d h:s') ?: 'never' }}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 
