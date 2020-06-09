@@ -52,9 +52,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::livewire('activities/logins', 'login-activities')->name('activities.logins');
-    Route::livewire('activities/models', 'model-activities')->name('activities.models');
-    Route::get('reports', 'ReportController')->name('reports');
+    Route::livewire('dashboard/users', 'dashboard.users')->name('dashboard.users');
+    Route::livewire('dashboard/activitylog', 'dashboard.activity-log')->name('dashboard.activitylog');
+    Route::get('dashboard/reports', 'DashboardController@reports')->name('dashboard.reports');
 });
 
 Route::post('locale', 'LocaleController')->name('locale.set');

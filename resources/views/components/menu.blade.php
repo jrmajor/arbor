@@ -70,9 +70,9 @@
                     </a>
                 @endif
 
-                {{-- @if($user->isSuperAdmin())
+                @if($user->isSuperAdmin())
                     <a
-                        href="{{ route('dashboard') }}"
+                        href="{{ route('dashboard.users') }}"
                         class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
                             hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 lg:hover:bg-gray-100 lg:focus:bg-gray-100
                             rounded lg:rounded-none uppercase lg:normal-case
@@ -87,7 +87,7 @@
                             {{ __('misc.menu.dashboard') }}
                         </div>
                     </a>
-                @endif --}}
+                @endif
 
                 @guest
                     <a

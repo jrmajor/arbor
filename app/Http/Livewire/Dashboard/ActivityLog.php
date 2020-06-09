@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Dashboard;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Activitylog\Models\Activity;
 
-class ModelActivities extends Component
+class ActivityLog extends Component
 {
     use WithPagination;
 
@@ -22,7 +22,7 @@ class ModelActivities extends Component
             ->whereIn('log_name', ['users', 'people', 'marriages'])
             ->paginate();
 
-        return view('livewire.model-activities', [
+        return view('livewire.dashboard.activity-log', [
             'activities' => $activities,
         ]);
     }

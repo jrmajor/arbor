@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Person;
 use Illuminate\Support\Facades\Auth;
 
-class ReportController extends Controller
+class DashboardController extends Controller
 {
-    public function __invoke()
+    public function reports()
     {
         if (! Auth::user()->isSuperAdmin()) {
             return abort(403);
@@ -33,7 +33,7 @@ class ReportController extends Controller
         $invisibleDead = Person::where('dead', true)
             ->where('visibility', false)->get();
 
-        return view('reports.reports', [
+        return view('dashboard.reports', [
             'shouldBeDead' => $shouldBeDead,
             'visibleAlive' => $visibleAlive,
             'invisibleDead' => $invisibleDead,

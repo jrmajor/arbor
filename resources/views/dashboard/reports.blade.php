@@ -2,8 +2,12 @@
 
 @section('title-bar', 'Reports')
 
+@section('sidebar-menu')
+    <x-dashboard-menu active="reports"/>
+@endsection
+
 @section('content')
-    <strong>should be dead:</strong>
+    <strong>Should be dead</strong>
     <ul>
         @forelse ($shouldBeDead as $person)
             <li><x-name :person="$person"/></li>
@@ -12,7 +16,7 @@
         @endforelse
     </ul>
 
-    <strong>visible alive:</strong>
+    <strong>Visible alive</strong>
     <ul>
         @forelse ($visibleAlive as $person)
             <li><x-name :person="$person"/></li>
@@ -21,7 +25,7 @@
         @endforelse
     </ul>
 
-    <strong>invisible dead:</strong>
+    <strong>Invisible dead</strong>
     <ul>
         @forelse ($invisibleDead as $person)
             <li><x-name :person="$person"/></li>

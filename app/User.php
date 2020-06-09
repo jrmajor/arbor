@@ -54,4 +54,11 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function latestLogin()
+    {
+        return $this->morphOne('Spatie\Activitylog\Models\Activity', 'causer')
+                    ->whereLogName('logins')->whereDescription('logged-in')
+                    ->orderBy('created_at', 'desc');
+    }
 }

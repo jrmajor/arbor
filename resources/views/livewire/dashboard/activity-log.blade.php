@@ -3,7 +3,11 @@
     <livewire:scripts>
 @endpush
 
-@section('title-bar', __('activities.model-activities'))
+@section('title-bar', __('Activity log'))
+
+@section('sidebar-menu')
+    <x-dashboard-menu active="activitylog"/>
+@endsection
 
 <div>
     <table>

@@ -2,9 +2,6 @@
 
 return [
 
-    'login-activities' => 'Logowania',
-    'model-activities' => 'Edycje',
-
     'created' => 'stworzon',
     'updated' => 'zmodyfikowan',
     'made_visible' => 'opublicznion',

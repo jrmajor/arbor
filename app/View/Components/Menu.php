@@ -22,6 +22,10 @@ class Menu extends Component
         if($this->active == 'people.letter') {
             $this->active = 'people.index';
         }
+
+        if(Str::startsWith($this->active, 'dashboard')) {
+            $this->active = 'dashboard';
+        }
     }
 
     public function render()
