@@ -5,7 +5,7 @@
             <input
                 type="text"
                 id="{{ $name }}_search" name="{{ $name }}_search"
-                autocomplete=off
+                autocomplete="off"
                 wire:model="search">
         </div>
         <div class="w-full sm:w-3/4 md:w-5/8">

@@ -8,7 +8,7 @@
                 <input
                     type="text" class="@error('id_pytlewski') invalid @enderror"
                     id="id_pytlewski" name="id_pytlewski"
-                    autocomplete=off
+                    autocomplete="off"
                     wire:model="pytlewskiId"
                     wire:keyup="search">
             </div>

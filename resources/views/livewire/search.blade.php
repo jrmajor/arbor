@@ -5,7 +5,7 @@
 
 <div>
     <form class="relative" wire:submit.prevent="$refresh">
-        <input type="search" wire:model.debounce.500ms="s" class="h-10"></input>
+        <input type="search" wire:model.debounce.500ms="s" autocomplete="off" class="h-10"></input>
         <button type="submit"
             class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 ease-out">
             <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
