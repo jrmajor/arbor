@@ -184,7 +184,7 @@
                             <div class="flex flex-col overflow-hidden bg-white rounded-lg shadow-2xl">
                                 <a
                                     href="{{ route('settings') }}"
-                                    class="px-3 py-4 text-gray-800
+                                    class="pl-5 pr-12 py-4 text-gray-800
                                         hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
                                         border-l-2 border-solid border-transparent
                                         {{ $active == 'settings' ? 'border-blue-500' : 'hover:border-gray-500 focus:border-gray-500 active:border-blue-500' }}
@@ -196,13 +196,13 @@
                                 <a
                                     href="{{ route('logout') }}"
                                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                    class="px-3 py-4 text-gray-800
+                                    class="pl-5 pr-12 py-4 text-gray-800
                                         hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
                                         border-l-2 border-solid border-transparent
                                         hover:border-gray-500 focus:border-gray-500 active:border-blue-500
                                         focus:outline-none hover:no-underline
                                         transition-colors duration-200 ease-out">
-                                    {{ __('misc.menu.logout') }}<small class="ml-1 normal-case">({{ $user->username }})</small>
+                                    {{ __('misc.menu.logout') }}
                                 </a>
                             </div>
 
