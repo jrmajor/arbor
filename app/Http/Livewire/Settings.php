@@ -8,8 +8,6 @@ use Livewire\Component;
 
 class Settings extends Component
 {
-    public $success;
-
     public $email;
 
     public $password;
@@ -19,8 +17,6 @@ class Settings extends Component
 
     public function saveEmail()
     {
-        $this->success = null;
-
         $this->validate([
             'email' => 'required|email',
         ]);
@@ -30,16 +26,14 @@ class Settings extends Component
         ])->save();
 
         if ($result) {
-            $this->success = 'email';
+            flash()->success(__('settings.alerts.changes_have_been_saved'));
         } else {
-            $this->addError('email', __('misc.an_unknown_error_occurred'));
+            flash()->error(__('misc.an_unknown_error_occurred'));
         }
     }
 
     public function savePassword()
     {
-        $this->success = null;
-
         $this->validate([
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -52,16 +46,14 @@ class Settings extends Component
         $this->password_confirmation = null;
 
         if ($result) {
-            $this->success = 'password';
+            flash()->success(__('settings.alerts.password_has_been_changed'));
         } else {
-            $this->addError('password', __('misc.an_unknown_error_occurred'));
+            flash()->error(__('misc.an_unknown_error_occurred'));
         }
     }
 
     public function logoutOtherDevices()
     {
-        $this->success = null;
-
         $this->validate([
             'logout_password' => 'required',
         ]);
@@ -76,9 +68,9 @@ class Settings extends Component
         $this->logout_password = null;
 
         if ($result) {
-            $this->success = 'logout';
+            flash()->success(__('settings.alerts.logged_out'));
         } else {
-            $this->addError('logout', __('misc.an_unknown_error_occurred'));
+            flash()->error(__('misc.an_unknown_error_occurred'));
         }
     }
 

@@ -3,23 +3,28 @@
     <livewire:scripts>
 @endpush
 
-@section('title-bar', 'Users')
+<div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-@section('sidebar-menu')
-    <x-dashboard-menu active="users"/>
-@endsection
+    <div class="flex-grow p-4 bg-white rounded-lg shadow-lg">
+        <table>
+            @foreach ($users as $user)
 
-<div>
-    <table>
-        @foreach ($users as $user)
-            <tr wire:key="{{ $user->id }}">
-                <td>
-                    <strong>{{ $user->username }}</strong>
-                </td>
-                <td class="tnum">
-                    {{ optional(optional($user->latestLogin)->created_at)->format('Y-m-d h:s') }}
-                </td>
-            </tr>
-        @endforeach
-    </table>
+                <tr wire:key="{{ $user->id }}">
+                    <td>
+                        <strong>{{ $user->username }}</strong>
+                    </td>
+
+                    <td class="tnum">
+                        {{ optional(optional($user->latestLogin)->created_at)->format('Y-m-d h:s') }}
+                    </td>
+                </tr>
+
+            @endforeach
+        </table>
+    </div>
+
+    <div class="flex-shrink-0 p-1">
+        <x-dashboard-menu active="users"/>
+    </div>
+
 </div>

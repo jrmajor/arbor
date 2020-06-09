@@ -1,17 +1,21 @@
 @extends('layouts.app')
 
-@section('title-bar')
-    <x-person-title-bar :person="$person"/>
-@endsection
-
-@section('sidebar-menu')
-    <x-person-menu active="edit" :person="$person"/>
-@endsection
-
 @section('content')
-    @error('deleting')
-        <p class="text-red-500">{{ $message }}</p>
-    @enderror
 
-    @component('people.form', ['person' => $person, 'action' => 'edit']) @endcomponent
+    <h1 class="mx-2 mb-1 mt-5 leading-none text-3xl font-medium">
+        <x-person-title-bar :person="$person"/>
+    </h1>
+
+    <div class="flex flex-col md:flex-row space-x-2 space-y-2">
+
+        <div class="flex-grow p-4 bg-white rounded-lg shadow-lg">
+            @include('people.form', ['person' => $person, 'action' => 'edit'])
+        </div>
+
+        <div class="flex-shrink-0 p-1">
+            <x-person-menu active="edit" :person="$person"/>
+        </div>
+
+    </div>
+
 @endsection
