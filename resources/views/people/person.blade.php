@@ -10,7 +10,7 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <div class="space-y-2">
+        <div class="space-y-3">
             @include('people.details')
             @include('people.small-tree')
         </div>

@@ -1,18 +1,30 @@
 @if(Arr::has($activity['attributes'], $attribute))
-    <tr>
-        <td class="pr-5">{!! $label ?? __($activity['model']->log_name.'.'.$attribute) !!}</td>
+
+    <tr class="block w-full md:table-row md:w-auto">
+
+        <td class="block w-full mt-1 -mb-1 md:m-0 pr-4 md:py-1 md:table-cell md:w-auto">
+            <strong>{!! $label ?? __($activity['model']->log_name.'.'.$attribute) !!}</strong>
+        </td>
+
         @if($activity['old'])
-            @if($activity['old'][$attribute] !== null)
-                <td>{{ __($translations.'.'.$activity['old'][$attribute]) }}</td>
+            <td class="inline pr-4 md:py-1 md:table-cell">
+                @unless($activity['old'][$attribute] === null)
+                    {{ __($translations.'.'.$activity['old'][$attribute]) }}
+                @else
+                    <span class="text-gray-500">{{ __('misc.null') }}</span>
+                @endif
+            </td>
+
+            <td class="inline pr-4 md:py-1 md:table-cell">=></td>
+        @endif
+
+        <td class="inline md:py-1 md:table-cell">
+            @unless($activity['attributes'][$attribute] === null)
+                {{ __($translations.'.'.$activity['attributes'][$attribute]) }}
             @else
-                <td class="text-gray-500">{{ __('misc.null') }}</td>
+                <span class="text-gray-500">{{ __('misc.null') }}</span>
             @endif
-            <td>=></td>
-        @endif
-        @if($activity['attributes'][$attribute] !== null)
-            <td>{{ __($translations.'.'.$activity['attributes'][$attribute]) }}</td>
-        @else
-            <td class="text-gray-500">{{ __('misc.null') }}</td>
-        @endif
+        </td>
+
     </tr>
 @endif
