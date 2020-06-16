@@ -10,6 +10,7 @@
 @section('content')
 
     <div class="flex flex-col items-center w-full">
+
         <a href="{{ route('people.index') }}">
             <h1
                 style="font-family: Nunito; letter-spacing: 0.2em"
@@ -22,7 +23,8 @@
             class="text-xl font-medium text-gray-700 leading-none">
             {{ __('passwords.resetting_password') }}
         </h2>
-        <div class="mt-2 bg-white rounded-lg shadow-lg px-5 py-4 w-full xs:w-5/6 sm:w-3/4 md:w-1/2 lg:w-128">
+
+        <main class="mt-2 bg-white rounded-lg shadow-lg px-5 py-4 w-full xs:w-5/6 sm:w-3/4 md:w-1/2 lg:w-128">
             <form method="POST" action="{{ route('password.update') }}">
                 @csrf
                 <input type="hidden" name="token" value="{{ $token }}">
@@ -78,7 +80,8 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </main>
+
     </div>
 
 @endsection

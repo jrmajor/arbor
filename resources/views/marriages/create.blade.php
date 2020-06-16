@@ -6,8 +6,8 @@
         {{ __('marriages.add_a_new_marriage') }}
     </h1>
 
-    <div class="p-4 bg-white rounded-lg shadow-lg">
+    <main class="p-4 bg-white rounded-lg shadow-lg">
         @include('marriages.form', ['marriage' => $marriage, 'action' => 'create'])
-    </div>
+    </main>
 
 @endsection

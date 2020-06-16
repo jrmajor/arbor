@@ -10,10 +10,10 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <div class="space-y-3">
+        <main class="space-y-3">
             @include('people.details')
             @include('people.small-tree')
-        </div>
+        </main>
 
         @if(optional(auth()->user())->canWrite())
             <div class="flex-shrink-0 p-1">

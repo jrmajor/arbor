@@ -8,7 +8,7 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <div class="flex-grow flex flex-col space-y-3">
+        <main class="flex-grow flex flex-col space-y-3">
 
             @foreach($activities as $activity)
 
@@ -54,7 +54,7 @@
 
             @endforeach
 
-        </div>
+        </main>
 
         <div class="flex-shrink-0 p-1">
             <x-person-menu active="history" :person="$person"/>

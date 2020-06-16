@@ -3,7 +3,7 @@
     <livewire:scripts>
 @endpush
 
-<div class="space-y-2 flex flex-col items-center">
+<main class="space-y-2 flex flex-col items-center">
 
     <div class="w-full p-4 bg-white rounded-lg shadow-lg">
 
@@ -39,4 +39,4 @@
 
     {{ $people->isNotEmpty() ? $people->links() : null }}
 
-</div>
+</main>

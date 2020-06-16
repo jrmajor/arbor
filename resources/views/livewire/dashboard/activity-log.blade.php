@@ -5,7 +5,7 @@
 
 <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-    <div class="flex-grow space-y-2 flex flex-col items-center">
+    <main class="flex-grow space-y-2 flex flex-col items-center">
 
         <div class="w-full p-4 bg-white rounded-lg shadow-lg">
             <table>
@@ -67,7 +67,7 @@
 
         {{ $activities->links() }}
 
-    </div>
+    </main>
 
     <div class="flex-shrink-0 p-1">
         <x-dashboard-menu active="activitylog"/>

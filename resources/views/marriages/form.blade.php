@@ -3,14 +3,6 @@
     <livewire:scripts>
 @endpush
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
-
 <form
     method="POST"
     action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"

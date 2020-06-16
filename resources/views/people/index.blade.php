@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="p-4 bg-white rounded-lg shadow-lg">
+    <main class="p-4 bg-white rounded-lg shadow-lg">
 
         <x-letters :active="$active ?? null"/>
 
@@ -18,6 +18,6 @@
             </ul>
         @endif
 
-    </div>
+    </main>
 
 @endsection

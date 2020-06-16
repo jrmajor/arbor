@@ -6,8 +6,8 @@
         {{ __('people.add_a_new_person') }}
     </h1>
 
-    <div class="p-4 bg-white rounded-lg shadow-lg">
+    <main class="p-4 bg-white rounded-lg shadow-lg">
         @include('people.form', ['person' => $person, 'action' => 'create'])
-    </div>
+    </main>
 
 @endsection

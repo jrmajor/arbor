@@ -7,13 +7,14 @@
 
 
 <div>
+
     <x-flash/>
 
     <h1 class="mx-2 mb-1 mt-5 leading-none text-3xl font-medium">
         {{ __('settings.user').': '.$user->username }}
     </h1>
 
-    <div class="p-4 bg-white rounded-lg shadow-lg space-y-4">
+    <main class="p-4 bg-white rounded-lg shadow-lg space-y-4">
 
         <div>
             <h2 class="mb-1 leading-none text-2xl font-medium">{{ __('settings.email') }}</h2>
@@ -98,6 +99,6 @@
             @enderror
         </div>
 
-    </div>
+    </main>
 
 </div>

@@ -8,9 +8,9 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <div class="flex-grow p-4 bg-white rounded-lg shadow-lg">
+        <main class="flex-grow p-4 bg-white rounded-lg shadow-lg">
             @include('marriages.form', ['marriage' => $marriage, 'action' => 'edit'])
-        </div>
+        </main>
 
         <div class="flex-shrink-0 p-1">
             <x-marriage-menu active="edit" :marriage="$marriage"/>

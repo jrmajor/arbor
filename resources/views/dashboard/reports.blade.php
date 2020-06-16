@@ -4,7 +4,7 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <div class="flex-grow space-y-2">
+        <main class="flex-grow space-y-2">
 
             <div>
                 <h2 class="mx-2 mb-1 mt-5 leading-none text-xl font-medium">Should be dead</h2>
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-        </div>
+        </main>
 
         <div class="flex-shrink-0 p-1">
             <x-dashboard-menu active="reports"/>
