@@ -17,6 +17,11 @@ return [
         'marriage_have_been_deleted' => 'Marriage have been deleted.',
     ],
 
+    'history' => [
+        'deleted' => 'Marriage was deleted.',
+        'restored' => 'Marriage was restored.',
+    ],
+
     'add_a_new_marriage' => 'Add marriage',
     'edit_this_marriage' => 'Edit this marriage',
     'add_child' => 'Add child',

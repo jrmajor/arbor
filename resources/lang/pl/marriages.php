@@ -17,6 +17,11 @@ return [
         'marriage_have_been_deleted' => 'Małżeństwo zostało usunięte.',
     ],
 
+    'history' => [
+        'deleted' => 'Ślub został usunięty.',
+        'restored' => 'Ślub został przywrócony.',
+    ],
+
     'add_a_new_marriage' => 'Dodaj związek',
     'edit_this_marriage' => 'Edytuj ten związek',
     'add_child' => 'Dodaj dziecko',

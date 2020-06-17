@@ -15,27 +15,29 @@
                 <div class="p-4 bg-white rounded-lg shadow-lg overflow-hidden">
                     <table class="block md:table">
                         <tbody class="block md:table-row-group">
-                            @if($activity['description'] == 'changed-visibility')
+                            @if($activity['description'] == 'deleted')
+                                {{ $activity['attributes']['deleted_at'] ? __('people.history.deleted') : __('people.history.restored') }}
+                            @elseif($activity['description'] == 'changed-visibility')
                                 {{ $activity['attributes']['visibility'] ? __('people.history.made_visible') : __('people.history.made_invisible') }}
                             @else
                                 <x-history.td-text :activity="$activity" :attribute="'id_pytlewski'"
                                     :label="__('people.pytlewski.id')"/>
                                 <x-history.td-text :activity="$activity" :attribute="'id_wielcy'"
                                     :label="__('people.wielcy.id')"/>
-                                {{-- <x-history.td-sex :activity="$activity"/> --}}
+                                <x-history.td-sex :activity="$activity"/>
                                 <x-history.td-text :activity="$activity" :attribute="'name'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'middle_name'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'family_name'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'last_name'"/>
-                                {{-- <x-history.td-date :activity="$activity" :attribute="'birth_date'"/> --}}
+                                <x-history.td-date :activity="$activity" :attribute="'birth_date'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'birth_place'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'dead'"/>
-                                {{-- <x-history.td-date :activity="$activity" :attribute="'death_date'"/> --}}
+                                <x-history.td-date :activity="$activity" :attribute="'death_date'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'death_place'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'death_cause'"/>
-                                {{-- <x-history.td-date :activity="$activity" :attribute="'funeral_date'"/> --}}
+                                <x-history.td-date :activity="$activity" :attribute="'funeral_date'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'funeral_place'"/>
-                                {{-- <x-history.td-date :activity="$activity" :attribute="'burial_date'"/> --}}
+                                <x-history.td-date :activity="$activity" :attribute="'burial_date'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'burial_place'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'mother_id'"
                                     :label="__('people.mother')"/>

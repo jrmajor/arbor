@@ -32,8 +32,10 @@ return [
     ],
 
     'history' => [
-        'made_visible' => 'Person was made visible',
-        'made_invisible' => 'Person was made invisible',
+        'deleted' => 'Person was deleted.',
+        'restored' => 'Person was restored.',
+        'made_visible' => 'Person was made visible.',
+        'made_invisible' => 'Person was made invisible.',
     ],
 
     'add_a_new_person' => 'Add a new person',

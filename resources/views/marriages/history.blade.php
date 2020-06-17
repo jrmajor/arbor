@@ -14,33 +14,39 @@
 
                 <div class="p-4 bg-white rounded-lg shadow-lg overflow-hidden">
                     <table class="block md:table">
-                        <x-history.td-text :activity="$activity" :attribute="'woman_id'"
-                            :label="__('marriages.woman')"/>
-                        <x-history.td-text :activity="$activity" :attribute="'woman_order'"/>
+                        <tbody class="block md:table-row-group">
+                            @if($activity['description'] == 'deleted')
+                                {{ $activity['attributes']['deleted_at'] ? __('marriages.history.deleted') : __('marriages.history.restored') }}
+                            @else
+                                <x-history.td-text :activity="$activity" :attribute="'woman_id'"
+                                    :label="__('marriages.woman')"/>
+                                <x-history.td-text :activity="$activity" :attribute="'woman_order'"/>
 
-                        <x-history.td-text :activity="$activity" :attribute="'man_id'"
-                            :label="__('marriages.man')"/>
-                        <x-history.td-text :activity="$activity" :attribute="'man_order'"/>
+                                <x-history.td-text :activity="$activity" :attribute="'man_id'"
+                                    :label="__('marriages.man')"/>
+                                <x-history.td-text :activity="$activity" :attribute="'man_order'"/>
 
-                        <x-history.td-enum :activity="$activity" :attribute="'rite'"
-                            :translations="'marriages.rites'"/>
+                                <x-history.td-enum :activity="$activity" :attribute="'rite'"
+                                    :translations="'marriages.rites'"/>
 
-                        <x-history.td-enum :activity="$activity" :attribute="'first_event_type'"
-                            :translations="'marriages.event_types'"/>
-                        <x-history.td-date :activity="$activity" :attribute="'first_event_date'"/>
-                        <x-history.td-text :activity="$activity" :attribute="'first_event_place'"/>
-                        <x-history.td-enum :activity="$activity" :attribute="'second_event_type'"
-                            :translations="'marriages.event_types'"/>
-                        <x-history.td-date :activity="$activity" :attribute="'second_event_date'"/>
-                        <x-history.td-text :activity="$activity" :attribute="'second_event_place'"/>
+                                <x-history.td-enum :activity="$activity" :attribute="'first_event_type'"
+                                    :translations="'marriages.event_types'"/>
+                                <x-history.td-date :activity="$activity" :attribute="'first_event_date'"/>
+                                <x-history.td-text :activity="$activity" :attribute="'first_event_place'"/>
+                                <x-history.td-enum :activity="$activity" :attribute="'second_event_type'"
+                                    :translations="'marriages.event_types'"/>
+                                <x-history.td-date :activity="$activity" :attribute="'second_event_date'"/>
+                                <x-history.td-text :activity="$activity" :attribute="'second_event_place'"/>
 
-                        <x-history.td-text :activity="$activity" :attribute="'ended'"/>
-                        <x-history.td-text :activity="$activity" :attribute="'end_cause'"/>
-                        <x-history.td-date :activity="$activity" :attribute="'end_date'"/>
+                                <x-history.td-text :activity="$activity" :attribute="'ended'"/>
+                                <x-history.td-text :activity="$activity" :attribute="'end_cause'"/>
+                                <x-history.td-date :activity="$activity" :attribute="'end_date'"/>
 
-                        <x-history.td-text :activity="$activity" :attribute="'divorced'"/>
-                        <x-history.td-date :activity="$activity" :attribute="'divorce_date'"/>
-                        <x-history.td-text :activity="$activity" :attribute="'divorce_place'"/>
+                                <x-history.td-text :activity="$activity" :attribute="'divorced'"/>
+                                <x-history.td-date :activity="$activity" :attribute="'divorce_date'"/>
+                                <x-history.td-text :activity="$activity" :attribute="'divorce_place'"/>
+                            @endif
+                        </tbody>
                     </table>
 
                     <div class="-m-4 mt-4 px-4 py-3 bg-gray-100 flex items-center justify-between">

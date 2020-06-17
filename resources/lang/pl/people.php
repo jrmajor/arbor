@@ -32,8 +32,10 @@ return [
     ],
 
     'history' => [
-        'made_visible' => 'Osoba została upubliczniona',
-        'made_invisible' => 'Osoba została ukryta',
+        'deleted' => 'Osoba została usunięta.',
+        'restored' => 'Osoba została przywrócona.',
+        'made_visible' => 'Osoba została upubliczniona.',
+        'made_invisible' => 'Osoba została ukryta.',
     ],
 
     'add_a_new_person' => 'Dodaj nową osobę',
