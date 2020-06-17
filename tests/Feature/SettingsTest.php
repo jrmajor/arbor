@@ -77,18 +77,17 @@ it('doesnt accept invalid password', function () {
 
 it('can change password', function () {
     $user = factory(User::class)->create();
-    $newPassword = faker()->password;
 
     actingAs($user)
         ->livewire(Settings::class)
-        ->set('password', $newPassword)
-        ->set('password_confirmation', $newPassword)
+        ->set('password', 'Abcd1234')
+        ->set('password_confirmation', 'Abcd1234')
         ->call('savePassword')
         ->assertHasNoErrors('password')
         ->assertSet('password', null)
         ->assertSet('password_confirmation', null);
 
-    assertTrue(Hash::check($newPassword, $user->fresh()->password));
+    assertTrue(Hash::check('Abcd1234', $user->fresh()->password));
 });
 
 it('checks password when logging user out from other devices', function () {

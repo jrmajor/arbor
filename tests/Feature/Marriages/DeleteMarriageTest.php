@@ -8,7 +8,7 @@ beforeEach(
 );
 
 test('guests cannot delete marriage', function () {
-    delete('marriages/'.$this->marriage->id)
+    delete("marriages/{$this->marriage->id}")
         ->assertStatus(302)
         ->assertRedirect('login');
 
@@ -17,7 +17,7 @@ test('guests cannot delete marriage', function () {
 
 test('users without permissions cannot delete marriage', function () {
     withPermissions(1)
-        ->delete('marriages/'.$this->marriage->id)
+        ->delete("marriages/{$this->marriage->id}")
         ->assertStatus(403);
 
     assertFalse($this->marriage->fresh()->trashed());
@@ -25,7 +25,7 @@ test('users without permissions cannot delete marriage', function () {
 
 test('users with permissions can delete marriage', function () {
     withPermissions(2)
-        ->delete('marriages/'.$this->marriage->id)
+        ->delete("marriages/{$this->marriage->id}")
         ->assertStatus(302)
         ->assertRedirect('people/'.$this->marriage->woman_id);
 

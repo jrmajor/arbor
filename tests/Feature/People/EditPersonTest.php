@@ -68,7 +68,7 @@ beforeEach(function () {
 });
 
 test('guests are asked to log in when attempting to view edit person form', function () {
-    get('people/'.$this->person->id.'/edit')
+    get("people/{$this->person->id}/edit")
         ->assertStatus(302)
         ->assertRedirect('login');
 });
@@ -80,18 +80,18 @@ test('guests are asked to log in when attempting to view edit form for nonexiste
 
 test('users without permissions cannot view edit person form', function () {
     withPermissions(1)
-        ->get('people/'.$this->person->id.'/edit')
+        ->get("people/{$this->person->id}/edit")
         ->assertStatus(403);
 });
 
 test('users with permissions can view edit person form', function () {
     withPermissions(2)
-        ->get('people/'.$this->person->id.'/edit')
+        ->get("people/{$this->person->id}/edit")
         ->assertStatus(200);
 });
 
 test('guests cannot edit person', function () {
-    put('people/'.$this->person->id, $this->newAttributes)
+    put("people/{$this->person->id}", $this->newAttributes)
         ->assertStatus(302)
         ->assertRedirect('login');
 
@@ -108,7 +108,7 @@ test('guests cannot edit person', function () {
 
 test('users without permissions cannot edit person', function () {
     withPermissions(1)
-        ->put('people/'.$this->person->id, $this->newAttributes)
+        ->put("people/{$this->person->id}", $this->newAttributes)
         ->assertStatus(403);
 
     $person = $this->person->fresh();
@@ -124,9 +124,9 @@ test('users without permissions cannot edit person', function () {
 
 test('users with permissions can edit person', function () {
     withPermissions(2)
-        ->put('people/'.$this->person->id, $this->newAttributes)
+        ->put("people/{$this->person->id}", $this->newAttributes)
         ->assertStatus(302)
-        ->assertRedirect('people/'.$this->person->id);
+        ->assertRedirect("people/{$this->person->id}");
 
     $person = $this->person->fresh();
 
@@ -159,7 +159,7 @@ test('person edition is logged', function () {
     travel('+1 minute');
 
     withPermissions(2)
-        ->put('people/'.$this->person->id, $this->newAttributes);
+        ->put("people/{$this->person->id}", $this->newAttributes);
 
     travel('back');
 

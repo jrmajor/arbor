@@ -8,7 +8,7 @@ beforeEach(
 );
 
 test('guests cannot delete person', function () {
-    delete('people/'.$this->person->id)
+    delete("people/{$this->person->id}")
         ->assertStatus(302)
         ->assertRedirect('login');
 
@@ -17,7 +17,7 @@ test('guests cannot delete person', function () {
 
 test('users without permissions cannot delete person', function () {
     withPermissions(1)
-        ->delete('people/'.$this->person->id)
+        ->delete("people/{$this->person->id}")
         ->assertStatus(403);
 
     assertFalse($this->person->fresh()->trashed());
@@ -25,7 +25,7 @@ test('users without permissions cannot delete person', function () {
 
 test('users with permissions can delete person', function () {
     withPermissions(2)
-        ->delete('people/'.$this->person->id)
+        ->delete("people/{$this->person->id}")
         ->assertStatus(302)
         ->assertRedirect('people');
 

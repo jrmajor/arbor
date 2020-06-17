@@ -8,7 +8,7 @@ beforeEach(
 );
 
 test('guests cannot change persons visibility', function () {
-    put('people/'.$this->person->id.'/visibility')
+    put("people/{$this->person->id}/visibility")
         ->assertStatus(302)
         ->assertRedirect('login');
 
@@ -17,7 +17,7 @@ test('guests cannot change persons visibility', function () {
 
 test('users without permissions cannot change persons visibility', function () {
     withPermissions(3)
-        ->put('people/'.$this->person->id.'/visibility')
+        ->put("people/{$this->person->id}/visibility")
         ->assertStatus(403);
 
     assertFalse($this->person->fresh()->isVisible());
@@ -28,7 +28,7 @@ test('users with permissions can change persons visibility', function () {
 
     withPermissions(4)
         ->from('people/'.$this->person->id.'/edit')
-        ->put('people/'.$this->person->id.'/visibility', [
+        ->put("people/{$this->person->id}/visibility", [
             'visibility' => true,
         ])->assertStatus(302)
         ->assertRedirect('people/'.$this->person->id.'/edit');
@@ -44,7 +44,7 @@ test('visibility change is logged', function () {
     travel('+1 minute');
 
     withPermissions(4)
-        ->put('people/'.$this->person->id.'/visibility', [
+        ->put("people/{$this->person->id}/visibility", [
             'visibility' => true,
         ]);
 

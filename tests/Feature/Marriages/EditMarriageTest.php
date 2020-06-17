@@ -53,7 +53,7 @@ beforeEach(function () {
 });
 
 test('guests are asked to log in when attempting to view edit marriage form', function () {
-    get('marriages/'.$this->marriage->id.'/edit')
+    get("marriages/{$this->marriage->id}/edit")
         ->assertStatus(302)
         ->assertRedirect('login');
 });
@@ -65,18 +65,18 @@ test('guests are asked to log in when attempting to view edit form for nonexiste
 
 test('users without permissions cannot view edit marriage form', function () {
     withPermissions(1)
-        ->get('marriages/'.$this->marriage->id.'/edit')
+        ->get("marriages/{$this->marriage->id}/edit")
         ->assertStatus(403);
 });
 
 test('users with permissions can view edit marriage form', function () {
     withPermissions(2)
-        ->get('marriages/'.$this->marriage->id.'/edit')
+        ->get("marriages/{$this->marriage->id}/edit")
         ->assertStatus(200);
 });
 
 test('guests cannot edit marriage', function () {
-    put('marriages/'.$this->marriage->id, $this->newAttributes)
+    put("marriages/{$this->marriage->id}", $this->newAttributes)
         ->assertStatus(302)
         ->assertRedirect('login');
 
@@ -91,7 +91,7 @@ test('guests cannot edit marriage', function () {
 
 test('users without permissions cannot edit marriage', function () {
     withPermissions(1)
-        ->put('marriages/'.$this->marriage->id, $this->newAttributes)
+        ->put("marriages/{$this->marriage->id}", $this->newAttributes)
         ->assertStatus(403);
 
     $marriage = $this->marriage->fresh();
@@ -105,7 +105,7 @@ test('users without permissions cannot edit marriage', function () {
 
 test('users with permissions can edit marriage', function () {
     $response = withPermissions(2)
-        ->put('marriages/'.$this->marriage->id, $this->newAttributes)
+        ->put("marriages/{$this->marriage->id}", $this->newAttributes)
         ->assertStatus(302);
 
     $marriage = $this->marriage->fresh();
@@ -133,7 +133,7 @@ test('marriage edition is logged', function () {
     travel('+1 minute');
 
     withPermissions(2)
-        ->put('marriages/'.$this->marriage->id, $this->newAttributes);
+        ->put("marriages/{$this->marriage->id}", $this->newAttributes);
 
     travel('back');
 
