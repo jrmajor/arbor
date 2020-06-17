@@ -16,7 +16,9 @@
                     <table class="block md:table">
                         <tbody class="block md:table-row-group">
                             @if($activity['description'] == 'deleted')
-                                {{ $activity['attributes']['deleted_at'] ? __('people.history.deleted') : __('people.history.restored') }}
+                                {{ __('people.history.deleted') }}
+                            @elseif($activity['description'] == 'restored')
+                                {{ __('people.history.restored') }}
                             @elseif($activity['description'] == 'changed-visibility')
                                 {{ $activity['attributes']['visibility'] ? __('people.history.made_visible') : __('people.history.made_invisible') }}
                             @else

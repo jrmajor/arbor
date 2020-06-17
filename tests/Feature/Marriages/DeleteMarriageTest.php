@@ -27,7 +27,7 @@ test('users with permissions can delete marriage', function () {
     withPermissions(2)
         ->delete("marriages/{$this->marriage->id}")
         ->assertStatus(302)
-        ->assertRedirect('people/'.$this->marriage->woman_id);
+        ->assertRedirect("people/{$this->marriage->woman_id}");
 
     assertTrue($this->marriage->fresh()->trashed());
 });

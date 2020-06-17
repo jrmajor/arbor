@@ -150,6 +150,19 @@ class PersonController extends Controller
         return redirect()->route('people.index');
     }
 
+    public function restore(Person $person)
+    {
+        $this->authorize('restore', $person);
+
+        if ($person->restore()) {
+            flash()->success(__('people.alerts.person_have_been_restored'));
+        } else {
+            flash()->error(__('misc.an_unknown_error_occurred'));
+        }
+
+        return redirect()->route('people.show', $person);
+    }
+
     public function history(Person $person)
     {
         $this->authorize('viewHistory', $person);

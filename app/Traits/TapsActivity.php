@@ -16,6 +16,10 @@ trait TapsActivity
         if ($eventName == 'deleted') {
             $this->tapDeletedActivity($activity);
         }
+
+        if ($eventName == 'restored') {
+            $this->tapRestoredActivity($activity);
+        }
     }
 
     protected function tapUpdatedActivity(Activity $activity)
@@ -48,6 +52,15 @@ trait TapsActivity
     }
 
     protected function tapDeletedActivity(Activity $activity)
+    {
+        $attributes = $activity->properties['attributes'];
+
+        $activity->properties = collect([
+            'attributes' => Arr::only($attributes, 'deleted_at'),
+        ]);
+    }
+
+    protected function tapRestoredActivity(Activity $activity)
     {
         $attributes = $activity->properties['attributes'];
 

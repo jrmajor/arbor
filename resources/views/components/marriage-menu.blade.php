@@ -2,24 +2,26 @@
     <div class="flex flex-col xs:flex-row md:flex-col">
         <div class="flex-grow">
 
-            <{{ $active == 'edit' ? 'span' : 'a' }}
-                href="{{ route('marriages.edit', $marriage) }}"
-                class="{{ $active == 'edit' ? 'text-blue-700' : 'group text-gray-700 hover:text-gray-800 focus:text-gray-800 focus:outline-none' }}
-                    transition-colors duration-100 ease-out">
-                <li class="px-3 py-1 rounded
-                        {{ $active != 'edit' ? 'group-hover:bg-gray-200 group-focus:bg-gray-300' : '' }}
-                        transition-all duration-100 ease-out">
-                    <span class="w-full {{ $active == 'edit' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
-                        <svg class="h-4 w-4 mr-2 fill-current
-                                {{ $active == 'edit' ? 'text-blue-600' : 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700' }}
-                                transition-colors duration-100 ease-out"
-                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/>
-                        </svg>
-                        {{ __('marriages.menu.edit_marriage') }}
-                    </span>
-                </li>
-            </{{ $active == 'edit' ? 'span' : 'a' }}>
+            @unless($marriage->trashed())
+                <{{ $active == 'edit' ? 'span' : 'a' }}
+                    href="{{ route('marriages.edit', $marriage) }}"
+                    class="{{ $active == 'edit' ? 'text-blue-700' : 'group text-gray-700 hover:text-gray-800 focus:text-gray-800 focus:outline-none' }}
+                        transition-colors duration-100 ease-out">
+                    <li class="px-3 py-1 rounded
+                            {{ $active != 'edit' ? 'group-hover:bg-gray-200 group-focus:bg-gray-300' : '' }}
+                            transition-all duration-100 ease-out">
+                        <span class="w-full {{ $active == 'edit' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
+                            <svg class="h-4 w-4 mr-2 fill-current
+                                    {{ $active == 'edit' ? 'text-blue-600' : 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700' }}
+                                    transition-colors duration-100 ease-out"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/>
+                            </svg>
+                            {{ __('marriages.menu.edit_marriage') }}
+                        </span>
+                    </li>
+                </{{ $active == 'edit' ? 'span' : 'a' }}>
+            @endif
 
             @if(optional(auth()->user())->isSuperAdmin())
                 <{{ $active == 'history' ? 'span' : 'a' }}
@@ -42,11 +44,35 @@
                 </{{ $active == 'history' ? 'span' : 'a' }}>
             @endif
 
-            <a
-                href="{{ route('marriages.destroy', $marriage) }}"
-                onclick="event.preventDefault();document.getElementById('delete-marriage-form').submit();"
-                class="group text-red-600 hover:text-red-700 focus:text-red-700 focus:outline-none
-                    transition-colors duration-100 ease-out">
+            @unless($marriage->trashed())
+                <a
+                    href="{{ route('marriages.destroy', $marriage) }}"
+                    onclick="event.preventDefault();document.getElementById('delete-marriage-form').submit();"
+                    class="group text-red-600 hover:text-red-700 focus:text-red-700 focus:outline-none
+                        transition-colors duration-100 ease-out">
+                        <li class="px-3 py-1 rounded
+                                group-hover:bg-red-200 group-focus:bg-red-300 flex items-center
+                                transition-colors duration-100 ease-out">
+                            <svg class="h-4 w-4 mr-2 fill-current
+                                    text-red-500 group-hover:text-red-600 group-focus:text-red-600
+                                    transition-colors duration-100 ease-out"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/>
+                        </svg>
+                        {{ __('marriages.menu.delete') }}
+                    </li>
+                    <form id="delete-marriage-form" method="POST" style="display: none"
+                        action="{{ route('marriages.destroy', $marriage) }}">
+                        @method('DELETE')
+                        @csrf
+                    </form>
+                </a>
+            @elseif(auth()->user()->canViewHistory())
+                <a
+                    href="{{ route('marriages.restore', $marriage) }}"
+                    onclick="event.preventDefault();document.getElementById('restore-marriage-form').submit();"
+                    class="group text-red-600 hover:text-red-700 focus:text-red-700 focus:outline-none
+                        transition-colors duration-100 ease-out">
                     <li class="px-3 py-1 rounded
                             group-hover:bg-red-200 group-focus:bg-red-300 flex items-center
                             transition-colors duration-100 ease-out">
@@ -54,16 +80,17 @@
                                 text-red-500 group-hover:text-red-600 group-focus:text-red-600
                                 transition-colors duration-100 ease-out"
                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/>
-                    </svg>
-                    {{ __('marriages.menu.delete') }}
-                </li>
-                <form id="delete-marriage-form" method="POST" style="display: none"
-                    action="{{ route('marriages.destroy', $marriage) }}">
-                    @method('DELETE')
-                    @csrf
-                </form>
-            </a>
+                            <path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/>
+                        </svg>
+                        {{ __('marriages.menu.restore') }}
+                    </li>
+                    <form id="restore-marriage-form" method="POST" style="display: none"
+                        action="{{ route('marriages.restore', $marriage) }}">
+                        @method('PATCH')
+                        @csrf
+                    </form>
+                </a>
+            @endif
 
         </div>
 

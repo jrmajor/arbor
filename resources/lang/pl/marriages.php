@@ -9,12 +9,14 @@ return [
         'edits_history' => 'Historia edycji',
 
         'delete' => 'Usuń',
+        'restore' => 'Przywróć',
     ],
 
     'alerts' => [
         'marriage_have_been_created' => 'Małżeństwo zostało dodane.',
         'changes_have_been_saved' => 'Zmiany zostały zapisane.',
         'marriage_have_been_deleted' => 'Małżeństwo zostało usunięte.',
+        'marriage_have_been_restored' => 'Małżeństwo zostało przywrócone.',
     ],
 
     'history' => [
@@ -27,7 +29,9 @@ return [
     'add_child' => 'Dodaj dziecko',
 
     'woman' => 'Kobieta',
+    'woman_order' => 'Kolejność w związkach kobiety',
     'man' => 'Mężczyzna',
+    'man_order' => 'Kolejność w związkach mężczyzny',
 
     'rite' => 'Obrządek',
     'rites' => [

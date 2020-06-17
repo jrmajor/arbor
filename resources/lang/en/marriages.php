@@ -9,12 +9,14 @@ return [
         'edits_history' => 'Edits history',
 
         'delete' => 'Delete',
+        'restore' => 'Restore',
     ],
 
     'alerts' => [
         'marriage_have_been_created' => 'Marriage have been created.',
         'changes_have_been_saved' => 'Changes have been saved.',
         'marriage_have_been_deleted' => 'Marriage have been deleted.',
+        'marriage_have_been_restored' => 'Marriage has been restored.',
     ],
 
     'history' => [
@@ -27,7 +29,9 @@ return [
     'add_child' => 'Add child',
 
     'woman' => 'Woman',
+    'woman_order' => 'Order in woman marriages',
     'man' => 'Man',
+    'man_order' => 'Order in man marriages',
 
     'rite' => 'Rite',
     'rites' => [

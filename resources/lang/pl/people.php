@@ -20,6 +20,7 @@ return [
         'make_visible' => 'Opublicznij',
 
         'delete' => 'Usuń',
+        'restore' => 'Przywróć',
     ],
 
     'alerts' => [
@@ -29,6 +30,7 @@ return [
         'cant_delete_person_with_relationships' => 'Aby usunąć tę osobę, usuń najpierw jej związki.',
         'cant_delete_person_with_children' => 'Aby usunąć tę osobę, usuń najpierw jej dzieci.',
         'person_have_been_deleted' => 'Osoba została usunięta.',
+        'person_have_been_restored' => 'Osoba została przywrócona.',
     ],
 
     'history' => [

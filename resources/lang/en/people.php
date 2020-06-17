@@ -20,6 +20,7 @@ return [
         'make_visible' => 'Make visible',
 
         'delete' => 'Delete',
+        'restore' => 'Restore',
     ],
 
     'alerts' => [
@@ -29,6 +30,7 @@ return [
         'cant_delete_person_with_relationships' => 'In order to delete this person, first delete relationships.',
         'cant_delete_person_with_children' => 'In order to delete this person, first delete children.',
         'person_have_been_deleted' => 'Person have been deleted.',
+        'person_have_been_restored' => 'Person have been restored.',
     ],
 
     'history' => [

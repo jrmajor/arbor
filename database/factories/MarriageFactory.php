@@ -25,10 +25,11 @@ $factory->define(Marriage::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Marriage::class, 'ended', function (Faker $faker) {
+$factory->state(Marriage::class, 'divorced', function (Faker $faker) {
     return [
-        'ended' => true,
-        'end_date_from' => $faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
-        'end_date_to' => fn (array $person) => $person['end_date_from'],
+        'divorced' => true,
+        'divorce_date_from' => $faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
+        'divorce_date_to' => fn (array $person) => $person['divorce_date_from'],
+        'divorce_place' => $faker->city.', Polska',
     ];
 });

@@ -36,11 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::match(['put', 'patch'], 'people/{person}', 'PersonController@update')->name('people.update');
     Route::put('people/{person}/visibility', 'PersonController@changeVisibility')->name('people.changeVisibility');
     Route::delete('people/{person}', 'PersonController@destroy')->name('people.destroy');
-    Route::get('people/{maybe_trashed_person}/history', 'PersonController@history')->name('people.history');
+    Route::patch('people/{trashedPerson}/restore', 'PersonController@restore')->name('people.restore');
+    Route::get('people/{anyPerson}/history', 'PersonController@history')->name('people.history');
 });
 Route::get('people', 'PersonController@index')->name('people.index');
 Route::get('people/{type}/{letter}', 'PersonController@letter')->where('type', '[fl]')->name('people.letter');
-Route::get('people/{maybe_trashed_person}', 'PersonController@show')->name('people.show');
+Route::get('people/{anyPerson}', 'PersonController@show')->name('people.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('marriages/create', 'MarriageController@create')->name('marriages.create');
@@ -48,7 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::get('marriages/{marriage}/edit', 'MarriageController@edit')->name('marriages.edit');
     Route::match(['put', 'patch'], 'marriages/{marriage}', 'MarriageController@update')->name('marriages.update');
     Route::delete('marriages/{marriage}', 'MarriageController@destroy')->name('marriages.destroy');
-    Route::get('marriages/{maybe_trashed_marriage}/history', 'MarriageController@history')->name('marriages.history');
+    Route::patch('marriages/{trashedMarriage}/restore', 'MarriageController@restore')->name('marriages.restore');
+    Route::get('marriages/{anyMarriage}/history', 'MarriageController@history')->name('marriages.history');
 });
 
 Route::middleware('auth')->group(function () {

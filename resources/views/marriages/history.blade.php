@@ -16,7 +16,9 @@
                     <table class="block md:table">
                         <tbody class="block md:table-row-group">
                             @if($activity['description'] == 'deleted')
-                                {{ $activity['attributes']['deleted_at'] ? __('marriages.history.deleted') : __('marriages.history.restored') }}
+                                {{ __('marriages.history.deleted') }}
+                            @elseif($activity['description'] == 'restored')
+                                {{ __('marriages.history.restored') }}
                             @else
                                 <x-history.td-text :activity="$activity" :attribute="'woman_id'"
                                     :label="__('marriages.woman')"/>
@@ -37,10 +39,6 @@
                                     :translations="'marriages.event_types'"/>
                                 <x-history.td-date :activity="$activity" :attribute="'second_event_date'"/>
                                 <x-history.td-text :activity="$activity" :attribute="'second_event_place'"/>
-
-                                <x-history.td-text :activity="$activity" :attribute="'ended'"/>
-                                <x-history.td-text :activity="$activity" :attribute="'end_cause'"/>
-                                <x-history.td-date :activity="$activity" :attribute="'end_date'"/>
 
                                 <x-history.td-text :activity="$activity" :attribute="'divorced'"/>
                                 <x-history.td-date :activity="$activity" :attribute="'divorce_date'"/>
