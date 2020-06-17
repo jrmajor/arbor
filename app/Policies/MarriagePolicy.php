@@ -22,12 +22,12 @@ class MarriagePolicy
 
     public function delete(User $user, Marriage $marriage)
     {
-        return $user->canDestroy();
+        return $user->canWrite();
     }
 
     public function restore(User $user, Marriage $marriage)
     {
-        return $user->canDestroy();
+        return $user->canViewHistory();
     }
 
     public function forceDelete(User $user, Marriage $marriage)
@@ -37,6 +37,6 @@ class MarriagePolicy
 
     public function viewHistory(User $user, Marriage $marriage)
     {
-        return $user->isSuperAdmin();
+        return $user->canViewHistory();
     }
 }

@@ -17,7 +17,7 @@ class PersonPolicy
 
     public function view(?User $user, Person $person)
     {
-        return optional($user)->canRead() || $person->isVisible();
+        return $person->canBeViewedBy($user);
     }
 
     public function create(User $user)
@@ -37,12 +37,12 @@ class PersonPolicy
 
     public function delete(User $user, Person $person)
     {
-        return $user->canDestroy();
+        return $user->canWrite();
     }
 
     public function restore(User $user, Person $person)
     {
-        return $user->canDestroy();
+        return $user->canViewHistory();
     }
 
     public function forceDelete(User $user, Person $person)
@@ -52,6 +52,6 @@ class PersonPolicy
 
     public function viewHistory(User $user, Person $person)
     {
-        return $user->isSuperAdmin();
+        return $user->canViewHistory();
     }
 }

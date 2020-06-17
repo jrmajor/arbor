@@ -38,7 +38,7 @@ class MarriageController extends Controller
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
 
-        return redirect()->route('people.show', [$marriage->woman_id]);
+        return redirect()->route('people.show', $marriage->woman);
     }
 
     public function edit(Marriage $marriage)
@@ -58,7 +58,7 @@ class MarriageController extends Controller
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
 
-        return redirect()->route('people.show', [$marriage->woman_id]);
+        return redirect()->route('people.show', $marriage->woman);
     }
 
     public function destroy(Marriage $marriage)
@@ -71,7 +71,7 @@ class MarriageController extends Controller
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
 
-        return redirect()->route('people.show', ['person' => $marriage->woman_id]);
+        return redirect()->route('people.show', $marriage->woman);
     }
 
     public function history(Marriage $marriage)

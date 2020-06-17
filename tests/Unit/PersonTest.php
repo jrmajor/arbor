@@ -177,7 +177,7 @@ it('can get partners', function () {
     assertTrue($person->partners()->contains($spouse));
     assertTrue($person->partners()->contains($spouseWithChild));
     assertTrue($person->partners()->contains($lover));
-});
+})->skip();
 
 it('can get children', function () {
     $father = factory(Person::class)->state('man')->create();

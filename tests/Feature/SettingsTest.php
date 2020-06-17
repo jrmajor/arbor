@@ -9,7 +9,7 @@ test('guest are asked to log in when attempting to view settings page')
     ->assertStatus(302)
     ->assertRedirect('login');
 
-test('users with permissions can view settings page')
+test('users can view settings page')
     ->withPermissions(0)
     ->get('settings')
     ->assertStatus(200);

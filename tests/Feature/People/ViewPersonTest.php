@@ -74,7 +74,31 @@ test('guest see 404 when attemting to view nonexistent person')
     ->get('people/1')
     ->assertStatus(404);
 
-test('user with persmissions see 404 when attemting to view nonexistent person')
+test('user with insufficient persmissions see 404 when attemting to view nonexistent person')
     ->withPermissions(1)
     ->get('people/1')
     ->assertStatus(404);
+
+test('guest see 404 when attemting to view deleted person', function () {
+    $person = tap(factory(Person::class)->create())->delete();
+
+    get("people/$person->id")
+        ->assertStatus(404);
+});
+
+test('users without persmissions see 404 when attemting to view deleted person', function () {
+    $person = tap(factory(Person::class)->create())->delete();
+
+    withPermissions(2)
+        ->get("people/$person->id")
+        ->assertStatus(404);
+});
+
+test('user with persmissions are redirected to edits history when attempting to view deleted person', function () {
+    $person = tap(factory(Person::class)->create())->delete();
+
+    withPermissions(3)
+        ->get("people/$person->id")
+        ->assertStatus(302)
+        ->assertRedirect("people/$person->id/history");
+});

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePerson;
 use App\Person;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PersonController extends Controller
 {
@@ -73,11 +74,17 @@ class PersonController extends Controller
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
 
-        return redirect()->route('people.show', [$person]);
+        return redirect()->route('people.show', $person);
     }
 
     public function show(Person $person)
     {
+        if ($person->trashed()) {
+            return optional(Auth::user())->canViewHistory()
+                    ? redirect()->route('people.history', $person)
+                    : abort(404);
+        }
+
         $this->authorize('view', $person);
 
         return view('people.person', ['person' => $person]);
@@ -100,7 +107,7 @@ class PersonController extends Controller
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
 
-        return redirect()->route('people.show', [$person]);
+        return redirect()->route('people.show', $person);
     }
 
     public function changeVisibility(Request $request, Person $person)

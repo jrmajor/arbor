@@ -40,7 +40,7 @@ class User extends Authenticatable
         return $this->permissions >= 2;
     }
 
-    public function canDestroy(): bool
+    public function canViewHistory(): bool
     {
         return $this->permissions >= 3;
     }

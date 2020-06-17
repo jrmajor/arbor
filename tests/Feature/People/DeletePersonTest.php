@@ -24,7 +24,7 @@ test('users without permissions cannot delete person', function () {
 });
 
 test('users with permissions can delete person', function () {
-    withPermissions(3)
+    withPermissions(2)
         ->delete('people/'.$this->person->id)
         ->assertStatus(302)
         ->assertRedirect('people');

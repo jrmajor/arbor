@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('people', 'PersonController@index')->name('people.index');
 Route::get('people/{type}/{letter}', 'PersonController@letter')->where('type', '[fl]')->name('people.letter');
-Route::get('people/{person}', 'PersonController@show')->name('people.show');
+Route::get('people/{maybe_trashed_person}', 'PersonController@show')->name('people.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('marriages/create', 'MarriageController@create')->name('marriages.create');

@@ -15,7 +15,7 @@ test('guests cannot delete marriage', function () {
     assertFalse($this->marriage->fresh()->trashed());
 });
 
-test('users without permissions cannot edit marriage', function () {
+test('users without permissions cannot delete marriage', function () {
     withPermissions(1)
         ->delete('marriages/'.$this->marriage->id)
         ->assertStatus(403);
@@ -23,8 +23,8 @@ test('users without permissions cannot edit marriage', function () {
     assertFalse($this->marriage->fresh()->trashed());
 });
 
-test('users with permissions can edit marriage', function () {
-    withPermissions(3)
+test('users with permissions can delete marriage', function () {
+    withPermissions(2)
         ->delete('marriages/'.$this->marriage->id)
         ->assertStatus(302)
         ->assertRedirect('people/'.$this->marriage->woman_id);

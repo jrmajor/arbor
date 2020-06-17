@@ -27,7 +27,7 @@
                             {{ $user->permissions == 0 ? 'none' : null }}
                             {{ $user->permissions == 1 ? 'read' : null }}
                             {{ $user->permissions == 2 ? 'write' : null }}
-                            {{ $user->permissions == 3 ? 'write' : null }}
+                            {{ $user->permissions == 3 ? 'view history' : null }}
                             {{ $user->permissions == 4 ? 'admin' : null }}
                         </td>
 
