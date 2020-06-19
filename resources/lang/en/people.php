@@ -24,13 +24,13 @@ return [
     ],
 
     'alerts' => [
-        'person_have_been_created' => 'Person have been created.',
+        'person_has_been_created' => 'Person has been created.',
         'changes_have_been_saved' => 'Changes have been saved.',
-        'visibility_have_been_changed' => 'Visibility have been changed.',
+        'visibility_has_been_changed' => 'Visibility has been changed.',
         'cant_delete_person_with_relationships' => 'In order to delete this person, first delete relationships.',
         'cant_delete_person_with_children' => 'In order to delete this person, first delete children.',
-        'person_have_been_deleted' => 'Person have been deleted.',
-        'person_have_been_restored' => 'Person have been restored.',
+        'person_has_been_deleted' => 'Person has been deleted.',
+        'person_has_been_restored' => 'Person has been restored.',
     ],
 
     'history' => [

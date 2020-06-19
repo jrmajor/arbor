@@ -33,7 +33,7 @@ class MarriageController extends Controller
         $marriage = new Marriage();
 
         if ($marriage->fill($request->validated())->save()) {
-            flash()->success(__('marriages.alerts.marriage_have_been_created'));
+            flash()->success(__('marriages.alerts.marriage_has_been_created'));
         } else {
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
@@ -66,7 +66,7 @@ class MarriageController extends Controller
         $this->authorize('delete', $marriage);
 
         if ($marriage->delete()) {
-            flash()->success(__('marriages.alerts.marriage_have_been_deleted'));
+            flash()->success(__('marriages.alerts.marriage_has_been_deleted'));
         } else {
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
@@ -79,7 +79,7 @@ class MarriageController extends Controller
         $this->authorize('restore', $marriage);
 
         if ($marriage->restore()) {
-            flash()->success(__('people.alerts.marriage_have_been_restored'));
+            flash()->success(__('people.alerts.marriage_has_been_restored'));
         } else {
             flash()->error(__('misc.an_unknown_error_occurred'));
         }

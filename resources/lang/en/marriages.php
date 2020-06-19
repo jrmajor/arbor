@@ -13,10 +13,10 @@ return [
     ],
 
     'alerts' => [
-        'marriage_have_been_created' => 'Marriage have been created.',
+        'marriage_has_been_created' => 'Marriage has been created.',
         'changes_have_been_saved' => 'Changes have been saved.',
-        'marriage_have_been_deleted' => 'Marriage have been deleted.',
-        'marriage_have_been_restored' => 'Marriage has been restored.',
+        'marriage_has_been_deleted' => 'Marriage has been deleted.',
+        'marriage_has_been_restored' => 'Marriage has been restored.',
     ],
 
     'history' => [

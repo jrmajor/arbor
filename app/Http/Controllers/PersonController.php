@@ -69,7 +69,7 @@ class PersonController extends Controller
         $person = new Person();
 
         if ($person->fill($request->validated())->save()) {
-            flash()->success(__('people.alerts.person_have_been_created'));
+            flash()->success(__('people.alerts.person_has_been_created'));
         } else {
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
@@ -119,7 +119,7 @@ class PersonController extends Controller
         ]);
 
         if ($person->changeVisibility($request['visibility'])) {
-            flash()->success(__('people.alerts.visibility_have_been_changed'));
+            flash()->success(__('people.alerts.visibility_has_been_changed'));
         } else {
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
@@ -142,7 +142,7 @@ class PersonController extends Controller
         }
 
         if ($person->delete()) {
-            flash()->success(__('people.alerts.person_have_been_deleted'));
+            flash()->success(__('people.alerts.person_has_been_deleted'));
         } else {
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
@@ -155,7 +155,7 @@ class PersonController extends Controller
         $this->authorize('restore', $person);
 
         if ($person->restore()) {
-            flash()->success(__('people.alerts.person_have_been_restored'));
+            flash()->success(__('people.alerts.person_has_been_restored'));
         } else {
             flash()->error(__('misc.an_unknown_error_occurred'));
         }

@@ -24,13 +24,13 @@ return [
     ],
 
     'alerts' => [
-        'person_have_been_created' => 'Osoba została utworzona.',
+        'person_has_been_created' => 'Osoba została utworzona.',
         'changes_have_been_saved' => 'Zmiany zostały zapisane.',
-        'visibility_have_been_changed' => 'Widoczność została zmieniona.',
+        'visibility_has_been_changed' => 'Widoczność została zmieniona.',
         'cant_delete_person_with_relationships' => 'Aby usunąć tę osobę, usuń najpierw jej związki.',
         'cant_delete_person_with_children' => 'Aby usunąć tę osobę, usuń najpierw jej dzieci.',
-        'person_have_been_deleted' => 'Osoba została usunięta.',
-        'person_have_been_restored' => 'Osoba została przywrócona.',
+        'person_has_been_deleted' => 'Osoba została usunięta.',
+        'person_has_been_restored' => 'Osoba została przywrócona.',
     ],
 
     'history' => [

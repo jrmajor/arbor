@@ -13,10 +13,10 @@ return [
     ],
 
     'alerts' => [
-        'marriage_have_been_created' => 'Małżeństwo zostało dodane.',
+        'marriage_has_been_created' => 'Małżeństwo zostało dodane.',
         'changes_have_been_saved' => 'Zmiany zostały zapisane.',
-        'marriage_have_been_deleted' => 'Małżeństwo zostało usunięte.',
-        'marriage_have_been_restored' => 'Małżeństwo zostało przywrócone.',
+        'marriage_has_been_deleted' => 'Małżeństwo zostało usunięte.',
+        'marriage_has_been_restored' => 'Małżeństwo zostało przywrócone.',
     ],
 
     'history' => [
