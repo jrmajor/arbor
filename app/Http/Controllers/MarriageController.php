@@ -6,6 +6,7 @@ use App\Http\Requests\StoreMarriage;
 use App\Marriage;
 use App\Person;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MarriageController extends Controller
 {
@@ -71,7 +72,9 @@ class MarriageController extends Controller
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
 
-        return redirect()->route('people.show', $marriage->woman);
+        return Auth::user()->canViewHistory()
+                ? redirect()->route('marriages.history', $marriage)
+                : redirect()->route('people.show', $marriage->woman);
     }
 
     public function restore(Marriage $marriage)

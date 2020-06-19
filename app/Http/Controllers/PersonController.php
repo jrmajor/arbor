@@ -147,7 +147,9 @@ class PersonController extends Controller
             flash()->error(__('misc.an_unknown_error_occurred'));
         }
 
-        return redirect()->route('people.index');
+        return Auth::user()->canViewHistory()
+                ? redirect()->route('people.history', $person)
+                : redirect()->route('people.index');
     }
 
     public function restore(Person $person)

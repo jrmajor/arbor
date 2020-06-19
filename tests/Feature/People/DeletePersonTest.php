@@ -26,10 +26,23 @@ test('users without permissions cannot delete person', function () {
 test('users with permissions can delete person', function () {
     withPermissions(2)
         ->delete("people/{$this->person->id}")
-        ->assertStatus(302)
-        ->assertRedirect('people');
+        ->assertStatus(302);
 
     assertTrue($this->person->fresh()->trashed());
+});
+
+test('users without permissions to view history are redirected to people index', function () {
+    withPermissions(2)
+        ->delete("people/{$this->person->id}")
+        ->assertStatus(302)
+        ->assertRedirect('people');
+});
+
+test('users with permissions to view history are redirected to person history', function () {
+    withPermissions(3)
+        ->delete("people/{$this->person->id}")
+        ->assertStatus(302)
+        ->assertRedirect("people/{$this->person->id}/history");
 });
 
 test('person deletion is logged', function () {

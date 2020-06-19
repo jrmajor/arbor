@@ -26,10 +26,23 @@ test('users without permissions cannot delete marriage', function () {
 test('users with permissions can delete marriage', function () {
     withPermissions(2)
         ->delete("marriages/{$this->marriage->id}")
-        ->assertStatus(302)
-        ->assertRedirect("people/{$this->marriage->woman_id}");
+        ->assertStatus(302);
 
     assertTrue($this->marriage->fresh()->trashed());
+});
+
+test('users without permissions to view history are redirected to woman page', function () {
+    withPermissions(2)
+        ->delete("marriages/{$this->marriage->id}")
+        ->assertStatus(302)
+        ->assertRedirect("people/{$this->marriage->woman_id}");
+});
+
+test('users with permissions to view history are redirected to marriage history', function () {
+    withPermissions(3)
+        ->delete("marriages/{$this->marriage->id}")
+        ->assertStatus(302)
+        ->assertRedirect("marriages/{$this->marriage->id}/history");
 });
 
 test('marriage deletion is logged', function () {
