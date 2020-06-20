@@ -65,23 +65,24 @@
         <div class="flex flex-nowrap items-center justify-between">
             <div x-show="! advancedPicker"
                 class="flex-grow flex-shrink flex">
-                <div class="flex items-center space-x-1">
+                <div class="flex items-center">
                     <input
-                        type="text" class="form-input !w-16"
+                        type="text" class="form-input !w-16 !rounded-r-none z-10"
                         x-ref="{{ $name }}_year"
                         @keyup="$dispatch('update-advanced')"
                         value="{{ $initialSimplePickerValues()['y'] }}"
                         placeholder="{{ __('misc.date.yyyy') }}"
                         maxlength=4>
                     <input
-                        type="text" class="form-input !w-12"
+                        type="text" class="form-input !w-12 !rounded-none focus:z-20"
+                        style="margin: 0 -1px 0 -1px"
                         x-ref="{{ $name }}_month"
                         @keyup="$dispatch('update-advanced')"
                         value="{{ $initialSimplePickerValues()['m'] }}"
                         placeholder="{{ __('misc.date.mm') }}"
                         maxlength=2>
                     <input
-                        type="text" class="form-input !w-12"
+                        type="text" class="form-input !w-12 !rounded-l-none z-10"
                         x-ref="{{ $name }}_day"
                         @keyup="$dispatch('update-advanced')"
                         value="{{ $initialSimplePickerValues()['d'] }}"

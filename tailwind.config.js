@@ -51,6 +51,7 @@ module.exports = {
         borderWidth: ['responsive', 'important'],
         textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus'],
         width: ['responsive', 'important'],
+        zIndex: ['responsive', 'focus'],
     },
     plugins: [
         require('tailwindcss-important')()
