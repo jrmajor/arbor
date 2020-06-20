@@ -6,7 +6,7 @@
         <div class="w-full flex flex-wrap sm:flex-no-wrap space-y-2 sm:space-y-0 sm:space-x-2">
             <div class="w-full sm:w-1/4 md:w-3/8">
                 <input
-                    type="text" class="@error('id_pytlewski') invalid @enderror"
+                    type="text" class="form-input @error('id_pytlewski') invalid @enderror"
                     id="id_pytlewski" name="id_pytlewski"
                     autocomplete="off"
                     wire:model="pytlewskiId"
@@ -14,7 +14,7 @@
             </div>
             <div class="w-full sm:w-3/4 md:w-5/8">
                 <input
-                    type="text"
+                    type="text" class="form-input"
                     wire:model="result"
                     disabled>
             </div>

@@ -47,44 +47,24 @@ small {
     @apply bg-blue-700 text-blue-100;
 }
 
-input[type=text],
-input[type=search],
-input[type=email],
-input[type=username],
-input[type=password],
-select {
+.form-input, select {
     @apply appearance-none block;
     @apply px-3 py-1 w-full;
     @apply rounded border border-gray-500 text-gray-800 bg-white;
     @apply transition-colors duration-200 ease-out;
 }
 
-input[type=text].invalid,
-input[type=search].invalid,
-input[type=email].invalid,
-input[type=username].invalid,
-input[type=password].invalid,
-select.invalid {
+.form-input.invalid, select.invalid {
     @apply border-red-500;
 }
 
-input[type=text][disabled],
-input[type=search][disabled],
-input[type=email][disabled],
-input[type=username][disabled],
-input[type=password][disabled],
-select[disabled] {
+.form-input[disabled], select[disabled] {
     @apply bg-gray-100 text-gray-700;
 }
 
-input[type=text]:focus,
-input[type=search]:focus,
-input[type=email]:focus,
-input[type=username]:focus,
-input[type=password]:focus,
-select:focus {
+.form-input:focus, select:focus {
     @apply outline-none;
-    @apply border-blue-600 bg-white;
+    @apply border-blue-600;
 }
 
 // select {

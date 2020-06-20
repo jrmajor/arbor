@@ -46,9 +46,9 @@ module.exports = {
     },
     variants: {
         backgroundColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus'],
-        borderColor: ['responsive', 'hover', 'focus', 'active'],
-        padding: ['responsive', 'important'],
-        boxShadow: ['responsive', 'hover', 'focus', 'group-hover', 'group-focus'],
+        borderColor: ['responsive', 'hover', 'focus', 'active', 'focus-within'],
+        borderRadius: ['responsive', 'important'],
+        borderWidth: ['responsive', 'important'],
         textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus'],
         width: ['responsive', 'important'],
     },

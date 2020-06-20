@@ -14,14 +14,14 @@
 
     <div class="space-y-4">
         <fieldset class="space-y-2">
-            <livewire:person-picker
-                :label="__('marriages.woman')" :sex="'xx'"
-                :name="'woman'" :nullable="false"
-                :initial="old('woman_id') ?? $marriage->woman_id">
-            <livewire:person-picker
-                :label="__('marriages.man')" :sex="'xy'"
-                :name="'man'" :nullable="false"
-                :initial="old('man_id') ?? $marriage->man_id">
+            <x-person-picker
+                :label="__('marriages.woman')" sex="xx"
+                name="woman" :nullable="false"
+                :initial="App\Person::find(old('woman_id') ?? $marriage->woman_id)"/>
+            <x-person-picker
+                :label="__('marriages.man')" sex="xy"
+                name="man" :nullable="false"
+                :initial="App\Person::find(old('man_id') ?? $marriage->man_id)"/>
         </fieldset>
 
         <fieldset class="space-y-2">
@@ -80,7 +80,7 @@
                 <label for="first_event_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.first_event_place') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('event_place') invalid @enderror"
+                        type="text" class="form-input @error('event_place') invalid @enderror"
                         id="first_event_place" name="first_event_place"
                         value="{{ old('first_event_place') ?? $marriage->first_event_place }}">
                     @error('first_event_place')
@@ -121,7 +121,7 @@
                 <label for="second_event_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.second_event_place') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('second_event_place') invalid @enderror"
+                        type="text" class="form-input @error('second_event_place') invalid @enderror"
                         id="second_event_place" name="second_event_place"
                         value="{{ old('second_event_place') ?? $marriage->second_event_place }}">
                     @error('second_event_place')
@@ -159,7 +159,7 @@
                 <label for="divorce_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('marriages.divorce_place') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('divorce_place') invalid @enderror"
+                        type="text" class="form-input @error('divorce_place') invalid @enderror"
                         id="divorce_place" name="divorce_place"
                         value="{{ old('divorce_place') ?? $marriage->divorce_place }}">
                     @error('divorce_place')

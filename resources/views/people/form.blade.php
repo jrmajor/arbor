@@ -61,7 +61,7 @@
                 <label for="name" class="w-full sm:w-1/2 md:w-1/4 pr-1">{{ __('people.name') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('name') invalid @enderror"
+                        type="text" class="form-input @error('name') invalid @enderror"
                         id="name" name="name"
                         value="{{ old('name') ?? $person->name }}">
                     @error('name')
@@ -73,7 +73,7 @@
                 <label for="middle_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.middle_name') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('middle_name') invalid @enderror"
+                        type="text" class="form-input @error('middle_name') invalid @enderror"
                         id="middle_name" name="middle_name"
                         value="{{ old('middle_name') ?? $person->middle_name }}">
                     @error('middle_name')
@@ -85,7 +85,7 @@
                 <label for="family_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.family_name') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('family_name') invalid @enderror"
+                        type="text" class="form-input @error('family_name') invalid @enderror"
                         id="family_name" name="family_name"
                         value="{{ old('family_name') ?? $person->family_name }}">
                     @error('family_name')
@@ -97,7 +97,7 @@
                 <label for="last_name" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.last_name') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('last_name') invalid @enderror"
+                        type="text" class="form-input @error('last_name') invalid @enderror"
                         id="last_name" name="last_name"
                         value="{{ old('last_name') ?? $person->last_name }}">
                     @error('last_name')
@@ -114,13 +114,13 @@
                     <div class="flex flex-wrap sm:flex-no-wrap space-y-2 sm:space-y-0 sm:space-x-2">
                         <div class="w-full sm:w-1/4 md:w-3/8">
                             <input
-                                type="text" class="@error('id_wielcy') invalid @enderror"
+                                type="text" class="form-input @error('id_wielcy') invalid @enderror"
                                 id="id_wielcy" name="id_wielcy"
                                 value="{{ old('id_wielcy') ?? $person->id_wielcy }}">
                         </div>
                         <div class="w-full sm:w-3/4 md:w-5/8">
                             <input
-                                type="text"
+                                type="text" class="form-input"
                                 id="wielcy_search" name="wielcy_search"
                                 placeholder="{{ __('misc.coming_soon') }}"
                                 disabled>
@@ -175,7 +175,7 @@
                 <label for="birth_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.birth_place') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('birth_place') invalid @enderror"
+                        type="text" class="form-input @error('birth_place') invalid @enderror"
                         id="birth_place" name="birth_place"
                         value="{{ old('birth_place') ?? $person->birth_place }}">
                     @error('birth_place')
@@ -215,7 +215,7 @@
                 <label for="death_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.death_place') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('death_place') invalid @enderror"
+                        type="text" class="form-input @error('death_place') invalid @enderror"
                         id="death_place" name="death_place"
                         value="{{ old('death_place') ?? $person->death_place }}">
                     @error('death_place')
@@ -227,7 +227,7 @@
                 <label for="death_cause" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.death_cause') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('death_cause') invalid @enderror"
+                        type="text" class="form-input @error('death_cause') invalid @enderror"
                         id="death_cause" name="death_cause"
                         value="{{ old('death_cause') ?? $person->death_cause }}">
                     @error('death_cause')
@@ -246,7 +246,7 @@
                 <label for="funeral_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.funeral_place') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('funeral_place') invalid @enderror"
+                        type="text" class="form-input @error('funeral_place') invalid @enderror"
                         id="funeral_place" name="funeral_place"
                         value="{{ old('funeral_place') ?? $person->funeral_place }}">
                     @error('funeral_place')
@@ -265,7 +265,7 @@
                 <label for="burial_place" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ __('people.burial_place') }}</label>
                 <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
                     <input
-                        type="text" class="@error('burial_place') invalid @enderror"
+                        type="text" class="form-input @error('burial_place') invalid @enderror"
                         id="burial_place" name="burial_place"
                         value="{{ old('burial_place') ?? $person->burial_place }}">
                     @error('burial_place')
@@ -276,14 +276,14 @@
         </fieldset>
 
         <fieldset class="space-y-2">
-            <livewire:person-picker
-                :label="__('people.mother')" :sex="'xx'"
-                :name="'mother'" :nullable="true"
-                :initial="old('mother_id') ?? $person->mother_id">
-            <livewire:person-picker
-                :label="__('people.father')" :sex="'xy'"
-                :name="'father'" :nullable="true"
-                :initial="old('father_id') ?? $person->father_id">
+            <x-person-picker
+                :label="__('people.mother')" sex="xx"
+                name="mother" :nullable="true"
+                :initial="App\Person::find(old('mother_id') ?? $person->mother_id)"/>
+            <x-person-picker
+                :label="__('people.father')" sex="xy"
+                name="father" :nullable="true"
+                :initial="App\Person::find(old('father_id') ?? $person->father_id)"/>
         </fieldset>
 
         <fieldset class="space-y-2">
@@ -314,7 +314,7 @@
                             <template
                                 x-for="(_, index) in sources" :key="index">
                                 <div class="w-full flex flex-no-wrap items-center space-x-2">
-                                    <input type="text" :name="'sources['+index+']'" x-model="sources[index]">
+                                    <input type="text" class="form-input" :name="'sources['+index+']'" x-model="sources[index]">
                                     <div>
                                         <button @click.prevent="sources.splice(index, 1)"
                                             class="w-6 h-6 rounded-full border border-blue-600 text-blue-600 p-1
@@ -343,7 +343,7 @@
                             </div>
                         </div>
                     </template>
-                    
+
                     @error('sources.*')
                         <small class="text-red-500">{{ $message }}</small>
                     @enderror

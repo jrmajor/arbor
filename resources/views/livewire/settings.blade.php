@@ -24,7 +24,7 @@
                     <label for="email" class="mr-2">{{ __('settings.email') }}</label>
                     <div class="flex-grow">
                         <input
-                            type="text" class="@error('email') invalid @enderror"
+                            type="text" class="form-input @error('email') invalid @enderror"
                             wire:model.lazy="email">
                     </div>
                 </div>
@@ -49,13 +49,13 @@
                     <label for="password" class="w-full sm:w-auto">{{ __('settings.password') }}</label>
                     <div class="w-full sm:w-auto flex-grow">
                         <input
-                            type="password" class="@error('password') invalid @enderror"
+                            type="password" class="form-input @error('password') invalid @enderror"
                             wire:model.lazy="password"
                             placeholder="{{ strtolower(__('settings.password')) }}">
                     </div>
                     <div class="w-full mt-2 sm:mt-0 sm:w-auto flex-grow">
                         <input
-                            type="password" class="@error('password') invalid @enderror"
+                            type="password" class="form-input @error('password') invalid @enderror"
                             wire:model.lazy="password_confirmation"
                             placeholder="{{ strtolower(__('settings.confirm_password')) }}">
                     </div>
@@ -82,7 +82,7 @@
                     <label for="password" class="mr-2">{{ __('settings.password') }}</label>
                     <div class="flex-grow">
                         <input
-                            type="password" class="@error('logout_password') invalid @enderror"
+                            type="password" class="form-input @error('logout_password') invalid @enderror"
                             wire:model.lazy="logout_password">
                     </div>
                 </div>

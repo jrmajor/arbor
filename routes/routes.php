@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('people/{person}', 'PersonController@destroy')->name('people.destroy');
     Route::patch('people/{trashedPerson}/restore', 'PersonController@restore')->name('people.restore');
     Route::get('people/{anyPerson}/history', 'PersonController@history')->name('people.history');
+    Route::get('people/picker', 'PersonPickerController')->name('people.picker');
 });
 Route::get('people', 'PersonController@index')->name('people.index');
 Route::get('people/{type}/{letter}', 'PersonController@letter')->where('type', '[fl]')->name('people.letter');

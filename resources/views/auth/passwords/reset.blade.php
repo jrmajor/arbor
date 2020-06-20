@@ -33,7 +33,7 @@
                     <div class="w-full">
                         <input
                             id="email" type="text" name="email"
-                            class="@error('email') invalid @enderror"
+                            class="form-input @error('email') invalid @enderror"
                             value="{{ $email ?? old('email') }}"
                             autocomplete="email"
                             placeholder="{{ __('passwords.email') }}">
@@ -51,7 +51,7 @@
                     <div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
                         <input
                             id="password" type="password" name="password"
-                            class="@error('password') invalid @enderror"
+                            class="form-input @error('password') invalid @enderror"
                             value="{{ old('password') }}"
                             autocomplete="new-password" autofocus
                             placeholder="{{ strtolower(__('passwords.password')) }}">
@@ -59,7 +59,7 @@
                     <div class="w-full sm:w-1/2 sm:pl-1">
                         <input
                             id="password-confirm" type="password" name="password_confirmation"
-                            class="@error('password') invalid @enderror"
+                            class="form-input @error('password') invalid @enderror"
                             autocomplete="current-password"
                             placeholder="{{ strtolower(__('passwords.confirm_password')) }}">
                     </div>

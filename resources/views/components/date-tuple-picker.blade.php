@@ -67,21 +67,21 @@
                 class="flex-grow flex-shrink flex">
                 <div class="flex items-center space-x-1">
                     <input
-                        type="text" class="!w-16"
+                        type="text" class="form-input !w-16"
                         x-ref="{{ $name }}_year"
                         @keyup="$dispatch('update-advanced')"
                         value="{{ $initialSimplePickerValues()['y'] }}"
                         placeholder="{{ __('misc.date.yyyy') }}"
                         maxlength=4>
                     <input
-                        type="text" class="!w-12"
+                        type="text" class="form-input !w-12"
                         x-ref="{{ $name }}_month"
                         @keyup="$dispatch('update-advanced')"
                         value="{{ $initialSimplePickerValues()['m'] }}"
                         placeholder="{{ __('misc.date.mm') }}"
                         maxlength=2>
                     <input
-                        type="text" class="!w-12"
+                        type="text" class="form-input !w-12"
                         x-ref="{{ $name }}_day"
                         @keyup="$dispatch('update-advanced')"
                         value="{{ $initialSimplePickerValues()['d'] }}"
@@ -94,7 +94,7 @@
                 <div class="flex-grow-0 flex items-center space-x-1">
                     <p>{{ __('misc.date.between') }}</p>
                     <input
-                        type="text" class="!w-auto @error($name.'_from') invalid @enderror"
+                        type="text" class="form-input !w-auto @error($name.'_from') invalid @enderror"
                         x-ref="{{ $name }}_from" name="{{ $name }}_from"
                         value="{{ optional($initialFrom)->format('Y-m-d') }}"
                         placeholder="{{ __('misc.date.format') }}"
@@ -103,7 +103,7 @@
                 <div class="flex-grow-0 flex items-center space-x-1">
                     <p>{{ __('misc.date.and') }}</p>
                     <input
-                        type="text" class="!w-auto @error($name.'_to') invalid @enderror"
+                        type="text" class="form-input !w-auto @error($name.'_to') invalid @enderror"
                         x-ref="{{ $name }}_to" name="{{ $name }}_to"
                         value="{{ optional($initialTo)->format('Y-m-d') }}"
                         placeholder="{{ __('misc.date.format') }}"

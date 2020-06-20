@@ -29,10 +29,10 @@
                 @csrf
                 <div class="flex flex-wrap mb-4">
                     <div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
-                        <input id="username" type="username" class="@error('username') invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="{{ strtolower(__('auth.username')) }}" autofocus>
+                        <input id="username" type="username" class="form-input @error('username') invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="{{ strtolower(__('auth.username')) }}" autofocus>
                     </div>
                     <div class="w-full sm:w-1/2 sm:pl-1">
-                        <input id="password" type="password" class="@error('username') invalid @enderror" name="password" required autocomplete="current-password" placeholder="{{ strtolower(__('auth.password')) }}">
+                        <input id="password" type="password" class="form-input @error('username') invalid @enderror" name="password" required autocomplete="current-password" placeholder="{{ strtolower(__('auth.password')) }}">
                     </div>
                 </div>
                 @error('username')

@@ -29,7 +29,7 @@
                 @csrf
                 <div class="flex flex-wrap mb-4">
                     <div class="w-full">
-                        <input id="email" type="text" class="@error('email') invalid @enderror" name="email" autocomplete="email" placeholder="{{ __('passwords.email') }}">
+                        <input id="email" type="text" class="form-input @error('email') invalid @enderror" name="email" autocomplete="email" placeholder="{{ __('passwords.email') }}">
                     </div>
                 </div>
                 @error('email')
