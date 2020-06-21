@@ -132,7 +132,7 @@ class PersonController extends Controller
         $this->authorize('delete', $person);
 
         if ($person->marriages->count() > 0) {
-            flash()->error(__('people.alerts.cant_delete_person_with_relationships'));
+            flash()->error(__('people.alerts.cant_delete_person_with_marriages'));
             return back();
         }
 

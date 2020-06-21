@@ -219,16 +219,24 @@
                     class="lg:mt-1 px-2 py-1 text-gray-800 text-sm flex items-center">
                     @csrf
                     {{ __('misc.language') }}:&nbsp;
-                    @unless(app()->isLocale('en'))
-                        <button name="language" value="en" class="btn leading-none text-xs !px-2">
-                            EN
-                        </button>
-                    @endunless
-                    @unless(app()->isLocale('pl'))
-                        <button name="language" value="pl" class="btn leading-none text-xs !px-2">
-                            PL
-                        </button>
-                    @endunless
+                    <div>
+                        @unless(app()->isLocale('pl'))
+                            <button name="language" value="pl" class="btn leading-none text-xs !px-2">
+                                PL
+                            </button>
+                        @endunless
+                        @unless(app()->isLocale('en'))
+                            <button name="language" value="en" class="btn leading-none text-xs !px-2">
+                                EN
+                            </button>
+                        @endunless
+                        @unless(app()->isLocale('de'))
+                            <button name="language" value="de" class="btn leading-none text-xs !px-2">
+                                DE
+                            </button>
+                        @endunless
+                    </div>
+
                 </form>
 
             </div>

@@ -15,7 +15,7 @@ return [
     'timezone' => 'Europe/Warsaw',
 
     'locale' => 'pl',
-    'available_locales' => ['pl', 'en'],
+    'available_locales' => ['pl', 'en', 'de'],
     'fallback_locale' => 'en',
     'faker_locale' => 'pl_PL',
 

@@ -298,9 +298,9 @@
             </dd>
         @endif
 
-        {{-- relationships --}}
+        {{-- marriages --}}
         @if($person->marriages->isNotEmpty())
-            <dt>{{ __('people.relationships') }}&nbsp;</dt>
+            <dt>{{ __('people.marriages') }}&nbsp;</dt>
             <dd>
                 <ul>
                     @foreach($person->marriages as $marriage)
