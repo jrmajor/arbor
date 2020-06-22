@@ -3,13 +3,13 @@
 
         @if ($paginator->onFirstPage())
             <li class="py-1">
-                <button id="pg-previous-disabled" class="btn" type="button" disabled>
+                <button id="pg-previous-disabled" class="btn-out" type="button" disabled>
                     &lsaquo;
                 </button>
             </li>
         @else
             <li class="py-1">
-                <button id="pg-previous" class="btn" type="button" wire:click="previousPage" rel="prev">
+                <button id="pg-previous" class="btn-out" type="button" wire:click="previousPage" rel="prev">
                     &lsaquo;
                 </button>
             </li>
@@ -24,9 +24,9 @@
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <li class="py-1"><button id="pg-current" class="btn" type="button" disabled>{{ $page }}</button></li>
+                        <li class="py-1"><button id="pg-current" class="btn-out" type="button" disabled>{{ $page }}</button></li>
                     @else
-                        <li class="py-1"><button id="pg-{{ $page }}" class="btn" type="button" wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
+                        <li class="py-1"><button id="pg-{{ $page }}" class="btn-out" type="button" wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>
                     @endif
                 @endforeach
             @endif
@@ -35,13 +35,13 @@
 
         @if ($paginator->hasMorePages())
             <li class="py-1">
-                <button id="pg-next" class="btn" type="button" wire:click="nextPage" rel="next">
+                <button id="pg-next" class="btn-out" type="button" wire:click="nextPage" rel="next">
                     &rsaquo;
                 </button>
             </li>
         @else
             <li class="py-1">
-                <button id="pg-next-disabled" class="btn" type="button" disabled>
+                <button id="pg-next-disabled" class="btn-out" type="button" disabled>
                     &rsaquo;
                 </button>
             </li>

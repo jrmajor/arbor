@@ -1,4 +1,4 @@
-<div class="p-4 bg-white rounded-lg shadow-lg">
+<div class="p-6 bg-white rounded-lg shadow">
     <dl>
 
         {{-- pytlewski --}}
@@ -18,7 +18,7 @@
                     @endif
                 </a>
                 <button @click="open = true"
-                    class="btn leading-none text-xs !px-2">
+                    class="btn-out leading-none text-xs rounded px-2">
                     {{ __('people.pytlewski.show_more') }}
                 </button>
                 <br>
@@ -331,7 +331,7 @@
                                         <small>[+]</small>
                                     </a>
                                 @else
-                                    <small>[marriage №{{ $marriage->id }}]</small>
+                                    <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                                 @endif
                                 @if($marriage->hasFirstEvent())
                                     @if($marriage->first_event_type)
@@ -381,7 +381,7 @@
                                 @endif
 
                                 <small>[{{ __('misc.hidden') }}]</small>
-                                <small>[marriage №{{ $marriage->id }}]</small>
+                                <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                             </li>
                         @endif
                     @endforeach

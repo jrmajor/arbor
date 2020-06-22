@@ -27,28 +27,36 @@
         <main class="mt-2 bg-white rounded-lg shadow-lg px-5 py-4 w-full xs:w-5/6 sm:w-3/4 md:w-1/2 lg:w-128">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <div class="flex flex-wrap mb-4">
+                <div class="flex flex-wrap">
                     <div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
-                        <input id="username" type="username" class="form-input @error('username') invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="{{ strtolower(__('auth.username')) }}" autofocus>
+                        <input id="username" type="username"
+                        class="form-input w-full @error('username') invalid @enderror @error('password') invalid @enderror"
+                        name="username" value="{{ old('username') }}" autocomplete="username" placeholder="{{ strtolower(__('auth.username')) }}" autofocus>
                     </div>
                     <div class="w-full sm:w-1/2 sm:pl-1">
-                        <input id="password" type="password" class="form-input @error('username') invalid @enderror" name="password" required autocomplete="current-password" placeholder="{{ strtolower(__('auth.password')) }}">
+                        <input id="password" type="password"
+                        class="form-input w-full @error('username') invalid @enderror @error('password') invalid @enderror"
+                        name="password" autocomplete="current-password" placeholder="{{ strtolower(__('auth.password')) }}">
                     </div>
                 </div>
                 @error('username')
-                    <div class="w-full -mt-4 text-left">
-                        <small class="text-red-500">
-                            {{ $message }}
-                        </small>
+                    <div class="w-full leading-none mt-1 text-left">
+                        <small class="text-red-500">{{ $message }}</small>
                     </div>
                 @enderror
-                <div class="flex flex-wrap justify-between items-center">
-                    <div>
-                        <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                        <label class="" for="remember"><small>{{ __('auth.remember') }}</small></label>
+                @error('password')
+                    <div class="w-full leading-none mt-1 text-left">
+                        <small class="text-red-500">{{ $message }}</small>
+                    </div>
+                @enderror
+
+                <div class="mt-4 flex flex-wrap justify-between items-center">
+                    <div class="mr-3 flex-grow flex items-center" style="flex-grow: 10">
+                        <input type="checkbox" name="remember" id="remember" class="form-checkbox h-3.5 w-3.5" {{ old('remember') ? 'checked' : '' }}>
+                        <label for="remember" class="ml-1"><small>{{ __('auth.remember') }}</small></label>
                     </div>
 
-                    <div>
+                    <div class="flex-grow flex items-center justify-between">
                         <a href="{{ route('password.request') }}" class="a mr-1"><small>{{ __('auth.forgot_password') }}</small></a>
                         <button type="submit" class="btn ml-1">
                             {{ __('auth.sign_in') }}

@@ -51,14 +51,14 @@
     }
 </script>
 
-<div class="flex flex-wrap"
+<div class="flex flex-col"
     x-data="personPickerData{{ $name }}()"
     x-init="
         selected.id = initial.id;
         selected.name = initial.name;
     ">
-    <label for="{{ $name }}_search" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ $label }}</label>
-    <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+    <label for="{{ $name }}_search" class="w-full font-medium pb-1 text-gray-700">{{ $label }}</label>
+    <div class="w-full">
         <input
             type="hidden"
             name="{{ $name }}_id"
@@ -72,34 +72,25 @@
                     search = null;
                 }
             ">
-            <div class="relative block px-3 py-1 w-full rounded border border-gray-500 text-gray-800 bg-white cursor-text
-                    @error($name.'_id') border-red-500 @else active:border-blue-600 focus-within:border-blue-600 @enderror"
-                :class="{ '!rounded-b-none': open }"
-                :style="open ? 'border-bottom-width: 0; margin-bottom: 1px' : ''"
+            <div class="relative block cursor-text form-select
+                    @error($name.'_id') shadow-outline-red @else active:shadow-outline-blue focus-within:shadow-outline-blue @enderror"
                 @click="$refs.search.focus()">
                 <div class="pr-4">
                     <span x-text="selected.name">
                     </span>{{--
                     --}}<input
                         type="text" class="appearance-none outline-none text-gray-600 focus:text-gray-800"
-                        :style="selected.id != null ? 'width: 4px' : 'width: 100%'"
+                        :style="selected.id != null ? 'width: 4px' : 'width: 100%'" autocomplete="off"
                         x-ref="search" x-model="search" id="{{ $name }}_search"
                         @focus="open = true"
                         @keydown="keyEvent($event)" @keypress="keyEvent($event)" @keyup="keyEvent($event)" @paste="keyEvent($event)">
                 </div>
-                <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                    </svg>
-                </div>
             </div>
             <template x-if="open">
                 <div
-                    class="absolute z-10 w-full text-gray-800 bg-white rounded-b border-l border-r border-b
-                    @error($name.'_id') border-red-500 @else border-blue-600 @enderror"
-                    style="margin-top: -1px">
+                    class="absolute mt-1.5 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300">
                     <template x-if="people.length == 0">
-                        <div class="w-full px-3 py-1 text-gray-600 border-t border-gray-300">
+                        <div class="w-full px-3 py-1 text-gray-600">
                             {{ __('misc.no_results') }}
                         </div>
                     </template>
@@ -111,9 +102,9 @@
                                 search = null;
                                 open = false;
                             "
-                            class="flex w-full px-3 py-1 border-t border-gray-300 text-gray-800 justify-between">
+                            class="flex w-full px-3 py-1 text-gray-800 text-left justify-between hover:bg-cool-gray-100">
                             <span x-text="person.name"></span>
-                            <span x-text="selected.id == person.id ? '✓ ' : ''"></span>
+                            <span class="text-gray-400" x-text="selected.id == person.id ? '✓ ' : ''"></span>
                         </button>
                     </template>
                 </div>

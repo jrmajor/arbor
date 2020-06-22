@@ -2,13 +2,13 @@
 
 @section('content')
 
-    <h1 class="mx-2 mb-1 mt-5 leading-none text-3xl font-medium">
+    <h1 class="mb-3 mt-4 leading-none text-3xl font-medium">
         <x-person-title-bar :person="$person"/>
     </h1>
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <main class="flex-grow p-4 bg-white rounded-lg shadow-lg">
+        <main class="flex-grow p-6 bg-white rounded-lg shadow overflow-hidden">
             @include('people.form', ['person' => $person, 'action' => 'edit'])
         </main>
 

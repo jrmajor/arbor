@@ -59,22 +59,29 @@
             $refs.{{ $name }}_day.classList.add('invalid');
         }
     "
-    class="flex flex-wrap">
-    <label for="{{ $name }}_year" class="w-full sm:w-1/2 md:w-1/4 pr-1 py-1">{{ $label }}</label>
-    <div class="w-full sm:w-1/2 md:w-3/4 lg:w-1/2">
+    class="flex flex-col">
+    <div class="w-full pb-1 flex items-center">
+        <label for="{{ $name }}_year" class="font-medium text-gray-700">{{ $label }}</label>
+        <button @click.prevent="advancedPicker = ! advancedPicker"
+            x-text="advancedPicker ? '{{ __('misc.date.simple') }}' : '{{ __('misc.date.advanced') }}'"
+            class="ml-2 a underline leading-none text-sm">
+            toggle
+        </button>
+    </div>
+    <div class="w-full">
         <div class="flex flex-nowrap items-center justify-between">
             <div x-show="! advancedPicker"
                 class="flex-grow flex-shrink flex">
                 <div class="flex items-center">
                     <input
-                        type="text" class="form-input !w-16 !rounded-r-none z-10"
+                        type="text" class="form-input w-16 rounded-r-none z-10"
                         x-ref="{{ $name }}_year"
                         @keyup="$dispatch('update-advanced')"
                         value="{{ $initialSimplePickerValues()['y'] }}"
                         placeholder="{{ __('misc.date.yyyy') }}"
                         maxlength=4>
                     <input
-                        type="text" class="form-input !w-12 !rounded-none focus:z-20"
+                        type="text" class="form-input w-12 rounded-none focus:z-20"
                         style="margin: 0 -1px 0 -1px"
                         x-ref="{{ $name }}_month"
                         @keyup="$dispatch('update-advanced')"
@@ -82,7 +89,7 @@
                         placeholder="{{ __('misc.date.mm') }}"
                         maxlength=2>
                     <input
-                        type="text" class="form-input !w-12 !rounded-l-none z-10"
+                        type="text" class="form-input w-12 rounded-l-none z-10"
                         x-ref="{{ $name }}_day"
                         @keyup="$dispatch('update-advanced')"
                         value="{{ $initialSimplePickerValues()['d'] }}"
@@ -91,41 +98,36 @@
                 </div>
             </div>
             <div x-show="advancedPicker"
-                class="flex-grow flex-shrink flex flex-wrap space-x-1">
-                <div class="flex-grow-0 flex items-center space-x-1">
-                    <p>{{ __('misc.date.between') }}</p>
+                class="flex-grow flex-shrink flex flex-wrap -mb-2">
+                <div class="flex-grow-0 flex items-center mb-2 mr-1">
+                    <p class="text-gray-900">{{ __('misc.date.between') }}</p>
                     <input
-                        type="text" class="form-input !w-auto @error($name.'_from') invalid @enderror"
+                        type="text" class="form-input w-32 ml-1 @error($name.'_from') invalid @enderror"
                         x-ref="{{ $name }}_from" name="{{ $name }}_from"
                         value="{{ optional($initialFrom)->format('Y-m-d') }}"
                         placeholder="{{ __('misc.date.format') }}"
                         size="12" maxlength=10>
                 </div>
-                <div class="flex-grow-0 flex items-center space-x-1">
-                    <p>{{ __('misc.date.and') }}</p>
+                <div class="flex-grow-0 flex items-center mb-2">
+                    <p class="text-gray-900">{{ __('misc.date.and') }}</p>
                     <input
-                        type="text" class="form-input !w-auto @error($name.'_to') invalid @enderror"
+                        type="text" class="form-input w-32 ml-1 @error($name.'_to') invalid @enderror"
                         x-ref="{{ $name }}_to" name="{{ $name }}_to"
                         value="{{ optional($initialTo)->format('Y-m-d') }}"
                         placeholder="{{ __('misc.date.format') }}"
                         size="12" maxlength=10>
                 </div>
             </div>
-            <div class="flex items-center ml-1">
-                <button @click.prevent="advancedPicker = ! advancedPicker"
-                    x-text="advancedPicker ? '{{ __('misc.date.simple') }}' : '{{ __('misc.date.advanced') }}'"
-                    class=" btn leading-none text-xs !px-2">
-                    toggle
-                </button>
-                <input type="hidden" name="{{ $name }}[picker]"
-                    :value="advancedPicker ? 'advanced' : 'simple'">
-            </div>
         </div>
         @error($name.'_from')
-            <small class="text-red-500">{{ $message }}</small>
+            <div class="w-full leading-none mt-1">
+                <small class="text-red-500">{{ $message }}</small>
+            </div>
         @enderror
         @error($name.'_to')
-            <small class="text-red-500">{{ $message }}</small>
+            <div class="w-full leading-none mt-1">
+                <small class="text-red-500">{{ $message }}</small>
+            </div>
         @enderror
     </div>
 </div>

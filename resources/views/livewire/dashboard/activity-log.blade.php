@@ -7,7 +7,7 @@
 
     <main class="flex-grow space-y-2 flex flex-col items-center">
 
-        <div class="w-full p-4 bg-white rounded-lg shadow-lg">
+        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
             <table>
                 @foreach ($activities as $activity)
                     <tr wire:key="{{ $activity->id }}">

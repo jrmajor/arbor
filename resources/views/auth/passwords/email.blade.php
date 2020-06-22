@@ -27,19 +27,19 @@
         <main class="mt-2 bg-white rounded-lg shadow-lg px-5 py-4 w-full xs:w-5/6 sm:w-3/4 md:w-1/2 lg:w-128">
             <form method="POST" action="{{ route('password.email') }}">
                 @csrf
-                <div class="flex flex-wrap mb-4">
+
+                <div class="flex flex-wrap">
                     <div class="w-full">
-                        <input id="email" type="text" class="form-input @error('email') invalid @enderror" name="email" autocomplete="email" placeholder="{{ __('passwords.email') }}">
+                        <input id="email" type="text" class="form-input w-full @error('email') invalid @enderror" name="email" autocomplete="email" placeholder="{{ __('passwords.email') }}">
                     </div>
                 </div>
                 @error('email')
-                    <div class="w-full -mt-4 text-left">
-                        <small class="text-red-500">
-                            {{ $message }}
-                        </small>
+                    <div class="w-full leading-none mt-1 text-left">
+                        <small class="text-red-500">{{ $message }}</small>
                     </div>
                 @enderror
-                <div class="flex justify-between items-center">
+
+                <div class="mt-4 flex justify-between items-center">
                     <div>
                         <a href="{{ route('login') }}" class="a mr-1"><small>{{ __('auth.sign_in') }}</small></a>
                     </div>

@@ -9,5 +9,5 @@
 @if($marriage->man->dead) </i> @endif
 
 <small class="text-lg">
-    [marriage №{{ $marriage->id }}]
+    [{{ __('marriages.marriage') }} №{{ $marriage->id }}]
 </small>

@@ -16,6 +16,7 @@ return [
     ],
 
     'date' => [
+        'date' => 'Datum',
         'between' => 'zwischen',
         'and' => 'und',
         'yyyy' => 'JJJJ',
@@ -25,6 +26,8 @@ return [
         'simple' => 'einfach',
         'advanced' => 'erweitert',
     ],
+
+    'place' => 'Ort',
 
     'hidden' => 'versteckt',
 
@@ -39,6 +42,7 @@ return [
 
     'yes' => 'Ja',
     'no' => 'Nein',
+    'cancel' => 'Cancel',
     'null' => 'Null',
 
     'no_results' => 'Keine Ergebnisse',

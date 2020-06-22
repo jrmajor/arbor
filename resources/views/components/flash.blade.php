@@ -1,6 +1,6 @@
 @if (flash()->message)
     <div
-        class="w-full rounded-lg shadow-md p-3 flex items-center mb-3
+        class="w-full rounded-lg shadow p-5 flex items-center mb-3
         @if(flash()->level === 'error')
             bg-red-100 text-red-900
         @elseif(flash()->level === 'warning')
@@ -8,7 +8,7 @@
         @elseif(flash()->level === 'success')
             bg-green-100 text-green-900
         @endif ">
-        <svg class="flex-none w-5 h-5 mr-3 fill-current
+        <svg class="flex-none w-5 h-5 mr-5 fill-current
             @if(flash()->level === 'error')
                 text-red-500
             @elseif(flash()->level === 'warning')

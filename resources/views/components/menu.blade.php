@@ -10,9 +10,9 @@
             <div class="flex items-center">
                 <a href="{{ route('people.index') }}"
                     class="px-4 pt-4 pb-3 md:pt-5 md:pb-4 lg:pt-6 lg:pb-4 text-gray-800
-                        hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
+                        hover:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
                         border-b-2 border-solid border-transparent
-                        {{ $active == 'people.index' ? 'border-blue-500' : 'hover:border-gray-500 focus:border-gray-500 active:border-blue-500' }}
+                        {{ $active == 'people.index' ? 'border-blue-500' : 'hover:border-gray-400 focus:border-gray-400 active:border-blue-500' }}
                         focus:outline-none hover:no-underline
                         transition-colors duration-200 ease-out
                         flex items-center">
@@ -42,7 +42,7 @@
                 @if($active != 'search')
                     <form action="{{ route('search') }}"
                         class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3">
-                        <input type="search" class="form-input" name="s" autocomplete="off" required class="h-10"/>
+                        <input type="search" class="form-input w-full h-9" name="s" autocomplete="off" required/>
                         <button class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 active:text-gray-900 transition-colors duration-200 ease-out">
                             <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
@@ -55,10 +55,10 @@
                     <a
                         href="{{ route('people.create') }}"
                         class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
-                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 lg:hover:bg-gray-100 lg:focus:bg-gray-100
+                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
                             rounded lg:rounded-none uppercase lg:normal-case
                             border-b-2 border-solid border-transparent
-                            {{ $active == 'people.create' ? 'lg:border-blue-500' : 'lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500' }}
+                            {{ $active == 'people.create' ? 'lg:border-blue-500' : 'lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500' }}
                             focus:outline-none hover:no-underline
                             transition-colors duration-200 ease-out">
                         <div class="w-full {{ $active == 'people.create' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : '' }} flex items-center">
@@ -74,10 +74,10 @@
                     <a
                         href="{{ route('dashboard.users') }}"
                         class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
-                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 lg:hover:bg-gray-100 lg:focus:bg-gray-100
+                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
                             rounded lg:rounded-none uppercase lg:normal-case
                             border-b-2 border-solid border-transparent
-                            {{ $active == 'dashboard' ? 'lg:border-blue-500' : 'lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500' }}
+                            {{ $active == 'dashboard' ? 'lg:border-blue-500' : 'lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500' }}
                             focus:outline-none hover:no-underline
                             transition-colors duration-200 ease-out">
                         <div class="w-full {{ $active == 'dashboard' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : '' }} flex items-center">
@@ -93,10 +93,10 @@
                     <a
                         href="mailto:jeremiah.major@npng.pl"
                         class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
-                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 lg:hover:bg-gray-100 lg:focus:bg-gray-100
+                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
                             rounded lg:rounded-none uppercase lg:normal-case
                             border-b-2 border-solid border-transparent
-                            lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500
+                            lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500
                             focus:outline-none hover:no-underline
                             transition-colors duration-200 ease-out
                             flex items-center">
@@ -109,10 +109,10 @@
                     <a
                         href="{{ route('login') }}"
                         class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
-                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 lg:hover:bg-gray-100 lg:focus:bg-gray-100
+                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
                             rounded lg:rounded-none uppercase lg:normal-case
                             border-b-2 border-solid border-transparent
-                            lg:hover:border-gray-500 lg:focus:border-gray-500 lg:active:border-blue-500
+                            lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500
                             focus:outline-none hover:no-underline
                             transition-colors duration-200 ease-out
                             flex items-center">
@@ -126,7 +126,7 @@
                     <a
                         href="{{ route('settings') }}"
                         class="lg:hidden px-3 py-1 text-gray-800
-                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200
+                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
                             rounded uppercase
                             border-b-2 border-solid border-transparent
                             focus:outline-none hover:no-underline
@@ -143,7 +143,7 @@
                         href="{{ route('logout') }}"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                         class="lg:hidden px-3 py-1 text-gray-800
-                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200
+                            hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
                             rounded uppercase
                             border-b-2 border-solid border-transparent
                             focus:outline-none hover:no-underline
@@ -161,9 +161,9 @@
                         <button
                             @click="dropdown = ! dropdown"
                             class="px-3 pt-6 pb-4 text-gray-800
-                                hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
+                                hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
                                 border-b-2 border-solid border-transparent
-                                hover:border-gray-500 focus:border-gray-500 active:border-blue-500
+                                hover:border-gray-400 focus:border-gray-400 active:border-blue-500
                                 focus:outline-none hover:no-underline
                                 transition-color duration-200 ease-out
                                 flex items-center"
@@ -185,9 +185,9 @@
                                 <a
                                     href="{{ route('settings') }}"
                                     class="pl-5 pr-12 py-4 text-gray-800
-                                        hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
+                                        hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
                                         border-l-2 border-solid border-transparent
-                                        {{ $active == 'settings' ? 'border-blue-500' : 'hover:border-gray-500 focus:border-gray-500 active:border-blue-500' }}
+                                        {{ $active == 'settings' ? 'border-blue-500' : 'hover:border-gray-400 focus:border-gray-400 active:border-blue-500' }}
                                         focus:outline-none hover:no-underline
                                         transition-colors duration-200 ease-out">
                                     {{ __('misc.menu.settings') }}
@@ -197,9 +197,9 @@
                                     href="{{ route('logout') }}"
                                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                     class="pl-5 pr-12 py-4 text-gray-800
-                                        hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
+                                        hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
                                         border-l-2 border-solid border-transparent
-                                        hover:border-gray-500 focus:border-gray-500 active:border-blue-500
+                                        hover:border-gray-400 focus:border-gray-400 active:border-blue-500
                                         focus:outline-none hover:no-underline
                                         transition-colors duration-200 ease-out">
                                     {{ __('misc.menu.logout') }}
@@ -221,17 +221,20 @@
                     {{ __('misc.language') }}:&nbsp;
                     <div>
                         @unless(app()->isLocale('pl'))
-                            <button name="language" value="pl" class="btn leading-none text-xs !px-2">
+                            <button name="language" value="pl"
+                                class="btn-out leading-none text-xs rounded px-2">
                                 PL
                             </button>
                         @endunless
                         @unless(app()->isLocale('en'))
-                            <button name="language" value="en" class="btn leading-none text-xs !px-2">
+                            <button name="language" value="en"
+                                class="btn-out leading-none text-xs rounded px-2">
                                 EN
                             </button>
                         @endunless
                         @unless(app()->isLocale('de'))
-                            <button name="language" value="de" class="btn leading-none text-xs !px-2">
+                            <button name="language" value="de"
+                                class="btn-out leading-none text-xs rounded px-2">
                                 DE
                             </button>
                         @endunless

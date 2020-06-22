@@ -39,18 +39,12 @@ return [
         'roman_catholic' => 'roman catholic',
     ],
 
-    'first_event_type' => 'First event type',
-    'first_event_date' => 'First event date',
-    'first_event_place' => 'First event place',
-
-    'second_event_type' => 'Second event type',
-    'second_event_date' => 'Second event date',
-    'second_event_place' => 'Second event place',
+    'first_event' => 'First event',
+    'second_event' => 'Second event',
+    'event_type' => 'Type',
 
     'divorce' => 'Divorce',
     'divorced' => 'Divorced',
-    'divorce_date' => 'Divorce date',
-    'divorce_place' => 'Divorce place',
 
     'event_types' => [
         'marriage' => 'marriage',

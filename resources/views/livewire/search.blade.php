@@ -5,10 +5,10 @@
 
 <main class="space-y-2 flex flex-col items-center">
 
-    <div class="w-full p-4 bg-white rounded-lg shadow-lg">
+    <div class="w-full p-6 bg-white rounded-lg shadow">
 
         <form class="relative" wire:submit.prevent="$refresh">
-            <input type="search" wire:model.debounce.500ms="s" autocomplete="off" class="form-input h-10"/>
+            <input type="search" wire:model.debounce.500ms="s" autocomplete="off" class="form-input w-full h-12"/>
             <button type="submit"
                 class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 ease-out">
                 <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
 
         @if(! blank($s))
 
-            <hr class="-mx-4 my-3 border-t-2 border-dashed">
+            <hr class="-mx-4 my-5 border-t-2 border-dashed">
 
             @if($people->isNotEmpty())
                 <ul>

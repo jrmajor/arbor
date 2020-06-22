@@ -2,12 +2,12 @@
 
 @section('content')
 
-    <main class="p-4 bg-white rounded-lg shadow-lg">
+    <main class="p-6 bg-white rounded-lg shadow">
 
         <x-letters :active="$active ?? null"/>
 
         @if(isset($list))
-            <hr class="-mx-4 my-3 border-t-2 border-dashed">
+            <hr class="-mx-6 my-5 border-t-2 border-dashed">
 
             <ul>
                 @foreach($list as $person)

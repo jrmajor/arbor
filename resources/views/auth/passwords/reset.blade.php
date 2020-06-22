@@ -29,29 +29,27 @@
                 @csrf
                 <input type="hidden" name="token" value="{{ $token }}">
 
-                <div class="flex flex-wrap mb-4">
+                <div class="flex flex-wrap">
                     <div class="w-full">
                         <input
                             id="email" type="text" name="email"
-                            class="form-input @error('email') invalid @enderror"
+                            class="form-input w-full @error('email') invalid @enderror"
                             value="{{ $email ?? old('email') }}"
                             autocomplete="email"
                             placeholder="{{ __('passwords.email') }}">
                     </div>
                 </div>
                 @error('email')
-                    <div class="w-full -mt-4 text-left">
-                        <small class="text-red-500">
-                            {{ $message }}
-                        </small>
+                    <div class="w-full leading-none mt-1 text-left">
+                        <small class="text-red-500">{{ $message }}</small>
                     </div>
                 @enderror
 
-                <div class="flex flex-wrap mb-4">
+                <div class="flex flex-wrap mt-4">
                     <div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
                         <input
                             id="password" type="password" name="password"
-                            class="form-input @error('password') invalid @enderror"
+                            class="form-input w-full @error('password') invalid @enderror"
                             value="{{ old('password') }}"
                             autocomplete="new-password" autofocus
                             placeholder="{{ strtolower(__('passwords.password')) }}">
@@ -59,22 +57,23 @@
                     <div class="w-full sm:w-1/2 sm:pl-1">
                         <input
                             id="password-confirm" type="password" name="password_confirmation"
-                            class="form-input @error('password') invalid @enderror"
+                            class="form-input w-full @error('password') invalid @enderror"
                             autocomplete="current-password"
                             placeholder="{{ strtolower(__('passwords.confirm_password')) }}">
                     </div>
                 </div>
                 @error('password')
-                    <div class="w-full -mt-4 text-left">
-                        <small class="text-red-500">
-                            {{ $message }}
-                        </small>
+                    <div class="w-full leading-none mt-1 text-left">
+                        <small class="text-red-500">{{ $message }}</small>
                     </div>
                 @enderror
 
-                <div class="flex justify-end">
+                <div class="mt-4 flex justify-between items-center">
                     <div>
-                        <button type="submit" class="btn">
+                        <a href="{{ route('welcome') }}" class="a mr-1"><small>{{ __('misc.cancel') }}</small></a>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn ml-1">
                             {{ __('passwords.reset_password') }}
                         </button>
                     </div>

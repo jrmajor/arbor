@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="mx-2 mb-1 mt-5 leading-none text-3xl font-medium">
+    <h1 class="mb-3 mt-4 leading-none text-3xl font-medium">
         <x-marriage-title-bar :marriage="$marriage"/>
     </h1>
 
@@ -12,7 +12,7 @@
 
             @foreach($activities as $activity)
 
-                <div class="p-4 bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 bg-white rounded-lg shadow overflow-hidden">
                     <table class="block md:table">
                         <tbody class="block md:table-row-group">
                             @if($activity['description'] == 'deleted')
@@ -47,7 +47,7 @@
                         </tbody>
                     </table>
 
-                    <div class="-m-4 mt-4 px-4 py-3 bg-gray-100 flex items-center justify-between">
+                    <div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex items-center justify-between">
                         {{ optional($activity['causer'])->username }}
                         <small>{{ $activity['model']->created_at->format('Y-m-d H:i') }}</small>
                     </div>

@@ -1,5 +1,5 @@
 @if($person->father || $person->mother)
-    <div class="p-4 bg-white rounded-lg shadow-lg">
+    <div class="p-6 bg-white rounded-lg shadow">
         <div class="text-center">
             <div class="w-full flex text-sm">
                 <div class="w-1/2 flex flex-col md:flex-row justify-center">

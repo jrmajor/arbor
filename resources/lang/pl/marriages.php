@@ -39,18 +39,12 @@ return [
         'roman_catholic' => 'rzymskokatolicki',
     ],
 
-    'first_event_type' => 'Typ pierwszego wydarzenia',
-    'first_event_date' => 'Data pierwszego wydarzenia',
-    'first_event_place' => 'Miejsce pierwszego wydarzenia',
-
-    'second_event_type' => 'Typ drugiego wydarzenia',
-    'second_event_date' => 'Data drugiego wydarzenia',
-    'second_event_place' => 'Miejsce drugiego wydarzenia',
+    'first_event' => 'Pierwsze wydarzenie',
+    'second_event' => 'Drugie wydarzenie',
+    'event_type' => 'Typ',
 
     'divorce' => 'Rozwód',
     'divorced' => 'Rozwiedzeni',
-    'divorce_date' => 'Data rozwodu',
-    'divorce_place' => 'Miejsce rozwodu',
 
     'event_types' => [
         'marriage' => 'ślub',

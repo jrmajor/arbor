@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="mx-2 mb-1 mt-5 leading-none text-3xl font-medium">
+    <h1 class="mb-3 mt-4 leading-none text-3xl font-medium">
         <x-person-title-bar :person="$person"/>
     </h1>
 
