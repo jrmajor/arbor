@@ -71,6 +71,8 @@ return [
     'family_name' => 'Nazwisko rodowe',
     'last_name' => 'Nazwisko zmienione',
     'birth' => 'Urodzenie',
+    'birth_date' => 'Data urodzenia',
+    'birth_place' => 'Miejsce urodzenia',
     'current_age' => 'aktualny wiek',
     'estimated_birth_date' => 'szacowana data urodzenia',
     'years_of_error' => 'lat błędu',

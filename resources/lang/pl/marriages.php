@@ -42,6 +42,14 @@ return [
     'second_event' => 'Drugie wydarzenie',
     'event_type' => 'Typ',
 
+    'first_event_type' => 'Typ pierwszego wydarzenia',
+    'first_event_date' => 'Data pierwszego wydarzenia',
+    'first_event_place' => 'Miejsce pierwszego wydarzenia',
+
+    'second_event_type' => 'Typ drugiego wydarzenia',
+    'second_event_date' => 'Data drugiego wydarzenia',
+    'second_event_place' => 'Miejsce drugiego wydarzenia',
+
     'divorce' => 'Rozwód',
     'divorced' => 'Rozwiedzeni',
 

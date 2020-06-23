@@ -71,6 +71,8 @@ return [
     'family_name' => 'Family name',
     'last_name' => 'Last name',
     'birth' => 'Birth',
+    'birth_date' => 'Birth date',
+    'birth_place' => 'Birth place',
     'current_age' => 'current age',
     'estimated_birth_date' => 'estimated birth date',
     'years_of_error' => 'years of error',
