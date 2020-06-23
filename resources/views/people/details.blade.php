@@ -318,7 +318,6 @@
                                 @if(optional(auth()->user())->canWrite())
                                     <a
                                         href="{{ route('marriages.edit', ['marriage' => $marriage]) }}"
-                                        data-tippy-content="{{ __('marriages.edit_this_marriage') }}"
                                         class="a">
                                         <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                                     </a>
@@ -326,7 +325,6 @@
                                                             'mother' => $marriage->woman_id,
                                                             'father' => $marriage->man_id,
                                         ]) }}"
-                                        data-tippy-content="{{ __('marriages.add_child') }}"
                                         class="a">
                                         <small>[+]</small>
                                     </a>

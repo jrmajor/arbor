@@ -25,7 +25,6 @@ return [
     ],
 
     'add_a_new_marriage' => 'Ehe hinzufügen',
-    'edit_this_marriage' => 'Ehe editieren',
     'add_child' => 'Child hinzufügen',
 
     'woman' => 'Frau',

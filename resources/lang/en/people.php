@@ -41,7 +41,6 @@ return [
     ],
 
     'add_a_new_person' => 'Add a new person',
-    'edit_this_person' => 'Edit this person',
 
     'sex' => 'Sex',
     'female' => 'female',

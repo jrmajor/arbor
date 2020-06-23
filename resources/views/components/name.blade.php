@@ -65,7 +65,6 @@
 @if(optional(auth()->user())->canWrite())
     <a
         href="{{ route('people.edit', $person) }}"
-        data-tippy-content="{{ __('people.edit_this_person') }}"
         class="a">
         <small>
             [№{{ $person->id }}]

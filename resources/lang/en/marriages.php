@@ -25,7 +25,6 @@ return [
     ],
 
     'add_a_new_marriage' => 'Add marriage',
-    'edit_this_marriage' => 'Edit this marriage',
     'add_child' => 'Add child',
 
     'woman' => 'Woman',

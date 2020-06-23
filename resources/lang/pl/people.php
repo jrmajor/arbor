@@ -41,7 +41,6 @@ return [
     ],
 
     'add_a_new_person' => 'Dodaj nową osobę',
-    'edit_this_person' => 'Edytuj tę osobę',
 
     'sex' => 'Płeć',
     'female' => 'kobieta',
