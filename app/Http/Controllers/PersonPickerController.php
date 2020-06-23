@@ -25,18 +25,16 @@ class PersonPickerController extends Controller
                 $q->where('id', $request->get('search'))
                     ->orWhere(function ($q) use ($request) {
                         foreach(Arr::trim(explode(' ', $request->get('search'))) as $s) {
-                            $q->where(fn ($q) =>
-                                $q->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
+                            $q->where(function ($q) use ($s) {
+                                return $q->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
                                     ->OrWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
-                                    ->OrWhereRaw('last_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
-                            );
+                                    ->OrWhereRaw('last_name collate utf8mb4_0900_ai_ci like ?', $s.'%');
+                            });
                         }
                     });
-            })->when(filled($request->get('sex')), fn ($q) =>
-                $q->where(fn ($q) =>
-                    $q->where('sex', $request->get('sex'))->orWhereNull('sex')
-                )
-            )
+            })->when(filled($request->get('sex')), function ($q) use ($request) {
+                return $q->where(fn ($q) => $q->where('sex', $request->get('sex'))->orWhereNull('sex'));
+            })
             ->limit(10)
             ->get();
 

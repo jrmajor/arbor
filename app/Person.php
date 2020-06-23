@@ -137,63 +137,63 @@ class Person extends Model
     {
         return $this->hasMany('App\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn ($q) =>
-                        $this->mother_id && $this->father_id
-                        ? $q->where('mother_id', $this->mother_id)
-                            ->where('father_id', $this->father_id)
-                            ->where('id', '!=', $this->id)
-                        : $q->whereRaw('false')
-                    )->orderBy('birth_date_from', 'asc');
+                    ->orWhere(function ($q) {
+                        return $this->mother_id && $this->father_id
+                            ? $q->where('mother_id', $this->mother_id)
+                                ->where('father_id', $this->father_id)
+                                ->where('id', '!=', $this->id)
+                            : $q->whereRaw('false');
+                    })->orderBy('birth_date_from', 'asc');
     }
 
     public function siblings_mother(): HasMany
     {
         return $this->hasMany('App\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn ($q) =>
-                        $this->mother_id
-                        ? $q->where('mother_id', $this->mother_id)
-                            ->where(fn ($q) =>
-                                $q->where('father_id', '!=', $this->father_id)
-                                    ->orWhereNull('father_id')
-                            )->where('id', '!=', $this->id)
-                        : $q->whereRaw('false')
-                    )->orderBy('birth_date_from', 'asc');
+                    ->orWhere(function ($q) {
+                        return $this->mother_id
+                            ? $q->where('mother_id', $this->mother_id)
+                                ->where(function ($q) {
+                                    return $q->where('father_id', '!=', $this->father_id)
+                                        ->orWhereNull('father_id');
+                                })->where('id', '!=', $this->id)
+                            : $q->whereRaw('false');
+                    })->orderBy('birth_date_from', 'asc');
     }
 
     public function siblings_father(): HasMany
     {
         return $this->hasMany('App\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn ($q) =>
-                        $this->father_id
-                        ? $q->where('father_id', $this->father_id)
-                            ->where(fn ($q) =>
-                                $q->where('mother_id', '!=', $this->mother_id)
-                                    ->orWhereNull('mother_id')
-                            )->where('id', '!=', $this->id)
-                        : $q->whereRaw('false')
-                    )->orderBy('birth_date_from', 'asc');
+                    ->orWhere(function ($q) {
+                        return $this->father_id
+                            ? $q->where('father_id', $this->father_id)
+                                ->where(function ($q) {
+                                    return $q->where('mother_id', '!=', $this->mother_id)
+                                        ->orWhereNull('mother_id');
+                                })->where('id', '!=', $this->id)
+                            : $q->whereRaw('false');
+                    })->orderBy('birth_date_from', 'asc');
     }
 
     public function marriages(): HasMany
     {
         return $this->hasMany('App\Marriage', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn ($q) =>
-                        $q->where('woman_id', $this->id)
-                            ->orWhere('man_id', $this->id)
-                    )->orderBy($this->sex == 'xx' ? 'woman_order' : 'man_order');
+                    ->orWhere(function ($q) {
+                        return $q->where('woman_id', $this->id)
+                            ->orWhere('man_id', $this->id);
+                    })->orderBy($this->sex == 'xx' ? 'woman_order' : 'man_order');
     }
 
     public function children(): HasMany
     {
         return $this->hasMany('App\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
-                    ->orWhere(fn ($q) =>
-                        $q->where('mother_id', $this->id)
-                            ->orwhere('father_id', $this->id)
-                    )->orderBy('birth_date_from', 'asc');
+                    ->orWhere(function ($q) {
+                        return $q->where('mother_id', $this->id)
+                            ->orwhere('father_id', $this->id);
+                    })->orderBy('birth_date_from', 'asc');
     }
 
     public function getBirthYearAttribute(): ?int

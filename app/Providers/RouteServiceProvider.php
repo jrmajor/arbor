@@ -24,20 +24,12 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        Route::bind('trashedPerson', fn ($id) =>
-            Person::onlyTrashed()->findOrFail($id)
-        );
+        Route::bind('trashedPerson', fn ($id) => Person::onlyTrashed()->findOrFail($id));
 
-        Route::bind('anyPerson', fn ($id) =>
-            Person::withTrashed()->findOrFail($id)
-        );
+        Route::bind('anyPerson', fn ($id) => Person::withTrashed()->findOrFail($id));
 
-        Route::bind('trashedMarriage', fn ($id) =>
-            Marriage::onlyTrashed()->findOrFail($id)
-        );
+        Route::bind('trashedMarriage', fn ($id) => Marriage::onlyTrashed()->findOrFail($id));
 
-        Route::bind('anyMarriage', fn ($id) =>
-            Marriage::withTrashed()->findOrFail($id)
-        );
+        Route::bind('anyMarriage', fn ($id) => Marriage::withTrashed()->findOrFail($id));
     }
 }
