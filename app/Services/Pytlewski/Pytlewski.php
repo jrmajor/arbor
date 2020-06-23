@@ -4,7 +4,6 @@ namespace App\Services\Pytlewski;
 
 use Carbon\CarbonInterval;
 use Exception;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
@@ -90,11 +89,11 @@ class Pytlewski
         try {
             $source = Http::timeout(2)->get(self::url($this->id));
         } catch (Exception $e) {
-            return null;
+            return;
         }
 
         if (! $source->ok()) {
-            return null;
+            return;
         }
 
         $source = iconv('Windows-1250', 'UTF-8', $source->body());

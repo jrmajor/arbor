@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Person;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePerson extends FormRequest
@@ -30,13 +29,13 @@ class StorePerson extends FormRequest
             'birth_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:birth_date_to',
-                'nullable'
+                'nullable',
             ],
             'birth_date_to' => [
                 'date_format:Y-m-d',
                 'required_with:birth_date_from',
                 'after_or_equal:birth_date_from',
-                'nullable'
+                'nullable',
             ],
             'birth_place' => 'string|max:100|nullable',
 
@@ -44,13 +43,13 @@ class StorePerson extends FormRequest
             'death_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:death_date_to',
-                'nullable'
+                'nullable',
             ],
             'death_date_to' => [
                 'date_format:Y-m-d',
                 'required_with:death_date_from',
                 'after_or_equal:death_date_from',
-                'nullable'
+                'nullable',
             ],
             'death_place' => 'string|max:100|nullable',
             'death_cause' => 'string|max:100|nullable',
@@ -58,26 +57,26 @@ class StorePerson extends FormRequest
             'funeral_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:funeral_date_to',
-                'nullable'
+                'nullable',
             ],
             'funeral_date_to' => [
                 'date_format:Y-m-d',
                 'required_with:funeral_date_from',
                 'after_or_equal:funeral_date_from',
-                'nullable'
+                'nullable',
             ],
             'funeral_place' => 'string|max:100|nullable',
 
             'burial_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:burial_date_to',
-                'nullable'
+                'nullable',
             ],
             'burial_date_to' => [
                 'date_format:Y-m-d',
                 'required_with:burial_date_from',
                 'after_or_equal:burial_date_from',
-                'nullable'
+                'nullable',
             ],
             'burial_place' => 'string|max:100|nullable',
 

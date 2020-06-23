@@ -133,11 +133,13 @@ class PersonController extends Controller
 
         if ($person->marriages->count() > 0) {
             flash()->error(__('people.alerts.cant_delete_person_with_marriages'));
+
             return back();
         }
 
         if ($person->children->count() > 0) {
             flash()->error(__('people.alerts.cant_delete_person_with_children'));
+
             return back();
         }
 

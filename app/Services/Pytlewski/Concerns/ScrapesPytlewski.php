@@ -3,10 +3,8 @@
 namespace App\Services\Pytlewski\Concerns;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
-use ReflectionClass;
 use Spatie\Regex\Regex;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -19,7 +17,6 @@ trait ScrapesPytlewski
         }
 
         try {
-
             $crawler = (new Crawler($source))
                 ->filter('#metrzyczka')
                 ->children();
@@ -30,7 +27,6 @@ trait ScrapesPytlewski
                 ->merge($this->parseRelations($crawler->eq(3)->children()->eq(0)))
                 ->merge($this->parseBio($crawler->eq(5)->children()->eq(1)))
             )->toArray();
-
         } catch (InvalidArgumentException $e) {
             return [];
         }
@@ -106,24 +102,24 @@ trait ScrapesPytlewski
         [$mother, $father] = explode('<br>', str_replace('-', ' ', $parents));
 
         $matches = Regex::match('/id=([0-9]+)/', $mother);
-        if($matches->hasMatch()) {
+        if ($matches->hasMatch()) {
             $attr['mother_id'] = $matches->group(1);
         }
 
         $matches = Regex::match('/id=([0-9]+)/', $father);
-        if($matches->hasMatch()) {
+        if ($matches->hasMatch()) {
             $attr['father_id'] = $matches->group(1);
         }
 
         $mother = explode(',', strip_tags($mother));
-        if(count($mother) == 2) {
+        if (count($mother) == 2) {
             [$attr['mother_surname'], $attr['mother_name']] = $mother;
         } else {
             $attr['mother_surname'] = implode(' ', $mother);
         }
 
         $father = explode(',', strip_tags($father));
-        if(count($father) == 2) {
+        if (count($father) == 2) {
             [$attr['father_surname'], $attr['father_name']] = $father;
         } else {
             $attr['father_surname'] = implode(' ', $father);

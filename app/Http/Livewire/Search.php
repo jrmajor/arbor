@@ -14,7 +14,7 @@ class Search extends Component
     public $s;
 
     protected $updatesQueryString = [
-        's' => ['except' => '']
+        's' => ['except' => ''],
     ];
 
     public function updatingS()
@@ -34,7 +34,7 @@ class Search extends Component
             : Person::where(function ($q) {
                 $q->where('id', $this->s)
                     ->orWhere(function ($q) {
-                        foreach(Arr::trim(explode(' ', $this->s)) as $s) {
+                        foreach (Arr::trim(explode(' ', $this->s)) as $s) {
                             $q->where(function ($q) use ($s) {
                                 return $q->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
                                     ->OrWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', $s.'%')

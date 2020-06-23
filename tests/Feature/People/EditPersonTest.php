@@ -98,7 +98,7 @@ test('guests cannot edit person', function () {
     $person = $this->person->fresh();
 
     $attributesToCheck = Arr::except($this->oldAttributes, [
-        'sources', ...$this->dates
+        'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
@@ -114,7 +114,7 @@ test('users without permissions cannot edit person', function () {
     $person = $this->person->fresh();
 
     $attributesToCheck = Arr::except($this->oldAttributes, [
-        'sources', ...$this->dates
+        'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
@@ -131,7 +131,7 @@ test('users with permissions can edit person', function () {
     $person = $this->person->fresh();
 
     $attributesToCheck = Arr::except($this->newAttributes, [
-        'sources', ...$this->dates
+        'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {

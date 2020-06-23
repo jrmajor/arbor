@@ -1,7 +1,6 @@
 <?php
 
 use App\Person;
-use Carbon\Carbon;
 
 beforeEach(
     fn () => $this->person = tap(factory(Person::class)->create())->delete()

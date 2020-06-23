@@ -60,6 +60,7 @@ class Settings extends Component
 
         if (! Hash::check($this->logout_password, Auth::user()->password)) {
             $this->addError('logout_password', __('settings.wrong_password'));
+
             return;
         }
 

@@ -373,14 +373,14 @@ it('can format simple name', function () {
         'last_name' => null,
     ]);
 
-    assertEquals("Zenona Skwierczyńska", $person->formatSimpleName());
+    assertEquals('Zenona Skwierczyńska', $person->formatSimpleName());
 
     $person->last_name = 'Wojtyła';
 
-    assertEquals("Zenona Wojtyła (Skwierczyńska)", $person->formatSimpleName());
+    assertEquals('Zenona Wojtyła (Skwierczyńska)', $person->formatSimpleName());
 });
 
-it('casts sources to collection', function() {
+it('casts sources to collection', function () {
     $sources = factory(Person::class)->create([
         'sources' => null,
     ])->sources;

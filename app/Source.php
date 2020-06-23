@@ -66,7 +66,7 @@ class Source implements Jsonable
     {
         $markup = '';
 
-        # $excerpt is based on the first occurrence of a marker
+        // $excerpt is based on the first occurrence of a marker
         while ($excerpt = strpbrk($text, $this->inlineMarkerList)) {
             $marker = $excerpt[0];
 
@@ -75,7 +75,7 @@ class Source implements Jsonable
             $excerpt = ['text' => $excerpt, 'context' => $text];
 
             foreach ($this->inlineTypes[$marker] as $inlineType) {
-                # check to see if the current inline type is nestable in the current context
+                // check to see if the current inline type is nestable in the current context
                 if (! empty($nonNestables) && in_array($inlineType, $nonNestables)) {
                     continue;
                 }
@@ -86,34 +86,34 @@ class Source implements Jsonable
                     continue;
                 }
 
-                # makes sure that the inline belongs to "our" marker
+                // makes sure that the inline belongs to "our" marker
                 if (isset($inline['position']) && $inline['position'] > $markerPosition) {
                     continue;
                 }
 
-                # sets a default inline position
+                // sets a default inline position
                 if (! isset($inline['position'])) {
                     $inline['position'] = $markerPosition;
                 }
 
-                # cause the new element to 'inherit' our non nestables
+                // cause the new element to 'inherit' our non nestables
                 foreach ($nonNestables as $nonNestable) {
                     $inline['element']['nonNestables'][] = $nonNestable;
                 }
 
-                # the text that comes before the inline
+                // the text that comes before the inline
                 $markup .= substr($text, 0, $inline['position']);
 
-                # compile the inline
+                // compile the inline
                 $markup .= $inline['markup'] ?? $this->element($inline['element']);
 
-                # remove the examined text
+                // remove the examined text
                 $text = substr($text, $inline['position'] + $inline['extent']);
 
                 continue 2;
             }
 
-            # the marker does not belong to an inline
+            // the marker does not belong to an inline
             $markup .= substr($text, 0, $markerPosition + 1);
 
             $text = substr($text, $markerPosition + 1);
@@ -169,7 +169,7 @@ class Source implements Jsonable
         ->replace(' ', '');
 
         return [
-            'extent' => $matches[2] == '' ? strlen($matches[0]) : strlen($matches[0])-1,
+            'extent' => $matches[2] == '' ? strlen($matches[0]) : strlen($matches[0]) - 1,
             'element' => [
                 'name' => 'a',
                 'text' => 'ISBN '.$matches[1],
