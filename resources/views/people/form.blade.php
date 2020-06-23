@@ -6,15 +6,16 @@
 <form
     method="POST"
     action="{{ $action == 'create' ? route('people.store') : route('people.update', $person) }}"
-    x-data="{
-        sex: '{{ old('sex') ?? $person->sex }}',
-        dead: {{ old('dead') ?? $person->dead ? 'true' : 'false' }},
-        sources: [
-            @foreach(old('sources') ?? $person->sources as $source)
-                '{{ $source instanceof App\Source ? $source->raw() : $source }}',
-            @endforeach
-        ]
-    }">
+    x-data="
+        @encodedjson([
+            'sex' => old('sex') ?? $person->sex,
+            'dead' => old('dead') ?? $person->dead,
+            'sources' => [
+                ...collect(old('sources') ?? $person->sources)
+                    ->map(fn ($source) => $source instanceof App\Source ? $source->raw() : $source)
+            ],
+        ])
+    ">
     @method($action == 'create' ? 'post' : 'put')
     @csrf
 
@@ -197,12 +198,11 @@
                     @enderror
                 </div>
             </div>
-            <div class="w-full sm:w-1/2">
-                <x-date-tuple-picker
-                    name="birth_date" :label="__('misc.date.date')"
-                    :initial-from="old('birth_date_from') ?? $person->birth_date_from"
-                    :initial-to="old('birth_date_to') ?? $person->birth_date_to"/>
-            </div>
+            <x-date-tuple-picker
+                class="w-full sm:w-1/2"
+                name="birth_date" :label="__('misc.date.date')"
+                :initial-from="old('birth_date_from') ?? $person->birth_date_from"
+                :initial-to="old('birth_date_to') ?? $person->birth_date_to"/>
         </fieldset>
 
         <hr class="mt-7 mb-6">
@@ -251,12 +251,11 @@
                         @enderror
                     </div>
                 </div>
-                <div class="w-full sm:w-1/2">
-                    <x-date-tuple-picker
-                        name="death_date" :label="__('people.death_date')"
-                        :initial-from="old('death_date_from') ?? $person->death_date_from"
-                        :initial-to="old('death_date_to') ?? $person->death_date_to"/>
-                </div>
+                <x-date-tuple-picker
+                    class="w-full sm:w-1/2"
+                    name="death_date" :label="__('people.death_date')"
+                    :initial-from="old('death_date_from') ?? $person->death_date_from"
+                    :initial-to="old('death_date_to') ?? $person->death_date_to"/>
             </div>
 
             <div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
@@ -274,12 +273,11 @@
                         @enderror
                     </div>
                 </div>
-                <div class="w-full sm:w-1/2">
-                    <x-date-tuple-picker
-                        name="funeral_date" :label="__('people.funeral_date')"
-                        :initial-from="old('funeral_date_from') ?? $person->funeral_date_from"
-                        :initial-to="old('funeral_date_to') ?? $person->funeral_date_to"/>
-                </div>
+                <x-date-tuple-picker
+                    class="w-full sm:w-1/2"
+                    name="funeral_date" :label="__('people.funeral_date')"
+                    :initial-from="old('funeral_date_from') ?? $person->funeral_date_from"
+                    :initial-to="old('funeral_date_to') ?? $person->funeral_date_to"/>
             </div>
 
             <div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
@@ -297,12 +295,11 @@
                         @enderror
                     </div>
                 </div>
-                <div class="w-full sm:w-1/2">
-                    <x-date-tuple-picker
-                        name="burial_date" :label="__('people.burial_date')"
-                        :initial-from="old('burial_date_from') ?? $person->burial_date_from"
-                        :initial-to="old('burial_date_to') ?? $person->burial_date_to"/>
-                </div>
+                <x-date-tuple-picker
+                    class="w-full sm:w-1/2"
+                    name="burial_date" :label="__('people.burial_date')"
+                    :initial-from="old('burial_date_from') ?? $person->burial_date_from"
+                    :initial-to="old('burial_date_to') ?? $person->burial_date_to"/>
             </div>
         </fieldset>
 
@@ -313,18 +310,16 @@
         </div>
         <fieldset class="space-y-5">
             <div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-                <div class="w-full sm:w-1/2">
-                    <x-person-picker
-                        :label="__('people.mother')" sex="xx"
-                        name="mother" :nullable="true"
-                        :initial="App\Person::find(old('mother_id') ?? $person->mother_id)"/>
-                </div>
-                <div class="w-full sm:w-1/2">
-                    <x-person-picker
-                        :label="__('people.father')" sex="xy"
-                        name="father" :nullable="true"
-                        :initial="App\Person::find(old('father_id') ?? $person->father_id)"/>
-                </div>
+                <x-person-picker
+                    class="w-full sm:w-1/2"
+                    :label="__('people.mother')" sex="xx"
+                    name="mother" :nullable="true"
+                    :initial="App\Person::find(old('mother_id') ?? $person->mother_id)"/>
+                <x-person-picker
+                    class="w-full sm:w-1/2"
+                    :label="__('people.father')" sex="xy"
+                    name="father" :nullable="true"
+                    :initial="App\Person::find(old('father_id') ?? $person->father_id)"/>
             </div>
         </fieldset>
 

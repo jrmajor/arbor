@@ -2,7 +2,7 @@
     class="mb-1 bg-white shadow-md"
     x-data="{
         open: false,
-        dropdown: false,
+        dropdown: false
     }">
     <div class="container mx-auto">
         <div class="px-3 flex items-center justify-between flex-wrap">

@@ -1,14 +1,16 @@
-<div class="flex flex-col"
-    x-data="dateTuplePickerData({
-        year: {{ "'".$initialSimplePickerValues()['y']."'" ?? 'null' }},
-        month: {{ "'".$initialSimplePickerValues()['m']."'" ?? 'null' }},
-        day: {{ "'".$initialSimplePickerValues()['d']."'" ?? 'null' }},
-        from: {{ "'".optional($initialFrom)->format('Y-m-d')."'" ?? 'null' }},
-        to: {{ "'".optional($initialTo)->format('Y-m-d')."'" ?? 'null' }},
-        advancedPicker: {{ $errors->has($name.'_from') || $errors->has($name.'_to') || ! $simplePickerCanBeUsed()
-                            ? 'true'
-                            : 'false' }},
-    })">
+@props(['name', 'label', 'initial-from', 'initial-to'])
+
+<div {{ $attributes->merge(['class' => 'flex flex-col']) }}
+    x-data="dateTuplePickerData(
+        @encodedjson([
+            'year' => $initialSimplePickerValues()['y'],
+            'month' => $initialSimplePickerValues()['m'],
+            'day' => $initialSimplePickerValues()['d'],
+            'from' => optional($initialFrom)->format('Y-m-d'),
+            'to' => optional($initialTo)->format('Y-m-d'),
+            'advancedPicker' => $errors->has($name.'_from') || $errors->has($name.'_to') || ! $simplePickerCanBeUsed(),
+        ])
+    )">
     <div class="w-full pb-1 flex items-center">
         <label for="{{ $name }}_year" class="font-medium text-gray-700">{{ $label }}</label>
         <button @click.prevent="advancedPicker = ! advancedPicker"

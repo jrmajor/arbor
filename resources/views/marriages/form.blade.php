@@ -6,27 +6,27 @@
 <form
     method="POST"
     action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"
-    x-data="{
-        divorced: {{ old('divorced') ?? $marriage->divorced ? 'true' : 'false' }}
-    }">
+    x-data="
+        @encodedjson([
+            'divorced' => old('divorced') ?? $marriage->divorced,
+        ])
+    ">
     @method($action == 'create' ? 'post' : 'put')
     @csrf
 
     <div>
         <fieldset class="space-y-5">
             <div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-                <div class="w-full sm:w-1/2">
-                    <x-person-picker
-                        :label="__('marriages.woman')" sex="xx"
-                        name="woman" :nullable="false"
-                        :initial="App\Person::find(old('woman_id') ?? $marriage->woman_id)"/>
-                </div>
-                <div class="w-full sm:w-1/2">
-                    <x-person-picker
-                        :label="__('marriages.man')" sex="xy"
-                        name="man" :nullable="false"
-                        :initial="App\Person::find(old('man_id') ?? $marriage->man_id)"/>
-                </div>
+                <x-person-picker
+                    class="w-full sm:w-1/2"
+                    :label="__('marriages.woman')" sex="xx"
+                    name="woman" :nullable="false"
+                    :initial="App\Person::find(old('woman_id') ?? $marriage->woman_id)"/>
+                <x-person-picker
+                    class="w-full sm:w-1/2"
+                    :label="__('marriages.man')" sex="xy"
+                    name="man" :nullable="false"
+                    :initial="App\Person::find(old('man_id') ?? $marriage->man_id)"/>
             </div>
 
             <div class="flex flex-col">
@@ -82,12 +82,11 @@
                         @enderror
                     </div>
                 </div>
-                <div class="w-full sm:w-1/2">
-                    <x-date-tuple-picker
-                        name="first_event_date" :label="__('misc.date.date')"
-                        :initial-from="old('first_event_date_from') ?? $marriage->first_event_date_from"
-                        :initial-to="old('first_event_date_to') ?? $marriage->first_event_date_to"/>
-                </div>
+                <x-date-tuple-picker
+                    class="w-full sm:w-1/2"
+                    name="first_event_date" :label="__('misc.date.date')"
+                    :initial-from="old('first_event_date_from') ?? $marriage->first_event_date_from"
+                    :initial-to="old('first_event_date_to') ?? $marriage->first_event_date_to"/>
             </div>
         </fieldset>
 
@@ -127,12 +126,11 @@
                         @enderror
                     </div>
                 </div>
-                <div class="w-full sm:w-1/2">
-                    <x-date-tuple-picker
-                        name="second_event_date" :label="__('misc.date.date')"
-                        :initial-from="old('second_event_date_from') ?? $marriage->second_event_date_from"
-                        :initial-to="old('second_event_date_to') ?? $marriage->second_event_date_to"/>
-                </div>
+                <x-date-tuple-picker
+                    class="w-full sm:w-1/2"
+                    name="second_event_date" :label="__('misc.date.date')"
+                    :initial-from="old('second_event_date_from') ?? $marriage->second_event_date_from"
+                    :initial-to="old('second_event_date_to') ?? $marriage->second_event_date_to"/>
             </div>
         </fieldset>
 
@@ -162,12 +160,11 @@
                     @enderror
                 </div>
             </div>
-            <div class="w-full sm:w-1/2">
-                <x-date-tuple-picker
-                    name="divorce_date" :label="__('misc.date.date')"
-                    :initial-from="old('divorce_date_from') ?? $marriage->divorce_date_from"
-                    :initial-to="old('divorce_date_to') ?? $marriage->divorce_date_to"/>
-            </div>
+            <x-date-tuple-picker
+                class="w-full sm:w-1/2"
+                name="divorce_date" :label="__('misc.date.date')"
+                :initial-from="old('divorce_date_from') ?? $marriage->divorce_date_from"
+                :initial-to="old('divorce_date_to') ?? $marriage->divorce_date_to"/>
         </fieldset>
 
         <fieldset class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
