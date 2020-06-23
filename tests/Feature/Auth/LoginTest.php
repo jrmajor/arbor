@@ -84,9 +84,9 @@ test('user can log in with correct credentials', function () {
     Event::fake();
 
     post('/login', [
-        'username' => 'gracjan',
-        'password' => 'secret',
-    ])->assertSessionHasNoErrors()
+            'username' => 'gracjan',
+            'password' => 'secret',
+        ])->assertSessionHasNoErrors()
         ->assertStatus(302)
         ->assertRedirect('/people');
 
