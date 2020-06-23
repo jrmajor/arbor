@@ -1,4 +1,6 @@
 preset: laravel
+disabled:
+  - align_double_arrow
 finder:
   not-name:
     - index.php
