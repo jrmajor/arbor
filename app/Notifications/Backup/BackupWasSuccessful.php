@@ -2,7 +2,6 @@
 
 namespace App\Notifications\Backup;
 
-use App\Notifications\Backup\BaseNotification;
 use NotificationChannels\Telegram\TelegramMessage;
 use Spatie\Backup\Events\BackupWasSuccessful as BackupWasSuccessfulEvent;
 

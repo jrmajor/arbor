@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
-use App\Marriage;
 use Illuminate\Foundation\Http\FormRequest;
 use Spatie\Enum\Laravel\Rules\EnumRule;
 
@@ -28,13 +27,13 @@ class StoreMarriage extends FormRequest
             'first_event_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:first_event_date_to',
-                'nullable'
+                'nullable',
             ],
             'first_event_date_to' => [
                 'date_format:Y-m-d',
                 'required_with:first_event_date_from',
                 'after_or_equal:first_event_date_from',
-                'nullable'
+                'nullable',
             ],
             'first_event_place' => 'string|max:100|nullable',
 
@@ -42,13 +41,13 @@ class StoreMarriage extends FormRequest
             'second_event_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:second_event_date_to',
-                'nullable'
+                'nullable',
             ],
             'second_event_date_to' => [
                 'date_format:Y-m-d',
                 'required_with:second_event_date_from',
                 'after_or_equal:second_event_date_from',
-                'nullable'
+                'nullable',
             ],
             'second_event_place' => 'string|max:100|nullable',
 
@@ -56,13 +55,13 @@ class StoreMarriage extends FormRequest
             'divorce_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:divorce_date_to',
-                'nullable'
+                'nullable',
             ],
             'divorce_date_to' => [
                 'date_format:Y-m-d',
                 'required_with:divorce_date_from',
                 'after_or_equal:divorce_date_from',
-                'nullable'
+                'nullable',
             ],
             'divorce_place' => 'string|max:100|nullable',
         ];

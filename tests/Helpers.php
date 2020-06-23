@@ -80,6 +80,7 @@ function travel($date, Closure $callback = null): Carbon
 {
     if ($date == 'back') {
         Carbon::setTestNow();
+
         return Carbon::now();
     }
 

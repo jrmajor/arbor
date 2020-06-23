@@ -321,6 +321,7 @@ class Person extends Model
         if (! $this->estimatedBirthDate() || ! $this->birth_year) {
             return null;
         }
+
         return abs($this->estimatedBirthDate() - $this->birth_year);
     }
 

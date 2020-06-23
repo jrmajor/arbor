@@ -2,7 +2,7 @@
 
 use App\Marriage;
 
-beforeEach(function() {
+beforeEach(function () {
     $this->marriage = factory(Marriage::class)->create();
 });
 

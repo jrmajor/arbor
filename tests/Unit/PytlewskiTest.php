@@ -34,7 +34,7 @@ it('caches source recievied from pytlewski.pl', function () {
     Http::assertSentCount(0);
 });
 
-it('properly scrapes pytlewski.pl', function($id, $source, $attributes) {
+it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
     Http::fake([
         Pytlewski::url($id) => Http::response($source, 200),
     ]);
@@ -47,5 +47,4 @@ it('properly scrapes pytlewski.pl', function($id, $source, $attributes) {
             "Pytlewski $id on key $key."
         );
     }
-
 })->with('pytlewscy');

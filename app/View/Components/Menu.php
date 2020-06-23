@@ -19,11 +19,11 @@ class Menu extends Component
 
         $this->active = Route::currentRouteName();
 
-        if($this->active == 'people.letter') {
+        if ($this->active == 'people.letter') {
             $this->active = 'people.index';
         }
 
-        if(Str::startsWith($this->active, 'dashboard')) {
+        if (Str::startsWith($this->active, 'dashboard')) {
             $this->active = 'dashboard';
         }
     }

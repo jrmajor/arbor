@@ -17,7 +17,7 @@ class Sources implements CastsAttributes
     public function set($model, $key, $value, $attributes)
     {
         if ($value === null) {
-            return null;
+            return;
         }
 
         $value = collect($value)

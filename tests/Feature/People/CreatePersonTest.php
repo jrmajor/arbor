@@ -91,7 +91,7 @@ test('users with permissions can add valid person', function () {
     $person = Person::latest()->first();
 
     $attributesToCheck = Arr::except($this->validAttributes, [
-        'sources', ...$this->dates
+        'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {

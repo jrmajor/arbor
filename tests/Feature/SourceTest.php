@@ -68,7 +68,7 @@ it('escapes italics')
         Source::from('\*text\* [\*link* text](https://weird.*domain*)')->markup()
     );
 
-it('parses ISBN-10', function() {
+it('parses ISBN-10', function () {
     assertEquals(
         'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/0306406158" target="_blank" title="ISBN 0-306-40615-8 w Wikipedii" class="a">ISBN 0-306-40615-8</a>',
         Source::from('exampIe ISBN 0-306-40615-8')->markup()
@@ -80,7 +80,7 @@ it('parses ISBN-10', function() {
     );
 });
 
-it('parses ISBN-13', function() {
+it('parses ISBN-13', function () {
     assertEquals(
         'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/9780306406157" target="_blank" title="ISBN 978-0-306-40615-7 w Wikipedii" class="a">ISBN 978-0-306-40615-7</a> text',
         Source::from('exampIe ISBN 978-0-306-40615-7 text')->markup()

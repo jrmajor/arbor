@@ -5,8 +5,6 @@ namespace App\Http\Livewire\Dashboard;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Livewire\WithPagination;
-use Spatie\Activitylog\Models\Activity;
 
 class Users extends Component
 {

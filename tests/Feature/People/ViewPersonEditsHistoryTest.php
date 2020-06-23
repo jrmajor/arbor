@@ -2,7 +2,7 @@
 
 use App\Person;
 
-beforeEach(function() {
+beforeEach(function () {
     $this->person = factory(Person::class)->create();
 });
 

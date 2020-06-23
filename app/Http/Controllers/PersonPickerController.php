@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -24,7 +23,7 @@ class PersonPickerController extends Controller
             where(function ($q) use ($request) {
                 $q->where('id', $request->get('search'))
                     ->orWhere(function ($q) use ($request) {
-                        foreach(Arr::trim(explode(' ', $request->get('search'))) as $s) {
+                        foreach (Arr::trim(explode(' ', $request->get('search'))) as $s) {
                             $q->where(function ($q) use ($s) {
                                 return $q->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
                                     ->OrWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
@@ -39,7 +38,7 @@ class PersonPickerController extends Controller
             ->get();
 
         return response()->json(
-            $people->map(fn ($person) => ['id' => $person->id, 'name' => $person->formatName() ])
+            $people->map(fn ($person) => ['id' => $person->id, 'name' => $person->formatName()])
         );
     }
 }

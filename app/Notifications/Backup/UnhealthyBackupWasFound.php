@@ -2,7 +2,6 @@
 
 namespace App\Notifications\Backup;
 
-use App\Notifications\Backup\BaseNotification;
 use NotificationChannels\Telegram\TelegramMessage;
 use Spatie\Backup\Events\UnhealthyBackupWasFound as UnhealthyBackupWasFoundEvent;
 use Spatie\Backup\Tasks\Monitor\HealthCheckFailure;
@@ -27,7 +26,6 @@ class UnhealthyBackupWasFound extends BaseNotification
             $message .= "\n<b>Health check:</b> ".e($this->failure()->healthCheck()->name());
             $message .= "\n<b>".e(trans('backup::notifications.exception_message_title', [], 'en')).':</b> '.e($this->failure()->exception()->getMessage());
         }
-
 
         foreach ($this->backupDestinationProperties() as $key => $val) {
             $message .= "\n<b>".e($key).':</b> '.e($val);

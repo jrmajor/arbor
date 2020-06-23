@@ -1,7 +1,6 @@
 <?php
 
 use App\Marriage;
-use Carbon\Carbon;
 
 beforeEach(
     fn () => $this->marriage = tap(factory(Marriage::class)->create())->delete()
