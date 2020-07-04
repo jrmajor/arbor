@@ -111,6 +111,8 @@ return [
 
         'sources.*' => 'źródło',
 
+        'biography' => 'biografia',
+
         /* marriages */
         'woman_order' => 'kolejność w związkach kobiety',
         'man_order' => 'kolejność w związkach mężczyzny',

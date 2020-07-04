@@ -7,6 +7,9 @@ return [
     'made_visible' => 'opublicznion',
     'made_invisible' => 'sprywatyzowan',
     'deleted' => 'usunion',
+    'added-biography' => 'wzbogaciła się o biografię',
+    'updated-biography' => 'otrzymała zmodyfikowaną biografię',
+    'deleted-biography' => 'zubożała o biografię',
 
     'by' => 'przez',
 

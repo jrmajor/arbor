@@ -14,6 +14,7 @@ return [
         'overview' => 'Widok osoby',
 
         'edit_person' => 'Edytuj osobę',
+        'edit_biography' => 'Edytuj biografię',
         'edits_history' => 'Historia edycji',
 
         'make_invisible' => 'Sprywatyzuj',
@@ -38,6 +39,9 @@ return [
         'restored' => 'Osoba została przywrócona.',
         'made_visible' => 'Osoba została upubliczniona.',
         'made_invisible' => 'Osoba została ukryta.',
+        'added-biography' => 'Biografia została dodana.',
+        'deleted-biography' => 'Biografia została usunięta.',
+        'updated-biography' => 'Biografia została zmodyfikowana.',
     ],
 
     'add_a_new_person' => 'Dodaj nową osobę',

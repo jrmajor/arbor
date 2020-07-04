@@ -7,6 +7,8 @@ use App\Person;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use Spatie\Flash\Flash;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +24,20 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('encodedjson', function ($expression) {
             return "<?php echo e(json_encode($expression)) ?>";
+        });
+
+        Stringable::macro('e', fn () => new Stringable(e($this->value)));
+
+        Str::macro('formatBiography', function ($biography) {
+            return $biography !== null
+                ? Str::of($biography)
+                    ->trim()
+                    ->replace(["\r\n", "\r"], "\n")
+                    ->e()
+                    ->prepend('<p>')
+                    ->append('</p>')
+                    ->replace("\n\n", "</p>\n<p>")
+                : null;
         });
 
         Arr::macro('trim', function ($array) {

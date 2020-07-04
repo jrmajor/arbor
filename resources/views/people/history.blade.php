@@ -8,11 +8,11 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <main class="flex-grow flex flex-col space-y-3">
+        <main class="flex-grow md:w-1/2 flex flex-col space-y-3">
 
             @foreach($activities as $activity)
 
-                <div class="p-4 bg-white rounded-lg shadow overflow-hidden">
+                <div class="p-6 bg-white rounded-lg shadow overflow-hidden">
                     <table class="block md:table">
                         <tbody class="block md:table-row-group">
                             @if($activity['description'] == 'deleted')
@@ -21,6 +21,20 @@
                                 {{ __('people.history.restored') }}
                             @elseif($activity['description'] == 'changed-visibility')
                                 {{ $activity['attributes']['visibility'] ? __('people.history.made_visible') : __('people.history.made_invisible') }}
+                            @elseif($activity['description'] == 'added-biography')
+                                {{ __('people.history.added-biography') }}
+
+                                <div class="mt-3 p-4 bg-gray-50 text-gray-700 rounded-md space-y-2 break-words">
+                                    {!! \Str::formatBiography($activity['new']) !!}
+                                </div>
+                            @elseif($activity['description'] == 'updated-biography')
+                                {{ __('people.history.updated-biography') }}
+
+                                <div class="mt-3 p-4 bg-gray-50 text-gray-700 rounded-md space-y-2 break-words">
+                                    {!! \Str::formatBiography($activity['new']) !!}
+                                </div>
+                            @elseif($activity['description'] == 'deleted-biography')
+                                {{ __('people.history.deleted-biography') }}
                             @else
                                 <x-history.text :activity="$activity" :attribute="'id_pytlewski'"
                                     :label="__('people.pytlewski.id')"/>
@@ -50,7 +64,7 @@
                         </tbody>
                     </table>
 
-                    <div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex items-center justify-between">
+                    <div class="-m-6 mt-5 px-6 py-4 bg-gray-50 flex items-center justify-between">
                         {{ optional($activity['causer'])->username }}
                         <small>{{ $activity['model']->created_at->format('Y-m-d H:i') }}</small>
                     </div>

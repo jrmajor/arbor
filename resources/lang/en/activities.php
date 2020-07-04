@@ -7,6 +7,9 @@ return [
     'made_visible' => 'made visible',
     'made_invisible' => 'made invisible',
     'deleted' => 'deleted',
+    'added-biography' => 'had biography added',
+    'updated-biography' => 'had biography updated',
+    'deleted-biography' => 'had biography deleted',
 
     'by' => 'by',
 

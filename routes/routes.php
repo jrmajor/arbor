@@ -34,10 +34,15 @@ Route::middleware('auth')->group(function () {
     Route::post('people', 'PersonController@store')->name('people.store');
     Route::get('people/{person}/edit', 'PersonController@edit')->name('people.edit');
     Route::match(['put', 'patch'], 'people/{person}', 'PersonController@update')->name('people.update');
-    Route::put('people/{person}/visibility', 'PersonController@changeVisibility')->name('people.changeVisibility');
     Route::delete('people/{person}', 'PersonController@destroy')->name('people.destroy');
     Route::patch('people/{trashedPerson}/restore', 'PersonController@restore')->name('people.restore');
     Route::get('people/{anyPerson}/history', 'PersonController@history')->name('people.history');
+
+    Route::put('people/{person}/visibility', 'PersonController@changeVisibility')->name('people.changeVisibility');
+
+    Route::get('people/{person}/biography', 'BiographyController@edit')->name('people.biography.edit');
+    Route::patch('people/{person}/biography', 'BiographyController@update')->name('people.biography.update');
+
     Route::get('people/picker', 'PersonPickerController')->name('people.picker');
 });
 Route::get('people', 'PersonController@index')->name('people.index');

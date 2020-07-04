@@ -27,6 +27,23 @@ trait TapsActivity
         $old = $activity->properties['old'];
         $attributes = $activity->properties['attributes'];
 
+        if (array_key_exists('biography', $attributes)) {
+            if ($activity->properties['old']['biography'] == null) {
+                $activity->description = 'added-biography';
+            } elseif ($activity->properties['attributes']['biography'] == null) {
+                $activity->description = 'deleted-biography';
+            } else {
+                $activity->description = 'updated-biography';
+            }
+
+            $activity->properties = collect([
+                'old' => $activity->properties['old']['biography'],
+                'new' => $activity->properties['attributes']['biography'],
+            ]);
+
+            return;
+        }
+
         foreach (static::$dateTuples as $date) {
             if (
                 Arr::has($attributes, $date.'_from')

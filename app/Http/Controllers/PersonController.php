@@ -6,6 +6,7 @@ use App\Http\Requests\StorePerson;
 use App\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PersonController extends Controller
 {
@@ -87,7 +88,10 @@ class PersonController extends Controller
 
         $this->authorize('view', $person);
 
-        return view('people.person', ['person' => $person]);
+        return view('people.person', [
+            'person' => $person,
+            'biography' => Str::formatBiography($person->biography),
+        ]);
     }
 
     public function edit(Person $person)
@@ -173,13 +177,24 @@ class PersonController extends Controller
 
         $activities = $person->activities
             ->reverse()
-            ->map(fn ($activity) => [
-                'model' => $activity,
-                'causer' => $activity->causer,
-                'description' => $activity->description,
-                'old' => $activity->properties['old'] ?? false,
-                'attributes' => $activity->properties['attributes'],
-            ]);
+            ->map(function ($activity) {
+                $newActivity = [
+                    'model' => $activity,
+                    'causer' => $activity->causer,
+                    'description' => $activity->description,
+                    'old' => $activity->properties['old'] ?? false,
+                ];
+
+                if ($activity->properties->has('attributes')) {
+                    $newActivity['attributes'] = $activity->properties['attributes'];
+                }
+
+                if ($activity->properties->has('new')) {
+                    $newActivity['new'] = $activity->properties['new'];
+                }
+
+                return $newActivity;
+            });
 
         return view('people.history', [
             'person' => $person,

@@ -5,18 +5,18 @@
 
 <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-    <main class="flex-grow space-y-2 flex flex-col items-center">
+    <main class="flex-grow md:w-1/2 space-y-2 flex flex-col items-center">
 
         <div class="w-full p-6 bg-white rounded-lg shadow-lg">
             <table>
                 @foreach ($activities as $activity)
                     <tr wire:key="{{ $activity->id }}">
 
-                        <td class="tnum text-right">
+                        <td class="tnum text-right p-1">
                             {{ $activity->created_at->format('Y-m-d h:s') }}
                         </td>
 
-                        <td>
+                        <td class="p-1">
                             @if($activity->log_name == 'people')
 
                                 <a href="{{ route('people.history', $activity->subject) }}" class="a">

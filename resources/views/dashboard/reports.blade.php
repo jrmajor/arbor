@@ -4,7 +4,7 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <main class="flex-grow space-y-2">
+        <main class="flex-grow md:w-1/2 space-y-2">
 
             <div>
                 <h2 class="mb-2 mt-4 leading-none text-xl font-medium">Should be dead</h2>

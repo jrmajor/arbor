@@ -7,7 +7,7 @@
     </h1>
 
     <main class="p-6 bg-white rounded-lg shadow overflow-hidden">
-        @include('people.form', ['person' => $person, 'action' => 'create'])
+        @include('people.includes.form', ['person' => $person, 'action' => 'create'])
     </main>
 
 @endsection

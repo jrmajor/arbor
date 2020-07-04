@@ -10,9 +10,10 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <main class="space-y-3">
-            @include('people.details')
-            @include('people.small-tree')
+        <main class="flex-grow md:w-1/2 flex flex-col space-y-3">
+            @include('people.includes.details')
+            @include('people.includes.biography')
+            @include('people.includes.small-tree')
         </main>
 
         @if(optional(auth()->user())->canWrite())

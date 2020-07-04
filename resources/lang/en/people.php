@@ -14,6 +14,7 @@ return [
         'overview' => 'Overview',
 
         'edit_person' => 'Edit person',
+        'edit_biography' => 'Edit biography',
         'edits_history' => 'Edits history',
 
         'make_invisible' => 'Make invisible',
@@ -38,6 +39,9 @@ return [
         'restored' => 'Person was restored.',
         'made_visible' => 'Person was made visible.',
         'made_invisible' => 'Person was made invisible.',
+        'added-biography' => 'Biography was added.',
+        'deleted-biography' => 'Biography was deleted.',
+        'updated-biography' => 'Biography was modified.',
     ],
 
     'add_a_new_person' => 'Add a new person',

@@ -8,7 +8,7 @@
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-        <main class="flex-grow flex flex-col space-y-3">
+        <main class="flex-grow md:w-1/2 flex flex-col space-y-3">
 
             @foreach($activities as $activity)
 
@@ -47,7 +47,7 @@
                         </tbody>
                     </table>
 
-                    <div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex items-center justify-between">
+                    <div class="-m-6 mt-5 px-6 py-4 bg-gray-50 flex items-center justify-between">
                         {{ optional($activity['causer'])->username }}
                         <small>{{ $activity['model']->created_at->format('Y-m-d H:i') }}</small>
                     </div>
