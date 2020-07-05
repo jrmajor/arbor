@@ -20,7 +20,7 @@
                         <textarea
                             type="text" class="form-input w-full min-h-full resize-y @error('biography') invalid @enderror"
                             id="biography" name="biography" rows="20"
-                            value="{{ old('biography') ?? $person->biography }}"
+                            value="{{ old('biography', $person->biography) }}"
                             autofocus>{{ $person->biography }}</textarea>
                         @error('biography')
                             <div class="w-full leading-none mt-1">

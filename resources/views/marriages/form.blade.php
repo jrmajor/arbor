@@ -8,7 +8,7 @@
     action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"
     x-data="
         @encodedjson([
-            'divorced' => old('divorced') ?? $marriage->divorced,
+            'divorced' => old('divorced', $marriage->divorced),
         ])
     ">
     @method($action == 'create' ? 'post' : 'put')
@@ -21,12 +21,12 @@
                     class="w-full sm:w-1/2"
                     :label="__('marriages.woman')" sex="xx"
                     name="woman" :nullable="false"
-                    :initial="App\Person::find(old('woman_id') ?? $marriage->woman_id)"/>
+                    :initial="App\Person::find(old('woman_id', $marriage->woman_id))"/>
                 <x-person-picker
                     class="w-full sm:w-1/2"
                     :label="__('marriages.man')" sex="xy"
                     name="man" :nullable="false"
-                    :initial="App\Person::find(old('man_id') ?? $marriage->man_id)"/>
+                    :initial="App\Person::find(old('man_id', $marriage->man_id))"/>
             </div>
 
             <div class="w-full space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
@@ -37,7 +37,7 @@
                             <input
                                 type="text" class="form-input w-full @error('woman_order') invalid @enderror"
                                 id="woman_order" name="woman_order"
-                                value="{{ old('woman_order') ?? $marriage->woman_order }}">
+                                value="{{ old('woman_order', $marriage->woman_order) }}">
                             @error('woman_order')
                                 <div class="w-full leading-none mt-1">
                                     <small class="text-red-500">{{ $message }}</small>
@@ -51,7 +51,7 @@
                             <input
                                 type="text" class="form-input w-full @error('man_order') invalid @enderror"
                                 id="man_order" name="man_order"
-                                value="{{ old('man_order') ?? $marriage->man_order }}">
+                                value="{{ old('man_order', $marriage->man_order) }}">
                             @error('man_order')
                                 <div class="w-full leading-none mt-1">
                                     <small class="text-red-500">{{ $message }}</small>
@@ -68,7 +68,7 @@
                             @foreach(\App\Enums\MarriageRiteEnum::getAll() as $rite)
                                 <option
                                     value="{{ $rite }}"
-                                    {{ $rite->isEqual(old('rite') ?? $marriage->rite) ? 'selected' : '' }}>
+                                    {{ $rite->isEqual(old('rite', $marriage->rite)) ? 'selected' : '' }}>
                                     {{ __('marriages.rites.' . $rite) }}
                                 </option>
                             @endforeach
@@ -92,7 +92,7 @@
                         @foreach(\App\Enums\MarriageEventTypeEnum::getAll() as $type)
                             <option
                                 value="{{ $type }}"
-                                {{ $type->isEqual(old('first_event_type') ?? $marriage->first_event_type) ? 'selected' : '' }}>
+                                {{ $type->isEqual(old('first_event_type', $marriage->first_event_type)) ? 'selected' : '' }}>
                                 {{ __('marriages.event_types.' . $type) }}
                             </option>
                         @endforeach
@@ -106,7 +106,7 @@
                         <input
                             type="text" class="form-input w-full @error('event_place') invalid @enderror"
                             id="first_event_place" name="first_event_place"
-                            value="{{ old('first_event_place') ?? $marriage->first_event_place }}">
+                            value="{{ old('first_event_place', $marriage->first_event_place) }}">
                         @error('first_event_place')
                             <div class="w-full leading-none mt-1">
                                 <small class="text-red-500">{{ $message }}</small>
@@ -117,8 +117,8 @@
                 <x-date-tuple-picker
                     class="w-full sm:w-1/2"
                     name="first_event_date" :label="__('misc.date.date')"
-                    :initial-from="old('first_event_date_from') ?? $marriage->first_event_date_from"
-                    :initial-to="old('first_event_date_to') ?? $marriage->first_event_date_to"/>
+                    :initial-from="old('first_event_date_from', $marriage->first_event_date_from)"
+                    :initial-to="old('first_event_date_to', $marriage->first_event_date_to)"/>
             </div>
         </fieldset>
 
@@ -136,7 +136,7 @@
                         @foreach(\App\Enums\MarriageEventTypeEnum::getAll() as $type)
                             <option
                                 value="{{ $type }}"
-                                {{ $type->isEqual(old('second_event_type') ?? $marriage->second_event_type) ? 'selected' : '' }}>
+                                {{ $type->isEqual(old('second_event_type', $marriage->second_event_type)) ? 'selected' : '' }}>
                                 {{ __('marriages.event_types.' . $type) }}
                             </option>
                         @endforeach
@@ -150,7 +150,7 @@
                         <input
                             type="text" class="form-input w-full @error('second_event_place') invalid @enderror"
                             id="second_event_place" name="second_event_place"
-                            value="{{ old('second_event_place') ?? $marriage->second_event_place }}">
+                            value="{{ old('second_event_place', $marriage->second_event_place) }}">
                         @error('second_event_place')
                             <div class="w-full leading-none mt-1">
                                 <small class="text-red-500">{{ $message }}</small>
@@ -161,8 +161,8 @@
                 <x-date-tuple-picker
                     class="w-full sm:w-1/2"
                     name="second_event_date" :label="__('misc.date.date')"
-                    :initial-from="old('second_event_date_from') ?? $marriage->second_event_date_from"
-                    :initial-to="old('second_event_date_to') ?? $marriage->second_event_date_to"/>
+                    :initial-from="old('second_event_date_from', $marriage->second_event_date_from)"
+                    :initial-to="old('second_event_date_to', $marriage->second_event_date_to)"/>
             </div>
         </fieldset>
 
@@ -184,7 +184,7 @@
                     <input
                         type="text" class="form-input w-full @error('divorce_place') invalid @enderror"
                         id="divorce_place" name="divorce_place"
-                        value="{{ old('divorce_place') ?? $marriage->divorce_place }}">
+                        value="{{ old('divorce_place', $marriage->divorce_place) }}">
                     @error('divorce_place')
                         <div class="w-full leading-none mt-1">
                             <small class="text-red-500">{{ $message }}</small>
@@ -195,8 +195,8 @@
             <x-date-tuple-picker
                 class="w-full sm:w-1/2"
                 name="divorce_date" :label="__('misc.date.date')"
-                :initial-from="old('divorce_date_from') ?? $marriage->divorce_date_from"
-                :initial-to="old('divorce_date_to') ?? $marriage->divorce_date_to"/>
+                :initial-from="old('divorce_date_from', $marriage->divorce_date_from)"
+                :initial-to="old('divorce_date_to', $marriage->divorce_date_to)"/>
         </fieldset>
 
         <fieldset class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
