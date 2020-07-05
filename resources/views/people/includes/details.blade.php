@@ -306,7 +306,7 @@
                     @foreach($person->marriages as $marriage)
                         @if($marriage->canBeViewedBy(auth()->user()))
                             <li>
-                                @if($marriage->order($person))
+                                @if($person->marriages->count() > 1 && $marriage->order($person))
                                     {{ strtolower(roman($marriage->order($person))) }}.
                                 @endif
                                 @if($marriage->rite)

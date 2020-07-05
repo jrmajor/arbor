@@ -29,19 +29,51 @@
                     :initial="App\Person::find(old('man_id') ?? $marriage->man_id)"/>
             </div>
 
-            <div class="flex flex-col">
-                <label for="rite" class="w-full font-medium pb-1 text-gray-700">{{ __('marriages.rite') }}</label>
-                <div class="w-full">
-                    <select id="rite" name="rite" class="form-select w-full sm:w-2/3 lg:w-1/3">
-                        <option value="">b/d</option>
-                        @foreach(\App\Enums\MarriageRiteEnum::getAll() as $rite)
-                            <option
-                                value="{{ $rite }}"
-                                {{ $rite->isEqual(old('rite') ?? $marriage->rite) ? 'selected' : '' }}>
-                                {{ __('marriages.rites.' . $rite) }}
-                            </option>
-                        @endforeach
-                    </select>
+            <div class="w-full space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
+                <div class="flex flex-row space-x-5">
+                    <div class="flex flex-col">
+                        <label for="woman_order" class="w-full font-medium pb-1 text-gray-700">{{ __('marriages.woman_order') }}</label>
+                        <div class="w-full">
+                            <input
+                                type="text" class="form-input w-full @error('woman_order') invalid @enderror"
+                                id="woman_order" name="woman_order"
+                                value="{{ old('woman_order') ?? $marriage->woman_order }}">
+                            @error('woman_order')
+                                <div class="w-full leading-none mt-1">
+                                    <small class="text-red-500">{{ $message }}</small>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="man_order" class="w-full font-medium pb-1 text-gray-700">{{ __('marriages.man_order') }}</label>
+                        <div class="w-full">
+                            <input
+                                type="text" class="form-input w-full @error('man_order') invalid @enderror"
+                                id="man_order" name="man_order"
+                                value="{{ old('man_order') ?? $marriage->man_order }}">
+                            @error('man_order')
+                                <div class="w-full leading-none mt-1">
+                                    <small class="text-red-500">{{ $message }}</small>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-grow flex flex-col">
+                    <label for="rite" class="w-full font-medium pb-1 text-gray-700">{{ __('marriages.rite') }}</label>
+                    <div class="w-full">
+                        <select id="rite" name="rite" class="form-select w-full">
+                            <option value="">b/d</option>
+                            @foreach(\App\Enums\MarriageRiteEnum::getAll() as $rite)
+                                <option
+                                    value="{{ $rite }}"
+                                    {{ $rite->isEqual(old('rite') ?? $marriage->rite) ? 'selected' : '' }}>
+                                    {{ __('marriages.rites.' . $rite) }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
         </fieldset>
