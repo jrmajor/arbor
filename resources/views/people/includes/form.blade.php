@@ -123,29 +123,32 @@
         <div class="w-full mb-4">
             <div class="font-medium text-xl text-gray-900">{{ __('people.external_links') }}</div>
         </div>
-        <fieldset class="space-y-5 md:space-y-0 md:space-x-5 flex flex-col md:flex-row">
-            <div class="w-full md:w-1/2 flex flex-col">
-                <label for="id_wielcy" class="w-full font-medium pb-1 text-gray-700">{!! __('people.wielcy.id') !!}</label>
-                <div class="w-full flex">
-                    <input
-                        type="text" class="form-input rounded-r-none w-1/4 md:w-3/8 z-10 @error('id_wielcy') invalid @enderror"
-                        id="id_wielcy" name="id_wielcy"
-                        value="{{ old('id_wielcy', $person->id_wielcy) }}">
-                    <input
-                        type="text" class="form-input rounded-l-none -ml-px w-3/4 md:w-5/8"
-                        id="wielcy_search" name="wielcy_search"
-                        placeholder="{{ __('misc.coming_soon') }}"
-                        disabled>
-                </div>
-                @error('id_wielcy')
-                    <div class="w-full leading-none mt-1">
-                        <small class="text-red-500">{{ $message }}</small>
+        <fieldset>
+            <!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
+            <div class="space-y-5 md:space-y-0 md:space-x-5 flex flex-col md:flex-row">
+                <div class="w-full md:w-1/2 flex flex-col">
+                    <label for="id_wielcy" class="w-full font-medium pb-1 text-gray-700">{!! __('people.wielcy.id') !!}</label>
+                    <div class="w-full flex">
+                        <input
+                            type="text" class="form-input rounded-r-none w-1/4 md:w-3/8 z-10 @error('id_wielcy') invalid @enderror"
+                            id="id_wielcy" name="id_wielcy"
+                            value="{{ old('id_wielcy', $person->id_wielcy) }}">
+                        <input
+                            type="text" class="form-input rounded-l-none -ml-px w-3/4 md:w-5/8"
+                            id="wielcy_search" name="wielcy_search"
+                            placeholder="{{ __('misc.coming_soon') }}"
+                            disabled>
                     </div>
-                @enderror
-            </div>
+                    @error('id_wielcy')
+                        <div class="w-full leading-none mt-1">
+                            <small class="text-red-500">{{ $message }}</small>
+                        </div>
+                    @enderror
+                </div>
 
-            <div class="w-full md:w-1/2">
-                <livewire:pytlewski-picker :person="$person">
+                <div class="w-full md:w-1/2">
+                    <livewire:pytlewski-picker :person="$person">
+                </div>
             </div>
         </fieldset>
 
@@ -183,26 +186,29 @@
         <div class="w-full mb-4">
             <div class="font-medium text-xl text-gray-900">{{ __('people.birth') }}</div>
         </div>
-        <fieldset class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-            <div class="w-full sm:w-1/2 flex flex-col">
-                <label for="birth_place" class="w-full font-medium pb-1 text-gray-700">{{ __('misc.place') }}</label>
-                <div class="w-full">
-                    <input
-                        type="text" class="form-input w-full @error('birth_place') invalid @enderror"
-                        id="birth_place" name="birth_place"
-                        value="{{ old('birth_place', $person->birth_place) }}">
-                    @error('birth_place')
-                        <div class="w-full leading-none mt-1">
-                            <small class="text-red-500">{{ $message }}</small>
-                        </div>
-                    @enderror
+        <fieldset>
+            <!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
+            <div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
+                <div class="w-full sm:w-1/2 flex flex-col">
+                    <label for="birth_place" class="w-full font-medium pb-1 text-gray-700">{{ __('misc.place') }}</label>
+                    <div class="w-full">
+                        <input
+                            type="text" class="form-input w-full @error('birth_place') invalid @enderror"
+                            id="birth_place" name="birth_place"
+                            value="{{ old('birth_place', $person->birth_place) }}">
+                        @error('birth_place')
+                            <div class="w-full leading-none mt-1">
+                                <small class="text-red-500">{{ $message }}</small>
+                            </div>
+                        @enderror
+                    </div>
                 </div>
+                <x-date-tuple-picker
+                    class="w-full sm:w-1/2"
+                    name="birth_date" :label="__('misc.date.date')"
+                    :initial-from="old('birth_date_from', $person->birth_date_from)"
+                    :initial-to="old('birth_date_to', $person->birth_date_to)"/>
             </div>
-            <x-date-tuple-picker
-                class="w-full sm:w-1/2"
-                name="birth_date" :label="__('misc.date.date')"
-                :initial-from="old('birth_date_from', $person->birth_date_from)"
-                :initial-to="old('birth_date_to', $person->birth_date_to)"/>
         </fieldset>
 
         <hr class="mt-7 mb-6">
@@ -220,7 +226,7 @@
                 x-model="dead">
         </div>
 
-        <fieldset class="space-y-5 flex flex-col" x-show="dead">
+        <fieldset class="space-y-5 x-show="dead">
             <div class="w-full">
                 <label for="death_cause" class="w-full font-medium pb-1 text-gray-700">{{ __('people.death_cause') }}</label>
                 <div class="w-full">
@@ -374,10 +380,10 @@
             </div>
         </fieldset>
 
-        <fieldset class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
+        <div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
             <button type="submit" class="btn">
                 {{ __('misc.save') }}
             </button>
-        </fieldset>
+        </div>
     </div>
 </form>

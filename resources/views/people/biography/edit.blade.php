@@ -18,24 +18,27 @@
                 @csrf
 
                 <div>
-                    <fieldset class="w-full flex flex-col">
-                        <textarea
-                            type="text" class="form-input w-full min-h-full resize-y @error('biography') invalid @enderror"
-                            id="biography" name="biography" rows="20"
-                            value="{{ old('biography', $person->biography) }}"
-                            autofocus>{{ $person->biography }}</textarea>
-                        @error('biography')
-                            <div class="w-full leading-none mt-1">
-                                <small class="text-red-500">{{ $message }}</small>
-                            </div>
-                        @enderror
+                    <fieldset>
+                        <!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
+                        <div class="w-full flex flex-col">
+                            <textarea
+                                type="text" class="form-input w-full min-h-full resize-y @error('biography') invalid @enderror"
+                                id="biography" name="biography" rows="20"
+                                value="{{ old('biography', $person->biography) }}"
+                                autofocus>{{ $person->biography }}</textarea>
+                            @error('biography')
+                                <div class="w-full leading-none mt-1">
+                                    <small class="text-red-500">{{ $message }}</small>
+                                </div>
+                            @enderror
+                        </div>
                     </fieldset>
 
-                    <fieldset class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
+                    <div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
                         <button type="submit" class="btn">
                             {{ __('misc.save') }}
                         </button>
-                    </fieldset>
+                    </div>
                 </div>
             </form>
         </main>
