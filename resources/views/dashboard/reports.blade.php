@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Reports')
+
 @section('content')
 
     <div class="flex flex-col md:flex-row space-x-2 space-y-2">

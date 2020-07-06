@@ -15,6 +15,11 @@ return [
         'contact' => 'Kontakt',
     ],
 
+    'titles' => [
+        'search' => 'Suche',
+        'error' => 'Fehler',
+    ],
+
     'date' => [
         'date' => 'Datum',
         'between' => 'zwischen',

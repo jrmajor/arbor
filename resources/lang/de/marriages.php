@@ -12,6 +12,12 @@ return [
         'restore' => 'Wiederherstellen',
     ],
 
+    'titles' => [
+        'new_marriage' => 'Neue Ehe',
+        'editing_marriage' => 'Editing marriage',
+        'marriage_edits_history' => 'Ehebearbeitungshistorie',
+    ],
+
     'alerts' => [
         'marriage_has_been_created' => 'Marriage has been created.',
         'changes_have_been_saved' => 'Changes have been saved.',

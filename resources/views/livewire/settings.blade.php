@@ -5,7 +5,6 @@
 
 @section('title', __('settings.settings'))
 
-
 <div>
 
     <x-flash/>

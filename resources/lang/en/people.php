@@ -24,6 +24,14 @@ return [
         'restore' => 'Restore',
     ],
 
+    'titles' => [
+        'index' => 'Index',
+        'new_person' => 'New person',
+        'editing' => 'Editing',
+        'biography_editing' => 'Biography editing',
+        'edits_history' => 'Edits history',
+    ],
+
     'alerts' => [
         'person_has_been_created' => 'Person has been created.',
         'changes_have_been_saved' => 'Changes have been saved.',

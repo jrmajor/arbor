@@ -3,6 +3,8 @@
     <livewire:scripts>
 @endpush
 
+@section('title', __('misc.titles.search'))
+
 <main class="space-y-2 flex flex-col items-center">
 
     <div class="w-full p-6 bg-white rounded-lg shadow">

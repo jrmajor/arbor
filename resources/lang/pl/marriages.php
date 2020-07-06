@@ -12,6 +12,12 @@ return [
         'restore' => 'Przywróć',
     ],
 
+    'titles' => [
+        'new_marriage' => 'Nowe małżeństwo',
+        'editing_marriage' => 'Edycja małżeństwa',
+        'marriage_edits_history' => 'Historia edycji małżeństwa',
+    ],
+
     'alerts' => [
         'marriage_has_been_created' => 'Małżeństwo zostało dodane.',
         'changes_have_been_saved' => 'Zmiany zostały zapisane.',

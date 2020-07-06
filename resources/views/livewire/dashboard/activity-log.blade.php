@@ -3,6 +3,8 @@
     <livewire:scripts>
 @endpush
 
+@section('title', 'Activity log')
+
 <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
     <main class="flex-grow md:w-1/2 space-y-2 flex flex-col items-center">

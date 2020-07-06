@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $person->formatSimpleName().' - '.__('people.titles.editing'))
+
 @section('content')
 
     <h1 class="mb-3 mt-4 leading-none text-3xl font-medium">

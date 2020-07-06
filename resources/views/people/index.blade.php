@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', __('people.titles.index'))
+
 @section('content')
 
     <main class="p-6 bg-white rounded-lg shadow">

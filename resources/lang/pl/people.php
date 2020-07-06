@@ -24,6 +24,14 @@ return [
         'restore' => 'Przywróć',
     ],
 
+    'titles' => [
+        'index' => 'Indeks',
+        'new_person' => 'Nowa osoba',
+        'editing' => 'Edycja',
+        'biography_editing' => 'Edycja biografii',
+        'edits_history' => 'Historia edycji',
+    ],
+
     'alerts' => [
         'person_has_been_created' => 'Osoba została utworzona.',
         'changes_have_been_saved' => 'Zmiany zostały zapisane.',
