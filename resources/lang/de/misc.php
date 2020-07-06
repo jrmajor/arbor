@@ -42,6 +42,7 @@ return [
 
     'yes' => 'Ja',
     'no' => 'Nein',
+    'delete' => 'Löschen',
     'cancel' => 'Cancel',
     'null' => 'Null',
 

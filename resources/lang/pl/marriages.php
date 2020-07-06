@@ -5,7 +5,7 @@ return [
     'marriage' => 'małżeństwo',
 
     'menu' => [
-        'edit_marriage' => 'Edytuj związek',
+        'edit_marriage' => 'Edytuj małżeństwo',
         'edits_history' => 'Historia edycji',
 
         'delete' => 'Usuń',
@@ -24,13 +24,13 @@ return [
         'restored' => 'Ślub został przywrócony.',
     ],
 
-    'add_a_new_marriage' => 'Dodaj związek',
+    'add_a_new_marriage' => 'Dodaj małżeństwo',
     'add_child' => 'Dodaj dziecko',
 
     'woman' => 'Kobieta',
-    'woman_order' => 'Kolejność w związkach kobiety',
+    'woman_order' => 'Kolejność w małżeństwach kobiety',
     'man' => 'Mężczyzna',
-    'man_order' => 'Kolejność w związkach mężczyzny',
+    'man_order' => 'Kolejność w małżeństwach mężczyzny',
 
     'rite' => 'Obrządek',
     'rites' => [

@@ -114,8 +114,8 @@ return [
         'biography' => 'biografia',
 
         /* marriages */
-        'woman_order' => 'kolejność w związkach kobiety',
-        'man_order' => 'kolejność w związkach mężczyzny',
+        'woman_order' => 'kolejność w małżeństwach kobiety',
+        'man_order' => 'kolejność w małżeństwach mężczyzny',
 
         'first_event_date_from' => 'data pierwszego wydarzenia',
         'first_event_date_to' => 'data pierwszego wydarzenia',
