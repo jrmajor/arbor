@@ -3,9 +3,9 @@
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}
     x-data="dateTuplePickerData(
         @encodedjson([
-            'year' => $initialSimplePickerValues()['y'],
-            'month' => $initialSimplePickerValues()['m'],
-            'day' => $initialSimplePickerValues()['d'],
+            'year' => $initialSimplePickerValues()['y'] ?? '',
+            'month' => $initialSimplePickerValues()['m'] ?? '',
+            'day' => $initialSimplePickerValues()['d'] ?? '',
             'from' => optional($initialFrom)->format('Y-m-d'),
             'to' => optional($initialTo)->format('Y-m-d'),
             'advancedPicker' => $errors->has($name.'_from') || $errors->has($name.'_to') || ! $simplePickerCanBeUsed(),
@@ -13,7 +13,7 @@
     )">
     <div class="w-full pb-1 flex items-center">
         <label for="{{ $name }}_year" class="font-medium text-gray-700">{{ $label }}</label>
-        <button @click.prevent="advancedPicker = ! advancedPicker"
+        <button type="button" @click.prevent="advancedPicker = ! advancedPicker"
             x-text="advancedPicker ? '{{ __('misc.date.simple') }}' : '{{ __('misc.date.advanced') }}'"
             class="ml-2 a underline leading-none text-sm">
             toggle
@@ -27,20 +27,37 @@
                     <input
                         type="text" class="form-input w-16 rounded-r-none z-10"
                         :class="{ 'invalid': ! dateIsValid }"
-                        x-model="year" @keyup="updateAdvanced()"
+                        x-model="year" x-ref="year"
+                        @keyup="
+                            updateAdvanced();
+                            if ($event.target.selectionStart == 4 && $event.keyCode >= 48 && $event.keyCode <= 57) {
+                                $refs.month.focus()
+                            }"
                         placeholder="{{ __('misc.date.yyyy') }}"
                         maxlength=4>
                     <input
                         type="text" class="form-input w-12 rounded-none focus:z-20"
                         :class="{ 'invalid': ! dateIsValid }"
                         style="margin: 0 -1px 0 -1px"
-                        x-model="month" @keyup="updateAdvanced()"
+                        x-model="month" x-ref="month"
+                        @keyup="
+                            updateAdvanced();
+                            if ($event.target.selectionStart == 2 && $event.keyCode >= 48 && $event.keyCode <= 57) {
+                                $refs.day.focus()
+                            } else if ($event.target.selectionStart == 0 && $event.keyCode == 8) {
+                                $refs.year.focus()
+                            }"
                         placeholder="{{ __('misc.date.mm') }}"
                         maxlength=2>
                     <input
                         type="text" class="form-input w-12 rounded-l-none z-10"
                         :class="{ 'invalid': ! dateIsValid }"
-                        x-model="day" @keyup="updateAdvanced()"
+                        x-model="day" x-ref="day"
+                        @keyup="
+                            updateAdvanced()
+                            if ($event.target.selectionStart == 0 && $event.keyCode == 8) {
+                               $refs.month.focus()
+                            }"
                         placeholder="{{ __('misc.date.dd') }}"
                         maxlength=2>
                 </div>
@@ -51,7 +68,7 @@
                     <p class="text-gray-900">{{ __('misc.date.between') }}</p>
                     <input
                         type="text" class="form-input w-32 ml-1 @error($name.'_from') invalid @enderror"
-                        x-model="from" name="{{ $name }}_from"
+                        x-model="from" x-ref="from" name="{{ $name }}_from"
                         placeholder="{{ __('misc.date.format') }}"
                         size="12" maxlength=10>
                 </div>
@@ -59,7 +76,7 @@
                     <p class="text-gray-900">{{ __('misc.date.and') }}</p>
                     <input
                         type="text" class="form-input w-32 ml-1 @error($name.'_to') invalid @enderror"
-                        x-model="to" name="{{ $name }}_to"
+                        x-model="to" x-ref="to" name="{{ $name }}_to"
                         placeholder="{{ __('misc.date.format') }}"
                         size="12" maxlength=10>
                 </div>
