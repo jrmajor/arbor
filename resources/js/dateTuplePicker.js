@@ -1,4 +1,6 @@
-window.dateTuplePickerData = (data) => {
+import { isValid, startOfMonth, lastDayOfMonth, startOfYear, lastDayOfYear, formatISO } from 'date-fns'
+
+window.dateTuplePickerData = function (data) {
   return {
     year: data.year,
     month: data.month,
@@ -9,52 +11,81 @@ window.dateTuplePickerData = (data) => {
     advancedPicker: data.advancedPicker,
 
     updateAdvanced() {
-      y = this.year
-      m = this.month
-      d = this.day
-
       this.dateIsValid = true
 
-      if (
-        /^([12]?\d{3})$|^$/.test(y)
-        && /^(0?[1-9]|1[0-2])$|^$/.test(m)
-        && /^(0?[1-9]|[12]\d|3[01])$|^$/.test(d)
-      ) {
-        if (y != '' && m != '' && d != '') {m
-          f = new Date()
-          f.setUTCFullYear(y, parseInt(m)-1, d)
-          f = f.toISOString().substring(0,10)
-          t = f
-        } else if (y != '' && m != '' && d == '') {
-          f = new Date()
-          t = new Date()
-          f.setUTCFullYear(y, parseInt(m)-1, 1)
-          t.setUTCFullYear(y, parseInt(m), 0)
-          f = f.toISOString().substring(0,10)
-          t = t.toISOString().substring(0,10)
-        } else if (y != '' && m == '' && d == '') {
-          f = new Date()
-          t = new Date()
-          f.setUTCFullYear(y, 0, 1)
-          t.setUTCFullYear(y, 12, 0)
-          f = f.toISOString().substring(0,10)
-          t = t.toISOString().substring(0,10)
-        } else if (y == '' && m == '' && d == '') {
-          f = ''
-          t = ''
-        } else {
-          this.dateIsValid = false
-          f = ''
-          t = ''
-        }
+      var y = this.year.trim()
+      var m = this.month.trim()
+      var d = this.day.trim()
 
-        this.from = f
-        this.to = t
+      if (y == '') {
+        y = 'no year'
+      } else if (parseInt(y) == y) {
+        y = parseInt(y)
+        if (y < 100) {
+          return this.clearInvalidDate()
+        }
+      } else {
+        return this.clearInvalidDate()
+      }
+
+      if (m == '') {
+        m = 'no month'
+      } else if (parseInt(m) == m) {
+        m = parseInt(m) - 1
+      } else {
+        return this.clearInvalidDate()
+      }
+
+      if (d == '') {
+        d = 'no day'
+      } else if (parseInt(d) == d) {
+        d = parseInt(d)
+      } else {
+        return this.clearInvalidDate()
+      }
+
+      var date, f, t = f = ''
+
+      if (d != 'no day') {
+        if (isValid(date = new Date(y, m, d)) && date.getDate() == d && date.getMonth() == m) {
+          f = formatISO(date, { representation: 'date' })
+          t = f
+          console.log(y, m, d, 'full date')
+        } else {
+          return this.clearInvalidDate()
+        }
+      } else if (m != 'no month') {
+        if (isValid(date = new Date(y, m, 15)) && date.getMonth() == m) {
+          f = formatISO(startOfMonth(date), { representation: 'date' })
+          t = formatISO(lastDayOfMonth(date), { representation: 'date' })
+          console.log(y, m, d, 'no day')
+        } else {
+          return this.clearInvalidDate()
+        }
+      } else if (y != 'no year') {
+        if (isValid(date = new Date(y, 5, 15))) {
+          f = formatISO(startOfYear(date), { representation: 'date' })
+          t = formatISO(lastDayOfYear(date), { representation: 'date' })
+          console.log(y, m, d, 'no month')
+        } else {
+          return this.clearInvalidDate()
+        }
+      } else if (y == 'no year' && m == 'no month' && d == 'no day') {
+        console.log(y, m, d, 'no date')
       } else {
         this.dateIsValid = false
-        this.from = ''
-        this.to = ''
+        console.log(y, m, d, 'invalid date')
       }
+
+      this.from = f
+      this.to = t
+    },
+
+    clearInvalidDate() {
+      this.dateIsValid = false
+      this.from = ''
+      this.to = ''
+      console.log('invalid date')
     }
   }
 }
