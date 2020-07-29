@@ -8,49 +8,41 @@
 @endphp
 
 <div>
-    {{ __('people.index.by_family_name') }}:
-    <small>
-        [{{ __('people.index.total') }}: <strong>{{ App\Person::count() }}</strong>]
-    </small>
-    <br>&nbsp;&nbsp;
+    <h2>{{ __('people.index.by_family_name') }}:</h2>
 
-    @foreach(App\Person::letters('family') as $letter)
-        @if (! $loop->first)
-            &middot;
-        @endif
-
-        @if($active['letter'] == $letter->letter && $active['type'] == 'f')
-            <strong>
-        @endif
-        <a href="{{ route('people.letter', ['type' => 'f', 'letter' => urlencode($letter->letter)]) }}" class="a">
-            {{ $letter->letter }} <small>[{{ $letter->total }}]</small>
-        </a>
-        @if($active['letter'] == $letter->letter && $active['type'] == 'f')
-            </strong>
-        @endif
-    @endforeach
+    <ul class="col-count-3 xs:col-count-4 sm:col-count-5 md:col-count-6 lg:col-count-8">
+        @foreach(App\Person::letters('family') as $letter)
+            <li>
+                @if($active['letter'] == $letter->letter && $active['type'] == 'f')
+                    <strong>
+                @endif
+                <a href="{{ route('people.letter', ['type' => 'f', 'letter' => urlencode($letter->letter)]) }}" class="a">
+                    {{ $letter->letter }} <small>[{{ $letter->total }}]</small>
+                </a>
+                @if($active['letter'] == $letter->letter && $active['type'] == 'f')
+                    </strong>
+                @endif
+            </li>
+        @endforeach
+    </ul>
 </div>
 
-<div>
-    {{ __('people.index.by_last_name') }}:
-    <small>
-        [{{ __('people.index.total') }}: <strong>{{ App\Person::count() }}</strong>]
-    </small>
-    <br>&nbsp;&nbsp;
+<div class="mt-4">
+    <h2>{{ __('people.index.by_last_name') }}:</h2>
 
-    @foreach(App\Person::letters('last') as $letter)
-        @if (! $loop->first)
-            &middot;
-        @endif
-
-        @if($active['letter'] == $letter->letter && $active['type'] == 'l')
-            <strong>
-        @endif
-        <a href="{{ route('people.letter', ['type' => 'l', 'letter' => urlencode($letter->letter)]) }}" class="a">
-            {{ $letter->letter }} <small>[{{ $letter->total }}]</small>
-        </a>
-        @if($active['letter'] == $letter->letter && $active['type'] == 'l')
-            </strong>
-        @endif
-    @endforeach
+    <ul class="col-count-3 xs:col-count-4 sm:col-count-5 md:col-count-6 lg:col-count-8">
+        @foreach(App\Person::letters('last') as $letter)
+            <li>
+                @if($active['letter'] == $letter->letter && $active['type'] == 'l')
+                    <strong>
+                @endif
+                <a href="{{ route('people.letter', ['type' => 'l', 'letter' => urlencode($letter->letter)]) }}" class="a">
+                    {{ $letter->letter }} <small>[{{ $letter->total }}]</small>
+                </a>
+                @if($active['letter'] == $letter->letter && $active['type'] == 'l')
+                    </strong>
+                @endif
+            </li>
+        @endforeach
+    </ul>
 </div>

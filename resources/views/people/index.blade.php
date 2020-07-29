@@ -8,9 +8,9 @@
 
         <x-letters :active="$active ?? null"/>
 
-        @if(isset($list))
-            <hr class="-mx-6 my-5 border-t-2 border-dashed">
+        <hr class="-mx-6 my-5 border-t-2 border-dashed">
 
+        @if(isset($list))
             <ul>
                 @foreach($list as $person)
                     <li>
@@ -18,6 +18,12 @@
                     </li>
                 @endforeach
             </ul>
+        @else
+            <div class="text-center">
+                <small>
+                    {{ __('people.index.total') }}: <strong>{{ App\Person::count() }}</strong>
+                </small>
+            </div>
         @endif
 
     </main>

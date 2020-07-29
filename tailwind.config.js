@@ -85,6 +85,7 @@ module.exports = {
                 900: '#2a4365',
             },
         },
+        columnCount: [1, 2, 3, 4, 5, 6, 7, 8],
         fontFamily: {
             sans: [
                 'Inter',
@@ -124,9 +125,11 @@ module.exports = {
     variants: {
         borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus', 'focus-within'],
         boxShadow: ['responsive', 'hover', 'focus', 'active', 'group-focus', 'focus-within'],
+        columnCount: ['responsive'],
     },
     plugins: [
+        require('@tailwindcss/ui'),
         require('tailwindcss-important')(),
-        require('@tailwindcss/ui')
+        require('tailwindcss-multi-column')(),
     ],
 }

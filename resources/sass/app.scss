@@ -51,6 +51,24 @@ small {
     }
 }
 
+.btn.btn-red {
+    @apply bg-red-600;
+
+    &:enabled {
+        &:hover {
+            @apply bg-red-500;
+        }
+
+        &:focus {
+            @apply border-red-700 shadow-outline-red
+        }
+
+        &:active {
+            @apply bg-red-700;
+        }
+    }
+}
+
 .btn-out {
     @apply inline-flex items-center;
     @apply px-3 py-1 rounded-md;
