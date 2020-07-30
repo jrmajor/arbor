@@ -3,7 +3,6 @@
 namespace App\Services\Pytlewski;
 
 use Carbon\CarbonInterval;
-use Exception;
 use Illuminate\Support\Facades\Cache;
 
 class Pytlewski
