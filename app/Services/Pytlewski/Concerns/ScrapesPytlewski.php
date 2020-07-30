@@ -92,6 +92,7 @@ trait ScrapesPytlewski
 
             $attr['middle_name'] = implode(' ', $names);
         } catch (InvalidArgumentException $e) {
+            //
         }
 
         try {
@@ -126,6 +127,7 @@ trait ScrapesPytlewski
                 }
             }
         } catch (InvalidArgumentException $e) {
+            //
         }
 
         try {
@@ -160,6 +162,7 @@ trait ScrapesPytlewski
                 $attr['father_surname'] = implode(' ', $father);
             }
         } catch (InvalidArgumentException $e) {
+            //
         }
 
         return $attr;
