@@ -18,7 +18,7 @@ it('requests source from pytlewski.pl', function () {
     );
 });
 
-it('caches source recievied from pytlewski.pl', function () {
+it('caches parsed attributes from pytlewski.pl', function () {
     Http::fake();
 
     Cache::shouldReceive('remember')
