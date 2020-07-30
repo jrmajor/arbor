@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Observers\PersonObserver;
 use App\Person;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -56,6 +57,10 @@ class AppServiceProvider extends ServiceProvider
             }
 
             return $array;
+        });
+
+        Collection::macro('trim', function () {
+            return new static(Arr::trim($this->items));
         });
 
         Flash::levels([
