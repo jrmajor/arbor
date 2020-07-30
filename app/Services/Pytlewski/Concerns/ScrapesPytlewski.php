@@ -29,7 +29,7 @@ trait ScrapesPytlewski
             ->merge($this->parseBio($crawler->eq(5)->children()->eq(1)))
             ->trim()->all();
 
-        foreach(['marriages', 'children', 'siblings'] as $key) {
+        foreach (['marriages', 'children', 'siblings'] as $key) {
             $attributes[$key] ??= [];
         }
 
@@ -91,7 +91,8 @@ trait ScrapesPytlewski
             unset($names[0]);
 
             $attr['middle_name'] = implode(' ', $names);
-        } catch (InvalidArgumentException $e) {}
+        } catch (InvalidArgumentException $e) {
+        }
 
         try {
             $dates = $crawler->eq(0)
@@ -124,7 +125,8 @@ trait ScrapesPytlewski
                     $attr['burial_place'] = $matches->groupOr(3, '');
                 }
             }
-        } catch (InvalidArgumentException $e) {}
+        } catch (InvalidArgumentException $e) {
+        }
 
         try {
             $parents = $crawler->eq(3)
@@ -157,7 +159,8 @@ trait ScrapesPytlewski
             } else {
                 $attr['father_surname'] = implode(' ', $father);
             }
-        } catch (InvalidArgumentException $e) {}
+        } catch (InvalidArgumentException $e) {
+        }
 
         return $attr;
     }
