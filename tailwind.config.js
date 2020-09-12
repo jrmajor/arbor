@@ -1,5 +1,5 @@
 module.exports = {
-    purge: false,
+    purge: ['./resources/views/**/*.blade.php'],
     theme: {
         screens: {
             xs: '420px',
@@ -132,4 +132,16 @@ module.exports = {
         require('tailwindcss-important')(),
         require('tailwindcss-multi-column')(),
     ],
+    experimental: {
+      applyComplexClasses: false,
+      darkModeVariant: false,
+      defaultLineHeights: false,
+      extendedFontSizeScale: false,
+      extendedSpacingScale: false,
+      uniformColorPalette: false,
+    },
+    future: {
+      purgeLayersByDefault: true,
+      removeDeprecatedGapUtilities: true,
+    },
 }

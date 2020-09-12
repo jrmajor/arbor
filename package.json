@@ -9,23 +9,18 @@
         "prod": "yarn run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
+    "dependencies": {
+        "@tailwindcss/ui": "^0.3.1",
+        "alpinejs": "^2.7.0",
+        "axios": "^0.20.0",
+        "date-fns": "^2.16.1",
+        "tailwindcss": "^1.8.8",
+        "tailwindcss-multi-column": "^1.0.2"
+    },
     "devDependencies": {
         "cross-env": "^7.0.2",
         "laravel-mix": "^5.0.4",
-        "laravel-mix-purgecss": "^4.2.0",
         "resolve-url-loader": "^3.1.1",
-        "sass": "^1.26.5",
-        "sass-loader": "^8.0.2",
         "vue-template-compiler": "^2.6.11"
-    },
-    "dependencies": {
-        "@tailwindcss/ui": "^0.3.0",
-        "alpinejs": "^2.3.3",
-        "axios": "^0.19.2",
-        "date-fns": "^2.14.0",
-        "tailwindcss": "^1.4.6",
-        "tailwindcss-important": "^1.0.0",
-        "tailwindcss-multi-column": "^1.0.2",
-        "tippy.js": "^6.2.3"
     }
 }
