@@ -19,6 +19,6 @@ class Users extends Component
 
         return view('livewire.dashboard.users', [
             'users' => $users,
-        ]);
+        ])->extends('layouts.app');
     }
 }

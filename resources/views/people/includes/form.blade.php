@@ -1,6 +1,6 @@
 @push('scripts')
-    <livewire:styles>
-    <livewire:scripts>
+    @livewireStyles
+    @livewireScripts
 @endpush
 
 <form

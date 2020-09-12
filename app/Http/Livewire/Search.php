@@ -13,18 +13,13 @@ class Search extends Component
 
     public $s;
 
-    protected $updatesQueryString = [
+    protected $queryString = [
         's' => ['except' => ''],
     ];
 
     public function updatingS()
     {
         $this->resetPage();
-    }
-
-    public function mount()
-    {
-        $this->s = request()->query('s');
     }
 
     public function render()
@@ -46,7 +41,7 @@ class Search extends Component
 
         return view('livewire.search', [
             'people' => $people,
-        ]);
+        ])->extends('layouts.app');
     }
 
     public function paginationView()

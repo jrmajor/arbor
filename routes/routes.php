@@ -10,6 +10,10 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MarriageController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PersonPickerController;
+use App\Http\Livewire\Dashboard\ActivityLog;
+use App\Http\Livewire\Dashboard\Users;
+use App\Http\Livewire\Search;
+use App\Http\Livewire\Settings;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => redirect()->route('people.index'))->name('welcome');
@@ -35,9 +39,9 @@ Route::post('logout', LogoutController::class)->name('logout');
 // Route::match(['put', 'patch'], 'users/{user}', 'UsersController@update')->name('users.update');
 // Route::delete('users/{user}', 'UsersController@destroy')->name('users.destroy');
 
-Route::livewire('search', 'search')->name('search');
+Route::get('search', Search::class)->name('search');
 
-Route::livewire('settings', 'settings')->name('settings')->middleware('auth');
+Route::get('settings', Settings::class)->name('settings')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('people/create', [PersonController::class, 'create'])->name('people.create');
@@ -70,8 +74,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::livewire('dashboard/users', 'dashboard.users')->name('dashboard.users');
-    Route::livewire('dashboard/activitylog', 'dashboard.activity-log')->name('dashboard.activitylog');
+    Route::get('dashboard/users', Users::class)->name('dashboard.users');
+    Route::get('dashboard/activitylog', ActivityLog::class)->name('dashboard.activitylog');
     Route::get('dashboard/reports', [DashboardController::class, 'reports'])->name('dashboard.reports');
 });
 

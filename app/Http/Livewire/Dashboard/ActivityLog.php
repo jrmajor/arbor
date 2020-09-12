@@ -24,7 +24,7 @@ class ActivityLog extends Component
 
         return view('livewire.dashboard.activity-log', [
             'activities' => $activities,
-        ]);
+        ])->extends('layouts.app');
     }
 
     public function paginationView()
