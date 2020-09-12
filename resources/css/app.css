@@ -1,187 +1,186 @@
 @tailwind base;
 
 .a {
-    @apply text-blue-700;
-    @apply transition-colors duration-100 ease-out;
+  @apply text-blue-700;
+  @apply transition-colors duration-100 ease-out;
 }
 
 .a:hover, .a:focus {
-    @apply text-blue-800;
+  @apply text-blue-800;
 }
 
 small {
-    @apply text-gray-500 font-normal;
+  @apply text-gray-500 font-normal;
 }
 
 .a > small {
-    @apply transition-colors duration-100 ease-out;
+  @apply transition-colors duration-100 ease-out;
 }
 
 .a:hover > small, .a:focus > small {
-    @apply text-gray-800;
+  @apply text-gray-800;
 }
 
 .tnum {
-    font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
 }
 
 .btn {
-    @apply inline-flex items-center;
-    @apply rounded-md px-4 py-2 leading-5;
-    @apply text-white bg-blue-600;
-    @apply transition-colors duration-150 ease-out;
+  @apply inline-flex items-center;
+  @apply rounded-md px-4 py-2 leading-5;
+  @apply text-white bg-blue-600;
+  @apply transition-colors duration-150 ease-out;
 }
 
 .btn[disabled] {
-    @apply bg-gray-500;
-    @apply cursor-default;
+  @apply bg-gray-500;
+  @apply cursor-default;
 }
 
 .btn:enabled:hover {
-    @apply bg-blue-500;
+  @apply bg-blue-500;
 }
 
 .btn:enabled:focus {
-    @apply outline-none border-blue-700 shadow-outline-blue
+  @apply outline-none border-blue-700 shadow-outline-blue
 }
 
 .btn:enabled:active {
-    @apply bg-blue-700;
+  @apply bg-blue-700;
 }
 
 .btn.btn-red {
-    @apply bg-red-600;
+  @apply bg-red-600;
 }
 
 .btn.btn-red:enabled:hover {
-    @apply bg-red-500;
+  @apply bg-red-500;
 }
 
 .btn.btn-red:enabled:focus {
-    @apply border-red-700 shadow-outline-red
+  @apply border-red-700 shadow-outline-red
 }
 
 .btn.btn-red:enabled:active {
-    @apply bg-red-700;
+  @apply bg-red-700;
 }
 
 .btn-out {
-    @apply inline-flex items-center;
-    @apply px-3 py-1 rounded-md;
-    @apply border border-blue-700;
-    @apply text-blue-700;
-    @apply transition-colors duration-100 ease-out;
+  @apply inline-flex items-center;
+  @apply px-3 py-1 rounded-md;
+  @apply border border-blue-700;
+  @apply text-blue-700;
+  @apply transition-colors duration-100 ease-out;
 }
 
 .btn-out[disabled] {
-    @apply border-gray-500 text-gray-500;
-    @apply cursor-default;
+  @apply border-gray-500 text-gray-500;
+  @apply cursor-default;
 }
 
 .btn-out:enabled:hover {
-    @apply bg-blue-100 text-blue-800;
+  @apply bg-blue-100 text-blue-800;
 }
 
 .btn-out:enabled:focus {
-    @apply outline-none shadow-outline-blue;
+  @apply outline-none shadow-outline-blue;
 }
 
 .btn-out:enabled:active {
-    @apply bg-blue-600 border-blue-600 text-blue-100;
+  @apply bg-blue-600 border-blue-600 text-blue-100;
 }
 
 .form-input, .form-select {
-    @apply py-1.5;
+  @apply py-1.5;
 }
 
 .form-input.invalid, .form-select.invalid {
-    @apply shadow-outline-red;
+  @apply shadow-outline-red;
 }
 
 .form-input[disabled], .form-select[disabled] {
-    @apply bg-gray-100 text-gray-700;
+  @apply bg-gray-100 text-gray-700;
 }
 
 dl {
-    @apply flex flex-wrap;
+  @apply flex flex-wrap;
 }
 
 dt {
-    @apply w-full font-bold;
+  @apply w-full font-bold;
 }
 
 dd {
-    @apply w-full pl-3 pb-1;
+  @apply w-full pl-3 pb-1;
 }
 
 @screen sm {
-    dt {
-        @apply w-1/4;
-    }
+  dt {
+    @apply w-1/4;
+  }
 
-    dd {
-        @apply w-3/4;
-    }
+  dd {
+    @apply w-3/4;
+  }
 
-    dt {
-        overflow: hidden;
-        white-space: nowrap;
-    }
+  dt {
+    overflow: hidden;
+    white-space: nowrap;
+  }
 
-    dt:after {
-        font-weight: normal;
-        font-size: 0.4rem;
-        content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
-    }
+  dt:after {
+    font-weight: normal;
+    font-size: 0.4rem;
+    content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+  }
 }
 
 .external-small-container {
-    width: 10px;
-    height: 14px;
-    margin: 3px 1px 0 0;
-    padding: 0;
-    display: inline-block;
-    position: relative;
-    bottom: 0;
+  width: 10px;
+  height: 14px;
+  margin: 3px 1px 0 0;
+  padding: 0;
+  display: inline-block;
+  position: relative;
+  bottom: 0;
 }
 
 .external-small-link {
-    width: 6px;
-    height: 6px;
-    padding: 0;
-    color: #FFFFFF;
-    display: block;
-    box-sizing: border-box;
-    cursor: context-menu;
-
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  color: #FFFFFF;
+  display: block;
+  box-sizing: border-box;
+  cursor: context-menu;
 }
 
 .link-wielcy {
-    content: 'w';
-    background-color: rgb(245, 248, 252);
-    margin: 0 2px 0 2px;
-    border: 1px solid rgb(122, 183, 265);
+  content: 'w';
+  background-color: rgb(245, 248, 252);
+  margin: 0 2px 0 2px;
+  border: 1px solid rgb(122, 183, 265);
 }
 
 .link-pytlewski {
-    content: "p";
-    background-color: rgb(245, 248, 252);
-    margin: 2px 2px 0 2px;
-    border: 1px solid rgb(122, 225, 108);
+  content: "p";
+  background-color: rgb(245, 248, 252);
+  margin: 2px 2px 0 2px;
+  border: 1px solid rgb(122, 225, 108);
 }
 
 .link-wielcy-active {
-    content: 'w';
-    background-color: rgb(115, 174, 255);
-    margin: 0 2px 0 2px;
-    border: 1px solid rgb(32, 93, 175);
+  content: 'w';
+  background-color: rgb(115, 174, 255);
+  margin: 0 2px 0 2px;
+  border: 1px solid rgb(32, 93, 175);
 }
 
 .link-pytlewski-active {
-    content: "p";
-    background-color: rgb(120, 217, 106);
-    margin: 2px 2px 0 2px;
-    border: 1px solid rgb(32, 135, 18);
+  content: "p";
+  background-color: rgb(120, 217, 106);
+  margin: 2px 2px 0 2px;
+  border: 1px solid rgb(32, 135, 18);
 }
 
 @tailwind components;
