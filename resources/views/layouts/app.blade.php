@@ -4,7 +4,7 @@
 
     <x-menu/>
 
-    <div class="container mx-auto my-1 p-2">
+    <div class="container mx-auto my-1 p-2 pt-5">
 
         <x-flash/>
 

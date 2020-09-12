@@ -9,7 +9,7 @@
 
     <x-flash/>
 
-    <h1 class="mb-3 mt-4 leading-none text-3xl font-medium">
+    <h1 class="mb-3 leading-none text-3xl font-medium">
         {{ __('settings.user').': '.$user->username }}
     </h1>
 
