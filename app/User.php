@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +13,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class User extends Authenticatable
 {
     use CausesActivity,
+        HasFactory,
         LogsActivity,
         Notifiable,
         SoftDeletes;

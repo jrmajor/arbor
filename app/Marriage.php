@@ -6,6 +6,7 @@ use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
 use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +17,7 @@ class Marriage extends Model
 {
     use HasDateTuples,
         HasEnums,
+        HasFactory,
         SoftDeletes,
         LogsActivity,
         TapsActivity;

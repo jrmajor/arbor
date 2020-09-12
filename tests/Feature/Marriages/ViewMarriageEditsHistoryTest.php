@@ -3,7 +3,7 @@
 use App\Marriage;
 
 beforeEach(function () {
-    $this->marriage = factory(Marriage::class)->create();
+    $this->marriage = Marriage::factory()->create();
 });
 
 test('guests are asked to log in when attempting to view marriage history', function () {

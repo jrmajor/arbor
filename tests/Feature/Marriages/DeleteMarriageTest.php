@@ -4,7 +4,7 @@ use App\Marriage;
 use Carbon\Carbon;
 
 beforeEach(
-    fn () => $this->marriage = factory(Marriage::class)->create()
+    fn () => $this->marriage = Marriage::factory()->create()
 );
 
 test('guests cannot delete marriage', function () {

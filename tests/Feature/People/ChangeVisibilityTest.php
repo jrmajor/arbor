@@ -4,7 +4,7 @@ use App\Person;
 use Spatie\Activitylog\Models\Activity;
 
 beforeEach(
-    fn () => $this->person = factory(Person::class)->create()
+    fn () => $this->person = Person::factory()->create()
 );
 
 test('guests cannot change persons visibility', function () {

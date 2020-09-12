@@ -9,7 +9,7 @@ use App\Person;
 use App\User;
 
 it('can determine its visibility', function () {
-    $marriage = factory(Marriage::class)->create();
+    $marriage = Marriage::factory()->create();
 
     assertFalse($marriage->isVisible());
     $marriage->woman->changeVisibility(true);
@@ -19,11 +19,11 @@ it('can determine its visibility', function () {
 });
 
 it('tells if can be viewed by given user', function () {
-    $user = factory(User::class)->create();
+    $user = User::factory()->create();
 
-    $hiddenMarriage = factory(Marriage::class)->create();
+    $hiddenMarriage = Marriage::factory()->create();
 
-    $visibleMarriage = factory(Marriage::class)->create();
+    $visibleMarriage = Marriage::factory()->create();
     $visibleMarriage->woman->changeVisibility(true);
     $visibleMarriage->man->changeVisibility(true);
 
@@ -37,7 +37,7 @@ it('tells if can be viewed by given user', function () {
 });
 
 it('tells if can be viewed by guest', function () {
-    $marriage = factory(Marriage::class)->create();
+    $marriage = Marriage::factory()->create();
 
     assertFalse($marriage->canBeViewedBy(null));
 
@@ -48,7 +48,7 @@ it('tells if can be viewed by guest', function () {
 });
 
 it('casts rite to enum', function () {
-    $marriage = factory(Marriage::class)->create([
+    $marriage = Marriage::factory()->create([
         'rite' => 'roman_catholic',
     ]);
 
@@ -57,7 +57,7 @@ it('casts rite to enum', function () {
 });
 
 test('rite is nullable', function () {
-    $marriage = factory(Marriage::class)->create([
+    $marriage = Marriage::factory()->create([
         'rite' => null,
     ]);
 
@@ -65,7 +65,7 @@ test('rite is nullable', function () {
 });
 
 it('casts events types to enums', function () {
-    $marriage = factory(Marriage::class)->create([
+    $marriage = Marriage::factory()->create([
         'first_event_type' => 'civil_marriage',
         'second_event_type' => 'church_marriage',
     ]);
@@ -78,7 +78,7 @@ it('casts events types to enums', function () {
 });
 
 test('events types are nullable', function () {
-    $marriage = factory(Marriage::class)->create([
+    $marriage = Marriage::factory()->create([
         'first_event_type' => null,
         'second_event_type' => null,
     ]);
@@ -88,9 +88,9 @@ test('events types are nullable', function () {
 });
 
 it('can get man and woman', function () {
-    $woman = factory(Person::class)->states('woman')->create();
-    $man = factory(Person::class)->states('man')->create();
-    $marriage = factory(Marriage::class)->create([
+    $woman = Person::factory()->woman()->create();
+    $man = Person::factory()->man()->create();
+    $marriage = Marriage::factory()->create([
         'woman_id' => $woman->id,
         'man_id' => $man->id,
     ]);
@@ -100,9 +100,9 @@ it('can get man and woman', function () {
 });
 
 it('can get partner', function () {
-    $woman = factory(Person::class)->states('woman')->create();
-    $man = factory(Person::class)->states('man')->create();
-    $marriage = factory(Marriage::class)->create([
+    $woman = Person::factory()->woman()->create();
+    $man = Person::factory()->man()->create();
+    $marriage = Marriage::factory()->create([
         'woman_id' => $woman->id,
         'man_id' => $man->id,
     ]);
@@ -112,16 +112,16 @@ it('can get partner', function () {
 });
 
 it('can get order in given person marriages', function () {
-    $woman = factory(Person::class)->states('woman')->create();
-    $man = factory(Person::class)->states('man')->create();
+    $woman = Person::factory()->woman()->create();
+    $man = Person::factory()->man()->create();
 
-    $first_marriage = factory(Marriage::class)->create([
+    $first_marriage = Marriage::factory()->create([
         'woman_id' => $woman->id,
         'woman_order' => null,
         'man_id' => $man->id,
         'man_order' => 1,
     ]);
-    $second_marriage = factory(Marriage::class)->create([
+    $second_marriage = Marriage::factory()->create([
         'man_id' => $man->id,
         'man_order' => 2,
     ]);
@@ -132,7 +132,7 @@ it('can get order in given person marriages', function () {
 });
 
 it('can determine if has events', function () {
-    $first_marriage = factory(Marriage::class)->create([
+    $first_marriage = Marriage::factory()->create([
         'first_event_type' => 'civil_marriage',
         'first_event_date_from' => '2014-06-23',
         'first_event_date_to' => '2014-06-23',
@@ -146,7 +146,7 @@ it('can determine if has events', function () {
     assertTrue($first_marriage->hasFirstEvent());
     assertFalse($first_marriage->hasSecondEvent());
 
-    $second_marriage = factory(Marriage::class)->create([
+    $second_marriage = Marriage::factory()->create([
         'first_event_type' => 'concordat_marriage',
         'first_event_date_from' => null,
         'first_event_date_to' => null,
@@ -160,7 +160,7 @@ it('can determine if has events', function () {
     assertTrue($second_marriage->hasFirstEvent());
     assertTrue($second_marriage->hasSecondEvent());
 
-    $third_marriage = factory(Marriage::class)->create([
+    $third_marriage = Marriage::factory()->create([
         'first_event_type' => null,
         'first_event_date_from' => null,
         'first_event_date_to' => null,

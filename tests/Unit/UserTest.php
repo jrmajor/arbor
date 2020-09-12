@@ -3,7 +3,7 @@
 use App\User;
 
 it('correctly determines its abilities', function () {
-    $user = factory(User::class)->create([
+    $user = User::factory()->create([
         'permissions' => 0,
     ]);
 

@@ -3,7 +3,7 @@
 use App\User;
 
 it('logs user logins events', function () {
-    $user = factory(User::class)->create();
+    $user = User::factory()->create();
 
     Agent::shouldReceive([
         'isDesktop' => true,

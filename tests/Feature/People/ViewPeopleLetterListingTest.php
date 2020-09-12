@@ -9,12 +9,12 @@ it('works with no people')
 it('works with people', function () {
     withPermissions(1);
 
-    factory(Person::class)->create([
+    Person::factory()->create([
         'family_name' => 'Zbyrowski',
         'last_name' => null,
     ]);
 
-    factory(Person::class)->create([
+    Person::factory()->create([
         'family_name' => 'Ziobro',
         'last_name' => 'Mikke',
     ]);
@@ -36,7 +36,7 @@ it('works with people', function () {
 });
 
 it('hides sensitive data to guests', function () {
-    factory(Person::class)->state('alive')->create([
+    Person::factory()->alive()->create([
         'family_name' => 'Ziobro',
         'last_name' => 'Mikke',
     ]);

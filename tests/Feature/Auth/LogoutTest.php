@@ -4,7 +4,7 @@ use App\User;
 use Illuminate\Auth\Events\CurrentDeviceLogout;
 
 it('logs user out', function () {
-    $user = factory(User::class)->create();
+    $user = User::factory()->create();
 
     Event::fake();
 

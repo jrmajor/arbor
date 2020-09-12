@@ -3,7 +3,7 @@
 use App\Person;
 
 beforeEach(
-    fn () => $this->person = tap(factory(Person::class)->create())->delete()
+    fn () => $this->person = tap(Person::factory()->create())->delete()
 );
 
 test('guests cannot restore person', function () {

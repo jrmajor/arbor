@@ -7,6 +7,7 @@ use App\Services\Pytlewski\Pytlewski;
 use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -21,6 +22,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Person extends Model
 {
     use HasDateTuples,
+        HasFactory,
         SoftDeletes,
         LogsActivity,
         TapsActivity;

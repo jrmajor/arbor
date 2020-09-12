@@ -12,7 +12,7 @@ abstract class TestCase extends BaseTestCase
 
     public function withPermissions(int $permissions): self
     {
-        $user = factory(User::class)
+        $user = User::factory()
             ->create(['permissions' => $permissions]);
 
         return $this->actingAs($user);

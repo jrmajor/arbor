@@ -3,7 +3,7 @@
 use App\Marriage;
 
 beforeEach(
-    fn () => $this->marriage = tap(factory(Marriage::class)->create())->delete()
+    fn () => $this->marriage = tap(Marriage::factory()->create())->delete()
 );
 
 test('guests cannot restore marriage', function () {

@@ -9,8 +9,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 it('can determine its visibility', function () {
-    $alive = factory(Person::class)->state('alive')->create();
-    $dead = factory(Person::class)->state('dead')->create();
+    $alive = Person::factory()->alive()->create();
+    $dead = Person::factory()->dead()->create();
 
     $alive->changeVisibility(false);
     assertFalse($alive->isVisible());
@@ -24,7 +24,7 @@ it('can determine its visibility', function () {
 });
 
 test('change visibility method works', function () {
-    $person = factory(Person::class)->create();
+    $person = Person::factory()->create();
 
     assertFalse($person->isVisible());
 
@@ -38,13 +38,13 @@ test('change visibility method works', function () {
 });
 
 it('tells if it can be viewed by given user', function () {
-    $user = factory(User::class)->create();
+    $user = User::factory()->create();
 
-    $hiddenPerson = factory(Person::class)->create([
+    $hiddenPerson = Person::factory()->create([
         'visibility' => false,
     ]);
 
-    $visiblePerson = factory(Person::class)->create([
+    $visiblePerson = Person::factory()->create([
         'visibility' => true,
     ]);
 
@@ -58,7 +58,7 @@ it('tells if it can be viewed by given user', function () {
 });
 
 it('tells if can be viewed by guest', function () {
-    $person = factory(Person::class)->create();
+    $person = Person::factory()->create();
 
     assertFalse($person->canBeViewedBy(null));
 
@@ -68,47 +68,47 @@ it('tells if can be viewed by guest', function () {
 });
 
 it('can get mother', function () {
-    $mother = factory(Person::class)->state('woman')->create();
-    $person = factory(Person::class)->create(['mother_id' => $mother->id]);
+    $mother = Person::factory()->woman()->create();
+    $person = Person::factory()->create(['mother_id' => $mother->id]);
 
     assertEquals($mother->id, $person->mother->id);
 });
 
 it('can get father', function () {
-    $father = factory(Person::class)->state('man')->create();
-    $person = factory(Person::class)->create(['father_id' => $father->id]);
+    $father = Person::factory()->man()->create();
+    $person = Person::factory()->create(['father_id' => $father->id]);
 
     assertEquals($father->id, $person->father->id);
 });
 
 it('can get siblings and half siblings', function () {
-    $mother = factory(Person::class)->state('woman')->create();
-    $father = factory(Person::class)->state('man')->create();
+    $mother = Person::factory()->woman()->create();
+    $father = Person::factory()->man()->create();
 
-    $person = factory(Person::class)->create([
+    $person = Person::factory()->create([
         'mother_id' => $mother->id,
         'father_id' => $father->id,
     ]);
 
-    factory(Person::class, 2)->create([
+    Person::factory()->count(2)->create([
         'mother_id' => $person->mother_id,
         'father_id' => $person->father_id,
     ]);
 
-    factory(Person::class, 1)->create([
+    Person::factory()->count(1)->create([
         'mother_id' => $person->mother_id,
-        'father_id' => factory(Person::class)->state('man')->create(),
+        'father_id' => Person::factory()->man()->create(),
     ]);
-    factory(Person::class, 2)->create([
+    Person::factory()->count(2)->create([
         'mother_id' => $person->mother_id,
         'father_id' => null,
     ]);
 
-    factory(Person::class, 3)->create([
-        'mother_id' => factory(Person::class)->state('woman')->create(),
+    Person::factory()->count(3)->create([
+        'mother_id' => Person::factory()->woman()->create(),
         'father_id' => $person->father_id,
     ]);
-    factory(Person::class, 1)->create([
+    Person::factory()->count(1)->create([
         'mother_id' => null,
         'father_id' => $person->father_id,
     ]);
@@ -130,11 +130,11 @@ it('can get siblings and half siblings', function () {
 });
 
 it('can get marriages', function () {
-    $person = factory(Person::class)->state('woman')->create();
+    $person = Person::factory()->woman()->create();
 
-    factory(Person::class, 3)->state('man')->create()
+    Person::factory()->count(3)->man()->create()
         ->each(function ($partner) use ($person) {
-            factory(Marriage::class)->create([
+            Marriage::factory()->create([
                 'woman_id' => $person->id,
                 'man_id' => $partner->id,
             ]);
@@ -144,30 +144,30 @@ it('can get marriages', function () {
 });
 
 it('can get partners', function () {
-    $person = factory(Person::class)->state('woman')->create();
+    $person = Person::factory()->woman()->create();
 
-    $spouse = factory(Person::class)->state('man')->create(['name' => 'Spouse']);
+    $spouse = Person::factory()->man()->create(['name' => 'Spouse']);
 
-    factory(Marriage::class)->create([
+    Marriage::factory()->create([
         'woman_id' => $person->id,
         'man_id' => $spouse->id,
     ]);
 
-    $spouseWithChild = factory(Person::class)->state('man')->create(['name' => 'Spouse With Child']);
+    $spouseWithChild = Person::factory()->man()->create(['name' => 'Spouse With Child']);
 
-    factory(Marriage::class)->create([
+    Marriage::factory()->create([
         'woman_id' => $person->id,
         'man_id' => $spouseWithChild->id,
     ]);
 
-    factory(Person::class)->create([
+    Person::factory()->create([
         'mother_id' => $person->id,
         'father_id' => $spouseWithChild->id,
     ]);
 
-    $lover = factory(Person::class)->state('man')->create(['name' => 'Lover']);
+    $lover = Person::factory()->man()->create(['name' => 'Lover']);
 
-    factory(Person::class)->create([
+    Person::factory()->create([
         'mother_id' => $person->id,
         'father_id' => $lover->id,
     ]);
@@ -180,17 +180,17 @@ it('can get partners', function () {
 })->skip();
 
 it('can get children', function () {
-    $father = factory(Person::class)->state('man')->create();
+    $father = Person::factory()->man()->create();
 
-    factory(Person::class, 2)->state('woman')->create()
+    Person::factory()->count(2)->woman()->create()
         ->each(function ($mother) use ($father) {
-            factory(Person::class)->create([
+            Person::factory()->create([
                 'mother_id' => $mother->id,
                 'father_id' => $father->id,
             ]);
         });
 
-    $child = factory(Person::class)->create([
+    $child = Person::factory()->create([
         'mother_id' => null,
         'father_id' => $father->id,
     ]);
@@ -200,19 +200,19 @@ it('can get children', function () {
 });
 
 test('year getters work', function () {
-    $personWithDates = factory(Person::class)->state('dead')->create([
+    $personWithDates = Person::factory()->dead()->create([
         'birth_date_from' => '1957-05-20',
         'birth_date_to' => '1957-05-20',
         'death_date_from' => '2020-11-09',
         'death_date_to' => '2020-11-09',
     ]);
-    $personWithSomeDates = factory(Person::class)->state('dead')->create([
+    $personWithSomeDates = Person::factory()->dead()->create([
         'birth_date_from' => '1893-01-01',
         'birth_date_to' => '1893-12-31',
         'death_date_from' => '1944-08-01',
         'death_date_to' => '1944-08-31',
     ]);
-    $personWithoutDates = factory(Person::class)->create([
+    $personWithoutDates = Person::factory()->create([
         'birth_date_from' => null,
         'birth_date_to' => null,
         'death_date_from' => null,
@@ -230,7 +230,7 @@ test('year getters work', function () {
 });
 
 it('returns null when calculating age without date', function () {
-    $person = factory(Person::class)->create([
+    $person = Person::factory()->create([
         'birth_date_from' => null,
         'birth_date_to' => null,
     ]);
@@ -242,7 +242,7 @@ it('returns null when calculating age without date', function () {
 });
 
 it('can calculate age with complete dates', function () {
-    $person = factory(Person::class)->create([
+    $person = Person::factory()->create([
         'birth_date_from' => '1994-06-22',
         'birth_date_to' => '1994-06-22',
     ]);
@@ -254,12 +254,12 @@ it('can calculate age with complete dates', function () {
 });
 
 it('can calculate age with incomplete birth date', function () {
-    $person_without_day = factory(Person::class)->create([
+    $person_without_day = Person::factory()->create([
         'birth_date_from' => '1978-04-01',
         'birth_date_to' => '1978-04-30',
     ]);
 
-    $person_without_month = factory(Person::class)->create([
+    $person_without_month = Person::factory()->create([
         'birth_date_from' => '1982-01-01',
         'birth_date_to' => '1982-12-31',
     ]);
@@ -277,7 +277,7 @@ it('can calculate age with incomplete birth date', function () {
 });
 
 it('can calculate age with incomplete at date', function () {
-    $person = factory(Person::class)->create([
+    $person = Person::factory()->create([
         'birth_date_from' => '1975-03-22',
         'birth_date_to' => '1975-03-22',
     ]);
@@ -297,7 +297,7 @@ it('can calculate age with incomplete at date', function () {
 });
 
 it('can calculate age with incomplete dates', function () {
-    $person = factory(Person::class)->create([
+    $person = Person::factory()->create([
         'birth_date_from' => '1992-01-01',
         'birth_date_to' => '1992-12-31',
     ]);
@@ -309,7 +309,7 @@ it('can calculate age with incomplete dates', function () {
 });
 
 it('can calculate current age', function () {
-    $person = factory(Person::class)->create([
+    $person = Person::factory()->create([
         'birth_date_from' => '1973-05-12',
         'birth_date_to' => '1973-05-12',
     ]);
@@ -324,7 +324,7 @@ it('can calculate current age', function () {
 });
 
 it('can calculate age age at death', function () {
-    $person = factory(Person::class)->create([
+    $person = Person::factory()->create([
         'birth_date_from' => '1874-04-08',
         'birth_date_to' => '1874-04-08',
         'death_date_from' => '1941-05-30',
@@ -336,7 +336,7 @@ it('can calculate age age at death', function () {
 });
 
 it('can format name', function () {
-    $person = factory(Person::class)->state('alive')->create([
+    $person = Person::factory()->alive()->create([
         'name' => 'Zenona',
         'middle_name' => 'Ludmiła',
         'family_name' => 'Skwierczyńska',
@@ -366,7 +366,7 @@ it('can format name', function () {
 });
 
 it('can format simple name', function () {
-    $person = factory(Person::class)->state('alive')->create([
+    $person = Person::factory()->alive()->create([
         'name' => 'Zenona',
         'middle_name' => 'Ludmiła',
         'family_name' => 'Skwierczyńska',
@@ -381,21 +381,21 @@ it('can format simple name', function () {
 });
 
 it('casts sources to collection', function () {
-    $sources = factory(Person::class)->create([
+    $sources = Person::factory()->create([
         'sources' => null,
     ])->sources;
 
     assertInstanceOf(Collection::class, $sources);
     assertTrue($sources->isEmpty());
 
-    $sources = factory(Person::class)->create([
+    $sources = Person::factory()->create([
         'sources' => [],
     ])->sources;
 
     assertInstanceOf(Collection::class, $sources);
     assertTrue($sources->isEmpty());
 
-    $sources = factory(Person::class)->create([
+    $sources = Person::factory()->create([
         'sources' => [
             '[Henryk Gąsiorowski](https://pl.wikipedia.org/wiki/Henryk_G%C4%85siorowski) w Wikipedii, wolnej encyklopedii, dostęp 2020-06-06',
             'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
@@ -421,13 +421,13 @@ test('sources are sanitized', function () {
 
     assertEquals(
         $sanitized,
-        factory(Person::class)->create(['sources' => $unsanitized])
+        Person::factory()->create(['sources' => $unsanitized])
             ->sources->map->raw()->all()
     );
 });
 
 it('can be found by pytlewski id', function () {
-    $person = factory(Person::class)->create([
+    $person = Person::factory()->create([
         'id_pytlewski' => 1140,
     ]);
 
@@ -455,7 +455,7 @@ it('can list first letters', function () {
             'last_name' => 'Hoffman',
         ],
     ])->each(function ($names) {
-        factory(Person::class)->create($names);
+        Person::factory()->create($names);
     });
 
     assertEquals(

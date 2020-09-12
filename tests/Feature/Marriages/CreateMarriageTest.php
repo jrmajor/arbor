@@ -10,9 +10,9 @@ beforeEach(function () {
     ];
 
     $this->validAttributes = [
-        'woman_id' => factory(Person::class)->state('woman')->create()->id,
+        'woman_id' => Person::factory()->woman()->create()->id,
         'woman_order' => 1,
-        'man_id' => factory(Person::class)->state('man')->create()->id,
+        'man_id' => Person::factory()->man()->create()->id,
         'man_order' => 2,
         'rite' => 'roman_catholic',
         'first_event_type' => 'civil_marriage',
@@ -93,8 +93,8 @@ test('users with permissions can add valid marriage', function () {
 });
 
 test('user can pass spouse to form by get request parameters', function () {
-    $woman = factory(Person::class)->state('woman')->create();
-    $man = factory(Person::class)->state('man')->create();
+    $woman = Person::factory()->woman()->create();
+    $man = Person::factory()->man()->create();
 
     withPermissions(2)
         ->get("marriages/create?woman=$woman->id&man=$man->id")

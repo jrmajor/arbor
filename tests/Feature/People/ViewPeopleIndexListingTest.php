@@ -8,12 +8,12 @@ it('works with no people')
     ->assertSeeText('total: 0');
 
 it('works with people', function () {
-    factory(Person::class)->create([
+    Person::factory()->create([
         'family_name' => 'Zbyrowski',
         'last_name' => null,
     ]);
 
-    factory(Person::class)->create([
+    Person::factory()->create([
         'family_name' => 'Ziobro',
         'last_name' => 'Mikke',
     ]);

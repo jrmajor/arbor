@@ -64,7 +64,7 @@ beforeEach(function () {
         ],
     ];
 
-    $this->person = factory(Person::class)->create($this->oldAttributes);
+    $this->person = Person::factory()->create($this->oldAttributes);
 });
 
 test('guests are asked to log in when attempting to view edit person form', function () {

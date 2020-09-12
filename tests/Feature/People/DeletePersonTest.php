@@ -4,7 +4,7 @@ use App\Person;
 use Carbon\Carbon;
 
 beforeEach(
-    fn () => $this->person = factory(Person::class)->create()
+    fn () => $this->person = Person::factory()->create()
 );
 
 test('guests cannot delete person', function () {

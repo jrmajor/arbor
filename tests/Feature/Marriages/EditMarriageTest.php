@@ -10,9 +10,9 @@ beforeEach(function () {
     ];
 
     $this->oldAttributes = [
-        'woman_id' => factory(Person::class)->state('woman')->create()->id,
+        'woman_id' => Person::factory()->woman()->create()->id,
         'woman_order' => 1,
-        'man_id' => factory(Person::class)->state('man')->create()->id,
+        'man_id' => Person::factory()->man()->create()->id,
         'man_order' => 2,
         'rite' => 'roman_catholic',
         'first_event_type' => 'civil_marriage',
@@ -30,9 +30,9 @@ beforeEach(function () {
     ];
 
     $this->newAttributes = [
-        'woman_id' => factory(Person::class)->state('woman')->create()->id,
+        'woman_id' => Person::factory()->woman()->create()->id,
         'woman_order' => 2,
-        'man_id' => factory(Person::class)->state('man')->create()->id,
+        'man_id' => Person::factory()->man()->create()->id,
         'man_order' => 1,
         'rite' => 'civil',
         'first_event_type' => 'concordat_marriage',
@@ -49,7 +49,7 @@ beforeEach(function () {
         'divorce_place' => 'Toruń, Polska',
     ];
 
-    $this->marriage = factory(Marriage::class)->create($this->oldAttributes);
+    $this->marriage = Marriage::factory()->create($this->oldAttributes);
 });
 
 test('guests are asked to log in when attempting to view edit marriage form', function () {

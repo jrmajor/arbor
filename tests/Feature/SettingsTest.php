@@ -36,7 +36,7 @@ it('doesnt accept invalid email', function () {
 });
 
 it('can change email', function () {
-    $user = factory(User::class)->create();
+    $user = User::factory()->create();
     $newEmail = faker()->safeEmail;
 
     actingAs($user)
@@ -76,7 +76,7 @@ it('doesnt accept invalid password', function () {
 });
 
 it('can change password', function () {
-    $user = factory(User::class)->create();
+    $user = User::factory()->create();
 
     actingAs($user)
         ->livewire(Settings::class)
@@ -108,7 +108,7 @@ it('checks password when logging user out from other devices', function () {
 });
 
 it('can change logout user from other devices', function () {
-    $user = factory(User::class)->create([
+    $user = User::factory()->create([
         'password' => Hash::make($password = faker()->password),
     ]);
 

@@ -3,7 +3,7 @@
 use App\Person;
 
 beforeEach(function () {
-    $this->person = factory(Person::class)->create();
+    $this->person = Person::factory()->create();
 });
 
 test('guests are asked to log in when attempting to view person history', function () {

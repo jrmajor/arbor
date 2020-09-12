@@ -3,21 +3,21 @@
 use App\Person;
 
 test('guest cannot see hidden alive person', function () {
-    $person = factory(Person::class)->states('alive')->create();
+    $person = Person::factory()->alive()->create();
 
     get("people/$person->id")
         ->assertStatus(403);
 });
 
 test('guest cannot see hidden dead person', function () {
-    $person = factory(Person::class)->states('dead')->create();
+    $person = Person::factory()->dead()->create();
 
     get("people/$person->id")
         ->assertStatus(403);
 });
 
 test('guest can see visible alive person', function () {
-    $person = factory(Person::class)->states('alive')->create([
+    $person = Person::factory()->alive()->create([
         'visibility' => 1,
     ]);
 
@@ -26,7 +26,7 @@ test('guest can see visible alive person', function () {
 });
 
 test('guest can see visible dead person', function () {
-    $person = factory(Person::class)->states('dead')->create([
+    $person = Person::factory()->dead()->create([
         'visibility' => 1,
     ]);
 
@@ -35,7 +35,7 @@ test('guest can see visible dead person', function () {
 });
 
 test('user with persmissions can see hidden alive person', function () {
-    $person = factory(Person::class)->states('alive')->create();
+    $person = Person::factory()->alive()->create();
 
     withPermissions(1)
         ->get("people/$person->id")
@@ -43,7 +43,7 @@ test('user with persmissions can see hidden alive person', function () {
 });
 
 test('user with persmissions can see hidden dead person', function () {
-    $person = factory(Person::class)->states('dead')->create();
+    $person = Person::factory()->dead()->create();
 
     withPermissions(1)
         ->get("people/$person->id")
@@ -51,7 +51,7 @@ test('user with persmissions can see hidden dead person', function () {
 });
 
 test('user with persmissions can see visible alive person', function () {
-    $person = factory(Person::class)->states('alive')->create([
+    $person = Person::factory()->alive()->create([
         'visibility' => 1,
     ]);
 
@@ -61,7 +61,7 @@ test('user with persmissions can see visible alive person', function () {
 });
 
 test('user with persmissions can see visible dead person', function () {
-    $person = factory(Person::class)->states('dead')->create([
+    $person = Person::factory()->dead()->create([
         'visibility' => 1,
     ]);
 
@@ -80,14 +80,14 @@ test('user with insufficient persmissions see 404 when attemting to view nonexis
     ->assertStatus(404);
 
 test('guest see 404 when attemting to view deleted person', function () {
-    $person = tap(factory(Person::class)->create())->delete();
+    $person = tap(Person::factory()->create())->delete();
 
     get("people/$person->id")
         ->assertStatus(404);
 });
 
 test('users without persmissions see 404 when attemting to view deleted person', function () {
-    $person = tap(factory(Person::class)->create())->delete();
+    $person = tap(Person::factory()->create())->delete();
 
     withPermissions(2)
         ->get("people/$person->id")
@@ -95,7 +95,7 @@ test('users without persmissions see 404 when attemting to view deleted person',
 });
 
 test('user with persmissions are redirected to edits history when attempting to view deleted person', function () {
-    $person = tap(factory(Person::class)->create())->delete();
+    $person = tap(Person::factory()->create())->delete();
 
     withPermissions(3)
         ->get("people/$person->id")

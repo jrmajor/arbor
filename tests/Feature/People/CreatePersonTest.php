@@ -30,8 +30,8 @@ beforeEach(function () {
         'burial_date_from' => '1947-01-21',
         'burial_date_to' => '1947-01-21',
         'burial_place' => 'Grudziądz, Polska',
-        'mother_id' => factory(Person::class)->state('woman')->create()->id,
-        'father_id' => factory(Person::class)->state('man')->create()->id,
+        'mother_id' => Person::factory()->woman()->create()->id,
+        'father_id' => Person::factory()->man()->create()->id,
         'sources' => [
             '[Henryk Gąsiorowski](https://pl.wikipedia.org/wiki/Henryk_G%C4%85siorowski) w Wikipedii, wolnej encyklopedii, dostęp 2020-06-06',
             'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
@@ -110,8 +110,8 @@ test('users with permissions can add valid person', function () {
 });
 
 test('you can pass parents ids to form by get request parameters', function () {
-    $mother = factory(Person::class)->state('woman')->create();
-    $father = factory(Person::class)->state('man')->create();
+    $mother = Person::factory()->woman()->create();
+    $father = Person::factory()->man()->create();
 
     withPermissions(2)
         ->get("people/create?mother=$mother->id&father=$father->id")
