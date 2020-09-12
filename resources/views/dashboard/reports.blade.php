@@ -10,7 +10,7 @@
 
             <div>
                 <h2 class="mb-2 mt-4 leading-none text-xl font-medium">Should be dead</h2>
-                <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+                <div class="w-full p-6 bg-white rounded-lg shadow">
                     <ul>
                         @forelse ($shouldBeDead as $person)
                             <li><x-name :person="$person"/></li>
@@ -23,7 +23,7 @@
 
             <div>
                 <h2 class="mb-2 mt-4 leading-none text-xl font-medium">Visible alive</h2>
-                <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+                <div class="w-full p-6 bg-white rounded-lg shadow">
                     <ul>
                         @forelse ($visibleAlive as $person)
                             <li><x-name :person="$person"/></li>
@@ -36,7 +36,7 @@
 
             <div>
                 <h2 class="mb-2 mt-4 leading-none text-xl font-medium">Invisible dead</h2>
-                <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+                <div class="w-full p-6 bg-white rounded-lg shadow">
                     <ul>
                         @forelse ($invisibleDead as $person)
                             <li><x-name :person="$person"/></li>

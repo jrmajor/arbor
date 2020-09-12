@@ -105,12 +105,6 @@ module.exports = {
       mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
     },
     extend: {
-      fontSize: {
-        '7xl': '5rem',
-        '8xl': '6rem',
-        '9xl': '7rem',
-        '10xl': '8rem',
-      },
       spacing: {
         '80': '20rem',
         '96': '24rem',
@@ -133,10 +127,10 @@ module.exports = {
     require('tailwindcss-multi-column')(),
   ],
   experimental: {
-    applyComplexClasses: false,
+    applyComplexClasses: true,
     darkModeVariant: false,
-    defaultLineHeights: false,
-    extendedFontSizeScale: false,
+    defaultLineHeights: true,
+    extendedFontSizeScale: true,
     extendedSpacingScale: false,
     uniformColorPalette: false,
   },

@@ -14,7 +14,7 @@
         <a href="{{ route('people.index') }}">
             <h1
                 style="font-family: Nunito; letter-spacing: 0.2em"
-                class="text-7xl xs:text-8xl sm:text-9xl md:text-9xl xl:text-9xl leading-none">
+                class="text-6xl xs:text-7xl sm:text-8xl leading-none">
                 arbor
             </h1>
         </a>

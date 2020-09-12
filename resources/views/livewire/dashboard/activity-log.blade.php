@@ -9,12 +9,12 @@
 
     <main class="flex-grow md:w-1/2 space-y-2 flex flex-col items-center">
 
-        <div class="w-full p-6 bg-white rounded-lg shadow-lg">
+        <div class="w-full p-6 bg-white rounded-lg shadow">
             <table>
                 @foreach ($activities as $activity)
                     <tr wire:key="{{ $activity->id }}">
 
-                        <td class="tnum text-right p-1">
+                        <td class="tabular-nums p-1">
                             {{ $activity->created_at->format('Y-m-d h:s') }}
                         </td>
 
