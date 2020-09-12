@@ -22,7 +22,7 @@ class ActivityLog extends Component
             ->whereIn('log_name', ['users', 'people', 'marriages'])
             ->paginate();
 
-        return view('livewire.dashboard.activity-log', [
+        return view('dashboard.activity-log', [
             'activities' => $activities,
         ])->extends('layouts.app');
     }

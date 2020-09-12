@@ -17,7 +17,7 @@ class Users extends Component
         $users = User::all()->load('latestLogin')
                     ->sortByDesc(fn ($user) => optional($user->latestLogin)->created_at);
 
-        return view('livewire.dashboard.users', [
+        return view('dashboard.users', [
             'users' => $users,
         ])->extends('layouts.app');
     }

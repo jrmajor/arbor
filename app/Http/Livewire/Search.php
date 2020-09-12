@@ -39,7 +39,7 @@ class Search extends Component
                     });
             })->paginate(20);
 
-        return view('livewire.search', [
+        return view('people.search', [
             'people' => $people,
         ])->extends('layouts.app');
     }
