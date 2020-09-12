@@ -1,6 +1,6 @@
 <?php
 
-use App\Person;
+use App\Models\Person;
 
 beforeEach(
     fn () => $this->person = tap(Person::factory()->create())->delete()

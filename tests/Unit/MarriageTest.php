@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
-use App\Marriage;
-use App\Person;
-use App\User;
+use App\Models\Marriage;
+use App\Models\Person;
+use App\Models\User;
 
 it('can determine its visibility', function () {
     $marriage = Marriage::factory()->create();

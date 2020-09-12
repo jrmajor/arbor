@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Marriage;
-use App\User;
+use App\Models\Marriage;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MarriagePolicy

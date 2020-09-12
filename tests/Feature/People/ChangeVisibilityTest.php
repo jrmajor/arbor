@@ -1,6 +1,6 @@
 <?php
 
-use App\Person;
+use App\Models\Person;
 use Spatie\Activitylog\Models\Activity;
 
 beforeEach(

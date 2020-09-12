@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Livewire\Settings;
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Events\OtherDeviceLogout;
 
 test('guest are asked to log in when attempting to view settings page')

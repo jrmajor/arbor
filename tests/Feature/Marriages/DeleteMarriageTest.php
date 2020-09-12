@@ -1,6 +1,6 @@
 <?php
 
-use App\Marriage;
+use App\Models\Marriage;
 use Carbon\Carbon;
 
 beforeEach(

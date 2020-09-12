@@ -2,7 +2,7 @@
     {{ $slot }}
 @else
     @php
-        $person = App\Person::findByPytlewskiId($id)
+        $person = App\Models\Person::findByPytlewskiId($id)
     @endphp
     @if (! $person)
         <a

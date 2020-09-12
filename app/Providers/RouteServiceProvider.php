@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Marriage;
-use App\Person;
+use App\Models\Marriage;
+use App\Models\Person;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 

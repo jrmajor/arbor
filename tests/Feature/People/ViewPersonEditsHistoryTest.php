@@ -1,6 +1,6 @@
 <?php
 
-use App\Person;
+use App\Models\Person;
 
 beforeEach(function () {
     $this->person = Person::factory()->create();

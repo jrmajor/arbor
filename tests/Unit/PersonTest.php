@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Marriage;
-use App\Person;
-use App\User;
+use App\Models\Marriage;
+use App\Models\Person;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Events\Login;
 
 test('authenticated users are redirected when trying to access form', function () {

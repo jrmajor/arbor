@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMarriage;
-use App\Marriage;
-use App\Person;
+use App\Models\Marriage;
+use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

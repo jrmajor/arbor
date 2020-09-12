@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 
 it('logs user logins events', function () {
     $user = User::factory()->create();

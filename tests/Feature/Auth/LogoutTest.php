@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Events\CurrentDeviceLogout;
 
 it('logs user out', function () {

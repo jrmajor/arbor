@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function latestLogin()
     {
-        return $this->morphOne('Spatie\Activitylog\Models\Activity', 'causer')
+        return $this->morphOne('Spatie\\Activitylog\\Models\\Activity', 'causer')
                     ->whereLogName('logins')->whereDescription('logged-in')
                     ->orderBy('created_at', 'desc');
     }

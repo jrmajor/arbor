@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Person;
+use App\Models\Person;
 use Illuminate\Support\Facades\Cache;
 
 class PersonObserver

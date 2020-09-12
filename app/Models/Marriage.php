@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
@@ -57,12 +57,12 @@ class Marriage extends Model
 
     public function woman(): BelongsTo
     {
-        return $this->belongsTo('App\Person')->withTrashed();
+        return $this->belongsTo('App\\Models\\Person')->withTrashed();
     }
 
     public function man(): BelongsTo
     {
-        return $this->belongsTo('App\Person')->withTrashed();
+        return $this->belongsTo('App\\Models\\Person')->withTrashed();
     }
 
     public function partner($person): ?Person

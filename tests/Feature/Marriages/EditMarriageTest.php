@@ -1,7 +1,7 @@
 <?php
 
-use App\Marriage;
-use App\Person;
+use App\Models\Marriage;
+use App\Models\Person;
 
 beforeEach(function () {
     $this->dates = [

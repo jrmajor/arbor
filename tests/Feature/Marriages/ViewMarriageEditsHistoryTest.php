@@ -1,6 +1,6 @@
 <?php
 
-use App\Marriage;
+use App\Models\Marriage;
 
 beforeEach(function () {
     $this->marriage = Marriage::factory()->create();

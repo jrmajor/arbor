@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 
 it('correctly determines its abilities', function () {
     $user = User::factory()->create([

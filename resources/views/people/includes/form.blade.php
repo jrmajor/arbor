@@ -320,12 +320,12 @@
                     class="w-full sm:w-1/2"
                     :label="__('people.mother')" sex="xx"
                     name="mother" :nullable="true"
-                    :initial="App\Person::find(old('mother_id', $person->mother_id))"/>
+                    :initial="App\Models\Person::find(old('mother_id', $person->mother_id))"/>
                 <x-person-picker
                     class="w-full sm:w-1/2"
                     :label="__('people.father')" sex="xy"
                     name="father" :nullable="true"
-                    :initial="App\Person::find(old('father_id', $person->father_id))"/>
+                    :initial="App\Models\Person::find(old('father_id', $person->father_id))"/>
             </div>
         </fieldset>
 

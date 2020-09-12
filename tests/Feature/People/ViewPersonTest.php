@@ -1,6 +1,6 @@
 <?php
 
-use App\Person;
+use App\Models\Person;
 
 test('guest cannot see hidden alive person', function () {
     $person = Person::factory()->alive()->create();

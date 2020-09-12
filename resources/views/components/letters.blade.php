@@ -11,7 +11,7 @@
     <h2>{{ __('people.index.by_family_name') }}:</h2>
 
     <ul class="col-count-3 xs:col-count-4 sm:col-count-5 md:col-count-6 lg:col-count-8">
-        @foreach(App\Person::letters('family') as $letter)
+        @foreach(App\Models\Person::letters('family') as $letter)
             <li>
                 @if($active['letter'] == $letter->letter && $active['type'] == 'f')
                     <strong>
@@ -31,7 +31,7 @@
     <h2>{{ __('people.index.by_last_name') }}:</h2>
 
     <ul class="col-count-3 xs:col-count-4 sm:col-count-5 md:col-count-6 lg:col-count-8">
-        @foreach(App\Person::letters('last') as $letter)
+        @foreach(App\Models\Person::letters('last') as $letter)
             <li>
                 @if($active['letter'] == $letter->letter && $active['type'] == 'l')
                     <strong>

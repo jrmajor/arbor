@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Person;
+use App\Models\Person;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Helper\Table;
 

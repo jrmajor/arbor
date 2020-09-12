@@ -1,11 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Casts\Sources;
 use App\Services\Pytlewski\Pytlewski;
 use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
+use App\Wielcy;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -101,12 +102,12 @@ class Person extends Model
 
     public function mother(): BelongsTo
     {
-        return $this->belongsTo('App\Person');
+        return $this->belongsTo('App\\Models\\Person');
     }
 
     public function father(): BelongsTo
     {
-        return $this->belongsTo('App\Person');
+        return $this->belongsTo('App\\Models\\Person');
     }
 
     public function getWielcyAttribute(): ?Wielcy
@@ -137,7 +138,7 @@ class Person extends Model
 
     public function siblings(): HasMany
     {
-        return $this->hasMany('App\Person', 'id', 'id')
+        return $this->hasMany('App\\Models\\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
                     ->orWhere(function ($q) {
                         return $this->mother_id && $this->father_id
@@ -150,7 +151,7 @@ class Person extends Model
 
     public function siblings_mother(): HasMany
     {
-        return $this->hasMany('App\Person', 'id', 'id')
+        return $this->hasMany('App\\Models\\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
                     ->orWhere(function ($q) {
                         return $this->mother_id
@@ -165,7 +166,7 @@ class Person extends Model
 
     public function siblings_father(): HasMany
     {
-        return $this->hasMany('App\Person', 'id', 'id')
+        return $this->hasMany('App\\Models\\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
                     ->orWhere(function ($q) {
                         return $this->father_id
@@ -180,7 +181,7 @@ class Person extends Model
 
     public function marriages(): HasMany
     {
-        return $this->hasMany('App\Marriage', 'id', 'id')
+        return $this->hasMany('App\\Models\\Marriage', 'id', 'id')
                     ->where('id', '!=', $this->id)
                     ->orWhere(function ($q) {
                         return $q->where('woman_id', $this->id)
@@ -190,7 +191,7 @@ class Person extends Model
 
     public function children(): HasMany
     {
-        return $this->hasMany('App\Person', 'id', 'id')
+        return $this->hasMany('App\\Models\\Person', 'id', 'id')
                     ->where('id', '!=', $this->id)
                     ->orWhere(function ($q) {
                         return $q->where('mother_id', $this->id)

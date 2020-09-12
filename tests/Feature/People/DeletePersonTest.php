@@ -1,6 +1,6 @@
 <?php
 
-use App\Person;
+use App\Models\Person;
 use Carbon\Carbon;
 
 beforeEach(

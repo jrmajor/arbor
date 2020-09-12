@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Person;
+use App\Models\Person;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;

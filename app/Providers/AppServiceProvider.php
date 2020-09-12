@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Person;
 use App\Observers\PersonObserver;
-use App\Person;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;

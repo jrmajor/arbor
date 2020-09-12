@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Person;
+use App\Models\Person;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;

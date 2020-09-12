@@ -21,7 +21,7 @@
         @else
             <div class="text-center">
                 <small>
-                    {{ __('people.index.total') }}: <strong>{{ App\Person::count() }}</strong>
+                    {{ __('people.index.total') }}: <strong>{{ App\Models\Person::count() }}</strong>
                 </small>
             </div>
         @endif

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Person;
+use App\Models\Person;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\Factory;

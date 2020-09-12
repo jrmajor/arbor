@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Person;
-use App\User;
+use App\Models\Person;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PersonPolicy
