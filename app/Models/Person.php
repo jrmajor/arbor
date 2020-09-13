@@ -333,9 +333,9 @@ class Person extends Model
         return $name;
     }
 
-    public static function findByPytlewskiId($id): ?self
+    public static function findByPytlewskiId(?int $id): ?self
     {
-        return self::where('id_pytlewski', $id)->first();
+        return $id ? self::where('id_pytlewski', $id)->first() : null;
     }
 
     public static function letters($type): Collection

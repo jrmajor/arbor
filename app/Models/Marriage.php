@@ -65,7 +65,7 @@ class Marriage extends Model
         return $this->belongsTo('App\\Models\\Person')->withTrashed();
     }
 
-    public function partner($person): ?Person
+    public function partner(Person $person): ?Person
     {
         if ($this->man_id == $person->id) {
             return $this->woman;
@@ -77,7 +77,7 @@ class Marriage extends Model
         return null;
     }
 
-    public function order($person): ?int
+    public function order(Person $person): ?int
     {
         if ($this->man_id == $person->id) {
             return $this->man_order;
