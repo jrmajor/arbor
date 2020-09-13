@@ -50,7 +50,7 @@ it('can get siblings and half siblings', function () {
     expect($person->siblings_father)->toHaveCount(6);
 });
 
-it('can eagerly get siblings', function () {
+it('can eagerly get siblings and half siblings', function () {
     $firstMother = Person::factory()->woman()->create();
     $firstFather = Person::factory()->man()->create();
 
@@ -104,7 +104,7 @@ it('can eagerly get siblings', function () {
         'father_id' => null,
     ]);
 
-    Person::factory()->count(1)->create([
+    Person::factory()->count(2)->create([
         'mother_id' => Person::factory()->woman()->create(),
         'father_id' => $secondPerson->father_id,
     ]);
@@ -114,11 +114,19 @@ it('can eagerly get siblings', function () {
     ]);
 
     $people = Person::whereIn('id', [$firstPerson->id, $secondPerson->id])
-        ->with('siblings')->get();
+        ->with('siblings', 'siblings_mother', 'siblings_father')->get();
 
     expect($people->get(0)->siblings)->toHaveCount(2);
 
     expect($people->get(1)->siblings)->toHaveCount(3);
+
+    expect($people->get(0)->siblings_mother)->toHaveCount(3);
+
+    expect($people->get(1)->siblings_mother)->toHaveCount(5);
+
+    expect($people->get(0)->siblings_father)->toHaveCount(4);
+
+    expect($people->get(1)->siblings_father)->toHaveCount(6);
 
     $firstPerson->mother_id = null;
     $firstPerson->save();
@@ -130,7 +138,15 @@ it('can eagerly get siblings', function () {
     $people = Person::whereIn('id', [$firstPerson->id, $secondPerson->id])
         ->with('siblings')->get();
 
-    expect($firstPerson->siblings)->toHaveCount(0);
+    expect($people->get(0)->siblings)->toHaveCount(0);
 
-    expect($secondPerson->siblings)->toHaveCount(0);
+    expect($people->get(1)->siblings)->toHaveCount(0);
+
+    expect($people->get(0)->siblings_mother)->toHaveCount(0);
+
+    expect($people->get(1)->siblings_mother)->toHaveCount(0);
+
+    expect($people->get(0)->siblings_father)->toHaveCount(6);
+
+    expect($people->get(1)->siblings_father)->toHaveCount(0);
 });

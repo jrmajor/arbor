@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Sources;
+use App\Models\Relations\HalfSiblings;
 use App\Models\Relations\Siblings;
 use App\Services\Pytlewski\Pytlewski;
 use App\Traits\HasDateTuples;
@@ -143,34 +144,16 @@ class Person extends Model
             ->orderBy('birth_date_from');
     }
 
-    public function siblings_mother(): HasMany
+    public function siblings_mother(): HalfSiblings
     {
-        return $this->hasMany('App\\Models\\Person', 'id', 'id')
-                    ->where('id', '!=', $this->id)
-                    ->orWhere(function ($q) {
-                        return $this->mother_id
-                            ? $q->where('mother_id', $this->mother_id)
-                                ->where(function ($q) {
-                                    return $q->where('father_id', '!=', $this->father_id)
-                                        ->orWhereNull('father_id');
-                                })->where('id', '!=', $this->id)
-                            : $q->whereRaw('false');
-                    })->orderBy('birth_date_from', 'asc');
+        return (new HalfSiblings($this, 'mother'))
+            ->orderBy('birth_date_from');
     }
 
-    public function siblings_father(): HasMany
+    public function siblings_father(): HalfSiblings
     {
-        return $this->hasMany('App\\Models\\Person', 'id', 'id')
-                    ->where('id', '!=', $this->id)
-                    ->orWhere(function ($q) {
-                        return $this->father_id
-                            ? $q->where('father_id', $this->father_id)
-                                ->where(function ($q) {
-                                    return $q->where('mother_id', '!=', $this->mother_id)
-                                        ->orWhereNull('mother_id');
-                                })->where('id', '!=', $this->id)
-                            : $q->whereRaw('false');
-                    })->orderBy('birth_date_from', 'asc');
+        return (new HalfSiblings($this, 'father'))
+            ->orderBy('birth_date_from');
     }
 
     public function marriages(): HasMany

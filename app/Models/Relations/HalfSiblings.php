@@ -6,10 +6,14 @@ use App\Models\Person;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class Siblings extends Relation
+class HalfSiblings extends Relation
 {
-    public function __construct(Person $parent)
+    public function __construct(Person $parent, $side)
     {
+        $this->side = $side;
+        $this->sideKey = $side.'_id';
+        $this->partnerKey = $side == 'mother' ? 'father_id' : 'mother_id';
+
         parent::__construct(Person::query(), $parent);
     }
 
@@ -17,24 +21,23 @@ class Siblings extends Relation
     {
         if (static::$constraints) {
             $this->query
-                ->where('mother_id', $this->parent->mother_id)
-                ->where('father_id', $this->parent->father_id)
-                ->where('id', '!=', $this->parent->id);
+                ->where($this->sideKey, $this->parent->{$this->sideKey})
+                ->where(function ($query) {
+                    $query->whereNull($this->partnerKey)
+                        ->orWhere($this->partnerKey, '!=', $this->parent->{$this->partnerKey});
+                })->where('id', '!=', $this->parent->id);
         }
     }
 
     public function addEagerConstraints(array $people)
     {
         $people = collect($people)->filter(function (Person $person) {
-            return $person->mother_id && $person->father_id;
+            return $person->{$this->sideKey};
         });
 
         $this->query->whereIn(
-            'mother_id',
-            $people->pluck('mother_id')->filter()
-        )->whereIn(
-            'father_id',
-            $people->pluck('father_id')->filter()
+            $this->sideKey,
+            $people->pluck($this->sideKey)->filter()
         );
     }
 
@@ -57,11 +60,18 @@ class Siblings extends Relation
         }
 
         foreach ($people as $person) {
+            if ($person->{$this->sideKey} === null) {
+                return $person->setRelation(
+                    $relation, $this->related->newCollection()
+                );
+            }
+
             $person->setRelation(
                 $relation,
                 $siblings->filter(function (Person $sibling) use ($person) {
-                    return $sibling->mother_id === $person->mother_id
-                        && $sibling->father_id === $person->father_id
+                    return $sibling->{$this->sideKey} === $person->{$this->sideKey}
+                        && ($sibling->{$this->partnerKey} !== $person->{$this->partnerKey}
+                            || $sibling->{$this->partnerKey} === null)
                         && $sibling->id !== $person->id;
                 })
             );
@@ -72,8 +82,7 @@ class Siblings extends Relation
 
     public function getResults()
     {
-        return ! is_null($this->parent->mother_id)
-            && ! is_null($this->parent->father_id)
+        return ! is_null($this->parent->{$this->sideKey})
                 ? $this->query->get()
                 : $this->related->newCollection();
     }
