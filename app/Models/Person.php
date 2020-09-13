@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Casts\Sources;
 use App\Models\Relations\Children;
 use App\Models\Relations\HalfSiblings;
+use App\Models\Relations\Marriages;
 use App\Models\Relations\Siblings;
 use App\Services\Pytlewski\Pytlewski;
 use App\Traits\HasDateTuples;
@@ -157,14 +158,10 @@ class Person extends Model
             ->orderBy('birth_date_from');
     }
 
-    public function marriages(): HasMany
+    public function marriages(): Marriages
     {
-        return $this->hasMany('App\\Models\\Marriage', 'id', 'id')
-                    ->where('id', '!=', $this->id)
-                    ->orWhere(function ($q) {
-                        return $q->where('woman_id', $this->id)
-                            ->orWhere('man_id', $this->id);
-                    })->orderBy($this->sex == 'xx' ? 'woman_order' : 'man_order');
+        return (new Marriages($this))
+            ->orderBy($this->sex == 'xx' ? 'woman_order' : 'man_order');
     }
 
     public function children(): Children

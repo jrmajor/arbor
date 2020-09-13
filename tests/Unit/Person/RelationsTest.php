@@ -17,20 +17,6 @@ it('can get father', function () {
     expect($person->father->id)->toBe($father->id);
 });
 
-it('can get marriages', function () {
-    $person = Person::factory()->woman()->create();
-
-    Person::factory()->count(3)->man()->create()
-        ->each(function ($partner) use ($person) {
-            Marriage::factory()->create([
-                'woman_id' => $person->id,
-                'man_id' => $partner->id,
-            ]);
-        });
-
-    expect($person->marriages)->toHaveCount(3);
-});
-
 it('can get partners', function () {
     $person = Person::factory()->woman()->create();
 
