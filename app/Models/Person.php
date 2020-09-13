@@ -140,7 +140,7 @@ class Person extends Model
     public function siblings(): Siblings
     {
         return (new Siblings($this))
-            ->orderBy('birth_date_from', 'asc');
+            ->orderBy('birth_date_from');
     }
 
     public function siblings_mother(): HasMany
@@ -190,7 +190,7 @@ class Person extends Model
                     ->orWhere(function ($q) {
                         return $q->where('mother_id', $this->id)
                             ->orwhere('father_id', $this->id);
-                    })->orderBy('birth_date_from', 'asc');
+                    })->orderBy('birth_date_from');
     }
 
     public function getBirthYearAttribute(): ?int

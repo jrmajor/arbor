@@ -24,14 +24,14 @@ class PersonController extends Controller
         if ($type == 'f') {
             $list = Person
                 ::whereRaw('left(family_name, 1) collate utf8mb4_0900_as_ci = ?', $letter)
-                ->orderBy('family_name', 'asc')
-                ->orderBy('name', 'asc')
+                ->orderBy('family_name')
+                ->orderBy('name')
                 ->get();
         } elseif ($type == 'l') {
             $list = Person
                 ::whereRaw('left(ifnull(last_name, family_name), 1) collate utf8mb4_0900_as_ci = ?', $letter)
                 ->orderByRaw('ifnull(last_name, family_name) asc')
-                ->orderBy('name', 'asc')
+                ->orderBy('name')
                 ->get();
         } else {
             abort(404);
