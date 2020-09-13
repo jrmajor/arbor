@@ -2,9 +2,9 @@
 
 use App\Models\User;
 use Illuminate\Auth\Events\Login;
-use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertAuthenticatedAs;
+use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\from;
 use function Pest\Laravel\post;
 

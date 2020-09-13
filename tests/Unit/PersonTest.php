@@ -7,8 +7,8 @@ use App\Models\Person;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use function Pest\Laravel\travelTo;
 use function Pest\Laravel\travelBack;
+use function Pest\Laravel\travelTo;
 
 it('can determine its visibility', function () {
     $alive = Person::factory()->alive()->create();
