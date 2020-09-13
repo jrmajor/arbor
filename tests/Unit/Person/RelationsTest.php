@@ -66,23 +66,3 @@ it('can get partners', function () {
     expect($person->partners()->contains($spouseWithChild))->toBeTrue();
     expect($person->partners()->contains($lover))->toBeTrue();
 })->skip();
-
-it('can get children', function () {
-    $father = Person::factory()->man()->create();
-
-    Person::factory()->count(2)->woman()->create()
-        ->each(function ($mother) use ($father) {
-            Person::factory()->create([
-                'mother_id' => $mother->id,
-                'father_id' => $father->id,
-            ]);
-        });
-
-    $child = Person::factory()->create([
-        'mother_id' => null,
-        'father_id' => $father->id,
-    ]);
-
-    expect($father->children)->toHaveCount(3);
-    expect($father->children->contains($child))->toBeTrue();
-});

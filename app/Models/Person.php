@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Sources;
+use App\Models\Relations\Children;
 use App\Models\Relations\HalfSiblings;
 use App\Models\Relations\Siblings;
 use App\Services\Pytlewski\Pytlewski;
@@ -166,14 +167,10 @@ class Person extends Model
                     })->orderBy($this->sex == 'xx' ? 'woman_order' : 'man_order');
     }
 
-    public function children(): HasMany
+    public function children(): Children
     {
-        return $this->hasMany('App\\Models\\Person', 'id', 'id')
-                    ->where('id', '!=', $this->id)
-                    ->orWhere(function ($q) {
-                        return $q->where('mother_id', $this->id)
-                            ->orwhere('father_id', $this->id);
-                    })->orderBy('birth_date_from');
+        return (new Children($this))
+            ->orderBy('birth_date_from');
     }
 
     public function getBirthYearAttribute(): ?int
