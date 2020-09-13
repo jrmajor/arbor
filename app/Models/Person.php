@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Sources;
+use App\Models\Relations\Siblings;
 use App\Services\Pytlewski\Pytlewski;
 use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
@@ -136,17 +137,10 @@ class Person extends Model
         return $this->pytlewski;
     }
 
-    public function siblings(): HasMany
+    public function siblings(): Siblings
     {
-        return $this->hasMany('App\\Models\\Person', 'id', 'id')
-                    ->where('id', '!=', $this->id)
-                    ->orWhere(function ($q) {
-                        return $this->mother_id && $this->father_id
-                            ? $q->where('mother_id', $this->mother_id)
-                                ->where('father_id', $this->father_id)
-                                ->where('id', '!=', $this->id)
-                            : $q->whereRaw('false');
-                    })->orderBy('birth_date_from', 'asc');
+        return (new Siblings($this))
+            ->orderBy('birth_date_from', 'asc');
     }
 
     public function siblings_mother(): HasMany

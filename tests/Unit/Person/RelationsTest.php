@@ -17,54 +17,6 @@ it('can get father', function () {
     expect($person->father->id)->toBe($father->id);
 });
 
-it('can get siblings and half siblings', function () {
-    $mother = Person::factory()->woman()->create();
-    $father = Person::factory()->man()->create();
-
-    $person = Person::factory()->create([
-        'mother_id' => $mother->id,
-        'father_id' => $father->id,
-    ]);
-
-    Person::factory()->count(2)->create([
-        'mother_id' => $person->mother_id,
-        'father_id' => $person->father_id,
-    ]);
-
-    Person::factory()->count(1)->create([
-        'mother_id' => $person->mother_id,
-        'father_id' => Person::factory()->man()->create(),
-    ]);
-    Person::factory()->count(2)->create([
-        'mother_id' => $person->mother_id,
-        'father_id' => null,
-    ]);
-
-    Person::factory()->count(3)->create([
-        'mother_id' => Person::factory()->woman()->create(),
-        'father_id' => $person->father_id,
-    ]);
-    Person::factory()->count(1)->create([
-        'mother_id' => null,
-        'father_id' => $person->father_id,
-    ]);
-
-    expect($person->siblings)->toHaveCount(2);
-
-    expect($person->siblings_mother)->toHaveCount(3);
-
-    expect($person->siblings_father)->toHaveCount(4);
-
-    $person->mother_id = null;
-    $person = tap($person)->save()->fresh();
-
-    expect($person->siblings)->toHaveCount(0);
-
-    expect($person->siblings_mother)->toHaveCount(0);
-
-    expect($person->siblings_father)->toHaveCount(6);
-});
-
 it('can get marriages', function () {
     $person = Person::factory()->woman()->create();
 
