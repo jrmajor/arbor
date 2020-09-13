@@ -18,7 +18,7 @@ it('can get children', function () {
         'father_id' => $father->id,
     ]);
 
-    expect($father->children)->toHaveCount(3);
+    expect($father->children)->toHaveCount(3)
         ->and($father->children->contains($child))->toBeTrue();
 });
 
@@ -50,11 +50,11 @@ it('can eagerly get children', function () {
         'father_id' => $father->id,
     ]);
 
-    Person::whereIn('id', [$mother->id, $father->id])
+    $people = Person::whereIn('id', [$mother->id, $father->id])
         ->with('children')->get();
 
-    expect($mother->children)->toHaveCount(5);
+    expect($people->get(0)->children)->toHaveCount(5);
 
-    expect($father->children)->toHaveCount(3)
-        ->and($father->children->contains($child))->toBeTrue();
+    expect($people->get(1)->children)->toHaveCount(3)
+        ->and($people->get(1)->children->contains($child))->toBeTrue();
 });
