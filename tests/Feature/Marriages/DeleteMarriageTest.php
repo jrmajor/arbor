@@ -2,6 +2,7 @@
 
 use App\Models\Marriage;
 use Carbon\Carbon;
+use function Pest\Laravel\delete;
 
 beforeEach(
     fn () => $this->marriage = Marriage::factory()->create()
@@ -12,7 +13,7 @@ test('guests cannot delete marriage', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    assertFalse($this->marriage->fresh()->trashed());
+    expect($this->marriage->fresh()->trashed())->toBeFalse();
 });
 
 test('users without permissions cannot delete marriage', function () {
@@ -20,7 +21,7 @@ test('users without permissions cannot delete marriage', function () {
         ->delete("marriages/{$this->marriage->id}")
         ->assertStatus(403);
 
-    assertFalse($this->marriage->fresh()->trashed());
+    expect($this->marriage->fresh()->trashed())->toBeFalse();
 });
 
 test('users with permissions can delete marriage', function () {
@@ -28,7 +29,7 @@ test('users with permissions can delete marriage', function () {
         ->delete("marriages/{$this->marriage->id}")
         ->assertStatus(302);
 
-    assertTrue($this->marriage->fresh()->trashed());
+    expect($this->marriage->fresh()->trashed())->toBeTrue();
 });
 
 test('users without permissions to view history are redirected to woman page', function () {
@@ -50,17 +51,15 @@ test('marriage deletion is logged', function () {
 
     $log = latestLog();
 
-    assertEquals('marriages', $log->log_name);
-    assertEquals('deleted', $log->description);
-    assertTrue($this->marriage->is($log->subject));
+    expect($log->log_name)->toBe('marriages');
+    expect($log->description)->toBe('deleted');
+    expect($this->marriage->is($log->subject))->toBeTrue();
 
-    assertEquals($this->marriage->deleted_at, $log->created_at);
+    expect((string) $log->created_at)->toBe((string) $this->marriage->deleted_at);
 
-    assertEquals(
-        $this->marriage->deleted_at,
-        Carbon::create($log->properties['attributes']['deleted_at'])
-    );
+    expect($log->properties['attributes']['deleted_at'])
+        ->toBe($this->marriage->deleted_at->toJson());
 
-    assertCount(1, $log->properties);
-    assertCount(1, $log->properties['attributes']);
+    expect($log->properties)->toHaveCount(1);
+    expect($log->properties['attributes'])->toHaveCount(1);
 });

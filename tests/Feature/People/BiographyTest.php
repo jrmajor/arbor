@@ -2,6 +2,8 @@
 
 use App\Models\Person;
 use Spatie\Activitylog\Models\Activity;
+use function Pest\Laravel\{get, patch};
+use function Pest\Laravel\{travel, travelBack};
 
 beforeEach(function () {
     $this->oldBiography = 'Ukończył gimnazjum w Kołomyi i studia wyższe (polonistyka, historia, geografia), zapewne na Uniwersytecie Lwowskim. Pracował jako nauczyciel gimnazjalny w Kołomyi, gdzie był działaczem Sokoła, Towarzystwa Szkoły Ludowej i Polskiego Towarzystwa Tatrzańskiego. Zajmował się organizacją Muzeum Pokuckiego i kolekcjonował huculską sztukę ludową. Pisał artykuły do prasy lokalnej i krajoznawczej. W latach I wojny światowej był oficerem armii astriackiej, od 1919 Wojska Polskiego. Od 1920 w Grudziądzu, gdzie był oficerem 64 pułku piechoty, 1922 referent ds. kultury i oświaty DOK VIII w Toruniu, następnie komendant Powiatowej Komendy Uzupełnień w Grudziądzu. W 1927 przeszedł na emeryturę w stopniu majora.';
@@ -39,7 +41,8 @@ test('guests cannot edit biography', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    assertEquals($this->oldBiography, $this->person->fresh()->biography);
+    expect($this->person->fresh()->biography)
+        ->toBe($this->oldBiography);
 });
 
 test('users without permissions cannot edit biography', function () {
@@ -47,7 +50,8 @@ test('users without permissions cannot edit biography', function () {
         ->patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography])
         ->assertStatus(403);
 
-    assertEquals($this->oldBiography, $this->person->fresh()->biography);
+    expect($this->person->fresh()->biography)
+        ->toBe($this->oldBiography);
 });
 
 test('users with permissions can edit biography', function () {
@@ -56,7 +60,8 @@ test('users with permissions can edit biography', function () {
         ->assertStatus(302)
         ->assertRedirect("people/{$this->person->id}");
 
-    assertEquals($this->newBiography, $this->person->fresh()->biography);
+    expect($this->person->fresh()->biography)
+        ->toBe($this->newBiography);
 });
 
 test('biography filed can\'t be longer than 10000 characters', function () {
@@ -64,7 +69,8 @@ test('biography filed can\'t be longer than 10000 characters', function () {
         ->patch("people/{$this->person->id}/biography", ['biography' => Str::random(10001)])
         ->assertSessionHasErrors(['biography']);
 
-    assertEquals($this->oldBiography, $this->person->fresh()->biography);
+    expect($this->person->fresh()->biography)
+        ->toBe($this->oldBiography);
 });
 
 test('biography addition is logged', function () {
@@ -72,90 +78,90 @@ test('biography addition is logged', function () {
 
     $count = Activity::count();
 
-    travel('+1 minute');
+    travel(5)->minutes();
 
     withPermissions(2)
         ->patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography]);
 
-    travel('back');
+    travelBack();
 
     $person = $this->person->fresh();
 
-    assertEquals($count + 2, Activity::count()); // visibility change and user creation
+    expect(Activity::count())->toBe($count + 2); // biography addition and user creation
 
     $log = latestLog();
 
-    assertEquals('people', $log->log_name);
-    assertEquals('added-biography', $log->description);
-    assertTrue($person->is($log->subject));
+    expect($log->log_name)->toBe('people');
+    expect($log->description)->toBe('added-biography');
+    expect($person->is($log->subject))->toBeTrue();
 
-    assertEquals($person->updated_at, $log->created_at);
+    expect((string) $log->created_at)->toBe((string) $person->updated_at);
 
-    assertCount(2, $log->properties);
+    expect($log->properties)->toHaveCount(2);
 
-    assertNull($log->properties['old']);
-    assertIsString($log->properties['new']);
+    expect($log->properties['old'])->toBeNull();
+    expect($log->properties['new'])->toBeString();
 
-    assertEquals($this->newBiography, $log->properties['new']);
+    expect($log->properties['new'])->toBe($this->newBiography);
 });
 
 test('biography edition is logged', function () {
     $count = Activity::count();
 
-    travel('+1 minute');
+    travel(5)->minutes();
 
     withPermissions(2)
         ->patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography]);
 
-    travel('back');
+    travelBack();
 
     $person = $this->person->fresh();
 
-    assertEquals($count + 2, Activity::count()); // visibility change and user creation
+    expect(Activity::count())->toBe($count + 2); // biography edition and user creation
 
     $log = latestLog();
 
-    assertEquals('people', $log->log_name);
-    assertEquals('updated-biography', $log->description);
-    assertTrue($person->is($log->subject));
+    expect($log->log_name)->toBe('people');
+    expect($log->description)->toBe('updated-biography');
+    expect($person->is($log->subject))->toBeTrue();
 
-    assertEquals($person->updated_at, $log->created_at);
+    expect((string) $log->created_at)->toBe((string) $person->updated_at);
 
-    assertCount(2, $log->properties);
+    expect($log->properties)->toHaveCount(2);
 
-    assertIsString($log->properties['old']);
-    assertIsString($log->properties['new']);
+    expect($log->properties['old'])->toBeString();
+    expect($log->properties['new'])->toBeString();
 
-    assertEquals($this->oldBiography, $log->properties['old']);
-    assertEquals($this->newBiography, $log->properties['new']);
+    expect($log->properties['old'])->toBe($this->oldBiography);
+    expect($log->properties['new'])->toBe($this->newBiography);
 });
 
 test('biography deletion is logged', function () {
     $count = Activity::count();
 
-    travel('+1 minute');
+    travel(5)->minutes();
 
     withPermissions(2)
         ->patch("people/{$this->person->id}/biography", ['biography' => null]);
 
-    travel('back');
+    travelBack();
 
     $person = $this->person->fresh();
 
-    assertEquals($count + 2, Activity::count()); // visibility change and user creation
+    expect(Activity::count())->toBe($count + 2); // biography deletion and user creation
 
     $log = latestLog();
 
-    assertEquals('people', $log->log_name);
-    assertEquals('deleted-biography', $log->description);
-    assertTrue($person->is($log->subject));
+    expect($log->log_name)->toBe('people');
+    expect($log->description)->toBe('deleted-biography');
+    expect($person->is($log->subject))->toBeTrue();
 
-    assertEquals($person->updated_at, $log->created_at);
+    expect((string) $log->created_at)->toBe((string) $person->updated_at);
 
-    assertCount(2, $log->properties);
+    expect($log->properties)->toHaveCount(2);
 
-    assertIsString($log->properties['old']);
-    assertNull($log->properties['new']);
+    expect($log->properties['old'])->toBeString();
+    expect($log->properties['new'])->toBeNull();
 
-    assertEquals($this->oldBiography, $log->properties['old']);
+    expect($log->properties['old'])->toBe($this->oldBiography);
 });

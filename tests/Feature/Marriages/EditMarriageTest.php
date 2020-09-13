@@ -2,12 +2,16 @@
 
 use App\Models\Marriage;
 use App\Models\Person;
+use function Pest\Laravel\{get, put};
+use function Pest\Laravel\{travel, travelBack};
 
 beforeEach(function () {
     $this->dates = [
         'first_event_date_from', 'second_event_date_from', 'divorce_date_from',
         'first_event_date_to', 'second_event_date_to', 'divorce_date_to',
     ];
+
+    $this->enums = ['rite', 'first_event_type', 'second_event_type'];
 
     $this->oldAttributes = [
         'woman_id' => Person::factory()->woman()->create()->id,
@@ -82,10 +86,10 @@ test('guests cannot edit marriage', function () {
 
     $marriage = $this->marriage->fresh();
 
-    $attributesToCheck = Arr::except($this->oldAttributes, $this->dates);
+    $attributesToCheck = Arr::except($this->oldAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        assertEquals($attribute, $marriage->$key);
+        expect($marriage->$key)->toBe($attribute);
     }
 });
 
@@ -96,10 +100,10 @@ test('users without permissions cannot edit marriage', function () {
 
     $marriage = $this->marriage->fresh();
 
-    $attributesToCheck = Arr::except($this->oldAttributes, $this->dates);
+    $attributesToCheck = Arr::except($this->oldAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        assertEquals($attribute, $marriage->$key);
+        expect($marriage->$key)->toBe($attribute);
     }
 });
 
@@ -112,14 +116,19 @@ test('users with permissions can edit marriage', function () {
 
     $response->assertRedirect('people/'.$marriage->woman_id);
 
-    $attributesToCheck = Arr::except($this->newAttributes, $this->dates);
+    $attributesToCheck = Arr::except($this->newAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        assertEquals($attribute, $marriage->$key);
+        expect($marriage->$key)->toBe($attribute);
+    }
+
+    foreach ($this->enums as $enum) {
+        expect((string) $marriage->$enum)->toBe($this->newAttributes[$enum]);
     }
 
     foreach ($this->dates as $date) {
-        assertEquals($this->newAttributes[$date], $marriage->$date->toDateString());
+        expect($marriage->$date->toDateString())
+            ->toBe($this->newAttributes[$date]);
     }
 });
 
@@ -130,49 +139,47 @@ test('data is validated using appropriate form request')
     );
 
 test('marriage edition is logged', function () {
-    travel('+1 minute');
+    travel(5)->minutes();
 
     withPermissions(2)
         ->put("marriages/{$this->marriage->id}", $this->newAttributes);
 
-    travel('back');
+    travelBack();
 
     $marriage = $this->marriage->fresh();
 
     $log = latestLog();
 
-    assertEquals('marriages', $log->log_name);
-    assertEquals('updated', $log->description);
-    assertTrue($marriage->is($log->subject));
+    expect($log->log_name)->toBe('marriages');
+    expect($log->description)->toBe('updated');
+    expect($marriage->is($log->subject))->toBeTrue();
 
     $oldToCheck = Arr::except($this->oldAttributes, $this->dates);
 
     foreach ($oldToCheck as $key => $value) {
-        assertEquals(
-            $value, $log->properties['old'][$key],
-            'Failed asserting that old attribute '.$key.' has the same value in log.'
-        );
+        expect($log->properties['old'][$key])->toBe($value);
+        // 'Failed asserting that old attribute '.$key.' has the same value in log.'
     }
 
     $newToCheck = Arr::except($this->newAttributes, $this->dates);
 
     foreach ($newToCheck as $key => $value) {
-        assertEquals(
-            $value, $log->properties['attributes'][$key],
-            'Failed asserting that attribute '.$key.' has the same value in log.'
-        );
+        expect($log->properties['attributes'][$key])->toBe($value);
+        // 'Failed asserting that attribute '.$key.' has the same value in log.'
     }
 
-    assertArrayNotHasKey('created_at', $log->properties['old']);
-    assertArrayNotHasKey('created_at', $log->properties['attributes']);
+    expect($log->properties['old'])->not->toHaveKey('created_at');
+    expect($log->properties['attributes'])->not->toHaveKey('created_at');
 
-    assertEquals($marriage->updated_at, $log->created_at);
+    expect((string) $log->created_at)->toBe((string) $marriage->updated_at);
 
-    assertArrayNotHasKey('updated_at', $log->properties['old']);
-    assertArrayNotHasKey('updated_at', $log->properties['attributes']);
+    expect($log->properties['old'])->not->toHaveKey('updated_at');
+    expect($log->properties['attributes'])->not->toHaveKey('updated_at');
 
     foreach ($this->dates as $date) {
-        assertEquals($this->oldAttributes[$date], $log->properties['old'][$date]);
-        assertEquals($this->newAttributes[$date], $log->properties['attributes'][$date]);
+        expect($log->properties['old'][$date])
+            ->toBe($this->oldAttributes[$date]);
+        expect($log->properties['attributes'][$date])
+            ->toBe($this->newAttributes[$date]);
     }
 });

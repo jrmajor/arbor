@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Person;
+use function Pest\Laravel\get;
 
 beforeEach(function () {
     $this->person = Person::factory()->create();

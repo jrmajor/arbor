@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Person;
+use function Pest\Laravel\post;
+use function Pest\Laravel\{travel, travelBack};
 
 beforeEach(function () {
     $this->dates = [
@@ -61,7 +63,7 @@ test('guest cannot add valid person', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    assertEquals($count, Person::count());
+    expect(Person::count())->toBe($count);
 });
 
 test('users without permissions cannot add valid person', function () {
@@ -71,22 +73,22 @@ test('users without permissions cannot add valid person', function () {
         ->post('people', $this->validAttributes)
         ->assertStatus(403);
 
-    assertEquals($count, Person::count());
+    expect(Person::count())->toBe($count);
 });
 
 test('users with permissions can add valid person', function () {
     $count = Person::count();
 
-    travel('+5 minutes');
+    travel(5)->minutes();
 
     withPermissions(2)
         ->post('people', $this->validAttributes)
         ->assertStatus(302)
         ->assertRedirect('people/'.Person::latest()->first()->id);
 
-    travel('back');
+    travelBack();
 
-    assertEquals($count + 1, Person::count());
+    expect(Person::count())->toBe($count + 1);
 
     $person = Person::latest()->first();
 
@@ -95,17 +97,15 @@ test('users with permissions can add valid person', function () {
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        assertEquals($attribute, $person->$key);
+        expect($person->$key)->toBe($attribute);
     }
 
-    assertCount(2, $person->sources);
-    assertEquals(
-        $this->validAttributes['sources'],
-        $person->sources->map->raw()->all()
-    );
+    expect($person->sources)->toHaveCount(2);
+    expect($person->sources->map->raw()->all())
+        ->toBe($this->validAttributes['sources']);
 
     foreach ($this->dates as $date) {
-        assertTrue($this->validAttributes[$date] == $person->$date->toDateString());
+        expect($person->$date->toDateString())->toBe($this->validAttributes[$date]);
     }
 });
 
@@ -129,47 +129,44 @@ test('data is validated using appropriate form request')
 test('person creation is logged', function () {
     $count = Person::count();
 
-    travel('+5 minutes');
+    travel(5)->minutes();
 
     withPermissions(2)
         ->post('people', $this->validAttributes);
 
-    travel('back');
+    travelBack();
 
-    assertEquals($count + 1, Person::count());
+    expect(Person::count())->toBe($count + 1);
 
     $person = Person::latest()->first();
 
     $log = latestLog();
 
-    assertEquals('people', $log->log_name);
-    assertEquals('created', $log->description);
-    assertTrue($person->is($log->subject));
+    expect($log->log_name)->toBe('people');
+    expect($log->description)->toBe('created');
+    expect($person->is($log->subject))->toBeTrue();
 
     $attributesToCheck = Arr::except($this->validAttributes, [
         'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $value) {
-        assertEquals(
-            $value, $log->properties['attributes'][$key],
-            'Failed asserting that attribute '.$key.' has the same value in log.'
-        );
+        expect($log->properties['attributes'][$key])->toBe($value);
+        // 'Failed asserting that attribute '.$key.' has the same value in log.'
     }
 
-    assertEquals($person->created_at, $log->created_at);
-    assertEquals($person->updated_at, $log->created_at);
+    expect((string) $log->created_at)->toBe((string) $person->created_at);
+    expect((string) $log->created_at)->toBe((string) $person->updated_at);
 
-    assertArrayNotHasKey('created_at', $log->properties['attributes']);
-    assertArrayNotHasKey('updated_at', $log->properties['attributes']);
+    expect($log->properties['attributes'])->not->toHaveKey('created_at');
+    expect($log->properties['attributes'])->not->toHaveKey('updated_at');
 
-    assertCount(2, $log->properties['attributes']['sources']);
-    assertEquals(
-        $this->validAttributes['sources'],
-        $log->properties['attributes']['sources']
-    );
+    expect($log->properties['attributes']['sources'])->toHaveCount(2);
+    expect($log->properties['attributes']['sources'])
+        ->toBe($this->validAttributes['sources']);
 
     foreach ($this->dates as $date) {
-        assertEquals($person->$date->format('Y-m-d'), $log->properties['attributes'][$date]);
+        expect($log->properties['attributes'][$date])
+            ->toBe($person->$date->format('Y-m-d'));
     }
 });

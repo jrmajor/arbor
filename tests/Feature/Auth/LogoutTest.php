@@ -2,6 +2,8 @@
 
 use App\Models\User;
 use Illuminate\Auth\Events\CurrentDeviceLogout;
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertGuest;
 
 it('logs user out', function () {
     $user = User::factory()->create();
@@ -13,7 +15,7 @@ it('logs user out', function () {
 
     Event::assertDispatched(fn (CurrentDeviceLogout $event) => $event->user->is($user));
 
-    assertFalse(Auth::check());
+    assertGuest();
 });
 
 it('redirects to welcome page after logging out')

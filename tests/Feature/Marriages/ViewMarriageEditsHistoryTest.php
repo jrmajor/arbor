@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Marriage;
+use function Pest\Laravel\get;
 
 beforeEach(function () {
     $this->marriage = Marriage::factory()->create();

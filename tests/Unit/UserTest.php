@@ -7,32 +7,32 @@ it('correctly determines its abilities', function () {
         'permissions' => 0,
     ]);
 
-    assertFalse($user->canRead());
-    assertFalse($user->canWrite());
-    assertFalse($user->canViewHistory());
-    assertFalse($user->isSuperAdmin());
+    expect($user->canRead())->toBeFalse()
+        ->and($user->canWrite())->toBeFalse()
+        ->and($user->canViewHistory())->toBeFalse()
+        ->and($user->isSuperAdmin())->toBeFalse();
 
     $user->permissions = 1;
-    assertTrue($user->canRead());
-    assertFalse($user->canWrite());
-    assertFalse($user->canViewHistory());
-    assertFalse($user->isSuperAdmin());
+    expect($user->canRead())->toBeTrue()
+        ->and($user->canWrite())->toBeFalse()
+        ->and($user->canViewHistory())->toBeFalse()
+        ->and($user->isSuperAdmin())->toBeFalse();
 
     $user->permissions = 2;
-    assertTrue($user->canRead());
-    assertTrue($user->canWrite());
-    assertFalse($user->canViewHistory());
-    assertFalse($user->isSuperAdmin());
+    expect($user->canRead())->toBeTrue()
+        ->and($user->canWrite())->toBeTrue()
+        ->and($user->canViewHistory())->toBeFalse()
+        ->and($user->isSuperAdmin())->toBeFalse();
 
     $user->permissions = 3;
-    assertTrue($user->canRead());
-    assertTrue($user->canWrite());
-    assertTrue($user->canViewHistory());
-    assertFalse($user->isSuperAdmin());
+    expect($user->canRead())->toBeTrue()
+        ->and($user->canWrite())->toBeTrue()
+        ->and($user->canViewHistory())->toBeTrue()
+        ->and($user->isSuperAdmin())->toBeFalse();
 
     $user->permissions = 4;
-    assertTrue($user->canRead());
-    assertTrue($user->canWrite());
-    assertTrue($user->canViewHistory());
-    assertTrue($user->isSuperAdmin());
+    expect($user->canRead())->toBeTrue()
+        ->and($user->canWrite())->toBeTrue()
+        ->and($user->canViewHistory())->toBeTrue()
+        ->and($user->isSuperAdmin())->toBeTrue();
 });

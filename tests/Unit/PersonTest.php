@@ -7,34 +7,35 @@ use App\Models\Person;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use function Pest\Laravel\{travelTo, travelBack};
 
 it('can determine its visibility', function () {
     $alive = Person::factory()->alive()->create();
     $dead = Person::factory()->dead()->create();
 
     $alive->changeVisibility(false);
-    assertFalse($alive->isVisible());
+    expect($alive->isVisible())->toBeFalse();
     $alive->changeVisibility(true);
-    assertTrue($alive->isVisible());
+    expect($alive->isVisible())->toBeTrue();
 
     $dead->changeVisibility(false);
-    assertFalse($dead->isVisible());
+    expect($dead->isVisible())->toBeFalse();
     $dead->changeVisibility(true);
-    assertTrue($dead->isVisible());
+    expect($dead->isVisible())->toBeTrue();
 });
 
 test('change visibility method works', function () {
     $person = Person::factory()->create();
 
-    assertFalse($person->isVisible());
+    expect($person->isVisible())->toBeFalse();
 
     $person->changeVisibility(true);
 
-    assertTrue($person->isVisible());
+    expect($person->isVisible())->toBeTrue();
 
     $person->changeVisibility(false);
 
-    assertFalse($person->isVisible());
+    expect($person->isVisible())->toBeFalse();
 });
 
 it('tells if it can be viewed by given user', function () {
@@ -48,37 +49,37 @@ it('tells if it can be viewed by given user', function () {
         'visibility' => true,
     ]);
 
-    assertFalse($hiddenPerson->canBeViewedBy($user));
-    assertTrue($visiblePerson->canBeViewedBy($user));
+    expect($hiddenPerson->canBeViewedBy($user))->toBeFalse();
+    expect($visiblePerson->canBeViewedBy($user))->toBeTrue();
 
     $user->permissions = 1;
 
-    assertTrue($hiddenPerson->canBeViewedBy($user));
-    assertTrue($visiblePerson->canBeViewedBy($user));
+    expect($hiddenPerson->canBeViewedBy($user))->toBeTrue();
+    expect($visiblePerson->canBeViewedBy($user))->toBeTrue();
 });
 
 it('tells if can be viewed by guest', function () {
     $person = Person::factory()->create();
 
-    assertFalse($person->canBeViewedBy(null));
+    expect($person->canBeViewedBy(null))->toBeFalse();
 
     $person->changeVisibility(true);
 
-    assertTrue($person->canBeViewedBy(null));
+    expect($person->canBeViewedBy(null))->toBeTrue();
 });
 
 it('can get mother', function () {
     $mother = Person::factory()->woman()->create();
     $person = Person::factory()->create(['mother_id' => $mother->id]);
 
-    assertEquals($mother->id, $person->mother->id);
+    expect($person->mother->id)->toBe($mother->id);
 });
 
 it('can get father', function () {
     $father = Person::factory()->man()->create();
     $person = Person::factory()->create(['father_id' => $father->id]);
 
-    assertEquals($father->id, $person->father->id);
+    expect($person->father->id)->toBe($father->id);
 });
 
 it('can get siblings and half siblings', function () {
@@ -113,20 +114,20 @@ it('can get siblings and half siblings', function () {
         'father_id' => $person->father_id,
     ]);
 
-    assertCount(2, $person->siblings);
+    expect($person->siblings)->toHaveCount(2);
 
-    assertCount(3, $person->siblings_mother);
+    expect($person->siblings_mother)->toHaveCount(3);
 
-    assertCount(4, $person->siblings_father);
+    expect($person->siblings_father)->toHaveCount(4);
 
     $person->mother_id = null;
     $person = tap($person)->save()->fresh();
 
-    assertCount(0, $person->siblings);
+    expect($person->siblings)->toHaveCount(0);
 
-    assertCount(0, $person->siblings_mother);
+    expect($person->siblings_mother)->toHaveCount(0);
 
-    assertCount(6, $person->siblings_father);
+    expect($person->siblings_father)->toHaveCount(6);
 });
 
 it('can get marriages', function () {
@@ -140,7 +141,7 @@ it('can get marriages', function () {
             ]);
         });
 
-    assertCount(3, $person->marriages);
+    expect($person->marriages)->toHaveCount(3);
 });
 
 it('can get partners', function () {
@@ -172,11 +173,11 @@ it('can get partners', function () {
         'father_id' => $lover->id,
     ]);
 
-    assertCount(3, $person->partners());
+    expect($person->partners())->toHaveCount(3);
 
-    assertTrue($person->partners()->contains($spouse));
-    assertTrue($person->partners()->contains($spouseWithChild));
-    assertTrue($person->partners()->contains($lover));
+    expect($person->partners()->contains($spouse))->toBeTrue();
+    expect($person->partners()->contains($spouseWithChild))->toBeTrue();
+    expect($person->partners()->contains($lover))->toBeTrue();
 })->skip();
 
 it('can get children', function () {
@@ -195,8 +196,8 @@ it('can get children', function () {
         'father_id' => $father->id,
     ]);
 
-    assertCount(3, $father->children);
-    assertTrue($father->children->contains($child));
+    expect($father->children)->toHaveCount(3);
+    expect($father->children->contains($child))->toBeTrue();
 });
 
 test('year getters work', function () {
@@ -219,14 +220,14 @@ test('year getters work', function () {
         'death_date_to' => null,
     ]);
 
-    assertEquals(1957, $personWithDates->birth_year);
-    assertEquals(2020, $personWithDates->death_year);
+    expect($personWithDates->birth_year)->toBe(1957);
+    expect($personWithDates->death_year)->toBe(2020);
 
-    assertEquals(1893, $personWithSomeDates->birth_year);
-    assertEquals(1944, $personWithSomeDates->death_year);
+    expect($personWithSomeDates->birth_year)->toBe(1893);
+    expect($personWithSomeDates->death_year)->toBe(1944);
 
-    assertNull($personWithoutDates->birth_year);
-    assertNull($personWithoutDates->death_year);
+    expect($personWithoutDates->birth_year)->toBeNull();
+    expect($personWithoutDates->death_year)->toBeNull();
 });
 
 it('returns null when calculating age without date', function () {
@@ -237,8 +238,8 @@ it('returns null when calculating age without date', function () {
 
     $at = Carbon::create(2019, 8, 15);
 
-    assertNull($person->age($at, true));
-    assertNull($person->age($at));
+    expect($person->age($at, true))->toBeNull();
+    expect($person->age($at))->toBeNull();
 });
 
 it('can calculate age with complete dates', function () {
@@ -249,8 +250,8 @@ it('can calculate age with complete dates', function () {
 
     $at = Carbon::create(2019, 8, 15);
 
-    assertEquals(25, $person->age($at, true));
-    assertEquals(25, $person->age($at));
+    expect($person->age($at, true))->toBe(25);
+    expect($person->age($at))->toBe(25);
 });
 
 it('can calculate age with incomplete birth date', function () {
@@ -268,12 +269,12 @@ it('can calculate age with incomplete birth date', function () {
 
     $at_same_month = Carbon::create(2006, 4, 16);
 
-    assertEquals(39, $person_without_day->age($at_diffrent_month, true));
-    assertEquals(39, $person_without_day->age($at_diffrent_month));
-    assertEquals(28, $person_without_day->age($at_same_month, true)); // 27-28
-    assertEquals('27-28', $person_without_day->age($at_same_month));
-    assertEquals(35, $person_without_month->age($at_diffrent_month, true)); // 34-35
-    assertEquals('34-35', $person_without_month->age($at_diffrent_month));
+    expect($person_without_day->age($at_diffrent_month, true))->toBe(39);
+    expect($person_without_day->age($at_diffrent_month))->toBe(39);
+    expect($person_without_day->age($at_same_month, true))->toBe(28); // 27-28
+    expect($person_without_day->age($at_same_month))->toBe('27-28');
+    expect($person_without_month->age($at_diffrent_month, true))->toBe(35); // 34-35
+    expect($person_without_month->age($at_diffrent_month))->toBe('34-35');
 });
 
 it('can calculate age with incomplete at date', function () {
@@ -288,12 +289,12 @@ it('can calculate age with incomplete at date', function () {
 
     $without_month = [Carbon::create(2016, 01, 01), Carbon::create(2016, 12, 31)];
 
-    assertEquals(38, $person->age($without_day, true));
-    assertEquals(38, $person->age($without_day));
-    assertEquals(40, $person->age($without_day_in_same_month, true)); // 39-40
-    assertEquals('39-40', $person->age($without_day_in_same_month));
-    assertEquals(41, $person->age($without_month, true)); // 40-41
-    assertEquals('40-41', $person->age($without_month));
+    expect($person->age($without_day, true))->toBe(38);
+    expect($person->age($without_day))->toBe(38);
+    expect($person->age($without_day_in_same_month, true))->toBe(40); // 39-40
+    expect($person->age($without_day_in_same_month))->toBe('39-40');
+    expect($person->age($without_month, true))->toBe(41); // 40-41
+    expect($person->age($without_month))->toBe('40-41');
 });
 
 it('can calculate age with incomplete dates', function () {
@@ -304,8 +305,8 @@ it('can calculate age with incomplete dates', function () {
 
     $at = [Carbon::create(2010, 7, 01), Carbon::create(2010, 7, 31)];
 
-    assertEquals(18, $person->age($at, true)); // 17-18
-    assertEquals('17-18', $person->age($at));
+    expect($person->age($at, true))->toBe(18); // 17-18
+    expect($person->age($at))->toBe('17-18');
 });
 
 it('can calculate current age', function () {
@@ -314,13 +315,13 @@ it('can calculate current age', function () {
         'birth_date_to' => '1973-05-12',
     ]);
 
-    travel('2016-11-10');
+    travelTo(Carbon::create('2016-11-10'));
 
-    assertEquals('2016-11-10', Carbon::now()->format('Y-m-d'));
-    assertEquals(43, $person->currentAge(true));
-    assertEquals(43, $person->currentAge());
+    expect(Carbon::now()->format('Y-m-d'))->toBe('2016-11-10');
+    expect($person->currentAge(true))->toBe(43);
+    expect($person->currentAge())->toBe(43);
 
-    travel('back');
+    travelBack();
 });
 
 it('can calculate age age at death', function () {
@@ -331,8 +332,8 @@ it('can calculate age age at death', function () {
         'death_date_to' => '1941-05-30',
     ]);
 
-    assertEquals(67, $person->ageAtDeath(true));
-    assertEquals(67, $person->ageAtDeath());
+    expect($person->ageAtDeath(true))->toBe(67);
+    expect($person->ageAtDeath())->toBe(67);
 });
 
 it('can format name', function () {
@@ -345,24 +346,24 @@ it('can format name', function () {
         'birth_date_to' => null,
     ]);
 
-    assertEquals("Zenona Skwierczyńska [№$person->id]", $person->formatName());
+    expect($person->formatName())->toBe("Zenona Skwierczyńska [№$person->id]");
 
     $person->last_name = 'Wojtyła';
-    assertEquals("Zenona Wojtyła (Skwierczyńska) [№$person->id]", $person->formatName());
+    expect($person->formatName())->toBe("Zenona Wojtyła (Skwierczyńska) [№$person->id]");
     $person->last_name = null;
 
     $person->birth_date_from = '1913-05-01';
     $person->birth_date_to = '1913-05-01';
-    assertEquals("Zenona Skwierczyńska (∗1913) [№$person->id]", $person->formatName());
+    expect($person->formatName())->toBe("Zenona Skwierczyńska (∗1913) [№$person->id]");
 
     $person->dead = true;
     $person->death_date_from = '1945-01-01';
     $person->death_date_to = '1945-12-31';
-    assertEquals("Zenona Skwierczyńska (∗1913, ✝1945) [№$person->id]", $person->formatName());
+    expect($person->formatName())->toBe("Zenona Skwierczyńska (∗1913, ✝1945) [№$person->id]");
 
     $person->birth_date_from = null;
     $person->birth_date_to = null;
-    assertEquals("Zenona Skwierczyńska (✝1945) [№$person->id]", $person->formatName());
+    expect($person->formatName())->toBe("Zenona Skwierczyńska (✝1945) [№$person->id]");
 });
 
 it('can format simple name', function () {
@@ -373,11 +374,11 @@ it('can format simple name', function () {
         'last_name' => null,
     ]);
 
-    assertEquals('Zenona Skwierczyńska', $person->formatSimpleName());
+    expect($person->formatSimpleName())->toBe('Zenona Skwierczyńska');
 
     $person->last_name = 'Wojtyła';
 
-    assertEquals('Zenona Wojtyła (Skwierczyńska)', $person->formatSimpleName());
+    expect($person->formatSimpleName())->toBe('Zenona Wojtyła (Skwierczyńska)');
 });
 
 it('casts sources to collection', function () {
@@ -385,15 +386,15 @@ it('casts sources to collection', function () {
         'sources' => null,
     ])->sources;
 
-    assertInstanceOf(Collection::class, $sources);
-    assertTrue($sources->isEmpty());
+    expect($sources)->toBeInstanceOf(Collection::class);
+    expect($sources->isEmpty())->toBeTrue();
 
     $sources = Person::factory()->create([
         'sources' => [],
     ])->sources;
 
-    assertInstanceOf(Collection::class, $sources);
-    assertTrue($sources->isEmpty());
+    expect($sources)->toBeInstanceOf(Collection::class);
+    expect($sources->isEmpty())->toBeTrue();
 
     $sources = Person::factory()->create([
         'sources' => [
@@ -402,8 +403,8 @@ it('casts sources to collection', function () {
         ],
     ])->sources;
 
-    assertInstanceOf(Collection::class, $sources);
-    assertCount(2, $sources);
+    expect($sources)->toBeInstanceOf(Collection::class);
+    expect($sources)->toHaveCount(2);
 });
 
 test('sources are sanitized', function () {
@@ -419,11 +420,10 @@ test('sources are sanitized', function () {
         'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
     ];
 
-    assertEquals(
-        $sanitized,
+    expect(
         Person::factory()->create(['sources' => $unsanitized])
             ->sources->map->raw()->all()
-    );
+    )->toBe($sanitized);
 });
 
 it('can be found by pytlewski id', function () {
@@ -431,9 +431,9 @@ it('can be found by pytlewski id', function () {
         'id_pytlewski' => 1140,
     ]);
 
-    assertTrue($person->is(Person::findByPytlewskiId(1140)));
-    assertNull(Person::findByPytlewskiId(null));
-    assertNull(Person::findByPytlewskiId(2137));
+    expect($person->is(Person::findByPytlewskiId(1140)))->toBeTrue();
+    expect(Person::findByPytlewskiId(null))->toBeNull();
+    expect(Person::findByPytlewskiId(2137))->toBeNull();
 });
 
 it('can list first letters', function () {
@@ -458,21 +458,17 @@ it('can list first letters', function () {
         Person::factory()->create($names);
     });
 
-    assertEquals(
-        [
+    expect(Person::letters('family')->map(fn ($std) => (array) $std)->toArray())
+        ->toBe([
             ['letter' => 'M', 'total' => 2],
             ['letter' => 'Š', 'total' => 1],
             ['letter' => 'Ż', 'total' => 1],
-        ],
-        Person::letters('family')->map(fn ($std) => (array) $std)->toArray()
-    );
+        ]);
 
-    assertEquals(
-        [
+    expect(Person::letters('last')->map(fn ($std) => (array) $std)->toArray())
+        ->toBe([
             ['letter' => 'H', 'total' => 1],
             ['letter' => 'M', 'total' => 1],
             ['letter' => 'Š', 'total' => 2],
-        ],
-        Person::letters('last')->map(fn ($std) => (array) $std)->toArray()
-    );
+        ]);
 });

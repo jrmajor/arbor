@@ -3,6 +3,7 @@
 use App\Http\Livewire\Settings;
 use App\Models\User;
 use Illuminate\Auth\Events\OtherDeviceLogout;
+use function Pest\Laravel\actingAs;
 
 test('guest are asked to log in when attempting to view settings page')
     ->get('settings')
@@ -45,7 +46,7 @@ it('can change email', function () {
         ->call('saveEmail')
         ->assertHasNoErrors('email');
 
-    assertEquals($newEmail, $user->fresh()->email);
+    expect($user->fresh()->email)->toBe($newEmail);
 });
 
 it('doesnt accept invalid password', function () {
@@ -87,7 +88,7 @@ it('can change password', function () {
         ->assertSet('password', null)
         ->assertSet('password_confirmation', null);
 
-    assertTrue(Hash::check('Abcd1234', $user->fresh()->password));
+    expect(Hash::check('Abcd1234', $user->fresh()->password))->toBeTrue();
 });
 
 it('checks password when logging user out from other devices', function () {

@@ -31,13 +31,15 @@
         "symfony/dom-crawler": "^5.1"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.3",
+        "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.3",
         "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.0",
-        "pestphp/pest": "^0.1.5",
-        "phpunit/phpunit": "9.2.6"
+        "pestphp/pest": "^0.3.2",
+        "pestphp/pest-plugin-laravel": "^0.3.0",
+        "pestphp/pest-plugin-livewire": "^0.3.1",
+        "phpunit/phpunit": "9.3.8"
     },
     "config": {
         "optimize-autoloader": true,

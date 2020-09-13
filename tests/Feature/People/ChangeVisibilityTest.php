@@ -2,6 +2,8 @@
 
 use App\Models\Person;
 use Spatie\Activitylog\Models\Activity;
+use function Pest\Laravel\put;
+use function Pest\Laravel\{travel, travelBack};
 
 beforeEach(
     fn () => $this->person = Person::factory()->create()
@@ -12,7 +14,7 @@ test('guests cannot change persons visibility', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    assertFalse($this->person->fresh()->isVisible());
+    expect($this->person->fresh()->isVisible())->toBeFalse();
 });
 
 test('users without permissions cannot change persons visibility', function () {
@@ -20,11 +22,11 @@ test('users without permissions cannot change persons visibility', function () {
         ->put("people/{$this->person->id}/visibility")
         ->assertStatus(403);
 
-    assertFalse($this->person->fresh()->isVisible());
+    expect($this->person->fresh()->isVisible())->toBeFalse();
 });
 
 test('users with permissions can change persons visibility', function () {
-    assertFalse($this->person->isVisible());
+    expect($this->person->isVisible())->toBeFalse();
 
     withPermissions(4)
         ->from('people/'.$this->person->id.'/edit')
@@ -33,37 +35,37 @@ test('users with permissions can change persons visibility', function () {
         ])->assertStatus(302)
         ->assertRedirect('people/'.$this->person->id.'/edit');
 
-    assertTrue($this->person->fresh()->isVisible());
+    expect($this->person->fresh()->isVisible())->toBeTrue();
 });
 
 test('visibility change is logged', function () {
-    assertFalse($this->person->isVisible());
+    expect($this->person->isVisible())->toBeFalse();
 
     $count = Activity::count();
 
-    travel('+1 minute');
+    travel(5)->minutes();
 
     withPermissions(4)
         ->put("people/{$this->person->id}/visibility", [
             'visibility' => true,
         ]);
 
-    travel('back');
+    travelBack();
 
-    assertEquals($count + 2, Activity::count()); // visibility change and user creation
+    expect(Activity::count())->toBe($count + 2); // visibility change and user creation
 
     $log = latestLog();
 
-    assertEquals('people', $log->log_name);
-    assertEquals('changed-visibility', $log->description);
-    assertTrue($this->person->fresh()->is($log->subject));
+    expect($log->log_name)->toBe('people');
+    expect($log->description)->toBe('changed-visibility');
+    expect($this->person->fresh()->is($log->subject))->toBeTrue();
 
-    assertEquals($this->person->fresh()->updated_at, $log->created_at);
+    expect((string) $log->created_at)->toBe((string) $this->person->fresh()->updated_at);
 
-    assertCount(2, $log->properties);
-    assertCount(1, $log->properties['old']);
-    assertCount(1, $log->properties['attributes']);
+    expect($log->properties)->toHaveCount(2);
+    expect($log->properties['old'])->toHaveCount(1);
+    expect($log->properties['attributes'])->toHaveCount(1);
 
-    assertEquals(false, $log->properties['old']['visibility']);
-    assertEquals(true, $log->properties['attributes']['visibility']);
+    expect($log->properties['old']['visibility'])->toBeFalse();
+    expect($log->properties['attributes']['visibility'])->toBeTrue();
 });

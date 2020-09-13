@@ -11,11 +11,11 @@ use App\Models\User;
 it('can determine its visibility', function () {
     $marriage = Marriage::factory()->create();
 
-    assertFalse($marriage->isVisible());
+    expect($marriage->isVisible())->toBeFalse();
     $marriage->woman->changeVisibility(true);
-    assertFalse($marriage->isVisible());
+    expect($marriage->isVisible())->toBeFalse();
     $marriage->man->changeVisibility(true);
-    assertTrue($marriage->isVisible());
+    expect($marriage->isVisible())->toBeTrue();
 });
 
 it('tells if can be viewed by given user', function () {
@@ -27,24 +27,24 @@ it('tells if can be viewed by given user', function () {
     $visibleMarriage->woman->changeVisibility(true);
     $visibleMarriage->man->changeVisibility(true);
 
-    assertFalse($hiddenMarriage->canBeViewedBy($user));
-    assertTrue($visibleMarriage->canBeViewedBy($user));
+    expect($hiddenMarriage->canBeViewedBy($user))->toBeFalse();
+    expect($visibleMarriage->canBeViewedBy($user))->toBeTrue();
 
     $user->permissions = 1;
 
-    assertTrue($hiddenMarriage->canBeViewedBy($user));
-    assertTrue($visibleMarriage->canBeViewedBy($user));
+    expect($hiddenMarriage->canBeViewedBy($user))->toBeTrue();
+    expect($visibleMarriage->canBeViewedBy($user))->toBeTrue();
 });
 
 it('tells if can be viewed by guest', function () {
     $marriage = Marriage::factory()->create();
 
-    assertFalse($marriage->canBeViewedBy(null));
+    expect($marriage->canBeViewedBy(null))->toBeFalse();
 
     $marriage->woman->changeVisibility(true);
     $marriage->man->changeVisibility(true);
 
-    assertTrue($marriage->canBeViewedBy(null));
+    expect($marriage->canBeViewedBy(null))->toBeTrue();
 });
 
 it('casts rite to enum', function () {
@@ -52,8 +52,8 @@ it('casts rite to enum', function () {
         'rite' => 'roman_catholic',
     ]);
 
-    assertInstanceOf(MarriageRiteEnum::class, $marriage->rite);
-    assertTrue($marriage->rite->isEqual(MarriageRiteEnum::roman_catholic()));
+    expect($marriage->rite)->toBeInstanceOf(MarriageRiteEnum::class);
+    expect($marriage->rite->isEqual(MarriageRiteEnum::roman_catholic()))->toBeTrue();
 });
 
 test('rite is nullable', function () {
@@ -61,7 +61,7 @@ test('rite is nullable', function () {
         'rite' => null,
     ]);
 
-    assertNull($marriage->rite);
+    expect($marriage->rite)->toBeNull();
 });
 
 it('casts events types to enums', function () {
@@ -70,11 +70,11 @@ it('casts events types to enums', function () {
         'second_event_type' => 'church_marriage',
     ]);
 
-    assertInstanceOf(MarriageEventTypeEnum::class, $marriage->first_event_type);
-    assertTrue($marriage->first_event_type->isEqual(MarriageEventTypeEnum::civil_marriage()));
+    expect($marriage->first_event_type)->toBeInstanceOf(MarriageEventTypeEnum::class);
+    expect($marriage->first_event_type->isEqual(MarriageEventTypeEnum::civil_marriage()))->toBeTrue();
 
-    assertInstanceOf(MarriageEventTypeEnum::class, $marriage->second_event_type);
-    assertTrue($marriage->second_event_type->isEqual(MarriageEventTypeEnum::church_marriage()));
+    expect($marriage->second_event_type)->toBeInstanceOf(MarriageEventTypeEnum::class);
+    expect($marriage->second_event_type->isEqual(MarriageEventTypeEnum::church_marriage()))->toBeTrue();
 });
 
 test('events types are nullable', function () {
@@ -83,8 +83,8 @@ test('events types are nullable', function () {
         'second_event_type' => null,
     ]);
 
-    assertNull($marriage->first_event_type);
-    assertNull($marriage->second_event_type);
+    expect($marriage->first_event_type)->toBeNull();
+    expect($marriage->second_event_type)->toBeNull();
 });
 
 it('can get man and woman', function () {
@@ -95,8 +95,8 @@ it('can get man and woman', function () {
         'man_id' => $man->id,
     ]);
 
-    assertTrue($woman->is($marriage->woman));
-    assertTrue($man->is($marriage->man));
+    expect($woman->is($marriage->woman))->toBeTrue();
+    expect($man->is($marriage->man))->toBeTrue();
 });
 
 it('can get partner', function () {
@@ -107,8 +107,8 @@ it('can get partner', function () {
         'man_id' => $man->id,
     ]);
 
-    assertTrue($woman->is($marriage->partner($man)));
-    assertTrue($man->is($marriage->partner($woman)));
+    expect($woman->is($marriage->partner($man)))->toBeTrue();
+    expect($man->is($marriage->partner($woman)))->toBeTrue();
 });
 
 it('can get order in given person marriages', function () {
@@ -126,9 +126,9 @@ it('can get order in given person marriages', function () {
         'man_order' => 2,
     ]);
 
-    assertNull($first_marriage->order($woman));
-    assertEquals(1, $first_marriage->order($man));
-    assertEquals(2, $second_marriage->order($man));
+    expect($first_marriage->order($woman))->toBeNull();
+    expect($first_marriage->order($man))->toBe(1);
+    expect($second_marriage->order($man))->toBe(2);
 });
 
 it('can determine if has events', function () {
@@ -143,8 +143,8 @@ it('can determine if has events', function () {
         'second_event_place' => null,
     ]);
 
-    assertTrue($first_marriage->hasFirstEvent());
-    assertFalse($first_marriage->hasSecondEvent());
+    expect($first_marriage->hasFirstEvent())->toBeTrue();
+    expect($first_marriage->hasSecondEvent())->toBeFalse();
 
     $second_marriage = Marriage::factory()->create([
         'first_event_type' => 'concordat_marriage',
@@ -157,8 +157,8 @@ it('can determine if has events', function () {
         'second_event_place' => null,
     ]);
 
-    assertTrue($second_marriage->hasFirstEvent());
-    assertTrue($second_marriage->hasSecondEvent());
+    expect($second_marriage->hasFirstEvent())->toBeTrue();
+    expect($second_marriage->hasSecondEvent())->toBeTrue();
 
     $third_marriage = Marriage::factory()->create([
         'first_event_type' => null,
@@ -171,6 +171,6 @@ it('can determine if has events', function () {
         'second_event_place' => null,
     ]);
 
-    assertTrue($third_marriage->hasFirstEvent());
-    assertTrue($third_marriage->hasSecondEvent());
+    expect($third_marriage->hasFirstEvent())->toBeTrue();
+    expect($third_marriage->hasSecondEvent())->toBeTrue();
 });

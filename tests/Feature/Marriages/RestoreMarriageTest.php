@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Marriage;
+use function Pest\Laravel\patch;
 
 beforeEach(
     fn () => $this->marriage = tap(Marriage::factory()->create())->delete()
@@ -11,7 +12,7 @@ test('guests cannot restore marriage', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    assertTrue($this->marriage->fresh()->trashed());
+    expect($this->marriage->fresh()->trashed())->toBeTrue();
 });
 
 test('users without permissions cannot restore marriage', function () {
@@ -19,7 +20,7 @@ test('users without permissions cannot restore marriage', function () {
         ->patch("marriages/{$this->marriage->id}/restore")
         ->assertStatus(403);
 
-    assertTrue($this->marriage->fresh()->trashed());
+    expect($this->marriage->fresh()->trashed())->toBeTrue();
 });
 
 test('users with permissions can restore marriage', function () {
@@ -28,7 +29,7 @@ test('users with permissions can restore marriage', function () {
         ->assertStatus(302)
         ->assertRedirect("people/{$this->marriage->woman_id}");
 
-    assertFalse($this->marriage->fresh()->trashed());
+    expect($this->marriage->fresh()->trashed())->toBeFalse();
 });
 
 test('marriage can be restored only when deleted', function () {
@@ -44,12 +45,12 @@ test('marriage restoration is logged', function () {
 
     $log = latestLog();
 
-    assertEquals('marriages', $log->log_name);
-    assertEquals('restored', $log->description);
-    assertTrue($this->marriage->is($log->subject));
+    expect($log->log_name)->toBe('marriages');
+    expect($log->description)->toBe('restored');
+    expect($this->marriage->is($log->subject))->toBeTrue();
 
-    assertEquals(null, $log->properties['attributes']['deleted_at']);
+    expect($log->properties['attributes']['deleted_at'])->toBeNull();
 
-    assertCount(1, $log->properties);
-    assertCount(1, $log->properties['attributes']);
+    expect($log->properties)->toHaveCount(1);
+    expect($log->properties['attributes'])->toHaveCount(1);
 });

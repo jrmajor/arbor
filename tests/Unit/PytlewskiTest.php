@@ -42,9 +42,7 @@ it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
     $pytlewski = new Pytlewski($id);
 
     foreach ($attributes as $key => $value) {
-        assertEquals(
-            $value, $pytlewski->$key,
-            "Pytlewski $id on key $key."
-        );
+        expect($pytlewski->$key)->toBe($value);
+        // "Pytlewski $id on key $key."
     }
 })->with('pytlewscy');

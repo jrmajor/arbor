@@ -4,7 +4,6 @@ namespace Tests;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Livewire\Livewire;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -18,19 +17,14 @@ abstract class TestCase extends BaseTestCase
         return $this->actingAs($user);
     }
 
-    public function livewire($name, $params = [])
-    {
-        return Livewire::test($name, $params);
-    }
-
     public function assertRouteUsesFormRequest(string $routeName, string $formRequest)
     {
         $controllerAction = collect(Route::getRoutes())->filter(function (\Illuminate\Routing\Route $route) use ($routeName) {
             return $route->getName() == $routeName;
         })->pluck('action.controller');
 
-        assertNotEmpty($controllerAction, 'Route "'.$routeName.'" is not defined.');
-        assertCount(1, $controllerAction, 'Route "'.$routeName.'" is defined multiple times, route names should be unique.');
+        $this->assertNotEmpty($controllerAction, 'Route "'.$routeName.'" is not defined.');
+        $this->assertCount(1, $controllerAction, 'Route "'.$routeName.'" is defined multiple times, route names should be unique.');
 
         $controller = $controllerAction->first();
         $method = '__invoke';
@@ -38,12 +32,12 @@ abstract class TestCase extends BaseTestCase
             [$controller, $method] = explode('@', $controllerAction->first());
         }
 
-        assertActionUsesFormRequest($controller, $method, $formRequest);
+        $this->assertActionUsesFormRequest($controller, $method, $formRequest);
     }
 
     public function assertActionUsesFormRequest(string $controller, string $method, string $formRequest)
     {
-        assertTrue(is_subclass_of($formRequest, 'Illuminate\\Foundation\\Http\\FormRequest'), $formRequest.' is not a type of Form Request');
+        $this->assertTrue(is_subclass_of($formRequest, 'Illuminate\\Foundation\\Http\\FormRequest'), $formRequest.' is not a type of Form Request');
 
         try {
             $reflector = new \ReflectionClass($controller);
@@ -52,12 +46,12 @@ abstract class TestCase extends BaseTestCase
             test()->fail('Controller action could not be found: '.$controller.'@'.$method);
         }
 
-        assertTrue($action->isPublic(), 'Action "'.$method.'" is not public, controller actions must be public.');
+        $this->assertTrue($action->isPublic(), 'Action "'.$method.'" is not public, controller actions must be public.');
 
         $actual = collect($action->getParameters())->contains(function ($parameter) use ($formRequest) {
             return $parameter->getType() instanceof \ReflectionNamedType && $parameter->getType()->getName() === $formRequest;
         });
 
-        assertTrue($actual, 'Action "'.$method.'" does not have validation using the "'.$formRequest.'" Form Request.');
+        $this->assertTrue($actual, 'Action "'.$method.'" does not have validation using the "'.$formRequest.'" Form Request.');
     }
 }
