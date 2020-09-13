@@ -2,8 +2,11 @@
 
 use App\Models\User;
 use Illuminate\Auth\Events\Login;
-use function Pest\Laravel\{from, post};
-use function Pest\Laravel\{assertAuthenticated, assertAuthenticatedAs, assertGuest};
+use function Pest\Laravel\assertGuest;
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\assertAuthenticatedAs;
+use function Pest\Laravel\from;
+use function Pest\Laravel\post;
 
 test('authenticated users are redirected when trying to access form', function () {
     withPermissions(0)

@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Person;
-use Carbon\Carbon;
 use function Pest\Laravel\delete;
 
 beforeEach(

@@ -2,7 +2,8 @@
 
 use App\Models\Person;
 use function Pest\Laravel\post;
-use function Pest\Laravel\{travel, travelBack};
+use function Pest\Laravel\travel;
+use function Pest\Laravel\travelBack;
 
 beforeEach(function () {
     $this->dates = [

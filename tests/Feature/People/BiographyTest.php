@@ -2,8 +2,10 @@
 
 use App\Models\Person;
 use Spatie\Activitylog\Models\Activity;
-use function Pest\Laravel\{get, patch};
-use function Pest\Laravel\{travel, travelBack};
+use function Pest\Laravel\get;
+use function Pest\Laravel\patch;
+use function Pest\Laravel\travel;
+use function Pest\Laravel\travelBack;
 
 beforeEach(function () {
     $this->oldBiography = 'Ukończył gimnazjum w Kołomyi i studia wyższe (polonistyka, historia, geografia), zapewne na Uniwersytecie Lwowskim. Pracował jako nauczyciel gimnazjalny w Kołomyi, gdzie był działaczem Sokoła, Towarzystwa Szkoły Ludowej i Polskiego Towarzystwa Tatrzańskiego. Zajmował się organizacją Muzeum Pokuckiego i kolekcjonował huculską sztukę ludową. Pisał artykuły do prasy lokalnej i krajoznawczej. W latach I wojny światowej był oficerem armii astriackiej, od 1919 Wojska Polskiego. Od 1920 w Grudziądzu, gdzie był oficerem 64 pułku piechoty, 1922 referent ds. kultury i oświaty DOK VIII w Toruniu, następnie komendant Powiatowej Komendy Uzupełnień w Grudziądzu. W 1927 przeszedł na emeryturę w stopniu majora.';

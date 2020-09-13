@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Person;
-use function Pest\Laravel\{get, put};
-use function Pest\Laravel\{travel, travelBack};
+use function Pest\Laravel\get;
+use function Pest\Laravel\put;
+use function Pest\Laravel\travel;
+use function Pest\Laravel\travelBack;
 
 beforeEach(function () {
     $this->dates = [
