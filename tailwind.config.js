@@ -123,7 +123,6 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/ui'),
-    require('tailwindcss-important')(),
     require('tailwindcss-multi-column')(),
   ],
   experimental: {
