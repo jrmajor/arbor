@@ -24,8 +24,8 @@
                 <br>
                 <div x-show="open" @click.away="open = false" style="display: none;">
                     <small style="display: block; line-height: 1.45">
-                        @if($pytlewski->hasParents())
-                            &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}: <br>
+                        @if($pytlewski->mother || $pytlewski->father)
+                            &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}:<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <x-pytlewski-relative :pytlewski="$pytlewski->mother"/>
                             <br>
@@ -34,7 +34,7 @@
                             <br>
                         @endif
 
-                        @if($pytlewski->hasMarriages())
+                        @if($pytlewski->marriages->isNotEmpty())
                             &nbsp;&nbsp;{{ __('people.pytlewski.marriages') }}:<br>
                             @foreach($pytlewski->marriages as $marriage)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -43,7 +43,7 @@
                             @endforeach
                         @endif
 
-                        @if($pytlewski->hasChildren())
+                        @if($pytlewski->children->isNotEmpty())
                             &nbsp;&nbsp;{{ __('people.pytlewski.children') }}:<br>
                             @foreach($pytlewski->children as $child)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -52,7 +52,7 @@
                             @endforeach
                         @endif
 
-                        @if($pytlewski->hasSiblings())
+                        @if($pytlewski->siblings->isNotEmpty())
                             &nbsp;&nbsp;{{ __('people.pytlewski.siblings') }}:<br>
                             @foreach($pytlewski->siblings as $sibling)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

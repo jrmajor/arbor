@@ -68,20 +68,22 @@ class Pytlewski
     private function matchRelatives(Collection $relatives): array
     {
         return [
-            'mother' => Relative::hydrate([
-                'id' => $this->attributes['mother_id'] ?? null,
-                'person' => isset($this->attributes['mother_id']) ? $relatives
-                    ->where('id_pytlewski', $this->attributes['mother_id'])->first() : null,
-                'surname' => $this->attributes['mother_surname'] ?? null,
-                'name' => $this->attributes['mother_name'] ?? null,
-            ]),
-            'father' => Relative::hydrate([
-                'id' => $this->attributes['father_id'] ?? null,
-                'person' => isset($this->attributes['father_id']) ? $relatives
-                    ->where('id_pytlewski', $this->attributes['father_id'])->first() : null,
-                'surname' => $this->attributes['father_surname'] ?? null,
-                'name' => $this->attributes['father_name'] ?? null,
-            ]),
+            'mother' => isset($this->attributes['mother_surname']) || isset($this->attributes['mother_name'])
+                ? Relative::hydrate([
+                    'id' => $this->attributes['mother_id'] ?? null,
+                    'person' => isset($this->attributes['mother_id']) ? $relatives
+                        ->where('id_pytlewski', $this->attributes['mother_id'])->first() : null,
+                    'surname' => $this->attributes['mother_surname'] ?? null,
+                    'name' => $this->attributes['mother_name'] ?? null,
+                ]) : null,
+            'father' => isset($this->attributes['father_surname']) || isset($this->attributes['father_name'])
+                ? Relative::hydrate([
+                    'id' => $this->attributes['father_id'] ?? null,
+                    'person' => isset($this->attributes['father_id']) ? $relatives
+                        ->where('id_pytlewski', $this->attributes['father_id'])->first() : null,
+                    'surname' => $this->attributes['father_surname'] ?? null,
+                    'name' => $this->attributes['father_name'] ?? null,
+                ]) : null,
             'marriages' => collect($this->attributes['marriages'])
                 ->map(function ($marriage) use ($relatives) {
                     if (isset($marriage['id'])) {
@@ -113,27 +115,6 @@ class Pytlewski
                 }),
 
         ];
-    }
-
-    public function hasParents(): bool
-    {
-        return isset($this->attributes['mother_surname']) || isset($this->attributes['father_surname'])
-                || isset($this->attributes['mother_name']) || isset($this->attributes['father_name']);
-    }
-
-    public function hasMarriages(): bool
-    {
-        return count($this->marriages) > 0;
-    }
-
-    public function hasChildren(): bool
-    {
-        return count($this->children) > 0;
-    }
-
-    public function hasSiblings(): bool
-    {
-        return count($this->siblings) > 0;
     }
 
     public function __get($key)

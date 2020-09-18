@@ -67,17 +67,25 @@ it('can load relations', function ($id, $source, $attributes) {
             ->and($pytlewski->siblings->get(1)->person->id)->toBe($secondSibling->id)
             ->and($pytlewski->siblings->get(1)->name)->toBe('Katarzyna');
     } else {
-        expect($pytlewski->mother)->toBeInstanceOf(Relative::class)
-            ->and($pytlewski->mother->id)->toBe($attributes['mother_id'])
-            ->and($pytlewski->mother->person)->toBeNull()
-            ->and($pytlewski->mother->surname)->toBe($attributes['mother_surname'])
-            ->and($pytlewski->mother->name)->toBe($attributes['mother_name']);
+        if (isset($attributes['mother_surname']) || isset($attributes['mother_name'])) {
+            expect($pytlewski->mother)->toBeInstanceOf(Relative::class)
+                ->and($pytlewski->mother->id)->toBe($attributes['mother_id'])
+                ->and($pytlewski->mother->person)->toBeNull()
+                ->and($pytlewski->mother->surname)->toBe($attributes['mother_surname'])
+                ->and($pytlewski->mother->name)->toBe($attributes['mother_name']);
+        } else {
+            expect($pytlewski->mother)->toBeNull();
+        }
 
-        expect($pytlewski->father)->toBeInstanceOf(Relative::class)
-            ->and($pytlewski->father->id)->toBe($attributes['father_id'])
-            ->and($pytlewski->father->person)->toBeNull()
-            ->and($pytlewski->father->surname)->toBe($attributes['father_surname'])
-            ->and($pytlewski->father->name)->toBe($attributes['father_name']);
+        if (isset($attributes['father_surname']) || isset($attributes['father_name'])) {
+            expect($pytlewski->father)->toBeInstanceOf(Relative::class)
+                ->and($pytlewski->father->id)->toBe($attributes['father_id'])
+                ->and($pytlewski->father->person)->toBeNull()
+                ->and($pytlewski->father->surname)->toBe($attributes['father_surname'])
+                ->and($pytlewski->father->name)->toBe($attributes['father_name']);
+        } else {
+            expect($pytlewski->father)->toBeNull();
+        }
 
         foreach ($attributes['marriages'] as $marriageKey => $marriageAttributes) {
             $marriage = $pytlewski->marriages->get($marriageKey);
