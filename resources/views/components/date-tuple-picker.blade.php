@@ -13,7 +13,7 @@
     )">
     <div class="w-full pb-1 flex items-center">
         <label for="{{ $name }}_year" class="font-medium text-gray-700">{{ $label }}</label>
-        <button type="button" @click.prevent="advancedPicker = ! advancedPicker"
+        <button type="button" x-on:click.prevent="advancedPicker = ! advancedPicker"
             x-text="advancedPicker ? '{{ __('misc.date.simple') }}' : '{{ __('misc.date.advanced') }}'"
             class="ml-2 a underline leading-none text-sm">
             toggle
@@ -28,7 +28,7 @@
                         type="text" class="form-input w-16 rounded-r-none z-10"
                         :class="{ 'invalid': ! dateIsValid }"
                         x-model="year" x-ref="year"
-                        @keyup="
+                        x-on:keyup="
                             updateAdvanced();
                             if ($event.target.selectionStart == 4 && $event.keyCode >= 48 && $event.keyCode <= 57) {
                                 $refs.month.focus()
@@ -40,7 +40,7 @@
                         :class="{ 'invalid': ! dateIsValid }"
                         style="margin: 0 -1px 0 -1px"
                         x-model="month" x-ref="month"
-                        @keyup="
+                        x-on:keyup="
                             updateAdvanced();
                             if ($event.target.selectionStart == 2 && $event.keyCode >= 48 && $event.keyCode <= 57) {
                                 $refs.day.focus()
@@ -53,7 +53,7 @@
                         type="text" class="form-input w-12 rounded-l-none z-10"
                         :class="{ 'invalid': ! dateIsValid }"
                         x-model="day" x-ref="day"
-                        @keyup="
+                        x-on:keyup="
                             updateAdvanced()
                             if ($event.target.selectionStart == 0 && $event.keyCode == 8) {
                                $refs.month.focus()

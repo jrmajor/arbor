@@ -25,7 +25,7 @@
             </div>
 
             <button
-                @click="open = ! open"
+                x-on:click="open = ! open"
                 type="button"
                 class="block lg:hidden px-4 pt-4 pb-3 md:pt-5 md:pb-4 -my-2 text-gray-800 hover:text-gray-900 focus:outline-none">
                 <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +37,7 @@
             <div
                 class="flex-col w-full mt-2 pb-2 lg:flex lg:flex-row lg:w-auto lg:mt-0 lg:pb-0 lg:items-center"
                 :class="{ 'flex': open, 'hidden': ! open }"
-                @click.away="open = false">
+                x-on:click.away="open = false">
 
                 @if($active != 'search')
                     <form action="{{ route('search') }}"
@@ -159,7 +159,7 @@
 
                     <div class="hidden lg:block relative">
                         <button
-                            @click="dropdown = ! dropdown"
+                            x-on:click="dropdown = ! dropdown"
                             class="px-3 pt-6 pb-4 text-gray-800
                                 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
                                 border-b-2 border-solid border-transparent
@@ -177,7 +177,7 @@
 
                         <div class="absolute right-0 flex-col items-end z-10"
                             :class="{ 'flex': dropdown, 'hidden': ! dropdown }"
-                            @click.away="dropdown = false">
+                            x-on:click.away="dropdown = false">
 
                             <div class="w-0 h-0 mr-8 z-20" style="border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #ffffff;"></div>
 

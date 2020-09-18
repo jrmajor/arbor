@@ -333,7 +333,7 @@
 
         <div class="w-full flex items-center justify-between mb-4">
             <div class="font-medium text-xl text-gray-900">{{ __('people.sources') }}</div>
-            <button @click.prevent="sources.push('')"
+            <button x-on:click.prevent="sources.push('')"
                 class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700
                     hover:bg-blue-100 hover:text-blue-800
                     focus:outline-none focus:shadow-outline-none
@@ -356,7 +356,7 @@
                             <div class="w-full flex flex-no-wrap items-center space-x-2">
                                 <input type="text" class="form-input w-full" :name="'sources['+index+']'" x-model="sources[index]">
                                 <div>
-                                    <button @click.prevent="sources.splice(index, 1)"
+                                    <button x-on:click.prevent="sources.splice(index, 1)"
                                         class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700
                                             hover:bg-blue-100 hover:text-blue-800
                                             focus:outline-none focus:shadow-outline-none

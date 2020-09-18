@@ -19,10 +19,10 @@
             name="{{ $name }}_id"
             x-model="selected.id">
         <div class="relative w-full"
-            @mousedown.away="closeDropdown()">
+            x-on:mousedown.away="closeDropdown()">
             <div class="relative block cursor-text form-select
                     @error($name.'_id') shadow-outline-red @else active:shadow-outline-blue focus-within:shadow-outline-blue @enderror"
-                @click="$refs.search.focus()">
+                x-on:click="$refs.search.focus()">
                 <div class="pr-4">
                     <span x-text="selected.name">
                     </span>{{--
@@ -30,8 +30,8 @@
                         type="text" class="appearance-none outline-none text-gray-600 focus:text-gray-800"
                         :style="selected.id != null ? 'width: 4px' : 'width: 100%'" autocomplete="off"
                         x-ref="search" x-model="search" id="{{ $name }}_search"
-                        @focus="open = true"
-                        @keydown="findPeople($event)" @keypress="findPeople($event)" @keyup="findPeople($event)" @paste="findPeople($event)">
+                        x-on:focus="open = true"
+                        x-on:keydown="findPeople($event)" x-on:keypress="findPeople($event)" x-on:keyup="findPeople($event)" x-on:paste="findPeople($event)">
                 </div>
             </div>
             <template x-if="open">
@@ -43,7 +43,7 @@
                     </template>
                     <template x-for="person in people" x-key="person.id">
                         <button
-                            @click.prevent="selectPerson(person)"
+                            x-on:click.prevent="selectPerson(person)"
                             class="flex w-full px-3 py-1 text-gray-800 text-left justify-between hover:bg-cool-gray-100">
                             <span x-text="person.name"></span>
                             <span class="text-gray-400" x-text="selected.id == person.id ? '✓ ' : ''"></span>
