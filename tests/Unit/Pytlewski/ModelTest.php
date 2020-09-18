@@ -45,7 +45,7 @@ it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
     $keysToCheck = [
         'family_name', 'last_name', 'name', 'middle_name',
         'birth_date', 'birth_place', 'death_date', 'death_place',
-        'photo', 'bio'
+        'photo', 'bio',
     ];
 
     foreach (Arr::only($attributes, $keysToCheck) as $key => $value) {

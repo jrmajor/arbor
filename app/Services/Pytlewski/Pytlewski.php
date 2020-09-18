@@ -22,11 +22,11 @@ class Pytlewski
     private $keys = [
         'family_name', 'last_name', 'name', 'middle_name',
         'birth_date', 'birth_place', 'death_date', 'death_place',
-        'photo', 'bio'
+        'photo', 'bio',
     ];
 
     private $relationKeys = [
-        'mother', 'father', 'marriages', 'children', 'siblings'
+        'mother', 'father', 'marriages', 'children', 'siblings',
     ];
 
     public function __construct($id)
