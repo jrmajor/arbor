@@ -27,14 +27,10 @@
                         @if($pytlewski->hasParents())
                             &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}: <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <x-pytlewski :id="$pytlewski->mother_id">
-                                {{ $pytlewski->mother_surname }}, {{ $pytlewski->mother_name }}
-                            </x-pytlewski>
+                            <x-pytlewski-relative :pytlewski="$pytlewski->mother"/>
                             <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <x-pytlewski :id="$pytlewski->father_id">
-                                {{ $pytlewski->father_surname }}, {{ $pytlewski->father_name }}
-                            </x-pytlewski>
+                            <x-pytlewski-relative :pytlewski="$pytlewski->father"/>
                             <br>
                         @endif
 
@@ -42,9 +38,7 @@
                             &nbsp;&nbsp;{{ __('people.pytlewski.marriages') }}:<br>
                             @foreach($pytlewski->marriages as $marriage)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <x-pytlewski :id="$marriage['id'] ?? null">
-                                    {{ $marriage['name'] ?? null }}
-                                </x-pytlewski>
+                                <x-pytlewski-relative :pytlewski="$marriage"/>
                                 <br>
                             @endforeach
                         @endif
@@ -53,9 +47,7 @@
                             &nbsp;&nbsp;{{ __('people.pytlewski.children') }}:<br>
                             @foreach($pytlewski->children as $child)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <x-pytlewski :id="$child['id'] ?? null">
-                                    {{ $child['name'] ?? null }}
-                                </x-pytlewski>
+                                <x-pytlewski-relative :pytlewski="$child"/>
                                 <br>
                             @endforeach
                         @endif
@@ -64,9 +56,7 @@
                             &nbsp;&nbsp;{{ __('people.pytlewski.siblings') }}:<br>
                             @foreach($pytlewski->siblings as $sibling)
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <x-pytlewski :id="$sibling['id'] ?? null">
-                                    {{ $sibling['name'] ?? null }}
-                                </x-pytlewski>
+                                <x-pytlewski-relative :pytlewski="$sibling"/>
                                 <br>
                             @endforeach
                         @endif

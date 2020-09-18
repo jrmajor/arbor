@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\Pytlewski\Pytlewski;
+use Illuminate\Support\Arr;
 
 it('can make proper url')
     ->assertEquals(
@@ -41,7 +42,13 @@ it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
 
     $pytlewski = new Pytlewski($id);
 
-    foreach ($attributes as $key => $value) {
+    $keysToCheck = [
+        'family_name', 'last_name', 'name', 'middle_name',
+        'birth_date', 'birth_place', 'death_date', 'death_place',
+        'photo', 'bio'
+    ];
+
+    foreach (Arr::only($attributes, $keysToCheck) as $key => $value) {
         expect($pytlewski->$key)->toBe($value);
         // "Pytlewski $id on key $key."
     }
