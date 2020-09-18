@@ -30,8 +30,7 @@
                         type="text" class="appearance-none outline-none text-gray-600 focus:text-gray-800"
                         :style="selected.id != null ? 'width: 4px' : 'width: 100%'" autocomplete="off"
                         x-ref="search" x-model="search" id="{{ $name }}_search"
-                        x-on:focus="open = true"
-                        x-on:keydown="findPeople($event)" x-on:keypress="findPeople($event)" x-on:keyup="findPeople($event)" x-on:paste="findPeople($event)">
+                        x-on:focus="open = true" x-on:input="findPeople($event)">
                 </div>
             </div>
             <template x-if="open">
