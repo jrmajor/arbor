@@ -11,44 +11,47 @@
                 'name' => optional($initial)->formatName(),
             ],
         ])
-    )">
+    )" x-init="init()">
     <label for="{{ $name }}_search" class="w-full font-medium pb-1 text-gray-700">{{ $label }}</label>
     <div class="w-full">
         <input
             type="hidden"
             name="{{ $name }}_id"
             x-model="selected.id">
-        <div class="relative w-full"
-            x-on:mousedown.away="closeDropdown()">
-            <div class="relative block cursor-text form-select
-                    @error($name.'_id') shadow-outline-red @else active:shadow-outline-blue focus-within:shadow-outline-blue @enderror"
-                x-on:click="$refs.search.focus()">
+        <div class="relative w-full">
+            <div x-on:click="$refs.search.focus()" class="block cursor-text form-select
+                    @error($name.'_id') shadow-outline-red @else active:shadow-outline-blue focus-within:shadow-outline-blue @enderror">
                 <div class="pr-4">
                     <span x-text="selected.name">
                     </span>{{--
-                    --}}<input
+                --}}<input
                         type="text" class="appearance-none outline-none text-gray-600 focus:text-gray-800"
                         :style="selected.id != null ? 'width: 4px' : 'width: 100%'" autocomplete="off"
                         x-ref="search" x-model="search" id="{{ $name }}_search"
-                        x-on:focus="open = true" x-on:input="findPeople($event)">
+                        x-on:keydown.backspace="deselect()" x-on:keydown.enter.prevent="enter()"
+                        x-on:keydown.arrow-up="arrow('up')" x-on:keydown.arrow-down="arrow('down')"
+                        x-on:keydown="keydown($event)" x-on:input="findPeople($event)"
+                        x-on:focus="open = true" x-on:blur="closeDropdown()">
                 </div>
             </div>
-            <template x-if="open">
-                <div class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300">
+            <template x-if="open && ! (search == '' && people.length == 0)">
+                <ul class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
+                    x-ref="dropdown" x-on:mousedown="shouldCloseOnBlur = false">
                     <template x-if="people.length == 0">
-                        <div class="w-full px-3 py-1 text-gray-600">
+                        <li class="w-full px-3 py-1 text-gray-600">
                             {{ __('misc.no_results') }}
-                        </div>
+                        </li>
                     </template>
-                    <template x-for="person in people" x-key="person.id">
-                        <button
-                            x-on:click.prevent="selectPerson(person)"
-                            class="flex w-full px-3 py-1 text-gray-800 text-left justify-between hover:bg-cool-gray-100">
+                    <template x-for="(person, index) in people" x-key="person.id">
+                        <li
+                            x-on:mouseover="hovered = index" x-on:click="selectPerson(person)"
+                            class="select-none flex w-full px-3 py-1 text-gray-800 text-left justify-between"
+                            :class="{ 'bg-cool-gray-100': hovered == index }">
                             <span x-text="person.name"></span>
                             <span class="text-gray-400" x-text="selected.id == person.id ? '✓ ' : ''"></span>
-                        </button>
+                        </li>
                     </template>
-                </div>
+                </ul>
             </template>
         </div>
         @error($name.'_id')

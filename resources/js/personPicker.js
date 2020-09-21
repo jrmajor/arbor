@@ -10,44 +10,81 @@ window.personPickerData = function (data) {
       id: data.initial.id,
       name: data.initial.name
     },
+    hovered: null,
     open: false,
+    shouldCloseOnBlur: true,
     previousSearch: '',
     search: '',
     people: [],
 
-    findPeople(e) {
-      if (e.metaKey || e.altKey) return
+    init() {
+      if (this.initial.id != null) this.people.push(this.initial)
+    },
 
-      if (this.selected.id == null) {
-        if (this.search != this.previousSearch) {
-          axios.get(this.route, {
-            params: {
-              sex: this.sex,
-              search: this.search
-            }
-          })
-          .then(response => {
-            this.people = response.data
-          })
-          .catch(response => {
-            console.log(response)
-          })
-          this.previousSearch = this.search
-        }
-      } else if (e.keyCode == 8) {
-        this.selected.id = null
-        this.selected.name = null
+    findPeople(event) {
+      if (this.selected.id != null) {
         this.search = ''
-      } else e.preventDefault()
+        return false
+      }
+
+      if (this.search != this.previousSearch) {
+        axios.get(this.route, {
+          params: {
+            sex: this.sex,
+            search: this.search
+          }
+        })
+        .then(response => {
+          this.people = response.data
+          if (this.hovered > this.people.length - 1) this.hovered = null
+        })
+        .catch(response => {
+          console.log(response)
+        })
+        this.previousSearch = this.search
+      }
+    },
+
+    keydown(event) {
+      if (this.selected.id == null) return
+
+      if (event.key == 'Tab'
+        || event.metaKey
+        || event.ctrlKey) return
+
+      event.preventDefault()
+    },
+
+    arrow(direction) {
+      if (this.people.length == 0) return
+
+      if (this.hovered == null) {
+        return this.hovered = direction == 'up' ? this.people.length - 1 : 0
+      }
+
+      this.hovered = direction == 'up' ? this.hovered - 1 : this.hovered + 1
+
+      if (this.hovered < 0) this.hovered = this.people.length - 1
+      if (this.hovered > this.people.length - 1) this.hovered = 0
+    },
+
+    enter() {
+      if (this.hovered != null) this.selectPerson(this.people[this.hovered])
     },
 
     closeDropdown() {
+      if (! this.shouldCloseOnBlur) return this.shouldCloseOnBlur = true
+
       this.open = false
+
       if (! this.nullable && this.selected.id == null && this.initial.id != null) {
         this.selected.id = this.initial.id
         this.selected.name = this.initial.name
         this.search = null
       }
+
+      this.hovered = null
+      this.shouldCloseOnBlur = true
     },
 
     selectPerson(person) {
@@ -55,6 +92,13 @@ window.personPickerData = function (data) {
       this.selected.name = person.name
       this.search = null
       this.open = false
-    }
+    },
+
+    deselect() {
+      this.selected.id = null
+      this.selected.name = null
+      this.search = ''
+      this.open = true
+    },
   }
 }
