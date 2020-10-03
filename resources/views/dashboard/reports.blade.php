@@ -8,44 +8,38 @@
 
         <main class="flex-grow md:w-1/2 space-y-5">
 
-            <div>
-                <h2 class="mb-2 leading-none text-xl font-medium">Should be dead</h2>
-                <div class="w-full p-6 bg-white rounded-lg shadow">
-                    <ul>
-                        @forelse ($shouldBeDead as $person)
+            @if($shouldBeDead->isNotEmpty())
+                <div>
+                    <h2 class="mb-2 leading-none text-xl font-medium">Should be dead</h2>
+                    <ul class="w-full p-6 bg-white rounded-lg shadow">
+                        @foreach ($shouldBeDead as $person)
                             <li><x-name :person="$person"/></li>
-                        @empty
-                            <li>all ok</li>
-                        @endforelse
+                        @endforeach
                     </ul>
                 </div>
-            </div>
+            @endif
 
-            <div>
-                <h2 class="mb-2 leading-none text-xl font-medium">Visible alive</h2>
-                <div class="w-full p-6 bg-white rounded-lg shadow">
-                    <ul>
-                        @forelse ($visibleAlive as $person)
+            @if($visibleAlive->isNotEmpty())
+                <div>
+                    <h2 class="mb-2 leading-none text-xl font-medium">Visible alive</h2>
+                    <ul class="w-full p-6 bg-white rounded-lg shadow">
+                        @foreach ($visibleAlive as $person)
                             <li><x-name :person="$person"/></li>
-                        @empty
-                            <li>all ok</li>
-                        @endforelse
+                        @endforeach
                     </ul>
                 </div>
-            </div>
+            @endif
 
-            <div>
-                <h2 class="mb-2 leading-none text-xl font-medium">Invisible dead</h2>
-                <div class="w-full p-6 bg-white rounded-lg shadow">
-                    <ul>
-                        @forelse ($invisibleDead as $person)
+            @if($invisibleDead->isNotEmpty())
+                <div>
+                    <h2 class="mb-2 leading-none text-xl font-medium">Invisible dead</h2>
+                    <ul class="w-full p-6 bg-white rounded-lg shadow">
+                        @foreach ($invisibleDead as $person)
                             <li><x-name :person="$person"/></li>
-                        @empty
-                            <li>all ok</li>
-                        @endforelse
+                        @endforeach
                     </ul>
                 </div>
-            </div>
+            @endif
 
         </main>
 
