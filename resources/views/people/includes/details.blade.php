@@ -26,12 +26,16 @@
                     <small style="display: block; line-height: 1.45">
                         @if($pytlewski->mother || $pytlewski->father)
                             &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}:<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <x-pytlewski-relative :pytlewski="$pytlewski->mother"/>
-                            <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <x-pytlewski-relative :pytlewski="$pytlewski->father"/>
-                            <br>
+                            @if($pytlewski->mother)
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <x-pytlewski-relative :pytlewski="$pytlewski->mother"/>
+                                <br>
+                            @endif
+                            @if($pytlewski->father)
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <x-pytlewski-relative :pytlewski="$pytlewski->father"/>
+                                <br>
+                            @endif
                         @endif
 
                         @if($pytlewski->marriages->isNotEmpty())
