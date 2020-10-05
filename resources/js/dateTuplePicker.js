@@ -1,91 +1,91 @@
-import { isValid, startOfMonth, lastDayOfMonth, startOfYear, lastDayOfYear, formatISO } from 'date-fns'
+import { isValid, startOfMonth, lastDayOfMonth, startOfYear, lastDayOfYear, format } from 'date-fns'
 
 window.dateTuplePickerData = function (data) {
   return {
-    year: data.year,
-    month: data.month,
-    day: data.day,
-    from: data.from,
-    to: data.to,
+    simple: data.simple,
+    advanced: {
+      from: data.from,
+      to: data.to,
+    },
     dateIsValid: true,
     advancedPicker: data.advancedPicker,
 
-    updateAdvanced() {
+    simpleChanged() {
       this.dateIsValid = true
 
-      var y = this.year.trim()
-      var m = this.month.trim()
-      var d = this.day.trim()
+      this.simple = this.simple.trim()
 
-      if (y == '') {
-        y = 'no year'
-      } else if (parseInt(y) == y) {
-        y = parseInt(y)
-        if (y < 100) {
-          return this.clearInvalidDate()
+      if (this.simple.length === 0) {
+        return this.advanced.from = this.advanced.to = ''
+      }
+
+      this.simple = this.simple.replace(/[^0-9-]/g, '')
+
+      const matches = this.simple.match(/^([0-9]{4})(?:(-)(?:([0-9]{1,2})(?:(-)(?:([0-9]{1,2}))?)?)?)?$/)
+
+      if (matches === null) return this.clearInvalidDate()
+
+      const rawDay = matches[5],
+            year = parseInt(matches[1]),
+            month = parseInt(matches[3]) - 1,
+            day = parseInt(matches[5]),
+            secondHyphen = matches[4] === '-' ? '-' : ''
+
+      let date
+
+      if (! isNaN(day)) {
+        if (
+          isValid((date = new Date(year, month, day)))
+          && date.getDate() === day && date.getMonth() === month
+        ) {
+          this.advanced.from = this.advanced.to = format(date, 'yyyy-MM-dd')
+          if (day > 3) {
+            this.simple = format(date, 'yyyy-MM-dd')
+          } else {
+            this.simple = format(date, 'yyyy-MM-') + rawDay
+          }
+          return
         }
-      } else {
+
         return this.clearInvalidDate()
       }
 
-      if (m == '') {
-        m = 'no month'
-      } else if (parseInt(m) == m) {
-        m = parseInt(m) - 1
-      } else {
+      if (! isNaN(month)) {
+        if (
+          isValid((date = new Date(year, month, 15)))
+          && date.getMonth() === month
+        ) {
+          this.advanced.from = format(startOfMonth(date), 'yyyy-MM-dd')
+          this.advanced.to = format(lastDayOfMonth(date), 'yyyy-MM-dd')
+          if (month > 0 || secondHyphen === '-') {
+            this.simple = format(date, 'yyyy-MM') + secondHyphen
+          }
+          return
+        }
+
         return this.clearInvalidDate()
       }
 
-      if (d == '') {
-        d = 'no day'
-      } else if (parseInt(d) == d) {
-        d = parseInt(d)
-      } else {
+      if (! isNaN(year)) {
+        if (isValid((date = new Date(year, 5, 15)))) {
+          this.advanced.from = format(startOfYear(date), 'yyyy-MM-dd')
+          this.advanced.to = format(lastDayOfYear(date), 'yyyy-MM-dd')
+          return
+        }
+
         return this.clearInvalidDate()
       }
 
-      var date, f, t = f = ''
+      this.clearInvalidDate()
+    },
 
-      if (d != 'no day') {
-        if (isValid(date = new Date(y, m, d)) && date.getDate() == d && date.getMonth() == m) {
-          f = formatISO(date, { representation: 'date' })
-          t = f
-          console.log(y, m, d, 'full date')
-        } else {
-          return this.clearInvalidDate()
-        }
-      } else if (m != 'no month') {
-        if (isValid(date = new Date(y, m, 15)) && date.getMonth() == m) {
-          f = formatISO(startOfMonth(date), { representation: 'date' })
-          t = formatISO(lastDayOfMonth(date), { representation: 'date' })
-          console.log(y, m, d, 'no day')
-        } else {
-          return this.clearInvalidDate()
-        }
-      } else if (y != 'no year') {
-        if (isValid(date = new Date(y, 5, 15))) {
-          f = formatISO(startOfYear(date), { representation: 'date' })
-          t = formatISO(lastDayOfYear(date), { representation: 'date' })
-          console.log(y, m, d, 'no month')
-        } else {
-          return this.clearInvalidDate()
-        }
-      } else if (y == 'no year' && m == 'no month' && d == 'no day') {
-        console.log(y, m, d, 'no date')
-      } else {
-        this.dateIsValid = false
-        console.log(y, m, d, 'invalid date')
-      }
-
-      this.from = f
-      this.to = t
+    simpleBlurred() {
+      if (this.simple.slice(-1) === '-') this.simple = this.simple.slice(0, -1)
     },
 
     clearInvalidDate() {
       this.dateIsValid = false
-      this.from = ''
-      this.to = ''
-      console.log('invalid date')
+      this.advanced.from = this.advanced.to = ''
     }
   }
 }

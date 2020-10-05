@@ -71,25 +71,17 @@ class DateTuplePicker extends Component
         return false;
     }
 
-    public function initialSimplePickerValues()
+    public function initialSimplePickerValue()
     {
         $from = $this->initialFrom;
         $to = $this->initialTo;
 
         if (! $from || ! $to) {
-            return [
-                'y' => null,
-                'm' => null,
-                'd' => null,
-            ];
+            return;
         }
 
         if ($from->equalTo($to)) {
-            return [
-                'y' => $from->format('Y'),
-                'm' => $from->format('m'),
-                'd' => $from->format('d'),
-            ];
+            return $from->format('Y-m-d');
         }
 
         $to = $to->endOfDay();
@@ -99,18 +91,9 @@ class DateTuplePicker extends Component
             && $to->copy()->endOfYear()->equalTo($to)
         ) {
             if ($from->year == $to->year) {
-                return [
-                    'y' => $from->format('Y'),
-                    'm' => null,
-                    'd' => null,
-                ];
-            } else {
-                return [
-                    'y' => null,
-                    'm' => null,
-                    'd' => null,
-                ];
+                return $from->format('Y');
             }
+            return;
         }
 
         if (
@@ -118,25 +101,12 @@ class DateTuplePicker extends Component
             && $to->copy()->endOfMonth()->equalTo($to)
         ) {
             if ($from->year == $to->year && $from->month == $to->month) {
-                return [
-                    'y' => $from->format('Y'),
-                    'm' => $from->format('m'),
-                    'd' => null,
-                ];
-            } else {
-                return [
-                    'y' => null,
-                    'm' => null,
-                    'd' => null,
-                ];
+                return $from->format('Y-m');
             }
+            return;
         }
 
-        return [
-            'y' => null,
-            'm' => null,
-            'd' => null,
-        ];
+        return;
     }
 
     public function render()

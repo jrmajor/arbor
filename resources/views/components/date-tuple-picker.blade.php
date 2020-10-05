@@ -3,9 +3,7 @@
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}
     x-data="dateTuplePickerData(
         @encodedjson([
-            'year' => $initialSimplePickerValues()['y'] ?? '',
-            'month' => $initialSimplePickerValues()['m'] ?? '',
-            'day' => $initialSimplePickerValues()['d'] ?? '',
+            'simple' => $initialSimplePickerValue(),
             'from' => optional($initialFrom)->format('Y-m-d'),
             'to' => optional($initialTo)->format('Y-m-d'),
             'advancedPicker' => $errors->has($name.'_from') || $errors->has($name.'_to') || ! $simplePickerCanBeUsed(),
@@ -25,41 +23,12 @@
                 class="flex-grow flex-shrink flex">
                 <div class="flex items-center">
                     <input
-                        type="text" class="form-input w-16 rounded-r-none z-10"
+                        type="text" class="form-input tabular-nums w-32"
                         :class="{ 'invalid': ! dateIsValid }"
-                        x-model="year" x-ref="year"
-                        x-on:keyup="
-                            updateAdvanced();
-                            if ($event.target.selectionStart == 4 && $event.keyCode >= 48 && $event.keyCode <= 57) {
-                                $refs.month.focus()
-                            }"
-                        placeholder="{{ __('misc.date.yyyy') }}"
-                        maxlength=4>
-                    <input
-                        type="text" class="form-input w-12 rounded-none focus:z-20"
-                        :class="{ 'invalid': ! dateIsValid }"
-                        style="margin: 0 -1px 0 -1px"
-                        x-model="month" x-ref="month"
-                        x-on:keyup="
-                            updateAdvanced();
-                            if ($event.target.selectionStart == 2 && $event.keyCode >= 48 && $event.keyCode <= 57) {
-                                $refs.day.focus()
-                            } else if ($event.target.selectionStart == 0 && $event.keyCode == 8) {
-                                $refs.year.focus()
-                            }"
-                        placeholder="{{ __('misc.date.mm') }}"
-                        maxlength=2>
-                    <input
-                        type="text" class="form-input w-12 rounded-l-none z-10"
-                        :class="{ 'invalid': ! dateIsValid }"
-                        x-model="day" x-ref="day"
-                        x-on:keyup="
-                            updateAdvanced()
-                            if ($event.target.selectionStart == 0 && $event.keyCode == 8) {
-                               $refs.month.focus()
-                            }"
-                        placeholder="{{ __('misc.date.dd') }}"
-                        maxlength=2>
+                        x-model="simple" x-on:input="simpleChanged"
+                        x-on:blur="simpleBlurred"
+                        placeholder="{{ __('misc.date.format') }}"
+                        maxlength="10">
                 </div>
             </div>
             <div x-show="advancedPicker"
@@ -67,18 +36,18 @@
                 <div class="flex-grow-0 flex items-center mb-2 mr-1">
                     <p class="text-gray-900">{{ __('misc.date.between') }}</p>
                     <input
-                        type="text" class="form-input w-32 ml-1 @error($name.'_from') invalid @enderror"
-                        x-model="from" x-ref="from" name="{{ $name }}_from"
+                        type="text" class="form-input tabular-nums w-32 ml-1 @error($name.'_from') invalid @enderror"
+                        x-model="advanced.from" name="{{ $name }}_from"
                         placeholder="{{ __('misc.date.format') }}"
-                        size="12" maxlength=10>
+                        maxlength="10">
                 </div>
                 <div class="flex-grow-0 flex items-center mb-2">
                     <p class="text-gray-900">{{ __('misc.date.and') }}</p>
                     <input
-                        type="text" class="form-input w-32 ml-1 @error($name.'_to') invalid @enderror"
-                        x-model="to" x-ref="to" name="{{ $name }}_to"
+                        type="text" class="form-input tabular-nums w-32 ml-1 @error($name.'_to') invalid @enderror"
+                        x-model="advanced.to" name="{{ $name }}_to"
                         placeholder="{{ __('misc.date.format') }}"
-                        size="12" maxlength=10>
+                        maxlength="10">
                 </div>
             </div>
         </div>
