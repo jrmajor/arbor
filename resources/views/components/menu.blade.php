@@ -41,13 +41,39 @@
 
                 @if($active != 'search')
                     <form action="{{ route('search') }}"
-                        class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3">
-                        <input type="search" class="form-input w-full h-9" name="s" autocomplete="off" required/>
+                        class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3 lg:w-96"
+                        x-data="menuSearchData(@encodedjson(['route' => route('people.search')]))">
+                        <input
+                            type="search" class="form-input w-full h-9"
+                            x-model="search" name="s" autocomplete="off"
+                            x-on:input="findPeople" x-on:keydown.enter="enter" x-on:keydown.escape="$event.target.blur()"
+                            x-on:keydown.arrow-up="arrow('up')" x-on:keydown.arrow-down="arrow('down')"
+                            x-on:focus="open = shouldCloseOnBlur = true" x-on:blur="closeDropdown">
                         <button class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 active:text-gray-900 transition-colors duration-200 ease-out">
                             <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
                             </svg>
                         </button>
+                        <template x-if="open && ! (search === '' && people.length === 0)">
+                            <ul class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
+                                x-on:mousedown="shouldCloseOnBlur = false">
+                                <template x-if="people.length === 0">
+                                    <li class="w-full px-3 py-1 text-gray-600">
+                                        {{ __('misc.no_results') }}
+                                    </li>
+                                </template>
+                                <template x-for="(person, index) in people" x-key="person.id">
+                                    <a :href="person.url" x-on:click="open = false">
+                                        <li
+                                            x-on:mouseover="hovered = index"
+                                            class="select-none w-full px-3 py-1 text-gray-800"
+                                            :class="{ 'bg-cool-gray-100': hovered === index }">
+                                            <span x-text="person.name"></span>
+                                        </li>
+                                    </a>
+                                </template>
+                            </ul>
+                        </template>
                     </form>
                 @endif
 

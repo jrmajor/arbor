@@ -1,15 +1,8 @@
 import axios from 'axios'
 
-window.personPickerData = function (data) {
+window.menuSearchData = function (data) {
   return {
     route: data.route,
-    nullable: data.nullable,
-    sex: data.sex,
-    initial: data.initial,
-    selected: {
-      id: data.initial.id,
-      name: data.initial.name
-    },
     hovered: null,
     open: false,
     shouldCloseOnBlur: true,
@@ -17,20 +10,10 @@ window.personPickerData = function (data) {
     search: '',
     people: [],
 
-    init() {
-      if (this.initial.id != null) this.people.push(this.initial)
-    },
-
     findPeople(event) {
-      if (this.selected.id != null) {
-        this.search = ''
-        return false
-      }
-
       if (this.search !== this.previousSearch) {
         axios.get(this.route, {
           params: {
-            sex: this.sex,
             search: this.search
           }
         })
@@ -46,16 +29,6 @@ window.personPickerData = function (data) {
       }
     },
 
-    keydown(event) {
-      if (this.selected.id === null) return
-
-      if (event.key === 'Tab'
-        || event.metaKey
-        || event.ctrlKey) return
-
-      event.preventDefault()
-    },
-
     arrow(direction) {
       if (this.people.length === 0) return
 
@@ -69,37 +42,21 @@ window.personPickerData = function (data) {
       if (this.hovered > this.people.length - 1) this.hovered = 0
     },
 
-    enter() {
-      if (this.hovered !== null) this.selectPerson(this.people[this.hovered])
+    enter(event) {
+      this.open = false
+
+      if (this.hovered === null) return
+
+      event.preventDefault()
+      window.location.href = this.people[this.hovered].url
     },
 
     closeDropdown() {
       if (! this.shouldCloseOnBlur) return this.shouldCloseOnBlur = true
 
       this.open = false
-
-      if (! this.nullable && this.selected.id === null && this.initial.id !== null) {
-        this.selected.id = this.initial.id
-        this.selected.name = this.initial.name
-        this.search = null
-      }
-
       this.hovered = null
       this.shouldCloseOnBlur = true
-    },
-
-    selectPerson(person) {
-      this.selected.id = person.id
-      this.selected.name = person.name
-      this.search = null
-      this.open = false
-    },
-
-    deselect() {
-      this.selected.id = null
-      this.selected.name = null
-      this.search = ''
-      this.open = true
     },
   }
 }

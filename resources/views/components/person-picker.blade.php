@@ -26,18 +26,18 @@
                     </span>{{--
                 --}}<input
                         type="text" class="appearance-none outline-none text-gray-600 focus:text-gray-800"
-                        :style="selected.id != null ? 'width: 4px' : 'width: 100%'" autocomplete="off"
+                        :style="selected.id !== null ? 'width: 4px' : 'width: 100%'" autocomplete="off"
                         x-ref="search" x-model="search" id="{{ $name }}_search"
-                        x-on:keydown.backspace="deselect()" x-on:keydown.enter.prevent="enter()"
+                        x-on:keydown.backspace="deselect" x-on:keydown.enter.prevent="enter"
                         x-on:keydown.arrow-up="arrow('up')" x-on:keydown.arrow-down="arrow('down')"
-                        x-on:keydown="keydown($event)" x-on:input="findPeople($event)"
-                        x-on:focus="open = true" x-on:blur="closeDropdown()">
+                        x-on:keydown="keydown" x-on:input="findPeople"
+                        x-on:focus="open = shouldCloseOnBlur = true" x-on:blur="closeDropdown">
                 </div>
             </div>
-            <template x-if="open && ! (search == '' && people.length == 0)">
+            <template x-if="open && ! (search === '' && people.length === 0)">
                 <ul class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
-                    x-ref="dropdown" x-on:mousedown="shouldCloseOnBlur = false">
-                    <template x-if="people.length == 0">
+                    x-on:mousedown="shouldCloseOnBlur = false">
+                    <template x-if="people.length === 0">
                         <li class="w-full px-3 py-1 text-gray-600">
                             {{ __('misc.no_results') }}
                         </li>
@@ -46,12 +46,12 @@
                         <li
                             x-on:mouseover="hovered = index" x-on:click="selectPerson(person)"
                             class="select-none flex w-full px-3 py-1 text-gray-800 text-left justify-between"
-                            :class="{ 'bg-cool-gray-100': hovered == index }">
+                            :class="{ 'bg-cool-gray-100': hovered === index }">
                             <span>
                                 <span x-text="person.name"></span>
                                 <small x-text="'[№'+person.id+']'"></small>
                             </span>
-                            <span class="text-gray-400" x-text="selected.id == person.id ? '✓ ' : ''"></span>
+                            <span class="text-gray-400" x-text="selected.id === person.id ? '✓ ' : ''"></span>
                         </li>
                     </template>
                 </ul>
