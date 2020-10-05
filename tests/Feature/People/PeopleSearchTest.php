@@ -44,7 +44,6 @@ it('works with no query')
 
 it('hides sensitive data from guests', function () {
     $firstPerson = $this->people[0];
-    $secondPerson = $this->people[2];
 
     get('people/search?search=maj')
         ->assertStatus(200)
@@ -54,14 +53,6 @@ it('hides sensitive data from guests', function () {
                 'name' => $firstPerson->formatSimpleName(),
                 'dates' => $firstPerson->formatSimpleDates(),
                 'url' => route('people.show', $firstPerson->id),
-                'hidden' => false
-            ],
-            [
-                'id' => $secondPerson->id,
-                'name' => null,
-                'dates' => null,
-                'url' => null,
-                'hidden' => true
             ],
         ]);
 });
@@ -79,14 +70,12 @@ it('shows full search results to users with permissions', function () {
                 'name' => $firstPerson->formatSimpleName(),
                 'dates' => $firstPerson->formatSimpleDates(),
                 'url' => route('people.show', $firstPerson->id),
-                'hidden' => false
             ],
             [
                 'id' => $secondPerson->id,
                 'name' => $secondPerson->formatSimpleName(),
                 'dates' => $secondPerson->formatSimpleDates(),
                 'url' => route('people.show', $secondPerson->id),
-                'hidden' => false
             ],
         ]);
 });

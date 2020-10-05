@@ -27,31 +27,28 @@ class PeopleSearchController extends Controller
                             });
                         }
                     });
-            })->when(filled($request->get('sex')), function ($query) use ($request) {
+            })
+            ->when(filled($request->get('sex')), function ($query) use ($request) {
                 return $query->where(fn ($query) => $query->where('sex', $request->get('sex'))->orWhereNull('sex'));
+            })
+            ->when(! optional(Auth::user())->canRead(), function ($query) {
+                return $query->where('visibility', true);
             })
             ->limit(10)
             ->get();
 
-        $response = $people->map(function ($person) {
-            if ($person->canBeViewedBy(Auth::user())) {
+        $response = $people
+            ->filter(function ($person) {
+                return $person->canBeViewedBy(Auth::user());
+            })
+            ->map(function ($person) {
                 return [
                     'id' => $person->id,
                     'name' => $person->formatSimpleName(),
                     'dates' => $person->formatSimpleDates(),
                     'url' => route('people.show', $person),
-                    'hidden' => false,
                 ];
-            }
-
-            return [
-                'id' => $person->id,
-                'name' => null,
-                'dates' => null,
-                'url' => null,
-                'hidden' => true,
-            ];
-        });
+            });
 
         return response()->json($response);
     }
