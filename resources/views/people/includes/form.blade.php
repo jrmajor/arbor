@@ -226,7 +226,7 @@
                 x-model="dead">
         </div>
 
-        <fieldset class="space-y-5 x-show="dead">
+        <fieldset class="space-y-5" x-show="dead">
             <div class="w-full">
                 <label for="death_cause" class="w-full font-medium pb-1 text-gray-700">{{ __('people.death_cause') }}</label>
                 <div class="w-full">
