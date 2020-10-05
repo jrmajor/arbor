@@ -41,6 +41,7 @@ window.personPickerData = function (data) {
         .catch(response => {
           console.log(response)
         })
+
         this.previousSearch = this.search
       }
     },

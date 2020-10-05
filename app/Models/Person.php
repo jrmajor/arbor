@@ -316,7 +316,7 @@ class Person extends Model
             $name .= " (✝{$this->death_year})";
         }
 
-        return $name .= " [№{$this->id}]";
+        return $name;
     }
 
     public function formatSimpleName(): string

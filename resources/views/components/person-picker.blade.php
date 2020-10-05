@@ -47,7 +47,10 @@
                             x-on:mouseover="hovered = index" x-on:click="selectPerson(person)"
                             class="select-none flex w-full px-3 py-1 text-gray-800 text-left justify-between"
                             :class="{ 'bg-cool-gray-100': hovered == index }">
-                            <span x-text="person.name"></span>
+                            <span>
+                                <span x-text="person.name"></span>
+                                <small x-text="'[№'+person.id+']'"></small>
+                            </span>
                             <span class="text-gray-400" x-text="selected.id == person.id ? '✓ ' : ''"></span>
                         </li>
                     </template>

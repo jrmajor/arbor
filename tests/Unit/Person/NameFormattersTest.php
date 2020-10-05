@@ -12,24 +12,24 @@ it('can format name', function () {
         'birth_date_to' => null,
     ]);
 
-    expect($person->formatName())->toBe("Zenona Skwierczyńska [№$person->id]");
+    expect($person->formatName())->toBe("Zenona Skwierczyńska");
 
     $person->last_name = 'Wojtyła';
-    expect($person->formatName())->toBe("Zenona Wojtyła (Skwierczyńska) [№$person->id]");
+    expect($person->formatName())->toBe("Zenona Wojtyła (Skwierczyńska)");
     $person->last_name = null;
 
     $person->birth_date_from = '1913-05-01';
     $person->birth_date_to = '1913-05-01';
-    expect($person->formatName())->toBe("Zenona Skwierczyńska (∗1913) [№$person->id]");
+    expect($person->formatName())->toBe("Zenona Skwierczyńska (∗1913)");
 
     $person->dead = true;
     $person->death_date_from = '1945-01-01';
     $person->death_date_to = '1945-12-31';
-    expect($person->formatName())->toBe("Zenona Skwierczyńska (∗1913, ✝1945) [№$person->id]");
+    expect($person->formatName())->toBe("Zenona Skwierczyńska (∗1913, ✝1945)");
 
     $person->birth_date_from = null;
     $person->birth_date_to = null;
-    expect($person->formatName())->toBe("Zenona Skwierczyńska (✝1945) [№$person->id]");
+    expect($person->formatName())->toBe("Zenona Skwierczyńska (✝1945)");
 });
 
 it('can format simple name', function () {
