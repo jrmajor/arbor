@@ -8,7 +8,10 @@
             'sex' => $sex,
             'initial' => [
                 'id' => optional($initial)->id,
-                'name' => optional($initial)->formatName(),
+                'name' => optional($initial)->formatSimpleName(),
+                'dates' => optional($initial)->formatSimpleDates(),
+                'url' => $initial ? route('people.show', $initial) : null,
+                'hidden' => false,
             ],
         ])
     )" x-init="init()">
@@ -45,13 +48,13 @@
                     <template x-for="(person, index) in people" x-key="person.id">
                         <li
                             x-on:mouseover="hovered = index" x-on:click="selectPerson(person)"
-                            class="select-none flex w-full px-3 py-1 text-gray-800 text-left justify-between"
+                            class="select-none w-full px-3 py-1 text-gray-800 flex justify-between items-center"
                             :class="{ 'bg-cool-gray-100': hovered === index }">
                             <span>
                                 <span x-text="person.name"></span>
-                                <small x-text="'[№'+person.id+']'"></small>
+                                <small x-text="'[№' + person.id + ']'"></small>
                             </span>
-                            <span class="text-gray-400" x-text="selected.id === person.id ? '✓ ' : ''"></span>
+                            <span class="text-gray-800 font-bold" x-text="selected.id === person.id ? '✓ ' : ''"></span>
                         </li>
                     </template>
                 </ul>

@@ -298,25 +298,21 @@ class Person extends Model
         return abs($this->estimatedBirthDate() - $this->birth_year);
     }
 
-    public function formatName(): string
+    public function formatSimpleDates(): ?string
     {
-        $name = $this->name.' ';
-
-        if (! $this->last_name) {
-            $name .= $this->family_name;
-        } else {
-            $name .= "{$this->last_name} ({$this->family_name})";
-        }
-
         if ($this->birth_year && $this->death_year) {
-            $name .= " (∗$this->birth_year, ✝$this->death_year)";
-        } elseif ($this->birth_year) {
-            $name .= " (∗{$this->birth_year})";
-        } elseif ($this->death_year) {
-            $name .= " (✝{$this->death_year})";
+           return "∗$this->birth_year, ✝$this->death_year";
         }
 
-        return $name;
+        if ($this->birth_year) {
+            return "∗{$this->birth_year}";
+        }
+
+        if ($this->death_year) {
+            return "✝{$this->death_year}";
+        }
+
+        return null;
     }
 
     public function formatSimpleName(): string

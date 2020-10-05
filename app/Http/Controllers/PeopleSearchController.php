@@ -37,7 +37,8 @@ class PeopleSearchController extends Controller
             if ($person->canBeViewedBy(Auth::user())) {
                 return [
                     'id' => $person->id,
-                    'name' => $person->formatName(),
+                    'name' => $person->formatSimpleName(),
+                    'dates' => $person->formatSimpleDates(),
                     'url' => route('people.show', $person),
                     'hidden' => false,
                 ];
@@ -46,6 +47,7 @@ class PeopleSearchController extends Controller
             return [
                 'id' => $person->id,
                 'name' => null,
+                'dates' => null,
                 'url' => null,
                 'hidden' => true,
             ];

@@ -66,9 +66,15 @@
                                     <a :href="person.url" x-on:click="open = false">
                                         <li
                                             x-on:mouseover="hovered = index"
-                                            class="select-none w-full px-3 py-1 text-gray-800"
+                                            class="select-none w-full px-3 py-1 text-gray-800 flex justify-between items-center"
                                             :class="{ 'bg-cool-gray-100': hovered === index }">
-                                            <span x-text="person.name"></span>
+                                            <span>
+                                                <span x-text="person.name"></span>
+                                                <small x-show="person.dates" x-text="'(' + person.dates + ')'"></small>
+                                            </span>
+                                            @if($user->isSuperAdmin())
+                                                <small x-text="'№' + person.id" class="tabular-nums"></small>
+                                            @endif
                                         </li>
                                     </a>
                                 </template>
