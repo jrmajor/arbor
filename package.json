@@ -12,7 +12,6 @@
     "dependencies": {
         "@tailwindcss/ui": "^0.3.1",
         "alpinejs": "^2.7.0",
-        "axios": "^0.20.0",
         "date-fns": "^2.16.1",
         "tailwindcss": "^1.8.10",
         "tailwindcss-multi-column": "^1.0.2"

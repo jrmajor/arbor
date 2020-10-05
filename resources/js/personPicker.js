@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 window.personPickerData = function (data) {
   return {
     route: data.route,
@@ -28,19 +26,12 @@ window.personPickerData = function (data) {
       }
 
       if (this.search !== this.previousSearch) {
-        axios.get(this.route, {
-          params: {
-            sex: this.sex,
-            search: this.search
-          }
-        })
-        .then(response => {
-          this.people = response.data
-          if (this.hovered > this.people.length - 1) this.hovered = null
-        })
-        .catch(response => {
-          console.log(response)
-        })
+        fetch(this.route + `?sex=${encodeURIComponent(this.sex)}&search=${encodeURIComponent(this.search)}`)
+          .then(response => response.json())
+          .then(data => {
+            this.people = data
+            if (this.hovered > this.people.length - 1) this.hovered = null
+          })
 
         this.previousSearch = this.search
       }
