@@ -3,7 +3,7 @@
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}
     x-data="personPickerData(
         @encodedjson([
-            'route' => route('people.picker'),
+            'route' => route('people.search'),
             'nullable' => $nullable,
             'sex' => $sex,
             'initial' => [

@@ -8,8 +8,8 @@ use App\Http\Controllers\BiographyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MarriageController;
+use App\Http\Controllers\PeopleSearchController;
 use App\Http\Controllers\PersonController;
-use App\Http\Controllers\PersonPickerController;
 use App\Http\Livewire\Dashboard\ActivityLog;
 use App\Http\Livewire\Dashboard\Users;
 use App\Http\Livewire\Search;
@@ -56,9 +56,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('people/{person}/biography', [BiographyController::class, 'edit'])->name('people.biography.edit');
     Route::patch('people/{person}/biography', [BiographyController::class, 'update'])->name('people.biography.update');
-
-    Route::get('people/picker', PersonPickerController::class)->name('people.picker');
 });
+
+Route::get('people/search', PeopleSearchController::class)->name('people.search');
 Route::get('people', [PersonController::class, 'index'])->name('people.index');
 Route::get('people/{type}/{letter}', [PersonController::class, 'letter'])->where('type', '[fl]')->name('people.letter');
 Route::get('people/{anyPerson}', [PersonController::class, 'show'])->name('people.show');
