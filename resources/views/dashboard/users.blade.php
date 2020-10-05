@@ -37,7 +37,7 @@
                             {{ $user->email ?: 'no email' }}
                         </td>
 
-                        <td class="pl-4 pt-2 tnum text-right">
+                        <td class="pl-4 pt-2 tabular-nums text-right">
                             {{ optional(optional($user->latestLogin)->created_at)->format('Y-m-d h:s') ?: 'never' }}
                         </td>
                     </tr>
