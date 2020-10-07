@@ -1,3 +1,5 @@
+/* global fetch */
+
 window.menuSearchData = function (data) {
   return {
     route: data.route,
@@ -8,7 +10,7 @@ window.menuSearchData = function (data) {
     search: '',
     people: [],
 
-    findPeople(event) {
+    findPeople (event) {
       if (this.search !== this.previousSearch) {
         fetch(this.route + `?search=${encodeURIComponent(this.search)}`)
           .then(response => response.json())
@@ -21,11 +23,12 @@ window.menuSearchData = function (data) {
       }
     },
 
-    arrow(direction) {
+    arrow (direction) {
       if (this.people.length === 0) return
 
       if (this.hovered === null) {
-        return this.hovered = direction === 'up' ? this.people.length - 1 : 0
+        this.hovered = direction === 'up' ? this.people.length - 1 : 0
+        return
       }
 
       this.hovered = direction === 'up' ? this.hovered - 1 : this.hovered + 1
@@ -34,7 +37,7 @@ window.menuSearchData = function (data) {
       if (this.hovered > this.people.length - 1) this.hovered = 0
     },
 
-    enter(event) {
+    enter (event) {
       this.open = false
 
       if (this.hovered === null) return
@@ -43,12 +46,15 @@ window.menuSearchData = function (data) {
       window.location.href = this.people[this.hovered].url
     },
 
-    closeDropdown() {
-      if (! this.shouldCloseOnBlur) return this.shouldCloseOnBlur = true
+    closeDropdown () {
+      if (!this.shouldCloseOnBlur) {
+        this.shouldCloseOnBlur = true
+        return
+      }
 
       this.open = false
       this.hovered = null
       this.shouldCloseOnBlur = true
-    },
+    }
   }
 }

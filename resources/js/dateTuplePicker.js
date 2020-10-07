@@ -5,18 +5,19 @@ window.dateTuplePickerData = function (data) {
     simple: data.simple,
     advanced: {
       from: data.from,
-      to: data.to,
+      to: data.to
     },
     dateIsValid: true,
     advancedPicker: data.advancedPicker,
 
-    simpleChanged() {
+    simpleChanged () {
       this.dateIsValid = true
 
       this.simple = this.simple.trim()
 
       if (this.simple.length === 0) {
-        return this.advanced.from = this.advanced.to = ''
+        this.advanced.from = this.advanced.to = ''
+        return
       }
 
       this.simple = this.simple.replace(/[^0-9-]/g, '')
@@ -25,18 +26,19 @@ window.dateTuplePickerData = function (data) {
 
       if (matches === null) return this.clearInvalidDate()
 
-      const rawDay = matches[5],
-            year = parseInt(matches[1]),
-            month = parseInt(matches[3]) - 1,
-            day = parseInt(matches[5]),
-            secondHyphen = matches[4] === '-' ? '-' : ''
+      const year = parseInt(matches[1])
+      const month = parseInt(matches[3]) - 1
+      const day = parseInt(matches[5])
+      const rawDay = matches[5]
+
+      const secondHyphen = matches[4] === '-' ? '-' : ''
 
       let date
 
-      if (! isNaN(day)) {
+      if (!isNaN(day)) {
         if (
-          isValid((date = new Date(year, month, day)))
-          && date.getDate() === day && date.getMonth() === month
+          isValid((date = new Date(year, month, day))) &&
+          date.getDate() === day && date.getMonth() === month
         ) {
           this.advanced.from = this.advanced.to = format(date, 'yyyy-MM-dd')
           if (day > 3) {
@@ -50,10 +52,10 @@ window.dateTuplePickerData = function (data) {
         return this.clearInvalidDate()
       }
 
-      if (! isNaN(month)) {
+      if (!isNaN(month)) {
         if (
-          isValid((date = new Date(year, month, 15)))
-          && date.getMonth() === month
+          isValid((date = new Date(year, month, 15))) &&
+          date.getMonth() === month
         ) {
           this.advanced.from = format(startOfMonth(date), 'yyyy-MM-dd')
           this.advanced.to = format(lastDayOfMonth(date), 'yyyy-MM-dd')
@@ -66,7 +68,7 @@ window.dateTuplePickerData = function (data) {
         return this.clearInvalidDate()
       }
 
-      if (! isNaN(year)) {
+      if (!isNaN(year)) {
         if (isValid((date = new Date(year, 5, 15)))) {
           this.advanced.from = format(startOfYear(date), 'yyyy-MM-dd')
           this.advanced.to = format(lastDayOfYear(date), 'yyyy-MM-dd')
@@ -79,11 +81,11 @@ window.dateTuplePickerData = function (data) {
       this.clearInvalidDate()
     },
 
-    simpleBlurred() {
+    simpleBlurred () {
       if (this.simple.slice(-1) === '-') this.simple = this.simple.slice(0, -1)
     },
 
-    clearInvalidDate() {
+    clearInvalidDate () {
       this.dateIsValid = false
       this.advanced.from = this.advanced.to = ''
     }
