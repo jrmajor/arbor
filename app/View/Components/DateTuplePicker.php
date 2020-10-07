@@ -93,6 +93,7 @@ class DateTuplePicker extends Component
             if ($from->year == $to->year) {
                 return $from->format('Y');
             }
+
             return;
         }
 
@@ -103,10 +104,9 @@ class DateTuplePicker extends Component
             if ($from->year == $to->year && $from->month == $to->month) {
                 return $from->format('Y-m');
             }
+
             return;
         }
-
-        return;
     }
 
     public function render()

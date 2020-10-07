@@ -301,7 +301,7 @@ class Person extends Model
     public function formatSimpleDates(): ?string
     {
         if ($this->birth_year && $this->death_year) {
-           return "∗$this->birth_year, ✝$this->death_year";
+            return "∗$this->birth_year, ✝$this->death_year";
         }
 
         if ($this->birth_year) {
