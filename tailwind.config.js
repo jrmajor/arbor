@@ -6,7 +6,7 @@ module.exports = {
       sm: '640px',
       md: '768px',
       lg: '1024px',
-      xl: '1280px',
+      xl: '1280px'
     },
     colors: {
       transparent: 'transparent',
@@ -26,7 +26,7 @@ module.exports = {
         600: '#4b5563',
         700: '#374151',
         800: '#252f3f',
-        900: '#161e2e',
+        900: '#161e2e'
       },
       'cool-gray': {
         50: '#fbfdfe',
@@ -38,7 +38,7 @@ module.exports = {
         600: '#475569',
         700: '#364152',
         800: '#27303f',
-          900: '#1a202e',
+        900: '#1a202e'
       },
       red: {
         100: '#fff5f5',
@@ -49,7 +49,7 @@ module.exports = {
         600: '#e53e3e',
         700: '#c53030',
         800: '#9b2c2c',
-        900: '#742a2a',
+        900: '#742a2a'
       },
       yellow: {
         100: '#fffff0',
@@ -60,7 +60,7 @@ module.exports = {
         600: '#d69e2e',
         700: '#b7791f',
         800: '#975a16',
-        900: '#744210',
+        900: '#744210'
       },
       green: {
         100: '#f0fff4',
@@ -71,7 +71,7 @@ module.exports = {
         600: '#38a169',
         700: '#2f855a',
         800: '#276749',
-        900: '#22543d',
+        900: '#22543d'
       },
       blue: {
         100: '#ebf8ff',
@@ -82,8 +82,8 @@ module.exports = {
         600: '#3182ce',
         700: '#2b6cb0',
         800: '#2c5282',
-        900: '#2a4365',
-      },
+        900: '#2a4365'
+      }
     },
     columnCount: [1, 2, 3, 4, 5, 6, 7, 8],
     fontFamily: {
@@ -99,31 +99,29 @@ module.exports = {
         '"Helvetica Neue"',
         'Arial',
         '"Noto Sans"',
-        'sans-serif',
+        'sans-serif'
       ],
       serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-      mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+      mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace']
     },
     extend: {
       spacing: {
-        '80': '20rem',
-        '96': '24rem',
-        '112': '28rem',
-        '128': '32rem',
+        80: '20rem',
+        96: '24rem',
+        112: '28rem',
+        128: '32rem'
       },
-      strokeWidth: {
-        '3': '3',
-      },
-    },
+      strokeWidth: { 3: '3' }
+    }
   },
   variants: {
     borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus', 'focus-within'],
     boxShadow: ['responsive', 'hover', 'focus', 'active', 'group-focus', 'focus-within'],
-    columnCount: ['responsive'],
+    columnCount: ['responsive']
   },
   plugins: [
     require('@tailwindcss/ui'),
-    require('tailwindcss-multi-column')(),
+    require('tailwindcss-multi-column')()
   ],
   experimental: {
     applyComplexClasses: true,
@@ -131,10 +129,10 @@ module.exports = {
     defaultLineHeights: true,
     extendedFontSizeScale: true,
     extendedSpacingScale: false,
-    uniformColorPalette: false,
+    uniformColorPalette: false
   },
   future: {
     purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true,
-  },
+    removeDeprecatedGapUtilities: true
+  }
 }
