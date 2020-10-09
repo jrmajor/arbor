@@ -1,8 +1,8 @@
 /* global fetch */
+import route from 'ziggy'
 
-window.menuSearchData = function (data) {
+window.menuSearchData = function () {
   return {
-    route: data.route,
     hovered: null,
     open: false,
     shouldCloseOnBlur: true,
@@ -12,7 +12,11 @@ window.menuSearchData = function (data) {
 
     findPeople (event) {
       if (this.search !== this.previousSearch) {
-        fetch(this.route + `?search=${encodeURIComponent(this.search)}`)
+        fetch(
+          route('people.search', {
+           search: this.search
+          })
+        )
           .then(response => response.json())
           .then(data => {
             this.people = data

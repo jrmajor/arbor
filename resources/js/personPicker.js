@@ -1,8 +1,8 @@
 /* global fetch */
+import route from 'ziggy'
 
 window.personPickerData = function (data) {
   return {
-    route: data.route,
     nullable: data.nullable,
     sex: data.sex,
     initial: data.initial,
@@ -28,7 +28,12 @@ window.personPickerData = function (data) {
       }
 
       if (this.search !== this.previousSearch) {
-        fetch(this.route + `?sex=${encodeURIComponent(this.sex)}&search=${encodeURIComponent(this.search)}`)
+        fetch(
+          route('people.search', {
+            sex: this.sex,
+            search: this.search
+          })
+        )
           .then(response => response.json())
           .then(data => {
             this.people = data

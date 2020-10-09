@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7995e718d2b656d0f142cbcfb4058f5c",
+    "content-hash": "a57a7a8f1a8e97c4634c6b7fc2f9f5ba",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -60,16 +60,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.158.3",
+            "version": "3.158.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ac883fef515dc92785136f251a8337b33bff1d54"
+                "reference": "dae8d62d976adc737d9daf4817ac36de6d53c3e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ac883fef515dc92785136f251a8337b33bff1d54",
-                "reference": "ac883fef515dc92785136f251a8337b33bff1d54",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dae8d62d976adc737d9daf4817ac36de6d53c3e8",
+                "reference": "dae8d62d976adc737d9daf4817ac36de6d53c3e8",
                 "shasum": ""
             },
             "require": {
@@ -141,7 +141,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2020-10-06T18:16:08+00:00"
+            "time": "2020-10-08T18:13:24+00:00"
         },
         {
             "name": "brick/math",
@@ -1901,16 +1901,16 @@
         },
         {
             "name": "league/flysystem-aws-s3-v3",
-            "version": "1.0.28",
+            "version": "1.0.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-aws-s3-v3.git",
-                "reference": "af7384a12f7cd7d08183390d930c9d0ec629c990"
+                "reference": "4e25cc0582a36a786c31115e419c6e40498f6972"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/af7384a12f7cd7d08183390d930c9d0ec629c990",
-                "reference": "af7384a12f7cd7d08183390d930c9d0ec629c990",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/4e25cc0582a36a786c31115e419c6e40498f6972",
+                "reference": "4e25cc0582a36a786c31115e419c6e40498f6972",
                 "shasum": ""
             },
             "require": {
@@ -1944,7 +1944,7 @@
                 }
             ],
             "description": "Flysystem adapter for the AWS S3 SDK v3.x",
-            "time": "2020-08-22T08:43:01+00:00"
+            "time": "2020-10-08T18:58:37+00:00"
         },
         {
             "name": "league/flysystem-cached-adapter",
@@ -3326,16 +3326,16 @@
         },
         {
             "name": "spatie/browsershot",
-            "version": "3.39.0",
+            "version": "3.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/browsershot.git",
-                "reference": "572968978e5e07513f44819b0e744403c13fa1a1"
+                "reference": "0aa3a683448efe9c7f2d34fee80dec62bafd6c90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/browsershot/zipball/572968978e5e07513f44819b0e744403c13fa1a1",
-                "reference": "572968978e5e07513f44819b0e744403c13fa1a1",
+                "url": "https://api.github.com/repos/spatie/browsershot/zipball/0aa3a683448efe9c7f2d34fee80dec62bafd6c90",
+                "reference": "0aa3a683448efe9c7f2d34fee80dec62bafd6c90",
                 "shasum": ""
             },
             "require": {
@@ -3384,7 +3384,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-24T08:59:01+00:00"
+            "time": "2020-10-07T20:56:21+00:00"
         },
         {
             "name": "spatie/crawler",
@@ -4255,12 +4255,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "04c3a31fe8ea94b42c9e2d1acc93d19782133b00"
+                "reference": "ae789a8a2ad189ce7e8216942cdb9b77319f5eb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/04c3a31fe8ea94b42c9e2d1acc93d19782133b00",
-                "reference": "04c3a31fe8ea94b42c9e2d1acc93d19782133b00",
+                "url": "https://api.github.com/repos/symfony/console/zipball/ae789a8a2ad189ce7e8216942cdb9b77319f5eb8",
+                "reference": "ae789a8a2ad189ce7e8216942cdb9b77319f5eb8",
                 "shasum": ""
             },
             "require": {
@@ -6590,6 +6590,63 @@
                 "laravel"
             ],
             "time": "2020-09-05T00:05:48+00:00"
+        },
+        {
+            "name": "tightenco/ziggy",
+            "version": "0.9.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tighten/ziggy.git",
+                "reference": "82ea6ec6cb6ab3545b0245310b2a424316fe48d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tighten/ziggy/zipball/82ea6ec6cb6ab3545b0245310b2a424316fe48d8",
+                "reference": "82ea6ec6cb6ab3545b0245310b2a424316fe48d8",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.4@dev"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tightenco\\Ziggy\\ZiggyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tightenco\\Ziggy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Coulbourne",
+                    "email": "daniel@tighten.co"
+                },
+                {
+                    "name": "Jake Bathman",
+                    "email": "jake@tighten.co"
+                }
+            ],
+            "description": "Generates a Blade directive exporting all of your named Laravel routes. Also provides a nice route() helper function in JavaScript.",
+            "homepage": "https://github.com/tightenco/ziggy",
+            "keywords": [
+                "Ziggy",
+                "javascript",
+                "laravel",
+                "routes"
+            ],
+            "time": "2020-06-05T14:42:41+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

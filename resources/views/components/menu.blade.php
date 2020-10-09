@@ -42,9 +42,7 @@
                 @if($active != 'search')
                     <form action="{{ route('search') }}"
                         class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3 lg:w-96"
-                        x-data="menuSearchData(
-                            @encodedjson(['route' => route('people.search')])
-                        )">
+                        x-data="menuSearchData()">
                         <input
                             type="search" class="form-input w-full h-9"
                             x-model="search" name="s" autocomplete="off"

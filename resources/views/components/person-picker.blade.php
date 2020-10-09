@@ -3,7 +3,6 @@
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}
     x-data="personPickerData(
         @encodedjson([
-            'route' => route('people.search'),
             'nullable' => $nullable,
             'sex' => $sex,
             'initial' => [
@@ -54,7 +53,7 @@
                                 <span x-text="person.name"></span>
                                 <small x-text="'[№' + person.id + ']'"></small>
                             </span>
-                            <span class="text-gray-800 font-bold" x-text="selected.id === person.id ? '✓ ' : ''"></span>
+                            <span class="text-gray-800" x-text="selected.id === person.id ? '✓ ' : ''"></span>
                         </li>
                     </template>
                 </ul>
