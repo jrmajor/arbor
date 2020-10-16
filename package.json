@@ -12,16 +12,16 @@
     "dependencies": {
         "@tailwindcss/ui": "^0.3.1",
         "alpinejs": "^2.7.0",
-        "date-fns": "^2.16.1",
-        "tailwindcss": "^1.8.10",
-        "tailwindcss-multi-column": "^1.0.2"
-    },
-    "devDependencies": {
         "cross-env": "^7.0.2",
+        "date-fns": "^2.16.1",
         "laravel-mix": "^5.0.5",
         "resolve-url-loader": "^3.1.1",
-        "standard": "^14.3.4",
+        "tailwindcss": "^1.8.10",
+        "tailwindcss-multi-column": "^1.0.2",
         "vue-template-compiler": "^2.6.12"
+    },
+    "devDependencies": {
+        "standard": "^14.3.4"
     },
     "standard": {
         "ignore": [
