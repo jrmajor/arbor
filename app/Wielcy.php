@@ -70,7 +70,6 @@ class Wielcy
     {
         $matches = Regex::match('/<h1[^<>]*><img src="images\/(female|male)\.png"[^<>]*\s*[^<>]*>([\s\S]+)<small>.*<\/small>\s*<\/h1>/', $this->source);
         if ($matches->hasMatch()) {
-
             if ($matches->group(1) == 'female') {
                 $this->sex = 'xx';
             } elseif ($matches->group(1) == 'male') {
