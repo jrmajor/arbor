@@ -3,8 +3,10 @@
 namespace App;
 
 use Carbon\CarbonInterval;
+use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Spatie\Regex\Regex;
 
 class Wielcy
@@ -42,7 +44,19 @@ class Wielcy
         $this->source = Cache::remember(
             "wielcy.$this->id",
             CarbonInterval::day(),
-            fn () => iconv('iso-8859-2', 'UTF-8', file_get_contents($this->url))
+            function () {
+                try {
+                    $source = Http::timeout(2)->get($this->url);
+                } catch (Exception $e) {
+                    return;
+                }
+
+                if (! $source->ok()) {
+                    return;
+                }
+
+                return iconv('iso-8859-2', 'UTF-8', $source->body());
+            }
         );
     }
 
@@ -56,12 +70,13 @@ class Wielcy
     {
         $matches = Regex::match('/<h1[^<>]*><img src="images\/(female|male)\.png"[^<>]*\s*[^<>]*>([\s\S]+)<small>.*<\/small>\s*<\/h1>/', $this->source);
         if ($matches->hasMatch()) {
-            //$matches = Arr::trim($matches);
+
             if ($matches->group(1) == 'female') {
                 $this->sex = 'xx';
             } elseif ($matches->group(1) == 'male') {
                 $this->sex = 'xy';
             }
+
             $this->name = Regex::replace('/<a[^<>]*>([^<>]*)<\/a>/', '<b>$1</b>', $matches->group(2))->result();
         }
     }
@@ -69,8 +84,10 @@ class Wielcy
     private function parseBio()
     {
         $regex = '/<center>\s<table border="0" cellspacing="0" cellpadding="0">\s<tr><td><center>\s<em>\s([\s\S]+)<\/em><br>\s<\/center>\s<\/td><\/tr>\s<\/table>\s<\/center><p>/';
+
         if (preg_match($regex, $this->source, $matches) == 1) {
             $matches = Arr::trim($matches);
+
             if (filled($matches[1])) {
                 $this->bio = $matches[1];
             }
