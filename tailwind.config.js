@@ -115,24 +115,25 @@ module.exports = {
     }
   },
   variants: {
-    borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus', 'focus-within'],
-    boxShadow: ['responsive', 'hover', 'focus', 'active', 'group-focus', 'focus-within'],
-    columnCount: ['responsive']
+    borderColor: ({ after }) => after(['active']),
+    boxShadow: ({ after }) => after(['active', 'focus-within']),
   },
   plugins: [
     require('@tailwindcss/ui'),
     require('tailwindcss-multi-column')()
   ],
   experimental: {
+    additionalBreakpoint: true,
     applyComplexClasses: true,
     darkModeVariant: false,
-    defaultLineHeights: true,
     extendedFontSizeScale: true,
     extendedSpacingScale: false,
     uniformColorPalette: false
   },
   future: {
+    defaultLineHeights: true,
     purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true
+    removeDeprecatedGapUtilities: true,
+    standardFontWeights: true
   }
 }
