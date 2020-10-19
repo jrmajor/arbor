@@ -3,7 +3,7 @@
 namespace App;
 
 use Carbon\CarbonInterval;
-use Exception;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -47,7 +47,7 @@ class Wielcy
             function () {
                 try {
                     $source = Http::timeout(2)->get($this->url);
-                } catch (Exception $e) {
+                } catch (ConnectionException $e) {
                     return;
                 }
 

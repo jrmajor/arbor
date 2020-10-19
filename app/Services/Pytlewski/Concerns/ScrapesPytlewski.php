@@ -2,6 +2,7 @@
 
 namespace App\Services\Pytlewski\Concerns;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -40,7 +41,7 @@ trait ScrapesPytlewski
     {
         try {
             $source = Http::timeout(2)->get(self::url($this->id));
-        } catch (Exception $e) {
+        } catch (ConnectionException $e) {
             return;
         }
 
