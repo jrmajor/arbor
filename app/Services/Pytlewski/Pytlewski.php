@@ -50,9 +50,9 @@ class Pytlewski
     private function eagerLoadRelatives(): Collection
     {
         $ids = collect([
-            ...$this->attributes['marriages'],
-            ...$this->attributes['children'],
-            ...$this->attributes['siblings'],
+            ...$this->attributes['marriages'] ?? [],
+            ...$this->attributes['children'] ?? [],
+            ...$this->attributes['siblings'] ?? [],
         ])->pluck('id')->concat([
             'mother' => $this->attributes['mother_id'] ?? null,
             'father' => $this->attributes['father_id'] ?? null,
@@ -84,7 +84,7 @@ class Pytlewski
                     'surname' => $this->attributes['father_surname'] ?? null,
                     'name' => $this->attributes['father_name'] ?? null,
                 ]) : null,
-            'marriages' => collect($this->attributes['marriages'])
+            'marriages' => collect($this->attributes['marriages'] ?? [])
                 ->map(function ($marriage) use ($relatives) {
                     if (isset($marriage['id'])) {
                         $person = $relatives->where('id_pytlewski', $marriage['id'])->first();
@@ -94,7 +94,7 @@ class Pytlewski
                     return Marriage::hydrate($marriage);
                 }),
 
-            'children' => collect($this->attributes['children'])
+            'children' => collect($this->attributes['children'] ?? [])
                 ->map(function ($child) use ($relatives) {
                     if (isset($child['id'])) {
                         $person = $relatives->where('id_pytlewski', $child['id'])->first();
@@ -104,7 +104,7 @@ class Pytlewski
                     return Relative::hydrate($child);
                 }),
 
-            'siblings' => collect($this->attributes['siblings'])
+            'siblings' => collect($this->attributes['siblings'] ?? [])
                 ->map(function ($sibling) use ($relatives) {
                     if (isset($sibling['id'])) {
                         $person = $relatives->where('id_pytlewski', $sibling['id'])->first();
