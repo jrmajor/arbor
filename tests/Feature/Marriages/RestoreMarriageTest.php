@@ -47,7 +47,7 @@ test('marriage restoration is logged', function () {
 
     expect($log->log_name)->toBe('marriages');
     expect($log->description)->toBe('restored');
-    expect($this->marriage->is($log->subject))->toBeTrue();
+    expect($log->subject()->is($this->marriage))->toBeTrue();
 
     expect($log->properties['attributes']['deleted_at'])->toBeNull();
 

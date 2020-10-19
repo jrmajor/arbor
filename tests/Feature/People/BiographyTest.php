@@ -95,7 +95,7 @@ test('biography addition is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('added-biography');
-    expect($person->is($log->subject))->toBeTrue();
+    expect($log->subject()->is($person))->toBeTrue();
 
     expect((string) $log->created_at)->toBe((string) $person->updated_at);
 
@@ -125,7 +125,7 @@ test('biography edition is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('updated-biography');
-    expect($person->is($log->subject))->toBeTrue();
+    expect($log->subject()->is($person))->toBeTrue();
 
     expect((string) $log->created_at)->toBe((string) $person->updated_at);
 
@@ -156,7 +156,7 @@ test('biography deletion is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('deleted-biography');
-    expect($person->is($log->subject))->toBeTrue();
+    expect($log->subject()->is($person))->toBeTrue();
 
     expect((string) $log->created_at)->toBe((string) $person->updated_at);
 

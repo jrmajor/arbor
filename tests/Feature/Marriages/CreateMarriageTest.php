@@ -136,7 +136,7 @@ test('marriage creation is logged', function () {
 
     expect($log->log_name)->toBe('marriages');
     expect($log->description)->toBe('created');
-    expect($marriage->is($log->subject))->toBeTrue();
+    expect($log->subject()->is($marriage))->toBeTrue();
 
     $attributesToCheck = Arr::except($this->validAttributes, $this->dates);
 

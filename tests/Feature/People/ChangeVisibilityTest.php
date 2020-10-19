@@ -59,7 +59,7 @@ test('visibility change is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('changed-visibility');
-    expect($this->person->fresh()->is($log->subject))->toBeTrue();
+    expect($log->subject()->is($this->person))->toBeTrue();
 
     expect((string) $log->created_at)->toBe((string) $this->person->fresh()->updated_at);
 

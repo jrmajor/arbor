@@ -13,8 +13,8 @@ it('can get man and woman', function () {
         'man_id' => $man->id,
     ]);
 
-    expect($woman->is($marriage->woman))->toBeTrue();
-    expect($man->is($marriage->man))->toBeTrue();
+    expect($marriage->woman()->is($woman))->toBeTrue();
+    expect($marriage->man()->is($man))->toBeTrue();
 });
 
 it('can get partner', function () {
@@ -25,8 +25,8 @@ it('can get partner', function () {
         'man_id' => $man->id,
     ]);
 
-    expect($woman->is($marriage->partner($man)))->toBeTrue();
-    expect($man->is($marriage->partner($woman)))->toBeTrue();
+    expect($marriage->partner($man)->is($woman))->toBeTrue();
+    expect($marriage->partner($woman)->is($man))->toBeTrue();
 });
 
 it('can get order in given person marriages', function () {

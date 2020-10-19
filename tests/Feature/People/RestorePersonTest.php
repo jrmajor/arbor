@@ -47,7 +47,7 @@ test('person restoration is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('restored');
-    expect($this->person->is($log->subject))->toBeTrue();
+    expect($log->subject()->is($this->person))->toBeTrue();
 
     expect($log->properties['attributes']['deleted_at'])->toBeNull();
 

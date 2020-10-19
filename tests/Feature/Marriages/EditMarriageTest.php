@@ -154,7 +154,7 @@ test('marriage edition is logged', function () {
 
     expect($log->log_name)->toBe('marriages');
     expect($log->description)->toBe('updated');
-    expect($marriage->is($log->subject))->toBeTrue();
+    expect($log->subject()->is($marriage))->toBeTrue();
 
     $oldToCheck = Arr::except($this->oldAttributes, $this->dates);
 
