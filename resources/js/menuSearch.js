@@ -14,7 +14,7 @@ window.menuSearchData = function () {
       if (this.search !== this.previousSearch) {
         fetch(
           route('people.search', {
-           search: this.search
+            search: this.search
           })
         )
           .then(response => response.json())

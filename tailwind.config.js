@@ -116,7 +116,7 @@ module.exports = {
   },
   variants: {
     borderColor: ({ after }) => after(['active']),
-    boxShadow: ({ after }) => after(['active', 'focus-within']),
+    boxShadow: ({ after }) => after(['active', 'focus-within'])
   },
   plugins: [
     require('@tailwindcss/ui'),
