@@ -21,6 +21,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "devDependencies": {
+        "laravel-mix-bundle-analyzer": "^1.0.5",
         "standard": "^14.3.4"
     },
     "standard": {
