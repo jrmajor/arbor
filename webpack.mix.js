@@ -1,8 +1,6 @@
 const mix = require('laravel-mix')
-const path = require('path')
 const tailwindcss = require('tailwindcss')
-
-require('laravel-mix-bundle-analyzer')
+const path = require('path')
 
 mix.js('resources/js/app.js', 'public/js')
 
@@ -12,6 +10,8 @@ mix.postCss('resources/css/app.css', 'public/css')
   }).version()
 
 if (!mix.inProduction()) {
+  require('laravel-mix-bundle-analyzer')
+
   mix.bundleAnalyzer({
     analyzerMode: 'static',
     openAnalyzer: false
