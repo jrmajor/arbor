@@ -86,12 +86,12 @@ test('guests cannot edit marriage', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    $marriage = $this->marriage->fresh();
+    $this->marriage->refresh();
 
     $attributesToCheck = Arr::except($this->oldAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($marriage->$key)->toBe($attribute);
+        expect($this->marriage->$key)->toBe($attribute);
     }
 });
 
@@ -100,12 +100,12 @@ test('users without permissions cannot edit marriage', function () {
         ->put("marriages/{$this->marriage->id}", $this->newAttributes)
         ->assertStatus(403);
 
-    $marriage = $this->marriage->fresh();
+    $this->marriage->refresh();
 
     $attributesToCheck = Arr::except($this->oldAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($marriage->$key)->toBe($attribute);
+        expect($this->marriage->$key)->toBe($attribute);
     }
 });
 
@@ -114,22 +114,22 @@ test('users with permissions can edit marriage', function () {
         ->put("marriages/{$this->marriage->id}", $this->newAttributes)
         ->assertStatus(302);
 
-    $marriage = $this->marriage->fresh();
+    $this->marriage->refresh();
 
-    $response->assertRedirect('people/'.$marriage->woman_id);
+    $response->assertRedirect('people/'.$this->marriage->woman_id);
 
     $attributesToCheck = Arr::except($this->newAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($marriage->$key)->toBe($attribute);
+        expect($this->marriage->$key)->toBe($attribute);
     }
 
     foreach ($this->enums as $enum) {
-        expect((string) $marriage->$enum)->toBe($this->newAttributes[$enum]);
+        expect((string) $this->marriage->$enum)->toBe($this->newAttributes[$enum]);
     }
 
     foreach ($this->dates as $date) {
-        expect($marriage->$date->toDateString())
+        expect($this->marriage->$date->toDateString())
             ->toBe($this->newAttributes[$date]);
     }
 });
@@ -148,13 +148,13 @@ test('marriage edition is logged', function () {
 
     travelBack();
 
-    $marriage = $this->marriage->fresh();
+    $this->marriage->refresh();
 
     $log = latestLog();
 
     expect($log->log_name)->toBe('marriages');
     expect($log->description)->toBe('updated');
-    expect($log->subject()->is($marriage))->toBeTrue();
+    expect($log->subject()->is($this->marriage))->toBeTrue();
 
     $oldToCheck = Arr::except($this->oldAttributes, $this->dates);
 
@@ -173,7 +173,7 @@ test('marriage edition is logged', function () {
     expect($log->properties['old'])->not->toHaveKey('created_at');
     expect($log->properties['attributes'])->not->toHaveKey('created_at');
 
-    expect((string) $log->created_at)->toBe((string) $marriage->updated_at);
+    expect((string) $log->created_at)->toBe((string) $this->marriage->updated_at);
 
     expect($log->properties['old'])->not->toHaveKey('updated_at');
     expect($log->properties['attributes'])->not->toHaveKey('updated_at');

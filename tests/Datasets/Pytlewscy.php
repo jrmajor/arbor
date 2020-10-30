@@ -1,7 +1,8 @@
 <?php
 
-dataset('pytlewscy', function () {
-    yield [
+dataset('pytlewscy', [
+
+    'Franciszek Kosela' => [
         '543',
         file_get_contents(__DIR__.'/pytlewscy/543.html'),
         [
@@ -37,9 +38,9 @@ dataset('pytlewscy', function () {
             ],
             'bio' => 'Hobby-kolarstwo-wygrał:Mistrz Polski Juniorów w przełaju 1957,Zwycięzca Pasma Gór Swiętokrzyskich w1959 i 1960,Górski Mistrz Polski seniorów 1960 itd',
         ],
-    ];
+    ],
 
-    yield [
+    'Józef Major' => [
         '556',
         file_get_contents(__DIR__.'/pytlewscy/556.html'),
         [
@@ -89,9 +90,9 @@ dataset('pytlewscy', function () {
             ],
             'bio' => null,
         ],
-    ];
+    ],
 
-    yield [
+    'Iwona Bobińska (Kosela)' => [
         '550',
         file_get_contents(__DIR__.'/pytlewscy/550.html'),
         [
@@ -126,9 +127,9 @@ dataset('pytlewscy', function () {
             ],
             'bio' => null,
         ],
-    ];
+    ],
 
-    yield [
+    'Maciej Kazimierz Pytlewski' => [
         '704',
         file_get_contents(__DIR__.'/pytlewscy/704.html'),
         [
@@ -261,9 +262,9 @@ dataset('pytlewscy', function () {
             ],
             'bio' => null,
         ],
-    ];
+    ],
 
-    yield [
+    'Maryanna Pytlewska (Ptakowska)' => [
         '1420',
         file_get_contents(__DIR__.'/pytlewscy/1420.html'),
         [
@@ -317,9 +318,9 @@ dataset('pytlewscy', function () {
             'siblings' => [],
             'bio' => null,
         ],
-    ];
+    ],
 
-    yield [
+    'Maria Ludwika Chełmońska (Korwin-Szymanowska)' => [
         '1928',
         file_get_contents(__DIR__.'/pytlewscy/1928.html'),
         [
@@ -379,9 +380,9 @@ dataset('pytlewscy', function () {
             'siblings' => [],
             'bio' => null,
         ],
-    ];
+    ],
 
-    yield [
+    'Adolfina Białkowska (Kolin)' => [
         '4613',
         file_get_contents(__DIR__.'/pytlewscy/4613.html'),
         [
@@ -415,5 +416,6 @@ dataset('pytlewscy', function () {
             'siblings' => [],
             'bio' => null,
         ],
-    ];
-});
+    ],
+
+]);

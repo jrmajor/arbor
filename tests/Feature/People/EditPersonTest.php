@@ -99,14 +99,14 @@ test('guests cannot edit person', function () {
         ->assertStatus(302)
         ->assertRedirect('login');
 
-    $person = $this->person->fresh();
+    $this->person->refresh();
 
     $attributesToCheck = Arr::except($this->oldAttributes, [
         'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($person->$key)->toBe($attribute);
+        expect($this->person->$key)->toBe($attribute);
     }
 });
 
@@ -115,14 +115,14 @@ test('users without permissions cannot edit person', function () {
         ->put("people/{$this->person->id}", $this->newAttributes)
         ->assertStatus(403);
 
-    $person = $this->person->fresh();
+    $this->person->refresh();
 
     $attributesToCheck = Arr::except($this->oldAttributes, [
         'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($person->$key)->toBe($attribute);
+        expect($this->person->$key)->toBe($attribute);
     }
 });
 
@@ -132,22 +132,22 @@ test('users with permissions can edit person', function () {
         ->assertStatus(302)
         ->assertRedirect("people/{$this->person->id}");
 
-    $person = $this->person->fresh();
+    $this->person->refresh();
 
     $attributesToCheck = Arr::except($this->newAttributes, [
         'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($person->$key)->toBe($attribute);
+        expect($this->person->$key)->toBe($attribute);
     }
 
-    expect($person->sources)->toHaveCount(2);
-    expect($person->sources->map->raw()->all())
+    expect($this->person->sources)->toHaveCount(2);
+    expect($this->person->sources->map->raw()->all())
         ->toBe($this->newAttributes['sources']);
 
     foreach ($this->dates as $date) {
-        expect($person->$date->toDateString())->toBe($this->newAttributes[$date]);
+        expect($this->person->$date->toDateString())->toBe($this->newAttributes[$date]);
     }
 });
 
@@ -165,13 +165,13 @@ test('person edition is logged', function () {
 
     travelBack();
 
-    $person = $this->person->fresh();
+    $this->person->refresh();
 
     $log = latestLog();
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('updated');
-    expect($log->subject()->is($person))->toBeTrue();
+    expect($log->subject()->is($this->person))->toBeTrue();
 
     $oldToCheck = Arr::except($this->oldAttributes, [
         'dead', 'death_cause', 'sources', ...$this->dates,
@@ -200,7 +200,7 @@ test('person edition is logged', function () {
     expect($log->properties['old'])->not->toHaveKey('created_at');
     expect($log->properties['attributes'])->not->toHaveKey('created_at');
 
-    expect((string) $log->created_at)->toBe((string) $person->updated_at);
+    expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
     expect($log->properties['old'])->not->toHaveKey('updated_at');
     expect($log->properties['attributes'])->not->toHaveKey('updated_at');

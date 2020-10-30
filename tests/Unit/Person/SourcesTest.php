@@ -9,14 +9,14 @@ it('casts sources to collection', function () {
     ])->sources;
 
     expect($sources)->toBeInstanceOf(Collection::class);
-    expect($sources->isEmpty())->toBeTrue();
+    expect($sources)->toBeEmpty();
 
     $sources = Person::factory()->create([
         'sources' => [],
     ])->sources;
 
     expect($sources)->toBeInstanceOf(Collection::class);
-    expect($sources->isEmpty())->toBeTrue();
+    expect($sources)->toBeEmpty();
 
     $sources = Person::factory()->create([
         'sources' => [

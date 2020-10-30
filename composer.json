@@ -38,10 +38,10 @@
         "fakerphp/faker": "^1.10",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.1",
-        "pestphp/pest": "^0.3.5",
-        "pestphp/pest-plugin-laravel": "^0.3.0",
-        "pestphp/pest-plugin-livewire": "^0.3.1",
-        "phpunit/phpunit": "9.3.10"
+        "pestphp/pest": "0.3.9",
+        "pestphp/pest-plugin-laravel": "^0.3",
+        "pestphp/pest-plugin-livewire": "^0.3",
+        "phpunit/phpunit": "9.4.1"
     },
     "config": {
         "optimize-autoloader": true,

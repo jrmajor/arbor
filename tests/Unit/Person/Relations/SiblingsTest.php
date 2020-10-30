@@ -41,7 +41,7 @@ it('can get siblings and half siblings', function () {
     expect($person->siblings_father)->toHaveCount(4);
 
     $person->mother_id = null;
-    $person = tap($person)->save()->fresh();
+    tap($person)->save()->refresh();
 
     expect($person->siblings)->toHaveCount(0);
 

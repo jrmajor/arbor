@@ -87,7 +87,7 @@ test('biography addition is logged', function () {
 
     travelBack();
 
-    $person = $this->person->fresh();
+    $this->person->refresh();
 
     expect(Activity::count())->toBe($count + 2); // biography addition and user creation
 
@@ -95,9 +95,9 @@ test('biography addition is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('added-biography');
-    expect($log->subject()->is($person))->toBeTrue();
+    expect($log->subject()->is($this->person))->toBeTrue();
 
-    expect((string) $log->created_at)->toBe((string) $person->updated_at);
+    expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
     expect($log->properties)->toHaveCount(2);
 
@@ -117,7 +117,7 @@ test('biography edition is logged', function () {
 
     travelBack();
 
-    $person = $this->person->fresh();
+    $this->person->refresh();
 
     expect(Activity::count())->toBe($count + 2); // biography edition and user creation
 
@@ -125,9 +125,9 @@ test('biography edition is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('updated-biography');
-    expect($log->subject()->is($person))->toBeTrue();
+    expect($log->subject()->is($this->person))->toBeTrue();
 
-    expect((string) $log->created_at)->toBe((string) $person->updated_at);
+    expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
     expect($log->properties)->toHaveCount(2);
 
@@ -148,7 +148,7 @@ test('biography deletion is logged', function () {
 
     travelBack();
 
-    $person = $this->person->fresh();
+    $this->person->refresh();
 
     expect(Activity::count())->toBe($count + 2); // biography deletion and user creation
 
@@ -156,9 +156,9 @@ test('biography deletion is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('deleted-biography');
-    expect($log->subject()->is($person))->toBeTrue();
+    expect($log->subject()->is($this->person))->toBeTrue();
 
-    expect((string) $log->created_at)->toBe((string) $person->updated_at);
+    expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
     expect($log->properties)->toHaveCount(2);
 
