@@ -11,22 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Enum\Laravel\HasEnums;
 
 class Marriage extends Model
 {
     use HasDateTuples,
-        HasEnums,
         HasFactory,
         SoftDeletes,
         LogsActivity,
         TapsActivity;
-
-    protected $enums = [
-        'rite' => MarriageRiteEnum::class.':nullable',
-        'first_event_type' => MarriageEventTypeEnum::class.':nullable',
-        'second_event_type' => MarriageEventTypeEnum::class.':nullable',
-    ];
 
     protected static $logName = 'marriages';
     protected static $logOnlyDirty = true;
@@ -37,6 +29,9 @@ class Marriage extends Model
 
     protected $casts = [
         'divorced' => 'boolean',
+        'rite' => MarriageRiteEnum::class.':nullable',
+        'first_event_type' => MarriageEventTypeEnum::class.':nullable',
+        'second_event_type' => MarriageEventTypeEnum::class.':nullable',
     ];
 
     protected static $dateTuples = [

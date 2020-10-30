@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-use Spatie\Enum\Enum;
+use Spatie\Enum\Laravel\Enum;
 
 /**
  * @method static self marriage()
@@ -10,6 +10,6 @@ use Spatie\Enum\Enum;
  * @method static self civil_marriage()
  * @method static self concordat_marriage()
  */
-class MarriageEventTypeEnum extends Enum
+final class MarriageEventTypeEnum extends Enum
 {
 }

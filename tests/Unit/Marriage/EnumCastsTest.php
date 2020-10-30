@@ -3,14 +3,16 @@
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
 use App\Models\Marriage;
+use Spatie\Enum\Phpunit\EnumAssertions;
+
+uses(EnumAssertions::class);
 
 it('casts rite to enum', function () {
     $marriage = Marriage::factory()->create([
         'rite' => 'roman_catholic',
     ]);
 
-    expect($marriage->rite)->toBeInstanceOf(MarriageRiteEnum::class);
-    expect($marriage->rite->isEqual(MarriageRiteEnum::roman_catholic()))->toBeTrue();
+    $this->assertSameEnum(MarriageRiteEnum::roman_catholic(), $marriage->rite);
 });
 
 test('rite is nullable', function () {
@@ -27,11 +29,9 @@ it('casts events types to enums', function () {
         'second_event_type' => 'church_marriage',
     ]);
 
-    expect($marriage->first_event_type)->toBeInstanceOf(MarriageEventTypeEnum::class);
-    expect($marriage->first_event_type->isEqual(MarriageEventTypeEnum::civil_marriage()))->toBeTrue();
+    $this->assertSameEnum(MarriageEventTypeEnum::civil_marriage(), $marriage->first_event_type);
 
-    expect($marriage->second_event_type)->toBeInstanceOf(MarriageEventTypeEnum::class);
-    expect($marriage->second_event_type->isEqual(MarriageEventTypeEnum::church_marriage()))->toBeTrue();
+    $this->assertSameEnum(MarriageEventTypeEnum::church_marriage(), $marriage->second_event_type);
 });
 
 test('events types are nullable', function () {

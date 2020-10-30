@@ -2,12 +2,12 @@
 
 namespace App\Enums;
 
-use Spatie\Enum\Enum;
+use Spatie\Enum\Laravel\Enum;
 
 /**
  * @method static self civil()
  * @method static self roman_catholic()
  */
-class MarriageRiteEnum extends Enum
+final class MarriageRiteEnum extends Enum
 {
 }
