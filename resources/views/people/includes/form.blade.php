@@ -9,7 +9,7 @@
     x-data="
         @encodedjson([
             'sex' => old('sex', $person->sex),
-            'dead' => old('dead', $person->dead),
+            'dead' => (bool) old('dead', $person->dead),
             'sources' => [
                 ...collect(old('sources', $person->sources))
                     ->map(fn ($source) => $source instanceof App\Source ? $source->raw() : $source)

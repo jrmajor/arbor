@@ -8,7 +8,7 @@
     action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"
     x-data="
         @encodedjson([
-            'divorced' => old('divorced', $marriage->divorced),
+            'divorced' => (bool) old('divorced', $marriage->divorced),
         ])
     ">
     @method($action == 'create' ? 'post' : 'put')
