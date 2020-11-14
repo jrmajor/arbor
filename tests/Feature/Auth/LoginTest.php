@@ -26,7 +26,7 @@ test('authenticated users are redirected when trying to log in', function () {
     assertAuthenticated();
 });
 
-it('requires email', function () {
+it('requires username', function () {
     from('/login')
         ->post('/login', [
             'password' => 'password',
@@ -91,7 +91,8 @@ test('user can log in with correct credentials', function () {
     post('/login', [
         'username' => 'gracjan',
         'password' => 'secret',
-    ])->assertSessionHasNoErrors()
+    ])
+        ->assertSessionHasNoErrors()
         ->assertStatus(302)
         ->assertRedirect('/people');
 
