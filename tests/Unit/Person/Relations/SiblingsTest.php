@@ -43,9 +43,9 @@ it('can get siblings and half siblings', function () {
     $person->mother_id = null;
     tap($person)->save()->refresh();
 
-    expect($person->siblings)->toHaveCount(0);
+    expect($person->siblings)->toBeEmpty();
 
-    expect($person->siblings_mother)->toHaveCount(0);
+    expect($person->siblings_mother)->toBeEmpty();
 
     expect($person->siblings_father)->toHaveCount(6);
 });
@@ -138,15 +138,15 @@ it('can eagerly get siblings and half siblings', function () {
     $people = Person::whereIn('id', [$firstPerson->id, $secondPerson->id])
         ->with('siblings')->get();
 
-    expect($people->get(0)->siblings)->toHaveCount(0);
+    expect($people->get(0)->siblings)->toBeEmpty();
 
-    expect($people->get(1)->siblings)->toHaveCount(0);
+    expect($people->get(1)->siblings)->toBeEmpty();
 
-    expect($people->get(0)->siblings_mother)->toHaveCount(0);
+    expect($people->get(0)->siblings_mother)->toBeEmpty();
 
-    expect($people->get(1)->siblings_mother)->toHaveCount(0);
+    expect($people->get(1)->siblings_mother)->toBeEmpty();
 
     expect($people->get(0)->siblings_father)->toHaveCount(6);
 
-    expect($people->get(1)->siblings_father)->toHaveCount(0);
+    expect($people->get(1)->siblings_father)->toBeEmpty();
 });
