@@ -11,9 +11,15 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: arbor_tests
         ports:
           - 3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
       - uses: actions/checkout@v2
@@ -40,5 +46,4 @@ jobs:
       - name: Run PHPUnit
         run: ./vendor/bin/pest
         env:
-          DB_USERNAME: root
-          DB_PASSWORD: root
+          DB_PASSWORD: ''
