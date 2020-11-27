@@ -67,54 +67,55 @@ class Pytlewski
 
     private function matchRelatives(Collection $relatives): array
     {
-        return [
-            'mother' => isset($this->attributes['mother_surname']) || isset($this->attributes['mother_name'])
-                ? Relative::hydrate([
-                    'id' => $this->attributes['mother_id'] ?? null,
-                    'person' => isset($this->attributes['mother_id']) ? $relatives
-                        ->where('id_pytlewski', $this->attributes['mother_id'])->first() : null,
-                    'surname' => $this->attributes['mother_surname'] ?? null,
-                    'name' => $this->attributes['mother_name'] ?? null,
-                ]) : null,
-            'father' => isset($this->attributes['father_surname']) || isset($this->attributes['father_name'])
-                ? Relative::hydrate([
-                    'id' => $this->attributes['father_id'] ?? null,
-                    'person' => isset($this->attributes['father_id']) ? $relatives
-                        ->where('id_pytlewski', $this->attributes['father_id'])->first() : null,
-                    'surname' => $this->attributes['father_surname'] ?? null,
-                    'name' => $this->attributes['father_name'] ?? null,
-                ]) : null,
-            'marriages' => collect($this->attributes['marriages'] ?? [])
-                ->map(function ($marriage) use ($relatives) {
-                    if (isset($marriage['id'])) {
-                        $person = $relatives->where('id_pytlewski', $marriage['id'])->first();
-                        $marriage['person'] = $person;
-                    }
+        $mother = isset($this->attributes['mother_surname']) || isset($this->attributes['mother_name'])
+            ? Relative::hydrate([
+                'id' => $this->attributes['mother_id'] ?? null,
+                'person' => isset($this->attributes['mother_id']) ? $relatives
+                    ->where('id_pytlewski', $this->attributes['mother_id'])->first() : null,
+                'surname' => $this->attributes['mother_surname'] ?? null,
+                'name' => $this->attributes['mother_name'] ?? null,
+            ]) : null;
 
-                    return Marriage::hydrate($marriage);
-                }),
+        $father = isset($this->attributes['father_surname']) || isset($this->attributes['father_name'])
+            ? Relative::hydrate([
+                'id' => $this->attributes['father_id'] ?? null,
+                'person' => isset($this->attributes['father_id']) ? $relatives
+                    ->where('id_pytlewski', $this->attributes['father_id'])->first() : null,
+                'surname' => $this->attributes['father_surname'] ?? null,
+                'name' => $this->attributes['father_name'] ?? null,
+            ]) : null;
 
-            'children' => collect($this->attributes['children'] ?? [])
-                ->map(function ($child) use ($relatives) {
-                    if (isset($child['id'])) {
-                        $person = $relatives->where('id_pytlewski', $child['id'])->first();
-                        $child['person'] = $person;
-                    }
+        $marriages = collect($this->attributes['marriages'] ?? [])
+            ->map(function ($marriage) use ($relatives) {
+                if (isset($marriage['id'])) {
+                    $person = $relatives->where('id_pytlewski', $marriage['id'])->first();
+                    $marriage['person'] = $person;
+                }
 
-                    return Relative::hydrate($child);
-                }),
+                return Marriage::hydrate($marriage);
+            });
 
-            'siblings' => collect($this->attributes['siblings'] ?? [])
-                ->map(function ($sibling) use ($relatives) {
-                    if (isset($sibling['id'])) {
-                        $person = $relatives->where('id_pytlewski', $sibling['id'])->first();
-                        $sibling['person'] = $person;
-                    }
+        $children = collect($this->attributes['children'] ?? [])
+            ->map(function ($child) use ($relatives) {
+                if (isset($child['id'])) {
+                    $person = $relatives->where('id_pytlewski', $child['id'])->first();
+                    $child['person'] = $person;
+                }
 
-                    return Relative::hydrate($sibling);
-                }),
+                return Relative::hydrate($child);
+            });
 
-        ];
+        $siblings = collect($this->attributes['siblings'] ?? [])
+            ->map(function ($sibling) use ($relatives) {
+                if (isset($sibling['id'])) {
+                    $person = $relatives->where('id_pytlewski', $sibling['id'])->first();
+                    $sibling['person'] = $person;
+                }
+
+                return Relative::hydrate($sibling);
+            });
+
+        return compact('mother', 'father', 'marriages', 'children', 'siblings');
     }
 
     public function __get($key)
