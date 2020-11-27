@@ -9,12 +9,9 @@ class Source implements Jsonable
 {
     const parsedownVersion = '1.7.4';
 
-    protected $raw;
-
-    public function __construct($raw)
-    {
-        $this->raw = $raw;
-    }
+    public function __construct(
+        protected ?string $raw
+    ) {}
 
     public static function from($raw)
     {
