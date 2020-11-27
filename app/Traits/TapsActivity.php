@@ -62,10 +62,7 @@ trait TapsActivity
             }
         }
 
-        $activity->properties = collect([
-            'old' => $old,
-            'attributes' => $attributes,
-        ]);
+        $activity->properties = compact('old', 'attributes');
     }
 
     protected function tapDeletedActivity(Activity $activity)
