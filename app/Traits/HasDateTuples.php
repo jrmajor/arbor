@@ -4,11 +4,6 @@ namespace App\Traits;
 
 trait HasDateTuples
 {
-    public static function getDateTuples()
-    {
-        return static::$dateTuples;
-    }
-
     public function initializeHasDateTuples()
     {
         foreach (static::$dateTuples as $dateTuple) {
