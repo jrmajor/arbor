@@ -13,8 +13,6 @@ class Pytlewski
 
     private $id;
 
-    private $source;
-
     private array $attributes = [];
 
     private ?array $relations = null;
