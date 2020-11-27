@@ -7,12 +7,9 @@ use Illuminate\Notifications\Notification;
 
 class ResetPassword extends Notification
 {
-    public string $token;
-
-    public function __construct($token)
-    {
-        $this->token = $token;
-    }
+    public function __construct(
+        public string $token,
+    ) {}
 
     public function via($notifiable): string
     {
