@@ -9,17 +9,12 @@ trait TapsActivity
 {
     public function tapActivity(Activity $activity, string $eventName)
     {
-        if ($eventName == 'updated') {
-            $this->tapUpdatedActivity($activity);
-        }
-
-        if ($eventName == 'deleted') {
-            $this->tapDeletedActivity($activity);
-        }
-
-        if ($eventName == 'restored') {
-            $this->tapRestoredActivity($activity);
-        }
+        match ($eventName) {
+            'updated' => $this->tapUpdatedActivity($activity),
+            'deleted' => $this->tapDeletedActivity($activity),
+            'restored' => $this->tapRestoredActivity($activity),
+            default => null,
+        };
     }
 
     protected function tapUpdatedActivity(Activity $activity)
