@@ -109,7 +109,7 @@ trait ScrapesPytlewski
             if ($matches->hasMatch()) {
                 $attr['birth_date'] = $matches->group(1);
 
-                if (! Str::contains($matches->group(2), 'brak')) {
+                if (! str_contains($matches->group(2), 'brak')) {
                     $attr['birth_place'] = $matches->group(2);
                 }
             }
@@ -120,7 +120,7 @@ trait ScrapesPytlewski
                 if ($matches->hasMatch()) {
                     $attr['death_date'] = $matches->group(1);
 
-                    if (! Str::contains($matches->groupOr(2, ''), 'brak')) {
+                    if (! str_contains($matches->groupOr(2, ''), 'brak')) {
                         $attr['death_place'] = $matches->groupOr(2, '');
                     }
 
