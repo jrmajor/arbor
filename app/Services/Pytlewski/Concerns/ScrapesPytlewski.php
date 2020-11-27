@@ -4,7 +4,6 @@ namespace App\Services\Pytlewski\Concerns;
 
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Spatie\Regex\Regex;
 use Symfony\Component\DomCrawler\Crawler;
@@ -194,7 +193,7 @@ trait ScrapesPytlewski
 
             foreach ($marriages as $marriage) {
                 $matches = Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>(]+)(?:<\/a><\/u>)? ?(?:\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\))?/', $marriage);
-                if ($matches->hasMatch() && ! Str::startsWith($matches->groupOr(2, ''), 'Nie zawar')) {
+                if ($matches->hasMatch() && ! str_starts_with($matches->groupOr(2, ''), 'Nie zawar')) {
                     $marriage = [];
                     $marriage['id'] = $matches->groupOr(1, '');
                     $marriage['name'] = $matches->groupOr(2, '');
@@ -214,7 +213,7 @@ trait ScrapesPytlewski
 
             foreach ($children as $child) {
                 $matches = Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/', $child);
-                if ($matches->hasMatch() && ! Str::startsWith($matches->groupOr(2, ''), 'Nie ma')) {
+                if ($matches->hasMatch() && ! str_starts_with($matches->groupOr(2, ''), 'Nie ma')) {
                     $child = [];
                     $child['id'] = $matches->groupOr(1, '');
                     $child['name'] = $matches->groupOr(2, '');
@@ -232,7 +231,7 @@ trait ScrapesPytlewski
 
             foreach ($siblings as $sibling) {
                 $matches = Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/', $sibling);
-                if ($matches->hasMatch() && ! Str::startsWith($matches->groupOr(2, ''), 'Nie ma')) {
+                if ($matches->hasMatch() && ! str_starts_with($matches->groupOr(2, ''), 'Nie ma')) {
                     $sibling = [];
                     $sibling['id'] = $matches->groupOr(1, '');
                     $sibling['name'] = $matches->groupOr(2, '');
