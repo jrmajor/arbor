@@ -62,26 +62,20 @@ class Marriage extends Model
 
     public function partner(Person $person): ?Person
     {
-        if ($this->man_id == $person->id) {
-            return $this->woman;
-        }
-        if ($this->woman_id == $person->id) {
-            return $this->man;
-        }
-
-        return null;
+        return match ($person->id) {
+            $this->man_id => $this->woman,
+            $this->woman_id => $this->man,
+            default => null,
+        };
     }
 
     public function order(Person $person): ?int
     {
-        if ($this->man_id == $person->id) {
-            return $this->man_order;
-        }
-        if ($this->woman_id == $person->id) {
-            return $this->woman_order;
-        }
-
-        return null;
+        return match ($person->id) {
+            $this->man_id => $this->man_order,
+            $this->woman_id => $this->woman_order,
+            default => null,
+        };
     }
 
     public function hasFirstEvent(): bool
