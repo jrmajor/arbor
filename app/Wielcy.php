@@ -42,20 +42,22 @@ class Wielcy
     private function getSource()
     {
         $this->source = Cache::remember(
-            "wielcy.$this->id",
+            "wielcy.{$this->id}",
             CarbonInterval::day(),
-            function () {
+            function (): ?string {
                 try {
                     $source = Http::timeout(2)->get($this->url);
                 } catch (ConnectionException $e) {
-                    return;
+                    return null;
                 }
 
                 if (! $source->ok()) {
-                    return;
+                    return null;
                 }
 
-                return iconv('iso-8859-2', 'UTF-8', $source->body());
+                $source = iconv('iso-8859-2', 'UTF-8', $source->body());
+
+                return $source !== false ? $source : null;
             }
         );
     }
