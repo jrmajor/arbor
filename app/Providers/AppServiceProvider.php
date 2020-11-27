@@ -29,16 +29,18 @@ class AppServiceProvider extends ServiceProvider
 
         Stringable::macro('e', fn () => new Stringable(e($this->value)));
 
-        Str::macro('formatBiography', function ($biography) {
-            return $biography !== null
-                ? Str::of($biography)
-                    ->trim()
-                    ->replace(["\r\n", "\r"], "\n")
-                    ->e()
-                    ->prepend('<p>')
-                    ->append('</p>')
-                    ->replace("\n\n", "</p>\n<p>")
-                : null;
+        Str::macro('formatBiography', function (?string $biography): ?string {
+            if ($biography === null) {
+                return null;
+            }
+
+            return (string) Str::of($biography)
+                ->trim()
+                ->replace(["\r\n", "\r"], "\n")
+                ->e()
+                ->prepend('<p>')
+                ->append('</p>')
+                ->replace("\n\n", "</p>\n<p>");
         });
 
         Arr::macro('trim', function ($array) {
