@@ -13,7 +13,7 @@ class Source implements Jsonable
         protected ?string $raw
     ) {}
 
-    public static function from($raw)
+    public static function from(string|self|null $raw): self
     {
         return $raw instanceof self ? $raw : new self($raw);
     }

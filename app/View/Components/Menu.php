@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -9,7 +10,7 @@ use Illuminate\View\Component;
 
 class Menu extends Component
 {
-    public $user;
+    public ?User $user;
 
     public ?string $active;
 

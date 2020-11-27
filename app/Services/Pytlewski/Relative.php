@@ -9,7 +9,7 @@ class Relative
         'name', 'surname',
     ];
 
-    public static function hydrate(array $attributes)
+    public static function hydrate(array $attributes): static
     {
         return new static($attributes);
     }
@@ -18,7 +18,7 @@ class Relative
         protected array $attributes
     ) {}
 
-    public function __get($key)
+    public function __get(string $key): mixed
     {
         if ($key === 'url') {
             return $this->attributes['id'] ?? null

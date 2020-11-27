@@ -114,7 +114,7 @@ class Pytlewski
         return compact('mother', 'father', 'marriages', 'children', 'siblings');
     }
 
-    public function __get($key)
+    public function __get(string $key): mixed
     {
         if ($key === 'id') {
             return $this->id;
