@@ -26,11 +26,13 @@
                         </td>
 
                         <td class="px-4 pt-2">
-                            {{ $user->permissions == 0 ? 'none' : null }}
-                            {{ $user->permissions == 1 ? 'read' : null }}
-                            {{ $user->permissions == 2 ? 'write' : null }}
-                            {{ $user->permissions == 3 ? 'view history' : null }}
-                            {{ $user->permissions == 4 ? 'admin' : null }}
+                            {{ match ($user->permissions) {
+                                0 => 'none',
+                                1 => 'read',
+                                2 => 'write',
+                                3 => 'view history',
+                                4 => 'admin',
+                            } }}
                         </td>
 
                         <td class="px-4 pt-2">
