@@ -322,8 +322,6 @@
                                         class="a">
                                         <small>[+]</small>
                                     </a>
-                                @else
-                                    <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                                 @endif
                                 @if($marriage->hasFirstEvent())
                                     @if($marriage->first_event_type)
