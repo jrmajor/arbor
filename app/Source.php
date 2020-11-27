@@ -18,12 +18,12 @@ class Source implements Jsonable
         return $raw instanceof self ? $raw : new self($raw);
     }
 
-    public function markup()
+    public function markup(): string
     {
         return $this->line($this->raw);
     }
 
-    public function sanitized()
+    public function sanitized(): ?string
     {
         $collapsed = trim(preg_replace('/\s+/', ' ', $this->raw));
 
@@ -35,12 +35,12 @@ class Source implements Jsonable
         return $this->raw;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->raw;
     }
 
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return json_encode($this->raw, $options);
     }
