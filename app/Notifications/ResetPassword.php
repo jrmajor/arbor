@@ -14,9 +14,9 @@ class ResetPassword extends Notification
         $this->token = $token;
     }
 
-    public function via($notifiable)
+    public function via(mixed $notifiable): string
     {
-        return ['mail'];
+        return 'mail';
     }
 
     public function toMail(mixed $notifiable): MailMessage
