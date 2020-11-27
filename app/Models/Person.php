@@ -236,9 +236,9 @@ class Person extends Model
 
         if ($raw) {
             return (int) $or;
-        } else {
-            return $either === $or ? $either : $either.'-'.$or;
         }
+
+        return $either === $or ? $either : $either.'-'.$or;
     }
 
     public function currentAge($raw = false)

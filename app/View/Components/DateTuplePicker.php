@@ -52,9 +52,9 @@ class DateTuplePicker extends Component
         ) {
             if ($from->year === $to->year) {
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         }
 
         if (
@@ -63,9 +63,9 @@ class DateTuplePicker extends Component
         ) {
             if ($from->year === $to->year && $from->month === $to->month) {
                 return true;
-            } else {
-                false;
             }
+
+            return false;
         }
 
         return false;
