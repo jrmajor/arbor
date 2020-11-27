@@ -335,21 +335,25 @@ class Person extends Model
 
     public static function letters($type): Collection
     {
-        if (! in_array($type, ['family', 'last'])) {
-            throw new InvalidArgumentException('Type must be "family" or "last".');
-        }
+        $name = match ($type) {
+            'family' => 'family_name',
+            'last' => 'ifnull(last_name, family_name)',
+            default => throw new InvalidArgumentException('Type must be "family" or "last".'),
+        };
 
         return Cache::rememberForever(
-            "letters_$type",
-            fn () => DB::table('people')
+            "letters_{$type}",
+            function () use ($name) {
+                return DB::table('people')
                     ->selectRaw(
-                        'left('.($type === 'family' ? 'family_name' : 'ifnull(last_name, family_name)').', 1)
+                        'left(' . $name . ', 1)
                         collate utf8mb4_0900_as_ci as letter,
                         count(*) as total'
                     )->groupBy('letter')
                     ->orderBy('letter')
                     ->whereNull('deleted_at')
-                    ->get()
+                    ->get();
+            }
         );
     }
 }
