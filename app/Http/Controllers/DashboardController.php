@@ -33,10 +33,9 @@ class DashboardController extends Controller
         $invisibleDead = Person::where('dead', true)
             ->where('visibility', false)->get();
 
-        return view('dashboard.reports', [
-            'shouldBeDead' => $shouldBeDead,
-            'visibleAlive' => $visibleAlive,
-            'invisibleDead' => $invisibleDead,
-        ]);
+        return view(
+            'dashboard.reports',
+            compact('shouldBeDead', 'visibleAlive', 'invisibleDead')
+        );
     }
 }
