@@ -12,32 +12,15 @@ use Spatie\Regex\Regex;
 
 class Wielcy
 {
-    private $id;
-    private $url;
-    private $source;
-    private $attributes = [];
+    private ?string $source;
 
-    public function __construct($id)
-    {
-        $this->id = $id;
-        $this->prepareSource();
-        $this->runParsers();
-    }
+    private array $attributes = [];
 
-    public static function url($id)
-    {
-        return 'http://www.sejm-wielki.pl/s/?m=NG&t=PN&n='.$id;
-    }
-
-    private function prepareSource()
-    {
-        $this->setUrl();
+    public function __construct(
+        private string $id
+    ) {
         $this->getSource();
-    }
-
-    private function setUrl()
-    {
-        $this->url = self::url($this->id);
+        $this->runParsers();
     }
 
     private function getSource()
@@ -47,7 +30,7 @@ class Wielcy
             CarbonInterval::day(),
             function (): ?string {
                 try {
-                    $source = Http::timeout(2)->get($this->url);
+                    $source = Http::timeout(2)->get(self::url($this->id));
                 } catch (ConnectionException) {
                     return null;
                 }
@@ -96,18 +79,14 @@ class Wielcy
         }
     }
 
-    public function __get($key)
+    public function __get(string $key): mixed
     {
-        if (! $key) {
-            return;
-        }
-
         if ($key === 'id') {
             return $this->id;
         }
 
         if ($key === 'url') {
-            return $this->url;
+            return self::url($this->id);
         }
 
         if (array_key_exists($key, $this->attributes)) {
@@ -122,5 +101,10 @@ class Wielcy
         $this->attributes[$key] = $value;
 
         return $this;
+    }
+
+    public static function url(string $id): string
+    {
+        return 'http://www.sejm-wielki.pl/s/?m=NG&t=PN&n='.$id;
     }
 }
