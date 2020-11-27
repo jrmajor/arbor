@@ -6,7 +6,7 @@ class Relative
 {
     protected $attributes;
 
-    protected $keys = [
+    protected array $keys = [
         'id', 'person',
         'name', 'surname',
     ];

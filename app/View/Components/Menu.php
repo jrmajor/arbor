@@ -11,7 +11,7 @@ class Menu extends Component
 {
     public $user;
 
-    public $active;
+    public ?string $active;
 
     public function __construct()
     {

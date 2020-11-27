@@ -37,16 +37,16 @@ trait ScrapesPytlewski
         return $attributes;
     }
 
-    private function getSource()
+    private function getSource(): ?string
     {
         try {
             $source = Http::timeout(2)->get(self::url($this->id));
         } catch (ConnectionException $e) {
-            return;
+            return null;
         }
 
         if (! $source->ok()) {
-            return;
+            return null;
         }
 
         $source = iconv('Windows-1250', 'UTF-8', $source->body());
@@ -54,7 +54,7 @@ trait ScrapesPytlewski
         $source = strstr($source, '<table id="metrzyczka" width="481" height="451" border="0" cellpadding="0" cellspacing="0">');
         $source = strstr($source, '<td background="images/spacer.gif" width="35" height="1"></td>', true);
 
-        return $source != false ? $source : null;
+        return $source !== false ? $source : null;
     }
 
     private function parseBasicInfo(Crawler $crawler): array

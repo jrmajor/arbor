@@ -31,7 +31,7 @@ class DateTuplePicker extends Component
         $this->initialTo = $initialTo;
     }
 
-    public function simplePickerCanBeUsed()
+    public function simplePickerCanBeUsed(): bool
     {
         $from = $this->initialFrom;
         $to = $this->initialTo;
@@ -71,13 +71,13 @@ class DateTuplePicker extends Component
         return false;
     }
 
-    public function initialSimplePickerValue()
+    public function initialSimplePickerValue(): ?string
     {
         $from = $this->initialFrom;
         $to = $this->initialTo;
 
         if (! $from || ! $to) {
-            return;
+            return null;
         }
 
         if ($from->equalTo($to)) {
@@ -94,7 +94,7 @@ class DateTuplePicker extends Component
                 return $from->format('Y');
             }
 
-            return;
+            return null;
         }
 
         if (
@@ -105,7 +105,7 @@ class DateTuplePicker extends Component
                 return $from->format('Y-m');
             }
 
-            return;
+            return null;
         }
     }
 

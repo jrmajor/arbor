@@ -4,7 +4,7 @@ namespace App\Services\Pytlewski;
 
 class Marriage extends Relative
 {
-    protected $keys = [
+    protected array $keys = [
         'id', 'person',
         'name', 'surname',
         'date', 'place',

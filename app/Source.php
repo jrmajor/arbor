@@ -33,7 +33,7 @@ class Source implements Jsonable
         return $collapsed === '' ? null : $collapsed;
     }
 
-    public function raw()
+    public function raw(): ?string
     {
         return $this->raw;
     }

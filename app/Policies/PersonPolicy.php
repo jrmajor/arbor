@@ -10,47 +10,47 @@ class PersonPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(?User $user)
+    public function viewAny(?User $user): bool
     {
         return true;
     }
 
-    public function view(?User $user, Person $person)
+    public function view(?User $user, Person $person): bool
     {
         return $person->canBeViewedBy($user);
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->canWrite();
     }
 
-    public function update(User $user, Person $person)
+    public function update(User $user, Person $person): bool
     {
         return $user->canWrite();
     }
 
-    public function changeVisibility(User $user, Person $person)
+    public function changeVisibility(User $user, Person $person): bool
     {
         return $user->isSuperAdmin();
     }
 
-    public function delete(User $user, Person $person)
+    public function delete(User $user, Person $person): bool
     {
         return $user->canWrite();
     }
 
-    public function restore(User $user, Person $person)
+    public function restore(User $user, Person $person): bool
     {
         return $user->canViewHistory();
     }
 
-    public function forceDelete(User $user, Person $person)
+    public function forceDelete(User $user, Person $person): bool
     {
         return $user->isSuperAdmin();
     }
 
-    public function viewHistory(User $user, Person $person)
+    public function viewHistory(User $user, Person $person): bool
     {
         return $user->canViewHistory();
     }

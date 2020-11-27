@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
                 ->replace("\n\n", "</p>\n<p>");
         });
 
-        Arr::macro('trim', function ($array) {
+        Arr::macro('trim', function (array $array): array {
             foreach ($array as $key => $value) {
                 if (is_array($value)) {
                     $array[$key] = Arr::trim($value);
@@ -61,7 +61,7 @@ class AppServiceProvider extends ServiceProvider
             return $array;
         });
 
-        Collection::macro('trim', function () {
+        Collection::macro('trim', function (): Collection {
             return new static(Arr::trim($this->items));
         });
 

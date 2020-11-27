@@ -15,17 +15,17 @@ class Pytlewski
 
     private $source;
 
-    private $attributes = [];
+    private array $attributes = [];
 
-    private $relations;
+    private ?array $relations = null;
 
-    private $keys = [
+    private array $keys = [
         'family_name', 'last_name', 'name', 'middle_name',
         'birth_date', 'birth_place', 'death_date', 'death_place',
         'photo', 'bio',
     ];
 
-    private $relationKeys = [
+    private array $relationKeys = [
         'mother', 'father', 'marriages', 'children', 'siblings',
     ];
 
@@ -36,11 +36,11 @@ class Pytlewski
         $this->attributes = Cache::remember(
             'pytlewski.'.$this->id,
             CarbonInterval::week(),
-            fn () => $this->scrape()
+            fn (): array => $this->scrape()
         );
     }
 
-    private function loadRelations()
+    private function loadRelations(): void
     {
         $relatives = $this->eagerLoadRelatives();
 
@@ -141,7 +141,7 @@ class Pytlewski
         }
     }
 
-    public static function url($id): string
+    public static function url(int $id): string
     {
         return 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id='.$id;
     }
