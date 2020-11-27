@@ -27,7 +27,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.0'
 
       - name: Cache Composer dependencies
         uses: actions/cache@v2
@@ -36,7 +36,7 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-interaction
+        run: composer install --prefer-dist --no-progress --no-interaction --ignore-platform-reqs
 
       - name: Prepare Laravel application
         run: |
