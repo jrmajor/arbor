@@ -21,21 +21,17 @@ class PersonController extends Controller
     {
         $this->authorize('viewAny', Person::class);
 
-        if ($type == 'f') {
-            $list = Person
-                ::whereRaw('left(family_name, 1) collate utf8mb4_0900_as_ci = ?', $letter)
+        $list = match ($type) {
+            'f' => Person::whereRaw('left(family_name, 1) collate utf8mb4_0900_as_ci = ?', $letter)
                 ->orderBy('family_name')
                 ->orderBy('name')
-                ->get();
-        } elseif ($type == 'l') {
-            $list = Person
-                ::whereRaw('left(ifnull(last_name, family_name), 1) collate utf8mb4_0900_as_ci = ?', $letter)
+                ->get(),
+            'l' => Person::whereRaw('left(ifnull(last_name, family_name), 1) collate utf8mb4_0900_as_ci = ?', $letter)
                 ->orderByRaw('ifnull(last_name, family_name) asc')
                 ->orderBy('name')
-                ->get();
-        } else {
-            abort(404);
-        }
+                ->get(),
+            default => abort(404),
+        };
 
         if ($list->isEmpty()) {
             abort(404);
