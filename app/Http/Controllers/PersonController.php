@@ -77,7 +77,7 @@ class PersonController extends Controller
     public function show(Person $person)
     {
         if ($person->trashed()) {
-            return optional(Auth::user())->canViewHistory()
+            return Auth::user()?->canViewHistory()
                 ? redirect()->route('people.history', $person)
                 : abort(404);
         }

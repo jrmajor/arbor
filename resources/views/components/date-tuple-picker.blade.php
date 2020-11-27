@@ -4,8 +4,8 @@
     x-data="dateTuplePickerData(
         @encodedjson([
             'simple' => $initialSimplePickerValue(),
-            'from' => optional($initialFrom)->format('Y-m-d'),
-            'to' => optional($initialTo)->format('Y-m-d'),
+            'from' => $initialFrom?->format('Y-m-d'),
+            'to' => $initialTo?->format('Y-m-d'),
             'advancedPicker' => $errors->has($name.'_from') || $errors->has($name.'_to') || ! $simplePickerCanBeUsed(),
         ])
     )">

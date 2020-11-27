@@ -21,7 +21,7 @@
                 </{{ $active === 'edit' ? 'span' : 'a' }}>
             @endif
 
-            @if(optional(auth()->user())->isSuperAdmin())
+            @if(auth()->user()?->isSuperAdmin())
                 <{{ $active === 'history' ? 'span' : 'a' }}
                     href="{{ route('marriages.history', $marriage) }}"
                     class="{{ $active === 'history' ? 'text-blue-700' : 'group text-gray-600 hover:text-gray-700 focus:text-gray-700 focus:outline-none' }}

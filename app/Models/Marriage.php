@@ -47,7 +47,7 @@ class Marriage extends Model
 
     public function canBeViewedBy(?User $user): bool
     {
-        return optional($user)->canRead() || $this->isVisible();
+        return $user?->canRead() || $this->isVisible();
     }
 
     public function woman(): BelongsTo

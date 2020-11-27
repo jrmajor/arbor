@@ -65,7 +65,7 @@ class Person extends Model
 
     public function canBeViewedBy(?User $user): bool
     {
-        return optional($user)->canRead() || $this->isVisible();
+        return $user?->canRead() || $this->isVisible();
     }
 
     public function changeVisibility(bool $visibility): bool
@@ -171,8 +171,8 @@ class Person extends Model
 
     public function getBirthYearAttribute(): ?int
     {
-        if (optional($this->birth_date_from)->year === optional($this->birth_date_to)->year) {
-            return optional($this->birth_date_from)->year;
+        if ($this->birth_date_from?->year === $this->birth_date_to?->year) {
+            return $this->birth_date_from?->year;
         }
 
         return null;
@@ -180,8 +180,8 @@ class Person extends Model
 
     public function getDeathYearAttribute(): ?int
     {
-        if (optional($this->death_date_from)->year === optional($this->death_date_to)->year) {
-            return optional($this->death_date_from)->year;
+        if ($this->death_date_from?->year === $this->death_date_to?->year) {
+            return $this->death_date_from?->year;
         }
 
         return null;
@@ -260,8 +260,8 @@ class Person extends Model
         $interval = self::generationInterval;
         $prediction = collect();
 
-        $mother_year = optional($this->mother)->birth_year;
-        $father_year = optional($this->father)->birth_year;
+        $mother_year = $this->mother?->birth_year;
+        $father_year = $this->father?->birth_year;
 
         if ($mother_year && $father_year) {
             $prediction->put('parents', (($mother_year + $father_year) / 2) + $interval);

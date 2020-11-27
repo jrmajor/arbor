@@ -62,7 +62,7 @@
     </a>
 @endif
 
-@if(optional(auth()->user())->canWrite())
+@if(auth()->user()?->canWrite())
     <a
         href="{{ route('people.edit', $person) }}"
         class="a">

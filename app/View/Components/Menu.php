@@ -15,7 +15,7 @@ class Menu extends Component
 
     public function __construct()
     {
-        $this->user = optional(Auth::user());
+        $this->user = Auth::user();
 
         $this->active = Route::currentRouteName();
 

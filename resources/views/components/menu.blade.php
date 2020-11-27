@@ -72,7 +72,7 @@
                                                 <span x-text="person.name"></span>
                                                 <small x-show="person.dates" x-text="'(' + person.dates + ')'"></small>
                                             </span>
-                                            @if($user->isSuperAdmin())
+                                            @if($user?->isSuperAdmin())
                                                 <small x-text="'№' + person.id" class="tabular-nums"></small>
                                             @endif
                                         </li>
@@ -83,7 +83,7 @@
                     </form>
                 @endif
 
-                @if($user->canWrite())
+                @if($user?->canWrite())
                     <a
                         href="{{ route('people.create') }}"
                         class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
@@ -102,7 +102,7 @@
                     </a>
                 @endif
 
-                @if($user->isSuperAdmin())
+                @if($user?->isSuperAdmin())
                     <a
                         href="{{ route('dashboard.users') }}"
                         class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800

@@ -31,7 +31,7 @@ class PeopleSearchController extends Controller
             ->when(filled($request->get('sex')), function ($query) use ($request) {
                 return $query->where(fn ($query) => $query->where('sex', $request->get('sex'))->orWhereNull('sex'));
             })
-            ->when(! optional(Auth::user())->canRead(), function ($query) {
+            ->when(! Auth::user()?->canRead(), function ($query) {
                 return $query->where('visibility', true);
             })
             ->limit(10)

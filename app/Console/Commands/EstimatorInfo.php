@@ -30,10 +30,10 @@ class EstimatorInfo extends Command
             )->get()
             ->filter(fn ($person) => $person->birth_year)
             ->map(fn ($person) => [
-                optional($person->mother)->birth_year
+                $person->mother?->birth_year
                     ? $person->birth_year - $person->mother->birth_year
                     : null,
-                optional($person->father)->birth_year
+                $person->father?->birth_year
                     ? $person->birth_year - $person->father->birth_year
                     : null,
             ])->flatten()->avg();

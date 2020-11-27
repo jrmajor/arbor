@@ -16,7 +16,7 @@
             @include('people.includes.small-tree')
         </main>
 
-        @if(optional(auth()->user())->canWrite())
+        @if(auth()->user()?->canWrite())
             <div class="flex-shrink-0 p-1">
                 <x-person-menu active="show" :person="$person"/>
             </div>

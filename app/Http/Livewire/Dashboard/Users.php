@@ -15,7 +15,7 @@ class Users extends Component
         }
 
         $users = User::all()->load('latestLogin')
-            ->sortByDesc(fn ($user) => optional($user->latestLogin)->created_at);
+            ->sortByDesc(fn ($user) => $user->latestLogin?->created_at);
 
         return view('dashboard.users', [
             'users' => $users,

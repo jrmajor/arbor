@@ -67,7 +67,7 @@
                     </table>
 
                     <div class="-m-6 mt-5 px-6 py-4 bg-gray-50 flex items-center justify-between">
-                        {{ optional($activity['causer'])->username }}
+                        {{ $activity['causer']?->username }}
                         <small>{{ $activity['model']->created_at->format('Y-m-d H:i') }}</small>
                     </div>
                 </div>

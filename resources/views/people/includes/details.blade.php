@@ -152,7 +152,7 @@
                         @php $some_birth_data_printed = true; @endphp
                     @endif
                     @if(
-                        (! $person->birth_date || optional(auth()->user())->isSuperAdmin())
+                        (! $person->birth_date || auth()->user()?->isSuperAdmin())
                         && $person->estimatedBirthDate()
                     )
                         @if($some_birth_data_printed === true)
@@ -309,7 +309,7 @@
 
                                 <x-name :person="$marriage->partner($person)"/>
 
-                                @if(optional(auth()->user())->canWrite())
+                                @if(auth()->user()?->canWrite())
                                     <a
                                         href="{{ route('marriages.edit', ['marriage' => $marriage]) }}"
                                         class="a">

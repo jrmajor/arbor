@@ -6,9 +6,9 @@
             'nullable' => $nullable,
             'sex' => $sex,
             'initial' => [
-                'id' => optional($initial)->id,
-                'name' => optional($initial)->formatSimpleName(),
-                'dates' => optional($initial)->formatSimpleDates(),
+                'id' => $initial?->id,
+                'name' => $initial?->formatSimpleName(),
+                'dates' => $initial?->formatSimpleDates(),
                 'url' => $initial ? route('people.show', $initial) : null,
                 'hidden' => false,
             ],
