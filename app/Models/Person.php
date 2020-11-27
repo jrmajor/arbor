@@ -105,12 +105,12 @@ class Person extends Model
 
     public function mother(): BelongsTo
     {
-        return $this->belongsTo('App\\Models\\Person');
+        return $this->belongsTo(Person::class);
     }
 
     public function father(): BelongsTo
     {
-        return $this->belongsTo('App\\Models\\Person');
+        return $this->belongsTo(Person::class);
     }
 
     public function getWielcyAttribute(): ?Wielcy
