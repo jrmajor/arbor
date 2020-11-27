@@ -41,7 +41,9 @@
         "pestphp/pest": "0.3.9",
         "pestphp/pest-plugin-laravel": "^0.3",
         "pestphp/pest-plugin-livewire": "^0.3",
-        "phpunit/phpunit": "9.4.1"
+        "phpunit/phpunit": "9.4.1",
+        "psalm/plugin-laravel": "^1.4",
+        "vimeo/psalm": "^4.2"
     },
     "config": {
         "optimize-autoloader": true,
