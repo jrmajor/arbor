@@ -29,21 +29,22 @@ jobs:
         with:
           php-version: '7.4'
 
-      - name: Cache composer dependencies
+      - name: Cache Composer dependencies
         uses: actions/cache@v2
         with:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
 
-      - name: Run composer install
+      - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
 
-      - name: Prepare Laravel Application
+      - name: Prepare Laravel application
         run: |
           cp .env.example .env
           php artisan key:generate
 
-      - name: Run PHPUnit
+      - name: Run Pest
         run: ./vendor/bin/pest
         env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
           DB_PASSWORD: ''
