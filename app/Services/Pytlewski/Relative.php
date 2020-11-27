@@ -4,8 +4,6 @@ namespace App\Services\Pytlewski;
 
 class Relative
 {
-    protected $attributes;
-
     protected array $keys = [
         'id', 'person',
         'name', 'surname',
@@ -16,10 +14,9 @@ class Relative
         return new static($attributes);
     }
 
-    public function __construct(array $attributes)
-    {
-        $this->attributes = $attributes;
-    }
+    public function __construct(
+        protected array $attributes
+    ) {}
 
     public function __get($key)
     {
