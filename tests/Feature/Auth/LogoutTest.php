@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Auth\Events\CurrentDeviceLogout;
+use Illuminate\Support\Facades\Event;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertGuest;
 

@@ -3,6 +3,8 @@
 use App\Http\Livewire\Settings;
 use App\Models\User;
 use Illuminate\Auth\Events\OtherDeviceLogout;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Hash;
 use function Pest\Laravel\actingAs;
 
 test('guest are asked to log in when attempting to view settings page')

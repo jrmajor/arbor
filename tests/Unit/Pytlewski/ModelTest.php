@@ -2,6 +2,8 @@
 
 use App\Services\Pytlewski\Pytlewski;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 it('can make proper url')
     ->assertEquals(
