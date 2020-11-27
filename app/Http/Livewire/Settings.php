@@ -42,8 +42,10 @@ class Settings extends Component
             'password' => Hash::make($this->password),
         ])->save();
 
-        $this->password = null;
-        $this->password_confirmation = null;
+        $this->fill([
+            'password' => null,
+            'password_confirmation' => null,
+        ]);
 
         if ($result) {
             flash()->success(__('settings.alerts.password_has_been_changed'));
