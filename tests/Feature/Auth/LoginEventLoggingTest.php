@@ -8,10 +8,9 @@ it('logs user logins events', function () {
     $user = User::factory()->create();
 
     Agent::shouldReceive([
-        'isDesktop' => true,
-        'isPhone' => false,
         'platform' => 'OS X',
         'browser' => 'Chrome',
+        'deviceType' => 'desktop',
     ]);
 
     Auth::login($user);
