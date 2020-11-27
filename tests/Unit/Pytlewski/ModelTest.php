@@ -30,7 +30,7 @@ it('caches parsed attributes from pytlewski.pl', function () {
             'pytlewski.556',
             Carbon\CarbonInterval::class,
             \Closure::class
-        );
+        )->andReturn([]);
 
     new Pytlewski(556);
 
