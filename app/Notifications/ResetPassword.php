@@ -14,12 +14,12 @@ class ResetPassword extends Notification
         $this->token = $token;
     }
 
-    public function via(mixed $notifiable): string
+    public function via($notifiable): string
     {
         return 'mail';
     }
 
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail($notifiable): MailMessage
     {
         $url = url(route('password.reset', [
             'token' => $this->token,
