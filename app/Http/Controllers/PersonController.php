@@ -131,13 +131,13 @@ class PersonController extends Controller
     {
         $this->authorize('delete', $person);
 
-        if ($person->marriages->count() > 0) {
+        if ($person->marriages->isNotEmpty()) {
             flash()->error(__('people.alerts.cant_delete_person_with_marriages'));
 
             return back();
         }
 
-        if ($person->children->count() > 0) {
+        if ($person->children->isNotEmpty()) {
             flash()->error(__('people.alerts.cant_delete_person_with_children'));
 
             return back();
