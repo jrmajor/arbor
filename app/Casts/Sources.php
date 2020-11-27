@@ -11,7 +11,7 @@ class Sources implements CastsAttributes
     public function get($model, $key, $value, $attributes)
     {
         return collect($model->fromJson($value))
-                ->map(fn ($raw) => Source::from($raw));
+            ->map(fn ($raw) => Source::from($raw));
     }
 
     public function set($model, $key, $value, $attributes)
@@ -21,11 +21,11 @@ class Sources implements CastsAttributes
         }
 
         $value = collect($value)
-                    ->map(fn ($source) => Source::from($source))
-                    ->map->sanitized()
-                    ->filter(fn ($source) => $source !== null)
-                    ->values()
-                    ->toJson();
+            ->map(fn ($source) => Source::from($source))
+            ->map->sanitized()
+            ->filter(fn ($source) => $source !== null)
+            ->values()
+            ->toJson();
 
         if ($value === false) {
             throw JsonEncodingException::forAttribute(

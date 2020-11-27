@@ -83,7 +83,7 @@ class HalfSiblings extends Relation
     public function getResults()
     {
         return ! is_null($this->parent->{$this->sideKey})
-                ? $this->query->get()
-                : $this->related->newCollection();
+            ? $this->query->get()
+            : $this->related->newCollection();
     }
 }

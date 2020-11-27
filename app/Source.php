@@ -165,8 +165,8 @@ class Source implements Jsonable
         }
 
         $number = Str::of($matches[1])
-        ->replace('-', '')
-        ->replace(' ', '');
+            ->replace('-', '')
+            ->replace(' ', '');
 
         return [
             'extent' => $matches[2] == '' ? strlen($matches[0]) : strlen($matches[0]) - 1,

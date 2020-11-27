@@ -42,8 +42,8 @@ class PersonController extends Controller
         }
 
         return view('people.index')
-                ->with('active', ['type' => strtolower($type), 'letter' => $letter])
-                ->with('list', $list);
+            ->with('active', ['type' => strtolower($type), 'letter' => $letter])
+            ->with('list', $list);
     }
 
     public function create(Request $request)
@@ -82,8 +82,8 @@ class PersonController extends Controller
     {
         if ($person->trashed()) {
             return optional(Auth::user())->canViewHistory()
-                    ? redirect()->route('people.history', $person)
-                    : abort(404);
+                ? redirect()->route('people.history', $person)
+                : abort(404);
         }
 
         $this->authorize('view', $person);
@@ -154,8 +154,8 @@ class PersonController extends Controller
         }
 
         return Auth::user()->canViewHistory()
-                ? redirect()->route('people.history', $person)
-                : redirect()->route('people.index');
+            ? redirect()->route('people.history', $person)
+            : redirect()->route('people.index');
     }
 
     public function restore(Person $person)

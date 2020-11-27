@@ -9,8 +9,6 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        Login::class => [
-            LogLoginEvent::class,
-        ],
+        Login::class => [LogLoginEvent::class],
     ];
 }

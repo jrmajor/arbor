@@ -60,7 +60,7 @@ class User extends Authenticatable
     public function latestLogin()
     {
         return $this->morphOne('Spatie\\Activitylog\\Models\\Activity', 'causer')
-                    ->whereLogName('logins')->whereDescription('logged-in')
-                    ->orderBy('created_at', 'desc');
+            ->whereLogName('logins')->whereDescription('logged-in')
+            ->orderBy('created_at', 'desc');
     }
 }

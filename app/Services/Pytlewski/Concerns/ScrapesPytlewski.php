@@ -69,10 +69,10 @@ trait ScrapesPytlewski
 
         try {
             $names = $crawler->eq(0)
-                        ->children()->first()
-                        ->children()->eq(0)
-                        ->children()->first()
-                        ->html();
+                ->children()->first()
+                ->children()->eq(0)
+                ->children()->first()
+                ->html();
 
             [$surnames, $names] = explode('<br>', $names);
 
@@ -98,9 +98,9 @@ trait ScrapesPytlewski
 
         try {
             $dates = $crawler->eq(0)
-                        ->children()->first()
-                        ->children()->eq(2)
-                        ->html();
+                ->children()->first()
+                ->children()->eq(2)
+                ->html();
 
             $dates = explode('<br>', $dates);
 
@@ -133,9 +133,9 @@ trait ScrapesPytlewski
 
         try {
             $parents = $crawler->eq(3)
-                        ->children()->first()
-                        ->children()->first()
-                        ->html();
+                ->children()->first()
+                ->children()->first()
+                ->html();
 
             [$mother, $father] = explode('<br>', str_replace('-', ' ', $parents));
 
