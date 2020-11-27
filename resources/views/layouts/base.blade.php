@@ -17,7 +17,9 @@
         @endif
 
         @routes
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        @unless (app()->runningUnitTests())
+            <script src="{{ mix('js/app.js') }}" defer></script>
+        @endif
         @stack('scripts')
     </head>
     <body class="font-sans bg-gray-100">
