@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
-    public function run(): bool
+    public function run()
     {
-        return DB::table('users')->insert([
+        DB::table('users')->insert([
             'username' => 'maksiuP',
             'email' => 'maksiu@example.com',
             'password' => bcrypt('password'),
