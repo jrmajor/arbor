@@ -18,7 +18,10 @@ class HalfSiblings extends Relation
     {
         $this->side = $side;
         $this->sideKey = $side.'_id';
-        $this->partnerKey = $side == 'mother' ? 'father_id' : 'mother_id';
+        $this->partnerKey = match ($side) {
+            'mother' => 'father_id',
+            'father' => 'mother_id',
+        };
 
         parent::__construct(Person::query(), $parent);
     }
