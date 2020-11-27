@@ -8,7 +8,7 @@
         @if($activity['old'])
             <td class="inline pr-4 md:py-1 md:table-cell">
                 @unless($activity['old']['sex'] === null)
-                    {{ $activity['old']['sex'] == 'xx' ? __('people.female') : __('people.male') }}
+                    {{ $activity['old']['sex'] === 'xx' ? __('people.female') : __('people.male') }}
                 @else
                     <span class="text-gray-500">{{ __('misc.null') }}</span>
                 @endif
@@ -19,7 +19,7 @@
 
         <td class="inline md:py-1 md:table-cell">
             @unless($activity['attributes']['sex'] === null)
-                {{ $activity['attributes']['sex'] == 'xx' ? __('people.female') : __('people.male') }}
+                {{ $activity['attributes']['sex'] === 'xx' ? __('people.female') : __('people.male') }}
             @else
                 <span class="text-gray-500">{{ __('misc.null') }}</span>
             @endif

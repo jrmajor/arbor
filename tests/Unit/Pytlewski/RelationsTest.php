@@ -12,7 +12,7 @@ it('can load relations', function ($id, $source, $attributes) {
 
     $pytlewski = new Pytlewski($id);
 
-    if ($id == 704) {
+    if ((int) $id === 704) {
         $mother = Person::factory()->create(['id_pytlewski' => 1420]);
 
         $father = Person::factory()->create(['id_pytlewski' => 637]);

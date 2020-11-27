@@ -119,11 +119,11 @@ class Pytlewski
 
     public function __get($key)
     {
-        if ($key == 'id') {
+        if ($key === 'id') {
             return $this->id;
         }
 
-        if ($key == 'url') {
+        if ($key === 'url') {
             return self::url($this->id);
         }
 

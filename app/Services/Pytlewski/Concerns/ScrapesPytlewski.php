@@ -150,14 +150,14 @@ trait ScrapesPytlewski
             }
 
             $mother = explode(',', strip_tags($mother));
-            if (count($mother) == 2) {
+            if (count($mother) === 2) {
                 [$attr['mother_surname'], $attr['mother_name']] = $mother;
             } else {
                 $attr['mother_surname'] = implode(' ', $mother);
             }
 
             $father = explode(',', strip_tags($father));
-            if (count($father) == 2) {
+            if (count($father) === 2) {
                 [$attr['father_surname'], $attr['father_name']] = $father;
             } else {
                 $attr['father_surname'] = implode(' ', $father);
@@ -250,7 +250,7 @@ trait ScrapesPytlewski
     private function parseBio(Crawler $crawler): array
     {
         try {
-            return ['bio' => $crawler->text() == 'pusto :(' ? null : $crawler->text()];
+            return ['bio' => $crawler->text() === 'pusto :(' ? null : $crawler->text()];
         } catch (InvalidArgumentException $e) {
             return [];
         }

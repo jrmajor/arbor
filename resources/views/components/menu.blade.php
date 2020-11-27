@@ -90,7 +90,7 @@
                             hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
                             rounded lg:rounded-none uppercase lg:normal-case
                             border-b-2 border-solid border-transparent
-                            {{ $active == 'people.create' ? 'lg:border-blue-500' : 'lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500' }}
+                            {{ $active === 'people.create' ? 'lg:border-blue-500' : 'lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500' }}
                             focus:outline-none hover:no-underline
                             transition-colors duration-200 ease-out">
                         <div class="w-full {{ $active == 'people.create' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : '' }} flex items-center">

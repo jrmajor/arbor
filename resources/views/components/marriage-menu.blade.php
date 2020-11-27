@@ -3,14 +3,14 @@
         <div class="flex-grow">
 
             @unless($marriage->trashed())
-                <{{ $active == 'edit' ? 'span' : 'a' }}
+                <{{ $active === 'edit' ? 'span' : 'a' }}
                     href="{{ route('marriages.edit', $marriage) }}"
-                    class="{{ $active == 'edit' ? 'text-blue-700' : 'group text-gray-600 hover:text-gray-700 focus:text-gray-700 focus:outline-none' }}
+                    class="{{ $active === 'edit' ? 'text-blue-700' : 'group text-gray-600 hover:text-gray-700 focus:text-gray-700 focus:outline-none' }}
                         transition-colors duration-100 ease-out">
                     <li class="px-3 py-1 rounded
-                            {{ $active != 'edit' ? 'group-hover:bg-gray-200 group-focus:bg-gray-300' : '' }}
+                            {{ $active !== 'edit' ? 'group-hover:bg-gray-200 group-focus:bg-gray-300' : '' }}
                             transition-all duration-100 ease-out">
-                        <span class="w-full {{ $active == 'edit' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
+                        <span class="w-full {{ $active === 'edit' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
                             <svg class="h-4 w-4 mr-2 fill-current"
                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/>
@@ -18,18 +18,18 @@
                             {{ __('marriages.menu.edit_marriage') }}
                         </span>
                     </li>
-                </{{ $active == 'edit' ? 'span' : 'a' }}>
+                </{{ $active === 'edit' ? 'span' : 'a' }}>
             @endif
 
             @if(optional(auth()->user())->isSuperAdmin())
-                <{{ $active == 'history' ? 'span' : 'a' }}
+                <{{ $active === 'history' ? 'span' : 'a' }}
                     href="{{ route('marriages.history', $marriage) }}"
-                    class="{{ $active == 'history' ? 'text-blue-700' : 'group text-gray-600 hover:text-gray-700 focus:text-gray-700 focus:outline-none' }}
+                    class="{{ $active === 'history' ? 'text-blue-700' : 'group text-gray-600 hover:text-gray-700 focus:text-gray-700 focus:outline-none' }}
                         transition-colors duration-100 ease-out">
                     <li class="px-3 py-1 rounded
-                            {{ $active != 'history' ? 'group-hover:bg-gray-200 group-focus:bg-gray-300' : '' }}
+                            {{ $active !== 'history' ? 'group-hover:bg-gray-200 group-focus:bg-gray-300' : '' }}
                             transition-colors duration-100 ease-out">
-                        <span class="w-full {{ $active == 'history' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
+                        <span class="w-full {{ $active === 'history' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
                             <svg class="h-4 w-4 mr-2 fill-current"
                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-1-7.59V4h2v5.59l3.95 3.95-1.41 1.41L9 10.41z"/>
@@ -37,7 +37,7 @@
                             {{ __('marriages.menu.edits_history') }}
                         </span>
                     </li>
-                </{{ $active == 'history' ? 'span' : 'a' }}>
+                </{{ $active === 'history' ? 'span' : 'a' }}>
             @endif
 
             @unless($marriage->trashed())

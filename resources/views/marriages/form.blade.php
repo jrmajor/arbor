@@ -5,13 +5,13 @@
 
 <form
     method="POST"
-    action="{{ $action == 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"
+    action="{{ $action === 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"
     x-data="
         @encodedjson([
             'divorced' => (bool) old('divorced', $marriage->divorced),
         ])
     ">
-    @method($action == 'create' ? 'post' : 'put')
+    @method($action === 'create' ? 'post' : 'put')
     @csrf
 
     <div>

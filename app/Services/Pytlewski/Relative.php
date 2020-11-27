@@ -23,7 +23,7 @@ class Relative
 
     public function __get($key)
     {
-        if ($key == 'url') {
+        if ($key === 'url') {
             return $this->attributes['id'] ?? null
                 ? Pytlewski::url($this->attributes['id'])
                 : null;

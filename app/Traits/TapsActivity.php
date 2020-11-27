@@ -28,9 +28,9 @@ trait TapsActivity
         $attributes = $activity->properties['attributes'];
 
         if (array_key_exists('biography', $attributes)) {
-            if ($activity->properties['old']['biography'] == null) {
+            if ($activity->properties['old']['biography'] === null) {
                 $activity->description = 'added-biography';
-            } elseif ($activity->properties['attributes']['biography'] == null) {
+            } elseif ($activity->properties['attributes']['biography'] === null) {
                 $activity->description = 'deleted-biography';
             } else {
                 $activity->description = 'updated-biography';

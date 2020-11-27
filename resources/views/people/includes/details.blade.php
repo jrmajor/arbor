@@ -155,7 +155,7 @@
                         (! $person->birth_date || optional(auth()->user())->isSuperAdmin())
                         && $person->estimatedBirthDate()
                     )
-                        @if($some_birth_data_printed == true)
+                        @if($some_birth_data_printed === true)
                             &nbsp;&nbsp;
                         @endif
                         {{ __('people.estimated_birth_date') }}: {!! $person->estimatedBirthDate() !!}

@@ -160,7 +160,7 @@ class Person extends Model
     public function marriages(): Marriages
     {
         return (new Marriages($this))
-            ->orderBy($this->sex == 'xx' ? 'woman_order' : 'man_order');
+            ->orderBy($this->sex === 'xx' ? 'woman_order' : 'man_order');
     }
 
     public function children(): Children
@@ -171,7 +171,7 @@ class Person extends Model
 
     public function getBirthYearAttribute(): ?int
     {
-        if (optional($this->birth_date_from)->year == optional($this->birth_date_to)->year) {
+        if (optional($this->birth_date_from)->year === optional($this->birth_date_to)->year) {
             return optional($this->birth_date_from)->year;
         }
 
@@ -180,7 +180,7 @@ class Person extends Model
 
     public function getDeathYearAttribute(): ?int
     {
-        if (optional($this->death_date_from)->year == optional($this->death_date_to)->year) {
+        if (optional($this->death_date_from)->year === optional($this->death_date_to)->year) {
             return optional($this->death_date_from)->year;
         }
 
@@ -237,7 +237,7 @@ class Person extends Model
         if ($raw) {
             return (int) $or;
         } else {
-            return $either == $or ? $either : $either.'-'.$or;
+            return $either === $or ? $either : $either.'-'.$or;
         }
     }
 
@@ -343,7 +343,7 @@ class Person extends Model
             "letters_$type",
             fn () => DB::table('people')
                     ->selectRaw(
-                        'left('.($type == 'family' ? 'family_name' : 'ifnull(last_name, family_name)').', 1)
+                        'left('.($type === 'family' ? 'family_name' : 'ifnull(last_name, family_name)').', 1)
                         collate utf8mb4_0900_as_ci as letter,
                         count(*) as total'
                     )->groupBy('letter')

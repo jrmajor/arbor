@@ -70,9 +70,9 @@ class Wielcy
     {
         $matches = Regex::match('/<h1[^<>]*><img src="images\/(female|male)\.png"[^<>]*\s*[^<>]*>([\s\S]+)<small>.*<\/small>\s*<\/h1>/', $this->source);
         if ($matches->hasMatch()) {
-            if ($matches->group(1) == 'female') {
+            if ($matches->group(1) === 'female') {
                 $this->sex = 'xx';
-            } elseif ($matches->group(1) == 'male') {
+            } elseif ($matches->group(1) === 'male') {
                 $this->sex = 'xy';
             }
 
@@ -84,7 +84,7 @@ class Wielcy
     {
         $regex = '/<center>\s<table border="0" cellspacing="0" cellpadding="0">\s<tr><td><center>\s<em>\s([\s\S]+)<\/em><br>\s<\/center>\s<\/td><\/tr>\s<\/table>\s<\/center><p>/';
 
-        if (preg_match($regex, $this->source, $matches) == 1) {
+        if (preg_match($regex, $this->source, $matches) === 1) {
             $matches = Arr::trim($matches);
 
             if (filled($matches[1])) {
@@ -99,11 +99,11 @@ class Wielcy
             return;
         }
 
-        if ($key == 'id') {
+        if ($key === 'id') {
             return $this->id;
         }
 
-        if ($key == 'url') {
+        if ($key === 'url') {
             return $this->url;
         }
 

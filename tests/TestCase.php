@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
     public function assertRouteUsesFormRequest(string $routeName, string $formRequest)
     {
         $controllerAction = collect(Route::getRoutes())->filter(function (\Illuminate\Routing\Route $route) use ($routeName) {
-            return $route->getName() == $routeName;
+            return $route->getName() === $routeName;
         })->pluck('action.controller');
 
         $this->assertNotEmpty($controllerAction, 'Route "'.$routeName.'" is not defined.');

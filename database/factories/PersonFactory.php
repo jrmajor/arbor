@@ -17,11 +17,11 @@ class PersonFactory extends Factory
         $dead = $this->faker->boolean;
 
         return [
-            'sex' => $sex == 'female' ? 'xx' : 'xy',
+            'sex' => $sex === 'female' ? 'xx' : 'xy',
             'name' => $this->faker->firstName($sex),
             'middle_name' => $this->faker->boolean ? $this->faker->firstName($sex) : null,
             'family_name' => $this->faker->lastName($sex),
-            'last_name' => $sex == 'female' && $this->faker->boolean ? $this->faker->lastName($sex) : null,
+            'last_name' => $sex === 'female' && $this->faker->boolean ? $this->faker->lastName($sex) : null,
             'birth_date_from' => $this->faker->dateTimeBetween('-80 years', '-30 years')->format('Y-m-d'),
             'birth_date_to' => fn ($person) => $person['birth_date_from'],
             'birth_place' => $this->faker->city.', Polska',

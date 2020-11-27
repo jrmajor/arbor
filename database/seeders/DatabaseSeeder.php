@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         }
 
         foreach ($seeders as $seed) {
-            if (! $seed->getExtension() == 'sql') {
+            if (! $seed->getExtension() === 'sql') {
                 continue;
             }
 

@@ -50,7 +50,7 @@ class DateTuplePicker extends Component
             $from->copy()->startOfYear()->equalTo($from)
             && $to->copy()->endOfYear()->equalTo($to)
         ) {
-            if ($from->year == $to->year) {
+            if ($from->year === $to->year) {
                 return true;
             } else {
                 return false;
@@ -61,7 +61,7 @@ class DateTuplePicker extends Component
             $from->copy()->startOfMonth()->equalTo($from)
             && $to->copy()->endOfMonth()->equalTo($to)
         ) {
-            if ($from->year == $to->year && $from->month == $to->month) {
+            if ($from->year === $to->year && $from->month === $to->month) {
                 return true;
             } else {
                 false;
@@ -90,7 +90,7 @@ class DateTuplePicker extends Component
             $from->copy()->startOfYear()->equalTo($from)
             && $to->copy()->endOfYear()->equalTo($to)
         ) {
-            if ($from->year == $to->year) {
+            if ($from->year === $to->year) {
                 return $from->format('Y');
             }
 
@@ -101,7 +101,7 @@ class DateTuplePicker extends Component
             $from->copy()->startOfMonth()->equalTo($from)
             && $to->copy()->endOfMonth()->equalTo($to)
         ) {
-            if ($from->year == $to->year && $from->month == $to->month) {
+            if ($from->year === $to->year && $from->month === $to->month) {
                 return $from->format('Y-m');
             }
 

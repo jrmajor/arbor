@@ -23,7 +23,7 @@
 
             @if (is_array($element))
                 @foreach ($element as $page => $url)
-                    @if ($page == $paginator->currentPage())
+                    @if ($page === $paginator->currentPage())
                         <li class="py-1"><button id="pg-current" class="btn-out" type="button" disabled>{{ $page }}</button></li>
                     @else
                         <li class="py-1"><button id="pg-{{ $page }}" class="btn-out" type="button" wire:click="gotoPage({{ $page }})">{{ $page }}</button></li>

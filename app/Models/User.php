@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function isSuperAdmin(): bool
     {
-        return $this->permissions == 4;
+        return $this->permissions === 4;
     }
 
     public function sendPasswordResetNotification($token)

@@ -13,7 +13,7 @@ if (! function_exists('format_date_from_period')) {
             $from->copy()->startOfYear()->equalTo($from)
             && $to->copy()->endOfYear()->equalTo($to)
         ) {
-            if ($from->year == $to->year) {
+            if ($from->year === $to->year) {
                 return $from->year;
             } else {
                 return $from->year.'-'.$to->year;
@@ -24,7 +24,7 @@ if (! function_exists('format_date_from_period')) {
             $from->copy()->startOfMonth()->equalTo($from)
             && $to->copy()->endOfMonth()->equalTo($to)
         ) {
-            if ($from->year == $to->year && $from->month == $to->month) {
+            if ($from->year === $to->year && $from->month === $to->month) {
                 return $from->year.'-'.$from->format('m');
             } else {
                 return __('misc.date.between').' '.$from->year.'-'.$from->format('m')

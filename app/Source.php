@@ -30,7 +30,7 @@ class Source implements Jsonable
     {
         $collapsed = trim(preg_replace('/\s+/', ' ', $this->raw));
 
-        return $collapsed != '' ? $collapsed : null;
+        return $collapsed === '' ? null : $collapsed;
     }
 
     public function raw()
@@ -169,7 +169,7 @@ class Source implements Jsonable
             ->replace(' ', '');
 
         return [
-            'extent' => $matches[2] == '' ? strlen($matches[0]) : strlen($matches[0]) - 1,
+            'extent' => $matches[2] === '' ? strlen($matches[0]) : strlen($matches[0]) - 1,
             'element' => [
                 'name' => 'a',
                 'text' => 'ISBN '.$matches[1],
@@ -309,7 +309,7 @@ class Source implements Jsonable
 
     protected function sanitiseElement(array $element)
     {
-        if ($element['name'] != 'a') {
+        if ($element['name'] !== 'a') {
             return $element;
         }
 

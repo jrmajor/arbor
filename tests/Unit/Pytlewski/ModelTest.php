@@ -17,7 +17,7 @@ it('requests source from pytlewski.pl', function () {
     new Pytlewski(556);
 
     Http::assertSent(
-        fn ($request) => $request->url() == 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556'
+        fn ($request) => $request->url() === 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556'
     );
 });
 

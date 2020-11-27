@@ -35,10 +35,10 @@
                     {{ $person->family_name }}
                 @if($bold ?? false)</b>@endif
             @else
-                @if(($bold ?? false) == 'l')<b>@endif
+                @if(($bold ?? false) === 'l')<b>@endif
                     {{ $person->last_name }}
-                @if(($bold ?? false) == 'l')</b>@endif
-                (@if(($bold ?? false) == 'f')<b>@endif{{ $person->family_name }}@if(($bold ?? false) == 'f')</b>@endif)
+                @if(($bold ?? false) === 'l')</b>@endif
+                (@if(($bold ?? false) === 'f')<b>@endif{{ $person->family_name }}@if(($bold ?? false) === 'f')</b>@endif)
             @endif
 
             @if($years ?? true)

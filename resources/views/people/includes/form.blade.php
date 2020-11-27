@@ -5,7 +5,7 @@
 
 <form
     method="POST"
-    action="{{ $action == 'create' ? route('people.store') : route('people.update', $person) }}"
+    action="{{ $action === 'create' ? route('people.store') : route('people.update', $person) }}"
     x-data="
         @encodedjson([
             'sex' => old('sex', $person->sex),
@@ -16,7 +16,7 @@
             ],
         ])
     ">
-    @method($action == 'create' ? 'post' : 'put')
+    @method($action === 'create' ? 'post' : 'put')
     @csrf
 
     <div>
@@ -29,7 +29,7 @@
                             <input
                                 type="radio" class="form-radio"
                                 id="sex_1" name="sex"
-                                value="xx" {{ (old('sex', $person->sex)) == 'xx' ? 'checked' : '' }}
+                                value="xx" {{ (old('sex', $person->sex)) === 'xx' ? 'checked' : '' }}
                                 x-model="sex">
                             <label class="ml-2" for="sex_1">{{ __('people.female') }}</label>
                         </div>
@@ -37,7 +37,7 @@
                             <input
                                 type="radio" class="form-radio"
                                 id="sex_2" name="sex"
-                                value="xy" {{ (old('sex', $person->sex)) == 'xy' ? 'checked' : '' }}
+                                value="xy" {{ (old('sex', $person->sex)) === 'xy' ? 'checked' : '' }}
                                 x-model="sex">
                             <label class="ml-2" for="sex_2">{{ __('people.male') }}</label>
                         </div>
@@ -45,7 +45,7 @@
                             <input
                                 type="radio" class="form-radio"
                                 id="sex_3" name="sex"
-                                value="" {{ (old('sex', $person->sex)) == null ? 'checked' : '' }}
+                                value="" {{ (old('sex', $person->sex)) === null ? 'checked' : '' }}
                                 x-model="sex">
                             <label class="ml-2" for="sex_3">{{ __('people.unknown') }}</label>
                         </div>
@@ -163,21 +163,21 @@
                         type="button" class="w-full"
                         id="pytlewski_names"
                         onclick="pytlewskiNames()"
-                        {{ $person->id_pytlewski == null ? 'disabled' : '' }}>{{ __('people.pytlewski.names') }}</button>
+                        {{ $person->id_pytlewski === null ? 'disabled' : '' }}>{{ __('people.pytlewski.names') }}</button>
                 </div>
                 <div class="w-1/3 px-2">
                     <button
                         type="button" class="w-full"
                         id="pytlewski_birth"
                         onclick="pytlewskiBirth()"
-                        {{ $person->id_pytlewski == null ? 'disabled' : '' }}>{{ __('people.pytlewski.birth') }}</button>
+                        {{ $person->id_pytlewski === null ? 'disabled' : '' }}>{{ __('people.pytlewski.birth') }}</button>
                 </div>
                 <div class="w-1/3">
                     <button
                         type="button" class="w-full"
                         id="pytlewski_death"
                         onclick="pytlewskiDeath()"
-                        {{ $person->id_pytlewski == null ? 'disabled' : '' }}>{{ __('people.pytlewski.death') }}</button>
+                        {{ $person->id_pytlewski === null ? 'disabled' : '' }}>{{ __('people.pytlewski.death') }}</button>
                 </div>
             </div>
         </div>
@@ -215,7 +215,7 @@
 
         <div class="w-full flex items-center mb-4">
             <label for="dead" class="font-medium text-xl text-gray-900"
-                x-text="sex == 'xx' ? '{{ __('people.dead_xx') }}' : '{{ __('people.dead_xy') }}'">
+                x-text="sex === 'xx' ? '{{ __('people.dead_xx') }}' : '{{ __('people.dead_xy') }}'">
                 {{ __('people.dead') }}
             </label>
             <input type="hidden" id="dead-hidden" name="dead" value="0">
@@ -346,10 +346,10 @@
         </div>
         <fieldset class="space-y-5">
             <div class="w-full">
-                <template x-if="sources.length == 0">
+                <template x-if="sources.length === 0">
                     <input type="hidden" name="sources">
                 </template>
-                <template x-if="sources.length != 0">
+                <template x-if="sources.length !== 0">
                     <div class="space-y-2">
                         <template
                             x-for="(_, index) in sources" :key="index">
