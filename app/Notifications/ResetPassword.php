@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Lang;
 
 class ResetPassword extends Notification
 {
-
     public function __construct($token)
     {
         $this->token = $token;
