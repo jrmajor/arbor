@@ -10,6 +10,8 @@ jobs:
     services:
       mysql:
         image: mysql:8.0
+        env:
+          MYSQL_DATABASE: arbor_tests
         ports:
           - 3306
 
@@ -20,11 +22,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
-
-      - name: Create database
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql  -u root -proot -e 'CREATE DATABASE IF NOT EXISTS arbor_tests;'
 
       - name: Cache composer dependencies
         uses: actions/cache@v2
