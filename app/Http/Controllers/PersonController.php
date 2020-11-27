@@ -48,11 +48,11 @@ class PersonController extends Controller
 
         $person = new Person();
 
-        if ($request->input('mother') && $mother = Person::find($request->input('mother'))) {
+        if ($request->has('mother') && $mother = Person::find($request->input('mother'))) {
             $person->mother_id = $mother->id;
         }
 
-        if ($request->input('father') && $father = Person::find($request->input('father'))) {
+        if ($request->has('father') && $father = Person::find($request->input('father'))) {
             $person->father_id = $father->id;
         }
 

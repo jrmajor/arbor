@@ -14,17 +14,18 @@ class MarriageController extends Controller
     {
         $this->authorize('create', Marriage::class);
 
-        $marriage = (new Marriage())
-            ->fill([
-                'woman_order' => 1,
-                'man_order' => 1,
-            ]);
+        $marriage = new Marriage();
 
-        if ($request->input('woman') && $woman = Person::find($request->input('woman'))) {
+        $marriage->fill([
+            'woman_order' => 1,
+            'man_order' => 1,
+        ]);
+
+        if ($request->has('woman') && $woman = Person::find($request->input('woman'))) {
             $marriage->woman_id = $woman->id;
         }
 
-        if ($request->input('man') && $man = Person::find($request->input('man'))) {
+        if ($request->has('man') && $man = Person::find($request->input('man'))) {
             $marriage->man_id = $man->id;
         }
 
