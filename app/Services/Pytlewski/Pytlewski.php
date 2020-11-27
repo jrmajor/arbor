@@ -12,8 +12,6 @@ class Pytlewski
 {
     use Concerns\ScrapesPytlewski;
 
-    private $id;
-
     private array $attributes = [];
 
     private ?array $relations = null;
@@ -28,10 +26,9 @@ class Pytlewski
         'mother', 'father', 'marriages', 'children', 'siblings',
     ];
 
-    public function __construct($id)
-    {
-        $this->id = $id;
-
+    public function __construct(
+        private int $id
+    ) {
         $this->attributes = Cache::remember(
             'pytlewski.'.$this->id,
             CarbonInterval::week(),

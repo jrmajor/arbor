@@ -7,28 +7,23 @@ use Illuminate\View\Component;
 
 class DateTuplePicker extends Component
 {
-    public $name;
+    public ?Carbon $initialFrom;
 
-    public $label;
+    public ?Carbon $initialTo;
 
-    public $initialFrom;
+    public function __construct(
+        public string $name,
+        public string $label,
+        Carbon|string|null $initialFrom,
+        Carbon|string|null $initialTo
+    ) {
+        $this->initialFrom = is_string($initialFrom)
+            ? Carbon::create($initialFrom)
+            : $initialFrom;
 
-    public $initialTo;
-
-    public function __construct($name, $label, $initialFrom, $initialTo)
-    {
-        if ($initialFrom != null && ! $initialFrom instanceof Carbon) {
-            $initialFrom = Carbon::create($initialFrom);
-        }
-
-        if ($initialTo != null && ! $initialTo instanceof Carbon) {
-            $initialTo = Carbon::create($initialTo);
-        }
-
-        $this->name = $name;
-        $this->label = $label;
-        $this->initialFrom = $initialFrom;
-        $this->initialTo = $initialTo;
+        $this->initialTo = is_string($initialTo)
+            ? Carbon::create($initialTo)
+            : $initialTo;
     }
 
     public function simplePickerCanBeUsed(): bool
