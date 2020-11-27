@@ -15,20 +15,12 @@ class LogLoginEvent
             ->log('logged-in');
     }
 
-    private function getAgent()
+    private function getAgent(): array
     {
-        if (Agent::isDesktop()) {
-            $device = 'desktop';
-        } elseif (Agent::isPhone()) {
-            $device = 'phone';
-        } else {
-            $device = null;
-        }
-
         return [
             'platform' => Agent::platform(),
             'browser' => Agent::browser(),
-            'device' => $device,
+            'device' => Agent::deviceType(),
         ];
     }
 }
