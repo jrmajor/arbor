@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use ReflectionException;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -42,7 +43,7 @@ abstract class TestCase extends BaseTestCase
         try {
             $reflector = new \ReflectionClass($controller);
             $action = $reflector->getMethod($method);
-        } catch (\ReflectionException $exception) {
+        } catch (ReflectionException) {
             test()->fail('Controller action could not be found: '.$controller.'@'.$method);
         }
 

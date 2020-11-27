@@ -48,7 +48,7 @@ class Wielcy
             function (): ?string {
                 try {
                     $source = Http::timeout(2)->get($this->url);
-                } catch (ConnectionException $e) {
+                } catch (ConnectionException) {
                     return null;
                 }
 

@@ -40,7 +40,7 @@ trait ScrapesPytlewski
     {
         try {
             $source = Http::timeout(2)->get(self::url($this->id));
-        } catch (ConnectionException $e) {
+        } catch (ConnectionException) {
             return null;
         }
 
@@ -60,7 +60,7 @@ trait ScrapesPytlewski
     {
         try {
             $crawler = $crawler->children()->first()->children();
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return [];
         }
 
@@ -91,9 +91,7 @@ trait ScrapesPytlewski
             unset($names[0]);
 
             $attr['middle_name'] = implode(' ', $names);
-        } catch (InvalidArgumentException $e) {
-            //
-        }
+        } catch (InvalidArgumentException) {}
 
         try {
             $dates = $crawler->eq(0)
@@ -126,9 +124,7 @@ trait ScrapesPytlewski
                     $attr['burial_place'] = $matches->groupOr(3, '');
                 }
             }
-        } catch (InvalidArgumentException $e) {
-            //
-        }
+        } catch (InvalidArgumentException) {}
 
         try {
             $parents = $crawler->eq(3)
@@ -161,9 +157,7 @@ trait ScrapesPytlewski
             } else {
                 $attr['father_surname'] = implode(' ', $father);
             }
-        } catch (InvalidArgumentException $e) {
-            //
-        }
+        } catch (InvalidArgumentException) {}
 
         return $attr;
     }
@@ -172,7 +166,7 @@ trait ScrapesPytlewski
     {
         try {
             return ['photo' => 'http://www.pytlewski.pl/index/drzewo/'.$crawler->filter('img')->attr('src')];
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return [];
         }
     }
@@ -203,7 +197,7 @@ trait ScrapesPytlewski
                     $attributes['marriages'][] = $marriage;
                 }
             }
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             $attributes['marriages'][] = [];
         }
 
@@ -221,7 +215,7 @@ trait ScrapesPytlewski
                     $attributes['children'][] = $child;
                 }
             }
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             $attributes['children'][] = [];
         }
 
@@ -239,7 +233,7 @@ trait ScrapesPytlewski
                     $attributes['siblings'][] = $sibling;
                 }
             }
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             $attributes['children'][] = [];
         }
 
@@ -250,7 +244,7 @@ trait ScrapesPytlewski
     {
         try {
             return ['bio' => $crawler->text() === 'pusto :(' ? null : $crawler->text()];
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return [];
         }
     }
