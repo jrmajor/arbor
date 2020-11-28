@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class HalfSiblings extends Relation
 {
+    public string $side;
+
+    public string $sideKey;
+
+    public string $partnerKey;
+
     public function __construct(Person $parent, $side)
     {
         $this->side = $side;
