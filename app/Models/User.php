@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -59,7 +60,7 @@ class User extends Authenticatable
 
     public function latestLogin()
     {
-        return $this->morphOne('Spatie\\Activitylog\\Models\\Activity', 'causer')
+        return $this->morphOne(Activity::class, 'causer')
             ->whereLogName('logins')->whereDescription('logged-in')
             ->orderBy('created_at', 'desc');
     }

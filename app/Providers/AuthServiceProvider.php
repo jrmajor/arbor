@@ -2,13 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models;
+use App\Policies;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        'App\Models\Person' => 'App\Policies\PersonPolicy',
-        'App\Models\Marriage' => 'App\Policies\MarriagePolicy',
+        Models\Person::class => Policies\PersonPolicy::class,
+        Models\Marriage::class => Policies\MarriagePolicy::class,
     ];
 
     public function boot()
