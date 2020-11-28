@@ -2,7 +2,7 @@
 
 return [
 
-    'whitelist' => ['people.search'],
+    'only' => ['people.search'],
 
     'skip-route-function' => true,
 

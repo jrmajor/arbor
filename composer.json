@@ -30,7 +30,7 @@
         "spatie/regex": "^1.4",
         "symfony/css-selector": "^5.1",
         "symfony/dom-crawler": "^5.1",
-        "tightenco/ziggy": "^0.9"
+        "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

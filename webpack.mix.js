@@ -17,11 +17,3 @@ if (!mix.inProduction()) {
     openAnalyzer: false
   })
 }
-
-mix.webpackConfig({
-  resolve: {
-    alias: {
-      ziggy: path.resolve('vendor/tightenco/ziggy/src/js/route.js')
-    }
-  }
-})

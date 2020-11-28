@@ -1,5 +1,5 @@
 /* global fetch */
-import route from 'ziggy'
+import route from 'ziggy-js'
 
 window.personPickerData = function (data) {
   return {
