@@ -4,12 +4,8 @@ namespace App\Providers;
 
 use App\Models\Person;
 use App\Observers\PersonObserver;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
-use Illuminate\Support\Stringable;
 use Spatie\Flash\Flash;
 
 class AppServiceProvider extends ServiceProvider
