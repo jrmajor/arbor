@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7eefb680a929f25a643ae2e1cba50cdf",
+    "content-hash": "0e639e44ddc85ffe5494a41f755ea589",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9151,16 +9151,16 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v0.3.13",
+            "version": "v0.3.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "5bbdd4f41e7757a08e3714f37e6bc4cc1d1e1154"
+                "reference": "b79ba5098b7fd9faf026d48f8cfd935da9bd17aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/5bbdd4f41e7757a08e3714f37e6bc4cc1d1e1154",
-                "reference": "5bbdd4f41e7757a08e3714f37e6bc4cc1d1e1154",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/b79ba5098b7fd9faf026d48f8cfd935da9bd17aa",
+                "reference": "b79ba5098b7fd9faf026d48f8cfd935da9bd17aa",
                 "shasum": ""
             },
             "require": {
@@ -9174,6 +9174,7 @@
             "require-dev": {
                 "illuminate/console": "^7.16.1",
                 "illuminate/support": "^7.16.1",
+                "laravel/dusk": "^6.9.0",
                 "mockery/mockery": "^1.4.1",
                 "pestphp/pest-dev-tools": "dev-master"
             },
@@ -9226,7 +9227,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v0.3.13"
+                "source": "https://github.com/pestphp/pest/tree/v0.3.14"
             },
             "funding": [
                 {
@@ -9242,7 +9243,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-11-23T20:43:58+00:00"
+            "time": "2020-11-28T17:55:22+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
