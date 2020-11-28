@@ -10,7 +10,7 @@ use App\Models\Relations\Siblings;
 use App\Services\Pytlewski\Pytlewski;
 use App\Traits\HasDateTuples;
 use App\Traits\TapsActivity;
-use App\Wielcy;
+use App\Services\Wielcy\Wielcy;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

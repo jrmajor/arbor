@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Services\Wielcy;
 
 use Carbon\CarbonInterval;
 use Illuminate\Http\Client\ConnectionException;
