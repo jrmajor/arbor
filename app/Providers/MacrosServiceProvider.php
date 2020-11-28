@@ -14,7 +14,9 @@ class MacrosServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Stringable::macro('e', fn () => new Stringable(e($this->value)));
+        Stringable::macro('e', function (): Stringable {
+            return new Stringable(e($this->value));
+        });
 
         Str::macro('formatBiography', function (?string $biography): ?string {
             if ($biography === null) {
@@ -49,7 +51,6 @@ class MacrosServiceProvider extends ServiceProvider
         });
 
         Collection::macro('trim', function (): Collection {
-            /** @var Collection $this */
             return new static(Arr::trim($this->items));
         });
     }
