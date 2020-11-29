@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cac659c0301c3b961474f918798f76e",
+    "content-hash": "ddef794a5bdd8ecdb6040ce4e913d732",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2340,23 +2340,23 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v2.3.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "8aa271bc3af74d8fea8480b372ecaa0d5ae3f6d2"
+                "reference": "9a2767953846d8591484a7578aafb7cd95552265"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/8aa271bc3af74d8fea8480b372ecaa0d5ae3f6d2",
-                "reference": "8aa271bc3af74d8fea8480b372ecaa0d5ae3f6d2",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/9a2767953846d8591484a7578aafb7cd95552265",
+                "reference": "9a2767953846d8591484a7578aafb7cd95552265",
                 "shasum": ""
             },
             "require": {
                 "illuminate/database": "^7.0|^8.0",
                 "illuminate/support": "^7.0|^8.0",
                 "illuminate/validation": "^7.0|^8.0",
-                "php": "^7.2.5",
+                "php": "^7.2.5|^8.0",
                 "symfony/http-kernel": "^5.0"
             },
             "require-dev": {
@@ -2368,6 +2368,7 @@
                 "phpunit/phpunit": "^8.4|^9.0",
                 "psy/psysh": "@stable"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2400,7 +2401,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v2.3.2"
+                "source": "https://github.com/livewire/livewire/tree/master"
             },
             "funding": [
                 {
@@ -2408,7 +2409,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-17T14:58:56+00:00"
+            "time": "2020-11-25T17:44:47+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -8621,20 +8622,20 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.16.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "1a1605b8e9bacb34cc0c6278206d699772e1d372"
+                "reference": "230f4ad6d8c33f8c5484aa92c436e3c6de05ae99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/1a1605b8e9bacb34cc0c6278206d699772e1d372",
-                "reference": "1a1605b8e9bacb34cc0c6278206d699772e1d372",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/230f4ad6d8c33f8c5484aa92c436e3c6de05ae99",
+                "reference": "230f4ad6d8c33f8c5484aa92c436e3c6de05ae99",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
+                "php": "^7.1|^8",
                 "psr/log": "^1.0",
                 "symfony/var-dumper": "^2.6|^3|^4|^5"
             },
@@ -8646,6 +8647,7 @@
                 "monolog/monolog": "Log using Monolog",
                 "predis/predis": "Redis storage"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -8680,9 +8682,9 @@
             ],
             "support": {
                 "issues": "https://github.com/maximebf/php-debugbar/issues",
-                "source": "https://github.com/maximebf/php-debugbar/tree/v1.16.3"
+                "source": "https://github.com/maximebf/php-debugbar/tree/master"
             },
-            "time": "2020-05-06T07:06:27+00:00"
+            "time": "2020-11-01T11:33:27+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -9545,27 +9547,28 @@
         },
         {
             "name": "pestphp/pest-plugin-livewire",
-            "version": "v0.3.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-livewire.git",
-                "reference": "22bc3324752590a0232d4e091084b8d5cac59faa"
+                "reference": "d6c8fd88c26ff22d7319bf826c039b6197469cff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-livewire/zipball/22bc3324752590a0232d4e091084b8d5cac59faa",
-                "reference": "22bc3324752590a0232d4e091084b8d5cac59faa",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-livewire/zipball/d6c8fd88c26ff22d7319bf826c039b6197469cff",
+                "reference": "d6c8fd88c26ff22d7319bf826c039b6197469cff",
                 "shasum": ""
             },
             "require": {
                 "livewire/livewire": "^1.2|^2.0",
                 "pestphp/pest": "^0.3",
-                "php": "^7.3"
+                "php": "^7.3|^8.0"
             },
             "require-dev": {
                 "orchestra/testbench": "^5.2",
                 "pestphp/pest-dev-tools": "dev-master"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -9612,7 +9615,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-09-07T19:13:57+00:00"
+            "time": "2020-11-27T14:19:26+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -11973,13 +11976,23 @@
             "time": "2015-12-17T08:42:14+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "livewire/livewire",
+            "version": "9999999-dev",
+            "alias": "2.4.0",
+            "alias_normalized": "2.4.0.0"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "livewire/livewire": 20,
+        "pestphp/pest-plugin-livewire": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4"
+        "php": "^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
