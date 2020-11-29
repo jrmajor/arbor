@@ -106,7 +106,7 @@
                         <label for="first_event_place" class="w-full font-medium pb-1 text-gray-700">{{ __('misc.place') }}</label>
                         <div class="w-full">
                             <input
-                                type="text" class="form-input w-full @error('event_place') invalid @enderror"
+                                type="text" class="form-input w-full @error('first_event_place') invalid @enderror"
                                 id="first_event_place" name="first_event_place"
                                 value="{{ old('first_event_place', $marriage->first_event_place) }}">
                             @error('first_event_place')
