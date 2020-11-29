@@ -7,6 +7,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use InvalidArgumentException;
 use Spatie\Regex\Regex;
 
 class Wielcy
@@ -112,6 +113,8 @@ class Wielcy
         if (array_key_exists($key, $this->attributes)) {
             return $this->attributes[$key];
         }
+
+        throw new InvalidArgumentException("Key [{$key}] does not exist.");
     }
 
     public function __set($key, $value)

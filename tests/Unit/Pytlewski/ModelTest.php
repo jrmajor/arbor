@@ -52,6 +52,14 @@ it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
 
     foreach (Arr::only($attributes, $keysToCheck) as $key => $value) {
         expect($pytlewski->$key)->toBe($value);
-        // "Pytlewski $id on key $key."
     }
 })->with('pytlewscy');
+
+it('throws an exception when a key does not exist', function () {
+    Cache::shouldReceive('remember')
+        ->andReturn([]);
+
+    $pytlewski = new Pytlewski(556);
+
+    $pytlewski->nonexistentKey;
+})->throws(InvalidArgumentException::class, 'Key [nonexistentKey] does not exist.');

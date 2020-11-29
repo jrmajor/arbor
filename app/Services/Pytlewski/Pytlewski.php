@@ -6,6 +6,7 @@ use App\Models\Person;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
+use InvalidArgumentException;
 
 class Pytlewski
 {
@@ -137,6 +138,8 @@ class Pytlewski
 
             return $this->relations[$key];
         }
+
+        throw new InvalidArgumentException("Key [{$key}] does not exist.");
     }
 
     public static function url(int $id): string
