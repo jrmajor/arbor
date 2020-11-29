@@ -1,13 +1,6 @@
 module.exports = {
   purge: ['./resources/views/**/*.blade.php'],
   theme: {
-    screens: {
-      xs: '420px',
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px'
-    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -86,28 +79,30 @@ module.exports = {
       }
     },
     columnCount: [1, 2, 3, 4, 5, 6, 7, 8],
-    fontFamily: {
-      sans: [
-        'Inter',
-        'Zapf Dingbats',
-        'Arial Unicode MS',
-        'system-ui',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        '"Noto Sans"',
-        'sans-serif'
-      ],
-      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-      mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace']
+    screens: {
+      xs: '420px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px'
     },
     extend: {
+      fontFamily: {
+        sans: [
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          '"Noto Sans"',
+          'sans-serif'
+        ]
+      },
       spacing: {
-        80: '20rem',
-        96: '24rem',
         112: '28rem',
         128: '32rem'
       },
@@ -115,25 +110,17 @@ module.exports = {
     }
   },
   variants: {
-    borderColor: ({ after }) => after(['active']),
-    boxShadow: ({ after }) => after(['active', 'focus-within'])
+    extend: {
+        backgroundColor: ['active'],
+        borderColor: ['active'],
+        ringColor: ['active'],
+        ringOpacity: ['active'],
+        ringWidth: ['active'],
+        textColor: ['active']
+    }
   },
   plugins: [
-    require('@tailwindcss/ui'),
+    require('@tailwindcss/forms'),
     require('tailwindcss-multi-column')()
   ],
-  experimental: {
-    additionalBreakpoint: true,
-    applyComplexClasses: true,
-    darkModeVariant: false,
-    extendedFontSizeScale: true,
-    extendedSpacingScale: false,
-    uniformColorPalette: false
-  },
-  future: {
-    defaultLineHeights: true,
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true,
-    standardFontWeights: true
-  }
 }

@@ -56,6 +56,41 @@
 }
 
 @layer components {
+  .form-input {
+    @apply px-3;
+  }
+
+  .form-select {
+    @apply pl-3 pr-9;
+  }
+
+  .form-input, .form-select {
+    @apply py-1.5 rounded-md border border-gray-300;
+    @apply focus:border-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50;
+    @apply focus-within:border-blue-600 focus-within:ring focus-within:ring-blue-500 focus-within:ring-opacity-50;
+    @apply active:border-blue-600 active:ring active:ring-blue-500 active:ring-opacity-50;
+  }
+
+  .form-input.invalid, .form-select.invalid {
+    @apply border-red-600;
+    @apply focus:ring-red-500 focus:ring-opacity-50;
+    @apply focus-within:ring-red-500 focus-within:ring-opacity-50;
+    @apply active:ring-red-500 active:ring-opacity-50;
+  }
+
+  .form-input[disabled], .form-select[disabled] {
+    @apply bg-gray-100 text-gray-700;
+  }
+
+  .form-checkbox {
+    @apply rounded;
+  }
+
+  .form-checkbox, .form-radio {
+    @apply border-gray-300;
+    @apply focus:border-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:ring-offset-0;
+  }
+
   .btn {
     @apply inline-flex items-center;
     @apply rounded-md px-4 py-2 leading-5;
@@ -70,7 +105,7 @@
 
   .btn:enabled {
     @apply hover:bg-blue-500;
-    @apply focus:outline-none focus:border-blue-700 focus:shadow-outline-blue;
+    @apply focus:outline-none focus:border-blue-700 focus:ring;
     @apply active:bg-blue-700;
   }
 
@@ -80,7 +115,7 @@
 
   .btn.btn-red:enabled {
     @apply hover:bg-red-500;
-    @apply focus:border-red-700 focus:shadow-outline-red;
+    @apply focus:border-red-700 focus:ring ring-red-500 ring-opacity-50;
     @apply active:bg-red-700;
   }
 
@@ -99,20 +134,8 @@
 
   .btn-out:enabled {
     @apply hover:bg-blue-100 hover:text-blue-800;
-    @apply focus:outline-none focus:shadow-outline-blue;
+    @apply focus:outline-none focus:ring;
     @apply active:bg-blue-600 active:border-blue-600 active:text-blue-100;
-  }
-
-  .form-input, .form-select {
-    @apply py-1.5;
-  }
-
-  .form-input.invalid, .form-select.invalid {
-    @apply shadow-outline-red;
-  }
-
-  .form-input[disabled], .form-select[disabled] {
-    @apply bg-gray-100 text-gray-700;
   }
 
   .external-small-container {

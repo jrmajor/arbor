@@ -21,14 +21,21 @@
             name="{{ $name }}_id"
             x-model="selected.id">
         <div class="relative w-full">
-            <div x-on:click="$refs.search.focus()" class="block cursor-text form-select
-                    @error($name.'_id') shadow-outline-red @else active:shadow-outline-blue focus-within:shadow-outline-blue @enderror">
+            <div x-on:click="$refs.search.focus()" class="cursor-text form-select @error($name.'_id') invalid @enderror"
+                style="
+                    background-image: url(&quot;data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E&quot;);
+                    background-position: right .5rem center;
+                    background-repeat: no-repeat;
+                    background-size: 1.5em 1.5em;
+                    -webkit-print-color-adjust: exact;
+                    color-adjust: exact;
+                ">
                 <div class="pr-4">
                     <span x-text="selected.name">
                     </span>{{--
                 --}}<input
-                        type="text" class="appearance-none outline-none text-gray-600 focus:text-gray-800"
-                        :style="selected.id !== null ? 'width: 4px' : 'width: 100%'" autocomplete="off"
+                        type="text" class="p-0 outline-none border-0 focus:ring-0"
+                        :style="selected.id !== null ? 'width: 4px; margin-left: 1px' : 'width: 100%'" autocomplete="off"
                         x-ref="search" x-model="search" id="{{ $name }}_search"
                         x-on:keydown.backspace="deselect" x-on:keydown.enter.prevent="enter"
                         x-on:keydown.arrow-up="arrow('up')" x-on:keydown.arrow-down="arrow('down')"

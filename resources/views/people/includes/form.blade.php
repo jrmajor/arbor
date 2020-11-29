@@ -336,7 +336,7 @@
             <button x-on:click.prevent="sources.push('')"
                 class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700
                     hover:bg-blue-100 hover:text-blue-800
-                    focus:outline-none focus:shadow-outline-none
+                    focus:outline-none focus:ring
                     active:bg-blue-600 active:border-blue-600 active:text-blue-100
                     transition-colors duration-100 ease-out">
                 <svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
@@ -351,15 +351,14 @@
                 </template>
                 <template x-if="sources.length !== 0">
                     <div class="space-y-2">
-                        <template
-                            x-for="(_, index) in sources" :key="index">
-                            <div class="w-full flex flex-no-wrap items-center space-x-2">
+                        <template x-for="(_, index) in sources" :key="index">
+                            <div class="w-full flex items-center space-x-2">
                                 <input type="text" class="form-input w-full" :name="'sources['+index+']'" x-model="sources[index]">
                                 <div>
                                     <button x-on:click.prevent="sources.splice(index, 1)"
                                         class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700
                                             hover:bg-blue-100 hover:text-blue-800
-                                            focus:outline-none focus:shadow-outline-none
+                                            focus:outline-none focus:ring
                                             active:bg-blue-600 active:border-blue-600 active:text-blue-100
                                             transition-colors duration-100 ease-out">
                                         <svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
