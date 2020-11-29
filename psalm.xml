@@ -12,6 +12,7 @@
         <directory name="database/seeders"/>
         <ignoreFiles>
             <directory name="vendor"/>
+            <file name="app/Providers/MacrosServiceProvider.php"/>
         </ignoreFiles>
     </projectFiles>
     <plugins>
