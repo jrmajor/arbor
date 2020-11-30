@@ -57,12 +57,12 @@ class Wielcy
         $matches = Regex::match('/<h1[^<>]*><img src="images\/(female|male)\.png"[^<>]*\s*[^<>]*>([\s\S]+)<small>.*<\/small>\s*<\/h1>/', $this->source);
         if ($matches->hasMatch()) {
             if ($matches->group(1) === 'female') {
-                $this->sex = 'xx';
+                $this->attributes['sex'] = 'xx';
             } elseif ($matches->group(1) === 'male') {
-                $this->sex = 'xy';
+                $this->attributes['sex'] = 'xy';
             }
 
-            $this->name = Regex::replace('/<a[^<>]*>([^<>]*)<\/a>/', '<b>$1</b>', $matches->group(2))->result();
+            $this->attributes['name'] = Regex::replace('/<a[^<>]*>([^<>]*)<\/a>/', '<b>$1</b>', $matches->group(2))->result();
         }
     }
 
@@ -74,7 +74,7 @@ class Wielcy
             $matches = Arr::trim($matches);
 
             if (filled($matches[1])) {
-                $this->bio = $matches[1];
+                $this->attributes['bio'] = $matches[1];
             }
         }
     }
