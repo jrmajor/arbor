@@ -39,12 +39,12 @@
         "fakerphp/faker": "^1.12",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.1",
+        "nunomaduro/larastan": "^0.6.10",
         "pestphp/pest": "^0.3.14",
         "pestphp/pest-plugin-laravel": "^0.3",
         "pestphp/pest-plugin-livewire": "dev-master",
-        "phpunit/phpunit": "^9.4",
-        "psalm/plugin-laravel": "^1.4",
-        "vimeo/psalm": "^4.2"
+        "phpstan/phpstan": "^0.12.58",
+        "phpunit/phpunit": "^9.4"
     },
     "config": {
         "optimize-autoloader": true,
