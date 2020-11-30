@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Siblings extends Relation
 {
+    /** @var Person */
+    protected $parent;
+
     public function __construct(Person $parent)
     {
         parent::__construct(Person::query(), $parent);

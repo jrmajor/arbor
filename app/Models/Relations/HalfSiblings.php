@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class HalfSiblings extends Relation
 {
+    /** @var Person */
+    protected $parent;
+
     public string $side;
 
     public string $sideKey;
 
     public string $partnerKey;
 
-    /**
-     * @param 'mother'|'father' $side
-     */
     public function __construct(Person $parent, string $side)
     {
         $this->side = $side;
