@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Dashboard;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Activitylog\Models\Activity;
+use App\Models\Activity;
 
 class ActivityLog extends Component
 {

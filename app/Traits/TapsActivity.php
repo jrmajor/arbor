@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Support\Arr;
-use Spatie\Activitylog\Contracts\Activity;
+use App\Models\Activity;
 
 trait TapsActivity
 {

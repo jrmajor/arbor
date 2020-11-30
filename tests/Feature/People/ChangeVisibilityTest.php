@@ -4,7 +4,7 @@ use App\Models\Person;
 use function Pest\Laravel\put;
 use function Pest\Laravel\travel;
 use function Pest\Laravel\travelBack;
-use Spatie\Activitylog\Models\Activity;
+use App\Models\Activity;
 
 beforeEach(
     fn () => $this->person = Person::factory()->create()

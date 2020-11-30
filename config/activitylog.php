@@ -12,7 +12,7 @@ return [
 
     'subject_returns_soft_deleted_models' => true,
 
-    'activity_model' => \Spatie\Activitylog\Models\Activity::class,
+    'activity_model' => \App\Models\Activity::class,
 
     'table_name' => 'activity_log',
 
