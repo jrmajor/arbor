@@ -11,32 +11,17 @@ use Spatie\Activitylog\Contracts\Activity as ActivityContract;
 
 class Activity extends Model implements ActivityContract
 {
+    protected $table = 'activity_log';
+
     public $guarded = [];
 
     protected $casts = [
         'properties' => 'collection',
     ];
 
-    public function __construct(array $attributes = [])
-    {
-        if (! isset($this->connection)) {
-            $this->setConnection(config('activitylog.database_connection'));
-        }
-
-        if (! isset($this->table)) {
-            $this->setTable(config('activitylog.table_name'));
-        }
-
-        parent::__construct($attributes);
-    }
-
     public function subject(): MorphTo
     {
-        if (config('activitylog.subject_returns_soft_deleted_models')) {
-            return $this->morphTo()->withTrashed();
-        }
-
-        return $this->morphTo();
+        return $this->morphTo()->withTrashed();
     }
 
     public function causer(): MorphTo
@@ -44,7 +29,7 @@ class Activity extends Model implements ActivityContract
         return $this->morphTo();
     }
 
-    public function getExtraProperty(string $propertyName)
+    public function getExtraProperty(string $propertyName): mixed
     {
         return Arr::get($this->properties->toArray(), $propertyName);
     }
