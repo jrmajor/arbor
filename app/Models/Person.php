@@ -23,6 +23,11 @@ use InvalidArgumentException;
 use Spatie\Activitylog\ActivityLogger;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+/**
+ * @property-read Collection|Marriage[] $marriages
+ * @property-read Collection|Activity[] $children
+ * @property-read Collection|Person[] $activities
+ */
 class Person extends Model
 {
     use HasDateTuples,
