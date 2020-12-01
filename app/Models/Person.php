@@ -255,7 +255,7 @@ class Person extends Model
         return $this->age([$this->death_date_from, $this->death_date_to], $raw);
     }
 
-    public function estimatedBirthDate()
+    public function estimatedBirthDate(): ?int
     {
         $interval = self::generationInterval;
         $prediction = collect();
@@ -286,7 +286,7 @@ class Person extends Model
                 ->avg->birth_year
         );
 
-        return $prediction->avg() ? round($prediction->avg()) : null;
+        return $prediction->avg() ? (int) round($prediction->avg()) : null;
     }
 
     public function estimatedBirthDateError(): ?int
