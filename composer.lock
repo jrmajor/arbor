@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "719cc9cd6cf52fc86f119affeeb3d8f1",
+    "content-hash": "6379102d11095539edd5315b0615413d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.164.0",
+            "version": "3.164.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "39ecf57d828eb50ab23fd70255a68b8996392ac9"
+                "reference": "bfd16503bd71491e654483773efd23c431817710"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/39ecf57d828eb50ab23fd70255a68b8996392ac9",
-                "reference": "39ecf57d828eb50ab23fd70255a68b8996392ac9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bfd16503bd71491e654483773efd23c431817710",
+                "reference": "bfd16503bd71491e654483773efd23c431817710",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.164.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.164.1"
             },
-            "time": "2020-11-24T19:18:22+00:00"
+            "time": "2020-12-01T04:29:55+00:00"
         },
         {
             "name": "brick/math",
@@ -4068,16 +4068,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "6.13.0",
+            "version": "6.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "08a76a1366c3cc98ec3ddd4ce90a28c3b73cc8bf"
+                "reference": "a0ca6662fbc3d008fe9e17b0f74101d139aca6f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/08a76a1366c3cc98ec3ddd4ce90a28c3b73cc8bf",
-                "reference": "08a76a1366c3cc98ec3ddd4ce90a28c3b73cc8bf",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/a0ca6662fbc3d008fe9e17b0f74101d139aca6f1",
+                "reference": "a0ca6662fbc3d008fe9e17b0f74101d139aca6f1",
                 "shasum": ""
             },
             "require": {
@@ -4141,7 +4141,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/6.13.0"
+                "source": "https://github.com/spatie/laravel-backup/tree/6.13.1"
             },
             "funding": [
                 {
@@ -4153,7 +4153,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2020-11-25T12:24:28+00:00"
+            "time": "2020-12-01T07:29:53+00:00"
         },
         {
             "name": "spatie/laravel-enum",
@@ -9067,16 +9067,16 @@
         },
         {
             "name": "pestphp/pest-plugin-livewire",
-            "version": "dev-master",
+            "version": "v0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-livewire.git",
-                "reference": "d6c8fd88c26ff22d7319bf826c039b6197469cff"
+                "reference": "6a2b7cc4b1091a202bc62a42343da92420967568"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-livewire/zipball/d6c8fd88c26ff22d7319bf826c039b6197469cff",
-                "reference": "d6c8fd88c26ff22d7319bf826c039b6197469cff",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-livewire/zipball/6a2b7cc4b1091a202bc62a42343da92420967568",
+                "reference": "6a2b7cc4b1091a202bc62a42343da92420967568",
                 "shasum": ""
             },
             "require": {
@@ -9085,10 +9085,9 @@
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^5.2",
+                "orchestra/testbench": "^6.4",
                 "pestphp/pest-dev-tools": "dev-master"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -9119,7 +9118,7 @@
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin-livewire/tree/master"
+                "source": "https://github.com/pestphp/pest-plugin-livewire/tree/v0.3.2"
             },
             "funding": [
                 {
@@ -9135,7 +9134,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-11-27T14:19:26+00:00"
+            "time": "2020-12-01T09:24:55+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -11263,9 +11262,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "pestphp/pest-plugin-livewire": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
