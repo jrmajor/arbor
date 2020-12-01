@@ -14,7 +14,7 @@ class Relative
         return new static($attributes);
     }
 
-    public function __construct(
+    final public function __construct(
         protected array $attributes
     ) {}
 
