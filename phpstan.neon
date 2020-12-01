@@ -4,6 +4,16 @@ parameters:
         - app
         - database/factories
         - database/seeders
+    excludes_analyse:
+        - app/Providers/MacrosServiceProvider.php
+    ignoreErrors:
+        - '#Result of function \w+ \(void\) is used\.#'
+        - '#Result of method \w+(\\\w+)*::\w+\(\) \(void\) is used\.#'
+        - '#Access to an undefined property Faker\\Generator::\$\w+\.#'
+        - '#Call to an undefined method Faker\\Generator::\w+\(\)\.#'
+        - '#Access to an undefined property Illuminate\\Support\\HigherOrderCollectionProxy::\$\w+\.#'
+        - '#Call to an undefined method Illuminate\\Support\\HigherOrderCollectionProxy::\w+\(\)\.#'
+        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Factories\\Factory::(divorced|woman|man)\(\)\.#'
 
 includes:
     - vendor/nunomaduro/larastan/extension.neon
