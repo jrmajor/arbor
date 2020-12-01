@@ -1,4 +1,7 @@
+version: 8
+
 preset: laravel
+
 finder:
   not-name:
     - index.php
