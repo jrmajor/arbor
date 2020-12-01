@@ -8,6 +8,25 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 use InvalidArgumentException;
 
+/**
+ * @property-read int $id
+ * @property-read string $url
+ * @property-read ?string $family_name
+ * @property-read ?string $last_name
+ * @property-read ?string $name
+ * @property-read ?string $middle_name
+ * @property-read ?string $birth_date
+ * @property-read ?string $birth_place
+ * @property-read ?string $death_date
+ * @property-read ?string $death_place
+ * @property-read ?string $photo
+ * @property-read ?string $bio
+ * @property-read ?Relative $mother
+ * @property-read ?Relative $father
+ * @property-read Collection<Marriage> $marriages
+ * @property-read Collection<Relative> $children
+ * @property-read Collection<Relative> $siblings
+ */
 class Pytlewski
 {
     use Concerns\ScrapesPytlewski;
