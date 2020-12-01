@@ -14,9 +14,9 @@ return [
 
     'timezone' => 'Europe/Warsaw',
 
-    'locale' => 'pl',
+    'locale' => 'en',
     'available_locales' => ['pl', 'en', 'de'],
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'pl',
     'faker_locale' => 'pl_PL',
 
     'key' => env('APP_KEY'),

@@ -47,6 +47,8 @@ it('escapes italics')
     ->toBe('*text* <a href="https://weird.*domain*" class="a">*link* text</a>');
 
 it('parses ISBN-10', function () {
+    app()->setLocale('pl');
+
     expect(Source::from('exampIe ISBN 0-306-40615-8')->markup())
         ->toBe('exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/0306406158" target="_blank" title="ISBN 0-306-40615-8 w Wikipedii" class="a">ISBN 0-306-40615-8</a>');
 
@@ -55,6 +57,8 @@ it('parses ISBN-10', function () {
 });
 
 it('parses ISBN-13', function () {
+    app()->setLocale('pl');
+
     expect(Source::from('exampIe ISBN 978-0-306-40615-7 text')->markup())
         ->toBe('exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/9780306406157" target="_blank" title="ISBN 978-0-306-40615-7 w Wikipedii" class="a">ISBN 978-0-306-40615-7</a> text');
 
