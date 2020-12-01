@@ -18,8 +18,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'eu-central-1'),
     ],
 
-    'telegram-bot-api' => [
-        'token' => env('TELEGRAM_BOT_TOKEN'),
+    'slack' => [
+        'webhook_url' => env('SLACK_WEBHOOK_URL'),
     ],
 
     'stripe' => [

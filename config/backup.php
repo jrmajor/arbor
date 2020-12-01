@@ -1,7 +1,5 @@
 <?php
 
-use NotificationChannels\Telegram\TelegramChannel;
-
 return [
 
     'backup' => [
@@ -19,6 +17,7 @@ return [
                     base_path('node_modules'),
                 ],
                 'follow_links' => false,
+                'ignore_unreadable_directories' => false,
             ],
 
             'databases' => [
@@ -44,18 +43,22 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \App\Notifications\Backup\BackupHasFailed::class => [TelegramChannel::class],
-            \App\Notifications\Backup\UnhealthyBackupWasFound::class => [TelegramChannel::class],
-            \App\Notifications\Backup\CleanupHasFailed::class => [TelegramChannel::class],
-            \App\Notifications\Backup\BackupWasSuccessful::class => [TelegramChannel::class],
-            \App\Notifications\Backup\HealthyBackupWasFound::class => [TelegramChannel::class],
-            \App\Notifications\Backup\CleanupWasSuccessful::class => [TelegramChannel::class],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailed::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailed::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessful::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['slack'],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['slack'],
         ],
 
-        'notifiable' => \App\Notifications\Backup\Notifiable::class,
+        'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
-        'telegram' => [
-            'to' => env('ADMIN_TELEGRAM'),
+        'slack' => [
+            'webhook_url' => env('SLACK_WEBHOOK_URL'),
+
+            'channel' => null,
+            'username' => null,
+            'icon' => null,
         ],
 
     ],
