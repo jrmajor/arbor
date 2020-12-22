@@ -18,6 +18,7 @@ return [
                 ],
                 'follow_links' => false,
                 'ignore_unreadable_directories' => false,
+                'relative_path' => false,
             ],
 
             'databases' => [
