@@ -52,7 +52,7 @@ test('marriage deletion is logged', function () {
 
     expect($log->log_name)->toBe('marriages');
     expect($log->description)->toBe('deleted');
-    expect($log->subject()->is($this->marriage))->toBeTrue();
+    expect($log->subject())->toBeModel($this->marriage);
 
     expect((string) $log->created_at)->toBe((string) $this->marriage->deleted_at);
 

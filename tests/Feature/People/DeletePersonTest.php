@@ -52,7 +52,7 @@ test('person deletion is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('deleted');
-    expect($log->subject()->is($this->person))->toBeTrue();
+    expect($log->subject())->toBeModel($this->person);
 
     expect((string) $log->created_at)->toBe((string) $this->person->deleted_at);
 

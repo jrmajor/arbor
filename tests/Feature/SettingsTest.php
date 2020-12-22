@@ -124,5 +124,7 @@ it('can change logout user from other devices', function () {
         ->assertHasNoErrors('logout_password')
         ->assertSet('logout_password', null);
 
-    Event::assertDispatched(fn (OtherDeviceLogout $event) => $event->user->is($user));
+    Event::assertDispatched(
+        fn (OtherDeviceLogout $event) => $event->user->is($user),
+    );
 });

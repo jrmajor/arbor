@@ -146,7 +146,7 @@ test('person creation is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('created');
-    expect($log->subject()->is($person))->toBeTrue();
+    expect($log->subject())->toBeModel($person);
 
     $attributesToCheck = Arr::except($this->validAttributes, [
         'sources', ...$this->dates,

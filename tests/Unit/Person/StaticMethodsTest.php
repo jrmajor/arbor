@@ -11,7 +11,7 @@ it('can be found by pytlewski id', function () {
         'id_pytlewski' => null,
     ]);
 
-    expect($person->is(Person::findByPytlewskiId(1140)))->toBeTrue();
+    expect(Person::findByPytlewskiId(1140))->toBeModel($person);
     expect(Person::findByPytlewskiId(null))->toBeNull();
     expect(Person::findByPytlewskiId(2137))->toBeNull();
 });

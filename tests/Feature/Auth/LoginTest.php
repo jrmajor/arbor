@@ -100,5 +100,7 @@ test('user can log in with correct credentials', function () {
 
     assertAuthenticatedAs($user);
 
-    Event::assertDispatched(fn (Login $event) => $event->user->is($user));
+    Event::assertDispatched(
+        fn (Login $event) => $event->user->is($user),
+    );
 });

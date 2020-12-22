@@ -172,7 +172,7 @@ test('person edition is logged', function () {
 
     expect($log->log_name)->toBe('people');
     expect($log->description)->toBe('updated');
-    expect($log->subject()->is($this->person))->toBeTrue();
+    expect($log->subject())->toBeModel($this->person);
 
     $oldToCheck = Arr::except($this->oldAttributes, [
         'dead', 'death_cause', 'sources', ...$this->dates,

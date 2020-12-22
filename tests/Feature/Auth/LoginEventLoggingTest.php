@@ -19,7 +19,7 @@ it('logs user logins events', function () {
 
     expect($log->log_name)->toBe('logins');
     expect($log->description)->toBe('logged-in');
-    expect($log->causer()->is($user))->toBeTrue();
+    expect($log->causer())->toBeModel($user);
     expect($log->subject)->toBeNull();
 
     expect($log->properties)->toHaveCount(3);

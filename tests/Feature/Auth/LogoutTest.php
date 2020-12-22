@@ -14,7 +14,9 @@ it('logs user out', function () {
     actingAs($user)
         ->post('/logout');
 
-    Event::assertDispatched(fn (CurrentDeviceLogout $event) => $event->user->is($user));
+    Event::assertDispatched(
+        fn (CurrentDeviceLogout $event) => $event->user->is($user),
+    );
 
     assertGuest();
 });
