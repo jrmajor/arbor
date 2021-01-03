@@ -9,7 +9,7 @@ on:
       - "phpstan.neon"
 
 jobs:
-  psalm:
+  phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
 
