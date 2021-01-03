@@ -6,6 +6,9 @@ use App\Models\Person;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
+/**
+ * @method $this orderBy($column, $direction = 'asc')
+ */
 class Siblings extends Relation
 {
     /** @var Person */
