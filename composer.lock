@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "179576b85d98129a59ef26ab425609f6",
+    "content-hash": "4548b616b550ae3c5524b060ebf2f265",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3590,6 +3590,73 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "sammyjo20/lasso",
+            "version": "1.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sammyjo20/Lasso.git",
+                "reference": "f1897ef479e12d6d3028d50ddc5df58b94c62ab4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sammyjo20/Lasso/zipball/f1897ef479e12d6d3028d50ddc5df58b94c62ab4",
+                "reference": "f1897ef479e12d6d3028d50ddc5df58b94c62ab4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-zip": "*",
+                "illuminate/console": "^6.0 || ^7.0 || ^8.0",
+                "illuminate/contracts": "^6.0 || ^7.0 || ^8.0",
+                "illuminate/filesystem": "^6.0 || ^7.0 || ^8.0",
+                "illuminate/support": "^6.0 || ^7.0 || ^8.0",
+                "php": "^7.3 || ~8.0",
+                "symfony/finder": "^4.0 || ^5.0",
+                "symfony/process": "^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^4.0 || ^5.0 || ^6.0",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Sammyjo20\\Lasso\\LassoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sammyjo20\\Lasso\\": "src/",
+                    "Sammyjo20\\Lasso\\Tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Carré",
+                    "email": "sam.carre2000@gmail.com"
+                }
+            ],
+            "description": "Lasso - Asset wrangling for Laravel made simple.",
+            "support": {
+                "issues": "https://github.com/Sammyjo20/Lasso/issues",
+                "source": "https://github.com/Sammyjo20/Lasso/tree/v1.2.7"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Sammyjo20",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-12-16T18:03:11+00:00"
         },
         {
             "name": "spatie/browsershot",

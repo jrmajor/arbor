@@ -22,6 +22,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.1",
         "livewire/livewire": "^2.3",
+        "sammyjo20/lasso": "^1.2",
         "spatie/laravel-activitylog": "^3.16",
         "spatie/laravel-backup": "^6.14",
         "spatie/laravel-enum": "^2.2",
