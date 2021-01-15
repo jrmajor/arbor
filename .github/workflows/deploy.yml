@@ -1,0 +1,64 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+
+      - name: Get Composer cache directory path
+        id: composer-cache-dir
+        run: |
+          echo "::set-output name=path::$(composer config cache-files-dir)"
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache-dir.outputs.path }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir
+        run: echo "::set-output name=path::$(yarn cache dir)"
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.path }}
+          key: yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: yarn-
+
+      - name: Install Yarn dependencies
+        run: yarn install --production
+
+      - name: Prepare Laravel application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Publish assets
+        run: php artisan lasso:publish --no-git
+        env:
+          S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+          S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+          S3_DEFAULT_REGION: ${{ secrets.S3_DEFAULT_REGION }}
+          S3_ASSETS_BUCKET: ${{ secrets.S3_ASSETS_BUCKET }}
+          S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+
+      - name: Trigger deployment
+        run: curl --request POST ${{ secrets.PLOI_WEBHOOK }}?token=${{ secrets.PLOI_TOKEN }}
