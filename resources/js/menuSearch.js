@@ -1,4 +1,3 @@
-/* global fetch */
 import route from 'ziggy-js'
 
 window.menuSearchData = function () {
@@ -10,12 +9,12 @@ window.menuSearchData = function () {
     search: '',
     people: [],
 
-    findPeople (event) {
+    findPeople(event) {
       if (this.search !== this.previousSearch) {
         fetch(
           route('people.search', {
-            search: this.search
-          })
+            search: this.search,
+          }),
         )
           .then(response => response.json())
           .then(data => {
@@ -27,7 +26,7 @@ window.menuSearchData = function () {
       }
     },
 
-    arrow (direction) {
+    arrow(direction) {
       if (this.people.length === 0) return
 
       if (this.hovered === null) {
@@ -41,7 +40,7 @@ window.menuSearchData = function () {
       if (this.hovered > this.people.length - 1) this.hovered = 0
     },
 
-    enter (event) {
+    enter(event) {
       this.open = false
 
       if (this.hovered === null) return
@@ -50,7 +49,7 @@ window.menuSearchData = function () {
       window.location.href = this.people[this.hovered].url
     },
 
-    closeDropdown () {
+    closeDropdown() {
       if (!this.shouldCloseOnBlur) {
         this.shouldCloseOnBlur = true
         return
@@ -59,6 +58,6 @@ window.menuSearchData = function () {
       this.open = false
       this.hovered = null
       this.shouldCloseOnBlur = true
-    }
+    },
   }
 }

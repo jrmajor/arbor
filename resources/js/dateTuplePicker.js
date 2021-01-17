@@ -5,12 +5,12 @@ window.dateTuplePickerData = function (data) {
     simple: data.simple,
     advanced: {
       from: data.from,
-      to: data.to
+      to: data.to,
     },
     dateIsValid: true,
     advancedPicker: data.advancedPicker,
 
-    simpleChanged () {
+    simpleChanged() {
       this.dateIsValid = true
 
       this.simple = this.simple.trim()
@@ -81,13 +81,13 @@ window.dateTuplePickerData = function (data) {
       this.clearInvalidDate()
     },
 
-    simpleBlurred () {
+    simpleBlurred() {
       if (this.simple.slice(-1) === '-') this.simple = this.simple.slice(0, -1)
     },
 
-    clearInvalidDate () {
+    clearInvalidDate() {
       this.dateIsValid = false
       this.advanced.from = this.advanced.to = ''
-    }
+    },
   }
 }
