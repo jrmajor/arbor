@@ -24,7 +24,7 @@ jobs:
           restore-keys: yarn-
 
       - name: Install Yarn dependencies
-        run: yarn install --production
+        run: yarn install
 
       - name: Run ESLint
         run: yarn format
