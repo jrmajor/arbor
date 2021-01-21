@@ -13,11 +13,6 @@ class GenerateSitemap extends Command
 
     protected $description = 'Generate sitemap.';
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function handle()
     {
         $sitemap = Sitemap::create()
