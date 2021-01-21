@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use InvalidArgumentException;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Marriage extends Model
@@ -65,7 +66,7 @@ class Marriage extends Model
         return match ($person->id) {
             $this->man_id => $this->woman,
             $this->woman_id => $this->man,
-            default => null,
+            default => throw new InvalidArgumentException(),
         };
     }
 
@@ -74,7 +75,7 @@ class Marriage extends Model
         return match ($person->id) {
             $this->man_id => $this->man_order,
             $this->woman_id => $this->woman_order,
-            default => null,
+            default => throw new InvalidArgumentException(),
         };
     }
 
