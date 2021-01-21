@@ -15,9 +15,9 @@ class PeopleSearchController extends Controller
             return response()->json([]);
         }
 
-        $people = Person::
-            where(function ($query) use ($request) {
-                $query->where('id', $request->get('search'))
+        $people = Person::where(function ($query) use ($request) {
+                $query
+                    ->where('id', $request->get('search'))
                     ->orWhere(function ($query) use ($request) {
                         foreach (Arr::trim(explode(' ', $request->get('search'))) as $s) {
                             $query->where(function ($query) use ($s) {
@@ -28,25 +28,23 @@ class PeopleSearchController extends Controller
                         }
                     });
             })
-            ->when(filled($request->get('sex')), function ($query) use ($request) {
-                return $query->where(fn ($query) => $query->where('sex', $request->get('sex'))->orWhereNull('sex'));
-            })
-            ->when(! Auth::user()?->canRead(), function ($query) {
-                return $query->where('visibility', true);
-            })
+            ->when(filled($request->get('sex')), fn ($query) => $query->where(function ($query) use ($request) {
+                $query
+                    ->where('sex', $request->get('sex'))
+                    ->orWhereNull('sex');
+            }))
+            ->unless(Auth::user()?->canRead(), fn ($query) => $query->where('visibility', true))
             ->limit(10)
             ->get();
 
         $response = $people
             ->filter(fn ($person) => $person->canBeViewedBy(Auth::user()))
-            ->map(function ($person) {
-                return [
-                    'id' => $person->id,
-                    'name' => $person->formatSimpleName(),
-                    'dates' => $person->formatSimpleDates(),
-                    'url' => route('people.show', $person),
-                ];
-            });
+            ->map(fn ($person) => [
+                'id' => $person->id,
+                'name' => $person->formatSimpleName(),
+                'dates' => $person->formatSimpleDates(),
+                'url' => route('people.show', $person),
+            ]);
 
         return response()->json($response);
     }
