@@ -27,13 +27,13 @@
                                 {{ __('people.history.added-biography') }}
 
                                 <div class="mt-3 p-4 bg-gray-50 text-gray-700 rounded-md space-y-2 break-words">
-                                    {!! \Str::formatBiography($activity['new']) !!}
+                                    {!! Str::formatBiography($activity['new']) !!}
                                 </div>
                             @elseif($activity['description'] === 'updated-biography')
                                 {{ __('people.history.updated-biography') }}
 
                                 <div class="mt-3 p-4 bg-gray-50 text-gray-700 rounded-md space-y-2 break-words">
-                                    {!! \Str::formatBiography($activity['new']) !!}
+                                    {!! Str::formatBiography($activity['new']) !!}
                                 </div>
                             @elseif($activity['description'] === 'deleted-biography')
                                 {{ __('people.history.deleted-biography') }}
