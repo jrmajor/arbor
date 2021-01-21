@@ -38,9 +38,7 @@ class PeopleSearchController extends Controller
             ->get();
 
         $response = $people
-            ->filter(function ($person) {
-                return $person->canBeViewedBy(Auth::user());
-            })
+            ->filter(fn ($person) => $person->canBeViewedBy(Auth::user()))
             ->map(function ($person) {
                 return [
                     'id' => $person->id,
