@@ -14,7 +14,8 @@ class MacrosServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::macro('formatPeriodTo', static function (Carbon $to): string {
-            $from = self::this();
+            $from = self::this()->toImmutable();
+            $to = $to->toImmutable();
 
             if ($from->equalTo($to)) {
                 return $from->toDateString();
@@ -23,8 +24,8 @@ class MacrosServiceProvider extends ServiceProvider
             $to = $to->endOfDay();
 
             if (
-                $from->copy()->startOfYear()->equalTo($from)
-                && $to->copy()->endOfYear()->equalTo($to)
+                $from->startOfYear()->equalTo($from)
+                && $to->endOfYear()->equalTo($to)
             ) {
                 if ($from->year === $to->year) {
                     return (string) $from->year;
@@ -34,8 +35,8 @@ class MacrosServiceProvider extends ServiceProvider
             }
 
             if (
-                $from->copy()->startOfMonth()->equalTo($from)
-                && $to->copy()->endOfMonth()->equalTo($to)
+                $from->startOfMonth()->equalTo($from)
+                && $to->endOfMonth()->equalTo($to)
             ) {
                 if ($from->year === $to->year && $from->month === $to->month) {
                     return $from->year.'-'.$from->format('m');
