@@ -54,7 +54,7 @@ class HalfSiblings extends Relation
 
         $this->query->whereIn(
             $this->sideKey,
-            $people->pluck($this->sideKey)->filter()
+            $people->pluck($this->sideKey)->filter(),
         );
     }
 
@@ -63,7 +63,7 @@ class HalfSiblings extends Relation
         foreach ($people as $person) {
             $person->setRelation(
                 $relation,
-                $this->related->newCollection()
+                $this->related->newCollection(),
             );
         }
 
@@ -79,7 +79,7 @@ class HalfSiblings extends Relation
         foreach ($people as $person) {
             if ($person->{$this->sideKey} === null) {
                 return $person->setRelation(
-                    $relation, $this->related->newCollection()
+                    $relation, $this->related->newCollection(),
                 );
             }
 
@@ -90,7 +90,7 @@ class HalfSiblings extends Relation
                         && ($sibling->{$this->partnerKey} !== $person->{$this->partnerKey}
                             || $sibling->{$this->partnerKey} === null)
                         && $sibling->id !== $person->id;
-                })
+                }),
             );
         }
 

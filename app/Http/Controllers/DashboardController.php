@@ -35,7 +35,7 @@ class DashboardController extends Controller
 
         return view(
             'dashboard.reports',
-            compact('shouldBeDead', 'visibleAlive', 'invisibleDead')
+            compact('shouldBeDead', 'visibleAlive', 'invisibleDead'),
         );
     }
 }

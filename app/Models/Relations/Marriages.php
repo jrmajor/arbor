@@ -43,7 +43,7 @@ class Marriages extends Relation
         foreach ($people as $person) {
             $person->setRelation(
                 $relation,
-                $this->related->newCollection()
+                $this->related->newCollection(),
             );
         }
 
@@ -62,7 +62,7 @@ class Marriages extends Relation
                 $marriages->filter(function (Marriage $marriage) use ($person) {
                     return $marriage->woman_id === $person->id
                         || $marriage->man_id === $person->id;
-                })
+                }),
             );
         }
 

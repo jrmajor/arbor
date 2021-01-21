@@ -26,7 +26,7 @@ class EstimatorInfo extends Command
             ->whereNotNull('father_id')
             ->union(
                 Person::whereNotNull('birth_date_from')
-                    ->whereNotNull('father_id')
+                    ->whereNotNull('father_id'),
             )->get()
             ->filter(fn ($person) => $person->birth_year)
             ->map(fn ($person) => [
@@ -57,7 +57,7 @@ class EstimatorInfo extends Command
                     $variance = $people
                         ->map(fn ($data) => ($data->error - $averageError) ** 2)
                         ->avg(),
-                    2
+                    2,
                 ),
             ],
             [

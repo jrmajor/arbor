@@ -42,7 +42,7 @@ class Wielcy
                 $source = iconv('iso-8859-2', 'UTF-8', $source->body());
 
                 return $source !== false ? $source : null;
-            }
+            },
         );
     }
 

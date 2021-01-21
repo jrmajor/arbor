@@ -51,7 +51,7 @@ class Pytlewski
         $this->attributes = Cache::remember(
             'pytlewski.'.$this->id,
             CarbonInterval::week(),
-            fn (): array => $this->scrape()
+            fn (): array => $this->scrape(),
         );
     }
 

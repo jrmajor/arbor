@@ -37,10 +37,10 @@ class Siblings extends Relation
 
         $this->query->whereIn(
             'mother_id',
-            $people->pluck('mother_id')->filter()
+            $people->pluck('mother_id')->filter(),
         )->whereIn(
             'father_id',
-            $people->pluck('father_id')->filter()
+            $people->pluck('father_id')->filter(),
         );
     }
 
@@ -49,7 +49,7 @@ class Siblings extends Relation
         foreach ($people as $person) {
             $person->setRelation(
                 $relation,
-                $this->related->newCollection()
+                $this->related->newCollection(),
             );
         }
 
@@ -69,7 +69,7 @@ class Siblings extends Relation
                     return $sibling->mother_id === $person->mother_id
                         && $sibling->father_id === $person->father_id
                         && $sibling->id !== $person->id;
-                })
+                }),
             );
         }
 

@@ -29,7 +29,7 @@ class Sources implements CastsAttributes
 
         if ($value === false) {
             throw JsonEncodingException::forAttribute(
-                $model, $key, json_last_error_msg()
+                $model, $key, json_last_error_msg(),
             );
         }
 

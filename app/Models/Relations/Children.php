@@ -42,7 +42,7 @@ class Children extends Relation
         foreach ($people as $person) {
             $person->setRelation(
                 $relation,
-                $this->related->newCollection()
+                $this->related->newCollection(),
             );
         }
 
@@ -61,7 +61,7 @@ class Children extends Relation
                 $children->filter(function (Person $child) use ($person) {
                     return $child->mother_id === $person->id
                         || $child->father_id === $person->id;
-                })
+                }),
             );
         }
 

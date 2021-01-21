@@ -276,20 +276,20 @@ class Person extends Model
         }
 
         $prediction->put('children',
-            $this->children->avg->birth_year ? $this->children->avg->birth_year - $interval : null
+            $this->children->avg->birth_year ? $this->children->avg->birth_year - $interval : null,
         );
 
         $prediction->put('partners',
             $this->marriages
                 ->map->partner($this)
-                ->avg->birth_year
+                ->avg->birth_year,
         );
 
         $prediction->put('siblings',
             $this->siblings
                 ->merge($this->siblings_mother)
                 ->merge($this->siblings_father)
-                ->avg->birth_year
+                ->avg->birth_year,
         );
 
         return $prediction->avg() ? (int) round($prediction->avg()) : null;
@@ -354,7 +354,7 @@ class Person extends Model
                     ->selectRaw(
                         'left(' . $name . ', 1)
                         collate utf8mb4_0900_as_ci as letter,
-                        count(*) as total'
+                        count(*) as total',
                     )->groupBy('letter')
                     ->orderBy('letter')
                     ->whereNull('deleted_at')
