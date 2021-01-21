@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Carbon\Carbon;
+use Faker\Generator;
 
 function format_date_from_period(Carbon $from, Carbon $to): string
 {
@@ -55,7 +56,7 @@ function roman($number)
     return $returnValue;
 }
 
-function faker()
+function faker(): Generator
 {
-    return app('Faker\Generator');
+    return app(Generator::class);
 }
