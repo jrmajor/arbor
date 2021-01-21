@@ -14,15 +14,14 @@ class HalfSiblings extends Relation
     /** @var Person */
     protected $parent;
 
-    public string $side;
-
     public string $sideKey;
 
     public string $partnerKey;
 
-    public function __construct(Person $parent, string $side)
-    {
-        $this->side = $side;
+    public function __construct(
+        Person $parent,
+        public string $side,
+    ) {
         $this->sideKey = $side.'_id';
         $this->partnerKey = match ($side) {
             'mother' => 'father_id',
