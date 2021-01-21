@@ -11,9 +11,7 @@
             <title>{{ config('app.name') }}</title>
         @endif
 
-        @production
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-        @endif
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
         @unless (app()->runningUnitTests())
             <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         @endif
