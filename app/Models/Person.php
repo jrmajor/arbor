@@ -196,7 +196,7 @@ class Person extends Model
     public function getBirthDateAttribute(): ?string
     {
         if ($this->birth_date_from && $this->birth_date_to) {
-            return format_date_from_period($this->birth_date_from, $this->birth_date_to);
+            return $this->birth_date_from->formatPeriodTo($this->birth_date_to);
         }
 
         return null;
@@ -205,7 +205,7 @@ class Person extends Model
     public function getDeathDateAttribute(): ?string
     {
         if ($this->death_date_from && $this->death_date_to) {
-            return format_date_from_period($this->death_date_from, $this->death_date_to);
+            return $this->death_date_from->formatPeriodTo($this->death_date_to);
         }
 
         return null;
@@ -214,7 +214,7 @@ class Person extends Model
     public function getFuneralDateAttribute(): ?string
     {
         if ($this->funeral_date_from && $this->funeral_date_to) {
-            return format_date_from_period($this->funeral_date_from, $this->funeral_date_to);
+            return $this->funeral_date_from->formatPeriodTo($this->funeral_date_to);
         }
 
         return null;
@@ -223,7 +223,7 @@ class Person extends Model
     public function getBurialDateAttribute(): ?string
     {
         if ($this->burial_date_from && $this->burial_date_to) {
-            return format_date_from_period($this->burial_date_from, $this->burial_date_to);
+            return $this->burial_date_from->formatPeriodTo($this->burial_date_to);
         }
 
         return null;

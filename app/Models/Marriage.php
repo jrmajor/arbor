@@ -91,7 +91,7 @@ class Marriage extends Model
     public function getFirstEventDateAttribute(): ?string
     {
         if ($this->first_event_date_from && $this->first_event_date_to) {
-            return format_date_from_period($this->first_event_date_from, $this->first_event_date_to);
+            return $this->first_event_date_from->formatPeriodTo($this->first_event_date_to);
         }
 
         return null;
@@ -100,7 +100,7 @@ class Marriage extends Model
     public function getSecondEventDateAttribute(): ?string
     {
         if ($this->second_event_date_from && $this->second_event_date_to) {
-            return format_date_from_period($this->second_event_date_from, $this->second_event_date_to);
+            return $this->second_event_date_from->formatPeriodTo($this->second_event_date_to);
         }
 
         return null;
@@ -109,7 +109,7 @@ class Marriage extends Model
     public function getDivorceDateAttribute(): ?string
     {
         if ($this->divorce_date_from && $this->divorce_date_to) {
-            return format_date_from_period($this->divorce_date_from, $this->divorce_date_to);
+            return $this->divorce_date_from->formatPeriodTo($this->divorce_date_to);
         }
 
         return null;

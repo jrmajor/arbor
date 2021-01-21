@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
@@ -12,6 +13,41 @@ class MacrosServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        Carbon::macro('formatPeriodTo', static function (Carbon $to): string {
+            $from = self::this();
+
+            if ($from->equalTo($to)) {
+                return $from->toDateString();
+            }
+
+            $to = $to->endOfDay();
+
+            if (
+                $from->copy()->startOfYear()->equalTo($from)
+                && $to->copy()->endOfYear()->equalTo($to)
+            ) {
+                if ($from->year === $to->year) {
+                    return (string) $from->year;
+                } else {
+                    return $from->year.'-'.$to->year;
+                }
+            }
+
+            if (
+                $from->copy()->startOfMonth()->equalTo($from)
+                && $to->copy()->endOfMonth()->equalTo($to)
+            ) {
+                if ($from->year === $to->year && $from->month === $to->month) {
+                    return $from->year.'-'.$from->format('m');
+                } else {
+                    return __('misc.date.between').' '.$from->year.'-'.$from->format('m')
+                        .' '.__('misc.date.and').' '.$to->year.'-'.$to->format('m');
+                }
+            }
+
+            return __('misc.date.between').' '.$from->toDateString().' '.__('misc.date.and').' '.$to->toDateString();
+        });
+
         Stringable::macro('e', function (): Stringable {
             return new Stringable(e($this->value));
         });

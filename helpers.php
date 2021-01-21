@@ -2,42 +2,7 @@
 
 declare(strict_types=1);
 
-use Carbon\Carbon;
 use Faker\Generator;
-
-function format_date_from_period(Carbon $from, Carbon $to): string
-{
-    if ($from->equalTo($to)) {
-        return $from->toDateString();
-    }
-
-    $to = $to->endOfDay();
-
-    if (
-        $from->copy()->startOfYear()->equalTo($from)
-        && $to->copy()->endOfYear()->equalTo($to)
-    ) {
-        if ($from->year === $to->year) {
-            return (string) $from->year;
-        } else {
-            return $from->year.'-'.$to->year;
-        }
-    }
-
-    if (
-        $from->copy()->startOfMonth()->equalTo($from)
-        && $to->copy()->endOfMonth()->equalTo($to)
-    ) {
-        if ($from->year === $to->year && $from->month === $to->month) {
-            return $from->year.'-'.$from->format('m');
-        } else {
-            return __('misc.date.between').' '.$from->year.'-'.$from->format('m')
-                .' '.__('misc.date.and').' '.$to->year.'-'.$to->format('m');
-        }
-    }
-
-    return __('misc.date.between').' '.$from->toDateString().' '.__('misc.date.and').' '.$to->toDateString();
-}
 
 function roman(int $number): string
 {
