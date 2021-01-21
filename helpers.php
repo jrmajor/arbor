@@ -1,6 +1,10 @@
 <?php
 
-function format_date_from_period($from, $to)
+declare(strict_types=1);
+
+use Carbon\Carbon;
+
+function format_date_from_period(Carbon $from, Carbon $to): string
 {
     if ($from->equalTo($to)) {
         return $from->toDateString();
@@ -13,7 +17,7 @@ function format_date_from_period($from, $to)
         && $to->copy()->endOfYear()->equalTo($to)
     ) {
         if ($from->year === $to->year) {
-            return $from->year;
+            return (string) $from->year;
         } else {
             return $from->year.'-'.$to->year;
         }

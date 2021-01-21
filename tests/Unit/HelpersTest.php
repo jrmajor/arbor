@@ -16,7 +16,7 @@ test('format date from period', function () {
         ->toBe(__('misc.date.between').' 2011-01 '.__('misc.date.and').' 2011-02');
 
     expect(format_date_from_period(new Carbon('1986-01-01'), new Carbon('1986-12-31')))
-        ->toBe(1986);
+        ->toBe('1986');
 
     expect(format_date_from_period(new Carbon('1977-01-01'), new Carbon('1983-12-31')))
         ->toBe('1977-1983');
