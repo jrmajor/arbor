@@ -5,6 +5,7 @@ namespace App\Models\Relations;
 use App\Models\Person;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use InvalidArgumentException;
 
 /**
  * @method $this orderBy($column, $direction = 'asc')
@@ -23,9 +24,11 @@ class HalfSiblings extends Relation
         public string $side,
     ) {
         $this->sideKey = $side.'_id';
+
         $this->partnerKey = match ($side) {
             'mother' => 'father_id',
             'father' => 'mother_id',
+            default => throw new InvalidArgumentException(),
         };
 
         parent::__construct(Person::query(), $parent);
