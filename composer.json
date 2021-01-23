@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "jenssegers/agent": "^2.6",
         "larabug/larabug": "^2.3",
-        "laravel/framework": "^8.19",
+        "laravel/framework": "^8.23",
         "laravel/slack-notification-channel": "^2.3",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
@@ -41,11 +41,11 @@
         "laravel/sail": "^1.0",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.1",
-        "nunomaduro/larastan": "^0.6.10",
+        "nunomaduro/larastan": "^0.6.13",
         "pestphp/pest": "^0.3.14",
         "pestphp/pest-plugin-laravel": "^0.3",
         "pestphp/pest-plugin-livewire": "^0.3",
-        "phpstan/phpstan": "^0.12.58",
+        "phpstan/phpstan": "^0.12.68",
         "phpunit/phpunit": "^9.5"
     },
     "config": {
