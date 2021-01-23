@@ -4,7 +4,7 @@ parameters:
         - app
         - database/factories
         - database/seeders
-    excludes_analyse:
+    excludePaths:
         - app/Providers/MacrosServiceProvider.php
     ignoreErrors:
         - '#Result of function \w+ \(void\) is used\.#'
