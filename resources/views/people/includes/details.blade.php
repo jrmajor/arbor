@@ -83,96 +83,67 @@
         {{-- names --}}
         @if($person->middle_name)
             <dt>{{ __('people.names') }}&nbsp;</dt>
-            <dd>
-                @if($person->canBeViewedBy(auth()->user()))
-                    {{ $person->name }} {{ $person->middle_name }}
-                @else
-                    <small>[{{ __('misc.hidden') }}]</small>
-                @endif
-            </dd>
+            <dd>{{ $person->name }} {{ $person->middle_name }}</dd>
         @else
             <dt>{{ __('people.name') }}&nbsp;</dt>
-            <dd>
-                @if($person->canBeViewedBy(auth()->user()))
-                    {{ $person->name }}
-                @else
-                    <small>[{{ __('misc.hidden') }}]</small>
-                @endif
-            </dd>
+            <dd>{{ $person->name }}</dd>
         @endif
+
         <dt>{{ __('people.family_name') }}&nbsp;</dt>
-        <dd>
-            @if($person->canBeViewedBy(auth()->user()))
-                {{ $person->family_name }}
-            @else
-                <small>[{{ __('misc.hidden') }}]</small>
-            @endif
-        </dd>
+        <dd>{{ $person->family_name }}</dd>
+
         @if($person->last_name)
             <dt>{{ __('people.last_name') }}&nbsp;</dt>
-            <dd>
-                @if($person->canBeViewedBy(auth()->user()))
-                    {{ $person->last_name }}
-                @else
-                    <small>[{{ __('misc.hidden') }}]</small>
-                @endif
-            </dd>
+            <dd>{{ $person->last_name }}</dd>
         @endif
 
         {{-- birth --}}
         @if($person->birth_date || $person->birth_place  || $person->estimatedBirthDate())
-            @if($person->canBeViewedBy(auth()->user()))
-                <dt>{{ __('people.birth') }}&nbsp;</dt>
-                <dd>
-                    @php $some_birth_data_printed = false; @endphp
-                    @if($person->birth_date)
-                        {{ $person->birth_date }}<br>
-                        @php $some_birth_data_printed = true; @endphp
+            <dt>{{ __('people.birth') }}&nbsp;</dt>
+            <dd>
+                @php $some_birth_data_printed = false; @endphp
+                @if($person->birth_date)
+                    {{ $person->birth_date }}<br>
+                    @php $some_birth_data_printed = true; @endphp
+                @endif
+                @if($person->birth_place)
+                    @if($some_birth_data_printed)
+                        &nbsp;&nbsp;
                     @endif
-                    @if($person->birth_place)
-                        @if($some_birth_data_printed)
-                            &nbsp;&nbsp;
-                        @endif
-                        {{ $person->birth_place }}<br>
-                        @php $some_birth_data_printed = true; @endphp
+                    {{ $person->birth_place }}<br>
+                    @php $some_birth_data_printed = true; @endphp
+                @endif
+                @if(! $person->dead && $person->currentAge() !== null)
+                    @if($some_birth_data_printed)
+                        &nbsp;&nbsp;
                     @endif
-                    @if(! $person->dead && $person->currentAge() !== null)
-                        @if($some_birth_data_printed)
-                            &nbsp;&nbsp;
-                        @endif
-                        {{ __('people.current_age') }}:
-                        {{
-                            trans_choice(
-                                'misc.year',
-                                $person->currentAge(true),
-                                ['age' => $person->currentAge()]
-                            )
-                        }}
-                        <br>
-                        @php $some_birth_data_printed = true; @endphp
+                    {{ __('people.current_age') }}:
+                    {{
+                        trans_choice(
+                            'misc.year',
+                            $person->currentAge(true),
+                            ['age' => $person->currentAge()]
+                        )
+                    }}
+                    <br>
+                    @php $some_birth_data_printed = true; @endphp
+                @endif
+                @if(
+                    (! $person->birth_date || auth()->user()?->isSuperAdmin())
+                    && $person->estimatedBirthDate()
+                )
+                    @if($some_birth_data_printed === true)
+                        &nbsp;&nbsp;
                     @endif
-                    @if(
-                        (! $person->birth_date || auth()->user()?->isSuperAdmin())
-                        && $person->estimatedBirthDate()
-                    )
-                        @if($some_birth_data_printed === true)
-                            &nbsp;&nbsp;
-                        @endif
-                        {{ __('people.estimated_birth_date') }}: {!! $person->estimatedBirthDate() !!}
-                        @if($person->estimatedBirthDateError())
-                            <small>
-                                (<strong>{{ $person->estimatedBirthDateError() }}</strong>
-                                {{ trans_choice('misc.years_of_error', $person->estimatedBirthDateError()) }})
-                            </small>
-                        @endif
+                    {{ __('people.estimated_birth_date') }}: {!! $person->estimatedBirthDate() !!}
+                    @if($person->estimatedBirthDateError())
+                        <small>
+                            (<strong>{{ $person->estimatedBirthDateError() }}</strong>
+                            {{ trans_choice('misc.years_of_error', $person->estimatedBirthDateError()) }})
+                        </small>
                     @endif
-                </dd>
-            @else
-                <dt>{{ __('people.birth') }}&nbsp;</dt>
-                <dd>
-                   <small>[{{ __('misc.hidden') }}]</small>
-                </dd>
-            @endif
+                @endif
+            </dd>
         @endif
 
         {{-- death --}}
