@@ -6,7 +6,7 @@ use App\Models\Person;
 it('can get marriages', function () {
     $person = Person::factory()->woman()->create();
 
-    Person::factory()->count(3)->man()->create()
+    Person::factory(3)->man()->create()
         ->each(function ($partner) use ($person) {
             Marriage::factory()->create([
                 'woman_id' => $person->id,
@@ -20,7 +20,7 @@ it('can get marriages', function () {
 it('can eagerly get marriages', function () {
     $woman = Person::factory()->woman()->create();
 
-    Person::factory()->count(3)->man()->create()
+    Person::factory(3)->man()->create()
         ->each(function ($partner) use ($woman) {
             Marriage::factory()->create([
                 'woman_id' => $woman->id,
@@ -30,7 +30,7 @@ it('can eagerly get marriages', function () {
 
     $man = Person::factory()->man()->create();
 
-    Person::factory()->count(4)->woman()->create()
+    Person::factory(4)->woman()->create()
         ->each(function ($partner) use ($man) {
             Marriage::factory()->create([
                 'woman_id' => $partner->id,

@@ -11,25 +11,25 @@ it('can get siblings and half siblings', function () {
         'father_id' => $father->id,
     ]);
 
-    Person::factory()->count(2)->create([
+    Person::factory(2)->create([
         'mother_id' => $person->mother_id,
         'father_id' => $person->father_id,
     ]);
 
-    Person::factory()->count(1)->create([
+    Person::factory(1)->create([
         'mother_id' => $person->mother_id,
         'father_id' => Person::factory()->man()->create(),
     ]);
-    Person::factory()->count(2)->create([
+    Person::factory(2)->create([
         'mother_id' => $person->mother_id,
         'father_id' => null,
     ]);
 
-    Person::factory()->count(3)->create([
+    Person::factory(3)->create([
         'mother_id' => Person::factory()->woman()->create(),
         'father_id' => $person->father_id,
     ]);
-    Person::factory()->count(1)->create([
+    Person::factory(1)->create([
         'mother_id' => null,
         'father_id' => $person->father_id,
     ]);
@@ -59,25 +59,25 @@ it('can eagerly get siblings and half siblings', function () {
         'father_id' => $firstFather->id,
     ]);
 
-    Person::factory()->count(2)->create([
+    Person::factory(2)->create([
         'mother_id' => $firstPerson->mother_id,
         'father_id' => $firstPerson->father_id,
     ]);
 
-    Person::factory()->count(1)->create([
+    Person::factory(1)->create([
         'mother_id' => $firstPerson->mother_id,
         'father_id' => Person::factory()->man()->create(),
     ]);
-    Person::factory()->count(2)->create([
+    Person::factory(2)->create([
         'mother_id' => $firstPerson->mother_id,
         'father_id' => null,
     ]);
 
-    Person::factory()->count(3)->create([
+    Person::factory(3)->create([
         'mother_id' => Person::factory()->woman()->create(),
         'father_id' => $firstPerson->father_id,
     ]);
-    Person::factory()->count(1)->create([
+    Person::factory(1)->create([
         'mother_id' => null,
         'father_id' => $firstPerson->father_id,
     ]);
@@ -90,25 +90,25 @@ it('can eagerly get siblings and half siblings', function () {
         'father_id' => $secondFather->id,
     ]);
 
-    Person::factory()->count(3)->create([
+    Person::factory(3)->create([
         'mother_id' => $secondPerson->mother_id,
         'father_id' => $secondPerson->father_id,
     ]);
 
-    Person::factory()->count(3)->create([
+    Person::factory(3)->create([
         'mother_id' => $secondPerson->mother_id,
         'father_id' => Person::factory()->man()->create(),
     ]);
-    Person::factory()->count(2)->create([
+    Person::factory(2)->create([
         'mother_id' => $secondPerson->mother_id,
         'father_id' => null,
     ]);
 
-    Person::factory()->count(2)->create([
+    Person::factory(2)->create([
         'mother_id' => Person::factory()->woman()->create(),
         'father_id' => $secondPerson->father_id,
     ]);
-    Person::factory()->count(4)->create([
+    Person::factory(4)->create([
         'mother_id' => null,
         'father_id' => $secondPerson->father_id,
     ]);

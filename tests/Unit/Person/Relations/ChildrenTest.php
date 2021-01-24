@@ -5,7 +5,7 @@ use App\Models\Person;
 it('can get children', function () {
     $father = Person::factory()->man()->create();
 
-    Person::factory()->count(2)->woman()->create()
+    Person::factory(2)->woman()->create()
         ->each(function ($mother) use ($father) {
             Person::factory()->create([
                 'mother_id' => $mother->id,
@@ -25,19 +25,19 @@ it('can get children', function () {
 it('can eagerly get children', function () {
     $mother = Person::factory()->man()->create();
 
-    Person::factory()->count(3)->create([
+    Person::factory(3)->create([
         'mother_id' => $mother->id,
         'father_id' => null,
     ]);
 
-    Person::factory()->count(2)->create([
+    Person::factory(2)->create([
         'mother_id' => $mother->id,
         'father_id' => Person::factory()->man()->create(),
     ]);
 
     $father = Person::factory()->man()->create();
 
-    Person::factory()->count(2)->woman()->create()
+    Person::factory(2)->woman()->create()
         ->each(function ($mother) use ($father) {
             Person::factory()->create([
                 'mother_id' => $mother->id,
