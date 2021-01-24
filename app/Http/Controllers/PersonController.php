@@ -17,7 +17,10 @@ class PersonController extends Controller
         return view('people.index');
     }
 
-    public function letter($type, $letter)
+    /**
+     * @param 'f'|'l' $type
+     */
+    public function letter(string $type, string $letter)
     {
         $this->authorize('viewAny', Person::class);
 
@@ -30,7 +33,6 @@ class PersonController extends Controller
                 ->orderByRaw('ifnull(last_name, family_name) asc')
                 ->orderBy('name')
                 ->get(),
-            default => abort(404),
         };
 
         if ($list->isEmpty()) {
