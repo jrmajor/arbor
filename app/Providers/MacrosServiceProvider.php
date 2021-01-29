@@ -49,10 +49,6 @@ class MacrosServiceProvider extends ServiceProvider
             return __('misc.date.between').' '.$from->toDateString().' '.__('misc.date.and').' '.$to->toDateString();
         });
 
-        Stringable::macro('e', function (): Stringable {
-            return new Stringable(e($this->value));
-        });
-
         Str::macro('formatBiography', function (?string $biography): ?string {
             if ($biography === null) {
                 return null;
@@ -61,7 +57,7 @@ class MacrosServiceProvider extends ServiceProvider
             return (string) Str::of($biography)
                 ->trim()
                 ->replace(["\r\n", "\r"], "\n")
-                ->e()
+                ->pipe('e')
                 ->prepend('<p>')
                 ->append('</p>')
                 ->replace("\n\n", "</p>\n<p>");
