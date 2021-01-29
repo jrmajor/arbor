@@ -21,8 +21,12 @@ Clone this repository and install it like you normally install Laravel applicati
 
 ## Testing
 
-This application uses [Pest](https://pestphp.com) for testing. MySQL 8 is required. You may set test database name in `phpunit.xml` (defaults to `arbor_tests`).
+This application uses Pest for testing and PHPStan for static analysis. MySQL 8 is required to run tests. You may set testing database name in `phpunit.xml` (defaults to `arbor_tests`).
 
-```sh-session
-$ vendor/bin/pest
+```sh
+# Tests
+vendor/bin/pest
+
+# Static analysis
+vendor/bin/phpstan analyse
 ```
