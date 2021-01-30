@@ -9,12 +9,12 @@ class LocaleController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $this->validate($request, ['language' => [
+        $locale = $this->validate($request, ['language' => [
             'required',
             'in:'.implode(',', config('app.available_locales')),
-        ]]);
+        ]])['language'];
 
-        Session::put('locale', $request->input('language'));
+        Session::put('locale', $locale);
 
         return back();
     }

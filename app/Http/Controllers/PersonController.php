@@ -40,8 +40,11 @@ class PersonController extends Controller
         }
 
         return view('people.index')
-            ->with('active', ['type' => strtolower($type), 'letter' => $letter])
-            ->with('list', $list);
+            ->with('list', $list)
+            ->with('active', [
+                'type' => mb_strtolower($type),
+                'letter' => $letter,
+            ]);
     }
 
     public function create(Request $request)
