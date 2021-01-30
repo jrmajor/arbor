@@ -25,11 +25,9 @@ class Settings extends Component
             'email' => $this->email,
         ])->save();
 
-        if ($result) {
-            flash()->success(__('settings.alerts.changes_have_been_saved'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $result
+            ? flash()->success(__('settings.alerts.changes_have_been_saved'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
     }
 
     public function savePassword()
@@ -47,11 +45,9 @@ class Settings extends Component
             'password_confirmation' => null,
         ]);
 
-        if ($result) {
-            flash()->success(__('settings.alerts.password_has_been_changed'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $result
+            ? flash()->success(__('settings.alerts.password_has_been_changed'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
     }
 
     public function logoutOtherDevices()
@@ -70,11 +66,9 @@ class Settings extends Component
 
         $this->logout_password = null;
 
-        if ($result) {
-            flash()->success(__('settings.alerts.logged_out'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $result
+            ? flash()->success(__('settings.alerts.logged_out'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
     }
 
     public function mount()

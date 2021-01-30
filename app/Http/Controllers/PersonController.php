@@ -67,11 +67,9 @@ class PersonController extends Controller
 
         $person = new Person();
 
-        if ($person->fill($request->validated())->save()) {
-            flash()->success(__('people.alerts.person_has_been_created'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $person->fill($request->validated())->save()
+            ? flash()->success(__('people.alerts.person_has_been_created'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return redirect()->route('people.show', $person);
     }
@@ -103,11 +101,9 @@ class PersonController extends Controller
     {
         $this->authorize('update', $person);
 
-        if ($person->fill($request->validated())->save()) {
-            flash()->success(__('people.alerts.changes_have_been_saved'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $person->fill($request->validated())->save()
+            ? flash()->success(__('people.alerts.changes_have_been_saved'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return redirect()->route('people.show', $person);
     }
@@ -116,15 +112,13 @@ class PersonController extends Controller
     {
         $this->authorize('changeVisibility', $person);
 
-        $request->validate([
+        $visibility = $request->validate([
             'visibility' => 'required|boolean',
-        ]);
+        ])['visibility'];
 
-        if ($person->changeVisibility($request['visibility'])) {
-            flash()->success(__('people.alerts.visibility_has_been_changed'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $person->changeVisibility($visibility)
+            ? flash()->success(__('people.alerts.visibility_has_been_changed'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return back();
     }
@@ -145,11 +139,9 @@ class PersonController extends Controller
             return back();
         }
 
-        if ($person->delete()) {
-            flash()->success(__('people.alerts.person_has_been_deleted'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $person->delete()
+            ? flash()->success(__('people.alerts.person_has_been_deleted'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return Auth::user()->canViewHistory()
             ? redirect()->route('people.history', $person)
@@ -160,11 +152,9 @@ class PersonController extends Controller
     {
         $this->authorize('restore', $person);
 
-        if ($person->restore()) {
-            flash()->success(__('people.alerts.person_has_been_restored'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $person->restore()
+            ? flash()->success(__('people.alerts.person_has_been_restored'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return redirect()->route('people.show', $person);
     }

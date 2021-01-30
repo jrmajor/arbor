@@ -38,11 +38,9 @@ class MarriageController extends Controller
 
         $marriage = new Marriage();
 
-        if ($marriage->fill($request->validated())->save()) {
-            flash()->success(__('marriages.alerts.marriage_has_been_created'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $marriage->fill($request->validated())->save()
+            ? flash()->success(__('marriages.alerts.marriage_has_been_created'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return redirect()->route('people.show', $marriage->woman);
     }
@@ -58,11 +56,9 @@ class MarriageController extends Controller
     {
         $this->authorize('update', $marriage);
 
-        if ($marriage->fill($request->validated())->save()) {
-            flash()->success(__('marriages.alerts.changes_have_been_saved'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $marriage->fill($request->validated())->save()
+            ? flash()->success(__('marriages.alerts.changes_have_been_saved'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return redirect()->route('people.show', $marriage->woman);
     }
@@ -71,26 +67,22 @@ class MarriageController extends Controller
     {
         $this->authorize('delete', $marriage);
 
-        if ($marriage->delete()) {
-            flash()->success(__('marriages.alerts.marriage_has_been_deleted'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $marriage->delete()
+            ? flash()->success(__('marriages.alerts.marriage_has_been_deleted'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return Auth::user()->canViewHistory()
-                ? redirect()->route('marriages.history', $marriage)
-                : redirect()->route('people.show', $marriage->woman);
+            ? redirect()->route('marriages.history', $marriage)
+            : redirect()->route('people.show', $marriage->woman);
     }
 
     public function restore(Marriage $marriage)
     {
         $this->authorize('restore', $marriage);
 
-        if ($marriage->restore()) {
-            flash()->success(__('people.alerts.marriage_has_been_restored'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $marriage->restore()
+            ? flash()->success(__('people.alerts.marriage_has_been_restored'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return redirect()->route('people.show', $marriage->woman);
     }

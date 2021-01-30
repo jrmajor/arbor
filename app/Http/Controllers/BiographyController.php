@@ -22,11 +22,9 @@ class BiographyController extends Controller
             'biography' => 'string|max:10000|nullable',
         ])['biography'];
 
-        if ($person->save()) {
-            flash()->success(__('people.alerts.changes_have_been_saved'));
-        } else {
-            flash()->error(__('misc.an_unknown_error_occurred'));
-        }
+        $person->save()
+            ? flash()->success(__('people.alerts.changes_have_been_saved'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return redirect()->route('people.show', $person);
     }
