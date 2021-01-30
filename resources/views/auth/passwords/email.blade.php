@@ -24,7 +24,7 @@
             {{ __('passwords.resetting_password') }}
         </h2>
 
-        <main class="mt-2 bg-white rounded-lg shadow-lg px-5 py-4 w-full xs:w-5/6 sm:w-3/4 md:w-1/2 lg:w-128">
+        <main class="mt-2 bg-white rounded-lg shadow px-5 py-4 w-full xs:w-5/6 sm:w-3/4 md:w-1/2 lg:w-128">
             <form method="POST" action="{{ route('password.email') }}">
                 @csrf
 
