@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $shouldBeDead = Person::where('dead', false)
             ->where(function ($q) {
                 return $q->whereNotNull('death_date_from')
-                    ->orwhereNotNull('death_date_to')
+                    ->orWhereNotNull('death_date_to')
                     ->orWhereNotNull('death_place')
                     ->orWhereNotNull('death_cause')
                     ->orWhereNotNull('funeral_date_from')
