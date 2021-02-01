@@ -1,6 +1,6 @@
 <?php
 
-use App\Source;
+use App\Services\Sources\Source;
 
 it('has raw method')
     ->expect(Source::from('*test* [test](test) https://example.com')->raw())

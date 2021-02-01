@@ -12,7 +12,7 @@
             'dead' => (bool) old('dead', $person->dead),
             'sources' => [
                 ...collect(old('sources', $person->sources))
-                    ->map(fn ($source) => $source instanceof App\Source ? $source->raw() : $source)
+                    ->map(fn ($source) => $source instanceof App\Services\Sources\Source ? $source->raw() : $source)
             ],
         ])
     ">

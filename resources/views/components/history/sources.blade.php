@@ -9,7 +9,7 @@
             <td class="inline pr-4 md:py-1 md:table-cell">
                 @unless(blank($activity['old'][$attribute]))
                     @foreach($activity['old'][$attribute] as $source)
-                        <small>{!! App\Source::from($source)->markup() !!}</small>@unless($loop->last),@endif
+                        <small>{!! App\Services\Sources\Source::from($source)->markup() !!}</small>@unless($loop->last),@endif
                     @endforeach
                 @else
                     <span class="text-gray-500">{{ __('misc.null') }}</span>
@@ -22,7 +22,7 @@
         <td class="inline md:py-1 md:table-cell">
             @unless(blank($activity['attributes'][$attribute]))
                 @foreach($activity['attributes'][$attribute] as $source)
-                    <small>{!! App\Source::from($source)->markup() !!}</small>@unless($loop->last),@endif
+                    <small>{!! App\Services\Sources\Source::from($source)->markup() !!}</small>@unless($loop->last),@endif
                 @endforeach
             @else
                 <span class="text-gray-500">{{ __('misc.null') }}</span>

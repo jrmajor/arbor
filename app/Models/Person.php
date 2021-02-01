@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Casts\Sources;
+use App\Services\Sources\SourcesCast;
 use App\Models\Relations\Children;
 use App\Models\Relations\HalfSiblings;
 use App\Models\Relations\Marriages;
@@ -49,7 +49,7 @@ class Person extends Model
 
     protected $casts = [
         'dead' => 'boolean',
-        'sources' => Sources::class,
+        'sources' => SourcesCast::class,
         'visibility' => 'boolean',
     ];
 

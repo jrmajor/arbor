@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Casts;
+namespace App\Services\Sources;
 
-use App\Source;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 
-class Sources implements CastsAttributes
+class SourcesCast implements CastsAttributes
 {
     public function get($model, $key, $value, $attributes)
     {

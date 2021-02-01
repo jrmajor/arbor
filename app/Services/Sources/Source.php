@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Services\Sources;
 
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Str;
