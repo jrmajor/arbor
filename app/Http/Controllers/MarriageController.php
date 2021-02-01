@@ -81,7 +81,7 @@ class MarriageController extends Controller
         $this->authorize('restore', $marriage);
 
         $marriage->restore()
-            ? flash()->success(__('people.alerts.marriage_has_been_restored'))
+            ? flash()->success(__('marriages.alerts.marriage_has_been_restored'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
 
         return redirect()->route('people.show', $marriage->woman);
