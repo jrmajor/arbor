@@ -14,6 +14,13 @@ class ForgotPasswordController extends Controller
     {
         flash()->success(trans($response));
 
-        return redirect('/people');
+        return redirect()->route('people.index');
+    }
+
+    protected function sendResetLinkFailedResponse(Request $request, $response)
+    {
+        flash()->error(__($response));
+
+        return redirect()->route('people.index');
     }
 }

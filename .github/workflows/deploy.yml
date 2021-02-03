@@ -44,7 +44,7 @@ jobs:
           restore-keys: yarn-
 
       - name: Install Yarn dependencies
-        run: yarn install --production
+        run: yarn install
 
       - name: Prepare Laravel application
         run: |
