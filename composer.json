@@ -15,10 +15,10 @@
         "guzzlehttp/guzzle": "^7.2",
         "jenssegers/agent": "^2.6",
         "larabug/larabug": "^2.3",
-        "laravel/framework": "^8.23",
+        "laravel/framework": "^8.26",
         "laravel/slack-notification-channel": "^2.3",
-        "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.1",
+        "laravel/tinker": "^2.6",
+        "laravel/ui": "^3.2",
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.1",
         "livewire/livewire": "^2.3",
@@ -27,10 +27,10 @@
         "spatie/laravel-backup": "^6.14",
         "spatie/laravel-enum": "^2.2",
         "spatie/laravel-flash": "^1.8",
-        "spatie/laravel-sitemap": "^5.8",
+        "spatie/laravel-sitemap": "^5.9",
         "spatie/regex": "^1.4",
-        "symfony/css-selector": "^5.1",
-        "symfony/dom-crawler": "^5.1",
+        "symfony/css-selector": "^5.2",
+        "symfony/dom-crawler": "^5.2",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
@@ -45,7 +45,7 @@
         "pestphp/pest": "^0.3.14",
         "pestphp/pest-plugin-laravel": "^0.3",
         "pestphp/pest-plugin-livewire": "^0.3",
-        "phpstan/phpstan": "^0.12.68",
+        "phpstan/phpstan": "^0.12.71",
         "phpunit/phpunit": "^9.5"
     },
     "config": {
