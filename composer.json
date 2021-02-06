@@ -42,9 +42,9 @@
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.1",
         "nunomaduro/larastan": "^0.6.13",
-        "pestphp/pest": "^0.3.14",
-        "pestphp/pest-plugin-laravel": "^0.3",
-        "pestphp/pest-plugin-livewire": "^0.3",
+        "pestphp/pest": "^1.0",
+        "pestphp/pest-plugin-laravel": "^1.0",
+        "pestphp/pest-plugin-livewire": "^1.0",
         "phpstan/phpstan": "^0.12.71",
         "phpunit/phpunit": "^9.5"
     },
