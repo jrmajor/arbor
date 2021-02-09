@@ -1,19 +1,5 @@
-@props(['name', 'label', 'sex', 'nullable', 'initial'])
-
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}
-    x-data="personPickerData(
-        @encodedjson([
-            'nullable' => $nullable,
-            'sex' => $sex,
-            'initial' => [
-                'id' => $initial?->id,
-                'name' => $initial?->formatSimpleName(),
-                'dates' => $initial?->formatSimpleDates(),
-                'url' => $initial ? route('people.show', $initial) : null,
-                'hidden' => false,
-            ],
-        ])
-    )" x-init="init()">
+    x-data="personPickerData(@encodedjson($pickerData()))" x-init="init()">
     <label for="{{ $name }}_search" class="w-full font-medium pb-1 text-gray-700">{{ $label }}</label>
     <div class="w-full">
         <input
