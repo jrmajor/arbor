@@ -7,16 +7,24 @@ use Illuminate\View\Component;
 
 class DateRangePicker extends Component
 {
-    public ?Carbon $initialFrom;
+    protected ?Carbon $initialFrom = null;
 
-    public ?Carbon $initialTo;
+    protected ?Carbon $initialTo = null;
+
+    protected bool $hasErrors = false;
 
     public function __construct(
         public string $name,
         public string $label,
         Carbon|string|null $initialFrom,
-        Carbon|string|null $initialTo
+        Carbon|string|null $initialTo,
     ) {
+        if (session()->get('errors')?->has(["{$name}_from", "{$name}_to"])) {
+            $this->hasErrors = false;
+
+            return;
+        }
+
         $this->initialFrom = is_string($initialFrom)
             ? Carbon::create($initialFrom)
             : $initialFrom;
@@ -26,7 +34,17 @@ class DateRangePicker extends Component
             : $initialTo;
     }
 
-    public function simplePickerCanBeUsed(): bool
+    public function pickerData(): array
+    {
+        return [
+            'simple' => $this->initialSimplePickerValue(),
+            'from' => $this->initialFrom?->format('Y-m-d'),
+            'to' => $this->initialTo?->format('Y-m-d'),
+            'advancedPicker' => $this->hasErrors || ! $this->simplePickerCanBeUsed(),
+        ];
+    }
+
+    protected function simplePickerCanBeUsed(): bool
     {
         $from = $this->initialFrom;
         $to = $this->initialTo;
@@ -66,7 +84,7 @@ class DateRangePicker extends Component
         return false;
     }
 
-    public function initialSimplePickerValue(): ?string
+    protected function initialSimplePickerValue(): ?string
     {
         $from = $this->initialFrom;
         $to = $this->initialTo;

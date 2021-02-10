@@ -1,14 +1,5 @@
-@props(['name', 'label', 'initial-from', 'initial-to'])
-
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}
-    x-data="dateRangePickerData(
-        @encodedjson([
-            'simple' => $initialSimplePickerValue(),
-            'from' => $initialFrom?->format('Y-m-d'),
-            'to' => $initialTo?->format('Y-m-d'),
-            'advancedPicker' => $errors->has($name.'_from') || $errors->has($name.'_to') || ! $simplePickerCanBeUsed(),
-        ])
-    )">
+    x-data="dateTuplePickerData(@encodedjson($pickerData()))">
     <div class="w-full pb-1 flex items-center">
         <label for="{{ $name }}_year" class="font-medium text-gray-700">{{ $label }}</label>
         <button type="button" x-on:click.prevent="advancedPicker = ! advancedPicker"
