@@ -9,7 +9,7 @@ use App\Models\Relations\Marriages;
 use App\Models\Relations\Siblings;
 use App\Services\Pytlewski\Pytlewski;
 use App\Services\Wielcy\Wielcy;
-use App\Traits\HasDateTuples;
+use App\Traits\HasDateRanges;
 use App\Traits\TapsActivity;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,7 +31,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Person extends Model
 {
-    use HasDateTuples,
+    use HasDateRanges,
         HasFactory,
         SoftDeletes,
         LogsActivity,
@@ -53,7 +53,7 @@ class Person extends Model
         'visibility' => 'boolean',
     ];
 
-    protected static $dateTuples = [
+    protected static $dateRanges = [
         'birth_date',
         'death_date',
         'funeral_date',

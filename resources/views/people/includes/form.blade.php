@@ -203,7 +203,7 @@
                         @enderror
                     </div>
                 </div>
-                <x-date-tuple-picker
+                <x-date-range-picker
                     class="w-full sm:w-1/2"
                     name="birth_date" :label="__('misc.date.date')"
                     :initial-from="old('birth_date_from', $person->birth_date_from)"
@@ -257,7 +257,7 @@
                         @enderror
                     </div>
                 </div>
-                <x-date-tuple-picker
+                <x-date-range-picker
                     class="w-full sm:w-1/2"
                     name="death_date" :label="__('people.death_date')"
                     :initial-from="old('death_date_from', $person->death_date_from)"
@@ -279,7 +279,7 @@
                         @enderror
                     </div>
                 </div>
-                <x-date-tuple-picker
+                <x-date-range-picker
                     class="w-full sm:w-1/2"
                     name="funeral_date" :label="__('people.funeral_date')"
                     :initial-from="old('funeral_date_from', $person->funeral_date_from)"
@@ -301,7 +301,7 @@
                         @enderror
                     </div>
                 </div>
-                <x-date-tuple-picker
+                <x-date-range-picker
                     class="w-full sm:w-1/2"
                     name="burial_date" :label="__('people.burial_date')"
                     :initial-from="old('burial_date_from', $person->burial_date_from)"

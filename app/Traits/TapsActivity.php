@@ -39,7 +39,7 @@ trait TapsActivity
             return;
         }
 
-        foreach (static::$dateTuples as $date) {
+        foreach (static::$dateRanges as $date) {
             if (
                 Arr::has($attributes, $date.'_from')
                 && ! Arr::has($attributes, $date.'_to')

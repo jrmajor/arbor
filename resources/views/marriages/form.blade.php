@@ -116,7 +116,7 @@
                             @enderror
                         </div>
                     </div>
-                    <x-date-tuple-picker
+                    <x-date-range-picker
                         class="w-full sm:w-1/2"
                         name="first_event_date" :label="__('misc.date.date')"
                         :initial-from="old('first_event_date_from', $marriage->first_event_date_from)"
@@ -163,7 +163,7 @@
                             @enderror
                         </div>
                     </div>
-                    <x-date-tuple-picker
+                    <x-date-range-picker
                         class="w-full sm:w-1/2"
                         name="second_event_date" :label="__('misc.date.date')"
                         :initial-from="old('second_event_date_from', $marriage->second_event_date_from)"
@@ -200,7 +200,7 @@
                         @enderror
                     </div>
                 </div>
-                <x-date-tuple-picker
+                <x-date-range-picker
                     class="w-full sm:w-1/2"
                     name="divorce_date" :label="__('misc.date.date')"
                     :initial-from="old('divorce_date_from', $marriage->divorce_date_from)"

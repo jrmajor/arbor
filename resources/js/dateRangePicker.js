@@ -1,6 +1,6 @@
 import { isValid, startOfMonth, lastDayOfMonth, startOfYear, lastDayOfYear, format } from 'date-fns'
 
-window.dateTuplePickerData = function (data) {
+window.dateRangePickerData = function (data) {
   return {
     simple: data.simple,
     advanced: {

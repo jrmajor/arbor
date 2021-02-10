@@ -5,7 +5,7 @@ namespace App\View\Components;
 use Carbon\Carbon;
 use Illuminate\View\Component;
 
-class DateTuplePicker extends Component
+class DateRangePicker extends Component
 {
     public ?Carbon $initialFrom;
 
@@ -106,6 +106,6 @@ class DateTuplePicker extends Component
 
     public function render()
     {
-        return view('components.date-tuple-picker');
+        return view('components.date-range-picker');
     }
 }

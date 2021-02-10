@@ -1,7 +1,7 @@
 @props(['name', 'label', 'initial-from', 'initial-to'])
 
 <div {{ $attributes->merge(['class' => 'flex flex-col']) }}
-    x-data="dateTuplePickerData(
+    x-data="dateRangePickerData(
         @encodedjson([
             'simple' => $initialSimplePickerValue(),
             'from' => $initialFrom?->format('Y-m-d'),

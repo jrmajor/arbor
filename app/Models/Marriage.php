@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
-use App\Traits\HasDateTuples;
+use App\Traits\HasDateRanges;
 use App\Traits\TapsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +15,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Marriage extends Model
 {
-    use HasDateTuples,
+    use HasDateRanges,
         HasFactory,
         SoftDeletes,
         LogsActivity,
@@ -35,7 +35,7 @@ class Marriage extends Model
         'second_event_type' => MarriageEventTypeEnum::class.':nullable',
     ];
 
-    protected static $dateTuples = [
+    protected static $dateRanges = [
         'first_event_date',
         'second_event_date',
         'divorce_date',
