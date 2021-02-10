@@ -341,7 +341,7 @@ class Person extends Model
 
     public static function letters($type): Collection
     {
-        $name = match ($type) {
+        $nameQuery = match ($type) {
             'family' => 'family_name',
             'last' => 'ifnull(last_name, family_name)',
             default => throw new InvalidArgumentException('Type must be "family" or "last".'),
@@ -349,17 +349,15 @@ class Person extends Model
 
         return Cache::rememberForever(
             "letters_{$type}",
-            function () use ($name) {
-                return DB::table('people')
-                    ->selectRaw(
-                        'left(' . $name . ', 1)
-                        collate utf8mb4_0900_as_ci as letter,
-                        count(*) as total',
-                    )->groupBy('letter')
-                    ->orderBy('letter')
-                    ->whereNull('deleted_at')
-                    ->get();
-            }
+            fn () => DB::table('people')
+                ->selectRaw(
+                    "left({$nameQuery}, 1)
+                    collate utf8mb4_0900_as_ci as letter,
+                    count(*) as total",
+                )->groupBy('letter')
+                ->orderBy('letter')
+                ->whereNull('deleted_at')
+                ->get(),
         );
     }
 }

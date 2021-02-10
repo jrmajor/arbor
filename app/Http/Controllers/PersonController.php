@@ -39,12 +39,11 @@ class PersonController extends Controller
             abort(404);
         }
 
-        return view('people.index')
-            ->with('list', $list)
-            ->with('active', [
-                'type' => mb_strtolower($type),
-                'letter' => $letter,
-            ]);
+        return view('people.index', [
+            'list' => $list,
+            'activeLetter' => $letter,
+            'activeType' => mb_strtolower($type),
+        ]);
     }
 
     public function create(Request $request)

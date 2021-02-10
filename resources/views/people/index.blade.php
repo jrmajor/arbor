@@ -6,7 +6,9 @@
 
     <main class="p-6 bg-white rounded-lg shadow">
 
-        <x-letters :active="$active ?? null"/>
+        <x-letters
+            :activeLetter="$activeLetter ?? null"
+            :activeType="$activeType ?? null"/>
 
         <hr class="-mx-6 my-5 border-t-2 border-dashed">
 
