@@ -7,13 +7,13 @@ use Illuminate\View\Component;
 
 class PersonPicker extends Component
 {
-    public ?Person $initial = null;
+    protected ?Person $initial = null;
 
     public function __construct(
         public string $name,
         public string $label,
-        public string $sex,
-        public bool $nullable,
+        protected string $sex,
+        protected bool $nullable,
         ?int $initial,
     ) {
         $this->initial = $initial ? Person::find($initial) : null;
