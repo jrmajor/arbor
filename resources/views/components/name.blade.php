@@ -19,26 +19,26 @@
     </div>
 @endif
 
-@if($person->canBeViewedBy(auth()->user()))
+@can('view', $person)
     <a href="{{ route('people.show', $person) }}" class="a">
-@endif
+@endcan
 
     @if($person->dead)
         <i>
     @endif
 
-        @if($person->canBeViewedBy(auth()->user()))
+        @can('view', $person)
             {{ $person->name }}
 
-            @if(! $person->last_name)
-                @if($bold ?? false)<b>@endif
-                    {{ $person->family_name }}
-                @if($bold ?? false)</b>@endif
-            @else
+            @if($person->last_name)
                 @if(($bold ?? false) === 'l')<b>@endif
                     {{ $person->last_name }}
                 @if(($bold ?? false) === 'l')</b>@endif
                 (@if(($bold ?? false) === 'f')<b>@endif{{ $person->family_name }}@if(($bold ?? false) === 'f')</b>@endif)
+            @else
+                @if($bold ?? false)<b>@endif
+                    {{ $person->family_name }}
+                @if($bold ?? false)</b>@endif
             @endif
 
             @if($years ?? true)
@@ -52,17 +52,17 @@
             @endif
         @else
             <small>[{{ __('misc.hidden') }}]</small>
-        @endif
+        @endcan
 
     @if($person->dead)
         </i>
     @endif
 
-@if($person->canBeViewedBy(auth()->user()))
+@can('view', $person)
     </a>
-@endif
+@endcan
 
-@if(auth()->user()?->canWrite())
+@can('update', $person)
     <a
         href="{{ route('people.edit', $person) }}"
         class="a">
@@ -70,4 +70,4 @@
             [№{{ $person->id }}]
         </small>
     </a>
-@endif
+@endcan

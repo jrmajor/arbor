@@ -280,7 +280,7 @@
 
                                 <x-name :person="$marriage->partner($person)"/>
 
-                                @if(auth()->user()?->canWrite())
+                                @can('update', $marriage)
                                     <a
                                         href="{{ route('marriages.edit', ['marriage' => $marriage]) }}"
                                         class="a">
@@ -293,7 +293,7 @@
                                         class="a">
                                         <small>[+]</small>
                                     </a>
-                                @endif
+                                @endcan
                                 @if($marriage->hasFirstEvent())
                                     @if($marriage->first_event_type)
                                         <br>&nbsp;&nbsp;{{ __('marriages.event_types.'.$marriage->first_event_type) }}:

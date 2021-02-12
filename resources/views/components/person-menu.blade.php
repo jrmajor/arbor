@@ -55,7 +55,7 @@
                 </{{ $active === 'biography' ? 'span' : 'a' }}>
             @endif
 
-            @if(auth()->user()->isSuperAdmin())
+            @can('viewHistory', $person)
                 <{{ $active === 'history' ? 'span' : 'a' }}
                     href="{{ route('people.history', $person) }}"
                     class="{{ $active === 'history' ? 'text-blue-700' : 'group text-gray-600 hover:text-gray-700 focus:text-gray-700 focus:outline-none' }}
@@ -78,7 +78,7 @@
 
         <div class="flex-grow">
 
-            @if(auth()->user()->isSuperAdmin() && ! $person->trashed())
+            @if(auth()->user()->can('changeVisibility', $person) && ! $person->trashed())
                 <a
                     href="{{ route('people.changeVisibility', $person) }}"
                     onclick="event.preventDefault();document.getElementById('change-visibility-form').submit();"
@@ -132,7 +132,7 @@
                         @csrf
                     </form>
                 </a>
-            @elseif(auth()->user()->canViewHistory())
+            @elsecan('viewHistory', $person)
                 <a
                     href="{{ route('people.restore', $person) }}"
                     onclick="event.preventDefault();document.getElementById('restore-person-form').submit();"

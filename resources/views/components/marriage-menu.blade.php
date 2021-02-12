@@ -21,7 +21,7 @@
                 </{{ $active === 'edit' ? 'span' : 'a' }}>
             @endif
 
-            @if(auth()->user()?->isSuperAdmin())
+            @can('viewHistory', $marriage)
                 <{{ $active === 'history' ? 'span' : 'a' }}
                     href="{{ route('marriages.history', $marriage) }}"
                     class="{{ $active === 'history' ? 'text-blue-700' : 'group text-gray-600 hover:text-gray-700 focus:text-gray-700 focus:outline-none' }}
@@ -61,7 +61,7 @@
                         @csrf
                     </form>
                 </a>
-            @elseif(auth()->user()->canViewHistory())
+            @elsecan('viewHistory', $marriage)
                 <a
                     href="{{ route('marriages.restore', $marriage) }}"
                     onclick="event.preventDefault();document.getElementById('restore-marriage-form').submit();"

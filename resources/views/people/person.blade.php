@@ -16,11 +16,11 @@
             @include('people.includes.small-tree')
         </main>
 
-        @if(auth()->user()?->canWrite())
+        @canany(['update', 'changeVisibility', 'delete', 'restore', 'viewHistory'], $person)
             <div class="flex-shrink-0 p-1">
                 <x-person-menu active="show" :person="$person"/>
             </div>
-        @endif
+        @endcanany
 
     </div>
 
