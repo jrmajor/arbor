@@ -6,6 +6,7 @@ use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PeopleSearchController extends Controller
 {
@@ -38,7 +39,7 @@ class PeopleSearchController extends Controller
             ->get();
 
         $response = $people
-            ->filter(fn ($person) => $person->canBeViewedBy(Auth::user()))
+            ->filter(fn ($person) => Gate::allows('view', $person))
             ->map(fn ($person) => [
                 'id' => $person->id,
                 'name' => $person->formatSimpleName(),

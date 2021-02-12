@@ -69,11 +69,6 @@ class Person extends Model
         return $this->visibility === true;
     }
 
-    public function canBeViewedBy(?User $user): bool
-    {
-        return $user?->canRead() || $this->isVisible();
-    }
-
     public function changeVisibility(bool $visibility): bool
     {
         if ($this->visibility === $visibility) {

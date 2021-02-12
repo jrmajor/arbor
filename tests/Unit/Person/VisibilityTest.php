@@ -31,33 +31,3 @@ test('change visibility method works', function () {
 
     expect($person->isVisible())->toBeFalse();
 });
-
-it('tells if it can be viewed by given user', function () {
-    $user = User::factory()->create();
-
-    $hiddenPerson = Person::factory()->create([
-        'visibility' => false,
-    ]);
-
-    $visiblePerson = Person::factory()->create([
-        'visibility' => true,
-    ]);
-
-    expect($hiddenPerson->canBeViewedBy($user))->toBeFalse();
-    expect($visiblePerson->canBeViewedBy($user))->toBeTrue();
-
-    $user->permissions = 1;
-
-    expect($hiddenPerson->canBeViewedBy($user))->toBeTrue();
-    expect($visiblePerson->canBeViewedBy($user))->toBeTrue();
-});
-
-it('tells if can be viewed by guest', function () {
-    $person = Person::factory()->create();
-
-    expect($person->canBeViewedBy(null))->toBeFalse();
-
-    $person->changeVisibility(true);
-
-    expect($person->canBeViewedBy(null))->toBeTrue();
-});

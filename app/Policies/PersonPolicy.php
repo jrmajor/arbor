@@ -17,7 +17,7 @@ class PersonPolicy
 
     public function view(?User $user, Person $person): bool
     {
-        return $person->canBeViewedBy($user);
+        return $user?->canRead() || $person->isVisible();
     }
 
     public function create(User $user): bool
