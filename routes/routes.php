@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\BiographyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocaleController;
@@ -19,15 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', fn () => redirect()->route('people.index'))->name('welcome');
 
 Route::middleware('guest')->group(function () {
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [LoginController::class, 'login']);
-    Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
 });
 
-Route::post('logout', LogoutController::class)->name('logout');
+Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 /**
  * @todo allow users edition

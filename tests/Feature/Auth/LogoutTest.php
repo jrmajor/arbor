@@ -25,9 +25,9 @@ it('redirects to welcome page after logging out')
     ->withPermissions(0)
     ->post('/logout')
     ->assertStatus(302)
-    ->assertRedirect('/');
+    ->assertRedirect('people');
 
 it('redirects to welcome page if no user is authenticated')
     ->post('/logout')
     ->assertStatus(302)
-    ->assertRedirect('/');
+    ->assertRedirect('people');
