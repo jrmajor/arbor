@@ -12,12 +12,12 @@
         @endif
 
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-        @unless (app()->runningUnitTests())
+        @unless(app()->runningUnitTests())
             <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         @endif
 
         @routes
-        @unless (app()->runningUnitTests())
+        @unless(app()->runningUnitTests())
             <script src="{{ mix('js/app.js') }}" defer></script>
         @endif
         @stack('scripts')

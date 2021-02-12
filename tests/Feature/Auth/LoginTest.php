@@ -66,7 +66,7 @@ it('checks if user exists', function () {
 });
 
 it('checks password', function () {
-    $user = User::factory()->create([
+    User::factory()->create([
         'username' => 'gracjan',
     ]);
 

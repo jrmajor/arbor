@@ -11,7 +11,7 @@
 
         <div class="w-full p-6 bg-white rounded-lg shadow">
             <table>
-                @foreach ($activities as $activity)
+                @foreach($activities as $activity)
                     <tr wire:key="{{ $activity->id }}">
 
                         <td class="tabular-nums p-1">

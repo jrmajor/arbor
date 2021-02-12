@@ -287,8 +287,8 @@
                                         <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                                     </a>
                                     <a href="{{ route('people.create', [
-                                                            'mother' => $marriage->woman_id,
-                                                            'father' => $marriage->man_id,
+                                            'mother' => $marriage->woman_id,
+                                            'father' => $marriage->man_id,
                                         ]) }}"
                                         class="a">
                                         <small>[+]</small>

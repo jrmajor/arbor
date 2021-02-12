@@ -1,4 +1,4 @@
-@if (flash()->message)
+@if(flash()->message)
     <div
         class="w-full rounded-lg shadow p-5 flex items-center mb-3
         @if(flash()->level === 'error')

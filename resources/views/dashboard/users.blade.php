@@ -19,7 +19,7 @@
             </thead>
 
             <tbody>
-                @foreach ($users as $user)
+                @foreach($users as $user)
                     <tr wire:key="{{ $user->id }}">
                         <td class="pr-4 pt-2">
                             {{ $user->username }}

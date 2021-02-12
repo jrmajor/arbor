@@ -19,6 +19,6 @@
     @endif
     {{ $pytlewski->name }}
 
-@if ($pytlewski->person || $pytlewski->id)
+@if($pytlewski->person || $pytlewski->id)
     </a>
 @endif
