@@ -34,7 +34,7 @@
                         <input
                             id="email" type="text" name="email"
                             class="form-input w-full @error('email') invalid @enderror"
-                            value="{{ $email ?? old('email') }}"
+                            value="{{ old('email', $email) }}"
                             autocomplete="email"
                             placeholder="{{ __('passwords.email') }}">
                     </div>

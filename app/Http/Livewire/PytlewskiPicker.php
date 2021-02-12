@@ -36,7 +36,7 @@ class PytlewskiPicker extends Component
 
     public function mount($person)
     {
-        $this->pytlewskiId = old('id_pytlewski') ?? $person->id_pytlewski;
+        $this->pytlewskiId = old('id_pytlewski', $person->id_pytlewski);
 
         $this->result = $this->search();
     }
