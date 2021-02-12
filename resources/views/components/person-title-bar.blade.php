@@ -18,15 +18,11 @@
             <i>
         @endif
 
-            @if($person->canBeViewedBy(auth()->user()))
-                <span class="font-normal">{{ $person->name }}</span>
-                @if($person->last_name)
-                    {{ $person->last_name }} ({{ $person->family_name }})
-                @else
-                    {{ $person->family_name }}
-                @endif
+            <span class="font-normal">{{ $person->name }}</span>
+            @if($person->last_name)
+                {{ $person->last_name }} ({{ $person->family_name }})
             @else
-                [{{ __('misc.hidden') }}]
+                {{ $person->family_name }}
             @endif
 
         @if($person->dead)
