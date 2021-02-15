@@ -24,6 +24,14 @@ use Spatie\Activitylog\ActivityLogger;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
+ * @property-read string $birth_date,
+ * @property-read string $death_date,
+ * @property-read string $funeral_date,
+ * @property-read string $burial_date,
+ * @property-read ?int $birth_year,
+ * @property-read ?int $death_year,
+ * @property-read ?int $funeral_year,
+ * @property-read ?int $burial_year,
  * @property-read Collection|Person[] $siblings
  * @property-read Collection|Marriage[] $marriages
  * @property-read Collection|Activity[] $children
