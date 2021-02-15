@@ -5,36 +5,6 @@ use Carbon\Carbon;
 use function Pest\Laravel\travelBack;
 use function Pest\Laravel\travelTo;
 
-test('year getters work', function () {
-    $personWithDates = Person::factory()->dead()->create([
-        'birth_date_from' => '1957-05-20',
-        'birth_date_to' => '1957-05-20',
-        'death_date_from' => '2020-11-09',
-        'death_date_to' => '2020-11-09',
-    ]);
-    $personWithSomeDates = Person::factory()->dead()->create([
-        'birth_date_from' => '1893-01-01',
-        'birth_date_to' => '1893-12-31',
-        'death_date_from' => '1944-08-01',
-        'death_date_to' => '1944-08-31',
-    ]);
-    $personWithoutDates = Person::factory()->create([
-        'birth_date_from' => null,
-        'birth_date_to' => null,
-        'death_date_from' => null,
-        'death_date_to' => null,
-    ]);
-
-    expect($personWithDates->birth_year)->toBe(1957);
-    expect($personWithDates->death_year)->toBe(2020);
-
-    expect($personWithSomeDates->birth_year)->toBe(1893);
-    expect($personWithSomeDates->death_year)->toBe(1944);
-
-    expect($personWithoutDates->birth_year)->toBeNull();
-    expect($personWithoutDates->death_year)->toBeNull();
-});
-
 it('returns null when calculating age without date', function () {
     $person = Person::factory()->create([
         'birth_date_from' => null,

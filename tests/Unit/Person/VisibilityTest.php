@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Person;
-use App\Models\User;
 
 it('can determine its visibility', function () {
     $alive = Person::factory()->alive()->create();

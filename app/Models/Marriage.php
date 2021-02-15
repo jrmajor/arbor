@@ -88,31 +88,4 @@ class Marriage extends Model
     {
         return $this->second_event_type || $this->second_event_date || $this->second_event_place;
     }
-
-    public function getFirstEventDateAttribute(): ?string
-    {
-        if ($this->first_event_date_from && $this->first_event_date_to) {
-            return $this->first_event_date_from->formatPeriodTo($this->first_event_date_to);
-        }
-
-        return null;
-    }
-
-    public function getSecondEventDateAttribute(): ?string
-    {
-        if ($this->second_event_date_from && $this->second_event_date_to) {
-            return $this->second_event_date_from->formatPeriodTo($this->second_event_date_to);
-        }
-
-        return null;
-    }
-
-    public function getDivorceDateAttribute(): ?string
-    {
-        if ($this->divorce_date_from && $this->divorce_date_to) {
-            return $this->divorce_date_from->formatPeriodTo($this->divorce_date_to);
-        }
-
-        return null;
-    }
 }
