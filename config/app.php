@@ -54,6 +54,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\MacrosServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
 
     ],
 
