@@ -16,7 +16,7 @@ class Relative
 
     final public function __construct(
         protected array $attributes
-    ) {}
+    ) { }
 
     public function __get(string $key): mixed
     {

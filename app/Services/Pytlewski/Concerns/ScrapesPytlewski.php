@@ -91,7 +91,7 @@ trait ScrapesPytlewski
             unset($names[0]);
 
             $attr['middle_name'] = implode(' ', $names);
-        } catch (InvalidArgumentException) {}
+        } catch (InvalidArgumentException) { }
 
         try {
             $dates = $crawler->eq(0)
@@ -124,7 +124,7 @@ trait ScrapesPytlewski
                     $attr['burial_place'] = $matches->groupOr(3, '');
                 }
             }
-        } catch (InvalidArgumentException) {}
+        } catch (InvalidArgumentException) { }
 
         try {
             $parents = $crawler->eq(3)
@@ -157,7 +157,7 @@ trait ScrapesPytlewski
             } else {
                 $attr['father_surname'] = implode(' ', $father);
             }
-        } catch (InvalidArgumentException) {}
+        } catch (InvalidArgumentException) { }
 
         return $attr;
     }

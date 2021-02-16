@@ -11,7 +11,7 @@ class Source implements Jsonable
 
     public function __construct(
         protected ?string $raw
-    ) {}
+    ) { }
 
     public static function from(string|self|null $raw): self
     {

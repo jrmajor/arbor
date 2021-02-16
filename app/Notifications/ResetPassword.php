@@ -9,9 +9,9 @@ class ResetPassword extends Notification
 {
     public function __construct(
         public string $token,
-    ) {}
+    ) { }
 
-    public function via(mixed $notifiable): string
+    public function via(): string
     {
         return 'mail';
     }
