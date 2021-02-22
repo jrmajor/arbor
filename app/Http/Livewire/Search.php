@@ -27,7 +27,7 @@ class Search extends Component
         $people = blank($this->s)
             ? collect()
             : Person::where(function ($q) {
-                $q->where('id', $this->s)
+                $q->whereKey($this->s)
                     ->orWhere(function ($q) {
                         foreach (Arr::trim(explode(' ', $this->s)) as $s) {
                             $q->where(function ($q) use ($s) {

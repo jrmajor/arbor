@@ -274,11 +274,9 @@ class Person extends Model
     {
         $name = $this->name.' ';
 
-        if (! $this->last_name) {
-            $name .= $this->family_name;
-        } else {
-            $name .= "{$this->last_name} ({$this->family_name})";
-        }
+        $name .= $this->last_name
+            ? "{$this->last_name} ({$this->family_name})"
+            : $this->family_name;
 
         return $name;
     }

@@ -61,6 +61,6 @@ class User extends Authenticatable
     {
         return $this->morphOne(Activity::class, 'causer')
             ->whereLogName('logins')->whereDescription('logged-in')
-            ->orderBy('created_at', 'desc');
+            ->latest();
     }
 }
