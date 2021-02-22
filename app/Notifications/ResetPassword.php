@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -16,7 +17,7 @@ class ResetPassword extends Notification
         return 'mail';
     }
 
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(User $notifiable): MailMessage
     {
         $url = url(route('password.reset', [
             'token' => $this->token,
