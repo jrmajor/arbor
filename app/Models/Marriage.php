@@ -21,11 +21,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Marriage extends Model
 {
-    use HasDateRanges,
-        HasFactory,
-        SoftDeletes,
-        LogsActivity,
-        TapsActivity;
+    use HasDateRanges;
+    use HasFactory;
+    use SoftDeletes;
+    use LogsActivity;
+    use TapsActivity;
 
     protected static $logName = 'marriages';
     protected static $logOnlyDirty = true;

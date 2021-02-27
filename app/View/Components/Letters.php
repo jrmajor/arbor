@@ -8,7 +8,6 @@ use Illuminate\View\Component;
 
 class Letters extends Component
 {
-
     public function __construct(
         public ?string $activeLetter,
         public ?string $activeType,

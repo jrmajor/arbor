@@ -12,11 +12,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
-    use CausesActivity,
-        HasFactory,
-        LogsActivity,
-        Notifiable,
-        SoftDeletes;
+    use CausesActivity;
+    use HasFactory;
+    use LogsActivity;
+    use Notifiable;
+    use SoftDeletes;
 
     protected static $logName = 'users';
     protected static $logOnlyDirty = true;

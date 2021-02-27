@@ -39,13 +39,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Person extends Model
 {
-    use HasDateRanges,
-        HasFactory,
-        SoftDeletes,
-        LogsActivity,
-        TapsActivity;
+    use HasDateRanges;
+    use HasFactory;
+    use SoftDeletes;
+    use LogsActivity;
+    use TapsActivity;
 
-    const generationInterval = 32;
+    public const generationInterval = 32;
 
     protected static $logName = 'people';
     protected static $logOnlyDirty = true;

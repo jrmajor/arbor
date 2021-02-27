@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
     private function callSqlSeeders()
     {
-        $seeders = (new Finder)->files()->in(__DIR__.'/sql');
+        $seeders = (new Finder())->files()->in(__DIR__.'/sql');
 
         if (! $seeders->hasResults()) {
             return $this->command->line('<comment>Found no raw sql seeders.</comment>');

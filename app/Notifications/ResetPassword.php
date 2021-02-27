@@ -24,7 +24,7 @@ class ResetPassword extends Notification
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject(__('passwords.reset_password'))
             ->line(__('passwords.you_are_receiving'))
             ->action(__('passwords.reset_password'), $url)

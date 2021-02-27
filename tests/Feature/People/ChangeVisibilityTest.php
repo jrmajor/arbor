@@ -1,10 +1,10 @@
 <?php
 
 use App\Models\Person;
+use App\Models\Activity;
 use function Pest\Laravel\put;
 use function Pest\Laravel\travel;
 use function Pest\Laravel\travelBack;
-use App\Models\Activity;
 
 beforeEach(
     fn () => $this->person = Person::factory()->create()

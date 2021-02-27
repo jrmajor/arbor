@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class Source implements Jsonable
 {
-    const parsedownVersion = '1.7.4';
+    public const parsedownVersion = '1.7.4';
 
     public function __construct(
         protected ?string $raw
