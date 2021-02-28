@@ -2,9 +2,9 @@
     <div
         class="w-full rounded-lg shadow p-5 flex items-center mb-3
         {{ match(flash()->level) {
-            'error' => 'bg-red-100 text-red-900',
-            'warning' => 'bg-yellow-100 text-yellow-900',
-            'success' => 'bg-green-100 text-green-900',
+            'error' => 'bg-red-50 text-red-900',
+            'warning' => 'bg-yellow-50 text-yellow-900',
+            'success' => 'bg-green-50 text-green-900',
         } }}">
         <svg class="flex-none w-5 h-5 mr-5 fill-current
             {{ match(flash()->level) {
