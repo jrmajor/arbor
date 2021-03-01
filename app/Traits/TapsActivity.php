@@ -2,8 +2,8 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Arr;
 use App\Models\Activity;
+use Illuminate\Support\Arr;
 
 trait TapsActivity
 {

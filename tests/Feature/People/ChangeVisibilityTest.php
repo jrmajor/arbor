@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Person;
 use App\Models\Activity;
+use App\Models\Person;
 use function Pest\Laravel\put;
 use function Pest\Laravel\travel;
 use function Pest\Laravel\travelBack;

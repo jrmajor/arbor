@@ -15,7 +15,7 @@ return [
     'required' => 'The :attribute field is required.',
 
     'custom' => [
-        /* people */
+        // people
         'birth_date_from' => [
             'required_with' => 'Birth date range beginning is required when ending is present.',
         ],
@@ -48,7 +48,7 @@ return [
             'after_or_equal' => 'Burial date range ending must be a date after or equal to beginning.',
         ],
 
-        /* marriages */
+        // marriages
         'first_event_date_from' => [
             'required_with' => 'First event date range beginning is required when ending is present.',
         ],
@@ -75,7 +75,7 @@ return [
     ],
 
     'attributes' => [
-        /* people */
+        // people
         'id_wielcy' => 'id in wielcy.pl',
         'id_pytlewski' => 'id in pytlewski.pl',
 
@@ -90,7 +90,7 @@ return [
 
         'sources.*' => 'source',
 
-        /* marriages */
+        // marriages
         'woman_order' => 'order in woman marriages',
         'man_order' => 'order in man marriages',
 
@@ -101,7 +101,7 @@ return [
         'divorce_date_from' => 'divorce date',
         'divorce_date_to' => 'divorce date',
 
-        /* settings */
+        // settings
         'logout_password' => 'password',
     ],
 

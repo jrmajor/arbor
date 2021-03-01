@@ -135,16 +135,19 @@ trait ScrapesPytlewski
             [$mother, $father] = explode('<br>', str_replace('-', ' ', $parents));
 
             $matches = Regex::match('/id=([0-9]+)/', $mother);
+
             if ($matches->hasMatch()) {
                 $attr['mother_id'] = $matches->group(1);
             }
 
             $matches = Regex::match('/id=([0-9]+)/', $father);
+
             if ($matches->hasMatch()) {
                 $attr['father_id'] = $matches->group(1);
             }
 
             $mother = explode(',', strip_tags($mother));
+
             if (count($mother) === 2) {
                 [$attr['mother_surname'], $attr['mother_name']] = $mother;
             } else {
@@ -152,6 +155,7 @@ trait ScrapesPytlewski
             }
 
             $father = explode(',', strip_tags($father));
+
             if (count($father) === 2) {
                 [$attr['father_surname'], $attr['father_name']] = $father;
             } else {
@@ -207,6 +211,7 @@ trait ScrapesPytlewski
 
             foreach ($children as $child) {
                 $matches = Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/', $child);
+
                 if ($matches->hasMatch() && ! str_starts_with($matches->groupOr(2, ''), 'Nie ma')) {
                     $child = [];
                     $child['id'] = $matches->groupOr(1, '');
@@ -225,6 +230,7 @@ trait ScrapesPytlewski
 
             foreach ($siblings as $sibling) {
                 $matches = Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/', $sibling);
+
                 if ($matches->hasMatch() && ! str_starts_with($matches->groupOr(2, ''), 'Nie ma')) {
                     $sibling = [];
                     $sibling['id'] = $matches->groupOr(1, '');

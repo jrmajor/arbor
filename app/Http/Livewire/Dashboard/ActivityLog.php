@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\Activity;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Activity;
 
 class ActivityLog extends Component
 {

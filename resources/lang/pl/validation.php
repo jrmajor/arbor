@@ -14,12 +14,12 @@ return [
     'required' => ':Attribute nie może być puste.',
 
     'custom' => [
-        /* user accounts and logins */
+        // user accounts and logins
         'password' => [
             'confirmed' => 'Podane hasła nie są identyczne.',
         ],
 
-        /* people */
+        // people
         'birth_date_from' => [
             'required_with' => 'Rozpoczęcie zakresu daty urodzenia nie może być puste jeśli podano zakończenie.',
         ],
@@ -52,7 +52,7 @@ return [
             'after_or_equal' => 'Zakończenie zakresu daty pochówku musi być datą taką samą lub późniejszą niż rozpoczęcie.',
         ],
 
-        /* marriages */
+        // marriages
         'first_event_date_from' => [
             'required_with' => 'Rozpoczęcie zakresu daty pierwszego wydarzenia nie może być puste jeśli podano zakończenie.',
         ],
@@ -79,10 +79,10 @@ return [
     ],
 
     'attributes' => [
-        /* user accounts and logins */
+        // user accounts and logins
         'password' => 'hasło',
 
-        /* people */
+        // people
         'id_wielcy' => 'id w wielcy.pl',
         'id_pytlewski' => 'id w pytlewski.pl',
 
@@ -113,7 +113,7 @@ return [
 
         'biography' => 'biografia',
 
-        /* marriages */
+        // marriages
         'woman_order' => 'kolejność w małżeństwach kobiety',
         'man_order' => 'kolejność w małżeństwach mężczyzny',
 
@@ -128,7 +128,7 @@ return [
         'second_event_place' => 'miejsce drugiego wydarzenia',
         'divorce_place' => 'miejsce rozwodu',
 
-        /* settings */
+        // settings
         'logout_password' => 'hasło',
     ],
 

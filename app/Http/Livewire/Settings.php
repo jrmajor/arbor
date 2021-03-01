@@ -11,6 +11,7 @@ class Settings extends Component
     public $email;
 
     public $password;
+
     public $password_confirmation;
 
     public $logout_password;

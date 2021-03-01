@@ -48,9 +48,13 @@ class Person extends Model
     public const generationInterval = 32;
 
     protected static $logName = 'people';
+
     protected static $logOnlyDirty = true;
+
     protected static $logAttributes = ['*'];
+
     protected static $logAttributesToIgnore = ['id', 'visibility', 'created_at', 'updated_at'];
+
     protected static $submitEmptyLogs = false;
 
     protected $guarded = ['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'];

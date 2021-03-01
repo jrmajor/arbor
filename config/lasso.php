@@ -18,7 +18,7 @@ return [
 
     'webhooks' => [
         'publish' => [],
-        'pull' => []
+        'pull' => [],
     ],
 
     'public_path' => public_path(),

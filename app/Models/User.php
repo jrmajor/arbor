@@ -19,9 +19,13 @@ class User extends Authenticatable
     use SoftDeletes;
 
     protected static $logName = 'users';
+
     protected static $logOnlyDirty = true;
+
     protected static $logAttributes = ['*'];
+
     protected static $logAttributesToIgnore = ['id', 'created_at', 'updated_at', 'remember_token'];
+
     protected static $submitEmptyLogs = false;
 
     protected $fillable = [
