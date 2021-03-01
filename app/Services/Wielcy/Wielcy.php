@@ -54,7 +54,8 @@ class Wielcy
 
     private function parseName()
     {
-        $matches = Regex::match('/<h1[^<>]*><img src="images\/(female|male)\.png"[^<>]*\s*[^<>]*>([\s\S]+)<small>.*<\/small>\s*<\/h1>/', $this->source);
+        $matches = Regex::match('/<h1[^<>]*><img src="images\\/(female|male)\\.png"[^<>]*\\s*[^<>]*>([\\s\\S]+)<small>.*<\\/small>\\s*<\\/h1>/', $this->source);
+
         if ($matches->hasMatch()) {
             if ($matches->group(1) === 'female') {
                 $this->attributes['sex'] = 'xx';
@@ -62,13 +63,13 @@ class Wielcy
                 $this->attributes['sex'] = 'xy';
             }
 
-            $this->attributes['name'] = Regex::replace('/<a[^<>]*>([^<>]*)<\/a>/', '<b>$1</b>', $matches->group(2))->result();
+            $this->attributes['name'] = Regex::replace('/<a[^<>]*>([^<>]*)<\\/a>/', '<b>$1</b>', $matches->group(2))->result();
         }
     }
 
     private function parseBio()
     {
-        $regex = '/<center>\s<table border="0" cellspacing="0" cellpadding="0">\s<tr><td><center>\s<em>\s([\s\S]+)<\/em><br>\s<\/center>\s<\/td><\/tr>\s<\/table>\s<\/center><p>/';
+        $regex = '/<center>\\s<table border="0" cellspacing="0" cellpadding="0">\\s<tr><td><center>\\s<em>\\s([\\s\\S]+)<\\/em><br>\\s<\\/center>\\s<\\/td><\\/tr>\\s<\\/table>\\s<\\/center><p>/';
 
         if (preg_match($regex, $this->source, $matches) === 1) {
             $matches = Arr::trim($matches);

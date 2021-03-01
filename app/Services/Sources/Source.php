@@ -25,7 +25,7 @@ class Source implements Jsonable
 
     public function sanitized(): ?string
     {
-        $collapsed = trim(preg_replace('/\s+/', ' ', $this->raw));
+        $collapsed = trim(preg_replace('/\\s+/', ' ', $this->raw));
 
         return $collapsed === '' ? null : $collapsed;
     }
@@ -118,7 +118,7 @@ class Source implements Jsonable
 
         $markup .= $text;
 
-        return trim(preg_replace('/\s+/', ' ', $markup));
+        return trim(preg_replace('/\\s+/', ' ', $markup));
     }
 
     protected function inlineEscapeSequence($excerpt)
@@ -137,7 +137,7 @@ class Source implements Jsonable
             return;
         }
 
-        if (! preg_match('/^[*]((?:\\\\\*|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*])/s', $excerpt['text'], $matches)) {
+        if (! preg_match('/^[*]((?:\\\\\\*|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*])/s', $excerpt['text'], $matches)) {
             return;
         }
 
@@ -157,7 +157,7 @@ class Source implements Jsonable
             return;
         }
 
-        if (! preg_match('/^ISBN ((?:978|979)?[- ]?(?:\d[- ]?){9}[\dXx])(\s|$)/s', $excerpt['text'], $matches)) {
+        if (! preg_match('/^ISBN ((?:978|979)?[- ]?(?:\\d[- ]?){9}[\\dXx])(\\s|$)/s', $excerpt['text'], $matches)) {
             return;
         }
 
@@ -198,7 +198,7 @@ class Source implements Jsonable
 
         $remainder = $excerpt['text'];
 
-        if (preg_match('/\[((?:[^][]++|(?R))*+)\]/', $remainder, $matches)) {
+        if (preg_match('/\\[((?:[^][]++|(?R))*+)\\]/', $remainder, $matches)) {
             $element['text'] = $matches[1];
 
             $extent += strlen($matches[0]);
@@ -208,7 +208,7 @@ class Source implements Jsonable
             return;
         }
 
-        if (preg_match('/^[(]\s*+((?:[^ ()]++|[(][^ )]+[)])++)\s*[)]/', $remainder, $matches)) {
+        if (preg_match('/^[(]\\s*+((?:[^ ()]++|[(][^ )]+[)])++)\\s*[)]/', $remainder, $matches)) {
             $element['attributes']['href'] = $matches[1];
 
             $extent += strlen($matches[0]);
@@ -224,7 +224,7 @@ class Source implements Jsonable
 
     protected function inlineSpecialCharacter($excerpt)
     {
-        if (preg_match('/^&#?\w+;/', $excerpt['text'])) {
+        if (preg_match('/^&#?\\w+;/', $excerpt['text'])) {
             return [
                 'markup' => '&',
                 'extent' => 1,
@@ -243,7 +243,7 @@ class Source implements Jsonable
             return;
         }
 
-        if (preg_match('/\bhttps?:[\/]{2}[^\s<]+\b\/*/ui', $excerpt['context'], $matches, PREG_OFFSET_CAPTURE)) {
+        if (preg_match('/\\bhttps?:[\\/]{2}[^\\s<]+\\b\\/*/ui', $excerpt['context'], $matches, PREG_OFFSET_CAPTURE)) {
             $url = $matches[0][0];
 
             $inline = [

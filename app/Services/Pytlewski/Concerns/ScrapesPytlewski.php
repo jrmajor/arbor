@@ -75,7 +75,7 @@ trait ScrapesPytlewski
 
             [$surnames, $names] = explode('<br>', $names);
 
-            $matches = Regex::match('/(.*) \((.*)\).*/', $surnames);
+            $matches = Regex::match('/(.*) \\((.*)\\).*/', $surnames);
 
             if ($matches->hasMatch()) {
                 $attr['last_name'] = strip_tags($matches->group(1));
@@ -101,7 +101,7 @@ trait ScrapesPytlewski
 
             $dates = explode('<br>', $dates);
 
-            $matches = Regex::match('/ur\. ([^ ]*) w ([^<]*)/', $dates[0]);
+            $matches = Regex::match('/ur\\. ([^ ]*) w ([^<]*)/', $dates[0]);
 
             if ($matches->hasMatch()) {
                 $attr['birth_date'] = $matches->group(1);
@@ -112,7 +112,7 @@ trait ScrapesPytlewski
             }
 
             if (isset($dates[1])) {
-                $matches = Regex::match('/\(zm\. ([^ ]*)(?: w ([^<),]*)(?:,poch\.([^<)]*)?\)?)?)?/', $dates[1]);
+                $matches = Regex::match('/\\(zm\\. ([^ ]*)(?: w ([^<),]*)(?:,poch\\.([^<)]*)?\\)?)?)?/', $dates[1]);
 
                 if ($matches->hasMatch()) {
                     $attr['death_date'] = $matches->group(1);
@@ -190,7 +190,8 @@ trait ScrapesPytlewski
             $marriages = explode('<br>', $marriages);
 
             foreach ($marriages as $marriage) {
-                $matches = Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>(]+)(?:<\/a><\/u>)? ?(?:\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\))?/', $marriage);
+                $matches = Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>(]+)(?:<\\/a><\\/u>)? ?(?:\\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\\))?/', $marriage);
+
                 if ($matches->hasMatch() && ! str_starts_with($matches->groupOr(2, ''), 'Nie zawar')) {
                     $marriage = [];
                     $marriage['id'] = $matches->groupOr(1, '');

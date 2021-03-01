@@ -27,7 +27,7 @@ it('parses links')
     ->toBe('<a href="https://wikipedia.com/wiki" class="a">wiki</a>');
 
 it('escapes links')
-    ->expect(Source::from('\[wiki](h)')->markup())
+    ->expect(Source::from('\\[wiki](h)')->markup())
     ->toBe('[wiki](h)');
 
 it('parses urls')
@@ -43,7 +43,7 @@ it('parses italics')
     ->toBe('<i>text</i> <a href="https://weird.*domain*" class="a"><i>link</i> text</a>');
 
 it('escapes italics')
-    ->expect(Source::from('\*text\* [\*link* text](https://weird.*domain*)')->markup())
+    ->expect(Source::from('\\*text\\* [\\*link* text](https://weird.*domain*)')->markup())
     ->toBe('*text* <a href="https://weird.*domain*" class="a">*link* text</a>');
 
 it('parses ISBN-10', function () {
