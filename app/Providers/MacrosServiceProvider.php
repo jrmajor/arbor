@@ -64,11 +64,11 @@ class MacrosServiceProvider extends ServiceProvider
 
         Arr::macro('trim', function (array $array): array {
             foreach ($array as $key => $value) {
-                if (is_array($value)) {
-                    $array[$key] = self::trim($value);
-                } elseif (is_string($value)) {
-                    $array[$key] = trim($value);
-                }
+                $array[$key] = match (gettype($value)) {
+                    'array' => self::trim($value),
+                    'string' => trim($value),
+                    default => $value,
+                };
 
                 if (blank($array[$key])) {
                     unset($array[$key]);
