@@ -1,7 +1,6 @@
 <?php
 
 dataset('pytlewscy', [
-
     'Franciszek Kosela' => [
         '543',
         file_get_contents(__DIR__.'/pytlewscy/543.html'),
@@ -417,5 +416,4 @@ dataset('pytlewscy', [
             'bio' => null,
         ],
     ],
-
 ]);
