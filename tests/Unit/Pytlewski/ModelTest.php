@@ -51,7 +51,7 @@ it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
     ];
 
     foreach (Arr::only($attributes, $keysToCheck) as $key => $value) {
-        expect($pytlewski->$key)->toBe($value);
+        expect($pytlewski->{$key})->toBe($value);
     }
 })->with('pytlewscy');
 

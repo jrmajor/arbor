@@ -107,7 +107,7 @@ test('guests cannot edit person', function () {
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($this->person->$key)->toBe($attribute);
+        expect($this->person->{$key})->toBe($attribute);
     }
 });
 
@@ -123,7 +123,7 @@ test('users without permissions cannot edit person', function () {
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($this->person->$key)->toBe($attribute);
+        expect($this->person->{$key})->toBe($attribute);
     }
 });
 
@@ -140,7 +140,7 @@ test('users with permissions can edit person', function () {
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($this->person->$key)->toBe($attribute);
+        expect($this->person->{$key})->toBe($attribute);
     }
 
     expect($this->person->sources)->toHaveCount(2);
@@ -148,7 +148,7 @@ test('users with permissions can edit person', function () {
         ->toBe($this->newAttributes['sources']);
 
     foreach ($this->dates as $date) {
-        expect($this->person->$date->toDateString())->toBe($this->newAttributes[$date]);
+        expect($this->person->{$date}->toDateString())->toBe($this->newAttributes[$date]);
     }
 });
 

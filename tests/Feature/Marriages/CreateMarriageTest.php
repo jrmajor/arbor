@@ -90,15 +90,15 @@ test('users with permissions can add valid marriage', function () {
     $attributesToCheck = Arr::except($this->validAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($marriage->$key)->toBe($attribute);
+        expect($marriage->{$key})->toBe($attribute);
     }
 
     foreach ($this->enums as $enum) {
-        expect((string) $marriage->$enum)->toBe($this->validAttributes[$enum]);
+        expect((string) $marriage->{$enum})->toBe($this->validAttributes[$enum]);
     }
 
     foreach ($this->dates as $date) {
-        expect($marriage->$date->toDateString())->toBe($this->validAttributes[$date]);
+        expect($marriage->{$date}->toDateString())->toBe($this->validAttributes[$date]);
     }
 });
 
@@ -107,7 +107,7 @@ test('user can pass spouse to form by get request parameters', function () {
     $man = Person::factory()->man()->create();
 
     withPermissions(2)
-        ->get("marriages/create?woman=$woman->id&man=$man->id")
+        ->get("marriages/create?woman={$woman->id}&man={$man->id}")
         ->assertStatus(200)
         ->assertSee($woman->id)
         ->assertSee($man->id);
@@ -154,6 +154,6 @@ test('marriage creation is logged', function () {
 
     foreach ($this->dates as $date) {
         expect($log->properties['attributes'][$date])
-            ->toBe($marriage->$date->format('Y-m-d'));
+            ->toBe($marriage->{$date}->format('Y-m-d'));
     }
 });

@@ -99,7 +99,7 @@ test('users with permissions can add valid person', function () {
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($person->$key)->toBe($attribute);
+        expect($person->{$key})->toBe($attribute);
     }
 
     expect($person->sources)->toHaveCount(2);
@@ -107,7 +107,7 @@ test('users with permissions can add valid person', function () {
         ->toBe($this->validAttributes['sources']);
 
     foreach ($this->dates as $date) {
-        expect($person->$date->toDateString())->toBe($this->validAttributes[$date]);
+        expect($person->{$date}->toDateString())->toBe($this->validAttributes[$date]);
     }
 });
 
@@ -116,7 +116,7 @@ test('you can pass parents ids to form by get request parameters', function () {
     $father = Person::factory()->man()->create();
 
     withPermissions(2)
-        ->get("people/create?mother=$mother->id&father=$father->id")
+        ->get("people/create?mother={$mother->id}&father={$father->id}")
         ->assertStatus(200)
         ->assertSee($mother->id)
         ->assertSee($father->id);
@@ -169,6 +169,6 @@ test('person creation is logged', function () {
 
     foreach ($this->dates as $date) {
         expect($log->properties['attributes'][$date])
-            ->toBe($person->$date->format('Y-m-d'));
+            ->toBe($person->{$date}->format('Y-m-d'));
     }
 });

@@ -94,7 +94,7 @@ it('can load relations', function ($id, $source, $attributes) {
                 ->and($marriage->person)->toBeNull();
 
             foreach ($marriageAttributes as $key => $value) {
-                expect($marriage->$key)->toBe($value);
+                expect($marriage->{$key})->toBe($value);
             }
         }
 
@@ -105,7 +105,7 @@ it('can load relations', function ($id, $source, $attributes) {
                 ->and($child->person)->toBeNull();
 
             foreach ($childAttributes as $key => $value) {
-                expect($child->$key)->toBe($value);
+                expect($child->{$key})->toBe($value);
             }
         }
 
@@ -116,7 +116,7 @@ it('can load relations', function ($id, $source, $attributes) {
                 ->and($sibling->person)->toBeNull();
 
             foreach ($siblingAttributes as $key => $value) {
-                expect($sibling->$key)->toBe($value);
+                expect($sibling->{$key})->toBe($value);
             }
         }
     }

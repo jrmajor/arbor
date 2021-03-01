@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
         Person::observe(PersonObserver::class);
 
         Blade::directive('encodedjson', function ($expression) {
-            return "<?php echo e(json_encode($expression)) ?>";
+            return "<?php echo e(json_encode({$expression})) ?>";
         });
 
         Flash::levels([

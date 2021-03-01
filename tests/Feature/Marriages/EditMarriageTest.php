@@ -92,7 +92,7 @@ test('guests cannot edit marriage', function () {
     $attributesToCheck = Arr::except($this->oldAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($this->marriage->$key)->toBe($attribute);
+        expect($this->marriage->{$key})->toBe($attribute);
     }
 });
 
@@ -106,7 +106,7 @@ test('users without permissions cannot edit marriage', function () {
     $attributesToCheck = Arr::except($this->oldAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($this->marriage->$key)->toBe($attribute);
+        expect($this->marriage->{$key})->toBe($attribute);
     }
 });
 
@@ -122,15 +122,15 @@ test('users with permissions can edit marriage', function () {
     $attributesToCheck = Arr::except($this->newAttributes, array_merge($this->dates, $this->enums));
 
     foreach ($attributesToCheck as $key => $attribute) {
-        expect($this->marriage->$key)->toBe($attribute);
+        expect($this->marriage->{$key})->toBe($attribute);
     }
 
     foreach ($this->enums as $enum) {
-        expect((string) $this->marriage->$enum)->toBe($this->newAttributes[$enum]);
+        expect((string) $this->marriage->{$enum})->toBe($this->newAttributes[$enum]);
     }
 
     foreach ($this->dates as $date) {
-        expect($this->marriage->$date->toDateString())
+        expect($this->marriage->{$date}->toDateString())
             ->toBe($this->newAttributes[$date]);
     }
 });
