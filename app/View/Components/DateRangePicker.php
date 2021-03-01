@@ -63,22 +63,14 @@ class DateRangePicker extends Component
             $from->copy()->startOfYear()->equalTo($from)
             && $to->copy()->endOfYear()->equalTo($to)
         ) {
-            if ($from->year === $to->year) {
-                return true;
-            }
-
-            return false;
+            return $from->year === $to->year;
         }
 
         if (
             $from->copy()->startOfMonth()->equalTo($from)
             && $to->copy()->endOfMonth()->equalTo($to)
         ) {
-            if ($from->year === $to->year && $from->month === $to->month) {
-                return true;
-            }
-
-            return false;
+            return $from->year === $to->year && $from->month === $to->month;
         }
 
         return false;
@@ -113,10 +105,10 @@ class DateRangePicker extends Component
         if (
             $from->copy()->startOfMonth()->equalTo($from)
             && $to->copy()->endOfMonth()->equalTo($to)
+            && $from->year === $to->year
+            && $from->month === $to->month
         ) {
-            if ($from->year === $to->year && $from->month === $to->month) {
-                return $from->format('Y-m');
-            }
+            return $from->format('Y-m');
         }
 
         return null;

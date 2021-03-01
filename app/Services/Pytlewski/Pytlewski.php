@@ -75,9 +75,9 @@ class Pytlewski
 
         if ($ids->isNotEmpty()) {
             return Person::whereIn('id_pytlewski', $ids)->get();
-        } else {
-            return new Collection();
         }
+
+        return new Collection();
     }
 
     private function matchRelatives(Collection $relatives): array

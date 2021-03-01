@@ -28,9 +28,9 @@ class MacrosServiceProvider extends ServiceProvider
             ) {
                 if ($from->year === $to->year) {
                     return (string) $from->year;
-                } else {
-                    return $from->year.'-'.$to->year;
                 }
+
+                return $from->year.'-'.$to->year;
             }
 
             if (
@@ -39,10 +39,10 @@ class MacrosServiceProvider extends ServiceProvider
             ) {
                 if ($from->year === $to->year && $from->month === $to->month) {
                     return $from->year.'-'.$from->format('m');
-                } else {
-                    return __('misc.date.between').' '.$from->year.'-'.$from->format('m')
-                        .' '.__('misc.date.and').' '.$to->year.'-'.$to->format('m');
                 }
+
+                return __('misc.date.between').' '.$from->year.'-'.$from->format('m')
+                    .' '.__('misc.date.and').' '.$to->year.'-'.$to->format('m');
             }
 
             return __('misc.date.between').' '.$from->toDateString().' '.__('misc.date.and').' '.$to->toDateString();
