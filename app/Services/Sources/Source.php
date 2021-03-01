@@ -9,6 +9,20 @@ class Source implements Jsonable
 {
     public const parsedownVersion = '1.7.4';
 
+    protected $inlineTypes = [
+        '"' => ['SpecialCharacter'],
+        '&' => ['SpecialCharacter'],
+        '<' => ['SpecialCharacter'],
+        '>' => ['SpecialCharacter'],
+        ':' => ['Url'],
+        '[' => ['Link'],
+        '*' => ['Italics'],
+        'I' => ['ISBN'],
+        '\\' => ['EscapeSequence'],
+    ];
+
+    protected $inlineMarkerList = '"&<>:[*I\\';
+
     public function __construct(
         protected ?string $raw
     ) { }
@@ -35,29 +49,10 @@ class Source implements Jsonable
         return $this->raw;
     }
 
-    public function __toString(): string
-    {
-        return (string) $this->raw;
-    }
-
     public function toJson($options = 0): string
     {
         return json_encode($this->raw, $options);
     }
-
-    protected $inlineTypes = [
-        '"' => ['SpecialCharacter'],
-        '&' => ['SpecialCharacter'],
-        '<' => ['SpecialCharacter'],
-        '>' => ['SpecialCharacter'],
-        ':' => ['Url'],
-        '[' => ['Link'],
-        '*' => ['Italics'],
-        'I' => ['ISBN'],
-        '\\' => ['EscapeSequence'],
-    ];
-
-    protected $inlineMarkerList = '"&<>:[*I\\';
 
     protected function line($text, $nonNestables = [])
     {
@@ -315,5 +310,10 @@ class Source implements Jsonable
         }
 
         return $element;
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->raw;
     }
 }

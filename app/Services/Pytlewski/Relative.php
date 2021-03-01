@@ -9,14 +9,14 @@ class Relative
         'name', 'surname',
     ];
 
+    final public function __construct(
+        protected array $attributes
+    ) { }
+
     public static function hydrate(array $attributes): static
     {
         return new static($attributes);
     }
-
-    final public function __construct(
-        protected array $attributes
-    ) { }
 
     public function __get(string $key): mixed
     {

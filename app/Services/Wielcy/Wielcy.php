@@ -80,6 +80,11 @@ class Wielcy
         }
     }
 
+    public static function url(string $id): string
+    {
+        return 'http://www.sejm-wielki.pl/s/?m=NG&t=PN&n='.$id;
+    }
+
     public function __get(string $key): mixed
     {
         if ($key === 'id') {
@@ -102,10 +107,5 @@ class Wielcy
         $this->attributes[$key] = $value;
 
         return $this;
-    }
-
-    public static function url(string $id): string
-    {
-        return 'http://www.sejm-wielki.pl/s/?m=NG&t=PN&n='.$id;
     }
 }

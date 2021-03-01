@@ -133,6 +133,11 @@ class Pytlewski
         return compact('mother', 'father', 'marriages', 'children', 'siblings');
     }
 
+    public static function url(int $id): string
+    {
+        return 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id='.$id;
+    }
+
     public function __get(string $key): mixed
     {
         if ($key === 'id') {
@@ -156,10 +161,5 @@ class Pytlewski
         }
 
         throw new InvalidArgumentException("Key [{$key}] does not exist.");
-    }
-
-    public static function url(int $id): string
-    {
-        return 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id='.$id;
     }
 }
