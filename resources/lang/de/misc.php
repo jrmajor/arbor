@@ -22,6 +22,7 @@ return [
 
     'date' => [
         'date' => 'Datum',
+        'between_and' => 'zwischen :from und :to',
         'between' => 'zwischen',
         'and' => 'und',
         'format' => 'JJJJ-MM-TT',

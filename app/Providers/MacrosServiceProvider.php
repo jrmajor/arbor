@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
@@ -13,6 +14,7 @@ class MacrosServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::macro('formatPeriodTo', static function (Carbon $to): string {
+            /** @var CarbonImmutable $from */
             $from = self::this()->toImmutable();
             $to = $to->toImmutable();
 
@@ -20,13 +22,11 @@ class MacrosServiceProvider extends ServiceProvider
                 return $from->toDateString();
             }
 
-            $to = $to->endOfDay();
-
             if (
-                $from->startOfYear()->equalTo($from)
-                && $to->endOfYear()->equalTo($to)
+                $from->startOfYear()->isSameDay($from)
+                && $to->endOfYear()->isSameDay($to)
             ) {
-                if ($from->year === $to->year) {
+                if ($from->isSameYear($to)) {
                     return (string) $from->year;
                 }
 
@@ -34,18 +34,23 @@ class MacrosServiceProvider extends ServiceProvider
             }
 
             if (
-                $from->startOfMonth()->equalTo($from)
-                && $to->endOfMonth()->equalTo($to)
+                $from->startOfMonth()->isSameDay($from)
+                && $to->endOfMonth()->isSameDay($to)
             ) {
-                if ($from->year === $to->year && $from->month === $to->month) {
-                    return $from->year.'-'.$from->format('m');
+                if ($from->isSameMonth($to)) {
+                    return $from->format('Y-m');
                 }
 
-                return __('misc.date.between').' '.$from->year.'-'.$from->format('m')
-                    .' '.__('misc.date.and').' '.$to->year.'-'.$to->format('m');
+                return __('misc.date.between_and', [
+                    'from' => $from->format('Y-m'),
+                    'to' => $to->format('Y-m'),
+                ]);
             }
 
-            return __('misc.date.between').' '.$from->toDateString().' '.__('misc.date.and').' '.$to->toDateString();
+            return __('misc.date.between_and', [
+                'from' => $from->toDateString(),
+                'to' => $to->toDateString(),
+            ]);
         });
 
         Str::macro('formatBiography', function (?string $biography): ?string {
