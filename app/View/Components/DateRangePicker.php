@@ -2,36 +2,37 @@
 
 namespace App\View\Components;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
 use Illuminate\View\Component;
 
 class DateRangePicker extends Component
 {
-    protected ?Carbon $initialFrom = null;
+    protected ?CarbonImmutable $initialFrom = null;
 
-    protected ?Carbon $initialTo = null;
+    protected ?CarbonImmutable $initialTo = null;
 
     protected bool $hasErrors = false;
 
     public function __construct(
         public string $name,
         public string $label,
-        Carbon|string|null $initialFrom,
-        Carbon|string|null $initialTo,
+        CarbonInterface|string|null $initialFrom,
+        CarbonInterface|string|null $initialTo,
     ) {
         if (session()->get('errors')?->has(["{$name}_from", "{$name}_to"])) {
-            $this->hasErrors = false;
+            $this->hasErrors = true;
 
             return;
         }
 
         $this->initialFrom = is_string($initialFrom)
-            ? Carbon::create($initialFrom)
-            : $initialFrom;
+            ? CarbonImmutable::create($initialFrom)
+            : $initialFrom?->toImmutable();
 
         $this->initialTo = is_string($initialTo)
-            ? Carbon::create($initialTo)
-            : $initialTo;
+            ? CarbonImmutable::create($initialTo)
+            : $initialTo?->toImmutable();
     }
 
     public function pickerData(): array
@@ -49,26 +50,20 @@ class DateRangePicker extends Component
         $from = $this->initialFrom;
         $to = $this->initialTo;
 
-        if (! $from || ! $to) {
+        if (! $from || ! $to || $from->equalTo($to)) {
             return true;
         }
-
-        if ($from->equalTo($to)) {
-            return true;
-        }
-
-        $to = $to->endOfDay();
 
         if (
-            $from->copy()->startOfYear()->equalTo($from)
-            && $to->copy()->endOfYear()->equalTo($to)
+            $from->startOfYear()->isSameDay($from)
+            && $to->endOfYear()->isSameDay($to)
         ) {
             return $from->year === $to->year;
         }
 
         if (
-            $from->copy()->startOfMonth()->equalTo($from)
-            && $to->copy()->endOfMonth()->equalTo($to)
+            $from->startOfMonth()->isSameDay($from)
+            && $to->endOfMonth()->isSameDay($to)
         ) {
             return $from->year === $to->year && $from->month === $to->month;
         }
@@ -89,24 +84,18 @@ class DateRangePicker extends Component
             return $from->format('Y-m-d');
         }
 
-        $to = $to->endOfDay();
-
         if (
-            $from->copy()->startOfYear()->equalTo($from)
-            && $to->copy()->endOfYear()->equalTo($to)
+            $from->startOfYear()->isSameDay($from)
+            && $to->endOfYear()->isSameDay($to)
+            && $from->isSameYear($to)
         ) {
-            if ($from->year === $to->year) {
-                return $from->format('Y');
-            }
-
-            return null;
+            return $from->format('Y');
         }
 
         if (
-            $from->copy()->startOfMonth()->equalTo($from)
-            && $to->copy()->endOfMonth()->equalTo($to)
-            && $from->year === $to->year
-            && $from->month === $to->month
+            $from->startOfMonth()->isSameDay($from)
+            && $to->endOfMonth()->isSameDay($to)
+            && $from->isSameMonth($to)
         ) {
             return $from->format('Y-m');
         }
