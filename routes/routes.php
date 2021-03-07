@@ -23,8 +23,8 @@ Route::get('settings', Settings::class)
 Route::get('dashboard/users', Users::class)
     ->middleware('auth')->name('dashboard.users');
 
-Route::get('dashboard/activitylog', ActivityLog::class)
-    ->middleware('auth')->name('dashboard.activitylog');
+Route::get('dashboard/activity-log', ActivityLog::class)
+    ->middleware('auth')->name('dashboard.activityLog');
 
 Route::get('dashboard/reports', [DashboardController::class, 'reports'])
     ->middleware('auth')->name('dashboard.reports');

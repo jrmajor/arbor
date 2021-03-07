@@ -21,16 +21,16 @@
                 </li>
             </{{ $active === 'users' ? 'span' : 'a' }}>
 
-            <{{ $active === 'activitylog' ? 'span' : 'a' }}
-                href="{{ route('dashboard.activitylog') }}"
-                class="{{ $active === 'activitylog' ? 'text-blue-700' : 'group text-gray-700 hover:text-gray-800 focus:text-gray-800 focus:outline-none' }}
+            <{{ $active === 'activityLog' ? 'span' : 'a' }}
+                href="{{ route('dashboard.activityLog') }}"
+                class="{{ $active === 'activityLog' ? 'text-blue-700' : 'group text-gray-700 hover:text-gray-800 focus:text-gray-800 focus:outline-none' }}
                     transition-colors duration-100 ease-out">
                 <li class="px-3 py-1 rounded
-                    {{ $active !== 'dashboard.activitylog' ? 'group-hover:bg-gray-200 group-focus:bg-gray-200' : '' }}
+                    {{ $active !== 'activityLog' ? 'group-hover:bg-gray-200 group-focus:bg-gray-200' : '' }}
                     transition-colors duration-100 ease-out">
-                    <span class="w-full {{ $active === 'activitylog' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
+                    <span class="w-full {{ $active === 'activityLog' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
                         <svg class="h-4 w-4 mr-2 fill-current
-                                {{ $active === 'activitylog' ? 'text-blue-600' : 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700' }}
+                                {{ $active === 'activityLog' ? 'text-blue-600' : 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700' }}
                                 transition-colors duration-100 ease-out"
                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.5 1.5a1 1 0 01.949.684L12.5 14.338l1.551-4.654A1 1 0 0115 9h4a1 1 0 110 2h-3.28l-2.271 6.816a1 1 0 01-1.898 0L7.5 5.662l-1.551 4.654A1 1 0 015 11H1a1 1 0 110-2h3.28L6.55 2.184A1 1 0 017.5 1.5z"/>
@@ -38,7 +38,7 @@
                         Activity log
                     </span>
                 </li>
-            </{{ $active === 'activitylog' ? 'span' : 'a' }}>
+            </{{ $active === 'activityLog' ? 'span' : 'a' }}>
 
             <{{ $active === 'reports' ? 'span' : 'a' }}
                 href="{{ route('dashboard.reports') }}"
