@@ -12,7 +12,7 @@ Route::permanentRedirect('/', 'people')
     ->name('welcome');
 
 Route::post('locale', LocaleController::class)
-    ->name('locale.set');
+    ->name('locale.store');
 
 Route::get('search', Search::class)
     ->name('search');

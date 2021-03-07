@@ -247,7 +247,7 @@
                 @endguest
 
                 <form
-                    action="{{ route('locale.set') }}" method="POST"
+                    action="{{ route('locale.store') }}" method="POST"
                     class="lg:mt-1 px-2 py-1 text-gray-800 text-sm flex items-center">
                     @csrf
                     {{ __('misc.language') }}:&nbsp;
