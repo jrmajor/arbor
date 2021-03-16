@@ -72,7 +72,7 @@
     </main>
 
     <div class="flex-shrink-0 p-1">
-        <x-dashboard-menu active="activityLog"/>
+        <x-sidebar-menus.dashboard active="activityLog"/>
     </div>
 
 </div>

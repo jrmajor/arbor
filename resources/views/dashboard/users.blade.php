@@ -49,7 +49,7 @@
     </main>
 
     <div class="flex-shrink-0 p-1">
-        <x-dashboard-menu active="users"/>
+        <x-sidebar-menus.dashboard active="users"/>
     </div>
 
 </div>

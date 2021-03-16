@@ -15,7 +15,7 @@
         </main>
 
         <div class="flex-shrink-0 p-1">
-            <x-marriage-menu active="edit" :marriage="$marriage"/>
+            <x-sidebar-menus.marriage active="edit" :marriage="$marriage"/>
         </div>
 
     </div>

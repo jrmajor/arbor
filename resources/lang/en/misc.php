@@ -15,6 +15,12 @@ return [
         'contact' => 'Contact',
     ],
 
+    'dashboard' => [
+        'users' => 'Users',
+        'activity_log' => 'Activity log',
+        'reports' => 'Reports',
+    ],
+
     'titles' => [
         'search' => 'Search',
         'error' => 'Error',

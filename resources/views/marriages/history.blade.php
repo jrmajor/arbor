@@ -60,7 +60,7 @@
         </main>
 
         <div class="flex-shrink-0 p-1">
-            <x-marriage-menu active="history" :marriage="$marriage"/>
+            <x-sidebar-menus.marriage active="history" :marriage="$marriage"/>
         </div>
 
     </div>

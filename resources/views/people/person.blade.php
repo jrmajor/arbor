@@ -18,7 +18,7 @@
 
         @canany(['update', 'changeVisibility', 'delete', 'restore', 'viewHistory'], $person)
             <div class="flex-shrink-0 p-1">
-                <x-person-menu active="show" :person="$person"/>
+                <x-sidebar-menus.person active="show" :person="$person"/>
             </div>
         @endcanany
 

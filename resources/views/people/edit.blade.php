@@ -15,7 +15,7 @@
         </main>
 
         <div class="flex-shrink-0 p-1">
-            <x-person-menu active="edit" :person="$person"/>
+            <x-sidebar-menus.person active="edit" :person="$person"/>
         </div>
 
     </div>

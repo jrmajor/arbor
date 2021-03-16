@@ -77,7 +77,7 @@
         </main>
 
         <div class="flex-shrink-0 p-1">
-            <x-person-menu active="history" :person="$person"/>
+            <x-sidebar-menus.person active="history" :person="$person"/>
         </div>
 
     </div>
