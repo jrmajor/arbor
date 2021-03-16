@@ -82,7 +82,7 @@ it('checks password', function () {
     assertGuest();
 });
 
-test('user can log in with correct credentials', function () {
+test('user can log in using username', function () {
     $user = User::factory()->create([
         'username' => 'gracjan',
         'password' => Hash::make($password = 'secret'),
@@ -92,6 +92,29 @@ test('user can log in with correct credentials', function () {
 
     post('/login', [
         'username' => 'gracjan',
+        'password' => 'secret',
+    ])
+        ->assertSessionHasNoErrors()
+        ->assertStatus(302)
+        ->assertRedirect('/people');
+
+    assertAuthenticatedAs($user);
+
+    Event::assertDispatched(
+        fn (Login $event) => $event->user->is($user),
+    );
+});
+
+test('user can log in using email', function () {
+    $user = User::factory()->create([
+        'email' => 'gracjan@example.com',
+        'password' => Hash::make($password = 'secret'),
+    ]);
+
+    Event::fake();
+
+    post('/login', [
+        'username' => 'gracjan@example.com',
         'password' => 'secret',
     ])
         ->assertSessionHasNoErrors()

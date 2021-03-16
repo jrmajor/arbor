@@ -24,11 +24,18 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    public function credentials()
+    {
+        $field = str_contains($this->username, '@') ? 'username' : 'email';
+
+        return [$field => $this->username] + $this->only('password');
+    }
+
     public function authenticate()
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('username', 'password'), $this->filled('remember'))) {
+        if (! Auth::attempt($this->credentials(), $this->filled('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
