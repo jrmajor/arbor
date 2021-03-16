@@ -23,8 +23,8 @@ class PeopleSearchController extends Controller
                         foreach (Arr::trim(explode(' ', $request->get('search'))) as $s) {
                             $query->where(function ($query) use ($s) {
                                 return $query->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
-                                    ->OrWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
-                                    ->OrWhereRaw('last_name collate utf8mb4_0900_ai_ci like ?', $s.'%');
+                                    ->orWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
+                                    ->orWhereRaw('last_name collate utf8mb4_0900_ai_ci like ?', $s.'%');
                             });
                         }
                     });
