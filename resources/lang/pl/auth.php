@@ -4,7 +4,7 @@ return [
 
     'signing_in' => 'Logowanie',
 
-    'username' => 'Nazwa użytkownika',
+    'username_or_email' => 'Użytkownik lub e-mail',
     'password' => 'Hasło',
     'remember' => 'Zapamiętaj mnie',
 

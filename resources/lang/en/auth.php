@@ -4,7 +4,7 @@ return [
 
     'signing_in' => 'Sign in',
 
-    'username' => 'Username',
+    'username_or_email' => 'Username or email',
     'password' => 'Password',
     'remember' => 'Remember me',
 
