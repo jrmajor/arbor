@@ -26,7 +26,7 @@ class LoginRequest extends FormRequest
 
     public function credentials()
     {
-        $field = str_contains($this->username, '@') ? 'username' : 'email';
+        $field = str_contains($this->username, '@') ? 'email' : 'username';
 
         return [$field => $this->username] + $this->only('password');
     }
