@@ -12,6 +12,7 @@ return [
     'reset_password' => 'Resetuj hasło',
 
     'you_are_receiving' => 'Dostałeś tego maila, ponieważ otrzymaliśmy prośbę o zresetowanie hasła do twojego konta.',
+    'you_can_use_this_link' => 'Aby zresetować hasło, skorzystaj z tego linka',
     'reset_link_will_expire' => 'Link do zresetowania hasła straci ważność za :count minut.',
     'if_you_didnt_request' => 'Jeśli nie próbowałeś zresetować hasła, zignoruj tę wiadomość.',
 

@@ -12,6 +12,7 @@ return [
     'reset_password' => 'Reset password',
 
     'you_are_receiving' => 'You are receiving this email because we received a password reset request for your account.',
+    'you_can_use_this_link' => 'You can use this link to reset your password',
     'reset_link_will_expire' => 'This password reset link will expire in :count minutes.',
     'if_you_didnt_request' => 'If you did not request a password reset, no further action is required.',
 
