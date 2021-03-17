@@ -71,9 +71,10 @@ return (new PhpCsFixer\Config())
         'function_typehint_space' => true,
         'lambda_not_used_import' => true,
         'method_argument_space' => ['on_multiline' => 'ignore'],
-        'nullable_type_declaration_for_default_null_value' => [
-            'use_nullable_type_declaration' => false,
-        ],
+        // TODO: Uncomment this fixer after PHP-CS-Fixer#5547 is resolved
+        // 'nullable_type_declaration_for_default_null_value' => [
+        //     'use_nullable_type_declaration' => false,
+        // ],
 
         // Import
         'fully_qualified_strict_types' => true,
