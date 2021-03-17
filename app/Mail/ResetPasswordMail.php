@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class ResetPasswordMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public function __construct(
         protected string $resetLink,
