@@ -2,7 +2,7 @@
 
 return [
 
-    'resetting_password' => 'Resetowanie hasła',
+    'password_reset' => 'Resetowanie hasła',
 
     'email' => 'Adres e-mail',
     'send_link' => 'Wyślij link do resetowania hasła',

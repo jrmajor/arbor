@@ -5,7 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 @endpush
 
-@section('title', __('passwords.resetting_password'))
+@section('title', __('passwords.password_reset'))
 
 @section('content')
 
@@ -21,7 +21,7 @@
         <h2
             style="font-family: Nunito"
             class="text-xl font-medium text-gray-700 leading-none">
-            {{ __('passwords.resetting_password') }}
+            {{ __('passwords.password_reset') }}
         </h2>
 
         <main class="mt-2 bg-white rounded-lg shadow px-5 py-4 w-full xs:w-5/6 sm:w-3/4 md:w-1/2 lg:w-128">
