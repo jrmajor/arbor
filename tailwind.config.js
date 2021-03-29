@@ -1,7 +1,10 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  purge: ['./resources/views/**/*.blade.php'],
+  purge: [
+    './resources/views/**/*.blade.php',
+    './app/View/Components/**/*.php',
+  ],
   theme: {
     colors: {
       transparent: 'transparent',
