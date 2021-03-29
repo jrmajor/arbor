@@ -57,16 +57,6 @@ module.exports = {
       strokeWidth: { 3: '3' },
     },
   },
-  variants: {
-    extend: {
-      backgroundColor: ['active'],
-      borderColor: ['active'],
-      ringColor: ['active'],
-      ringOpacity: ['active'],
-      ringWidth: ['active'],
-      textColor: ['active'],
-    },
-  },
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwindcss-multi-column')(),
