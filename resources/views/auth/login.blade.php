@@ -1,30 +1,16 @@
 @extends('layouts.auth')
 
-@push('scripts')
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-@endpush
-
 @section('title', __('auth.signing_in'))
 
 @section('content')
 
-    <div class="flex flex-col items-center w-full">
+    <div class="flex flex-col items-center w-full space-y-4">
 
-        <a href="{{ route('people.index') }}">
-            <h1
-                style="font-family: Nunito; letter-spacing: 0.2em"
-                class="text-6xl xs:text-7xl sm:text-8xl leading-none">
-                arbor
-            </h1>
-        </a>
-        <h2
-            style="font-family: Nunito"
-            class="text-xl font-medium text-gray-700 leading-none">
+        <h1 class="text-3xl sm:text-4xl text-gray-800 leading-none">
             {{ __('auth.signing_in') }}
-        </h2>
+        </h1>
 
-        <main class="mt-2 bg-white rounded-lg shadow px-5 py-4 w-full max-w-[32rem]">
+        <main class="bg-white rounded-lg shadow px-5 py-4 w-full max-w-[32rem]">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="flex flex-wrap">
@@ -66,6 +52,10 @@
                 </div>
             </form>
         </main>
+
+        <a href="{{ route('people.index') }}" class="a text-base">
+            <small>{{ config('app.name') }}</small>
+        </a>
 
     </div>
 
