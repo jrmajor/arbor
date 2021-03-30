@@ -2,18 +2,18 @@
 
 @section('body')
 
-    <x-menu/>
+  <x-menu/>
 
-    <div class="container mx-auto my-1 p-2 pt-5">
+  <div class="container mx-auto my-1 p-2 pt-5">
 
-        <x-flash/>
+    <x-flash/>
 
-        @yield('content')
+    @yield('content')
 
-        <footer class="m-1 px-3 pt-2 text-center text-gray-600 text-sm">
-            &copy; 2018-{{ now()->year }} <a href="mailto:jeremiah.major@npng.pl">Jeremiah Major</a>
-        </footer>
+    <footer class="m-1 px-3 pt-2 text-center text-gray-600 text-sm">
+      &copy; 2018-{{ now()->year }} <a href="mailto:jeremiah.major@npng.pl">Jeremiah Major</a>
+    </footer>
 
-    </div>
+  </div>
 
 @endsection
