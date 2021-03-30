@@ -1,14 +1,15 @@
-@if(Arr::has($activity['attributes'], $attribute))
+@if (Arr::has($activity['attributes'], $attribute))
+
   <tr class="block w-full md:table-row md:w-auto">
 
     <td class="block w-full mt-1 -mb-1 md:m-0 pr-4 md:py-1 md:table-cell md:w-auto">
       <strong>{!! $label ?? __($activity['model']->log_name.'.'.$attribute) !!}</strong>
     </td>
 
-    @if($activity['old'])
+    @if ($activity['old'])
       <td class="inline pr-4 md:py-1 md:table-cell">
-        @unless($activity['old'][$attribute] === null)
-          @if(is_bool($activity['old'][$attribute]))
+        @unless ($activity['old'][$attribute] === null)
+          @if (is_bool($activity['old'][$attribute]))
             {{ $activity['old'][$attribute] ? __('misc.yes') : __('misc.no') }}
           @else
             {{ $activity['old'][$attribute] }}
@@ -22,8 +23,8 @@
     @endif
 
     <td class="inline md:py-1 md:table-cell">
-      @unless($activity['attributes'][$attribute] === null)
-        @if(is_bool($activity['attributes'][$attribute]))
+      @unless ($activity['attributes'][$attribute] === null)
+        @if (is_bool($activity['attributes'][$attribute]))
           {{ $activity['attributes'][$attribute] ? __('misc.yes') : __('misc.no') }}
         @else
           {{ $activity['attributes'][$attribute] }}
@@ -34,4 +35,5 @@
     </td>
 
   </tr>
+
 @endif

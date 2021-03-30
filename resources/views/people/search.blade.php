@@ -19,13 +19,13 @@
       </button>
     </form>
 
-    @if(! blank($s))
+    @if (! blank($s))
 
       <hr class="-mx-4 my-5 border-t-2 border-dashed">
 
-      @if($people->isNotEmpty())
+      @if ($people->isNotEmpty())
         <ul>
-          @foreach($people as $person)
+          @foreach ($people as $person)
             <li wire:key="{{ $person->id }}">
               <x-name :person="$person"/>
             </li>

@@ -1,4 +1,4 @@
-@if(Arr::has($activity['attributes'], $attribute))
+@if (Arr::has($activity['attributes'], $attribute))
 
   <tr class="block w-full md:table-row md:w-auto">
 
@@ -6,9 +6,9 @@
       <strong>{!! $label ?? __($activity['model']->log_name.'.'.$attribute) !!}</strong>
     </td>
 
-    @if($activity['old'])
+    @if ($activity['old'])
       <td class="inline pr-4 md:py-1 md:table-cell">
-        @unless($activity['old'][$attribute] === null)
+        @unless ($activity['old'][$attribute] === null)
           {{ __($translations.'.'.$activity['old'][$attribute]) }}
         @else
           <span class="text-gray-500">{{ __('misc.null') }}</span>
@@ -19,7 +19,7 @@
     @endif
 
     <td class="inline md:py-1 md:table-cell">
-      @unless($activity['attributes'][$attribute] === null)
+      @unless ($activity['attributes'][$attribute] === null)
         {{ __($translations.'.'.$activity['attributes'][$attribute]) }}
       @else
         <span class="text-gray-500">{{ __('misc.null') }}</span>
@@ -27,4 +27,5 @@
     </td>
 
   </tr>
+
 @endif

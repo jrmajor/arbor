@@ -12,14 +12,14 @@
 
     <main class="flex-grow md:w-1/2 flex flex-col space-y-3">
 
-      @foreach($activities as $activity)
+      @foreach ($activities as $activity)
 
         <div class="p-6 bg-white rounded-lg shadow overflow-hidden">
           <table class="block md:table">
             <tbody class="block md:table-row-group">
-              @if($activity['description'] === 'deleted')
+              @if ($activity['description'] === 'deleted')
                 {{ __('marriages.history.deleted') }}
-              @elseif($activity['description'] === 'restored')
+              @elseif ($activity['description'] === 'restored')
                 {{ __('marriages.history.restored') }}
               @else
                 <x-history.text :activity="$activity" :attribute="'woman_id'"

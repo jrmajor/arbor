@@ -65,7 +65,7 @@
           <div class="w-full">
             <select id="rite" name="rite" class="form-select w-full">
               <option value="">b/d</option>
-              @foreach(\App\Enums\MarriageRiteEnum::toArray() as $rite)
+              @foreach (\App\Enums\MarriageRiteEnum::toArray() as $rite)
                 <option
                   value="{{ $rite }}"
                   {{ $rite === old('rite', (string) $marriage->rite) ? 'selected' : '' }}>
@@ -91,7 +91,7 @@
           <div class="w-full">
             <select id="first_event_type" name="first_event_type" class="form-select w-full">
               <option value="">b/d</option>
-              @foreach(\App\Enums\MarriageEventTypeEnum::toArray() as $type)
+              @foreach (\App\Enums\MarriageEventTypeEnum::toArray() as $type)
                 <option
                   value="{{ $type }}"
                   {{ $type === old('first_event_type', (string) $marriage->first_event_type) ? 'selected' : '' }}>
@@ -138,7 +138,7 @@
           <div class="w-full">
             <select id="second_event_type" name="second_event_type" class="form-select w-full">
               <option value="">b/d</option>
-              @foreach(\App\Enums\MarriageEventTypeEnum::toArray() as $type)
+              @foreach (\App\Enums\MarriageEventTypeEnum::toArray() as $type)
                 <option
                   value="{{ $type }}"
                   {{ $type === old('second_event_type', (string) $marriage->second_event_type) ? 'selected' : '' }}>

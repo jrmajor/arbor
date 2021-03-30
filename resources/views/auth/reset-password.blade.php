@@ -22,7 +22,8 @@
               class="form-input w-full @error('email') invalid @enderror"
               value="{{ old('email', $email) }}"
               autocomplete="email"
-              placeholder="{{ __('passwords.email') }}">
+              placeholder="{{ __('passwords.email') }}"
+            >
           </div>
         </div>
         @error('email')
@@ -38,14 +39,16 @@
               class="form-input w-full @error('password') invalid @enderror"
               value="{{ old('password') }}"
               autocomplete="new-password" autofocus
-              placeholder="{{ strtolower(__('passwords.password')) }}">
+              placeholder="{{ strtolower(__('passwords.password')) }}"
+            >
           </div>
           <div class="w-full sm:w-1/2 sm:pl-1">
             <input
               id="password-confirm" type="password" name="password_confirmation"
               class="form-input w-full @error('password') invalid @enderror"
               autocomplete="current-password"
-              placeholder="{{ strtolower(__('passwords.confirm_password')) }}">
+              placeholder="{{ strtolower(__('passwords.confirm_password')) }}"
+            >
           </div>
         </div>
         @error('password')

@@ -16,14 +16,16 @@
         <div class="flex flex-wrap">
           <div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
             <input id="username" type="text"
-            class="form-input w-full @error('username') invalid @enderror @error('password') invalid @enderror"
-            name="username" value="{{ old('username') }}" autocomplete="username"
-            placeholder="{{ strtolower(__('auth.username_or_email')) }}" autofocus>
+              class="form-input w-full @error('username') invalid @enderror @error('password') invalid @enderror"
+              name="username" value="{{ old('username') }}" autocomplete="username"
+              placeholder="{{ strtolower(__('auth.username_or_email')) }}" autofocus
+            >
           </div>
           <div class="w-full sm:w-1/2 sm:pl-1">
             <input id="password" type="password"
-            class="form-input w-full @error('username') invalid @enderror @error('password') invalid @enderror"
-            name="password" autocomplete="current-password" placeholder="{{ strtolower(__('auth.password')) }}">
+              class="form-input w-full @error('username') invalid @enderror @error('password') invalid @enderror"
+              name="password" autocomplete="current-password" placeholder="{{ strtolower(__('auth.password')) }}"
+            >
           </div>
         </div>
         @error('username')

@@ -12,9 +12,9 @@
 
     <hr class="-mx-6 my-5 border-t-2 border-dashed">
 
-    @if(isset($list))
+    @if (isset($list))
       <ul>
-        @foreach($list as $person)
+        @foreach ($list as $person)
           <li>
             <x-name :person="$person" :bold="isset($active) ? $active['type'] : null"/>
           </li>
