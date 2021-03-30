@@ -1,20 +1,20 @@
 @if($person->id_wielcy || $person->id_pytlewski)
-    <div class="external-small-container">
+    <div class="inline-block space-y-[0.139rem]">
         @if($person->id_wielcy)
             <a
-                class="external-small-link link-wielcy-active"
+                class="block w-[0.417rem] h-[0.417rem] bg-[#73adff] border border-[#205daf]"
                 href="{{ $person->wielcy->url }}" target="_blank">
             </a>
         @else
-            <a class="external-small-link link-wielcy"></a>
+            <span class="block w-[0.417rem] h-[0.417rem] bg-[#f5f8fc] border border-[#7ab8ff]"></span>
         @endif
         @if($person->id_pytlewski)
             <a
-                class="external-small-link link-pytlewski-active"
+                class="block w-[0.417rem] h-[0.417rem] bg-[#79d96a] border border-[#208712]"
                 href="{{ $person->pytlewski->url }}" target="_blank">
             </a>
         @else
-            <a class="external-small-link link-pytlewski"></a>
+            <span class="block w-[0.417rem] h-[0.417rem] bg-[#f5f8fc] border border-[#7ae16c]"></span>
         @endif
     </div>
 @endif
