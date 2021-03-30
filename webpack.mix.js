@@ -5,6 +5,7 @@ mix
   .postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('@tailwindcss/jit'),
+    require('postcss-nested'),
     require ('autoprefixer'),
   ])
   .version()

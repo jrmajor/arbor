@@ -7,18 +7,18 @@
     @apply text-blue-700;
     @apply transition-colors duration-100 ease-out;
     @apply hover:text-blue-800 focus:text-blue-800;
+
+    & small {
+      @apply text-gray-700;
+    }
+
+    &:hover small, &:focus small {
+      @apply text-gray-800;
+    }
   }
 
   small {
-    @apply text-gray-500 font-normal;
-  }
-
-  .a > small {
-    @apply transition-colors duration-100 ease-out;
-  }
-
-  .a:hover > small, .a:focus > small {
-    @apply text-gray-800;
+    @apply font-normal text-gray-500;
   }
 
   dl {
@@ -26,31 +26,15 @@
   }
 
   dt {
-    @apply w-full font-bold;
+    @apply w-full font-bold sm:w-1/4 sm:overflow-hidden sm:whitespace-nowrap;
+
+    &:after {
+      @apply hidden ml-0.5 font-normal text-[0.4rem] sm:inline;
+      content: ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+     }
   }
 
   dd {
-    @apply w-full pl-3 pb-1;
-  }
-
-  @screen sm {
-    dt {
-      @apply w-1/4;
-    }
-
-    dd {
-      @apply w-3/4;
-    }
-
-    dt {
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    dt:after {
-      font-weight: normal;
-      font-size: 0.4rem;
-      content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
-    }
+    @apply pb-1 pl-3 w-full sm:w-3/4;
   }
 }

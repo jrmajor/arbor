@@ -4,27 +4,27 @@
     @apply rounded-md px-4 py-2 leading-5;
     @apply text-white bg-blue-600;
     @apply transition-colors duration-150 ease-out;
-  }
 
-  .btn[disabled] {
-    @apply bg-gray-500;
-    @apply cursor-default;
-  }
+    &[disabled] {
+      @apply bg-gray-500;
+      @apply cursor-default;
+    }
 
-  .btn:enabled {
-    @apply hover:bg-blue-500;
-    @apply focus:outline-none focus:border-blue-700 focus:ring;
-    @apply active:bg-blue-700;
-  }
+    &:enabled {
+      @apply hover:bg-blue-500;
+      @apply focus:outline-none focus:border-blue-700 focus:ring;
+      @apply active:bg-blue-700;
+    }
 
-  .btn.btn-red {
-    @apply bg-red-600;
-  }
+    &.btn-red {
+      @apply bg-red-600;
 
-  .btn.btn-red:enabled {
-    @apply hover:bg-red-500;
-    @apply focus:border-red-700 focus:ring ring-red-500 ring-opacity-50;
-    @apply active:bg-red-700;
+      &:enabled {
+        @apply hover:bg-red-500;
+        @apply focus:border-red-700 focus:ring ring-red-500 ring-opacity-50;
+        @apply active:bg-red-700;
+      }
+    }
   }
 
   .btn-out {
@@ -33,16 +33,16 @@
     @apply border border-blue-700;
     @apply text-blue-700;
     @apply transition-colors duration-100 ease-out;
-  }
 
-  .btn-out[disabled] {
-    @apply border-gray-500 text-gray-500;
-    @apply cursor-default;
-  }
+    &[disabled] {
+      @apply border-gray-500 text-gray-500;
+      @apply cursor-default;
+    }
 
-  .btn-out:enabled {
-    @apply hover:bg-blue-100 hover:text-blue-800;
-    @apply focus:outline-none focus:ring;
-    @apply active:bg-blue-600 active:border-blue-600 active:text-blue-100;
+    &:enabled {
+      @apply hover:bg-blue-100 hover:text-blue-800;
+      @apply focus:outline-none focus:ring;
+      @apply active:bg-blue-600 active:border-blue-600 active:text-blue-100;
+    }
   }
 }

@@ -8,7 +8,7 @@
                 <a href="{{ $pytlewski->url }}" target="_blank" class="a">
                     {{ $pytlewski->id}}
                     @if($pytlewski->name || $pytlewski->family_name || $pytlewski->last_name)
-                        <small class="text-gray-700">
+                        <small>
                             {{ __('people.pytlewski.as') }}
                             <strong>{{ $pytlewski->last_name
                                                 ? $pytlewski->last_name.' ('.$pytlewski->family_name.')'
