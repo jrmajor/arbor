@@ -25,6 +25,7 @@
         "eslint-config-spatie": "^2.0",
         "laravel-mix": "^6.0",
         "laravel-mix-bundle-analyzer": "^1.0",
-        "postcss": "^8.1"
+        "postcss": "^8.1",
+        "postcss-import": "^14.0.0"
     }
 }

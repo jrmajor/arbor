@@ -1,0 +1,36 @@
+@layer components {
+  .form-input {
+    @apply px-3;
+  }
+
+  .form-select {
+    @apply pl-3 pr-9;
+  }
+
+  .form-input, .form-select {
+    @apply py-1.5 rounded-md border border-gray-300;
+    @apply focus:border-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50;
+    @apply focus-within:border-blue-600 focus-within:ring focus-within:ring-blue-500 focus-within:ring-opacity-50;
+    @apply active:border-blue-600 active:ring active:ring-blue-500 active:ring-opacity-50;
+  }
+
+  .form-input.invalid, .form-select.invalid {
+    @apply border-red-600;
+    @apply focus:ring-red-500 focus:ring-opacity-50;
+    @apply focus-within:ring-red-500 focus-within:ring-opacity-50;
+    @apply active:ring-red-500 active:ring-opacity-50;
+  }
+
+  .form-input[disabled], .form-select[disabled] {
+    @apply bg-gray-100 text-gray-700;
+  }
+
+  .form-checkbox {
+    @apply rounded;
+  }
+
+  .form-checkbox, .form-radio {
+    @apply border-gray-300;
+    @apply focus:border-blue-600 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:ring-offset-0;
+  }
+}

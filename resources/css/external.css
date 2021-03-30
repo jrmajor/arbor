@@ -1,0 +1,49 @@
+@layer components {
+  .external-small-container {
+    width: 10px;
+    height: 14px;
+    margin: 3px 1px 0 0;
+    padding: 0;
+    display: inline-block;
+    position: relative;
+    bottom: 0;
+  }
+
+  .external-small-link {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    color: #fff;
+    display: block;
+    box-sizing: border-box;
+    cursor: context-menu;
+  }
+
+  .link-wielcy {
+    content: 'w';
+    background-color: #f5f8fc;
+    margin: 0 2px 0 2px;
+    border: 1px solid #7ab8ff;
+  }
+
+  .link-pytlewski {
+    content: 'p';
+    background-color: #f5f8fc;
+    margin: 2px 2px 0 2px;
+    border: 1px solid #7ae16c;
+  }
+
+  .link-wielcy-active {
+    content: 'w';
+    background-color: #73adff;
+    margin: 0 2px 0 2px;
+    border: 1px solid #205daf;
+  }
+
+  .link-pytlewski-active {
+    content: 'p';
+    background-color: #79d96a;
+    margin: 2px 2px 0 2px;
+    border: 1px solid #208712;
+  }
+}

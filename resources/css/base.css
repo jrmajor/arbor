@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .a {
+    @apply text-blue-700;
+    @apply transition-colors duration-100 ease-out;
+    @apply hover:text-blue-800 focus:text-blue-800;
+  }
+
+  small {
+    @apply text-gray-500 font-normal;
+  }
+
+  .a > small {
+    @apply transition-colors duration-100 ease-out;
+  }
+
+  .a:hover > small, .a:focus > small {
+    @apply text-gray-800;
+  }
+
+  dl {
+    @apply flex flex-wrap;
+  }
+
+  dt {
+    @apply w-full font-bold;
+  }
+
+  dd {
+    @apply w-full pl-3 pb-1;
+  }
+
+  @screen sm {
+    dt {
+      @apply w-1/4;
+    }
+
+    dd {
+      @apply w-3/4;
+    }
+
+    dt {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    dt:after {
+      font-weight: normal;
+      font-size: 0.4rem;
+      content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+    }
+  }
+}
