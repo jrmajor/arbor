@@ -1,10 +1,10 @@
 <?php
 
 use App\Services\Pytlewski\Pytlewski;
+use Carbon\CarbonInterval;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Carbon\CarbonInterval;
 
 it('can make proper url')
     ->expect(Pytlewski::url(556))
