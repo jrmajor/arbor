@@ -11,7 +11,7 @@ it('returns null when calculating age without date', function () {
         'birth_date_to' => null,
     ]);
 
-    $at = Carbon::create(2019, 8, 15);
+    $at = carbon(2019, 8, 15);
 
     expect($person->age($at, true))->toBeNull();
     expect($person->age($at))->toBeNull();
@@ -23,7 +23,7 @@ it('can calculate age with complete dates', function () {
         'birth_date_to' => '1994-06-22',
     ]);
 
-    $at = Carbon::create(2019, 8, 15);
+    $at = carbon(2019, 8, 15);
 
     expect($person->age($at, true))->toBe(25);
     expect($person->age($at))->toBe(25);
@@ -40,9 +40,9 @@ it('can calculate age with incomplete birth date', function () {
         'birth_date_to' => '1982-12-31',
     ]);
 
-    $differentMonth = Carbon::create(2017, 6, 15);
+    $differentMonth = carbon(2017, 6, 15);
 
-    $sameMonth = Carbon::create(2006, 4, 16);
+    $sameMonth = carbon(2006, 4, 16);
 
     expect($withoutDay->age($differentMonth, true))->toBe(39);
     expect($withoutDay->age($differentMonth))->toBe(39);
@@ -58,11 +58,11 @@ it('can calculate age with incomplete at date', function () {
         'birth_date_to' => '1975-03-22',
     ]);
 
-    $withoutDay = [Carbon::create(2013, 7, 01), Carbon::create(2013, 7, 31)];
+    $withoutDay = [carbon(2013, 7, 01), carbon(2013, 7, 31)];
 
-    $withoutDaySameMonth = [Carbon::create(2015, 3, 01), Carbon::create(2015, 3, 31)];
+    $withoutDaySameMonth = [carbon(2015, 3, 01), carbon(2015, 3, 31)];
 
-    $withoutMonth = [Carbon::create(2016, 01, 01), Carbon::create(2016, 12, 31)];
+    $withoutMonth = [carbon(2016, 01, 01), carbon(2016, 12, 31)];
 
     expect($person->age($withoutDay, true))->toBe(38);
     expect($person->age($withoutDay))->toBe(38);
@@ -78,7 +78,7 @@ it('can calculate age with incomplete dates', function () {
         'birth_date_to' => '1992-12-31',
     ]);
 
-    $at = [Carbon::create(2010, 7, 01), Carbon::create(2010, 7, 31)];
+    $at = [carbon(2010, 7, 01), carbon(2010, 7, 31)];
 
     expect($person->age($at, true))->toBe(18); // 17-18
     expect($person->age($at))->toBe('17-18');
@@ -90,7 +90,7 @@ it('can calculate current age', function () {
         'birth_date_to' => '1973-05-12',
     ]);
 
-    travelTo(Carbon::create('2016-11-10'));
+    travelTo(carbon('2016-11-10'));
 
     expect(now()->format('Y-m-d'))->toBe('2016-11-10');
     expect($person->currentAge(true))->toBe(43);

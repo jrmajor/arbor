@@ -23,7 +23,7 @@ class MarriageFactory extends Factory
             'first_event_date_to' => fn ($m) => $m['first_event_date_from'],
             'first_event_place' => $this->faker->city.', Polska',
             'second_event_type' => 'concordat_marriage',
-            'second_event_date_from' => fn ($m) => Carbon::create($m['first_event_date_from'])
+            'second_event_date_from' => fn ($m) => carbon($m['first_event_date_from'])
                 ->add(CarbonInterval::days(3))
                 ->format('Y-m-d'),
             'second_event_date_to' => fn ($m) => $m['second_event_date_from'],
