@@ -289,7 +289,7 @@ class Person extends Model
 
     public static function findByPytlewskiId(?int $id): ?self
     {
-        return $id ? self::where('id_pytlewski', $id)->first() : null;
+        return $id ? self::firstWhere('id_pytlewski', $id) : null;
     }
 
     /**

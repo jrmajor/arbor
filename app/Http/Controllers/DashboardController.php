@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -14,17 +15,12 @@ class DashboardController extends Controller
         }
 
         $shouldBeDead = Person::where('dead', false)
-            ->where(function ($q) {
-                return $q->whereNotNull('death_date_from')
-                    ->orWhereNotNull('death_date_to')
-                    ->orWhereNotNull('death_place')
-                    ->orWhereNotNull('death_cause')
-                    ->orWhereNotNull('funeral_date_from')
-                    ->orWhereNotNull('funeral_date_to')
-                    ->orWhereNotNull('funeral_place')
-                    ->orWhereNotNull('burial_date_from')
-                    ->orWhereNotNull('burial_date_to')
-                    ->orWhereNotNull('burial_place');
+            ->where(function (Builder $q) {
+                return $q->whereNotNull([
+                    'death_date_from', 'death_date_to', 'death_place', 'death_cause',
+                    'funeral_date_from', 'funeral_date_to', 'funeral_place',
+                    'burial_date_from', 'burial_date_to', 'burial_place',
+                ], 'or');
             })->get();
 
         $visibleAlive = Person::where('dead', false)
