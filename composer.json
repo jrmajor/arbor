@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "doctrine/dbal": "^2.12",
+        "doctrine/dbal": "^2.13",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3",
@@ -33,12 +33,12 @@
         "spatie/regex": "^1.4",
         "symfony/css-selector": "^5.2",
         "symfony/dom-crawler": "^5.2",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
         "barryvdh/laravel-ide-helper": "^2.8",
-        "facade/ignition": "^2.6",
+        "facade/ignition": "^2.7",
         "fakerphp/faker": "^1.14",
         "friendsofphp/php-cs-fixer": "^2.18",
         "laravel/sail": "^1.0",
@@ -48,7 +48,7 @@
         "pestphp/pest": "^1.0",
         "pestphp/pest-plugin-laravel": "^1.0",
         "pestphp/pest-plugin-livewire": "^1.0",
-        "phpstan/phpstan": "^0.12.81",
+        "phpstan/phpstan": "^0.12.83",
         "phpunit/phpunit": "^9.5"
     },
     "config": {
