@@ -10,6 +10,11 @@ class MarriagePolicy
 {
     use HandlesAuthorization;
 
+    public function view(?User $user, Marriage $marriage): bool
+    {
+        return $user?->canRead() || $marriage->isVisible();
+    }
+
     public function create(User $user): bool
     {
         return $user->canWrite();

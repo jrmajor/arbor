@@ -269,7 +269,7 @@
       <dd>
         <ul>
           @foreach ($person->marriages as $marriage)
-            @if ($marriage->canBeViewedBy(auth()->user()))
+            @can ('view', $marriage)
               <li>
                 @if ($person->marriages->count() > 1 && $marriage->order($person))
                   {{ strtolower(roman($marriage->order($person))) }}.
@@ -344,7 +344,7 @@
                 <small>[{{ __('misc.hidden') }}]</small>
                 <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
               </li>
-            @endif
+            @endcan
           @endforeach
         </ul>
       </dd>
