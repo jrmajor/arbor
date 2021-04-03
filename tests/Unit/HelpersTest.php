@@ -2,7 +2,11 @@
 
 use Carbon\Carbon;
 
-test('format date from period', function () {
+test('carbon() helper')
+    ->expect(carbon('2021-04-01'))
+    ->toBeInstanceOf(Carbon::class);
+
+test('format date from period carbon macro', function () {
     expect(
         (new Carbon('1972-11-28'))->formatPeriodTo(new Carbon('1972-11-28'))
     )->toBe('1972-11-28');
@@ -32,7 +36,7 @@ test('format date from period', function () {
     )->toBe('between 2002-12-17 and 2015-10-31');
 });
 
-test('roman helper')
+test('roman() helper')
     ->expect(roman(1))->toBe('I')
     ->and(roman(2))->toBe('II')
     ->and(roman(3))->toBe('III')
@@ -49,6 +53,6 @@ test('roman helper')
     ->and(roman(30))->toBe('XXX')
     ->and(roman(39))->toBe('XXXIX');
 
-test('faker helper returns faker')
+test('faker() helper')
     ->expect(faker())
     ->toBeInstanceOf(\Faker\Generator::class);
