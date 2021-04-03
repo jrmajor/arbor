@@ -4,11 +4,14 @@ namespace App\Models\Relations;
 
 use App\Models\Marriage;
 use App\Models\Person;
+use Closure;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\Expression;
 
 /**
- * @method $this orderBy($column, $direction = 'asc')
+ * @method $this orderBy(Closure|Builder|Expression|string $column, string $direction = 'asc')
  */
 class Marriages extends Relation
 {

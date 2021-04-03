@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -56,12 +57,12 @@ class User extends Authenticatable
         return $this->permissions === 4;
     }
 
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $this->notify(new ResetPasswordNotification($token));
     }
 
-    public function latestLogin()
+    public function latestLogin(): MorphOne
     {
         return $this->morphOne(Activity::class, 'causer')
             ->whereLogName('logins')->whereDescription('logged-in')

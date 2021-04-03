@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use InvalidArgumentException;
 use Spatie\Activitylog\ActivityLogger;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -182,10 +181,13 @@ class Person extends Model
             ->orderBy('birth_date_from');
     }
 
-    public function age($to, $raw = false)
+    /**
+     * @param Carbon[]|Carbon $to
+     */
+    public function age(array|Carbon $to, bool $raw = false): int|string|null
     {
         if (! $this->birth_date) {
-            return;
+            return null;
         }
 
         [$to_from, $to_to] = is_array($to) ? $to : [$to, $to];
@@ -200,15 +202,15 @@ class Person extends Model
         return $either === $or ? $either : $either.'-'.$or;
     }
 
-    public function currentAge($raw = false)
+    public function currentAge(bool $raw = false): int|string|null
     {
-        return $this->age(Carbon::now(), $raw);
+        return $this->age(now(), $raw);
     }
 
-    public function ageAtDeath($raw = false)
+    public function ageAtDeath(bool $raw = false): int|string|null
     {
         if (! $this->death_date) {
-            return;
+            return null;
         }
 
         return $this->age([$this->death_date_from, $this->death_date_to], $raw);
@@ -290,12 +292,14 @@ class Person extends Model
         return $id ? self::where('id_pytlewski', $id)->first() : null;
     }
 
-    public static function letters($type): Collection
+    /**
+     * @param 'family'|'last' $type
+     */
+    public static function letters(string $type): Collection
     {
         $nameQuery = match ($type) {
             'family' => 'family_name',
             'last' => 'ifnull(last_name, family_name)',
-            default => throw new InvalidArgumentException('Type must be "family" or "last".'),
         };
 
         return Cache::rememberForever(
