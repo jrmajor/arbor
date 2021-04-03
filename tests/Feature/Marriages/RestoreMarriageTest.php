@@ -2,6 +2,8 @@
 
 use App\Models\Marriage;
 use function Pest\Laravel\patch;
+use function Tests\latestLog;
+use function Tests\withPermissions;
 
 beforeEach(
     fn () => $this->marriage = tap(Marriage::factory()->create())->delete()

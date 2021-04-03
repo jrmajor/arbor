@@ -2,6 +2,7 @@
 
 use App\Models\Marriage;
 use function Pest\Laravel\get;
+use function Tests\withPermissions;
 
 beforeEach(function () {
     $this->marriage = Marriage::factory()->create();

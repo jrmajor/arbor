@@ -2,6 +2,7 @@
 
 use App\Models\Person;
 use function Pest\Laravel\get;
+use function Tests\withPermissions;
 
 beforeEach(function () {
     $this->person = Person::factory()->create();

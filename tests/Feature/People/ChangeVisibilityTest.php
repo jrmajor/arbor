@@ -5,6 +5,8 @@ use App\Models\Person;
 use function Pest\Laravel\put;
 use function Pest\Laravel\travel;
 use function Pest\Laravel\travelBack;
+use function Tests\latestLog;
+use function Tests\withPermissions;
 
 beforeEach(
     fn () => $this->person = Person::factory()->create()

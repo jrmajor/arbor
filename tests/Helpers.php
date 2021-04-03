@@ -1,7 +1,8 @@
 <?php
 
+namespace Tests;
+
 use App\Models\Activity;
-use Tests\TestCase;
 
 function withPermissions(int $permissions): TestCase
 {

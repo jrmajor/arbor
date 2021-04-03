@@ -9,6 +9,7 @@ use function Pest\Laravel\assertAuthenticatedAs;
 use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\from;
 use function Pest\Laravel\post;
+use function Tests\withPermissions;
 
 test('authenticated users are redirected when trying to access form', function () {
     withPermissions(0)

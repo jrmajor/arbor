@@ -2,6 +2,7 @@
 
 use App\Models\Person;
 use function Pest\Laravel\get;
+use function Tests\withPermissions;
 
 test('guest cannot see hidden alive person', function () {
     $person = Person::factory()->alive()->create();

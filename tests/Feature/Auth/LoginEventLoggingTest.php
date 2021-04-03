@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Facades\Agent;
+use function Tests\latestLog;
 
 it('logs user logins events', function () {
     $user = User::factory()->create();

@@ -2,6 +2,8 @@
 
 use App\Models\Person;
 use function Pest\Laravel\delete;
+use function Tests\latestLog;
+use function Tests\withPermissions;
 
 beforeEach(
     fn () => $this->person = Person::factory()->create()

@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\OtherDeviceLogout;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use function Pest\Laravel\actingAs;
+use function Tests\withPermissions;
 
 test('guest are asked to log in when attempting to view settings page')
     ->get('settings')
