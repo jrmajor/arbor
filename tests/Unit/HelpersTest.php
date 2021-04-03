@@ -32,26 +32,23 @@ test('format date from period', function () {
     )->toBe('between 2002-12-17 and 2015-10-31');
 });
 
-test('roman helper', function () {
-    expect(roman(1))->toBe('I');
-    expect(roman(2))->toBe('II');
-    expect(roman(3))->toBe('III');
-    expect(roman(4))->toBe('IV');
-    expect(roman(5))->toBe('V');
-    expect(roman(6))->toBe('VI');
-    expect(roman(7))->toBe('VII');
-    expect(roman(8))->toBe('VIII');
-    expect(roman(9))->toBe('IX');
-    expect(roman(10))->toBe('X');
-    expect(roman(14))->toBe('XIV');
-    expect(roman(20))->toBe('XX');
-    expect(roman(23))->toBe('XXIII');
-    expect(roman(30))->toBe('XXX');
-    expect(roman(39))->toBe('XXXIX');
-});
+test('roman helper')
+    ->expect(roman(1))->toBe('I')
+    ->and(roman(2))->toBe('II')
+    ->and(roman(3))->toBe('III')
+    ->and(roman(4))->toBe('IV')
+    ->and(roman(5))->toBe('V')
+    ->and(roman(6))->toBe('VI')
+    ->and(roman(7))->toBe('VII')
+    ->and(roman(8))->toBe('VIII')
+    ->and(roman(9))->toBe('IX')
+    ->and(roman(10))->toBe('X')
+    ->and(roman(14))->toBe('XIV')
+    ->and(roman(20))->toBe('XX')
+    ->and(roman(23))->toBe('XXIII')
+    ->and(roman(30))->toBe('XXX')
+    ->and(roman(39))->toBe('XXXIX');
 
-test('faker helper returns faker', function () {
-    $faker = faker();
-
-    expect($faker)->toBeInstanceOf(\Faker\Generator::class);
-});
+test('faker helper returns faker')
+    ->expect(faker())
+    ->toBeInstanceOf(\Faker\Generator::class);
