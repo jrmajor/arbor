@@ -20,7 +20,7 @@ test('guest cannot see hidden dead person', function () {
 
 test('guest can see visible alive person', function () {
     $person = Person::factory()->alive()->create([
-        'visibility' => 1,
+        'visibility' => true,
     ]);
 
     get("people/{$person->id}")
@@ -29,7 +29,7 @@ test('guest can see visible alive person', function () {
 
 test('guest can see visible dead person', function () {
     $person = Person::factory()->dead()->create([
-        'visibility' => 1,
+        'visibility' => true,
     ]);
 
     get("people/{$person->id}")
@@ -54,7 +54,7 @@ test('user with persmissions can see hidden dead person', function () {
 
 test('user with persmissions can see visible alive person', function () {
     $person = Person::factory()->alive()->create([
-        'visibility' => 1,
+        'visibility' => true,
     ]);
 
     withPermissions(1)
@@ -64,7 +64,7 @@ test('user with persmissions can see visible alive person', function () {
 
 test('user with persmissions can see visible dead person', function () {
     $person = Person::factory()->dead()->create([
-        'visibility' => 1,
+        'visibility' => true,
     ]);
 
     withPermissions(1)
