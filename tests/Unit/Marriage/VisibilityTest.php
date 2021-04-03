@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Marriage;
-use App\Models\User;
 
 it('can determine its visibility', function () {
     $marriage = Marriage::factory()->create();

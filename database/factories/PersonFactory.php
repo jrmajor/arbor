@@ -30,7 +30,7 @@ final class PersonFactory extends Factory
             'death_date_to' => fn ($p) => $p['death_date_from'],
             'death_place' => $dead ? $this->faker->city.', Polska' : null,
             'funeral_date_from' => fn ($p) => $dead
-                ? (new Carbon($p['death_date_from']))
+                ? Carbon::create($p['death_date_from'])
                     ->add(CarbonInterval::days(5))
                     ->format('Y-m-d')
                 : null,
@@ -103,11 +103,9 @@ final class PersonFactory extends Factory
             'death_date_from' => $this->faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
             'death_date_to' => fn ($p) => $p['death_date_from'],
             'death_place' => $this->faker->city.', Polska',
-            'funeral_date_from' => function ($person) {
-                return (new Carbon($person['death_date_from']))
-                    ->add(CarbonInterval::days(5))
-                    ->format('Y-m-d');
-            },
+            'funeral_date_from' => fn ($p) => Carbon::create($p['death_date_from'])
+                ->add(CarbonInterval::days(5))
+                ->format('Y-m-d'),
             'funeral_date_to' => fn ($p) => $p['funeral_date_from'],
             'funeral_place' => fn ($p) => $p['death_place'],
             'burial_date_from' => fn ($p) => $p['funeral_date_from'],

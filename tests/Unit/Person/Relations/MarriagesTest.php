@@ -6,7 +6,7 @@ use App\Models\Person;
 it('can get marriages', function () {
     $person = Person::factory()->woman()->create();
 
-    Marriage::factory(3)->create(['woman_id' => $person,]);
+    Marriage::factory(3)->create(['woman_id' => $person]);
 
     expect($person->marriages)->toHaveCount(3);
 });

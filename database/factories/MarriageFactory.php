@@ -20,28 +20,24 @@ class MarriageFactory extends Factory
             'rite' => 'roman_catholic',
             'first_event_type' => 'civil_marriage',
             'first_event_date_from' => $this->faker->dateTimeBetween('-40 years', '-20 years')->format('Y-m-d'),
-            'first_event_date_to' => fn ($marriage) => $marriage['first_event_date_from'],
+            'first_event_date_to' => fn ($m) => $m['first_event_date_from'],
             'first_event_place' => $this->faker->city.', Polska',
             'second_event_type' => 'concordat_marriage',
-            'second_event_date_from' => function ($marriage) {
-                return (new Carbon($marriage['first_event_date_from']))
-                    ->add(CarbonInterval::days(3))
-                    ->format('Y-m-d');
-            },
-            'second_event_date_to' => fn ($marriage) => $marriage['second_event_date_from'],
-            'second_event_place' => fn ($marriage) => $marriage['first_event_place'],
+            'second_event_date_from' => fn ($m) => Carbon::create($m['first_event_date_from'])
+                ->add(CarbonInterval::days(3))
+                ->format('Y-m-d'),
+            'second_event_date_to' => fn ($m) => $m['second_event_date_from'],
+            'second_event_place' => fn ($m) => $m['first_event_place'],
         ];
     }
 
-    public function divorced()
+    public function divorced(): self
     {
-        return $this->state(function (array $person) {
-            return [
-                'divorced' => true,
-                'divorce_date_from' => $this->faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
-                'divorce_date_to' => fn ($person) => $person['divorce_date_from'],
-                'divorce_place' => $this->faker->city.', Polska',
-            ];
-        });
+        return $this->state([
+            'divorced' => true,
+            'divorce_date_from' => $this->faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
+            'divorce_date_to' => fn ($m) => $m['divorce_date_from'],
+            'divorce_place' => $this->faker->city.', Polska',
+        ]);
     }
 }
