@@ -4,12 +4,11 @@ use App\Services\Pytlewski\Pytlewski;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Carbon\CarbonInterval;
 
 it('can make proper url')
-    ->assertEquals(
-        'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
-        Pytlewski::url(556)
-    );
+    ->expect(Pytlewski::url(556))
+    ->toBe('http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556');
 
 it('requests source from pytlewski.pl', function () {
     Http::fake();
@@ -17,7 +16,7 @@ it('requests source from pytlewski.pl', function () {
     new Pytlewski(556);
 
     Http::assertSent(
-        fn ($request) => $request->url() === 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556'
+        fn ($request) => $request->url() === 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
     );
 });
 
@@ -26,11 +25,8 @@ it('caches parsed attributes from pytlewski.pl', function () {
 
     Cache::shouldReceive('remember')
         ->once()
-        ->with(
-            'pytlewski.556',
-            Carbon\CarbonInterval::class,
-            \Closure::class
-        )->andReturn([]);
+        ->with('pytlewski.556', CarbonInterval::class, Closure::class)
+        ->andReturn([]);
 
     new Pytlewski(556);
 
@@ -39,7 +35,7 @@ it('caches parsed attributes from pytlewski.pl', function () {
 
 it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
     Http::fake([
-        Pytlewski::url($id) => Http::response($source, 200),
+        Pytlewski::url($id) => Http::response($source),
     ]);
 
     $pytlewski = new Pytlewski($id);
