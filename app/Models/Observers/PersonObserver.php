@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace App\Models\Observers;
 
 use App\Models\Person;
 use Illuminate\Support\Facades\Cache;
