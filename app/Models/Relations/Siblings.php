@@ -35,13 +35,9 @@ class Siblings extends Relation
             return $person->mother_id && $person->father_id;
         });
 
-        $this->query->whereIn(
-            'mother_id',
-            $people->pluck('mother_id')->filter(),
-        )->whereIn(
-            'father_id',
-            $people->pluck('father_id')->filter(),
-        );
+        $this->query
+            ->whereIn('mother_id', $people->pluck('mother_id')->filter())
+            ->whereIn('father_id', $people->pluck('father_id')->filter());
     }
 
     public function initRelation(array $people, $relation)

@@ -87,8 +87,10 @@ class HalfSiblings extends Relation
                 $relation,
                 $siblings->filter(function (Person $sibling) use ($person) {
                     return $sibling->{$this->sideKey} === $person->{$this->sideKey}
-                        && ($sibling->{$this->partnerKey} !== $person->{$this->partnerKey}
-                            || $sibling->{$this->partnerKey} === null)
+                        && (
+                            $sibling->{$this->partnerKey} !== $person->{$this->partnerKey}
+                            || $sibling->{$this->partnerKey} === null
+                        )
                         && $sibling->id !== $person->id;
                 }),
             );
