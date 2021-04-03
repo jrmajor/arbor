@@ -155,7 +155,7 @@ test('users with permissions can edit person', function () {
 test('data is validated using appropriate form request')
     ->assertActionUsesFormRequest(
         \App\Http\Controllers\PersonController::class, 'update',
-        \App\Http\Requests\StorePerson::class
+        \App\Http\Requests\StorePerson::class,
     );
 
 test('person edition is logged', function () {

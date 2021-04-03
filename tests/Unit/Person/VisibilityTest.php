@@ -23,10 +23,8 @@ test('change visibility method works', function () {
     expect($person->isVisible())->toBeFalse();
 
     $person->changeVisibility(true);
-
     expect($person->isVisible())->toBeTrue();
 
     $person->changeVisibility(false);
-
     expect($person->isVisible())->toBeFalse();
 });

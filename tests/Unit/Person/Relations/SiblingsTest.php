@@ -16,23 +16,21 @@ it('can get siblings and half siblings', function () {
         'father_id' => $person->father_id,
     ]);
 
-    Person::factory(1)->create([
-        'mother_id' => $person->mother_id,
-        'father_id' => Person::factory()->man()->create(),
-    ]);
-    Person::factory(2)->create([
-        'mother_id' => $person->mother_id,
-        'father_id' => null,
-    ]);
+    Person::factory()
+        ->withParents()
+        ->create(['mother_id' => $person->mother_id]);
 
-    Person::factory(3)->create([
-        'mother_id' => Person::factory()->woman()->create(),
-        'father_id' => $person->father_id,
-    ]);
-    Person::factory(1)->create([
-        'mother_id' => null,
-        'father_id' => $person->father_id,
-    ]);
+    Person::factory(2)
+        ->withoutParents()
+        ->create(['mother_id' => $person->mother_id]);
+
+    Person::factory(3)
+        ->withParents()
+        ->create(['father_id' => $person->father_id]);
+
+    Person::factory()
+        ->withoutParents()
+        ->create(['father_id' => $person->father_id]);
 
     expect($person->siblings)->toHaveCount(2);
 

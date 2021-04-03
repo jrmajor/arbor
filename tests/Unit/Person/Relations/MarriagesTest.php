@@ -6,37 +6,17 @@ use App\Models\Person;
 it('can get marriages', function () {
     $person = Person::factory()->woman()->create();
 
-    Person::factory(3)->man()->create()
-        ->each(function ($partner) use ($person) {
-            Marriage::factory()->create([
-                'woman_id' => $person->id,
-                'man_id' => $partner->id,
-            ]);
-        });
+    Marriage::factory(3)->create(['woman_id' => $person,]);
 
     expect($person->marriages)->toHaveCount(3);
 });
 
 it('can eagerly get marriages', function () {
     $woman = Person::factory()->woman()->create();
-
-    Person::factory(3)->man()->create()
-        ->each(function ($partner) use ($woman) {
-            Marriage::factory()->create([
-                'woman_id' => $woman->id,
-                'man_id' => $partner->id,
-            ]);
-        });
-
     $man = Person::factory()->man()->create();
 
-    Person::factory(4)->woman()->create()
-        ->each(function ($partner) use ($man) {
-            Marriage::factory()->create([
-                'woman_id' => $partner->id,
-                'man_id' => $man->id,
-            ]);
-        });
+    Marriage::factory(3)->create(['woman_id' => $woman]);
+    Marriage::factory(4)->create(['man_id' => $man]);
 
     $people = Person::whereIn('id', [$woman->id, $man->id])
         ->with('children')->get();

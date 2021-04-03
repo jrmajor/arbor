@@ -5,56 +5,41 @@ use App\Models\Person;
 it('can get children', function () {
     $father = Person::factory()->man()->create();
 
-    Person::factory(2)->woman()->create()
-        ->each(function ($mother) use ($father) {
-            Person::factory()->create([
-                'mother_id' => $mother->id,
-                'father_id' => $father->id,
-            ]);
-        });
+    Person::factory(2)
+        ->withParents()
+        ->create(['father_id' => $father]);
 
-    $child = Person::factory()->create([
-        'mother_id' => null,
-        'father_id' => $father->id,
-    ]);
+    Person::factory()
+        ->withoutParents()
+        ->create(['father_id' => $father]);
 
-    expect($father->children)->toHaveCount(3)
-        ->and($father->children->contains($child))->toBeTrue();
+    expect($father->children)->toHaveCount(3);
 });
 
 it('can eagerly get children', function () {
-    $mother = Person::factory()->man()->create();
+    $mother = Person::factory()->woman()->create();
 
-    Person::factory(3)->create([
-        'mother_id' => $mother->id,
-        'father_id' => null,
-    ]);
+    Person::factory(3)
+        ->withoutParents()
+        ->create(['mother_id' => $mother]);
 
-    Person::factory(2)->create([
-        'mother_id' => $mother->id,
-        'father_id' => Person::factory()->man()->create(),
-    ]);
+    Person::factory(2)
+        ->withParents()
+        ->create(['mother_id' => $mother]);
 
     $father = Person::factory()->man()->create();
 
-    Person::factory(2)->woman()->create()
-        ->each(function ($mother) use ($father) {
-            Person::factory()->create([
-                'mother_id' => $mother->id,
-                'father_id' => $father->id,
-            ]);
-        });
+    Person::factory()
+        ->withoutParents()
+        ->create(['father_id' => $father]);
 
-    $child = Person::factory()->create([
-        'mother_id' => null,
-        'father_id' => $father->id,
-    ]);
+    Person::factory(2)
+        ->withParents()
+        ->create(['father_id' => $father]);
 
-    $people = Person::whereIn('id', [$mother->id, $father->id])
+    [$mother, $father] = Person::whereIn('id', [$mother->id, $father->id])
         ->with('children')->get();
 
-    expect($people->get(0)->children)->toHaveCount(5);
-
-    expect($people->get(1)->children)->toHaveCount(3)
-        ->and($people->get(1)->children->contains($child))->toBeTrue();
+    expect($mother->children)->toHaveCount(5);
+    expect($father->children)->toHaveCount(3);
 });

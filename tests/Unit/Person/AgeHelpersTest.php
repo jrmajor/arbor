@@ -30,26 +30,26 @@ it('can calculate age with complete dates', function () {
 });
 
 it('can calculate age with incomplete birth date', function () {
-    $person_without_day = Person::factory()->create([
+    $withoutDay = Person::factory()->create([
         'birth_date_from' => '1978-04-01',
         'birth_date_to' => '1978-04-30',
     ]);
 
-    $person_without_month = Person::factory()->create([
+    $withoutMonth = Person::factory()->create([
         'birth_date_from' => '1982-01-01',
         'birth_date_to' => '1982-12-31',
     ]);
 
-    $at_diffrent_month = Carbon::create(2017, 6, 15);
+    $differentMonth = Carbon::create(2017, 6, 15);
 
-    $at_same_month = Carbon::create(2006, 4, 16);
+    $sameMonth = Carbon::create(2006, 4, 16);
 
-    expect($person_without_day->age($at_diffrent_month, true))->toBe(39);
-    expect($person_without_day->age($at_diffrent_month))->toBe(39);
-    expect($person_without_day->age($at_same_month, true))->toBe(28); // 27-28
-    expect($person_without_day->age($at_same_month))->toBe('27-28');
-    expect($person_without_month->age($at_diffrent_month, true))->toBe(35); // 34-35
-    expect($person_without_month->age($at_diffrent_month))->toBe('34-35');
+    expect($withoutDay->age($differentMonth, true))->toBe(39);
+    expect($withoutDay->age($differentMonth))->toBe(39);
+    expect($withoutDay->age($sameMonth, true))->toBe(28); // 27-28
+    expect($withoutDay->age($sameMonth))->toBe('27-28');
+    expect($withoutMonth->age($differentMonth, true))->toBe(35); // 34-35
+    expect($withoutMonth->age($differentMonth))->toBe('34-35');
 });
 
 it('can calculate age with incomplete at date', function () {
@@ -58,18 +58,18 @@ it('can calculate age with incomplete at date', function () {
         'birth_date_to' => '1975-03-22',
     ]);
 
-    $without_day = [Carbon::create(2013, 7, 01), Carbon::create(2013, 7, 31)];
+    $withoutDay = [Carbon::create(2013, 7, 01), Carbon::create(2013, 7, 31)];
 
-    $without_day_in_same_month = [Carbon::create(2015, 3, 01), Carbon::create(2015, 3, 31)];
+    $withoutDaySameMonth = [Carbon::create(2015, 3, 01), Carbon::create(2015, 3, 31)];
 
-    $without_month = [Carbon::create(2016, 01, 01), Carbon::create(2016, 12, 31)];
+    $withoutMonth = [Carbon::create(2016, 01, 01), Carbon::create(2016, 12, 31)];
 
-    expect($person->age($without_day, true))->toBe(38);
-    expect($person->age($without_day))->toBe(38);
-    expect($person->age($without_day_in_same_month, true))->toBe(40); // 39-40
-    expect($person->age($without_day_in_same_month))->toBe('39-40');
-    expect($person->age($without_month, true))->toBe(41); // 40-41
-    expect($person->age($without_month))->toBe('40-41');
+    expect($person->age($withoutDay, true))->toBe(38);
+    expect($person->age($withoutDay))->toBe(38);
+    expect($person->age($withoutDaySameMonth, true))->toBe(40); // 39-40
+    expect($person->age($withoutDaySameMonth))->toBe('39-40');
+    expect($person->age($withoutMonth, true))->toBe(41); // 40-41
+    expect($person->age($withoutMonth))->toBe('40-41');
 });
 
 it('can calculate age with incomplete dates', function () {
@@ -92,7 +92,7 @@ it('can calculate current age', function () {
 
     travelTo(Carbon::create('2016-11-10'));
 
-    expect(Carbon::now()->format('Y-m-d'))->toBe('2016-11-10');
+    expect(now()->format('Y-m-d'))->toBe('2016-11-10');
     expect($person->currentAge(true))->toBe(43);
     expect($person->currentAge())->toBe(43);
 

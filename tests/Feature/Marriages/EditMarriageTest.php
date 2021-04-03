@@ -138,7 +138,7 @@ test('users with permissions can edit marriage', function () {
 test('data is validated using appropriate form request')
     ->assertActionUsesFormRequest(
         \App\Http\Controllers\MarriageController::class, 'update',
-        \App\Http\Requests\StoreMarriage::class
+        \App\Http\Requests\StoreMarriage::class,
     );
 
 test('marriage edition is logged', function () {

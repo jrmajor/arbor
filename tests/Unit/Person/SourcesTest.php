@@ -8,15 +8,13 @@ it('casts sources to collection', function () {
         'sources' => null,
     ])->sources;
 
-    expect($sources)->toBeInstanceOf(Collection::class);
-    expect($sources)->toBeEmpty();
+    expect($sources)->toBeInstanceOf(Collection::class)->toBeEmpty();
 
     $sources = Person::factory()->create([
         'sources' => [],
     ])->sources;
 
-    expect($sources)->toBeInstanceOf(Collection::class);
-    expect($sources)->toBeEmpty();
+    expect($sources)->toBeInstanceOf(Collection::class)->toBeEmpty();
 
     $sources = Person::factory()->create([
         'sources' => [
@@ -25,12 +23,11 @@ it('casts sources to collection', function () {
         ],
     ])->sources;
 
-    expect($sources)->toBeInstanceOf(Collection::class);
-    expect($sources)->toHaveCount(2);
+    expect($sources)->toBeInstanceOf(Collection::class)->toHaveCount(2);
 });
 
 test('sources are sanitized', function () {
-    $unsanitized = [
+    $raw = [
         'a' => "     [Henryk    Gąsiorowski](https://pl.wikipedia.org/wiki/Henryk_G%C4%85siorowski)  \t   w Wikipedii,\nwolnej encyklopedii, dostęp 2020-06-06\r\n",
         'b' => "    \n",
         null,
@@ -43,7 +40,7 @@ test('sources are sanitized', function () {
     ];
 
     expect(
-        Person::factory()->create(['sources' => $unsanitized])
+        Person::factory()->create(['sources' => $raw])
             ->sources->map->raw()->all()
     )->toBe($sanitized);
 });

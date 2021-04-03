@@ -1,39 +1,33 @@
 <?php
 
 use App\Models\Person;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use function Pest\Laravel\get;
 
 beforeEach(function () {
-    $this->people = Person::factory()
-        ->count(3)
+    $this->people = Person::factory(3)
         ->alive()
-        ->state(new Sequence(
-            [
-                'name' => 'Jan',
-                'family_name' => 'Major',
-                'last_name' => null,
-                'visibility' => true,
-                'birth_date_from' => null,
-                'birth_date_to' => null,
-            ],
-            [
-                'name' => 'Balbina',
-                'family_name' => 'Bosak',
-                'last_name' => 'Gąsiorowska',
-                'visibility' => false,
-                'birth_date_from' => null,
-                'birth_date_to' => null,
-            ],
-            [
-                'name' => 'Nepomucena',
-                'family_name' => 'Korwin',
-                'last_name' => 'Major',
-                'visibility' => false,
-                'birth_date_from' => null,
-                'birth_date_to' => null,
-            ]
-        ))
+        ->sequence([
+            'name' => 'Jan',
+            'family_name' => 'Major',
+            'last_name' => null,
+            'visibility' => true,
+            'birth_date_from' => null,
+            'birth_date_to' => null,
+        ], [
+            'name' => 'Balbina',
+            'family_name' => 'Bosak',
+            'last_name' => 'Gąsiorowska',
+            'visibility' => false,
+            'birth_date_from' => null,
+            'birth_date_to' => null,
+        ], [
+            'name' => 'Nepomucena',
+            'family_name' => 'Korwin',
+            'last_name' => 'Major',
+            'visibility' => false,
+            'birth_date_from' => null,
+            'birth_date_to' => null,
+        ])
         ->create();
 });
 

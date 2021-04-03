@@ -44,6 +44,22 @@ class PersonFactory extends Factory
         ];
     }
 
+    public function withParents(): self
+    {
+        return $this->state([
+            'father_id' => Person::factory()->man(),
+            'mother_id' => Person::factory()->woman(),
+        ]);
+    }
+
+    public function withoutParents(Person|int $father = null, Person|int $mother = null): self
+    {
+        return $this->state([
+            'father_id' => $father,
+            'mother_id' => $mother,
+        ]);
+    }
+
     public function woman()
     {
         return $this->state(function () {
