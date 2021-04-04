@@ -44,7 +44,9 @@
       >
 
         @if ($active != 'search')
-          <form action="{{ route('search') }}"
+          <form
+            role="search"
+            action="{{ route('search') }}"
             class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3 lg:w-96"
             x-data="menuSearchData()"
           >
