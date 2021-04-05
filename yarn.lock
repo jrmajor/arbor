@@ -6766,7 +6766,7 @@ tailwindcss-multi-column@^1.0:
     flat "^4.1.0"
     lodash "^4.17.11"
 
-tailwindcss@^2.0:
+tailwindcss@^2.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-2.1.0.tgz#3e9e15931072c45e1c86d76c0619f9f018e96928"
   integrity sha512-3tsoLMOrFvwrm0VRx2Hr3cRJ158Sd/KH9BwKg5xyS96yiR/0frQBCfUbXvNsa2hxzViGN4nSWJqzBWDQb4jOSA==
