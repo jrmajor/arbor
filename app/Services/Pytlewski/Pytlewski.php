@@ -46,7 +46,7 @@ class Pytlewski
     ];
 
     public function __construct(
-        private int $id
+        private int $id,
     ) {
         $this->attributes = Cache::remember(
             'pytlewski.'.$this->id,

@@ -17,7 +17,7 @@ class Wielcy
     private array $attributes = [];
 
     public function __construct(
-        private string $id
+        private string $id,
     ) {
         $this->getSource();
         $this->runParsers();

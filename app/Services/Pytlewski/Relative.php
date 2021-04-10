@@ -10,7 +10,7 @@ class Relative
     ];
 
     final public function __construct(
-        protected array $attributes
+        protected array $attributes,
     ) { }
 
     public static function hydrate(array $attributes): static

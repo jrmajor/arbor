@@ -24,7 +24,7 @@ class Source implements Jsonable
     protected $inlineMarkerList = '"&<>:[*I\\';
 
     public function __construct(
-        protected ?string $raw
+        protected ?string $raw,
     ) { }
 
     public static function from(string|self|null $raw): self
