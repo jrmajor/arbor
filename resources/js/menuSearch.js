@@ -50,7 +50,7 @@ window.menuSearchData = function () {
     },
 
     closeDropdown() {
-      if (!this.shouldCloseOnBlur) {
+      if (! this.shouldCloseOnBlur) {
         this.shouldCloseOnBlur = true
         return
       }

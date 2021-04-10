@@ -35,7 +35,7 @@ window.dateRangePickerData = function (data) {
 
       let date
 
-      if (!isNaN(day)) {
+      if (! isNaN(day)) {
         if (
           isValid((date = new Date(year, month, day))) &&
           date.getDate() === day && date.getMonth() === month
@@ -52,7 +52,7 @@ window.dateRangePickerData = function (data) {
         return this.clearInvalidDate()
       }
 
-      if (!isNaN(month)) {
+      if (! isNaN(month)) {
         if (
           isValid((date = new Date(year, month, 15))) &&
           date.getMonth() === month
@@ -68,7 +68,7 @@ window.dateRangePickerData = function (data) {
         return this.clearInvalidDate()
       }
 
-      if (!isNaN(year)) {
+      if (! isNaN(year)) {
         if (isValid((date = new Date(year, 5, 15)))) {
           this.advanced.from = format(startOfYear(date), 'yyyy-MM-dd')
           this.advanced.to = format(lastDayOfYear(date), 'yyyy-MM-dd')

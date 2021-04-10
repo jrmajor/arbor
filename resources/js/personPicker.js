@@ -72,14 +72,14 @@ window.personPickerData = function (data) {
     },
 
     closeDropdown() {
-      if (!this.shouldCloseOnBlur) {
+      if (! this.shouldCloseOnBlur) {
         this.shouldCloseOnBlur = true
         return
       }
 
       this.open = false
 
-      if (!this.nullable && this.selected.id === null && this.initial.id !== null) {
+      if (! this.nullable && this.selected.id === null && this.initial.id !== null) {
         this.selected.id = this.initial.id
         this.selected.name = this.initial.name
         this.search = null

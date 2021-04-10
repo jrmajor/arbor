@@ -10,7 +10,7 @@ mix
   ])
   .version()
 
-if (!mix.inProduction()) {
+if (! mix.inProduction()) {
   require('laravel-mix-bundle-analyzer')
 
   mix.bundleAnalyzer({
