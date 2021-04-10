@@ -9,23 +9,23 @@ use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
 use Spatie\Regex\Regex;
 
-class Wielcy
+final class Wielcy
 {
-    private ?string $source;
+    protected ?string $source;
 
-    private array $attributes = [];
+    protected array $attributes = [];
 
-    private array $keys = ['sex', 'name'];
+    protected array $keys = ['sex', 'name'];
 
     public function __construct(
-        private string $id,
+        protected string $id,
     ) {
         if ($this->getSource()) {
             $this->runParsers();
         }
     }
 
-    private function getSource()
+    protected function getSource()
     {
         return $this->source = Cache::remember(
             "wielcy.{$this->id}",
@@ -48,32 +48,24 @@ class Wielcy
         );
     }
 
-    private function runParsers()
+    protected function runParsers()
     {
         $this->parseName();
         $this->parseSex();
     }
 
-    private function parseName()
+    protected function parseName()
     {
         $matches = Regex::match("/<meta property='og:title' content='([^']*)' \\/>/", $this->source);
 
-        if (! $matches->hasMatch()) {
-            return;
-        }
-
-        $this->attributes['name'] = $matches->group(1);
+        $this->attributes['name'] = $matches->groupOr(1, '');
     }
 
-    private function parseSex()
+    protected function parseSex()
     {
         $matches = Regex::match("<img src=\"images/((?:fe)?male).png\" width=\"13\" height=\"13\"\nalt=\"M\" align=left>", $this->source);
 
-        if (! $matches->hasMatch()) {
-            return;
-        }
-
-        $this->attributes['sex'] = match ($matches->group(1)) {
+        $this->attributes['sex'] = match ($matches->groupOr(1, '')) {
             'male' => 'xy',
             'female' => 'xx',
             default => null,

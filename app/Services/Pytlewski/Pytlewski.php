@@ -27,26 +27,26 @@ use InvalidArgumentException;
  * @property-read Collection<Relative> $children
  * @property-read Collection<Relative> $siblings
  */
-class Pytlewski
+final class Pytlewski
 {
     use Concerns\ScrapesPytlewski;
 
-    private array $attributes = [];
+    protected array $attributes;
 
-    private ?array $relations = null;
+    protected ?array $relations = null;
 
-    private array $keys = [
+    protected array $keys = [
         'family_name', 'last_name', 'name', 'middle_name',
         'birth_date', 'birth_place', 'death_date', 'death_place',
         'photo', 'bio',
     ];
 
-    private array $relationKeys = [
+    protected array $relationKeys = [
         'mother', 'father', 'marriages', 'children', 'siblings',
     ];
 
     public function __construct(
-        private int $id,
+        protected int $id,
     ) {
         $this->attributes = Cache::remember(
             'pytlewski.'.$this->id,
@@ -55,14 +55,14 @@ class Pytlewski
         );
     }
 
-    private function loadRelations(): void
+    protected function loadRelations(): void
     {
         $relatives = $this->eagerLoadRelatives();
 
         $this->relations = $this->matchRelatives($relatives);
     }
 
-    private function eagerLoadRelatives(): Collection
+    protected function eagerLoadRelatives(): Collection
     {
         $ids = collect([
             ...$this->attributes['marriages'] ?? [],
@@ -80,7 +80,7 @@ class Pytlewski
         return new Collection();
     }
 
-    private function matchRelatives(Collection $relatives): array
+    protected function matchRelatives(Collection $relatives): array
     {
         $mother = isset($this->attributes['mother_surname']) || isset($this->attributes['mother_name'])
             ? Relative::hydrate([
@@ -103,8 +103,7 @@ class Pytlewski
         $marriages = collect($this->attributes['marriages'] ?? [])
             ->map(function ($marriage) use ($relatives) {
                 if (isset($marriage['id'])) {
-                    $person = $relatives->where('id_pytlewski', $marriage['id'])->first();
-                    $marriage['person'] = $person;
+                    $marriage['person'] = $relatives->where('id_pytlewski', $marriage['id'])->first();
                 }
 
                 return Marriage::hydrate($marriage);
@@ -113,8 +112,7 @@ class Pytlewski
         $children = collect($this->attributes['children'] ?? [])
             ->map(function ($child) use ($relatives) {
                 if (isset($child['id'])) {
-                    $person = $relatives->where('id_pytlewski', $child['id'])->first();
-                    $child['person'] = $person;
+                    $child['person'] = $relatives->where('id_pytlewski', $child['id'])->first();
                 }
 
                 return Relative::hydrate($child);
@@ -123,8 +121,7 @@ class Pytlewski
         $siblings = collect($this->attributes['siblings'] ?? [])
             ->map(function ($sibling) use ($relatives) {
                 if (isset($sibling['id'])) {
-                    $person = $relatives->where('id_pytlewski', $sibling['id'])->first();
-                    $sibling['person'] = $person;
+                    $sibling['person'] = $relatives->where('id_pytlewski', $sibling['id'])->first();
                 }
 
                 return Relative::hydrate($sibling);
@@ -135,7 +132,7 @@ class Pytlewski
 
     public static function url(int $id): string
     {
-        return 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id='.$id;
+        return "http://www.pytlewski.pl/index/drzewo/index.php?view=true&id={$id}";
     }
 
     public function __get(string $key): mixed
