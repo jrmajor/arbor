@@ -101,11 +101,4 @@ class Wielcy
 
         throw new InvalidArgumentException("Key [{$key}] does not exist.");
     }
-
-    public function __set($key, $value)
-    {
-        $this->attributes[$key] = $value;
-
-        return $this;
-    }
 }
