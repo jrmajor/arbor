@@ -13,12 +13,12 @@ class Relative
         protected array $attributes,
     ) { }
 
-    public static function hydrate(array $attributes): static
+    final public static function hydrate(array $attributes): static
     {
         return new static($attributes);
     }
 
-    public function __get(string $key): mixed
+    final public function __get(string $key): mixed
     {
         if ($key === 'url') {
             return $this->attributes['id'] ?? null

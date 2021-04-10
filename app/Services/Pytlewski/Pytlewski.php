@@ -73,32 +73,27 @@ final class Pytlewski
             'father' => $this->attributes['father_id'] ?? null,
         ])->filter();
 
-        if ($ids->isNotEmpty()) {
-            return Person::whereIn('id_pytlewski', $ids)->get();
-        }
-
-        return new Collection();
+        return $ids->isNotEmpty()
+            ? Person::whereIn('id_pytlewski', $ids)->get()
+            : new Collection();
     }
 
     protected function matchRelatives(Collection $relatives): array
     {
-        $mother = isset($this->attributes['mother_surname']) || isset($this->attributes['mother_name'])
-            ? Relative::hydrate([
-                'id' => $this->attributes['mother_id'] ?? null,
-                'person' => isset($this->attributes['mother_id']) ? $relatives
-                    ->where('id_pytlewski', $this->attributes['mother_id'])->first() : null,
-                'surname' => $this->attributes['mother_surname'] ?? null,
-                'name' => $this->attributes['mother_name'] ?? null,
-            ]) : null;
+        foreach (['mother', 'father'] as $relative) {
+            $person = isset($this->attributes['mother_id'])
+                ? $relatives->where('id_pytlewski', $this->attributes['mother_id'])->first()
+                : null;
 
-        $father = isset($this->attributes['father_surname']) || isset($this->attributes['father_name'])
-            ? Relative::hydrate([
-                'id' => $this->attributes['father_id'] ?? null,
-                'person' => isset($this->attributes['father_id']) ? $relatives
-                    ->where('id_pytlewski', $this->attributes['father_id'])->first() : null,
-                'surname' => $this->attributes['father_surname'] ?? null,
-                'name' => $this->attributes['father_name'] ?? null,
-            ]) : null;
+            ${$relative} = isset($this->attributes["{$relative}_surname"]) || isset($this->attributes["{$relative}_name"])
+                ? Relative::hydrate([
+                    'id' => $this->attributes["{$relative}_id"] ?? null,
+                    'person' => $person,
+                    'surname' => $this->attributes["{$relative}_surname"] ?? null,
+                    'name' => $this->attributes["{$relative}_name"] ?? null,
+                ])
+                : null;
+        }
 
         $marriages = collect($this->attributes['marriages'] ?? [])
             ->map(function ($marriage) use ($relatives) {
