@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\JsonEncodingException;
 
 class SourcesCast implements CastsAttributes
 {
-    public function get($model, $key, $value, $attributes)
+    public function get($model, string $key, $value, array $attributes)
     {
         return collect($model->fromJson($value))
             ->map(fn ($raw) => Source::from($raw));
     }
 
-    public function set($model, $key, $value, $attributes)
+    public function set($model, string $key, $value, array $attributes)
     {
         if ($value === null) {
             return;
