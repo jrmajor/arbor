@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     @unless (app()->runningUnitTests())
-      <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+      <link rel="stylesheet" href="{{ mix('css/style.css') }}">
     @endif
 
     @routes
