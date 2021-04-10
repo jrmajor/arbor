@@ -3,7 +3,7 @@
 
     {{-- pytlewski --}}
     @if ($pytlewski = $person->pytlewski)
-      <dt>@lang('people.pytlewski.id')&nbsp;</dt>
+      <dt>{!! __('people.pytlewski.id') !!}&nbsp;</dt>
       <dd x-data="{ open: false }">
         <a href="{{ $pytlewski->url }}" target="_blank" class="a">
           {{ $pytlewski->id}}
@@ -71,7 +71,7 @@
 
     {{-- wielcy --}}
     @if ($wielcy = $person->wielcy)
-      <dt>@lang('people.wielcy.id')&nbsp;</dt>
+      <dt>{!! __('people.wielcy.id') !!}&nbsp;</dt>
       <dd>
         <a href="{{ $wielcy->url }}" target="_blank" class="a">
           {{ $wielcy->id }}
