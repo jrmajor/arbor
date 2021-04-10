@@ -75,7 +75,9 @@
       <dd>
         <a href="{{ $wielcy->url }}" target="_blank" class="a">
           {{ $wielcy->id }}
-          {{-- <small>{{ __('people.wielcy.as') }} {!! $wielcy->name !!}</small>--}}
+          @if ($wielcy->name)
+            <small>{{ __('people.wielcy.as') }} {{ $wielcy->name }}</small>
+          @endif
         </a>
       <br>
     @endif

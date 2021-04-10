@@ -16,16 +16,19 @@ class Wielcy
 
     private array $attributes = [];
 
+    private array $keys = ['sex', 'name'];
+
     public function __construct(
         private string $id,
     ) {
-        $this->getSource();
-        $this->runParsers();
+        if ($this->getSource()) {
+            $this->runParsers();
+        }
     }
 
     private function getSource()
     {
-        $this->source = Cache::remember(
+        return $this->source = Cache::remember(
             "wielcy.{$this->id}",
             CarbonInterval::day(),
             function (): ?string {
@@ -49,40 +52,38 @@ class Wielcy
     private function runParsers()
     {
         $this->parseName();
-        $this->parseBio();
+        $this->parseSex();
     }
 
     private function parseName()
     {
-        $matches = Regex::match('/<h1[^<>]*><img src="images\\/(female|male)\\.png"[^<>]*\\s*[^<>]*>([\\s\\S]+)<small>.*<\\/small>\\s*<\\/h1>/', $this->source);
+        $matches = Regex::match("/<meta property='og:title' content='([^']*)' \\/>/", $this->source);
 
-        if ($matches->hasMatch()) {
-            if ($matches->group(1) === 'female') {
-                $this->attributes['sex'] = 'xx';
-            } elseif ($matches->group(1) === 'male') {
-                $this->attributes['sex'] = 'xy';
-            }
-
-            $this->attributes['name'] = Regex::replace('/<a[^<>]*>([^<>]*)<\\/a>/', '<b>$1</b>', $matches->group(2))->result();
+        if (! $matches->hasMatch()) {
+            return;
         }
+
+        $this->attributes['name'] = $matches->group(1);
     }
 
-    private function parseBio()
+    private function parseSex()
     {
-        $regex = '/<center>\\s<table border="0" cellspacing="0" cellpadding="0">\\s<tr><td><center>\\s<em>\\s([\\s\\S]+)<\\/em><br>\\s<\\/center>\\s<\\/td><\\/tr>\\s<\\/table>\\s<\\/center><p>/';
+        $matches = Regex::match("<img src=\"images/((?:fe)?male).png\" width=\"13\" height=\"13\"\nalt=\"M\" align=left>", $this->source);
 
-        if (preg_match($regex, $this->source, $matches) === 1) {
-            $matches = Arr::trim($matches);
-
-            if (filled($matches[1])) {
-                $this->attributes['bio'] = $matches[1];
-            }
+        if (! $matches->hasMatch()) {
+            return;
         }
+
+        $this->attributes['sex'] = match ($matches->group(1)) {
+            'male' => 'xy',
+            'female' => 'xx',
+            default => null,
+        };
     }
 
     public static function url(string $id): string
     {
-        return 'http://www.sejm-wielki.pl/s/?m=NG&t=PN&n='.$id;
+        return "http://www.sejm-wielki.pl/s/?m=NG&t=PN&n={$id}";
     }
 
     public function __get(string $key): mixed
@@ -95,8 +96,8 @@ class Wielcy
             return self::url($this->id);
         }
 
-        if (array_key_exists($key, $this->attributes)) {
-            return $this->attributes[$key];
+        if (in_array($key, $this->keys)) {
+            return $this->attributes[$key] ?? null;
         }
 
         throw new InvalidArgumentException("Key [{$key}] does not exist.");
