@@ -67,10 +67,10 @@ class MacrosServiceProvider extends ServiceProvider
                 ->replace("\n\n", "</p>\n<p>");
         });
 
-        Arr::macro('trim', function (array $array): array {
+        Arr::macro('trim', function (array|Collection $array): array|Collection {
             foreach ($array as $key => $value) {
-                $array[$key] = match (gettype($value)) {
-                    'array' => self::trim($value),
+                $array[$key] = match (get_debug_type($value)) {
+                    'array', 'Illuminate\\Support\\Collection' => self::trim($value),
                     'string' => trim($value),
                     default => $value,
                 };
