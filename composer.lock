@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c01f7210540443c479b7e0b3e299c28e",
+    "content-hash": "ad6dee6cd17906bafa36019d5ae1a96a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4525,20 +4525,20 @@
         },
         {
             "name": "spatie/regex",
-            "version": "1.4.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/regex.git",
-                "reference": "1500ed75af430df3a32047494c43d79d45cf152b"
+                "reference": "189625e968958e4ee0b61008e87d0b8ecda79858"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/regex/zipball/1500ed75af430df3a32047494c43d79d45cf152b",
-                "reference": "1500ed75af430df3a32047494c43d79d45cf152b",
+                "url": "https://api.github.com/repos/spatie/regex/zipball/189625e968958e4ee0b61008e87d0b8ecda79858",
+                "reference": "189625e968958e4ee0b61008e87d0b8ecda79858",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3|^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.3"
@@ -4572,7 +4572,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/regex/issues",
-                "source": "https://github.com/spatie/regex/tree/1.4.2"
+                "source": "https://github.com/spatie/regex/tree/2.0.0"
             },
             "funding": [
                 {
@@ -4584,7 +4584,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-03T23:05:25+00:00"
+            "time": "2021-03-31T14:24:29+00:00"
         },
         {
             "name": "spatie/robots-txt",
