@@ -52,7 +52,7 @@ jobs:
           php artisan key:generate
 
       - name: Run Pest
-        run: ./vendor/bin/pest
+        run: vendor/bin/pest
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
           DB_PASSWORD: ''
@@ -85,4 +85,4 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-interaction
 
       - name: Run PHPStan
-        run: ./vendor/bin/phpstan analyse --no-progress --no-interaction
+        run: vendor/bin/phpstan analyse --no-progress --no-interaction
