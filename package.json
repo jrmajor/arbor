@@ -13,7 +13,7 @@
     "dependencies": {
         "@tailwindcss/forms": "^0.2.1",
         "alpinejs": "^2.8",
-        "date-fns": "^2.19",
+        "date-fns": "^2.21",
         "tailwindcss": "^2.1",
         "tailwindcss-multi-column": "^1.0",
         "ziggy-js": "^1.0"
@@ -24,7 +24,7 @@
         "eslint-config-spatie": "^2.0",
         "laravel-mix": "^6.0",
         "laravel-mix-bundle-analyzer": "^1.0",
-        "postcss": "^8.1",
+        "postcss": "^8.2",
         "postcss-import": "^14.0",
         "postcss-nested": "^5.0"
     }
