@@ -334,11 +334,10 @@
     <div class="w-full flex items-center justify-between mb-4">
       <div class="font-medium text-xl text-gray-900">{{ __('people.sources') }}</div>
       <button x-on:click.prevent="sources.push('')"
-        class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700
+        class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700 transition
           hover:bg-blue-100 hover:text-blue-800
           focus:outline-none focus:ring
-          active:bg-blue-600 active:border-blue-600 active:text-blue-100
-          transition-colors duration-100 ease-out">
+          active:bg-blue-600 active:border-blue-600 active:text-blue-100">
         <svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M8 6V2.5H6V6H2.5v2H6v3.5h2V8h3.5V6H8z"/>
         </svg>
@@ -356,11 +355,10 @@
                 <input type="text" class="form-input w-full" :name="'sources['+index+']'" x-model="sources[index]">
                 <div>
                   <button x-on:click.prevent="sources.splice(index, 1)"
-                    class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700
+                    class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700 transition
                       hover:bg-blue-100 hover:text-blue-800
                       focus:outline-none focus:ring
-                      active:bg-blue-600 active:border-blue-600 active:text-blue-100
-                      transition-colors duration-100 ease-out">
+                      active:bg-blue-600 active:border-blue-600 active:text-blue-100">
                     <svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 8h-9V6h9v2z"/>
                     </svg>

@@ -15,7 +15,7 @@
             border-b-2 border-solid border-transparent
             {{ $active == 'people.index' ? 'border-blue-500' : 'hover:border-gray-400 focus:border-gray-400 active:border-blue-500' }}
             focus:outline-none hover:no-underline
-            transition-colors duration-200 ease-out
+            transition-colors duration-200
             flex items-center"
         >
           <svg class="fill-current h-4 w-4 mr-2" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@
               x-on:keydown.arrow-up="arrow('up')" x-on:keydown.arrow-down="arrow('down')"
               x-on:focus="open = shouldCloseOnBlur = true" x-on:blur="closeDropdown"
             >
-            <button class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 active:text-gray-900 transition-colors duration-200 ease-out">
+            <button class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 active:text-gray-900 transition-colors duration-200">
               <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
               </svg>
@@ -102,7 +102,7 @@
               border-b-2 border-solid border-transparent
               {{ $active === 'people.create' ? 'lg:border-blue-500' : 'lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500' }}
               focus:outline-none hover:no-underline
-              transition-colors duration-200 ease-out"
+              transition-colors duration-200"
           >
             <div class="w-full {{ $active == 'people.create' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : '' }} flex items-center">
               <svg class="fill-current h-4 w-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +122,7 @@
               border-b-2 border-solid border-transparent
               {{ $active == 'dashboard' ? 'lg:border-blue-500' : 'lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500' }}
               focus:outline-none hover:no-underline
-              transition-colors duration-200 ease-out"
+              transition-colors duration-200"
           >
             <div class="w-full {{ $active == 'dashboard' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : '' }} flex items-center">
               <svg class="fill-current h-4 w-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -142,7 +142,7 @@
               border-b-2 border-solid border-transparent
               lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500
               focus:outline-none hover:no-underline
-              transition-colors duration-200 ease-out
+              transition-colors duration-200
               flex items-center"
           >
             <svg class="fill-current h-4 w-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -159,7 +159,7 @@
               border-b-2 border-solid border-transparent
               lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500
               focus:outline-none hover:no-underline
-              transition-colors duration-200 ease-out
+              transition-colors duration-200
               flex items-center"
           >
             <svg class="stroke-current h-5 w-5 -ml-1 mr-1 lg:hidden" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -176,7 +176,7 @@
               rounded uppercase
               border-b-2 border-solid border-transparent
               focus:outline-none hover:no-underline
-              transition-colors duration-200 ease-out"
+              transition-colors duration-200"
           >
             <div class="w-full {{ $active == 'settings' ? 'border-b-2 border-dotted border-blue-500' : '' }} flex items-center">
               <svg class="fill-current h-4 w-4 mr-2" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -194,7 +194,7 @@
               rounded uppercase
               border-b-2 border-solid border-transparent
               focus:outline-none hover:no-underline
-              transition-colors duration-200 ease-out
+              transition-colors duration-200
               flex items-center"
           >
             <svg class="stroke-current h-5 w-5 mr-1 lg:hidden" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -213,7 +213,7 @@
                 border-b-2 border-solid border-transparent
                 hover:border-gray-400 focus:border-gray-400 active:border-blue-500
                 focus:outline-none hover:no-underline
-                transition-color duration-200 ease-out
+                transition-color duration-200
                 flex items-center"
               :class="{ 'border-blue-500': dropdown, 'hover:border-blue-500': dropdown, 'focus:border-blue-500': dropdown }"
             >
@@ -239,7 +239,7 @@
                     border-l-2 border-solid border-transparent
                     {{ $active == 'settings' ? 'border-blue-500' : 'hover:border-gray-400 focus:border-gray-400 active:border-blue-500' }}
                     focus:outline-none hover:no-underline
-                    transition-colors duration-200 ease-out"
+                    transition-colors duration-200"
                 >
                   {{ __('misc.menu.settings') }}
                 </a>
@@ -252,7 +252,7 @@
                     border-l-2 border-solid border-transparent
                     hover:border-gray-400 focus:border-gray-400 active:border-blue-500
                     focus:outline-none hover:no-underline
-                    transition-colors duration-200 ease-out"
+                    transition-colors duration-200"
                 >
                   {{ __('misc.menu.logout') }}
                 </a>
