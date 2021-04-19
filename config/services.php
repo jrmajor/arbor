@@ -32,4 +32,8 @@ return [
         ],
     ],
 
+    'fathom' => [
+        'id' => env('FATHOM_SITE_ID'),
+    ],
+
 ];
