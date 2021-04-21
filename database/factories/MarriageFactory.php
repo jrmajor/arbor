@@ -21,7 +21,7 @@ class MarriageFactory extends Factory
             'first_event_type' => 'civil_marriage',
             'first_event_date_from' => $this->faker->dateTimeBetween('-40 years', '-20 years')->format('Y-m-d'),
             'first_event_date_to' => fn ($m) => $m['first_event_date_from'],
-            'first_event_place' => $this->faker->city.', Polska',
+            'first_event_place' => $this->faker->city().', Polska',
             'second_event_type' => 'concordat_marriage',
             'second_event_date_from' => fn ($m) => carbon($m['first_event_date_from'])
                 ->add(CarbonInterval::days(3))
@@ -37,7 +37,7 @@ class MarriageFactory extends Factory
             'divorced' => true,
             'divorce_date_from' => $this->faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
             'divorce_date_to' => fn ($m) => $m['divorce_date_from'],
-            'divorce_place' => $this->faker->city.', Polska',
+            'divorce_place' => $this->faker->city().', Polska',
         ]);
     }
 }

@@ -13,22 +13,22 @@ final class PersonFactory extends Factory
 
     public function definition()
     {
-        $sex = $this->faker->boolean ? 'female' : 'male';
-        $dead = $this->faker->boolean;
+        $sex = $this->faker->boolean() ? 'female' : 'male';
+        $dead = $this->faker->boolean();
 
         return [
             'sex' => $sex === 'female' ? 'xx' : 'xy',
             'name' => $this->faker->firstName($sex),
-            'middle_name' => $this->faker->boolean ? $this->faker->firstName($sex) : null,
+            'middle_name' => $this->faker->boolean() ? $this->faker->firstName($sex) : null,
             'family_name' => $this->faker->lastName($sex),
-            'last_name' => $sex === 'female' && $this->faker->boolean ? $this->faker->lastName($sex) : null,
+            'last_name' => $sex === 'female' && $this->faker->boolean() ? $this->faker->lastName($sex) : null,
             'birth_date_from' => $this->faker->dateTimeBetween('-80 years', '-30 years')->format('Y-m-d'),
             'birth_date_to' => fn ($p) => $p['birth_date_from'],
-            'birth_place' => $this->faker->city.', Polska',
+            'birth_place' => $this->faker->city().', Polska',
             'dead' => $dead,
             'death_date_from' => $dead ? $this->faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d') : null,
             'death_date_to' => fn ($p) => $p['death_date_from'],
-            'death_place' => $dead ? $this->faker->city.', Polska' : null,
+            'death_place' => $dead ? $this->faker->city().', Polska' : null,
             'funeral_date_from' => fn ($p) => $dead
                 ? carbon($p['death_date_from'])
                     ->add(CarbonInterval::days(5))
@@ -63,9 +63,9 @@ final class PersonFactory extends Factory
         return $this->state([
             'sex' => 'xx',
             'name' => $this->faker->firstName('female'),
-            'middle_name' => $this->faker->boolean ? $this->faker->firstName('female') : null,
+            'middle_name' => $this->faker->boolean() ? $this->faker->firstName('female') : null,
             'family_name' => $this->faker->lastName('female'),
-            'last_name' => $this->faker->boolean ? $this->faker->lastName('female') : null,
+            'last_name' => $this->faker->boolean() ? $this->faker->lastName('female') : null,
         ]);
     }
 
@@ -74,7 +74,7 @@ final class PersonFactory extends Factory
         return $this->state([
             'sex' => 'xy',
             'name' => $this->faker->firstName('male'),
-            'middle_name' => $this->faker->boolean ? $this->faker->firstName('male') : null,
+            'middle_name' => $this->faker->boolean() ? $this->faker->firstName('male') : null,
             'family_name' => $this->faker->lastName('male'),
             'last_name' => null,
         ]);
@@ -102,7 +102,7 @@ final class PersonFactory extends Factory
             'dead' => true,
             'death_date_from' => $this->faker->dateTimeBetween('-29 years', '-5 years')->format('Y-m-d'),
             'death_date_to' => fn ($p) => $p['death_date_from'],
-            'death_place' => $this->faker->city.', Polska',
+            'death_place' => $this->faker->city().', Polska',
             'funeral_date_from' => fn ($p) => carbon($p['death_date_from'])
                 ->add(CarbonInterval::days(5))
                 ->format('Y-m-d'),
