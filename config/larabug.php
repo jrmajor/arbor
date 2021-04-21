@@ -17,6 +17,7 @@ return [
     ],
 
     'blacklist' => [
+        'current_password',
         'password',
         'password_confirmation',
     ],
