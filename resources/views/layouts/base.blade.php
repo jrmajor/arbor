@@ -21,9 +21,9 @@
       <script src="{{ mix('js/app.js') }}" defer></script>
     @endif
     @stack('scripts')
-    @production
-        <script src="https://cdn.usefathom.com/script.js" data-site="{{ config('services.fathom.id') }}" defer></script>
-    @endproduction
+    @if(config('services.fathom.id'))
+      <script src="https://cdn.usefathom.com/script.js" data-site="{{ config('services.fathom.id') }}" defer></script>
+    @endif
   </head>
   <body class="font-sans bg-gray-100">
 
