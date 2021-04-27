@@ -14,20 +14,23 @@ class EstimatorInfo extends Command
 
     public function handle()
     {
-        $people = Person::whereNotNull('birth_date_from')->get()
+        $people = Person::query()
+            ->whereNotNull('birth_date_from')
+            ->get()
             ->filter(fn ($person) => $person->birth_year)
             ->map(fn ($person) => (object) [
                 'person' => $person,
                 'error' => $person->estimatedBirthDateError(),
-            ])->whereNotNull('error')
+            ])
+            ->whereNotNull('error')
             ->sortByDesc->error;
 
-        $generationInterval = Person::whereNotNull('birth_date_from')
-            ->whereNotNull('father_id')
+        $generationInterval = Person::query()
+            ->whereNotNull(['birth_date_from', 'father_id'])
             ->union(
-                Person::whereNotNull('birth_date_from')
-                    ->whereNotNull('father_id'),
-            )->get()
+                Person::whereNotNull(['birth_date_from', 'father_id']),
+            )
+            ->get()
             ->filter(fn ($person) => $person->birth_year)
             ->map(fn ($person) => [
                 $person->mother?->birth_year
@@ -36,7 +39,9 @@ class EstimatorInfo extends Command
                 $person->father?->birth_year
                     ? $person->birth_year - $person->father->birth_year
                     : null,
-            ])->flatten()->avg();
+            ])
+            ->flatten()
+            ->avg();
 
         (new Table($this->output))->setRows([
             [
