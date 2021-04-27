@@ -57,5 +57,7 @@ class EstimatorInfo extends Command
             ['real interval', round($generationInterval, 2)],
             ['used interval', Person::generationInterval],
         ]);
+
+        $this->comment('Calculated in '.microtime(true) - LARAVEL_START);
     }
 }
