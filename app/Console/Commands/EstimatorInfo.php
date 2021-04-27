@@ -23,7 +23,16 @@ class EstimatorInfo extends Command
                 'error' => $person->estimatedBirthDateError(),
             ])
             ->whereNotNull('error')
-            ->sortByDesc->error;
+            ->sortByDesc('error');
+
+        $first = $people->first();
+        $maximalError = "{$first->error} (person №{$first->person->id})";
+
+        $averageError = $people->avg('error');
+
+        $variance = $people
+            ->map(fn ($data) => ($data->error - $averageError) ** 2)
+            ->avg();
 
         $generationInterval = Person::query()
             ->whereNotNull('birth_date_from')
@@ -41,31 +50,12 @@ class EstimatorInfo extends Command
             ->avg();
 
         $this->table([], [
-            [
-                'maximal error',
-                $people->first()->error.' (person №'.$people->first()->person->id.')',
-            ],
-            [
-                'average error',
-                round($averageError = $people->avg->error, 2),
-            ],
-            [
-                'variance',
-                round(
-                    $variance = $people
-                        ->map(fn ($data) => ($data->error - $averageError) ** 2)
-                        ->avg(),
-                    2,
-                ),
-            ],
-            [
-                'standard deviation',
-                round(sqrt($variance), 2),
-            ],
-            [
-                'interval',
-                round($generationInterval, 2).' (using '.Person::generationInterval.')',
-            ],
+            ['maximal error', $maximalError],
+            ['average error', round($averageError, 2)],
+            ['variance', round($variance, 2)],
+            ['standard deviation', round(sqrt($variance), 2)],
+            ['real interval', round($generationInterval, 2)],
+            ['used interval', Person::generationInterval],
         ]);
     }
 }
