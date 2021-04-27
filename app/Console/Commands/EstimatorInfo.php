@@ -17,16 +17,16 @@ class EstimatorInfo extends Command
         $people = Person::query()
             ->whereNotNull('birth_date_from')
             ->get()
-            ->filter(fn ($person) => $person->birth_year)
-            ->map(fn ($person) => (object) [
-                'person' => $person,
+            ->filter(fn (Person $person) => $person->birth_year)
+            ->map(fn (Person $person) => (object) [
+                'personId' => $person->id,
                 'error' => $person->estimatedBirthDateError(),
             ])
             ->whereNotNull('error')
             ->sortByDesc('error');
 
         $first = $people->first();
-        $maximalError = "{$first->error} (person №{$first->person->id})";
+        $maximalError = "{$first->error} (person №{$first->personId})";
 
         $averageError = $people->avg('error');
 
@@ -40,8 +40,8 @@ class EstimatorInfo extends Command
                 $query->whereNotNull(['father_id', 'mother_id'], 'or');
             })
             ->get()
-            ->filter(fn ($person) => $person->birth_year)
-            ->map(fn ($person) => [
+            ->filter(fn (Person $person) => $person->birth_year)
+            ->map(fn (Person $person) => [
                 ($f = $person->father?->birth_year) ? $person->birth_year - $f : null,
                 ($m = $person->mother?->birth_year) ? $person->birth_year - $m : null,
             ])
