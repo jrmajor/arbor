@@ -7,7 +7,6 @@ parameters:
     excludePaths:
         - app/Providers/MacrosServiceProvider.php
     ignoreErrors:
-        - '#Access to an undefined property Faker\\Generator::\$\w+\.#'
         - '#Access to an undefined property Illuminate\\Support\\HigherOrderCollectionProxy::\$\w+\.#'
         - '#Call to an undefined method Faker\\Generator::\w+\(\)\.#'
         - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Factories\\Factory::(divorced|woman|man)\(\)\.#'
