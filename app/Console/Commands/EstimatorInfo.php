@@ -42,10 +42,6 @@ class EstimatorInfo extends Command
 
         $this->table([], [
             [
-                'minimal error',
-                $people->first()->error.' (person №'.$people->first()->person->id.')',
-            ],
-            [
                 'maximal error',
                 $people->reverse()->first()->error.' (person №'.$people->reverse()->first()->person->id.')',
             ],
