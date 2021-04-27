@@ -7,13 +7,14 @@ parameters:
     excludePaths:
         - app/Providers/MacrosServiceProvider.php
     ignoreErrors:
-        - '#Access to an undefined property Illuminate\\Support\\HigherOrderCollectionProxy::\$\w+\.#'
-        - '#Call to an undefined method Faker\\Generator::\w+\(\)\.#'
-        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Factories\\Factory::(divorced|woman|man)\(\)\.#'
-        - '#Call to an undefined method Illuminate\\Support\\HigherOrderCollectionProxy::\w+\(\)\.#'
-        - '#Result of function \w+ \(void\) is used\.#'
-        - '#Result of method \w+(\\\w+)*::\w+\(\) \(void\) is used\.#'
-        - '#Using nullsafe property access on non-nullable type mixed\. Use -> instead\.#'
+        - '#^Access to an undefined property Illuminate\\Support\\HigherOrderCollectionProxy::\$\w+\.$#'
+        - '#^Call to an undefined method Faker\\Generator::\w+\(\)\.$#'
+        - '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Factories\\Factory::(divorced|woman|man)\(\)\.$#'
+        - '#^Call to an undefined method Illuminate\\Support\\HigherOrderCollectionProxy::\w+\(\)\.$#'
+        - '#^Match expression does not handle remaining value: #'
+        - '#^Result of function \w+ \(void\) is used\.$#'
+        - '#^Result of method \w+(\\\w+)*::\w+\(\) \(void\) is used\.$#'
+        - '#^Using nullsafe property access on non-nullable type mixed\. Use -> instead\.$#'
 
 includes:
     - vendor/nunomaduro/larastan/extension.neon

@@ -3,9 +3,9 @@
 namespace App\Models\Relations;
 
 use App\Models\Person;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use InvalidArgumentException;
 
 /**
  * @method $this orderBy($column, $direction = 'asc')
@@ -23,12 +23,11 @@ class HalfSiblings extends Relation
         Person $parent,
         public string $side,
     ) {
-        $this->sideKey = $side.'_id';
+        $this->sideKey = "{$side}_id";
 
         $this->partnerKey = match ($side) {
             'mother' => 'father_id',
             'father' => 'mother_id',
-            default => throw new InvalidArgumentException(),
         };
 
         parent::__construct(Person::query(), $parent);
@@ -39,10 +38,11 @@ class HalfSiblings extends Relation
         if (static::$constraints) {
             $this->query
                 ->where($this->sideKey, $this->parent->{$this->sideKey})
-                ->where(function ($query) {
+                ->where(function (Builder $query) {
                     $query->whereNull($this->partnerKey)
                         ->orWhere($this->partnerKey, '!=', $this->parent->{$this->partnerKey});
-                })->where('id', '!=', $this->parent->id);
+                })
+                ->whereKeyNot($this->parent->id);
         }
     }
 
