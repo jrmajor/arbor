@@ -34,14 +34,11 @@ class EstimatorInfo extends Command
             ->get()
             ->filter(fn ($person) => $person->birth_year)
             ->map(fn ($person) => [
-                $person->mother?->birth_year
-                    ? $person->birth_year - $person->mother->birth_year
-                    : null,
-                $person->father?->birth_year
-                    ? $person->birth_year - $person->father->birth_year
-                    : null,
+                ($f = $person->father?->birth_year) ? $person->birth_year - $f : null,
+                ($m = $person->mother?->birth_year) ? $person->birth_year - $m : null,
             ])
             ->flatten()
+            ->filter()
             ->avg();
 
         (new Table($this->output))->setRows([
