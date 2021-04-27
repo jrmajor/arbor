@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^7.3",
         "jenssegers/agent": "^2.6",
         "larabug/larabug": "^2.3",
-        "laravel/framework": "^8.38",
+        "laravel/framework": "^8.39",
         "laravel/slack-notification-channel": "^2.3",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.6",
@@ -48,7 +48,7 @@
         "pestphp/pest": "^1.0",
         "pestphp/pest-plugin-laravel": "^1.0",
         "pestphp/pest-plugin-livewire": "^1.0",
-        "phpstan/phpstan": "^0.12.84",
+        "phpstan/phpstan": "^0.12.85",
         "phpunit/phpunit": "^9.5"
     },
     "config": {
