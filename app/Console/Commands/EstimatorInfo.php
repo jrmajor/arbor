@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\Person;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Helper\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 class EstimatorInfo extends Command
@@ -41,7 +40,7 @@ class EstimatorInfo extends Command
             ->filter()
             ->avg();
 
-        (new Table($this->output))->setRows([
+        $this->table([], [
             [
                 'minimal error',
                 $people->first()->error.' (person №'.$people->first()->person->id.')',
@@ -71,7 +70,6 @@ class EstimatorInfo extends Command
                 'interval',
                 round($generationInterval, 2).' (using '.Person::generationInterval.')',
             ],
-        ])->setStyle('default')
-        ->render();
+        ]);
     }
 }
