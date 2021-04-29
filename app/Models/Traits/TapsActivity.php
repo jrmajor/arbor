@@ -21,8 +21,14 @@ trait TapsActivity
         $old = $activity->properties['old'];
         $attributes = $activity->properties['attributes'];
 
+        if (array_key_exists('visibility', $attributes)) {
+            $this->tapVisibilityChangedActivity($activity);
+
+            return;
+        }
+
         if (array_key_exists('biography', $attributes)) {
-            $this->tapBiographyRelatedActivity($activity);
+            $this->tapBiographyUpdatedActivity($activity);
 
             return;
         }
@@ -45,7 +51,12 @@ trait TapsActivity
         $activity->properties = compact('old', 'attributes');
     }
 
-    protected function tapBiographyRelatedActivity(Activity $activity)
+    protected function tapVisibilityChangedActivity(Activity $activity)
+    {
+        $activity->description = 'changed-visibility';
+    }
+
+    protected function tapBiographyUpdatedActivity(Activity $activity)
     {
         $activity->description = match (null) {
             $activity->properties['old']['biography'] => 'added-biography',

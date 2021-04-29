@@ -12,6 +12,7 @@ use App\Services\Pytlewski\Pytlewski;
 use App\Services\Sources\SourcesCast;
 use App\Services\Wielcy\Wielcy;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,7 +20,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Spatie\Activitylog\ActivityLogger;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -52,7 +52,7 @@ class Person extends Model
 
     protected static $logAttributes = ['*'];
 
-    protected static $logAttributesToIgnore = ['id', 'visibility', 'created_at', 'updated_at'];
+    protected static $logAttributesToIgnore = ['id', 'created_at', 'updated_at'];
 
     protected static $submitEmptyLogs = false;
 
@@ -75,31 +75,18 @@ class Person extends Model
 
     protected ?Pytlewski $pytlewski = null;
 
+    protected static function booting()
+    {
+        static::updating(function (self $person) {
+            if ($person->isDirty('visibility') && count($person->getDirty()) > 1) {
+                throw new Exception('Visibility can not be updated with other attributes.');
+            }
+        });
+    }
+
     public function isVisible(): bool
     {
         return $this->visibility === true;
-    }
-
-    public function changeVisibility(bool $visibility): bool
-    {
-        if (
-            $this->visibility === $visibility
-            || ! $this->setAttribute('visibility', $visibility)->save()
-        ) {
-            return false;
-        }
-
-        app(ActivityLogger::class)
-            ->useLog($this->getLogNameToUse('changed-visibility'))
-            ->performedOn($this)
-            ->withProperties([
-                'old' => ['visibility' => ! $visibility],
-                'attributes' => ['visibility' => $visibility],
-            ])
-            ->tap([$this, 'tapActivity'], 'changed-visibility')
-            ->log($this->getDescriptionForEvent('changed-visibility'));
-
-        return true;
     }
 
     public function mother(): BelongsTo

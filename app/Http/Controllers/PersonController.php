@@ -111,9 +111,9 @@ class PersonController extends Controller
 
         $visibility = $request->validate([
             'visibility' => 'required|boolean',
-        ])['visibility'];
+        ]);
 
-        $person->changeVisibility($visibility)
+        $person->forceFill($visibility)->save()
             ? flash()->success(__('people.alerts.visibility_has_been_changed'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
 

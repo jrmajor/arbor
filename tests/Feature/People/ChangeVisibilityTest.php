@@ -32,11 +32,11 @@ test('users with permissions can change persons visibility', function () {
     expect($this->person->isVisible())->toBeFalse();
 
     withPermissions(4)
-        ->from('people/'.$this->person->id.'/edit')
+        ->from("people/{$this->person->id}/edit")
         ->put("people/{$this->person->id}/visibility", [
             'visibility' => true,
         ])->assertStatus(302)
-        ->assertRedirect('people/'.$this->person->id.'/edit');
+        ->assertRedirect("people/{$this->person->id}/edit");
 
     expect($this->person->fresh()->isVisible())->toBeTrue();
 });
