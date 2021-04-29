@@ -11,8 +11,7 @@ trait TapsActivity
     {
         match ($eventName) {
             'updated' => $this->tapUpdatedActivity($activity),
-            'deleted' => $this->tapDeletedActivity($activity),
-            'restored' => $this->tapRestoredActivity($activity),
+            'deleted', 'restored' => $this->tapDeletedOrRestoredActivity($activity),
             default => null,
         };
     }
@@ -57,21 +56,12 @@ trait TapsActivity
         $activity->properties = compact('old', 'attributes');
     }
 
-    protected function tapDeletedActivity(Activity $activity)
+    protected function tapDeletedOrRestoredActivity(Activity $activity)
     {
         $attributes = $activity->properties['attributes'];
 
-        $activity->properties = collect([
+        $activity->properties = [
             'attributes' => Arr::only($attributes, 'deleted_at'),
-        ]);
-    }
-
-    protected function tapRestoredActivity(Activity $activity)
-    {
-        $attributes = $activity->properties['attributes'];
-
-        $activity->properties = collect([
-            'attributes' => Arr::only($attributes, 'deleted_at'),
-        ]);
+        ];
     }
 }
