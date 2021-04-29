@@ -16,7 +16,7 @@ class StoreBiography extends FormRequest
         return ['biography' => ['string', 'max:10000', 'nullable']];
     }
 
-    public function biography(): string
+    public function biography(): ?string
     {
         return $this->validated()['biography'];
     }
