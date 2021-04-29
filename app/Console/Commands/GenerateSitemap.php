@@ -32,5 +32,7 @@ class GenerateSitemap extends Command
         });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
+
+        $this->info('Sitemap has been generated successfully.');
     }
 }
