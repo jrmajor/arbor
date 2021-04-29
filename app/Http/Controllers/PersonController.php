@@ -67,9 +67,9 @@ class PersonController extends Controller
     {
         $this->authorize('create', Person::class);
 
-        $person = new Person();
+        $person = new Person($request->validated());
 
-        $person->fill($request->validated())->save()
+        $person->save()
             ? flash()->success(__('people.alerts.person_has_been_created'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
 
@@ -103,7 +103,7 @@ class PersonController extends Controller
     {
         $this->authorize('update', $person);
 
-        $person->fill($request->validated())->save()
+        $person->update($request->validated())
             ? flash()->success(__('people.alerts.changes_have_been_saved'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
 

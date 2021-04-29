@@ -14,9 +14,7 @@ class MarriageController extends Controller
     {
         $this->authorize('create', Marriage::class);
 
-        $marriage = new Marriage();
-
-        $marriage->fill([
+        $marriage = new Marriage([
             'woman_order' => 1,
             'man_order' => 1,
         ]);
@@ -36,9 +34,9 @@ class MarriageController extends Controller
     {
         $this->authorize('create', Marriage::class);
 
-        $marriage = new Marriage();
+        $marriage = new Marriage($request->validated());
 
-        $marriage->fill($request->validated())->save()
+        $marriage->save()
             ? flash()->success(__('marriages.alerts.marriage_has_been_created'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
 
@@ -56,7 +54,7 @@ class MarriageController extends Controller
     {
         $this->authorize('update', $marriage);
 
-        $marriage->fill($request->validated())->save()
+        $marriage->update($request->validated())
             ? flash()->success(__('marriages.alerts.changes_have_been_saved'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
 
