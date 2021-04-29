@@ -8,8 +8,8 @@ class DateRangeToDateCast implements CastsAttributes
 {
     public function get($model, string $key, $value, array $attributes)
     {
-        $from = $key.'_from';
-        $to = $key.'_to';
+        $from = "{$key}_from";
+        $to = "{$key}_to";
 
         return $model->{$from} && $model->{$to}
             ? $model->{$from}->formatPeriodTo($model->{$to}) : null;

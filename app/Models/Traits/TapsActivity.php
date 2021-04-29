@@ -40,20 +40,17 @@ trait TapsActivity
         }
 
         foreach (static::$dateRanges as $date) {
-            if (
-                Arr::has($attributes, $date.'_from')
-                && ! Arr::has($attributes, $date.'_to')
-            ) {
-                $old[$date.'_to'] = $this->{$date.'_to'}->format('Y-m-d');
-                $attributes[$date.'_to'] = $this->{$date.'_to'}->format('Y-m-d');
+            $from = "{$date}_from";
+            $to = "{$date}_to";
+
+            if (Arr::has($attributes, $from) && ! Arr::has($attributes, $to)) {
+                $old[$to] = $this->{$to}->format('Y-m-d');
+                $attributes[$to] = $this->{$to}->format('Y-m-d');
             }
 
-            if (
-                ! Arr::has($attributes, $date.'_from')
-                && Arr::has($attributes, $date.'_to')
-            ) {
-                $old[$date.'_from'] = $this->{$date.'_from'}->format('Y-m-d');
-                $attributes[$date.'_from'] = $this->{$date.'_from'}->format('Y-m-d');
+            if (! Arr::has($attributes, $from) && Arr::has($attributes, $to)) {
+                $old[$from] = $this->{$from}->format('Y-m-d');
+                $attributes[$from] = $this->{$from}->format('Y-m-d');
             }
         }
 

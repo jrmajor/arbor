@@ -309,7 +309,8 @@ class Person extends Model
                     "left({$nameQuery}, 1)
                     collate utf8mb4_0900_as_ci as letter,
                     count(*) as total",
-                )->groupBy('letter')
+                )
+                ->groupBy('letter')
                 ->orderBy('letter')
                 ->whereNull('deleted_at')
                 ->get(),

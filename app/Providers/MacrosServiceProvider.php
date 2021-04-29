@@ -70,7 +70,7 @@ class MacrosServiceProvider extends ServiceProvider
         Arr::macro('trim', function (array|Collection $array): array|Collection {
             foreach ($array as $key => $value) {
                 $array[$key] = match (get_debug_type($value)) {
-                    'array', 'Illuminate\\Support\\Collection' => self::trim($value),
+                    'array', Collection::class => self::trim($value),
                     'string' => trim($value),
                     default => $value,
                 };

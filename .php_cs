@@ -156,7 +156,7 @@ return (new PhpCsFixer\Config())
 
         // Return Notation
         'no_useless_return' => true,
-        'simplified_null_return' => true,
+        // 'simplified_null_return' => true,
 
         // Semicolon
         'multiline_whitespace_before_semicolons' => true,
