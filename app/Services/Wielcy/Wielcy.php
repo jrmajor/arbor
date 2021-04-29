@@ -79,18 +79,11 @@ final class Wielcy
 
     public function __get(string $key): mixed
     {
-        if ($key === 'id') {
-            return $this->id;
-        }
-
-        if ($key === 'url') {
-            return self::url($this->id);
-        }
-
-        if (in_array($key, $this->keys)) {
-            return $this->attributes[$key] ?? null;
-        }
-
-        throw new InvalidArgumentException("Key [{$key}] does not exist.");
+        return match (true) {
+            $key === 'id' => $this->id,
+            $key === 'url' => self::url($this->id),
+            in_array($key, $this->keys) => $this->attributes[$key] ?? null,
+            default => throw new InvalidArgumentException("Key [{$key}] does not exist."),
+        };
     }
 }

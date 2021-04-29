@@ -135,26 +135,16 @@ final class Pytlewski
 
     public function __get(string $key): mixed
     {
-        if ($key === 'id') {
-            return $this->id;
+        if (in_array($key, $this->relationKeys) && ! $this->relations) {
+            $this->loadRelations();
         }
 
-        if ($key === 'url') {
-            return self::url($this->id);
-        }
-
-        if (in_array($key, $this->keys)) {
-            return $this->attributes[$key] ?? null;
-        }
-
-        if (in_array($key, $this->relationKeys)) {
-            if (! $this->relations) {
-                $this->loadRelations();
-            }
-
-            return $this->relations[$key];
-        }
-
-        throw new InvalidArgumentException("Key [{$key}] does not exist.");
+        return match (true) {
+            $key === 'id' => $this->id,
+            $key === 'url' => self::url($this->id),
+            in_array($key, $this->keys) => $this->attributes[$key] ?? null,
+            in_array($key, $this->relationKeys) => $this->relations[$key],
+            default => throw new InvalidArgumentException("Key [{$key}] does not exist."),
+        };
     }
 }
