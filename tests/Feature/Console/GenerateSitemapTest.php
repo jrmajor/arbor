@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Person;
-use Illuminate\Support\Str;
 
 it('can generate sitemap', function () {
     $sitemapPath = __DIR__.'/../../../public/sitemap.xml';

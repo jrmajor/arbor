@@ -18,44 +18,30 @@ class Settings extends Component
 
     public function saveEmail()
     {
-        $this->validate([
-            'email' => 'required|email',
-        ]);
+        $this->validate(['email' => 'required|email']);
 
-        $result = Auth::user()->fill([
-            'email' => $this->email,
-        ])->save();
-
-        $result
+        Auth::user()->update(['email' => $this->email])
             ? flash()->success(__('settings.alerts.changes_have_been_saved'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
     }
 
     public function savePassword()
     {
-        $this->validate([
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        $this->validate(['password' => 'required|string|min:8|confirmed']);
 
-        $result = Auth::user()->fill([
-            'password' => Hash::make($this->password),
-        ])->save();
+        Auth::user()->update(['password' => Hash::make($this->password)])
+            ? flash()->success(__('settings.alerts.password_has_been_changed'))
+            : flash()->error(__('misc.an_unknown_error_occurred'));
 
         $this->fill([
             'password' => null,
             'password_confirmation' => null,
         ]);
-
-        $result
-            ? flash()->success(__('settings.alerts.password_has_been_changed'))
-            : flash()->error(__('misc.an_unknown_error_occurred'));
     }
 
     public function logoutOtherDevices()
     {
-        $this->validate([
-            'logout_password' => 'required',
-        ]);
+        $this->validate(['logout_password' => 'required']);
 
         if (! Hash::check($this->logout_password, Auth::user()->password)) {
             $this->addError('logout_password', __('settings.wrong_password'));
@@ -63,13 +49,11 @@ class Settings extends Component
             return;
         }
 
-        $result = Auth::guard()->logoutOtherDevices($this->logout_password);
-
-        $this->logout_password = null;
-
-        $result
+        Auth::guard()->logoutOtherDevices($this->logout_password)
             ? flash()->success(__('settings.alerts.logged_out'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
+
+        $this->logout_password = null;
     }
 
     public function mount()
