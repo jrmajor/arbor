@@ -7,31 +7,49 @@ use Illuminate\Support\Arr;
 
 trait TapsActivity
 {
-    public function tapActivity(Activity $activity, string $eventName)
+    public function tapActivity(Activity $activity, string $eventName): void
     {
         match ($eventName) {
-            'updated' => $this->tapUpdatedActivity($activity),
-            'deleted', 'restored' => $this->tapDeletedOrRestoredActivity($activity),
+            'updated' => $this->tapUpdated($activity),
+            'deleted', 'restored' => $this->tapDeletedOrRestored($activity),
             default => null,
         };
     }
 
-    protected function tapUpdatedActivity(Activity $activity)
+    private function tapUpdated(Activity $activity): void
+    {
+        $attr = $activity->properties['attributes'];
+
+        match (true) {
+            array_key_exists('visibility', $attr) => $this->visibilityChanged($activity),
+            array_key_exists('biography', $attr) => $this->biographyUpdated($activity),
+            default => $this->modelUpdated($activity),
+        };
+    }
+
+    private function visibilityChanged(Activity $activity): void
+    {
+        $activity->description = 'changed-visibility';
+    }
+
+    private function biographyUpdated(Activity $activity): void
+    {
+        $activity->description = match (null) {
+            $activity->properties['old']['biography'] => 'added-biography',
+            $activity->properties['attributes']['biography'] => 'deleted-biography',
+            default => 'updated-biography',
+        };
+
+        $activity->properties = [
+            'old' => $activity->properties['old']['biography'],
+            'new' => $activity->properties['attributes']['biography'],
+        ];
+    }
+
+    private function modelUpdated(Activity $activity): void
     {
         $old = $activity->properties['old'];
         $attributes = $activity->properties['attributes'];
-
-        if (array_key_exists('visibility', $attributes)) {
-            $this->tapVisibilityChangedActivity($activity);
-
-            return;
-        }
-
-        if (array_key_exists('biography', $attributes)) {
-            $this->tapBiographyUpdatedActivity($activity);
-
-            return;
-        }
 
         foreach (static::$dateRanges as $date) {
             $from = "{$date}_from";
@@ -51,26 +69,7 @@ trait TapsActivity
         $activity->properties = compact('old', 'attributes');
     }
 
-    protected function tapVisibilityChangedActivity(Activity $activity)
-    {
-        $activity->description = 'changed-visibility';
-    }
-
-    protected function tapBiographyUpdatedActivity(Activity $activity)
-    {
-        $activity->description = match (null) {
-            $activity->properties['old']['biography'] => 'added-biography',
-            $activity->properties['attributes']['biography'] => 'deleted-biography',
-            default => 'updated-biography',
-        };
-
-        $activity->properties = [
-            'old' => $activity->properties['old']['biography'],
-            'new' => $activity->properties['attributes']['biography'],
-        ];
-    }
-
-    protected function tapDeletedOrRestoredActivity(Activity $activity)
+    private function tapDeletedOrRestored(Activity $activity): void
     {
         $attributes = $activity->properties['attributes'];
 
