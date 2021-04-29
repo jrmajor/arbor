@@ -82,37 +82,22 @@ class Person extends Model
 
     public function changeVisibility(bool $visibility): bool
     {
-        if ($this->visibility === $visibility) {
+        if (
+            $this->visibility === $visibility
+            || ! $this->setAttribute('visibility', $visibility)->save()
+        ) {
             return false;
         }
 
-        $this->visibility = $visibility;
-
-        $saved = $this->save();
-
-        if (! $saved) {
-            return false;
-        }
-
-        $description = $this->getDescriptionForEvent('changed-visibility');
-
-        $logName = $this->getLogNameToUse('changed-visibility');
-
-        $attrs = [
-            'old' => ['visibility' => ! $visibility],
-            'attributes' => ['visibility' => $visibility],
-        ];
-
-        $logger = app(ActivityLogger::class)
-            ->useLog($logName)
+        app(ActivityLogger::class)
+            ->useLog($this->getLogNameToUse('changed-visibility'))
             ->performedOn($this)
-            ->withProperties($attrs);
-
-        if (method_exists($this, 'tapActivity')) {
-            $logger->tap([$this, 'tapActivity'], 'changed-visibility');
-        }
-
-        $logger->log($description);
+            ->withProperties([
+                'old' => ['visibility' => ! $visibility],
+                'attributes' => ['visibility' => $visibility],
+            ])
+            ->tap([$this, 'tapActivity'], 'changed-visibility')
+            ->log($this->getDescriptionForEvent('changed-visibility'));
 
         return true;
     }
