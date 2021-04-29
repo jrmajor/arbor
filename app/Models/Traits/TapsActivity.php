@@ -22,18 +22,7 @@ trait TapsActivity
         $attributes = $activity->properties['attributes'];
 
         if (array_key_exists('biography', $attributes)) {
-            if ($activity->properties['old']['biography'] === null) {
-                $activity->description = 'added-biography';
-            } elseif ($activity->properties['attributes']['biography'] === null) {
-                $activity->description = 'deleted-biography';
-            } else {
-                $activity->description = 'updated-biography';
-            }
-
-            $activity->properties = collect([
-                'old' => $activity->properties['old']['biography'],
-                'new' => $activity->properties['attributes']['biography'],
-            ]);
+            $this->tapBiographyRelatedActivity($activity);
 
             return;
         }
@@ -54,6 +43,20 @@ trait TapsActivity
         }
 
         $activity->properties = compact('old', 'attributes');
+    }
+
+    protected function tapBiographyRelatedActivity(Activity $activity)
+    {
+        $activity->description = match (null) {
+            $activity->properties['old']['biography'] => 'added-biography',
+            $activity->properties['attributes']['biography'] => 'deleted-biography',
+            default => 'updated-biography',
+        };
+
+        $activity->properties = [
+            'old' => $activity->properties['old']['biography'],
+            'new' => $activity->properties['attributes']['biography'],
+        ];
     }
 
     protected function tapDeletedOrRestoredActivity(Activity $activity)
