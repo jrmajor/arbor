@@ -15,17 +15,11 @@ class MarriageController extends Controller
         $this->authorize('create', Marriage::class);
 
         $marriage = new Marriage([
-            'woman_order' => 1,
             'man_order' => 1,
+            'woman_order' => 1,
+            'man_id' => Person::find($request->input('man'))?->id,
+            'woman_id' => Person::find($request->input('woman'))?->id,
         ]);
-
-        if ($request->has('woman') && $woman = Person::find($request->input('woman'))) {
-            $marriage->woman_id = $woman->id;
-        }
-
-        if ($request->has('man') && $man = Person::find($request->input('man'))) {
-            $marriage->man_id = $man->id;
-        }
 
         return view('marriages.create', ['marriage' => $marriage]);
     }
