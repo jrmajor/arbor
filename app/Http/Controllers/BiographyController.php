@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBiography;
 use App\Models\Person;
-use Illuminate\Http\Request;
 
 class BiographyController extends Controller
 {
@@ -14,15 +14,11 @@ class BiographyController extends Controller
         return view('people.biography.edit', ['person' => $person]);
     }
 
-    public function update(Request $request, Person $person)
+    public function update(StoreBiography $request, Person $person)
     {
         $this->authorize('update', $person);
 
-        $person->biography = $request->validate([
-            'biography' => 'string|max:10000|nullable',
-        ])['biography'];
-
-        $person->save()
+        $person->update(['biography' => $request->biography()])
             ? flash()->success(__('people.alerts.changes_have_been_saved'))
             : flash()->error(__('misc.an_unknown_error_occurred'));
 
