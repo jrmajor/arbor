@@ -90,29 +90,31 @@ class Person extends Model
 
         $saved = $this->save();
 
-        if ($saved) {
-            $description = $this->getDescriptionForEvent('changed-visibility');
-
-            $logName = $this->getLogNameToUse('changed-visibility');
-
-            $attrs = [
-                'old' => ['visibility' => ! $visibility],
-                'attributes' => ['visibility' => $visibility],
-            ];
-
-            $logger = app(ActivityLogger::class)
-                ->useLog($logName)
-                ->performedOn($this)
-                ->withProperties($attrs);
-
-            if (method_exists($this, 'tapActivity')) {
-                $logger->tap([$this, 'tapActivity'], 'changed-visibility');
-            }
-
-            $logger->log($description);
+        if (! $saved) {
+            return false;
         }
 
-        return $saved;
+        $description = $this->getDescriptionForEvent('changed-visibility');
+
+        $logName = $this->getLogNameToUse('changed-visibility');
+
+        $attrs = [
+            'old' => ['visibility' => ! $visibility],
+            'attributes' => ['visibility' => $visibility],
+        ];
+
+        $logger = app(ActivityLogger::class)
+            ->useLog($logName)
+            ->performedOn($this)
+            ->withProperties($attrs);
+
+        if (method_exists($this, 'tapActivity')) {
+            $logger->tap([$this, 'tapActivity'], 'changed-visibility');
+        }
+
+        $logger->log($description);
+
+        return true;
     }
 
     public function mother(): BelongsTo
