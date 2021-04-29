@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use App\Http\Requests\LocaleRequest;
 
 class LocaleController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(LocaleRequest $request)
     {
-        $locale = $this->validate($request, ['language' => [
-            'required',
-            'in:'.implode(',', config('app.available_locales')),
-        ]])['language'];
-
-        Session::put('locale', $locale);
+        session(['locale' => $request->locale()]);
 
         return back();
     }
