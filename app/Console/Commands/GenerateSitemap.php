@@ -21,15 +21,13 @@ class GenerateSitemap extends Command
             ->add(Url::create('/people')
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
 
-        Person::orderBy('id')->chunk(100, function ($people) use ($sitemap) {
-            $people
-                ->filter(fn ($person) => $person->isVisible())
-                ->each(fn ($person) => $sitemap->add(
-                    Url::create('/people/'.$person->id)
-                        ->setLastModificationDate($person->updated_at)
-                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY),
-                ));
-        });
+        Person::lazy(100)
+            ->filter(fn (Person $person) => $person->isVisible())
+            ->each(fn (Person $person) => $sitemap->add(
+                Url::create("/people/{$person->id}")
+                    ->setLastModificationDate($person->updated_at)
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY),
+            ));
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
 
