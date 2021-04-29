@@ -48,6 +48,7 @@
         "pestphp/pest": "^1.0",
         "pestphp/pest-plugin-laravel": "^1.0",
         "pestphp/pest-plugin-livewire": "^1.0",
+        "pestphp/pest-plugin-watch": "1.x-dev",
         "phpstan/phpstan": "^0.12.85",
         "phpunit/phpunit": "^9.5"
     },
