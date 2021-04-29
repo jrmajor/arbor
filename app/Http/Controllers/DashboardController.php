@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function (Request $request, Closure $next) {
+            if (! Auth::user()->isSuperAdmin()) {
+                return abort(403);
+            }
+
+            return $next($request);
+        });
+    }
+
     public function reports()
     {
-        if (! Auth::user()->isSuperAdmin()) {
-            return abort(403);
-        }
-
         $shouldBeDead = Person::where('dead', false)
             ->where(function (Builder $q) {
                 return $q->whereNotNull([
