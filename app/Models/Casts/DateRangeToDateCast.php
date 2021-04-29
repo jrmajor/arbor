@@ -11,8 +11,11 @@ class DateRangeToDateCast implements CastsAttributes
         $from = "{$key}_from";
         $to = "{$key}_to";
 
-        return $model->{$from} && $model->{$to}
-            ? $model->{$from}->formatPeriodTo($model->{$to}) : null;
+        if (! $model->{$from} || ! $model->{$to}) {
+            return null;
+        }
+
+        return $model->{$from}->formatPeriodTo($model->{$to});
     }
 
     public function set($model, string $key, $value, array $attributes)
