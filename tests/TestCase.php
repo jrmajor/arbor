@@ -20,25 +20,6 @@ abstract class TestCase extends BaseTestCase
         return $this->actingAs($user);
     }
 
-    public function assertRouteUsesFormRequest(string $routeName, string $formRequest)
-    {
-        $controllerAction = collect(Route::getRoutes())->filter(function (\Illuminate\Routing\Route $route) use ($routeName) {
-            return $route->getName() === $routeName;
-        })->pluck('action.controller');
-
-        $this->assertNotEmpty($controllerAction, 'Route "'.$routeName.'" is not defined.');
-        $this->assertCount(1, $controllerAction, 'Route "'.$routeName.'" is defined multiple times, route names should be unique.');
-
-        $controller = $controllerAction->first();
-        $method = '__invoke';
-
-        if (strstr($controllerAction->first(), '@')) {
-            [$controller, $method] = explode('@', $controllerAction->first());
-        }
-
-        $this->assertActionUsesFormRequest($controller, $method, $formRequest);
-    }
-
     public function assertActionUsesFormRequest(string $controller, string $method, string $formRequest)
     {
         $this->assertTrue(is_subclass_of($formRequest, 'Illuminate\\Foundation\\Http\\FormRequest'), $formRequest.' is not a type of Form Request');
