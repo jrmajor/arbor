@@ -117,7 +117,7 @@ test('user can pass spouse to form by get request parameters', function () {
 
 test('data is validated using appropriate form request')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\MarriageController::class, 'store',
+        [\App\Http\Controllers\MarriageController::class, 'store'],
         \App\Http\Requests\StoreMarriage::class,
     );
 

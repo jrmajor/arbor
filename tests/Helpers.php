@@ -11,10 +11,5 @@ function withPermissions(int $permissions): TestCase
 
 function latestLog(): ?Activity
 {
-    return Activity::orderBy('id', 'desc')->first();
-}
-
-function assertActionUsesFormRequest(string $controller, string $method, string $formRequest)
-{
-    return test()->assertActionUsesFormRequest($controller, $method, $formRequest);
+    return Activity::orderByDesc('id')->first();
 }

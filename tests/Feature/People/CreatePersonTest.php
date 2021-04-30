@@ -126,7 +126,7 @@ test('you can pass parents ids to form by get request parameters', function () {
 
 test('data is validated using appropriate form request')
     ->assertActionUsesFormRequest(
-        \App\Http\Controllers\PersonController::class, 'store',
+        [\App\Http\Controllers\PersonController::class, 'store'],
         \App\Http\Requests\StorePerson::class,
     );
 
