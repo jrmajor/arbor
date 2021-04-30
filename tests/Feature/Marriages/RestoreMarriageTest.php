@@ -5,9 +5,9 @@ use function Pest\Laravel\patch;
 use function Tests\latestLog;
 use function Tests\withPermissions;
 
-beforeEach(
-    fn () => $this->marriage = tap(Marriage::factory()->create())->delete()
-);
+beforeEach(function () {
+    $this->marriage = tap(Marriage::factory()->create())->delete();
+});
 
 test('guests cannot restore marriage', function () {
     patch("marriages/{$this->marriage->id}/restore")

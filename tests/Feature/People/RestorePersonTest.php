@@ -5,9 +5,9 @@ use function Pest\Laravel\patch;
 use function Tests\latestLog;
 use function Tests\withPermissions;
 
-beforeEach(
-    fn () => $this->person = tap(Person::factory()->create())->delete()
-);
+beforeEach(function () {
+    $this->person = tap(Person::factory()->create())->delete();
+});
 
 test('guests cannot restore person', function () {
     patch("people/{$this->person->id}/restore")

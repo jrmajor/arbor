@@ -8,9 +8,9 @@ use function Pest\Laravel\travelBack;
 use function Tests\latestLog;
 use function Tests\withPermissions;
 
-beforeEach(
-    fn () => $this->person = Person::factory()->create()
-);
+beforeEach(function () {
+    $this->person = Person::factory()->create();
+});
 
 test('guests cannot change persons visibility', function () {
     put("people/{$this->person->id}/visibility")

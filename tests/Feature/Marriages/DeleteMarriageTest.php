@@ -5,9 +5,9 @@ use function Pest\Laravel\delete;
 use function Tests\latestLog;
 use function Tests\withPermissions;
 
-beforeEach(
-    fn () => $this->marriage = Marriage::factory()->create()
-);
+beforeEach(function () {
+    $this->marriage = Marriage::factory()->create();
+});
 
 test('guests cannot delete marriage', function () {
     delete("marriages/{$this->marriage->id}")
