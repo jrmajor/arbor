@@ -24,15 +24,11 @@ it('doesnt accept invalid email', function () {
 
     ->set('email', null)
         ->call('saveEmail')
-        ->assertHasErrors([
-            'email' => 'required',
-        ])
+        ->assertHasErrors(['email' => 'required'])
 
     ->set('email', 'abc.de')
         ->call('saveEmail')
-        ->assertHasErrors([
-            'email' => 'email',
-        ])
+        ->assertHasErrors(['email' => 'email'])
 
     ->set('email', faker()->safeEmail)
         ->call('saveEmail')
@@ -58,21 +54,15 @@ it('doesnt accept invalid password', function () {
 
     ->set('password', null)
         ->call('savePassword')
-        ->assertHasErrors([
-            'password' => 'required',
-        ])
+        ->assertHasErrors(['password' => 'required'])
 
     ->set('password', '1234567')
         ->call('savePassword')
-        ->assertHasErrors([
-            'password' => 'min',
-        ])
+        ->assertHasErrors(['password' => 'min'])
 
     ->set('password', 'Abcd1234')
         ->call('savePassword')
-        ->assertHasErrors([
-            'password' => 'confirmed',
-        ])
+        ->assertHasErrors(['password' => 'confirmed'])
 
     ->set('password_confirmation', 'Abcd1234')
         ->call('savePassword')
