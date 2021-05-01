@@ -34,3 +34,7 @@ require __DIR__.'/auth.php';
 require __DIR__.'/people.php';
 
 require __DIR__.'/marriages.php';
+
+if (app()->isLocal()) {
+    require __DIR__.'/dev.php';
+}
