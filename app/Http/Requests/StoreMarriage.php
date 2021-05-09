@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Spatie\Enum\Laravel\Rules\EnumRule;
 
 class StoreMarriage extends FormRequest
 {
@@ -21,9 +20,9 @@ class StoreMarriage extends FormRequest
             'woman_order' => 'integer|nullable',
             'man_id' => 'required|integer|exists:people,id',
             'man_order' => 'integer|nullable',
-            'rite' => [new EnumRule(MarriageRiteEnum::class), 'nullable'],
+            'rite' => [MarriageRiteEnum::toRule(), 'nullable'],
 
-            'first_event_type' => [new EnumRule(MarriageEventTypeEnum::class), 'nullable'],
+            'first_event_type' => [MarriageEventTypeEnum::toRule(), 'nullable'],
             'first_event_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:first_event_date_to',
@@ -37,7 +36,7 @@ class StoreMarriage extends FormRequest
             ],
             'first_event_place' => 'string|max:100|nullable',
 
-            'second_event_type' => [new EnumRule(MarriageEventTypeEnum::class), 'nullable'],
+            'second_event_type' => [MarriageEventTypeEnum::toRule(), 'nullable'],
             'second_event_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:second_event_date_to',
