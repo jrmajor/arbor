@@ -16,10 +16,8 @@ class GenerateSitemap extends Command
     public function handle()
     {
         $sitemap = Sitemap::create()
-            ->add(Url::create('/')
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY))
-            ->add(Url::create('/people')
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
+            ->add(Url::create('/')->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY))
+            ->add(Url::create('/people')->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
 
         Person::lazy(100)
             ->filter(fn (Person $person) => $person->isVisible())

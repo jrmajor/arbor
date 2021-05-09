@@ -24,7 +24,7 @@ it('can list first letters', function () {
     expect(
         Person::letters('family')
             ->map(fn (stdClass $std) => (array) $std)
-            ->all()
+            ->all(),
     )->toBe([
         ['letter' => 'M', 'total' => 2],
         ['letter' => 'Š', 'total' => 1],
@@ -34,7 +34,7 @@ it('can list first letters', function () {
     expect(
         Person::letters('last')
             ->map(fn (stdClass $std) => (array) $std)
-            ->all()
+            ->all(),
     )->toBe([
         ['letter' => 'H', 'total' => 1],
         ['letter' => 'M', 'total' => 1],

@@ -41,6 +41,6 @@ test('sources are sanitized', function () {
 
     expect(
         Person::factory()->create(['sources' => $raw])
-            ->sources->map->raw()->all()
+            ->sources->map->raw()->all(),
     )->toBe($sanitized);
 });
