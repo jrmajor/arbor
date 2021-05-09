@@ -26,6 +26,7 @@ class SourcesCast implements CastsAttributes
             ->values()
             ->toJson();
 
+        /** @phpstan-ignore-next-line  */
         if ($value === false) {
             throw JsonEncodingException::forAttribute(
                 $model, $key, json_last_error_msg(),
