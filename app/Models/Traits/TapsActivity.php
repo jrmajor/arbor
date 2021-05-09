@@ -71,7 +71,7 @@ trait TapsActivity
 
     private function tapDeletedOrRestored(Activity $activity): void
     {
-        $attributes = $activity->properties['attributes'];
+        $attributes = $activity->properties['old'] ?? $activity->properties['attributes'];
 
         $activity->properties = [
             'attributes' => Arr::only($attributes, 'deleted_at'),

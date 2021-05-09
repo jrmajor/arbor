@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InvalidArgumentException;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -26,14 +27,6 @@ class Marriage extends Model
     use SoftDeletes;
     use LogsActivity;
     use TapsActivity;
-
-    protected static $logName = 'marriages';
-
-    protected static $logOnlyDirty = true;
-
-    protected static $logAttributes = ['*'];
-
-    protected static $logAttributesToIgnore = ['id', 'created_at', 'updated_at'];
 
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
@@ -91,5 +84,15 @@ class Marriage extends Model
     public function hasSecondEvent(): bool
     {
         return $this->second_event_type || $this->second_event_date || $this->second_event_place;
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('marriages')
+            ->logAll()
+            ->logExcept(['id', 'created_at', 'updated_at'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

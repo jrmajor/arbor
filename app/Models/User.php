@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -18,16 +19,6 @@ class User extends Authenticatable
     use LogsActivity;
     use Notifiable;
     use SoftDeletes;
-
-    protected static $logName = 'users';
-
-    protected static $logOnlyDirty = true;
-
-    protected static $logAttributes = ['*'];
-
-    protected static $logAttributesToIgnore = ['id', 'created_at', 'updated_at', 'remember_token'];
-
-    protected static $submitEmptyLogs = false;
 
     protected $fillable = [
         'username', 'email', 'password',
@@ -67,5 +58,15 @@ class User extends Authenticatable
         return $this->morphOne(Activity::class, 'causer')
             ->whereLogName('logins')->whereDescription('logged-in')
             ->latest();
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('users')
+            ->logAll()
+            ->logExcept(['id', 'created_at', 'updated_at', 'remember_token'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }

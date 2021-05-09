@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
@@ -45,16 +46,6 @@ class Person extends Model
     use TapsActivity;
 
     public const generationInterval = 32;
-
-    protected static $logName = 'people';
-
-    protected static $logOnlyDirty = true;
-
-    protected static $logAttributes = ['*'];
-
-    protected static $logAttributesToIgnore = ['id', 'created_at', 'updated_at'];
-
-    protected static $submitEmptyLogs = false;
 
     protected $guarded = ['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'];
 
@@ -284,5 +275,15 @@ class Person extends Model
                 ->whereNull('deleted_at')
                 ->get(),
         );
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('people')
+            ->logAll()
+            ->logExcept(['id', 'created_at', 'updated_at'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }
