@@ -10,3 +10,8 @@ parameters:
 			count: 1
 			path: app/Http/Controllers/PersonController.php
 
+		-
+			message: "#^Match expression does not handle remaining value\\: string$#"
+			count: 1
+			path: app/Models/Relations/HalfSiblings.php
+
