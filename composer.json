@@ -40,7 +40,7 @@
         "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.9",
         "fakerphp/faker": "^1.14",
-        "friendsofphp/php-cs-fixer": "^2.19",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "laravel/sail": "^1.5",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.4",
