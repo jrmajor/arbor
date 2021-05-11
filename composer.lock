@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92fbbe153637537f713867e149cd68e4",
+    "content-hash": "784c519e5c919f787e1288f43fa96f20",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.180.5",
+            "version": "3.181.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "948a4defbe2a571cc4460725015b8e98b7060f2d"
+                "reference": "a8b6535334a3b3d7c02601e8b3c15391dab915d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/948a4defbe2a571cc4460725015b8e98b7060f2d",
-                "reference": "948a4defbe2a571cc4460725015b8e98b7060f2d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a8b6535334a3b3d7c02601e8b3c15391dab915d2",
+                "reference": "a8b6535334a3b3d7c02601e8b3c15391dab915d2",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.180.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.181.0"
             },
-            "time": "2021-05-07T18:12:43+00:00"
+            "time": "2021-05-11T18:15:59+00:00"
         },
         {
             "name": "brick/math",
@@ -1691,16 +1691,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.40.0",
+            "version": "v8.41.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4"
+                "reference": "05417155d886df8710e55c84e12622b52d83c47c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a654897ad7f97aea9d7ef292803939798c4a02a4",
-                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/05417155d886df8710e55c84e12622b52d83c47c",
+                "reference": "05417155d886df8710e55c84e12622b52d83c47c",
                 "shasum": ""
             },
             "require": {
@@ -1808,7 +1808,7 @@
                 "phpunit/phpunit": "Required to use assertions and run tests (^8.5.8|^9.3.3).",
                 "predis/predis": "Required to use the predis connector (^1.1.2).",
                 "psr/http-message": "Required to allow Storage::put to accept a StreamInterface (^1.0).",
-                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (^4.0|^5.0).",
+                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (^4.0|^5.0|^6.0).",
                 "symfony/cache": "Required to PSR-6 cache bridge (^5.1.4).",
                 "symfony/filesystem": "Required to enable support for relative symbolic links (^5.1.4).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0).",
@@ -1855,7 +1855,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-04-28T14:38:56+00:00"
+            "time": "2021-05-11T14:00:02+00:00"
         },
         {
             "name": "laravel/slack-notification-channel",
@@ -4121,16 +4121,16 @@
         },
         {
             "name": "spatie/enum",
-            "version": "3.8.0",
+            "version": "3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/enum.git",
-                "reference": "9da7dfe60deabeabee217125b505e28107ca4a84"
+                "reference": "5870275f3811dc63c08200b1536ab2f8618b6a52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/enum/zipball/9da7dfe60deabeabee217125b505e28107ca4a84",
-                "reference": "9da7dfe60deabeabee217125b505e28107ca4a84",
+                "url": "https://api.github.com/repos/spatie/enum/zipball/5870275f3811dc63c08200b1536ab2f8618b6a52",
+                "reference": "5870275f3811dc63c08200b1536ab2f8618b6a52",
                 "shasum": ""
             },
             "require": {
@@ -4193,7 +4193,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-12T13:24:11+00:00"
+            "time": "2021-05-10T09:27:50+00:00"
         },
         {
             "name": "spatie/image",
@@ -8006,12 +8006,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "649087d6de158dc4da73a06c7759dec5932be5a5"
+                "reference": "0021758e0bcf964237a56cb22e2f0309118b6a3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/649087d6de158dc4da73a06c7759dec5932be5a5",
-                "reference": "649087d6de158dc4da73a06c7759dec5932be5a5",
+                "url": "https://api.github.com/repos/composer/composer/zipball/0021758e0bcf964237a56cb22e2f0309118b6a3f",
+                "reference": "0021758e0bcf964237a56cb22e2f0309118b6a3f",
                 "shasum": ""
             },
             "require": {
@@ -8097,7 +8097,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-04T14:47:54+00:00"
+            "time": "2021-05-10T11:14:14+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -9766,16 +9766,16 @@
         },
         {
             "name": "pestphp/pest-plugin-init",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-init.git",
-                "reference": "bd6fdb058ba5dc7a9f7f3645ad4e0bdc34cf0026"
+                "reference": "cb3dfa1a9887aafb3d0b4db0fb8f6171ce69b49e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-init/zipball/bd6fdb058ba5dc7a9f7f3645ad4e0bdc34cf0026",
-                "reference": "bd6fdb058ba5dc7a9f7f3645ad4e0bdc34cf0026",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-init/zipball/cb3dfa1a9887aafb3d0b4db0fb8f6171ce69b49e",
+                "reference": "cb3dfa1a9887aafb3d0b4db0fb8f6171ce69b49e",
                 "shasum": ""
             },
             "require": {
@@ -9821,7 +9821,7 @@
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin-init/tree/v1.0.0"
+                "source": "https://github.com/pestphp/pest-plugin-init/tree/v1.1.0"
             },
             "funding": [
                 {
@@ -9837,7 +9837,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-01-03T15:47:48+00:00"
+            "time": "2021-05-10T16:31:00+00:00"
         },
         {
             "name": "pestphp/pest-plugin-laravel",

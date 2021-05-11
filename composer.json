@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^7.3",
         "jenssegers/agent": "^2.6",
         "larabug/larabug": "^2.4",
-        "laravel/framework": "^8.40",
+        "laravel/framework": "^8.41",
         "laravel/slack-notification-channel": "^2.3",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.6",
