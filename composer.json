@@ -41,6 +41,7 @@
         "facade/ignition": "^2.9",
         "fakerphp/faker": "^1.14",
         "friendsofphp/php-cs-fixer": "^3.0",
+        "jrmajor/cs": "dev-master",
         "laravel/sail": "^1.6",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.4",
