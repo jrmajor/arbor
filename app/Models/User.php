@@ -55,9 +55,8 @@ class User extends Authenticatable
 
     public function latestLogin(): MorphOne
     {
-        return $this->morphOne(Activity::class, 'causer')
-            ->whereLogName('logins')->whereDescription('logged-in')
-            ->latest();
+        return $this->morphOne(Activity::class, 'causer')->latestOfMany()
+            ->whereLogName('logins')->whereDescription('logged-in');
     }
 
     public function getActivitylogOptions(): LogOptions

@@ -14,7 +14,7 @@ class Users extends Component
             abort(403);
         }
 
-        $users = User::all()->load('latestLogin')
+        $users = User::query()->with('latestLogin')->get()
             ->sortByDesc(fn ($user) => $user->latestLogin?->created_at);
 
         return view('dashboard.users', [
