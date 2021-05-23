@@ -18,7 +18,8 @@ it('can eagerly get marriages', function () {
     Marriage::factory(3)->create(['woman_id' => $woman]);
     Marriage::factory(4)->create(['man_id' => $man]);
 
-    $people = Person::whereIn('id', [$woman->id, $man->id])
+    $people = Person::query()
+        ->whereIn('id', [$woman->id, $man->id])
         ->with('children')->get();
 
     expect($people->get(0)->marriages)->toHaveCount(3);

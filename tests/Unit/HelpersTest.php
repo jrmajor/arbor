@@ -42,4 +42,4 @@ test('roman() helper', function ($arabic, $roman) {
 
 test('faker() helper')
     ->expect(faker())
-    ->toBeInstanceOf(\Faker\Generator::class);
+    ->toBeInstanceOf(Faker\Generator::class);
