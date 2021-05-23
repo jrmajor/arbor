@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.183.1",
+            "version": "3.183.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4ba06057844425c4095ad72095beaea278c9778b"
+                "reference": "b790a4cea9592a7df51da3a4affde0945248c24d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4ba06057844425c4095ad72095beaea278c9778b",
-                "reference": "4ba06057844425c4095ad72095beaea278c9778b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b790a4cea9592a7df51da3a4affde0945248c24d",
+                "reference": "b790a4cea9592a7df51da3a4affde0945248c24d",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.183.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.183.3"
             },
-            "time": "2021-05-19T18:14:26+00:00"
+            "time": "2021-05-21T18:14:34+00:00"
         },
         {
             "name": "brick/math",
@@ -283,16 +283,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "1.11.1",
+            "version": "1.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "163074496dc7c3c7b8ccbf3d4376c0187424ed81"
+                "reference": "9c53086695937c50c47936ed86d96150ffbcf60d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/163074496dc7c3c7b8ccbf3d4376c0187424ed81",
-                "reference": "163074496dc7c3c7b8ccbf3d4376c0187424ed81",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/9c53086695937c50c47936ed86d96150ffbcf60d",
+                "reference": "9c53086695937c50c47936ed86d96150ffbcf60d",
                 "shasum": ""
             },
             "require": {
@@ -362,7 +362,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/cache/issues",
-                "source": "https://github.com/doctrine/cache/tree/1.11.1"
+                "source": "https://github.com/doctrine/cache/tree/1.11.2"
             },
             "funding": [
                 {
@@ -378,7 +378,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-18T16:45:32+00:00"
+            "time": "2021-05-20T14:57:29+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -4411,16 +4411,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "7.5.2",
+            "version": "7.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "61296bfd8ada78893f926ab6df47d56e0ea3b419"
+                "reference": "8019cbd89fb5543ad9235bd21345f11fd4acd0cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/61296bfd8ada78893f926ab6df47d56e0ea3b419",
-                "reference": "61296bfd8ada78893f926ab6df47d56e0ea3b419",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/8019cbd89fb5543ad9235bd21345f11fd4acd0cb",
+                "reference": "8019cbd89fb5543ad9235bd21345f11fd4acd0cb",
                 "shasum": ""
             },
             "require": {
@@ -4490,7 +4490,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/7.5.2"
+                "source": "https://github.com/spatie/laravel-backup/tree/7.5.3"
             },
             "funding": [
                 {
@@ -4502,7 +4502,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-04-21T21:26:06+00:00"
+            "time": "2021-05-23T09:56:56+00:00"
         },
         {
             "name": "spatie/laravel-enum",
@@ -4659,16 +4659,16 @@
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "a28108b61dac8a83de6c97f09a5a1e98f4d75522"
+                "reference": "1150930205dbe32f4e594ba2805cd56563120145"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/a28108b61dac8a83de6c97f09a5a1e98f4d75522",
-                "reference": "a28108b61dac8a83de6c97f09a5a1e98f4d75522",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/1150930205dbe32f4e594ba2805cd56563120145",
+                "reference": "1150930205dbe32f4e594ba2805cd56563120145",
                 "shasum": ""
             },
             "require": {
@@ -4707,7 +4707,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.7.0"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.8.0"
             },
             "funding": [
                 {
@@ -4715,7 +4715,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-05-06T21:49:32+00:00"
+            "time": "2021-05-22T09:13:53+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",
@@ -8002,16 +8002,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "dev-master",
+            "version": "2.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "c4ed9f5566c17f5d65750c0eb60d6fe29332429b"
+                "reference": "92b2ccbef65292ba9f2004271ef47c7231e2eed5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/c4ed9f5566c17f5d65750c0eb60d6fe29332429b",
-                "reference": "c4ed9f5566c17f5d65750c0eb60d6fe29332429b",
+                "url": "https://api.github.com/repos/composer/composer/zipball/92b2ccbef65292ba9f2004271ef47c7231e2eed5",
+                "reference": "92b2ccbef65292ba9f2004271ef47c7231e2eed5",
                 "shasum": ""
             },
             "require": {
@@ -8026,28 +8026,27 @@
                 "react/promise": "^1.2 || ^2.7",
                 "seld/jsonlint": "^1.4",
                 "seld/phar-utils": "^1.0",
-                "symfony/console": "^2.8.52 || ^3.4.35 || ^4.4 || ^5.0",
-                "symfony/filesystem": "^2.8.52 || ^3.4.35 || ^4.4 || ^5.0",
-                "symfony/finder": "^2.8.52 || ^3.4.35 || ^4.4 || ^5.0",
-                "symfony/process": "^2.8.52 || ^3.4.35 || ^4.4 || ^5.0"
+                "symfony/console": "^2.8.52 || ^3.4.35 || ^4.4 || ^5.0 || ^6.0",
+                "symfony/filesystem": "^2.8.52 || ^3.4.35 || ^4.4 || ^5.0 || ^6.0",
+                "symfony/finder": "^2.8.52 || ^3.4.35 || ^4.4 || ^5.0 || ^6.0",
+                "symfony/process": "^2.8.52 || ^3.4.35 || ^4.4 || ^5.0 || ^6.0"
             },
             "require-dev": {
                 "phpspec/prophecy": "^1.10",
-                "symfony/phpunit-bridge": "^4.2 || ^5.0"
+                "symfony/phpunit-bridge": "^4.2 || ^5.0 || ^6.0"
             },
             "suggest": {
                 "ext-openssl": "Enabling the openssl extension allows you to access https URLs for repositories and packages",
                 "ext-zip": "Enabling the zip extension allows you to unzip archives",
                 "ext-zlib": "Allow gzip compression of HTTP requests"
             },
-            "default-branch": true,
             "bin": [
                 "bin/composer"
             ],
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -8081,7 +8080,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/master"
+                "source": "https://github.com/composer/composer/tree/2.0.14"
             },
             "funding": [
                 {
@@ -8097,7 +8096,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-19T13:24:01+00:00"
+            "time": "2021-05-21T15:03:37+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -9005,12 +9004,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/php-cs.git",
-                "reference": "486d9b9a394d67afec40a5cdb3e2cd2305ce5e60"
+                "reference": "8f5961de9e6e11713ac375278ece114ba4482c34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/486d9b9a394d67afec40a5cdb3e2cd2305ce5e60",
-                "reference": "486d9b9a394d67afec40a5cdb3e2cd2305ce5e60",
+                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/8f5961de9e6e11713ac375278ece114ba4482c34",
+                "reference": "8f5961de9e6e11713ac375278ece114ba4482c34",
                 "shasum": ""
             },
             "require": {
@@ -9040,7 +9039,7 @@
                 "issues": "https://github.com/jrmajor/php-cs/issues",
                 "source": "https://github.com/jrmajor/php-cs/tree/master"
             },
-            "time": "2021-05-19T18:45:05+00:00"
+            "time": "2021-05-19T19:07:53+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
