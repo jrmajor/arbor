@@ -16,7 +16,7 @@
         "date-fns": "^2.21",
         "tailwindcss": "^2.1",
         "tailwindcss-multi-column": "^1.0",
-        "ziggy-js": "^1.0"
+        "ziggy-js": "^1.2"
     },
     "devDependencies": {
         "autoprefixer": "^10.2",
