@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "772ffe490e177b76c5e1a08d9a4e47e5",
+    "content-hash": "be6f90646095378d71168315fea65e6f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.183.7",
+            "version": "3.183.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "cf9c877e799c43e22d0e0cbc840e91d1885b13b6"
+                "reference": "3b3aafdceac4cb820e2ae65a8785e4d07db471a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cf9c877e799c43e22d0e0cbc840e91d1885b13b6",
-                "reference": "cf9c877e799c43e22d0e0cbc840e91d1885b13b6",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3b3aafdceac4cb820e2ae65a8785e4d07db471a7",
+                "reference": "3b3aafdceac4cb820e2ae65a8785e4d07db471a7",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.183.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.183.9"
             },
-            "time": "2021-05-27T01:00:13+00:00"
+            "time": "2021-05-28T18:28:19+00:00"
         },
         {
             "name": "brick/math",
@@ -1691,16 +1691,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.43.0",
+            "version": "v8.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3ec63771a07e251f4fb6c7ef2411a79a314bba65"
+                "reference": "7b3b27dc8911ab02a69731af2ba97b5130b2ddb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3ec63771a07e251f4fb6c7ef2411a79a314bba65",
-                "reference": "3ec63771a07e251f4fb6c7ef2411a79a314bba65",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7b3b27dc8911ab02a69731af2ba97b5130b2ddb8",
+                "reference": "7b3b27dc8911ab02a69731af2ba97b5130b2ddb8",
                 "shasum": ""
             },
             "require": {
@@ -1855,7 +1855,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-05-25T13:06:44+00:00"
+            "time": "2021-05-27T16:46:06+00:00"
         },
         {
             "name": "laravel/slack-notification-channel",
@@ -4416,16 +4416,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "7.5.3",
+            "version": "7.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "8019cbd89fb5543ad9235bd21345f11fd4acd0cb"
+                "reference": "93d340475dd3567ccbc2d6336357c4d28dcda846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/8019cbd89fb5543ad9235bd21345f11fd4acd0cb",
-                "reference": "8019cbd89fb5543ad9235bd21345f11fd4acd0cb",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/93d340475dd3567ccbc2d6336357c4d28dcda846",
+                "reference": "93d340475dd3567ccbc2d6336357c4d28dcda846",
                 "shasum": ""
             },
             "require": {
@@ -4495,7 +4495,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/7.5.3"
+                "source": "https://github.com/spatie/laravel-backup/tree/7.5.4"
             },
             "funding": [
                 {
@@ -4507,7 +4507,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-05-23T09:56:56+00:00"
+            "time": "2021-05-28T11:05:52+00:00"
         },
         {
             "name": "spatie/laravel-enum",
