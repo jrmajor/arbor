@@ -120,13 +120,7 @@
             &nbsp;&nbsp;
           @endif
           {{ __('people.current_age') }}:
-          {{
-            trans_choice(
-              'misc.year',
-              $person->currentAge(true),
-              ['age' => $person->currentAge()]
-            )
-          }}
+          {{ __('misc.year', ['rawAge' => $person->currentAge(true), 'age' => $person->currentAge()]) }}
           <br>
           @php $some_birth_data_printed = true; @endphp
         @endif
@@ -141,7 +135,7 @@
           @if ($person->estimatedBirthDateError())
             <small>
               (<strong>{{ $person->estimatedBirthDateError() }}</strong>
-              {{ trans_choice('misc.years_of_error', $person->estimatedBirthDateError()) }})
+              {{ __('misc.years_of_error', ['age' => $person->estimatedBirthDateError()]) }})
             </small>
           @endif
         @endif
@@ -177,13 +171,7 @@
               &nbsp;&nbsp;
             @endif
             {{ __('people.death_age') }}:
-            {{
-              trans_choice(
-                'misc.year',
-                $person->ageAtDeath(true),
-                ['age' => $person->ageAtDeath()]
-              )
-            }}
+            {{ __('misc.year', ['rawAge' => $person->ageAtDeath(true), 'age' => $person->ageAtDeath()]) }}
           @endif
         </dd>
       @else
