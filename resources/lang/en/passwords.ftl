@@ -1,4 +1,3 @@
-
 password_reset = Password reset
 
 email = E-mail adress

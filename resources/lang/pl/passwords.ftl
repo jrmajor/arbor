@@ -1,4 +1,3 @@
-
 password_reset = Resetowanie hasła
 
 email = Adres e-mail

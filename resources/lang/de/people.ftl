@@ -1,4 +1,3 @@
-
 person = Person
 
 index =
@@ -77,7 +76,6 @@ birth_date = Geburtsdatum
 birth_place = Geburtsort
 current_age = aktuelle Alter
 estimated_birth_date = estimated birth date
-years_of_error = years of error
 death = Tod
 dead = Tot
     .xx = Tot
@@ -103,15 +101,3 @@ children = Kindern
 sources = Quellen
 isbn_url = https://de.wikipedia.org/wiki/Spezial:ISBN-Suche/
 isbn_in_wikipedia = in Wikipedia
-// notes = Notes
-// show_notes_versions = Click to watch earlier<br>versions of notes<br>about this person
-// edit_notes = Edit note about this person
-// 1_version = version
-// 234_version = versions
-// else_version = versions
-// note_deleted_you_can_see = The note has been deleted. You can see
-// earlier_versions = earlier versions
-// or = or
-// add_new_one = add the new one
-// no_notes = no notes
-// click_to_create_note = Click to create note<br>about this person
