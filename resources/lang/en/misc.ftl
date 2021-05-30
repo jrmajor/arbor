@@ -21,7 +21,7 @@ titles =
 
 date =
     .date = Date
-    .between_and = between :from and :to
+    .between_and = between { $from } and { $to }
     .between = between
     .and = and
     .format = YYYY-MM-DD
