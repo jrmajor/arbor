@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -85,6 +86,10 @@ class MacrosServiceProvider extends ServiceProvider
 
         Collection::macro('trim', function (): Collection {
             return new static(Arr::trim($this->items));
+        });
+
+        Blade::directive('encodedjson', function ($expression) {
+            return "<?php echo e(json_encode({$expression})) ?>";
         });
     }
 }
