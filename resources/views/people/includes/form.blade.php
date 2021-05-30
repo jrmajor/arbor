@@ -215,7 +215,7 @@
 
     <div class="w-full flex items-center mb-4">
       <label for="dead" class="font-medium text-xl text-gray-900"
-        x-text="sex === 'xx' ? '{{ __('people.dead_xx') }}' : '{{ __('people.dead_xy') }}'">
+        x-text="sex === 'xx' ? '{{ __('people.dead.xx') }}' : '{{ __('people.dead.xy') }}'">
         {{ __('people.dead') }}
       </label>
       <input type="hidden" id="dead-hidden" name="dead" value="0">
