@@ -2,6 +2,7 @@
 
 use App\Models\Marriage;
 use App\Models\Person;
+use Illuminate\Database\Eloquent\Model;
 
 it('can get marriages', function () {
     $person = Person::factory()->woman()->create();
@@ -12,6 +13,8 @@ it('can get marriages', function () {
 });
 
 it('can eagerly get marriages', function () {
+    Model::preventLazyLoading(false);
+
     $woman = Person::factory()->woman()->create();
     $man = Person::factory()->man()->create();
 

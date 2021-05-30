@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Person;
+use Illuminate\Database\Eloquent\Model;
 
 it('can get siblings and half siblings', function () {
     [$person] = Person::factory(3)->create([
@@ -37,6 +38,8 @@ it('can get siblings and half siblings', function () {
 });
 
 it('can eagerly get siblings and half siblings', function () {
+    Model::preventLazyLoading(false);
+
     [$firstPerson] = Person::factory(3)->create([
         'mother_id' => $firstMother = Person::factory()->woman()->create(),
         'father_id' => $firstFather = Person::factory()->man()->create(),
