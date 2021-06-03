@@ -61,6 +61,10 @@ return [
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 
+        'octane' => [
+            'driver' => 'octane',
+        ],
+
     ],
 
     'prefix' => env('CACHE_PREFIX', 'arbor_cache'),
