@@ -3,6 +3,7 @@
 use App\Models\Marriage;
 use App\Models\Person;
 use Illuminate\Support\Arr;
+
 use function Pest\Laravel\post;
 use function Pest\Laravel\travel;
 use function Pest\Laravel\travelBack;

@@ -6,6 +6,7 @@ use App\Http\Requests\StorePerson;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 use function App\Services\formatBiography;
 
 class PersonController extends Controller

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Person;
+
 use function Pest\Laravel\delete;
 use function Tests\latestLog;
 use function Tests\withPermissions;

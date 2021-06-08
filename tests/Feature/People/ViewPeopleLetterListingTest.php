@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Person;
+
 use function Pest\Laravel\get;
 use function Tests\withPermissions;
 
