@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBiography;
 use App\Models\Person;
 
+use function App\Services\flash;
+
 class BiographyController extends Controller
 {
     public function edit(Person $person)
@@ -19,8 +21,8 @@ class BiographyController extends Controller
         $this->authorize('update', $person);
 
         $person->update(['biography' => $request->biography()])
-            ? flash()->success(__('people.alerts.changes_have_been_saved'))
-            : flash()->error(__('misc.an_unknown_error_occurred'));
+            ? flash('success', 'people.alerts.changes_have_been_saved')
+            : flash('error', 'misc.an_unknown_error_occurred');
 
         return redirect()->route('people.show', $person);
     }

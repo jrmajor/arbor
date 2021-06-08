@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
+use function App\Services\flash;
+
 class PasswordResetLinkController extends Controller
 {
     public function create()
@@ -22,7 +24,7 @@ class PasswordResetLinkController extends Controller
         );
 
         if ($status === Password::RESET_LINK_SENT) {
-            flash()->success(__($status));
+            flash('success', $status);
 
             return redirect()->route('people.index');
         }

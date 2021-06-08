@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
+use function App\Services\flash;
+
 class Settings extends Component
 {
     public $email;
@@ -21,8 +23,8 @@ class Settings extends Component
         $this->validate(['email' => 'required|email']);
 
         Auth::user()->update(['email' => $this->email])
-            ? flash()->success(__('settings.alerts.changes_have_been_saved'))
-            : flash()->error(__('misc.an_unknown_error_occurred'));
+            ? flash('success', 'settings.alerts.changes_have_been_saved')
+            : flash('error', 'misc.an_unknown_error_occurred');
     }
 
     public function savePassword()
@@ -30,8 +32,8 @@ class Settings extends Component
         $this->validate(['password' => 'required|string|min:8|confirmed']);
 
         Auth::user()->update(['password' => Hash::make($this->password)])
-            ? flash()->success(__('settings.alerts.password_has_been_changed'))
-            : flash()->error(__('misc.an_unknown_error_occurred'));
+            ? flash('success', 'settings.alerts.password_has_been_changed')
+            : flash('error', 'misc.an_unknown_error_occurred');
 
         $this->fill([
             'password' => null,
@@ -50,8 +52,8 @@ class Settings extends Component
         }
 
         Auth::guard()->logoutOtherDevices($this->logout_password)
-            ? flash()->success(__('settings.alerts.logged_out'))
-            : flash()->error(__('misc.an_unknown_error_occurred'));
+            ? flash('success', 'settings.alerts.logged_out')
+            : flash('error', 'misc.an_unknown_error_occurred');
 
         $this->logout_password = null;
     }

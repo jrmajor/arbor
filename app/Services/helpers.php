@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use Illuminate\Support\Str;
+use Spatie\Flash\Flash;
+use Spatie\Flash\Message as FlashMessage;
 
 function formatBiography(?string $biography): ?string
 {
@@ -17,4 +19,9 @@ function formatBiography(?string $biography): ?string
         ->prepend('<p>')
         ->append('</p>')
         ->replace("\n\n", "</p>\n<p>");
+}
+
+function flash(string $class, string $text): void
+{
+    app(Flash::class)->flash(new FlashMessage(__($text), $class));
 }

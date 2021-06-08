@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
+use function App\Services\flash;
+
 class NewPasswordController extends Controller
 {
     use ResetsPasswords;
@@ -43,7 +45,7 @@ class NewPasswordController extends Controller
         );
 
         if ($status === Password::PASSWORD_RESET) {
-            flash()->success(__($status));
+            flash('success', $status);
 
             return redirect()->route('people.index');
         }

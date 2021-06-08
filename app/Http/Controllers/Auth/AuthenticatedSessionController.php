@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Auth\SessionGuard;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
+use function App\Services\flash;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -39,7 +40,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        flash()->success(__('auth.successfully_logged_out'));
+        flash('success', 'auth.successfully_logged_out');
 
         return redirect()->route('people.index');
     }
