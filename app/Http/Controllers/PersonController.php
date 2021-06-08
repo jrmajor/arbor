@@ -6,7 +6,7 @@ use App\Http\Requests\StorePerson;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use function App\Services\formatBiography;
 
 class PersonController extends Controller
 {
@@ -83,7 +83,7 @@ class PersonController extends Controller
 
         return view('people.person', [
             'person' => $person,
-            'biography' => Str::formatBiography($person->biography),
+            'biography' => formatBiography($person->biography),
         ]);
     }
 

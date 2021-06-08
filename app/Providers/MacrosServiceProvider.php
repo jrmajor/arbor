@@ -8,11 +8,20 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 class MacrosServiceProvider extends ServiceProvider
 {
     public function boot()
+    {
+        $this->registerCarbonMacros();
+        $this->registerTrimArrayMacro();
+
+        Blade::directive('encodedjson', function ($expression) {
+            return "<?php echo e(json_encode({$expression})) ?>";
+        });
+    }
+
+    public function registerCarbonMacros()
     {
         Carbon::macro('formatPeriodTo', static function (Carbon $to): string {
             /** @var CarbonImmutable $from */
@@ -23,29 +32,17 @@ class MacrosServiceProvider extends ServiceProvider
                 return $from->toDateString();
             }
 
-            if (
-                $from->startOfYear()->isSameDay($from)
-                && $to->endOfYear()->isSameDay($to)
-            ) {
-                if ($from->isSameYear($to)) {
-                    return (string) $from->year;
-                }
-
-                return $from->year.'-'.$to->year;
+            if ($from->startOfYear()->isSameDay($from) && $to->endOfYear()->isSameDay($to)) {
+                return $from->isSameYear($to) ? (string) $from->year : $from->year.'-'.$to->year;
             }
 
-            if (
-                $from->startOfMonth()->isSameDay($from)
-                && $to->endOfMonth()->isSameDay($to)
-            ) {
-                if ($from->isSameMonth($to)) {
-                    return $from->format('Y-m');
-                }
-
-                return __('misc.date.between_and', [
-                    'from' => $from->format('Y-m'),
-                    'to' => $to->format('Y-m'),
-                ]);
+            if ($from->startOfMonth()->isSameDay($from) && $to->endOfMonth()->isSameDay($to)) {
+                return $from->isSameMonth($to)
+                    ? $from->format('Y-m')
+                    : __('misc.date.between_and', [
+                        'from' => $from->format('Y-m'),
+                        'to' => $to->format('Y-m'),
+                    ]);
             }
 
             return __('misc.date.between_and', [
@@ -53,21 +50,10 @@ class MacrosServiceProvider extends ServiceProvider
                 'to' => $to->toDateString(),
             ]);
         });
+    }
 
-        Str::macro('formatBiography', function (?string $biography): ?string {
-            if ($biography === null) {
-                return null;
-            }
-
-            return (string) Str::of($biography)
-                ->trim()
-                ->replace(["\r\n", "\r"], "\n")
-                ->pipe('e')
-                ->prepend('<p>')
-                ->append('</p>')
-                ->replace("\n\n", "</p>\n<p>");
-        });
-
+    public function registerTrimArrayMacro()
+    {
         Arr::macro('trim', function (array|Collection $array): array|Collection {
             foreach ($array as $key => $value) {
                 $array[$key] = match (get_debug_type($value)) {
@@ -86,10 +72,6 @@ class MacrosServiceProvider extends ServiceProvider
 
         Collection::macro('trim', function (): Collection {
             return new static(Arr::trim($this->items));
-        });
-
-        Blade::directive('encodedjson', function ($expression) {
-            return "<?php echo e(json_encode({$expression})) ?>";
         });
     }
 }
