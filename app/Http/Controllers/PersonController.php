@@ -161,6 +161,7 @@ class PersonController extends Controller
         $this->authorize('viewHistory', $person);
 
         $activities = $person->activities
+            ->load('causer')
             ->reverse()
             ->map(function ($activity) {
                 $newActivity = [
