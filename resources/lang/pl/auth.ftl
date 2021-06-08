@@ -14,3 +14,5 @@ throttle = Zbyt dużo prób. Sporóbuj ponownie za { $seconds ->
     [few] { $seconds } sekundy
    *[many] { $seconds } sekund
 }.
+
+successfully_logged_out = Zostałeś pomyślnie wylogowany.

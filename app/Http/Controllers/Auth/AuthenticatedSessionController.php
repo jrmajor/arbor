@@ -31,13 +31,15 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         /** @var SessionGuard $guard */
-        $guard = Auth::guard('web');
+        $guard = auth()->guard('web');
 
         $guard->logoutCurrentDevice();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        flash()->success(__('auth.successfully_logged_out'));
 
         return redirect()->route('people.index');
     }

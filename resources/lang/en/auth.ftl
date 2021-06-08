@@ -13,3 +13,5 @@ throttle = Too many login attempts. Please try again in { $seconds ->
     [one] one second
    *[many] { $seconds } seconds
 }.
+
+successfully_logged_out = You have been successfully logged out.
