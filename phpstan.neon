@@ -10,7 +10,6 @@ parameters:
     ignoreErrors:
         - '#^Call to an undefined method Faker\\Generator::\w+\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Factories\\Factory::(divorced|woman|man)\(\)\.$#'
-        - '#^Call to an undefined method Illuminate\\Support\\Collection&iterable<App\\Models\\Person>::load\(\)\.$#'
         - '#^Result of function \w+ \(void\) is used\.$#'
         - '#^Result of method \w+(\\\w+)*::\w+\(\) \(void\) is used\.$#'
         - '#^Using nullsafe property access on non-nullable type mixed\. Use -> instead\.$#'

@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\LogOptions;
@@ -32,10 +32,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read ?int $death_year
  * @property-read ?int $funeral_year
  * @property-read ?int $burial_year
- * @property-read Collection|Person[] $siblings
- * @property-read Collection|Marriage[] $marriages
- * @property-read Collection|Activity[] $children
- * @property-read Collection|Person[] $activities
+ * @property-read EloquentCollection<Person> $siblings
+ * @property-read EloquentCollection<Marriage> $marriages
+ * @property-read EloquentCollection<Activity> $children
+ * @property-read EloquentCollection<Person> $activities
  */
 class Person extends Model
 {
@@ -255,7 +255,7 @@ class Person extends Model
     /**
      * @param 'family'|'last' $type
      */
-    public static function letters(string $type): Collection
+    public static function letters(string $type): EloquentCollection
     {
         $nameQuery = match ($type) {
             'family' => 'family_name',
