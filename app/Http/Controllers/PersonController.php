@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePerson;
+use App\Models\Activity;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,14 +28,12 @@ class PersonController extends Controller
         $this->authorize('viewAny', Person::class);
 
         $list = match ($type) {
-            'f' => Person::whereRaw('left(family_name, 1) collate utf8mb4_0900_as_ci = ?', $letter)
-                ->orderBy('family_name')
-                ->orderBy('name')
-                ->get(),
-            'l' => Person::whereRaw('left(ifnull(last_name, family_name), 1) collate utf8mb4_0900_as_ci = ?', $letter)
-                ->orderByRaw('ifnull(last_name, family_name) asc')
-                ->orderBy('name')
-                ->get(),
+            'f' => Person::query()
+                ->whereRaw('left(family_name, 1) collate utf8mb4_0900_as_ci = ?', $letter)
+                ->orderBy('family_name')->orderBy('name')->get(),
+            'l' => Person::query()
+                ->whereRaw('left(ifnull(last_name, family_name), 1) collate utf8mb4_0900_as_ci = ?', $letter)
+                ->orderByRaw('ifnull(last_name, family_name) asc')->orderBy('name')->get(),
         };
 
         if ($list->isEmpty()) {
@@ -165,7 +164,7 @@ class PersonController extends Controller
         $activities = $person->activities
             ->load('causer')
             ->reverse()
-            ->map(function ($activity) {
+            ->map(function (Activity $activity) {
                 $newActivity = [
                     'model' => $activity,
                     'causer' => $activity->causer,
