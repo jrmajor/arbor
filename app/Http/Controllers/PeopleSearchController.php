@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -16,31 +17,31 @@ class PeopleSearchController extends Controller
             return response()->json([]);
         }
 
-        $people = Person::where(function ($query) use ($request) {
-                $query
-                    ->where('id', $request->get('search'))
-                    ->orWhere(function ($query) use ($request) {
+        $people = Person::query()
+            ->where(function (Builder $q) use ($request) {
+                $q->where('id', $request->get('search'))
+                    ->orWhere(function (Builder $q) use ($request) {
                         foreach (Arr::trim(explode(' ', $request->get('search'))) as $s) {
-                            $query->where(function ($query) use ($s) {
-                                return $query->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
+                            $q->where(function (Builder $q) use ($s) {
+                                return $q->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
                                     ->orWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
                                     ->orWhereRaw('last_name collate utf8mb4_0900_ai_ci like ?', $s.'%');
                             });
                         }
                     });
             })
-            ->when(filled($request->get('sex')), fn ($query) => $query->where(function ($query) use ($request) {
-                $query
-                    ->where('sex', $request->get('sex'))
-                    ->orWhereNull('sex');
-            }))
-            ->unless(Auth::user()?->canRead(), fn ($query) => $query->where('visibility', true))
+            ->when(filled($request->get('sex')), function (Builder $q) use ($request) {
+                return $q->where(function (Builder $q) use ($request) {
+                    $q->where('sex', $request->get('sex'))->orWhereNull('sex');
+                });
+            })
+            ->unless(Auth::user()?->canRead(), fn (Builder $q) => $q->where('visibility', true))
             ->limit(10)
             ->get();
 
         $response = $people
-            ->filter(fn ($person) => Gate::allows('view', $person))
-            ->map(fn ($person) => [
+            ->filter(fn (Person $person) => Gate::allows('view', $person))
+            ->map(fn (Person $person) => [
                 'id' => $person->id,
                 'name' => $person->formatSimpleName(),
                 'dates' => $person->formatSimpleDates(),

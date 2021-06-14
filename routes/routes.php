@@ -4,18 +4,16 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Livewire\Dashboard\ActivityLog;
 use App\Http\Livewire\Dashboard\Users;
-use App\Http\Livewire\Search;
 use App\Http\Livewire\Settings;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'people')
     ->name('welcome');
 
+Route::redirect('search', 'people');
+
 Route::post('locale', LocaleController::class)
     ->name('locale.store');
-
-Route::get('search', Search::class)
-    ->name('search');
 
 Route::get('settings', Settings::class)
     ->middleware('auth')->name('settings');
