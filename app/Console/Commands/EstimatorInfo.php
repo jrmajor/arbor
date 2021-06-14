@@ -19,6 +19,8 @@ class EstimatorInfo extends Command
 
         Model::preventLazyLoading(false);
 
+        $time = microtime(true);
+
         $people = Person::query()
             ->whereNotNull('birth_date_from')
             ->get()
@@ -63,7 +65,9 @@ class EstimatorInfo extends Command
             ['used interval', Person::generationInterval],
         ]);
 
-        $this->comment('Calculated in '.microtime(true) - LARAVEL_START);
+        $time = microtime(true) - $time;
+
+        $this->comment("Calculated in {$time}");
 
         Model::preventLazyLoading($initialLazyLoadingMode);
     }
