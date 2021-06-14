@@ -13,28 +13,35 @@ class PeopleSearchController extends Controller
 {
     public function __invoke(Request $request)
     {
-        if (blank($request->get('search'))) {
+        $query = $request->get('search');
+
+        if (blank($query)) {
             return response()->json([]);
         }
 
-        $people = Person::query()
-            ->where(function (Builder $q) use ($request) {
-                $q->where('id', $request->get('search'))
-                    ->orWhere(function (Builder $q) use ($request) {
-                        foreach (Arr::trim(explode(' ', $request->get('search'))) as $s) {
-                            $q->where(function (Builder $q) use ($s) {
-                                return $q->whereRaw('name collate utf8mb4_0900_ai_ci like ?', $s.'%')
-                                    ->orWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', $s.'%')
-                                    ->orWhereRaw('last_name collate utf8mb4_0900_ai_ci like ?', $s.'%');
-                            });
-                        }
-                    });
-            })
-            ->when(filled($request->get('sex')), function (Builder $q) use ($request) {
-                return $q->where(function (Builder $q) use ($request) {
-                    $q->where('sex', $request->get('sex'))->orWhereNull('sex');
+        $sex = filled($request->get('sex')) ? $request->get('sex') : null;
+
+        $whereFragment = function (Builder $q) use ($query) {
+            $queryFragments = Arr::trim(explode(' ', $query));
+
+            foreach ($queryFragments as $fragment) {
+                $q->where(function (Builder $q) use ($fragment) {
+                    return $q->whereRaw('name collate utf8mb4_0900_ai_ci like ?', "{$fragment}%")
+                        ->orWhereRaw('family_name collate utf8mb4_0900_ai_ci like ?', "{$fragment}%")
+                        ->orWhereRaw('last_name collate utf8mb4_0900_ai_ci like ?', "{$fragment}%");
                 });
-            })
+            }
+        };
+
+        $whereSex = function (Builder $q) use ($sex, ) {
+            return $q->where(function (Builder $q) use ($sex) {
+                $q->where('sex', $sex)->orWhereNull('sex');
+            });
+        };
+
+        $people = Person::query()
+            ->where(fn (Builder $q) => $q->where('id', $query)->orWhere($whereFragment))
+            ->when($sex, $whereSex)
             ->unless(Auth::user()?->canRead(), fn (Builder $q) => $q->where('visibility', true))
             ->limit(10)
             ->get();
