@@ -35,8 +35,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read ?int $burial_year
  * @property-read EloquentCollection<Person> $siblings
  * @property-read EloquentCollection<Marriage> $marriages
- * @property-read EloquentCollection<Activity> $children
- * @property-read EloquentCollection<Person> $activities
+ * @property-read EloquentCollection<Person> $children
+ * @property-read EloquentCollection<Activity> $activities
  */
 class Person extends Model
 {
