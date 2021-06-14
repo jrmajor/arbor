@@ -43,9 +43,7 @@ class EstimatorInfo extends Command
 
         $generationInterval = Person::query()
             ->whereNotNull('birth_date_from')
-            ->where(function (Builder $query) {
-                $query->whereNotNull(['father_id', 'mother_id'], 'or');
-            })
+            ->where(fn (Builder $q) => $q->whereHas('father')->orWhereHas('mother'))
             ->get()
             ->filter(fn (Person $person) => $person->birth_year)
             ->map(fn (Person $person) => [
