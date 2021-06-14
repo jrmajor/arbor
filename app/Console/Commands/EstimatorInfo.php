@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Person;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class EstimatorInfo extends Command
 {
@@ -14,6 +15,10 @@ class EstimatorInfo extends Command
 
     public function handle()
     {
+        $initialLazyLoadingMode = Model::preventsLazyLoading();
+
+        Model::preventLazyLoading(false);
+
         $people = Person::query()
             ->whereNotNull('birth_date_from')
             ->get()
@@ -59,5 +64,7 @@ class EstimatorInfo extends Command
         ]);
 
         $this->comment('Calculated in '.microtime(true) - LARAVEL_START);
+
+        Model::preventLazyLoading($initialLazyLoadingMode);
     }
 }
