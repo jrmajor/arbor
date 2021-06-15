@@ -28,7 +28,7 @@
           :route="route('marriages.destroy', $marriage)"
           name="marriages.menu.delete"
           :form="[
-            'name' => 'delete-marriage',
+            'name' => 'deleteMarriage',
             'method' => 'DELETE',
           ]"
         >
@@ -39,7 +39,7 @@
           :route="route('marriages.restore', $marriage)"
           name="marriages.menu.restore"
           :form="[
-            'name' => 'restore-marriage',
+            'name' => 'restoreMarriage',
             'method' => 'PATCH',
           ]"
         >

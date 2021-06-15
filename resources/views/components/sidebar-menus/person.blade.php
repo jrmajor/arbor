@@ -49,7 +49,7 @@
           :route="route('people.changeVisibility', $person)"
           :name="$person->isVisible() ? 'people.menu.make_invisible' : 'people.menu.make_visible'"
           :form="[
-            'name' => 'change-visibility',
+            'name' => 'changeVisibility',
             'method' => 'PUT',
           ]"
         >
@@ -70,7 +70,7 @@
           :route="route('people.destroy', $person)"
           name="people.menu.delete"
           :form="[
-            'name' => 'delete-person',
+            'name' => 'deletePerson',
             'method' => 'DELETE',
           ]"
         >
@@ -81,7 +81,7 @@
           :route="route('people.restore', $person)"
           name="people.menu.restore"
           :form="[
-            'name' => 'restore-person',
+            'name' => 'restorePerson',
             'method' => 'PATCH',
           ]"
         >
