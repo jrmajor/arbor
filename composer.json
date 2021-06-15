@@ -23,7 +23,7 @@
         "laravel/ui": "^3.3",
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.1",
-        "livewire/livewire": "^2.3",
+        "livewire/livewire": "^2.5",
         "nesbot/carbon": "^2.49",
         "sammyjo20/lasso": "^1.2",
         "spatie/laravel-activitylog": "^4.0",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5555329023884750615a65901929b77",
+    "content-hash": "983b2fc3e9b4ae5a585bb914510c15d5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,16 +64,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.184.2",
+            "version": "3.184.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "78fe691ab466fecf195209672f6c00c5d4ed219a"
+                "reference": "2e1e8544258ea1a8f6c6ccaf651c8b5830a03a03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/78fe691ab466fecf195209672f6c00c5d4ed219a",
-                "reference": "78fe691ab466fecf195209672f6c00c5d4ed219a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2e1e8544258ea1a8f6c6ccaf651c8b5830a03a03",
+                "reference": "2e1e8544258ea1a8f6c6ccaf651c8b5830a03a03",
                 "shasum": ""
             },
             "require": {
@@ -148,9 +148,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.184.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.184.3"
             },
-            "time": "2021-06-11T18:20:15+00:00"
+            "time": "2021-06-14T18:18:58+00:00"
         },
         {
             "name": "brick/math",
@@ -2671,16 +2671,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v2.4.4",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "33101c83b75728651b9e668a4559f97def7c9138"
+                "reference": "5cffdbfe4204e0d932cde6f8c9bdf63f0928b4d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/33101c83b75728651b9e668a4559f97def7c9138",
-                "reference": "33101c83b75728651b9e668a4559f97def7c9138",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/5cffdbfe4204e0d932cde6f8c9bdf63f0928b4d4",
+                "reference": "5cffdbfe4204e0d932cde6f8c9bdf63f0928b4d4",
                 "shasum": ""
             },
             "require": {
@@ -2731,7 +2731,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v2.4.4"
+                "source": "https://github.com/livewire/livewire/tree/2.5.0"
             },
             "funding": [
                 {
@@ -2739,7 +2739,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-28T15:31:15+00:00"
+            "time": "2021-06-14T22:25:45+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
