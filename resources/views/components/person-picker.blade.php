@@ -1,5 +1,6 @@
-<div {{ $attributes->merge(['class' => 'flex flex-col']) }}
-  x-data="personPickerData(@encodedjson($pickerData()))" x-init="init()"
+<div
+  {{ $attributes->merge(['class' => 'flex flex-col']) }}
+  x-data="personPickerData(@encodedjson($pickerData()))"
 >
   <label for="{{ $name }}_search" class="w-full font-medium pb-1 text-gray-700">{{ $label }}</label>
   <div class="w-full">
@@ -34,7 +35,8 @@
         </div>
       </div>
       <template x-if="open && ! (search === '' && people.length === 0)">
-        <ul class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
+        <ul
+          class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
           x-on:mousedown="shouldCloseOnBlur = false"
         >
           <template x-if="people.length === 0">

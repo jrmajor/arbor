@@ -1,9 +1,11 @@
-<div {{ $attributes->merge(['class' => 'flex flex-col']) }}
+<div
+  {{ $attributes->merge(['class' => 'flex flex-col']) }}
   x-data="dateRangePickerData(@encodedjson($pickerData()))"
 >
   <div class="w-full pb-1 flex items-center">
     <label for="{{ $name }}_year" class="font-medium text-gray-700">{{ $label }}</label>
-    <button type="button" x-on:click.prevent="advancedPicker = ! advancedPicker"
+    <button
+      type="button" x-on:click.prevent="advancedPicker = ! advancedPicker"
       x-text="advancedPicker ? '{{ __('misc.date.simple') }}' : '{{ __('misc.date.advanced') }}'"
       class="ml-2 a underline leading-none text-sm"
     >
@@ -12,9 +14,7 @@
   </div>
   <div class="w-full">
     <div class="flex flex-nowrap items-center justify-between">
-      <div x-show="! advancedPicker"
-        class="flex-grow flex-shrink flex"
-      >
+      <div x-show="! advancedPicker" class="flex-grow flex-shrink flex">
         <div class="flex items-center">
           <input
             type="text" class="form-input tabular-nums w-32"
@@ -26,9 +26,7 @@
           >
         </div>
       </div>
-      <div x-show="advancedPicker"
-        class="flex-grow flex-shrink flex flex-wrap -mb-2"
-      >
+      <div x-show="advancedPicker" class="flex-grow flex-shrink flex flex-wrap -mb-2">
         <div class="flex-grow-0 flex items-center mb-2 mr-1">
           <p class="text-gray-900">{{ __('misc.date.between') }}</p>
           <input

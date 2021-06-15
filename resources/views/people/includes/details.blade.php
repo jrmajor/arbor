@@ -22,7 +22,7 @@
           {{ __('people.pytlewski.show_more') }}
         </button>
         <br>
-        <div x-show="open" x-on:click.away="open = false" style="display: none;">
+        <div x-show="open" x-on:click.outside="open = false" style="display: none;">
           <small style="display: block; line-height: 1.45">
             @if ($pytlewski->mother || $pytlewski->father)
               &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}:<br>

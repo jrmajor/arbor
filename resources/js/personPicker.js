@@ -20,10 +20,10 @@ window.personPickerData = function (data) {
       if (this.initial.id !== null) this.people.push(this.initial)
     },
 
-    findPeople(event) {
+    findPeople() {
       if (this.selected.id !== null) {
         this.search = ''
-        return false
+        return
       }
 
       if (this.search !== this.previousSearch) {

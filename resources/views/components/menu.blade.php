@@ -1,15 +1,13 @@
 <nav
   class="mb-1 bg-white shadow-md"
-  x-data="{
-    open: false,
-    dropdown: false
-  }"
+  x-data="{ open: false, dropdown: false }"
 >
   <div class="container mx-auto">
     <div class="px-3 flex items-center justify-between flex-wrap">
 
       <div class="flex items-center">
-        <a href="{{ route('people.index') }}"
+        <a
+          href="{{ route('people.index') }}"
           class="px-4 pt-4 pb-3 md:pt-5 md:pb-4 lg:pt-6 lg:pb-4 text-gray-800
             hover:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
             border-b-2 border-solid border-transparent
@@ -38,9 +36,9 @@
       </button>
 
       <div
-        class="flex-col w-full mt-2 pb-2 lg:flex lg:flex-row lg:w-auto lg:mt-0 lg:pb-0 lg:items-center"
+        class="flex-col pb-2 mt-2 w-full lg:!flex lg:flex-row lg:w-auto lg:mt-0 lg:pb-0 lg:items-center"
         :class="{ 'flex': open, 'hidden': ! open }"
-        x-on:click.away="open = false"
+        x-show="open" x-on:click.outside="open = false"
       >
 
         @if ($active != 'search')
@@ -63,7 +61,8 @@
               </svg>
             </button>
             <template x-if="open && ! (search === '' && people.length === 0)">
-              <ul class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
+              <ul
+                class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
                 x-on:mousedown="shouldCloseOnBlur = false"
               >
                 <template x-if="people.length === 0">
@@ -224,9 +223,9 @@
               </svg>
             </button>
 
-            <div class="absolute right-0 flex-col items-end z-10"
-              :class="{ 'flex': dropdown, 'hidden': ! dropdown }"
-              x-on:click.away="dropdown = false"
+            <div
+              class="flex absolute right-0 z-10 flex-col items-end"
+              x-show="dropdown" x-on:click.outside="dropdown = false"
             >
 
               <div class="w-0 h-0 mr-8 z-20" style="border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #ffffff;"></div>
