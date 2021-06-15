@@ -46,7 +46,7 @@
             role="search"
             class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3 lg:w-96"
             x-data="menuSearchData()"
-            x-on:submit="$event.preventDefault()"
+            x-on:submit.prevent
           >
             <input
               type="search" class="form-input w-full h-9"
@@ -187,7 +187,7 @@
 
           <a
             href="{{ route('logout') }}"
-            onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+            x-on:click.prevent="$refs.logoutForm.submit()"
             class="lg:hidden px-3 py-1 text-gray-800
               hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
               rounded uppercase
@@ -245,7 +245,7 @@
 
                 <a
                   href="{{ route('logout') }}"
-                  onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                  x-on:click.prevent="$refs.logoutForm.submit()"
                   class="pl-5 pr-12 py-4 text-gray-800
                     hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
                     border-l-2 border-solid border-transparent
@@ -260,7 +260,7 @@
             </div>
           </div>
 
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none">
+          <form x-ref="logoutForm" action="{{ route('logout') }}" method="POST" style="display: none">
             @csrf
           </form>
         @endguest
