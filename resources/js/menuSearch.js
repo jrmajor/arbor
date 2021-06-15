@@ -9,7 +9,7 @@ window.menuSearchData = function () {
     search: '',
     people: [],
 
-    findPeople(event) {
+    findPeople() {
       if (this.search !== this.previousSearch) {
         fetch(
           route('people.search', {
