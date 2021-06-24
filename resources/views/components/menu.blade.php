@@ -272,27 +272,13 @@
           @csrf
           {{ __('misc.language') }}:&nbsp;
           <div>
-            @unless (app()->isLocale('pl'))
-              <button name="language" value="pl"
-                class="btn-out leading-none text-xs rounded px-2"
-              >
-                PL
-              </button>
-            @endunless
-            @unless (app()->isLocale('en'))
-              <button name="language" value="en"
-                class="btn-out leading-none text-xs rounded px-2"
-              >
-                EN
-              </button>
-            @endunless
-            @unless (app()->isLocale('de'))
-              <button name="language" value="de"
-                class="btn-out leading-none text-xs rounded px-2"
-              >
-                DE
-              </button>
-            @endunless
+            @foreach (config('app.available_locales') as $locale)
+              @unless (app()->isLocale($locale))
+                <button name="language" value="{{ $locale }}" class="btn-out leading-none text-xs rounded px-2">
+                  {{ mb_strtoupper($locale) }}
+                </button>
+              @endunless
+            @endforeach
           </div>
 
         </form>
