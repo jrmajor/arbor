@@ -1,63 +1,61 @@
 import route from 'ziggy-js'
 
-window.menuSearchData = function () {
-  return {
-    hovered: null,
-    open: false,
-    shouldCloseOnBlur: true,
-    previousSearch: '',
-    search: '',
-    people: [],
+export default () => ({
+  hovered: null,
+  open: false,
+  shouldCloseOnBlur: true,
+  previousSearch: '',
+  search: '',
+  people: [],
 
-    findPeople() {
-      if (this.search !== this.previousSearch) {
-        fetch(
-          route('people.search', {
-            search: this.search,
-          }),
-        )
-          .then(response => response.json())
-          .then(data => {
-            this.people = data
-            if (this.hovered > this.people.length - 1) this.hovered = null
-          })
+  findPeople() {
+    if (this.search === this.previousSearch) return
 
-        this.previousSearch = this.search
-      }
-    },
+    fetch(
+      route('people.search', {
+        search: this.search,
+      }),
+    )
+      .then(response => response.json())
+      .then(data => {
+        this.people = data
+        if (this.hovered > this.people.length - 1) this.hovered = null
+      })
 
-    arrow(direction) {
-      if (this.people.length === 0) return
+    this.previousSearch = this.search
+  },
 
-      if (this.hovered === null) {
-        this.hovered = direction === 'up' ? this.people.length - 1 : 0
-        return
-      }
+  arrow(direction) {
+    if (this.people.length === 0) return
 
-      this.hovered = direction === 'up' ? this.hovered - 1 : this.hovered + 1
+    if (this.hovered === null) {
+      this.hovered = direction === 'up' ? this.people.length - 1 : 0
+      return
+    }
 
-      if (this.hovered < 0) this.hovered = this.people.length - 1
-      if (this.hovered > this.people.length - 1) this.hovered = 0
-    },
+    this.hovered = direction === 'up' ? this.hovered - 1 : this.hovered + 1
 
-    enter(event) {
-      this.open = false
+    if (this.hovered < 0) this.hovered = this.people.length - 1
+    if (this.hovered > this.people.length - 1) this.hovered = 0
+  },
 
-      if (this.hovered === null) return
+  enter(event) {
+    this.open = false
 
-      event.preventDefault()
-      window.location.href = this.people[this.hovered].url
-    },
+    if (this.hovered === null) return
 
-    closeDropdown() {
-      if (! this.shouldCloseOnBlur) {
-        this.shouldCloseOnBlur = true
-        return
-      }
+    event.preventDefault()
+    window.location.href = this.people[this.hovered].url
+  },
 
-      this.open = false
-      this.hovered = null
+  closeDropdown() {
+    if (! this.shouldCloseOnBlur) {
       this.shouldCloseOnBlur = true
-    },
-  }
-}
+      return
+    }
+
+    this.open = false
+    this.hovered = null
+    this.shouldCloseOnBlur = true
+  },
+})

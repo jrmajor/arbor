@@ -45,7 +45,7 @@
           <form
             role="search"
             class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3 lg:w-96"
-            x-data="menuSearchData()"
+            x-data="menuSearch"
             x-on:submit.prevent
           >
             <input
