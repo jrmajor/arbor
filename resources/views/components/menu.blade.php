@@ -228,7 +228,7 @@
               x-show="dropdown" x-on:click.outside="dropdown = false"
             >
 
-              <div class="w-0 h-0 mr-8 z-20" style="border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #ffffff;"></div>
+              <div class="w-0 h-0 mr-8 z-20 border-8 border-t-0 border-r-transparent border-l-transparent border-b-white"></div>
 
               <div class="flex flex-col overflow-hidden bg-white rounded-lg shadow-2xl">
                 <a

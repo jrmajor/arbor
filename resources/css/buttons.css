@@ -21,7 +21,7 @@
 
       &:enabled {
         @apply hover:bg-red-500;
-        @apply focus:border-red-700 focus:ring ring-red-500 ring-opacity-50;
+        @apply focus:border-red-700 focus:ring ring-red-500/50;
         @apply active:bg-red-700;
       }
     }
