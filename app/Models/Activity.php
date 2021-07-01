@@ -9,6 +9,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\Activitylog\Contracts\Activity as ActivityContract;
 
+/**
+ * @property Collection|array|null $properties
+ */
 class Activity extends Model implements ActivityContract
 {
     protected $table = 'activity_log';

@@ -1,16 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Ternary operator condition is always true\\.$#"
-			count: 1
-			path: app/Http/Controllers/MarriageController.php
-
-		-
-			message: "#^Ternary operator condition is always true\\.$#"
-			count: 1
-			path: app/Http/Controllers/PersonController.php
-
-		-
 			message: "#^Match expression does not handle remaining value\\: string$#"
 			count: 1
 			path: app/Models/Relations/HalfSiblings.php

@@ -26,7 +26,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * @property-read string $birth_date
+ * @property-read ?Carbon $birth_date_from
+ * @property-read ?Carbon $birth_date_to
  * @property-read string $death_date
+ * @property-read ?Carbon $death_date_from
+ * @property-read ?Carbon $death_date_to
  * @property-read string $funeral_date
  * @property-read string $burial_date
  * @property-read ?int $birth_year
