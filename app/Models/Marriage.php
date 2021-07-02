@@ -32,9 +32,9 @@ class Marriage extends Model
 
     protected $casts = [
         'divorced' => 'boolean',
-        'rite' => MarriageRiteEnum::class.':nullable',
-        'first_event_type' => MarriageEventTypeEnum::class.':nullable',
-        'second_event_type' => MarriageEventTypeEnum::class.':nullable',
+        'rite' => MarriageRiteEnum::class . ':nullable',
+        'first_event_type' => MarriageEventTypeEnum::class . ':nullable',
+        'second_event_type' => MarriageEventTypeEnum::class . ':nullable',
     ];
 
     protected static $dateRanges = [

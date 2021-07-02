@@ -9160,12 +9160,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/php-cs.git",
-                "reference": "162e521f72aaca06d658dcd8d9c838147824f9cc"
+                "reference": "4ae274e05f13b680313a9b271e77aac3f2d7be7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/162e521f72aaca06d658dcd8d9c838147824f9cc",
-                "reference": "162e521f72aaca06d658dcd8d9c838147824f9cc",
+                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/4ae274e05f13b680313a9b271e77aac3f2d7be7f",
+                "reference": "4ae274e05f13b680313a9b271e77aac3f2d7be7f",
                 "shasum": ""
             },
             "require": {
@@ -9195,7 +9195,7 @@
                 "issues": "https://github.com/jrmajor/php-cs/issues",
                 "source": "https://github.com/jrmajor/php-cs/tree/master"
             },
-            "time": "2021-06-09T17:34:27+00:00"
+            "time": "2021-07-02T00:50:21+00:00"
         },
         {
             "name": "justinrainbow/json-schema",

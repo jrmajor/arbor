@@ -33,7 +33,7 @@ class MacrosServiceProvider extends ServiceProvider
             }
 
             if ($from->startOfYear()->isSameDay($from) && $to->endOfYear()->isSameDay($to)) {
-                return $from->isSameYear($to) ? (string) $from->year : $from->year.'-'.$to->year;
+                return $from->isSameYear($to) ? (string) $from->year : "{$from->year}-{$to->year}";
             }
 
             if ($from->startOfMonth()->isSameDay($from) && $to->endOfMonth()->isSameDay($to)) {

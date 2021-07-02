@@ -169,7 +169,7 @@ class Person extends Model
             return (int) $or;
         }
 
-        return $either === $or ? $either : $either.'-'.$or;
+        return $either === $or ? $either : "{$either}-{$or}";
     }
 
     public function currentAge(bool $raw = false): int|string|null
@@ -248,7 +248,7 @@ class Person extends Model
 
     public function formatSimpleName(): string
     {
-        $name = $this->name.' ';
+        $name = $this->name . ' ';
 
         $name .= $this->last_name
             ? "{$this->last_name} ({$this->family_name})"

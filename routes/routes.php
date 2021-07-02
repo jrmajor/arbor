@@ -27,12 +27,12 @@ Route::get('dashboard/activity-log', ActivityLog::class)
 Route::get('dashboard/reports', [DashboardController::class, 'reports'])
     ->middleware('auth')->name('dashboard.reports');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-require __DIR__.'/people.php';
+require __DIR__ . '/people.php';
 
-require __DIR__.'/marriages.php';
+require __DIR__ . '/marriages.php';
 
 if (app()->isLocal()) {
-    require __DIR__.'/dev.php';
+    require __DIR__ . '/dev.php';
 }

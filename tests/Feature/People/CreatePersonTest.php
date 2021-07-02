@@ -89,7 +89,7 @@ test('users with permissions can add valid person', function () {
     withPermissions(2)
         ->post('people', $this->validAttributes)
         ->assertStatus(302)
-        ->assertRedirect('people/'.Person::latest()->first()->id);
+        ->assertRedirect('people/' . Person::latest()->first()->id);
 
     travelBack();
 

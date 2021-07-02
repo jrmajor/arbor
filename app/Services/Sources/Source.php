@@ -72,7 +72,7 @@ class Source implements Jsonable
                     continue;
                 }
 
-                $inline = $this->{'inline'.$inlineType}($excerpt);
+                $inline = $this->{'inline' . $inlineType}($excerpt);
 
                 if (! isset($inline)) {
                     continue;
@@ -164,11 +164,11 @@ class Source implements Jsonable
             'extent' => $matches[2] === '' ? strlen($matches[0]) : strlen($matches[0]) - 1,
             'element' => [
                 'name' => 'a',
-                'text' => 'ISBN '.$matches[1],
+                'text' => 'ISBN ' . $matches[1],
                 'attributes' => [
-                    'href' => __('people.isbn_url').$number,
+                    'href' => __('people.isbn_url') . $number,
                     'target' => '_blank',
-                    'title' => 'ISBN '.$matches[1].' '.__('people.isbn_in_wikipedia'),
+                    'title' => 'ISBN ' . $matches[1] . ' ' . __('people.isbn_in_wikipedia'),
                     'class' => 'a',
                 ],
             ],
@@ -262,7 +262,7 @@ class Source implements Jsonable
     {
         $element = $this->sanitiseElement($element);
 
-        $markup = '<'.$element['name'];
+        $markup = '<' . $element['name'];
 
         if (isset($element['attributes'])) {
             foreach ($element['attributes'] as $name => $value) {
@@ -270,7 +270,7 @@ class Source implements Jsonable
                     continue;
                 }
 
-                $markup .= ' '.$name.'="'.e($value).'"';
+                $markup .= ' ' . $name . '="' . e($value) . '"';
             }
         }
 
@@ -291,7 +291,7 @@ class Source implements Jsonable
                 $markup .= e($text, true);
             }
 
-            $markup .= '</'.$element['name'].'>';
+            $markup .= '</' . $element['name'] . '>';
         } else {
             $markup .= '/>';
         }

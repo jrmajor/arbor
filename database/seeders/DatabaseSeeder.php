@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
     private function callSqlSeeders()
     {
-        $seeders = (new Finder())->files()->in(__DIR__.'/sql');
+        $seeders = (new Finder())->files()->in(__DIR__ . '/sql');
 
         if (! $seeders->hasResults()) {
             return $this->command->line('<comment>Found no raw sql seeders.</comment>');
@@ -28,11 +28,11 @@ class DatabaseSeeder extends Seeder
                 continue;
             }
 
-            $this->command->line('<comment>Seeding: </comment>'.$seed->getFilename());
+            $this->command->line('<comment>Seeding: </comment>' . $seed->getFilename());
 
             DB::unprepared($seed->getContents());
 
-            $this->command->line('<info>Seeded:  </info>'.$seed->getFilename());
+            $this->command->line('<info>Seeded:  </info>' . $seed->getFilename());
         }
     }
 }

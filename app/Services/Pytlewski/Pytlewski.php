@@ -49,7 +49,7 @@ final class Pytlewski
         protected int $id,
     ) {
         $this->attributes = Cache::remember(
-            'pytlewski.'.$this->id,
+            "pytlewski.{$this->id}",
             CarbonInterval::week(),
             fn (): array => $this->scrape(),
         );

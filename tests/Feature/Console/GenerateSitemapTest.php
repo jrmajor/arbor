@@ -3,7 +3,7 @@
 use App\Models\Person;
 
 it('can generate sitemap', function () {
-    $sitemapPath = __DIR__.'/../../../public/sitemap.xml';
+    $sitemapPath = __DIR__ . '/../../../public/sitemap.xml';
 
     if (file_exists($sitemapPath)) {
         unlink($sitemapPath);

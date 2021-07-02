@@ -23,14 +23,13 @@ class PytlewskiPicker extends Component
             return __('people.pytlewski.not_found');
         }
 
-        $result = $pytlewski->name.' ';
+        $result = $pytlewski->name . ' ';
 
         $result .= $pytlewski->middle_name
-            ? $pytlewski->middle_name.' '
-            : '';
+            ? $pytlewski->middle_name . ' ' : '';
 
-        return $result.$pytlewski->last_name
-            ? $pytlewski->last_name.' ('.$pytlewski->family_name.')'
+        return $result . $pytlewski->last_name
+            ? "{$pytlewski->last_name} ({$pytlewski->family_name})"
             : $pytlewski->family_name;
     }
 

@@ -82,7 +82,7 @@ test('users with permissions can add valid marriage', function () {
     withPermissions(2)
         ->post('marriages', $this->validAttributes)
         ->assertStatus(302)
-        ->assertRedirect('people/'.Marriage::latest()->first()->woman_id);
+        ->assertRedirect('people/' . Marriage::latest()->first()->woman_id);
 
     travelBack();
 

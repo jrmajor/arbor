@@ -120,7 +120,7 @@ test('users with permissions can edit marriage', function () {
 
     $this->marriage->refresh();
 
-    $response->assertRedirect('people/'.$this->marriage->woman_id);
+    $response->assertRedirect('people/' . $this->marriage->woman_id);
 
     $attributesToCheck = Arr::except($this->newAttributes, array_merge($this->dates, $this->enums));
 

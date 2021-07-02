@@ -3,7 +3,7 @@
 dataset('pytlewscy', function () {
     yield 'Franciszek Kosela' => [
         '543',
-        file_get_contents(__DIR__.'/pytlewscy/543.html'),
+        file_get_contents(__DIR__ . '/pytlewscy/543.html'),
         [
             'family_name' => 'Kosela',
             'last_name' => null,
@@ -41,7 +41,7 @@ dataset('pytlewscy', function () {
 
     yield 'Józef Major' => [
         '556',
-        file_get_contents(__DIR__.'/pytlewscy/556.html'),
+        file_get_contents(__DIR__ . '/pytlewscy/556.html'),
         [
             'family_name' => 'Major',
             'last_name' => null,
@@ -93,7 +93,7 @@ dataset('pytlewscy', function () {
 
     yield 'Iwona Bobińska (Kosela)' => [
         '550',
-        file_get_contents(__DIR__.'/pytlewscy/550.html'),
+        file_get_contents(__DIR__ . '/pytlewscy/550.html'),
         [
             'family_name' => 'Kosela',
             'last_name' => 'Bobińska',
@@ -130,7 +130,7 @@ dataset('pytlewscy', function () {
 
     yield 'Maciej Kazimierz Pytlewski' => [
         '704',
-        file_get_contents(__DIR__.'/pytlewscy/704.html'),
+        file_get_contents(__DIR__ . '/pytlewscy/704.html'),
         [
             'family_name' => 'Pytlewski',
             'last_name' => null,
@@ -265,7 +265,7 @@ dataset('pytlewscy', function () {
 
     yield 'Maryanna Pytlewska (Ptakowska)' => [
         '1420',
-        file_get_contents(__DIR__.'/pytlewscy/1420.html'),
+        file_get_contents(__DIR__ . '/pytlewscy/1420.html'),
         [
             'family_name' => 'Ptakowska',
             'last_name' => 'Pytlewska',
@@ -321,7 +321,7 @@ dataset('pytlewscy', function () {
 
     yield 'Maria Ludwika Chełmońska (Korwin-Szymanowska)' => [
         '1928',
-        file_get_contents(__DIR__.'/pytlewscy/1928.html'),
+        file_get_contents(__DIR__ . '/pytlewscy/1928.html'),
         [
             'family_name' => 'Korwin-Szymanowska',
             'last_name' => 'Chełmońska',
@@ -383,7 +383,7 @@ dataset('pytlewscy', function () {
 
     yield 'Adolfina Białkowska (Kolin)' => [
         '4613',
-        file_get_contents(__DIR__.'/pytlewscy/4613.html'),
+        file_get_contents(__DIR__ . '/pytlewscy/4613.html'),
         [
             'family_name' => 'Kolin',
             'last_name' => 'Białkowska',
