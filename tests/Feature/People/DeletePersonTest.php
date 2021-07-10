@@ -59,6 +59,6 @@ test('person deletion is logged', function () {
     expect((string) $log->created_at)->toBe((string) $this->person->deleted_at);
 
     expect($log->properties->all())->toBe([
-        'attributes' => ['deleted_at' => $this->person->deleted_at->toJson()]
+        'attributes' => ['deleted_at' => $this->person->deleted_at->toJson()],
     ]);
 });

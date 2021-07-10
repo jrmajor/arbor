@@ -59,6 +59,6 @@ test('marriage deletion is logged', function () {
     expect((string) $log->created_at)->toBe((string) $this->marriage->deleted_at);
 
     expect($log->properties->all())->toBe([
-        'attributes' => ['deleted_at' => $this->marriage->deleted_at->toJson()]
+        'attributes' => ['deleted_at' => $this->marriage->deleted_at->toJson()],
     ]);
 });
