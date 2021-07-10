@@ -46,14 +46,12 @@ test('marriage can be restored only when deleted', function () {
 test('marriage restoration is logged', function () {
     $this->marriage->restore();
 
-    $log = latestLog();
+    expect($log = latestLog())
+        ->log_name->toBe('marriages')
+        ->description->toBe('restored')
+        ->subject->toBeModel($this->marriage);
 
-    expect($log->log_name)->toBe('marriages');
-    expect($log->description)->toBe('restored');
-    expect($log->subject())->toBeModel($this->marriage);
-
-    expect($log->properties['attributes']['deleted_at'])->toBeNull();
-
-    expect($log->properties)->toHaveCount(1);
-    expect($log->properties['attributes'])->toHaveCount(1);
+    expect($log->properties->all())->toBe([
+        'attributes' => ['deleted_at' => null],
+    ]);
 });

@@ -51,17 +51,14 @@ test('users with permissions to view history are redirected to person history', 
 test('person deletion is logged', function () {
     $this->person->delete();
 
-    $log = latestLog();
-
-    expect($log->log_name)->toBe('people');
-    expect($log->description)->toBe('deleted');
-    expect($log->subject())->toBeModel($this->person);
+    expect($log = latestLog())
+        ->log_name->toBe('people')
+        ->description->toBe('deleted')
+        ->subject->toBeModel($this->person);
 
     expect((string) $log->created_at)->toBe((string) $this->person->deleted_at);
 
-    expect($log->properties['attributes']['deleted_at'])
-        ->toBe($this->person->deleted_at->toJson());
-
-    expect($log->properties)->toHaveCount(1);
-    expect($log->properties['attributes'])->toHaveCount(1);
+    expect($log->properties->all())->toBe([
+        'attributes' => ['deleted_at' => $this->person->deleted_at->toJson()]
+    ]);
 });

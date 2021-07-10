@@ -25,7 +25,8 @@ it('can eagerly get marriages', function () {
         ->whereIn('id', [$woman->id, $man->id])
         ->with('children')->get();
 
-    expect($people->get(0)->marriages)->toHaveCount(3);
-
-    expect($people->get(1)->marriages)->toHaveCount(4);
+    expect($people)->sequence(
+        fn ($e) => $e->marriages->toHaveCount(3),
+        fn ($e) => $e->marriages->toHaveCount(4),
+    );
 });

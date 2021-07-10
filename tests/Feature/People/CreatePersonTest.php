@@ -145,11 +145,10 @@ test('person creation is logged', function () {
 
     $person = Person::latest()->first();
 
-    $log = latestLog();
-
-    expect($log->log_name)->toBe('people');
-    expect($log->description)->toBe('created');
-    expect($log->subject())->toBeModel($person);
+    expect($log = latestLog())
+        ->log_name->toBe('people')
+        ->description->toBe('created')
+        ->subject->toBeModel($person);
 
     $attributesToCheck = Arr::except($this->validAttributes, [
         'sources', ...$this->dates,
@@ -160,18 +159,15 @@ test('person creation is logged', function () {
         // 'Failed asserting that attribute '.$key.' has the same value in log.'
     }
 
-    expect((string) $log->created_at)->toBe((string) $person->created_at);
-    expect((string) $log->created_at)->toBe((string) $person->updated_at);
+    expect((string) $log->created_at)
+        ->toBe((string) $person->created_at)
+        ->toBe((string) $person->updated_at);
 
-    expect($log->properties['attributes'])->not->toHaveKey('created_at');
-    expect($log->properties['attributes'])->not->toHaveKey('updated_at');
+    expect($log->properties['attributes'])->not->toHaveKeys(['created_at', 'updated_at']);
 
-    expect($log->properties['attributes']['sources'])->toHaveCount(2);
-    expect($log->properties['attributes']['sources'])
-        ->toBe($this->validAttributes['sources']);
+    expect($log->properties['attributes']['sources'])->toBe($this->validAttributes['sources']);
 
     foreach ($this->dates as $date) {
-        expect($log->properties['attributes'][$date])
-            ->toBe($person->{$date}->format('Y-m-d'));
+        expect($log->properties['attributes'][$date])->toBe($person->{$date}->format('Y-m-d'));
     }
 });

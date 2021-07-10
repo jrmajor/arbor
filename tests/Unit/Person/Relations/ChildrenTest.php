@@ -37,7 +37,8 @@ it('can eagerly get children', function () {
         ->withParents()
         ->create(['father_id' => $father]);
 
-    [$mother, $father] = Person::whereIn('id', [$mother->id, $father->id])
+    [$mother, $father] = Person::query()
+        ->whereIn('id', [$mother->id, $father->id])
         ->with('children')->get();
 
     expect($mother->children)->toHaveCount(5);

@@ -52,8 +52,7 @@ it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
 })->with('pytlewscy');
 
 it('throws an exception when a key does not exist', function () {
-    Cache::shouldReceive('remember')
-        ->andReturn([]);
+    Cache::shouldReceive('remember')->andReturn([]);
 
     $pytlewski = new Pytlewski(556);
 

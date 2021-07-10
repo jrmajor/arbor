@@ -14,10 +14,11 @@ it('adds year getters', function () {
         'burial_date_to' => '2021-12-31',
     ]);
 
-    expect($person->birth_year)->toBe(1957);
-    expect($person->death_year)->toBe(2020);
-    expect($person->funeral_year)->toBeNull();
-    expect($person->burial_year)->toBeNull();
+    expect($person)
+        ->birth_year->toBe(1957)
+        ->death_year->toBe(2020)
+        ->funeral_year->toBeNull()
+        ->burial_year->toBeNull();
 });
 
 it('adds date getters', function () {
@@ -32,8 +33,9 @@ it('adds date getters', function () {
         'burial_date_to' => '2021-12-31',
     ]);
 
-    expect($person->birth_date)->toBe('1957-05-20');
-    expect($person->death_date)->toBe('between 2020-01-01 and 2020-01-07');
-    expect($person->funeral_date)->toBeNull();
-    expect($person->burial_date)->toBe('2020-2021');
+    expect($person)
+        ->birth_date->toBe('1957-05-20')
+        ->death_date->toBe('between 2020-01-01 and 2020-01-07')
+        ->funeral_date->toBeNull()
+        ->burial_date->toBe('2020-2021');
 });

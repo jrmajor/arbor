@@ -95,20 +95,17 @@ test('biography addition is logged', function () {
 
     expect(Activity::count())->toBe($count + 2); // biography addition and user creation
 
-    $log = latestLog();
-
-    expect($log->log_name)->toBe('people');
-    expect($log->description)->toBe('added-biography');
-    expect($log->subject())->toBeModel($this->person);
+    expect($log = latestLog())
+        ->log_name->toBe('people')
+        ->description->toBe('added-biography')
+        ->subject->toBeModel($this->person);
 
     expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
-    expect($log->properties)->toHaveCount(2);
-
-    expect($log->properties['old'])->toBeNull();
-    expect($log->properties['new'])->toBeString();
-
-    expect($log->properties['new'])->toBe($this->newBiography);
+    expect($log->properties->all())->toBe([
+        'new' => $this->newBiography,
+        'old' => null,
+    ]);
 });
 
 test('biography edition is logged', function () {
@@ -125,21 +122,17 @@ test('biography edition is logged', function () {
 
     expect(Activity::count())->toBe($count + 2); // biography edition and user creation
 
-    $log = latestLog();
-
-    expect($log->log_name)->toBe('people');
-    expect($log->description)->toBe('updated-biography');
-    expect($log->subject())->toBeModel($this->person);
+    expect($log = latestLog())
+        ->log_name->toBe('people')
+        ->description->toBe('updated-biography')
+        ->subject->toBeModel($this->person);
 
     expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
-    expect($log->properties)->toHaveCount(2);
-
-    expect($log->properties['old'])->toBeString();
-    expect($log->properties['new'])->toBeString();
-
-    expect($log->properties['old'])->toBe($this->oldBiography);
-    expect($log->properties['new'])->toBe($this->newBiography);
+    expect($log->properties->all())->toBe([
+        'new' => $this->newBiography,
+        'old' => $this->oldBiography,
+    ]);
 });
 
 test('biography deletion is logged', function () {
@@ -156,18 +149,15 @@ test('biography deletion is logged', function () {
 
     expect(Activity::count())->toBe($count + 2); // biography deletion and user creation
 
-    $log = latestLog();
-
-    expect($log->log_name)->toBe('people');
-    expect($log->description)->toBe('deleted-biography');
-    expect($log->subject())->toBeModel($this->person);
+    expect($log = latestLog())
+        ->log_name->toBe('people')
+        ->description->toBe('deleted-biography')
+        ->subject->toBeModel($this->person);
 
     expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
-    expect($log->properties)->toHaveCount(2);
-
-    expect($log->properties['old'])->toBeString();
-    expect($log->properties['new'])->toBeNull();
-
-    expect($log->properties['old'])->toBe($this->oldBiography);
+    expect($log->properties->all())->toBe([
+        'new' => null,
+        'old' => $this->oldBiography,
+    ]);
 });

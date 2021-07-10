@@ -51,17 +51,14 @@ test('users with permissions to view history are redirected to marriage history'
 test('marriage deletion is logged', function () {
     $this->marriage->delete();
 
-    $log = latestLog();
-
-    expect($log->log_name)->toBe('marriages');
-    expect($log->description)->toBe('deleted');
-    expect($log->subject())->toBeModel($this->marriage);
+    expect($log = latestLog())
+        ->log_name->toBe('marriages')
+        ->description->toBe('deleted')
+        ->subject->toBeModel($this->marriage);
 
     expect((string) $log->created_at)->toBe((string) $this->marriage->deleted_at);
 
-    expect($log->properties['attributes']['deleted_at'])
-        ->toBe($this->marriage->deleted_at->toJson());
-
-    expect($log->properties)->toHaveCount(1);
-    expect($log->properties['attributes'])->toHaveCount(1);
+    expect($log->properties->all())->toBe([
+        'attributes' => ['deleted_at' => $this->marriage->deleted_at->toJson()]
+    ]);
 });

@@ -171,11 +171,10 @@ test('person edition is logged', function () {
 
     $this->person->refresh();
 
-    $log = latestLog();
-
-    expect($log->log_name)->toBe('people');
-    expect($log->description)->toBe('updated');
-    expect($log->subject())->toBeModel($this->person);
+    expect($log = latestLog())
+        ->log_name->toBe('people')
+        ->description->toBe('updated')
+        ->subject->toBeModel($this->person);
 
     $oldToCheck = Arr::except($this->oldAttributes, [
         'dead', 'death_cause', 'sources', ...$this->dates,
@@ -195,27 +194,16 @@ test('person edition is logged', function () {
         // 'Failed asserting that attribute '.$key.' has the same value in log.'
     }
 
-    expect($log->properties['old'])->not->toHaveKey('dead');
-    expect($log->properties['attributes'])->not->toHaveKey('dead');
+    expect($log->properties['old'])
+        ->not->toHaveKeys(['dead', 'death_cause', 'created_at', 'updated_at']);
 
-    expect($log->properties['old'])->not->toHaveKey('death_cause');
-    expect($log->properties['attributes'])->not->toHaveKey('death_cause');
-
-    expect($log->properties['old'])->not->toHaveKey('created_at');
-    expect($log->properties['attributes'])->not->toHaveKey('created_at');
+    expect($log->properties['attributes'])
+        ->not->toHaveKeys(['dead', 'death_cause', 'created_at', 'updated_at']);
 
     expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
-    expect($log->properties['old'])->not->toHaveKey('updated_at');
-    expect($log->properties['attributes'])->not->toHaveKey('updated_at');
-
-    expect($log->properties['old']['sources'])->toHaveCount(2);
-    expect($log->properties['attributes']['sources'])->toHaveCount(2);
-
-    expect($log->properties['old']['sources'])
-        ->toBe($this->oldAttributes['sources']);
-    expect($log->properties['attributes']['sources'])
-        ->toBe($this->newAttributes['sources']);
+    expect($log->properties['old']['sources'])->toBe($this->oldAttributes['sources']);
+    expect($log->properties['attributes']['sources'])->toBe($this->newAttributes['sources']);
 
     foreach ($this->dates as $date) {
         expect($log->properties['old'][$date])->toBe($this->oldAttributes[$date]);

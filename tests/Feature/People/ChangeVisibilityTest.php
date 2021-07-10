@@ -58,18 +58,15 @@ test('visibility change is logged', function () {
 
     expect(Activity::count())->toBe($count + 2); // visibility change and user creation
 
-    $log = latestLog();
-
-    expect($log->log_name)->toBe('people');
-    expect($log->description)->toBe('changed-visibility');
-    expect($log->subject())->toBeModel($this->person);
+    expect($log = latestLog())
+        ->log_name->toBe('people')
+        ->description->toBe('changed-visibility')
+        ->subject->toBeModel($this->person);
 
     expect((string) $log->created_at)->toBe((string) $this->person->fresh()->updated_at);
 
-    expect($log->properties)->toHaveCount(2);
-    expect($log->properties['old'])->toHaveCount(1);
-    expect($log->properties['attributes'])->toHaveCount(1);
-
-    expect($log->properties['old']['visibility'])->toBeFalse();
-    expect($log->properties['attributes']['visibility'])->toBeTrue();
+    expect($log->properties->all())->toBe([
+        'old' => ['visibility' => false],
+        'attributes' => ['visibility' => true],
+    ]);
 });

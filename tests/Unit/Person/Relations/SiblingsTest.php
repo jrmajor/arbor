@@ -25,16 +25,18 @@ it('can get siblings and half siblings', function () {
         ->withoutParents()
         ->create(['father_id' => $father]);
 
-    expect($person->siblings)->toHaveCount(2);
-    expect($person->siblings_mother)->toHaveCount(3);
-    expect($person->siblings_father)->toHaveCount(4);
+    expect($person)
+        ->siblings->toHaveCount(2)
+        ->siblings_mother->toHaveCount(3)
+        ->siblings_father->toHaveCount(4);
 
     $person->mother_id = null;
     tap($person)->save()->refresh();
 
-    expect($person->siblings)->toBeEmpty();
-    expect($person->siblings_mother)->toBeEmpty();
-    expect($person->siblings_father)->toHaveCount(6);
+    expect($person)
+        ->siblings->toBeEmpty()
+        ->siblings_mother->toBeEmpty()
+        ->siblings_father->toHaveCount(6);
 });
 
 it('can eagerly get siblings and half siblings', function () {
@@ -85,29 +87,34 @@ it('can eagerly get siblings and half siblings', function () {
     $people = Person::whereIn('id', [$firstPerson->id, $secondPerson->id])
         ->with('siblings', 'siblings_mother', 'siblings_father')->get();
 
-    expect($people[0]->siblings)->toHaveCount(2);
-    expect($people[0]->siblings_mother)->toHaveCount(3);
-    expect($people[0]->siblings_father)->toHaveCount(4);
+    expect($people[0])
+        ->siblings->toHaveCount(2)
+        ->siblings_mother->toHaveCount(3)
+        ->siblings_father->toHaveCount(4);
 
-    expect($people[1]->siblings)->toHaveCount(3);
-    expect($people[1]->siblings_mother)->toHaveCount(5);
-    expect($people[1]->siblings_father)->toHaveCount(6);
+    expect($people[1])
+        ->siblings->toHaveCount(3)
+        ->siblings_mother->toHaveCount(5)
+        ->siblings_father->toHaveCount(6);
 
-    $firstPerson->mother_id = null;
-    $firstPerson->save();
+    $firstPerson->update(['mother_id' => null]);
 
-    $secondPerson->mother_id = null;
-    $secondPerson->father_id = null;
-    $secondPerson->save();
+    $secondPerson->update([
+        'mother_id' => null,
+        'father_id' => null,
+    ]);
 
-    $people = Person::whereIn('id', [$firstPerson->id, $secondPerson->id])
+    $people = Person::query()
+        ->whereIn('id', [$firstPerson->id, $secondPerson->id])
         ->with('siblings')->get();
 
-    expect($people[0]->siblings)->toBeEmpty();
-    expect($people[0]->siblings_mother)->toBeEmpty();
-    expect($people[0]->siblings_father)->toHaveCount(6);
+    expect($people[0])
+        ->siblings->toBeEmpty()
+        ->siblings_mother->toBeEmpty()
+        ->siblings_father->toHaveCount(6);
 
-    expect($people[1]->siblings)->toBeEmpty();
-    expect($people[1]->siblings_mother)->toBeEmpty();
-    expect($people[1]->siblings_father)->toBeEmpty();
+    expect($people[1])
+        ->siblings->toBeEmpty()
+        ->siblings_mother->toBeEmpty()
+        ->siblings_father->toBeEmpty();
 });

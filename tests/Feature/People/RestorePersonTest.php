@@ -46,14 +46,12 @@ test('person can be restored only when deleted', function () {
 test('person restoration is logged', function () {
     $this->person->restore();
 
-    $log = latestLog();
+    expect($log = latestLog())
+        ->log_name->toBe('people')
+        ->description->toBe('restored')
+        ->subject->toBeModel($this->person);
 
-    expect($log->log_name)->toBe('people');
-    expect($log->description)->toBe('restored');
-    expect($log->subject())->toBeModel($this->person);
-
-    expect($log->properties['attributes']['deleted_at'])->toBeNull();
-
-    expect($log->properties)->toHaveCount(1);
-    expect($log->properties['attributes'])->toHaveCount(1);
+    expect($log->properties->all())->toBe([
+        'attributes' => ['deleted_at' => null],
+    ]);
 });

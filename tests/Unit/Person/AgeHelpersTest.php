@@ -44,12 +44,14 @@ it('can calculate age with incomplete birth date', function () {
 
     $sameMonth = carbon(2006, 4, 16);
 
-    expect($withoutDay->age($differentMonth, true))->toBe(39);
-    expect($withoutDay->age($differentMonth))->toBe(39);
-    expect($withoutDay->age($sameMonth, true))->toBe(28); // 27-28
-    expect($withoutDay->age($sameMonth))->toBe('27-28');
-    expect($withoutMonth->age($differentMonth, true))->toBe(35); // 34-35
-    expect($withoutMonth->age($differentMonth))->toBe('34-35');
+    expect($withoutDay)
+        ->age($differentMonth, true)->toBe(39)
+        ->age($differentMonth)->toBe(39)
+        ->age($sameMonth, true)->toBe(28) // 27-28
+        ->age($sameMonth)->toBe('27-28');
+    expect($withoutMonth)
+        ->age($differentMonth, true)->toBe(35) // 34-35
+        ->age($differentMonth)->toBe('34-35');
 });
 
 it('can calculate age with incomplete at date', function () {
@@ -64,12 +66,13 @@ it('can calculate age with incomplete at date', function () {
 
     $withoutMonth = [carbon(2016, 01, 01), carbon(2016, 12, 31)];
 
-    expect($person->age($withoutDay, true))->toBe(38);
-    expect($person->age($withoutDay))->toBe(38);
-    expect($person->age($withoutDaySameMonth, true))->toBe(40); // 39-40
-    expect($person->age($withoutDaySameMonth))->toBe('39-40');
-    expect($person->age($withoutMonth, true))->toBe(41); // 40-41
-    expect($person->age($withoutMonth))->toBe('40-41');
+    expect($person)
+        ->age($withoutDay, true)->toBe(38)
+        ->age($withoutDay)->toBe(38)
+        ->age($withoutDaySameMonth, true)->toBe(40) // 39-40
+        ->age($withoutDaySameMonth)->toBe('39-40')
+        ->age($withoutMonth, true)->toBe(41) // 40-41
+        ->age($withoutMonth)->toBe('40-41');
 });
 
 it('can calculate age with incomplete dates', function () {

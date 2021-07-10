@@ -156,9 +156,10 @@ test('marriage edition is logged', function () {
 
     $log = latestLog();
 
-    expect($log->log_name)->toBe('marriages');
-    expect($log->description)->toBe('updated');
-    expect($log->subject())->toBeModel($this->marriage);
+    expect($log)
+        ->log_name->toBe('marriages')
+        ->description->toBe('updated')
+        ->subject->toBeModel($this->marriage);
 
     $oldToCheck = Arr::except($this->oldAttributes, $this->dates);
 
@@ -174,18 +175,13 @@ test('marriage edition is logged', function () {
         // 'Failed asserting that attribute '.$key.' has the same value in log.'
     }
 
-    expect($log->properties['old'])->not->toHaveKey('created_at');
-    expect($log->properties['attributes'])->not->toHaveKey('created_at');
+    expect($log->properties['old'])->not->toHaveKeys(['created_at', 'updated_at']);
+    expect($log->properties['attributes'])->not->toHaveKeys(['created_at', 'updated_at']);
 
     expect((string) $log->created_at)->toBe((string) $this->marriage->updated_at);
 
-    expect($log->properties['old'])->not->toHaveKey('updated_at');
-    expect($log->properties['attributes'])->not->toHaveKey('updated_at');
-
     foreach ($this->dates as $date) {
-        expect($log->properties['old'][$date])
-            ->toBe($this->oldAttributes[$date]);
-        expect($log->properties['attributes'][$date])
-            ->toBe($this->newAttributes[$date]);
+        expect($log->properties['old'][$date])->toBe($this->oldAttributes[$date]);
+        expect($log->properties['attributes'][$date])->toBe($this->newAttributes[$date]);
     }
 });
