@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use Illuminate\Auth\SessionGuard;
 use Illuminate\Http\Request;
 
 use function App\Services\flash;
