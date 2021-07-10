@@ -12,11 +12,4 @@ class DropDivorceCauseColumn extends Migration
             $table->dropColumn('end_cause');
         });
     }
-
-    public function down()
-    {
-        Schema::table('marriages', function (Blueprint $table) {
-            $table->string('end_cause', 100)->nullable()->after('divorced');
-        });
-    }
 }

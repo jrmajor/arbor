@@ -32,9 +32,4 @@ class CreateMarriagesTable extends Migration
             $table->index(['woman_id', 'man_id'], 'pair');
         });
     }
-
-    public function down()
-    {
-        Schema::dropIfExists('marriages');
-    }
 }

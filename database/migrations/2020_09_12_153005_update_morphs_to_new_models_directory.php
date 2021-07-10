@@ -23,23 +23,4 @@ class UpdateMorphsToNewModelsDirectory extends Migration
             ->where('subject_type', 'App\\Marriage')
             ->update(['subject_type' => 'App\\Models\\Marriage']);
     }
-
-    public function down()
-    {
-        DB::table('activity_log')
-            ->where('causer_type', 'App\\Models\\User')
-            ->update(['causer_type' => 'App\\User']);
-
-        DB::table('activity_log')
-            ->where('subject_type', 'App\\Models\\User')
-            ->update(['subject_type' => 'App\\User']);
-
-        DB::table('activity_log')
-            ->where('subject_type', 'App\\Models\\Person')
-            ->update(['subject_type' => 'App\\Person']);
-
-        DB::table('activity_log')
-            ->where('subject_type', 'App\\Models\\Marriage')
-            ->update(['subject_type' => 'App\\Marriage']);
-    }
 }

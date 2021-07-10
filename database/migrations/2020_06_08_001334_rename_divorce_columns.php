@@ -18,15 +18,4 @@ class RenameDivorceColumns extends Migration
             $table->string('divorce_place', 100)->nullable()->after('divorce_date_to');
         });
     }
-
-    public function down()
-    {
-        Schema::table('marriages', function (Blueprint $table) {
-            $table->renameColumn('divorced', 'ended');
-            $table->renameColumn('divorce_date_from', 'end_date_from');
-            $table->renameColumn('divorce_date_to', 'end_date_to');
-
-            $table->dropColumn('divorce_place');
-        });
-    }
 }

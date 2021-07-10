@@ -28,20 +28,4 @@ class AddDateTuples extends Migration
             $table->date('end_date_to')->after('end_date_from')->nullable();
         });
     }
-
-    public function down()
-    {
-        Schema::table('people', function (Blueprint $table) {
-            $table->dropColumn(['birth_date_from', 'birth_date_to']);
-            $table->dropColumn(['death_date_from', 'death_date_to']);
-            $table->dropColumn(['funeral_date_from', 'funeral_date_to']);
-            $table->dropColumn(['burial_date_from', 'burial_date_to']);
-        });
-
-        Schema::table('marriages', function (Blueprint $table) {
-            $table->dropColumn(['first_event_date_from', 'first_event_date_to']);
-            $table->dropColumn(['second_event_date_from', 'second_event_date_to']);
-            $table->dropColumn(['end_date_from', 'end_date_to']);
-        });
-    }
 }

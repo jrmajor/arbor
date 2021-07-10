@@ -44,9 +44,4 @@ class CreatePeopleTable extends Migration
             $table->index('father_id');
         });
     }
-
-    public function down()
-    {
-        Schema::dropIfExists('people');
-    }
 }

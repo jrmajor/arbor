@@ -12,11 +12,4 @@ class AddSourcesField extends Migration
             $table->json('sources')->nullable()->after('burial_place');
         });
     }
-
-    public function down()
-    {
-        Schema::table('people', function (Blueprint $table) {
-            $table->dropColumn('sources');
-        });
-    }
 }

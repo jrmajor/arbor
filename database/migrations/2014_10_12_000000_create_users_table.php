@@ -21,9 +21,4 @@ class CreateUsersTable extends Migration
             $table->index('email');
         });
     }
-
-    public function down()
-    {
-        Schema::dropIfExists('users');
-    }
 }

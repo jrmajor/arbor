@@ -12,9 +12,4 @@ class ChangeColumnTypeFromIntToBool extends Migration
             $table->boolean('visibility')->default(false)->change();
         });
     }
-
-    public function down()
-    {
-        // this migration cannot be rolled back
-    }
 }

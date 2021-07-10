@@ -12,11 +12,4 @@ class AddBiographyToPeopleTable extends Migration
             $table->string('biography', 10000)->nullable()->after('burial_place');
         });
     }
-
-    public function down()
-    {
-        Schema::table('people', function (Blueprint $table) {
-            $table->dropColumn('biography');
-        });
-    }
 }

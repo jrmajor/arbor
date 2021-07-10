@@ -12,11 +12,4 @@ class AddUsersSoftDeletes extends Migration
             $table->softDeletes();
         });
     }
-
-    public function down()
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('deleted_at');
-        });
-    }
 }

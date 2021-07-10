@@ -24,9 +24,4 @@ class CreateActivityLogTable extends Migration
             $table->index(['causer_id', 'causer_type'], 'causer');
         });
     }
-
-    public function down()
-    {
-        Schema::dropIfExists('activity_log');
-    }
 }

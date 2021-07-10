@@ -21,20 +21,4 @@ class RemoveUnusedDateColumns extends Migration
             $table->dropColumn('end_date');
         });
     }
-
-    public function down()
-    {
-        Schema::table('people', function (Blueprint $table) {
-            $table->string('birth_date', 10)->nullable();
-            $table->string('death_date', 10)->nullable();
-            $table->string('funeral_date', 10)->nullable();
-            $table->string('burial_date', 10)->nullable();
-        });
-
-        Schema::table('marriages', function (Blueprint $table) {
-            $table->string('first_event_date', 10)->nullable();
-            $table->string('second_event_date', 10)->nullable();
-            $table->string('end_date', 10)->nullable();
-        });
-    }
 }
