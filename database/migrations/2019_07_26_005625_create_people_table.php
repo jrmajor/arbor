@@ -9,7 +9,7 @@ class CreatePeopleTable extends Migration
     public function up()
     {
         Schema::create('people', function (Blueprint $table) {
-            $table->id('id');
+            $table->id();
             $table->string('id_wielcy', 20)->nullable();
             $table->unsignedMediumInteger('id_pytlewski')->nullable();
 
