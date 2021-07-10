@@ -19,13 +19,15 @@ it('logs user logins events', function () {
 
     $log = latestLog();
 
-    expect($log->log_name)->toBe('logins');
-    expect($log->description)->toBe('logged-in');
-    expect($log->causer())->toBeModel($user);
-    expect($log->subject)->toBeNull();
+    expect($log)
+        ->log_name->toBe('logins')
+        ->description->toBe('logged-in')
+        ->causer->toBeModel($user)
+        ->subject->toBeNull();
 
-    expect($log->properties)->toHaveCount(3);
-    expect($log->properties['platform'])->toBe('OS X');
-    expect($log->properties['browser'])->toBe('Chrome');
-    expect($log->properties['device'])->toBe('desktop');
+    expect($log->properties->all())->toBe([
+        'device' => 'desktop',
+        'browser' => 'Chrome',
+        'platform' => 'OS X',
+    ]);
 });
