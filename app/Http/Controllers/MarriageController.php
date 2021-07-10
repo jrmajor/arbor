@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMarriage;
+use App\Models\Activity;
 use App\Models\Marriage;
 use App\Models\Person;
 use Illuminate\Http\Request;
@@ -87,7 +88,7 @@ class MarriageController extends Controller
 
         $activities = $marriage->activities
             ->reverse()
-            ->map(fn ($activity) => [
+            ->map(fn (Activity $activity) => [
                 'model' => $activity,
                 'causer' => $activity->causer,
                 'description' => $activity->description,

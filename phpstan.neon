@@ -9,12 +9,17 @@ parameters:
         - app/Providers/MacrosServiceProvider.php
     ignoreErrors:
         - '#^Call to an undefined method Faker\\Generator::\w+\(\)\.$#'
+        - '#^Call to an undefined method Faker\\UniqueGenerator::\w*\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Factories\\Factory::(divorced|woman|man)\(\)\.$#'
+        - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'
         - '#^Result of function \w+ \(void\) is used\.$#'
         - '#^Result of method \w+(\\\w+)*::\w+\(\) \(void\) is used\.$#'
         - '#^Using nullsafe property access on non-nullable type mixed\. Use -> instead\.$#'
+        -
+            message: '#^Match expression does not handle remaining value: string$#'
+            path: app/Models/Relations/HalfSiblings.php
+            count: 1
 
 includes:
-    - phpstan-baseline.neon
     - vendor/nunomaduro/larastan/extension.neon

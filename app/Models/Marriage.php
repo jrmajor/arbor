@@ -6,6 +6,7 @@ use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
 use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +20,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read string $second_event_date
  * @property-read ?int $first_event_year
  * @property-read ?int $second_event_year
+ * @property-read EloquentCollection<Activity> $activities
  */
 class Marriage extends Model
 {

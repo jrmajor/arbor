@@ -31,14 +31,14 @@ it('doesnt accept invalid email', function () {
         ->call('saveEmail')
         ->assertHasErrors(['email' => 'email'])
 
-    ->set('email', faker()->safeEmail)
+    ->set('email', faker()->safeEmail())
         ->call('saveEmail')
         ->assertHasNoErrors('email');
 });
 
 it('can change email', function () {
     $user = User::factory()->create();
-    $newEmail = faker()->safeEmail;
+    $newEmail = faker()->safeEmail();
 
     actingAs($user)
         ->livewire(Settings::class)
