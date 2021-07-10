@@ -1,20 +1,19 @@
 <?php
 
 use App\Models\Person;
-use Illuminate\Support\Collection;
 
 it('casts sources to collection', function () {
     $sources = Person::factory()->create([
         'sources' => null,
     ])->sources;
 
-    expect($sources)->toBeInstanceOf(Collection::class)->toBeEmpty();
+    expect($sources)->toBeCollection()->toBeEmpty();
 
     $sources = Person::factory()->create([
         'sources' => [],
     ])->sources;
 
-    expect($sources)->toBeInstanceOf(Collection::class)->toBeEmpty();
+    expect($sources)->toBeCollection()->toBeEmpty();
 
     $sources = Person::factory()->create([
         'sources' => [
@@ -23,7 +22,7 @@ it('casts sources to collection', function () {
         ],
     ])->sources;
 
-    expect($sources)->toBeInstanceOf(Collection::class)->toHaveCount(2);
+    expect($sources)->toBeCollection()->toHaveCount(2);
 });
 
 test('sources are sanitized', function () {
