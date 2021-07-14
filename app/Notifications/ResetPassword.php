@@ -25,7 +25,7 @@ class ResetPassword extends Notification
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
 
-        return new class ($notifiable->email, $url) extends Mailable {
+        return new class($notifiable->email, $url) extends Mailable {
             use Queueable;
 
             public function __construct(
