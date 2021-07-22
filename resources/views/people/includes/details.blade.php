@@ -2,7 +2,14 @@
   <dl>
 
     {{-- pytlewski --}}
-    @if ($pytlewski = $person->pytlewski)
+    @if ($person->pytlewski_id && ! $person->pytlewski)
+      <dt>{!! __('people.pytlewski.id') !!}&nbsp;</dt>
+      <dd>
+        <a href="{{ $pytlewski->url }}" target="_blank" class="a">
+          {{ $pytlewski->id}}
+        </a>
+      </dd>
+    @elseif ($pytlewski = $person->pytlewski)
       <dt>{!! __('people.pytlewski.id') !!}&nbsp;</dt>
       <dd x-data="{ open: false }">
         <a href="{{ $pytlewski->url }}" target="_blank" class="a">
