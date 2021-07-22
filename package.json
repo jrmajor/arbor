@@ -20,7 +20,7 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.3",
-        "eslint": "^7.30",
+        "eslint": "^7.31",
         "eslint-config-spatie": "^2.0",
         "laravel-mix": "^6.0",
         "laravel-mix-bundle-analyzer": "^1.0",
