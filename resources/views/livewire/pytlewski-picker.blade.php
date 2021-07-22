@@ -7,8 +7,7 @@
       type="text" class="form-input rounded-r-none w-1/4 md:w-3/8 z-10 @error('id_pytlewski') invalid @enderror"
       id="id_pytlewski" name="id_pytlewski"
       autocomplete="off"
-      wire:model="pytlewskiId"
-      wire:keyup="search">
+      wire:model="pytlewskiId">
     <input
       type="text" class="form-input rounded-l-none -ml-px w-3/4 md:w-5/8"
       wire:model="result"

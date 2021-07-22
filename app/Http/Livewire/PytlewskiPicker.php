@@ -7,9 +7,9 @@ use Livewire\Component;
 
 class PytlewskiPicker extends Component
 {
-    public $pytlewskiId;
+    public string $pytlewskiId;
 
-    public $result;
+    public string $result = '';
 
     public function search(): string
     {
@@ -17,7 +17,7 @@ class PytlewskiPicker extends Component
             return '←';
         }
 
-        $pytlewski = new Pytlewski($this->pytlewskiId);
+        $pytlewski = new Pytlewski((int) $this->pytlewskiId);
 
         if (! $pytlewski->name && ! $pytlewski->family_name && ! $pytlewski->last_name) {
             return __('people.pytlewski.not_found');
@@ -25,18 +25,25 @@ class PytlewskiPicker extends Component
 
         $result = $pytlewski->name . ' ';
 
-        $result .= $pytlewski->middle_name
-            ? $pytlewski->middle_name . ' ' : '';
+        if ($pytlewski->middle_name) {
+            $result .= $pytlewski->middle_name . ' ';
+        }
 
-        return $result . $pytlewski->last_name
-            ? "{$pytlewski->last_name} ({$pytlewski->family_name})"
-            : $pytlewski->family_name;
+        return $pytlewski->last_name
+            ? $result . "{$pytlewski->last_name} ({$pytlewski->family_name})"
+            : $result . $pytlewski->family_name;
     }
 
-    public function mount($person)
+    // @todo Narrow $id type hint to int|null after a Livewire bug is fixed.
+    public function mount(mixed $id)
     {
-        $this->pytlewskiId = old('id_pytlewski', $person->id_pytlewski);
+        $this->pytlewskiId = (string) $id;
 
+        $this->result = $this->search();
+    }
+
+    public function updatedPytlewskiId(): void
+    {
         $this->result = $this->search();
     }
 

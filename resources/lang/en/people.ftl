@@ -59,10 +59,6 @@ pytlewski =
     .children = Children
     .siblings = Siblings
     .not_found = not found
-    # .guess = Guess
-    # .names = Names
-    # .birth = Birth
-    # .death = Death
 wielcy =
     .id = ID in <a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
     .as = as

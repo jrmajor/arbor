@@ -147,7 +147,7 @@
         </div>
 
         <div class="w-full md:w-1/2">
-          <livewire:pytlewski-picker :person="$person">
+          <livewire:pytlewski-picker :id="old('id_pytlewski', $person->id_pytlewski)">
         </div>
       </div>
     </fieldset>
