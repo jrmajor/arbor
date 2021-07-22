@@ -12,8 +12,8 @@ dataset('pytlewscy', function () {
     ] as $id => $name) {
         yield $name => [
             $id,
-            file_get_contents(__DIR__ . "/pytlewscy/{$id}.html"),
-            require __DIR__ . "/pytlewscy/{$id}.php",
+            file_get_contents(__DIR__ . "/Pytlewscy/{$id}.html"),
+            require __DIR__ . "/Pytlewscy/{$id}.php",
         ];
     }
 });
