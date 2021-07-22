@@ -17,9 +17,9 @@ class PytlewskiPicker extends Component
             return '←';
         }
 
-        $pytlewski = new Pytlewski((int) $this->pytlewskiId);
+        $pytlewski = Pytlewski::find((int) $this->pytlewskiId);
 
-        if (! $pytlewski->name && ! $pytlewski->family_name && ! $pytlewski->last_name) {
+        if (! $pytlewski) {
             return __('people.pytlewski.not_found');
         }
 

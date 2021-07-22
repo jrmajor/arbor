@@ -115,7 +115,7 @@ class Person extends Model
         }
 
         if (! $this->pytlewski) {
-            $this->pytlewski = new Pytlewski($this->id_pytlewski);
+            $this->pytlewski = Pytlewski::find($this->id_pytlewski);
         }
 
         return $this->pytlewski;

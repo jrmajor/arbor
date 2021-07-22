@@ -13,7 +13,7 @@ it('can load relations', function (string $id, string $source, array $attributes
         Pytlewski::url($id) => Http::response($source),
     ]);
 
-    $pytlewski = new Pytlewski($id);
+    $pytlewski = Pytlewski::find($id);
 
     (int) $id === 704
         ? test704($pytlewski)

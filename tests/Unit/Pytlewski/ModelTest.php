@@ -13,11 +13,25 @@ it('can make proper url')
 it('requests source from pytlewski.pl', function () {
     Http::fake();
 
-    new Pytlewski(556);
+    Pytlewski::find(556);
 
     Http::assertSent(
         fn ($request) => $request->url() === 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
     );
+});
+
+it("returns null when it can't scrape received response", function () {
+    Http::fake();
+
+    expect(Pytlewski::find(556))->toBeNull();
+});
+
+it('returns null when receives error response', function () {
+    Http::fake([
+        Pytlewski::url(556) => Http::response(status: 404),
+    ]);
+
+    expect(Pytlewski::find(556))->toBeNull();
 });
 
 it('caches parsed attributes from pytlewski.pl', function () {
@@ -28,7 +42,7 @@ it('caches parsed attributes from pytlewski.pl', function () {
         ->with('pytlewski.556', CarbonInterval::class, Closure::class)
         ->andReturn([]);
 
-    new Pytlewski(556);
+    Pytlewski::find(556);
 
     Http::assertSentCount(0);
 });
@@ -38,7 +52,7 @@ it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
         Pytlewski::url($id) => Http::response($source),
     ]);
 
-    $pytlewski = new Pytlewski($id);
+    $pytlewski = Pytlewski::find($id);
 
     $keysToCheck = [
         'family_name', 'last_name', 'name', 'middle_name',
@@ -52,9 +66,9 @@ it('properly scrapes pytlewski.pl', function ($id, $source, $attributes) {
 })->with('pytlewscy');
 
 it('throws an exception when a key does not exist', function () {
-    Cache::shouldReceive('remember')->andReturn([]);
+    Cache::shouldReceive('remember')->andReturn(require __DIR__ . '/../../Datasets/Pytlewscy/556.php');
 
-    $pytlewski = new Pytlewski(556);
+    $pytlewski = Pytlewski::find(556);
 
     $pytlewski->nonexistentKey;
 })->throws(InvalidArgumentException::class, 'Key [nonexistentKey] does not exist.');

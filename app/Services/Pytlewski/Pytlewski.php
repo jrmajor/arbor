@@ -45,7 +45,7 @@ final class Pytlewski
         'mother', 'father', 'marriages', 'children', 'siblings',
     ];
 
-    public function __construct(
+    protected function __construct(
         protected int $id,
     ) {
         $this->attributes = Cache::remember(
@@ -53,6 +53,18 @@ final class Pytlewski
             CarbonInterval::week(),
             fn (): array => $this->scrape(),
         );
+    }
+
+    public static function find(int $id): ?self
+    {
+        $pytlewski = new self($id);
+
+        return $pytlewski->exists() ? $pytlewski : null;
+    }
+
+    protected function exists(): bool
+    {
+        return $this->name || $this->family_name || $this->last_name;
     }
 
     protected function loadRelations(): void

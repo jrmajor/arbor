@@ -7,15 +7,13 @@
       <dd x-data="{ open: false }">
         <a href="{{ $pytlewski->url }}" target="_blank" class="a">
           {{ $pytlewski->id}}
-          @if ($pytlewski->name || $pytlewski->family_name || $pytlewski->last_name)
-            <small>
-              {{ __('people.pytlewski.as') }}
-              <strong>{{ $pytlewski->last_name
-                        ? $pytlewski->last_name.' ('.$pytlewski->family_name.')'
-                        : $pytlewski->family_name }}</strong>
-              {{ $pytlewski->name }} {{ $pytlewski->middle_name }}
-            </small>
-          @endif
+          <small>
+            {{ __('people.pytlewski.as') }}
+            <strong>{{ $pytlewski->last_name
+                      ? $pytlewski->last_name.' ('.$pytlewski->family_name.')'
+                      : $pytlewski->family_name }}</strong>
+            {{ $pytlewski->name }} {{ $pytlewski->middle_name }}
+          </small>
         </a>
         <button x-on:click="open = true"
           class="btn-out leading-none text-xs rounded px-2">
