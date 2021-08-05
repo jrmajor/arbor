@@ -16,7 +16,7 @@
         "jenssegers/agent": "^2.6",
         "jrmajor/laravel-fluent": "^0.1.2",
         "larabug/larabug": "^2.4",
-        "laravel/framework": "^8.51",
+        "laravel/framework": "^8.53",
         "laravel/slack-notification-channel": "^2.3",
         "laravel/telescope": "^4.6",
         "laravel/tinker": "^2.6",
@@ -24,9 +24,9 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.1",
         "livewire/livewire": "^2.5",
-        "nesbot/carbon": "^2.50",
+        "nesbot/carbon": "^2.51",
         "sammyjo20/lasso": "^1.2",
-        "spatie/laravel-activitylog": "^4.0",
+        "spatie/laravel-activitylog": "^4.1",
         "spatie/laravel-backup": "^7.6",
         "spatie/laravel-enum": "^2.5",
         "spatie/laravel-flash": "^1.8",
@@ -43,15 +43,15 @@
         "fakerphp/faker": "^1.15",
         "friendsofphp/php-cs-fixer": "^3.0",
         "jrmajor/cs": "dev-master",
-        "laravel/sail": "^1.8",
+        "laravel/sail": "^1.9",
         "mockery/mockery": "^1.4",
-        "nunomaduro/collision": "^5.5",
-        "nunomaduro/larastan": "^0.7.11",
-        "pestphp/pest": "^1.11",
+        "nunomaduro/collision": "^5.6",
+        "nunomaduro/larastan": "^0.7.12",
+        "pestphp/pest": "^1.15",
         "pestphp/pest-plugin-laravel": "^1.1",
         "pestphp/pest-plugin-livewire": "^1.0",
         "pestphp/pest-plugin-watch": "1.x-dev",
-        "phpstan/phpstan": "^0.12.93",
+        "phpstan/phpstan": "^0.12.94",
         "phpunit/phpunit": "^9.5"
     },
     "config": {
@@ -65,15 +65,15 @@
         }
     },
     "autoload": {
-        "files": [
-            "helpers.php",
-            "app/Services/helpers.php"
-        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "helpers.php",
+            "app/Services/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
