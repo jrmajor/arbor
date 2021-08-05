@@ -9544,16 +9544,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/php-cs.git",
-                "reference": "4ae274e05f13b680313a9b271e77aac3f2d7be7f"
+                "reference": "a49c8e8ad1c6ea9e729de0adfd27149c4b3e5279"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/4ae274e05f13b680313a9b271e77aac3f2d7be7f",
-                "reference": "4ae274e05f13b680313a9b271e77aac3f2d7be7f",
+                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/a49c8e8ad1c6ea9e729de0adfd27149c4b3e5279",
+                "reference": "a49c8e8ad1c6ea9e729de0adfd27149c4b3e5279",
                 "shasum": ""
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^3.0",
+                "friendsofphp/php-cs-fixer": "3.0.2",
                 "php": ">= 7.1"
             },
             "default-branch": true,
@@ -9579,7 +9579,7 @@
                 "issues": "https://github.com/jrmajor/php-cs/issues",
                 "source": "https://github.com/jrmajor/php-cs/tree/master"
             },
-            "time": "2021-07-02T00:50:21+00:00"
+            "time": "2021-08-05T13:52:53+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
