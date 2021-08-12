@@ -34,8 +34,7 @@ class PytlewskiPicker extends Component
             : $result . $pytlewski->family_name;
     }
 
-    // @todo Narrow $id type hint to int|null after https://github.com/livewire/livewire/issues/3375 is fixed.
-    public function mount(mixed $id)
+    public function mount(int|null $id)
     {
         $this->pytlewskiId = (string) $id;
 
