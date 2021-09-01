@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Marriage;
 use App\Models\Person;
-use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -42,6 +42,7 @@ function roman(int $number): string
             if ($number >= $int) {
                 $number -= $int;
                 $returnValue .= $roman;
+
                 break;
             }
         }

@@ -22,16 +22,13 @@ test('users can view settings page')
 it('doesnt accept invalid email', function () {
     withPermissions(0)
         ->livewire(Settings::class)
-
-    ->set('email', null)
+        ->set('email', null)
         ->call('saveEmail')
         ->assertHasErrors(['email' => 'required'])
-
-    ->set('email', 'abc.de')
+        ->set('email', 'abc.de')
         ->call('saveEmail')
         ->assertHasErrors(['email' => 'email'])
-
-    ->set('email', faker()->safeEmail())
+        ->set('email', faker()->safeEmail())
         ->call('saveEmail')
         ->assertHasNoErrors('email');
 });
@@ -52,20 +49,16 @@ it('can change email', function () {
 it('doesnt accept invalid password', function () {
     withPermissions(0)
         ->livewire(Settings::class)
-
-    ->set('password', null)
+        ->set('password', null)
         ->call('savePassword')
         ->assertHasErrors(['password' => 'required'])
-
-    ->set('password', '1234567')
+        ->set('password', '1234567')
         ->call('savePassword')
         ->assertHasErrors(['password' => 'min'])
-
-    ->set('password', 'Abcd1234')
+        ->set('password', 'Abcd1234')
         ->call('savePassword')
         ->assertHasErrors(['password' => 'confirmed'])
-
-    ->set('password_confirmation', 'Abcd1234')
+        ->set('password_confirmation', 'Abcd1234')
         ->call('savePassword')
         ->assertHasNoErrors('password');
 });
@@ -90,12 +83,10 @@ it('checks password when logging user out from other devices', function () {
 
     withPermissions(0)
         ->livewire(Settings::class)
-
-    ->set('logout_password', null)
+        ->set('logout_password', null)
         ->call('logoutOtherDevices')
         ->assertHasErrors('logout_password')
-
-    ->set('logout_password', 'wrong_password')
+        ->set('logout_password', 'wrong_password')
         ->call('logoutOtherDevices')
         ->assertHasErrors('logout_password');
 

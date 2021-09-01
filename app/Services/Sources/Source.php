@@ -241,7 +241,7 @@ class Source implements Jsonable
         if (preg_match('/\\bhttps?:[\\/]{2}[^\\s<]+\\b\\/*/ui', $excerpt['context'], $matches, PREG_OFFSET_CAPTURE)) {
             $url = $matches[0][0];
 
-            $inline = [
+            return [
                 'extent' => strlen($matches[0][0]),
                 'position' => $matches[0][1],
                 'element' => [
@@ -253,8 +253,6 @@ class Source implements Jsonable
                     ],
                 ],
             ];
-
-            return $inline;
         }
     }
 

@@ -8,9 +8,7 @@ return [
 
     'enable_share_button' => false,
 
-    'ignored_solution_providers' => [
-        //
-    ],
+    'ignored_solution_providers' => [],
 
     'enable_runnable_solutions' => false,
 
