@@ -4,10 +4,7 @@ namespace App\Services\Pytlewski;
 
 class Relative
 {
-    protected array $keys = [
-        'id', 'person',
-        'name', 'surname',
-    ];
+    protected array $keys = ['id', 'name', 'surname', 'person'];
 
     final public function __construct(
         protected array $attributes,
@@ -29,5 +26,7 @@ class Relative
         if (in_array($key, $this->keys)) {
             return $this->attributes[$key] ?? null;
         }
+
+        throw new InvalidArgumentException("Key [{$key}] does not exist.");
     }
 }
