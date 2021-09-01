@@ -2,6 +2,8 @@
 
 namespace App\Services\Pytlewski;
 
+use InvalidArgumentException;
+
 class Relative
 {
     protected array $keys = ['id', 'name', 'surname', 'person'];
