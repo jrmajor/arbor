@@ -11,11 +11,11 @@ use Spatie\Regex\Regex;
 
 final class Wielcy
 {
-    protected ?string $source;
+    private ?string $source;
 
-    protected array $attributes = [];
+    private array $attributes = [];
 
-    protected array $keys = ['sex', 'name'];
+    private array $keys = ['sex', 'name'];
 
     public function __construct(
         protected string $id,
@@ -25,7 +25,7 @@ final class Wielcy
         }
     }
 
-    protected function getSource()
+    private function getSource()
     {
         return $this->source = Cache::remember(
             "wielcy.{$this->id}",
@@ -48,20 +48,20 @@ final class Wielcy
         );
     }
 
-    protected function runParsers()
+    private function runParsers()
     {
         $this->parseName();
         $this->parseSex();
     }
 
-    protected function parseName()
+    private function parseName()
     {
         $matches = Regex::match("/<meta property='og:title' content='([^']*)' \\/>/", $this->source);
 
         $this->attributes['name'] = $matches->groupOr(1, '');
     }
 
-    protected function parseSex()
+    private function parseSex()
     {
         $matches = Regex::match("<img src=\"images/((?:fe)?male).png\" width=\"13\" height=\"13\"\nalt=\"M\" align=left>", $this->source);
 
