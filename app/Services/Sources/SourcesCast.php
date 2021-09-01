@@ -4,16 +4,20 @@ namespace App\Services\Sources;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\JsonEncodingException;
+use Illuminate\Support\Collection;
 
 class SourcesCast implements CastsAttributes
 {
-    public function get($model, string $key, $value, array $attributes)
+    /**
+     * @return Collection<int, Source>
+     */
+    public function get($model, string $key, $value, array $attributes): Collection
     {
         return collect($model->fromJson($value))
             ->map(fn ($raw) => Source::from($raw));
     }
 
-    public function set($model, string $key, $value, array $attributes)
+    public function set($model, string $key, $value, array $attributes): ?string
     {
         if ($value === null) {
             return null;
