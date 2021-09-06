@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
+ * @extends Relation<Person>
+ *
  * @method $this orderBy($column, $direction = 'asc')
  */
 class HalfSiblings extends Relation
@@ -33,7 +35,7 @@ class HalfSiblings extends Relation
         parent::__construct(Person::query(), $parent);
     }
 
-    public function addConstraints()
+    public function addConstraints(): void
     {
         if (static::$constraints) {
             $this->query
@@ -46,7 +48,7 @@ class HalfSiblings extends Relation
         }
     }
 
-    public function addEagerConstraints(array $people)
+    public function addEagerConstraints(array $people): void
     {
         $people = collect($people)->filter(function (Person $person) {
             return $person->{$this->sideKey};
@@ -58,19 +60,16 @@ class HalfSiblings extends Relation
         );
     }
 
-    public function initRelation(array $people, $relation)
+    public function initRelation(array $people, $relation): array
     {
         foreach ($people as $person) {
-            $person->setRelation(
-                $relation,
-                $this->related->newCollection(),
-            );
+            $person->setRelation($relation, $this->related->newCollection());
         }
 
         return $people;
     }
 
-    public function match(array $people, Collection $siblings, $relation)
+    public function match(array $people, Collection $siblings, $relation): array
     {
         if ($siblings->isEmpty()) {
             return $people;
@@ -78,9 +77,7 @@ class HalfSiblings extends Relation
 
         foreach ($people as $person) {
             if ($person->{$this->sideKey} === null) {
-                return $person->setRelation(
-                    $relation, $this->related->newCollection(),
-                );
+                return $person->setRelation($relation, $this->related->newCollection());
             }
 
             $person->setRelation(
@@ -99,7 +96,7 @@ class HalfSiblings extends Relation
         return $people;
     }
 
-    public function getResults()
+    public function getResults(): Collection
     {
         return ! is_null($this->parent->{$this->sideKey})
             ? $this->query->get()

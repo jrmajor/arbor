@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
+ * @extends Relation<Person>
+ *
  * @method $this orderBy($column, $direction = 'asc')
  */
 class Children extends Relation
@@ -19,7 +21,7 @@ class Children extends Relation
         parent::__construct(Person::query(), $parent);
     }
 
-    public function addConstraints()
+    public function addConstraints(): void
     {
         if (static::$constraints) {
             $this->query
@@ -28,7 +30,7 @@ class Children extends Relation
         }
     }
 
-    public function addEagerConstraints(array $people)
+    public function addEagerConstraints(array $people): void
     {
         $people = collect($people)->pluck('id');
 
@@ -37,19 +39,16 @@ class Children extends Relation
             ->orWhereIn('father_id', $people);
     }
 
-    public function initRelation(array $people, $relation)
+    public function initRelation(array $people, $relation): array
     {
         foreach ($people as $person) {
-            $person->setRelation(
-                $relation,
-                $this->related->newCollection(),
-            );
+            $person->setRelation($relation, $this->related->newCollection());
         }
 
         return $people;
     }
 
-    public function match(array $people, Collection $children, $relation)
+    public function match(array $people, Collection $children, $relation): array
     {
         if ($children->isEmpty()) {
             return $people;
@@ -68,7 +67,7 @@ class Children extends Relation
         return $people;
     }
 
-    public function getResults()
+    public function getResults(): Collection
     {
         return $this->query->get();
     }

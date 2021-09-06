@@ -11,6 +11,8 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Expression;
 
 /**
+ * @extends Relation<Person>
+ *
  * @method $this orderBy(Closure|Builder|Expression|string $column, string $direction = 'asc')
  */
 class Marriages extends Relation
@@ -23,7 +25,7 @@ class Marriages extends Relation
         parent::__construct(Marriage::query(), $parent);
     }
 
-    public function addConstraints()
+    public function addConstraints(): void
     {
         if (static::$constraints) {
             $this->query
@@ -32,7 +34,7 @@ class Marriages extends Relation
         }
     }
 
-    public function addEagerConstraints(array $people)
+    public function addEagerConstraints(array $people): void
     {
         $people = collect($people)->pluck('id');
 
@@ -41,19 +43,16 @@ class Marriages extends Relation
             ->orWhereIn('man_id', $people);
     }
 
-    public function initRelation(array $people, $relation)
+    public function initRelation(array $people, $relation): array
     {
         foreach ($people as $person) {
-            $person->setRelation(
-                $relation,
-                $this->related->newCollection(),
-            );
+            $person->setRelation($relation, $this->related->newCollection());
         }
 
         return $people;
     }
 
-    public function match(array $people, Collection $marriages, $relation)
+    public function match(array $people, Collection $marriages, $relation): array
     {
         if ($marriages->isEmpty()) {
             return $people;
@@ -72,7 +71,7 @@ class Marriages extends Relation
         return $people;
     }
 
-    public function getResults()
+    public function getResults(): Collection
     {
         return $this->query->get();
     }
