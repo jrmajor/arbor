@@ -7,7 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule->command('sitemap:generate')->weekly();
 
@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:monitor')->dailyAt('03:00');
     }
 
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');
     }

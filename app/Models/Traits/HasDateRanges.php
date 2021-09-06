@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 trait HasDateRanges
 {
-    public function initializeHasDateRanges()
+    public function initializeHasDateRanges(): void
     {
         foreach (static::$dateRanges as $dateRange) {
             if (! str_ends_with($dateRange, '_date')) {

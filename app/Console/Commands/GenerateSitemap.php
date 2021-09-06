@@ -13,7 +13,7 @@ class GenerateSitemap extends Command
 
     protected $description = 'Generate sitemap.';
 
-    public function handle()
+    public function handle(): void
     {
         $sitemap = Sitemap::create()
             ->add(Url::create('/')->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY))

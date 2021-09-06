@@ -11,7 +11,7 @@ class StorePerson extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'id_wielcy' => 'string|max:20|nullable',

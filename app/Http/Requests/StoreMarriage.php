@@ -13,7 +13,7 @@ class StoreMarriage extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'woman_id' => 'required|integer|exists:people,id',

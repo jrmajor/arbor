@@ -13,7 +13,7 @@ class EstimatorInfo extends Command
 
     protected $description = 'Get statistics about people age estimation quality.';
 
-    public function handle()
+    public function handle(): void
     {
         $initialLazyLoadingMode = Model::preventsLazyLoading();
 

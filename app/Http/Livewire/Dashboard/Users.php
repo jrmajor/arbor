@@ -3,12 +3,13 @@
 namespace App\Http\Livewire\Dashboard;
 
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Users extends Component
 {
-    public function render()
+    public function render(): View
     {
         if (! Auth::user()->isSuperAdmin()) {
             abort(403);

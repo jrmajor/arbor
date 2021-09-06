@@ -9,7 +9,7 @@ use TypeError;
 
 class LogLoginEvent
 {
-    public function handle(Login $event)
+    public function handle(Login $event): void
     {
         if (! $event->user instanceof User) {
             throw new TypeError('$event->user should be instance of App\\Models\\User.');

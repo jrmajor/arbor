@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Services\Pytlewski\Pytlewski;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class PytlewskiPicker extends Component
@@ -34,7 +35,7 @@ class PytlewskiPicker extends Component
             : $result . $pytlewski->family_name;
     }
 
-    public function mount(int|null $id)
+    public function mount(int|null $id): void
     {
         $this->pytlewskiId = (string) $id;
 
@@ -46,7 +47,7 @@ class PytlewskiPicker extends Component
         $this->result = $this->search();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.pytlewski-picker');
     }

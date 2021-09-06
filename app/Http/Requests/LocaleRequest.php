@@ -11,7 +11,7 @@ class LocaleRequest extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         $supportedLocales = implode(',', config('app.available_locales'));
 

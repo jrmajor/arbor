@@ -11,7 +11,7 @@ class StoreBiography extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return ['biography' => ['string', 'max:10000', 'nullable']];
     }

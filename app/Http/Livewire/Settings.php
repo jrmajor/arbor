@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -18,7 +19,7 @@ class Settings extends Component
 
     public $logout_password;
 
-    public function saveEmail()
+    public function saveEmail(): void
     {
         $this->validate(['email' => 'required|email']);
 
@@ -27,7 +28,7 @@ class Settings extends Component
             : flash('error', 'misc.an_unknown_error_occurred');
     }
 
-    public function savePassword()
+    public function savePassword(): void
     {
         $this->validate(['password' => 'required|string|min:8|confirmed']);
 
@@ -41,7 +42,7 @@ class Settings extends Component
         ]);
     }
 
-    public function logoutOtherDevices()
+    public function logoutOtherDevices(): void
     {
         $this->validate(['logout_password' => 'required']);
 
@@ -58,12 +59,12 @@ class Settings extends Component
         $this->logout_password = null;
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->email = Auth::user()->email;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.settings', [
             'user' => Auth::user(),

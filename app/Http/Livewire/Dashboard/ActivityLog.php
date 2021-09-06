@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Activity;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +12,7 @@ class ActivityLog extends Component
 {
     use WithPagination;
 
-    public function render()
+    public function render(): View
     {
         if (! Auth::user()->isSuperAdmin()) {
             abort(403);

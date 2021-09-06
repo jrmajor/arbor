@@ -16,7 +16,7 @@ class LoginRequest extends FormRequest
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'username' => 'required|string',
@@ -24,14 +24,17 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    public function credentials()
+    /**
+     * @return array<string, string>
+     */
+    public function credentials(): array
     {
         $field = str_contains($this->username, '@') ? 'email' : 'username';
 
         return [$field => $this->username] + $this->only('password');
     }
 
-    public function authenticate()
+    public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
 
@@ -46,7 +49,7 @@ class LoginRequest extends FormRequest
         RateLimiter::clear($this->throttleKey());
     }
 
-    public function ensureIsNotRateLimited()
+    public function ensureIsNotRateLimited(): void
     {
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
@@ -61,7 +64,7 @@ class LoginRequest extends FormRequest
         ]);
     }
 
-    public function throttleKey()
+    public function throttleKey(): string
     {
         return Str::lower($this->input('username')) . '|' . $this->ip();
     }
