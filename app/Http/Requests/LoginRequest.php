@@ -11,11 +11,6 @@ use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -67,5 +62,10 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::lower($this->input('username')) . '|' . $this->ip();
+    }
+
+    public function authorize(): bool
+    {
+        return true;
     }
 }

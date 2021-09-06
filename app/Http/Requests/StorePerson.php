@@ -6,11 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StorePerson extends FormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -83,5 +78,10 @@ class StorePerson extends FormRequest
             'sources' => 'array|nullable',
             'sources.*' => 'string|max:256|nullable',
         ];
+    }
+
+    public function authorize(): bool
+    {
+        return true;
     }
 }

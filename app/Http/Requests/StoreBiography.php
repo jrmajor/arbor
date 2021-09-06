@@ -6,11 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreBiography extends FormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return ['biography' => ['string', 'max:10000', 'nullable']];
@@ -19,5 +14,10 @@ class StoreBiography extends FormRequest
     public function biography(): ?string
     {
         return $this->validated()['biography'];
+    }
+
+    public function authorize(): bool
+    {
+        return true;
     }
 }

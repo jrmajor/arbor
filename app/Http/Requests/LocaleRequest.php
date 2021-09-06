@@ -6,11 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LocaleRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         $supportedLocales = implode(',', config('app.available_locales'));
@@ -21,5 +16,10 @@ class LocaleRequest extends FormRequest
     public function locale(): string
     {
         return $this->validated()['language'];
+    }
+
+    public function authorize(): bool
+    {
+        return true;
     }
 }

@@ -8,11 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreMarriage extends FormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -64,5 +59,10 @@ class StoreMarriage extends FormRequest
             ],
             'divorce_place' => 'string|max:100|nullable',
         ];
+    }
+
+    public function authorize(): bool
+    {
+        return true;
     }
 }
