@@ -8,6 +8,7 @@ parameters:
     excludePaths:
         - app/Providers/MacrosServiceProvider.php
     ignoreErrors:
+        - '#^Access to an undefined property .*|Illuminate\\Database\\Eloquent\\Model::\$id\.$#'
         - '#^Call to an undefined method Faker\\Generator::\w+\(\)\.$#'
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'
