@@ -24,7 +24,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.1",
         "livewire/livewire": "^2.5",
-        "nesbot/carbon": "^2.52",
+        "nesbot/carbon": "^2.53",
         "sammyjo20/lasso": "^1.2",
         "spatie/laravel-activitylog": "^4.1",
         "spatie/laravel-backup": "^7.6",
@@ -40,7 +40,7 @@
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.12",
-        "fakerphp/faker": "^1.15",
+        "fakerphp/faker": "^1.16",
         "friendsofphp/php-cs-fixer": "^3.1",
         "jrmajor/cs": "^0.2.2",
         "laravel/sail": "^1.10",
@@ -51,7 +51,7 @@
         "pestphp/pest-plugin-laravel": "^1.1",
         "pestphp/pest-plugin-livewire": "^1.0",
         "pestphp/pest-plugin-watch": "1.x-dev",
-        "phpstan/phpstan": "^0.12.94",
+        "phpstan/phpstan": "^0.12.98",
         "phpunit/phpunit": "^9.5"
     },
     "config": {
@@ -67,7 +67,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
+            "Database\\rctories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
