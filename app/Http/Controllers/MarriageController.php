@@ -87,6 +87,7 @@ class MarriageController extends Controller
         $this->authorize('viewHistory', $marriage);
 
         $activities = $marriage->activities
+            ->load('causer')
             ->reverse()
             ->map(fn (Activity $activity) => [
                 'model' => $activity,
