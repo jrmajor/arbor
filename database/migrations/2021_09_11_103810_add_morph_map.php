@@ -8,9 +8,9 @@ class AddMorphMap extends Migration
     public function up(): void
     {
         foreach ([
-             'App\Models\Marriage' => 'marriage',
-             'App\Models\Person' => 'person',
-             'App\Models\User' => 'user',
+            'App\\Models\\Marriage' => 'marriage',
+            'App\\Models\\Person' => 'person',
+            'App\\Models\\User' => 'user',
         ] as $class => $name) {
             DB::table('activity_log')
                 ->where('subject_type', $class)
