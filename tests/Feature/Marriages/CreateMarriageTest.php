@@ -112,8 +112,8 @@ test('user can pass spouse to form by get request parameters', function () {
     withPermissions(2)
         ->get("marriages/create?woman={$woman->id}&man={$man->id}")
         ->assertStatus(200)
-        ->assertSee($woman->id)
-        ->assertSee($man->id);
+        ->assertSee((string) $woman->id)
+        ->assertSee((string) $man->id);
 });
 
 test('data is validated using appropriate form request')

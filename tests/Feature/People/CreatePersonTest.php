@@ -121,8 +121,8 @@ test('you can pass parents ids to form by get request parameters', function () {
     withPermissions(2)
         ->get("people/create?mother={$mother->id}&father={$father->id}")
         ->assertStatus(200)
-        ->assertSee($mother->id)
-        ->assertSee($father->id);
+        ->assertSee((string) $mother->id)
+        ->assertSee((string) $father->id);
 });
 
 test('data is validated using appropriate form request')

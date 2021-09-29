@@ -6,11 +6,14 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
+/**
+ * @extends Factory<User>
+ */
 class UserFactory extends Factory
 {
     protected $model = User::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'username' => $this->faker->username(),

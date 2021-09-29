@@ -70,5 +70,6 @@ it('throws an exception when a key does not exist', function () {
 
     $pytlewski = Pytlewski::find(556);
 
+    /** @phpstan-ignore-next-line */
     $pytlewski->nonexistentKey;
 })->throws(InvalidArgumentException::class, 'Key [nonexistentKey] does not exist.');

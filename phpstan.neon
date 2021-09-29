@@ -3,18 +3,29 @@ parameters:
     paths:
         - app
         - config
-        - database/factories
-        - database/seeders
+        - database
+        - routes
+        - tests
     excludePaths:
         - app/Providers/MacrosServiceProvider.php
+    scanFiles:
+        - tests/Helpers.php
     ignoreErrors:
         - '#^Access to an undefined property .*|Illuminate\\Database\\Eloquent\\Model::\$id\.$#'
         - '#^Call to an undefined method Faker\\Generator::\w+\(\)\.$#'
+        - '#^Call to an undefined method Illuminate\\Foundation\\Testing\\TestCase::livewire\(\)\.$#'
+        - '#^Call to an undefined method Pest\\Expectation\|Pest\\Support\\Extendable::(age|canRead|toBeCollection|toBeModel)\(\)\.$#'
+        - '#^Call to an undefined method Pest\\PendingObjects\\TestCall::(get|post|withPermissions)\(\)\.$#'
+        - '#^Call to an undefined method Tests\\TestCase::livewire\(\)\.$#'
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
+        - '#^Parameter \#1 \$value of function Pest\\Laravel\\travel expects int, string given\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'
         - '#^Result of function \w+ \(void\) is used\.$#'
         - '#^Result of method \w+(\\\w+)*::\w+\(\) \(void\) is used\.$#'
         - '#^Using nullsafe property access on non-nullable type mixed\. Use -> instead\.$#'
+        -
+            message: '#^Undefined variable: \$this$#'
+            path: tests/
         -
             message: '#^Match expression does not handle remaining value: string$#'
             path: app/Models/Relations/HalfSiblings.php

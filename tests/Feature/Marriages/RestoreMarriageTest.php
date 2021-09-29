@@ -7,7 +7,7 @@ use function Tests\latestLog;
 use function Tests\withPermissions;
 
 beforeEach(function () {
-    $this->marriage = tap(Marriage::factory()->create())->delete();
+    $this->marriage = Marriage::factory()->create(['deleted_at' => now()]);
 });
 
 test('guests cannot restore marriage', function () {

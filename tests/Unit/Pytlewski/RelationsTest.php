@@ -8,14 +8,14 @@ use App\Services\Pytlewski\Pytlewski;
 use App\Services\Pytlewski\Relative;
 use Illuminate\Support\Facades\Http;
 
-it('can load relations', function (string $id, string $source, array $attributes) {
+it('can load relations', function (int $id, string $source, array $attributes) {
     Http::fake([
         Pytlewski::url($id) => Http::response($source),
     ]);
 
     $pytlewski = Pytlewski::find($id);
 
-    (int) $id === 704
+    $id === 704
         ? test704($pytlewski)
         : testOther($pytlewski, $attributes);
 })->with('pytlewscy');

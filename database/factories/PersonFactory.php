@@ -6,11 +6,14 @@ use App\Models\Person;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<Person>
+ */
 final class PersonFactory extends Factory
 {
     protected $model = Person::class;
 
-    public function definition()
+    public function definition(): array
     {
         $sex = $this->faker->boolean() ? 'female' : 'male';
         $dead = $this->faker->boolean();

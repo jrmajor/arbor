@@ -7,7 +7,7 @@ use function Tests\latestLog;
 use function Tests\withPermissions;
 
 beforeEach(function () {
-    $this->person = tap(Person::factory()->create())->delete();
+    $this->person = Person::factory()->create(['deleted_at' => now()]);
 });
 
 test('guests cannot restore person', function () {

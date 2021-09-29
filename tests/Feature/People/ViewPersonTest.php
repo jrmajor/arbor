@@ -82,23 +82,23 @@ test('user with insufficient persmissions see 404 when attemting to view nonexis
     ->get('people/1')
     ->assertStatus(404);
 
-test('guest see 404 when attemting to view deleted person', function () {
-    $person = tap(Person::factory()->create())->delete();
+test('guest see 404 when attempting to view deleted person', function () {
+    $person = Person::factory()->create(['deleted_at' => now()]);
 
     get("people/{$person->id}")
         ->assertStatus(404);
 });
 
-test('users without persmissions see 404 when attemting to view deleted person', function () {
-    $person = tap(Person::factory()->create())->delete();
+test('users without permissions see 404 when attempting to view deleted person', function () {
+    $person = Person::factory()->create(['deleted_at' => now()]);
 
     withPermissions(2)
         ->get("people/{$person->id}")
         ->assertStatus(404);
 });
 
-test('user with persmissions are redirected to edits history when attempting to view deleted person', function () {
-    $person = tap(Person::factory()->create())->delete();
+test('user with permissions are redirected to edits history when attempting to view deleted person', function () {
+    $person = Person::factory()->create(['deleted_at' => now()]);
 
     withPermissions(3)
         ->get("people/{$person->id}")

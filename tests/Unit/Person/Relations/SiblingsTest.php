@@ -9,6 +9,8 @@ it('can get siblings and half siblings', function () {
         'father_id' => $father = Person::factory()->man()->create(),
     ]);
 
+    assert($person instanceof Person);
+
     Person::factory()
         ->withParents()
         ->create(['mother_id' => $mother]);

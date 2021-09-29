@@ -7,11 +7,14 @@ use App\Models\Person;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<Marriage>
+ */
 class MarriageFactory extends Factory
 {
     protected $model = Marriage::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'woman_id' => Person::factory()->woman()->create()->id,
