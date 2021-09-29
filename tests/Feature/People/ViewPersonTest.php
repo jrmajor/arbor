@@ -37,7 +37,7 @@ test('guest can see visible dead person', function () {
         ->assertStatus(200);
 });
 
-test('user with persmissions can see hidden alive person', function () {
+test('user with permissions can see hidden alive person', function () {
     $person = Person::factory()->alive()->create();
 
     withPermissions(1)
@@ -45,7 +45,7 @@ test('user with persmissions can see hidden alive person', function () {
         ->assertStatus(200);
 });
 
-test('user with persmissions can see hidden dead person', function () {
+test('user with permissions can see hidden dead person', function () {
     $person = Person::factory()->dead()->create();
 
     withPermissions(1)
@@ -53,7 +53,7 @@ test('user with persmissions can see hidden dead person', function () {
         ->assertStatus(200);
 });
 
-test('user with persmissions can see visible alive person', function () {
+test('user with permissions can see visible alive person', function () {
     $person = Person::factory()->alive()->create([
         'visibility' => true,
     ]);
@@ -63,7 +63,7 @@ test('user with persmissions can see visible alive person', function () {
         ->assertStatus(200);
 });
 
-test('user with persmissions can see visible dead person', function () {
+test('user with permissions can see visible dead person', function () {
     $person = Person::factory()->dead()->create([
         'visibility' => true,
     ]);
@@ -73,11 +73,11 @@ test('user with persmissions can see visible dead person', function () {
         ->assertStatus(200);
 });
 
-test('guest see 404 when attemting to view nonexistent person')
+test('guest see 404 when attempting to view nonexistent person')
     ->get('people/1')
     ->assertStatus(404);
 
-test('user with insufficient persmissions see 404 when attemting to view nonexistent person')
+test('user with insufficient permissions see 404 when attempting to view nonexistent person')
     ->withPermissions(1)
     ->get('people/1')
     ->assertStatus(404);
