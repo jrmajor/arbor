@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Faker\Generator as Faker;
+use Faker\Provider\Internet as InternetFaker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -12,6 +14,9 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     protected $model = User::class;
+
+    /** @var Faker|InternetFaker */
+    protected $faker;
 
     public function definition(): array
     {

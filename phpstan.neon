@@ -12,7 +12,6 @@ parameters:
         - tests/Helpers.php
     ignoreErrors:
         - '#^Access to an undefined property .*|Illuminate\\Database\\Eloquent\\Model::\$id\.$#'
-        - '#^Call to an undefined method Faker\\Generator::\w+\(\)\.$#'
         - '#^Call to an undefined method Illuminate\\Foundation\\Testing\\TestCase::livewire\(\)\.$#'
         - '#^Call to an undefined method Pest\\Expectation\|Pest\\Support\\Extendable::(age|canRead|toBeCollection|toBeModel)\(\)\.$#'
         - '#^Call to an undefined method Pest\\PendingObjects\\TestCall::(get|post|withPermissions)\(\)\.$#'
