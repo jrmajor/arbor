@@ -1,12 +1,18 @@
+@php
+
+use App\Services\Pytlewski\Pytlewski;
+
+@endphp
+
 <div class="p-6 bg-white rounded-lg shadow">
   <dl>
 
     {{-- pytlewski --}}
-    @if ($person->pytlewski_id && ! $person->pytlewski)
+    @if ($person->id_pytlewski && ! $person->pytlewski)
       <dt>{!! __('people.pytlewski.id') !!}&nbsp;</dt>
       <dd>
-        <a href="{{ $pytlewski->url }}" target="_blank" class="a">
-          {{ $pytlewski->id}}
+        <a href="{{ Pytlewski::url($person->id_pytlewski) }}" target="_blank" class="a">
+          {{ $person->id_pytlewski }}
         </a>
       </dd>
     @elseif ($pytlewski = $person->pytlewski)
