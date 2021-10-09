@@ -11,7 +11,7 @@ parameters:
     scanFiles:
         - tests/Helpers.php
     ignoreErrors:
-        - '#^Access to an undefined property .*|Illuminate\\Database\\Eloquent\\Model::\$id\.$#'
+        - '#^Access to an undefined property Pest\\Expectation(\|Pest\\Support\\Extendable)?::\$\w+\.$#'
         - '#^Call to an undefined method Illuminate\\Foundation\\Testing\\TestCase::livewire\(\)\.$#'
         - '#^Call to an undefined method Pest\\Expectation\|Pest\\Support\\Extendable::(age|canRead|toBeCollection|toBeModel)\(\)\.$#'
         - '#^Call to an undefined method Pest\\PendingObjects\\TestCall::(get|post|withPermissions)\(\)\.$#'
