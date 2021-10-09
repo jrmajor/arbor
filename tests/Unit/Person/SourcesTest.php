@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Person;
+use App\Services\Sources\Source;
+use Illuminate\Support\Collection;
 
 it('casts sources to collection', function () {
     $sources = Person::factory()->create([
@@ -38,9 +40,10 @@ test('sources are sanitized', function () {
         'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
     ];
 
-    expect(
-        Person::factory()
-            ->create(['sources' => $raw])
-            ->sources->map->raw()->all(),
-    )->toBe($sanitized);
+    /** @var Collection<Source> $sources */
+    $sources = Person::factory()->create(['sources' => $raw])->sources;
+
+    $sources = $sources->map(fn (Source $s) => $s->raw())->all();
+
+    expect($sources)->toBe($sanitized);
 });
