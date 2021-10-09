@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27dbabc2069325b2762190de631d0ccb",
+    "content-hash": "b1398ae46bf71f860b9e6963f04431b6",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5420,16 +5420,16 @@
         },
         {
             "name": "spatie/regex",
-            "version": "2.0.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/regex.git",
-                "reference": "6671b64ff0aaae5fbe98bb292eec93a8cd6281d3"
+                "reference": "6b61be6a5deb09b20a8d8d02a92d4a18abdcefe3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/regex/zipball/6671b64ff0aaae5fbe98bb292eec93a8cd6281d3",
-                "reference": "6671b64ff0aaae5fbe98bb292eec93a8cd6281d3",
+                "url": "https://api.github.com/repos/spatie/regex/zipball/6b61be6a5deb09b20a8d8d02a92d4a18abdcefe3",
+                "reference": "6b61be6a5deb09b20a8d8d02a92d4a18abdcefe3",
                 "shasum": ""
             },
             "require": {
@@ -5467,7 +5467,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/regex/issues",
-                "source": "https://github.com/spatie/regex/tree/2.0.1"
+                "source": "https://github.com/spatie/regex/tree/3.0.0"
             },
             "funding": [
                 {
@@ -5479,7 +5479,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-20T08:33:46+00:00"
+            "time": "2021-10-06T13:55:05+00:00"
         },
         {
             "name": "spatie/robots-txt",

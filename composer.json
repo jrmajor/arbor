@@ -30,7 +30,7 @@
         "spatie/laravel-enum": "^2.5",
         "spatie/laravel-flash": "^1.8",
         "spatie/laravel-sitemap": "^6.0",
-        "spatie/regex": "^2.0",
+        "spatie/regex": "^3.0",
         "symfony/css-selector": "^5.3",
         "symfony/dom-crawler": "^5.3",
         "tightenco/ziggy": "^1.4"
