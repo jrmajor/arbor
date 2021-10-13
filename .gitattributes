@@ -1,2 +1,2 @@
 * text=auto
-/public/vendor/** linguist-vendored
+/tests/Datasets/Pytlewscy/*.html linguist-vendored
