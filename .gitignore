@@ -1,3 +1,4 @@
+/.phpunit.cache
 /node_modules
 /public/hot
 /public/storage
@@ -6,7 +7,6 @@
 .env
 .env.backup
 .php-cs-fixer.cache
-.phpunit.result.cache
 Homestead.json
 Homestead.yaml
 docker-compose.override.yml
