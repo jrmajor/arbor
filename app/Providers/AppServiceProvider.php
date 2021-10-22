@@ -10,7 +10,7 @@ use Spatie\Flash\Flash;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         Model::preventLazyLoading(! app()->isProduction());
 

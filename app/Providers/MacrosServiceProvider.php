@@ -11,7 +11,7 @@ use Illuminate\Support\ServiceProvider;
 
 class MacrosServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->registerCarbonMacros();
         $this->registerTrimArrayMacro();
@@ -21,7 +21,7 @@ class MacrosServiceProvider extends ServiceProvider
         });
     }
 
-    public function registerCarbonMacros()
+    public function registerCarbonMacros(): void
     {
         Carbon::macro('formatPeriodTo', static function (Carbon $to): string {
             /** @var CarbonImmutable $from */
@@ -52,7 +52,7 @@ class MacrosServiceProvider extends ServiceProvider
         });
     }
 
-    public function registerTrimArrayMacro()
+    public function registerTrimArrayMacro(): void
     {
         Arr::macro('trim', function (array|Collection $array): array|Collection {
             foreach ($array as $key => $value) {

@@ -14,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
         Login::class => [LogLoginEvent::class],
     ];
 
-    public function boot()
+    public function boot(): void
     {
         Person::observe(PersonObserver::class);
     }
