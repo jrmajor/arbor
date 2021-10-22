@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class DashboardController extends Controller
         });
     }
 
-    public function reports()
+    public function reports(): View
     {
         $shouldBeDead = Person::where('dead', false)
             ->where(function (Builder $q) {

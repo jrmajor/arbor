@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Symfony\Component\HttpFoundation\Response;
 
 use function App\Services\flash;
 
 class PasswordResetLinkController extends Controller
 {
-    public function create()
+    public function create(): View
     {
         return view('auth.forgot-password');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): Response
     {
         $request->validate(['email' => 'required|email']);
 

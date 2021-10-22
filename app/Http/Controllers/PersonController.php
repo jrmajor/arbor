@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePerson;
 use App\Models\Activity;
 use App\Models\Person;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 use function App\Services\flash;
 use function App\Services\formatBiography;
 
 class PersonController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $this->authorize('viewAny', Person::class);
 
@@ -23,7 +25,7 @@ class PersonController extends Controller
     /**
      * @param 'f'|'l' $type
      */
-    public function letter(string $type, string $letter)
+    public function letter(string $type, string $letter): View
     {
         $this->authorize('viewAny', Person::class);
 
@@ -47,7 +49,7 @@ class PersonController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $this->authorize('create', Person::class);
 
@@ -59,7 +61,7 @@ class PersonController extends Controller
         return view('people.create', ['person' => $person]);
     }
 
-    public function store(StorePerson $request)
+    public function store(StorePerson $request): Response
     {
         $this->authorize('create', Person::class);
 
@@ -72,7 +74,7 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function show(Person $person)
+    public function show(Person $person): View|Response
     {
         if ($person->trashed()) {
             return Auth::user()?->canViewHistory()
@@ -88,14 +90,14 @@ class PersonController extends Controller
         ]);
     }
 
-    public function edit(Person $person)
+    public function edit(Person $person): View
     {
         $this->authorize('update', $person);
 
         return view('people.edit', ['person' => $person]);
     }
 
-    public function update(StorePerson $request, Person $person)
+    public function update(StorePerson $request, Person $person): Response
     {
         $this->authorize('update', $person);
 
@@ -106,7 +108,7 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function changeVisibility(Request $request, Person $person)
+    public function changeVisibility(Request $request, Person $person): Response
     {
         $this->authorize('changeVisibility', $person);
 
@@ -121,7 +123,7 @@ class PersonController extends Controller
         return back();
     }
 
-    public function destroy(Person $person)
+    public function destroy(Person $person): Response
     {
         $this->authorize('delete', $person);
 
@@ -146,7 +148,7 @@ class PersonController extends Controller
             : redirect()->route('people.index');
     }
 
-    public function restore(Person $person)
+    public function restore(Person $person): Response
     {
         $this->authorize('restore', $person);
 
@@ -157,7 +159,7 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function history(Person $person)
+    public function history(Person $person): View
     {
         $this->authorize('viewHistory', $person);
 

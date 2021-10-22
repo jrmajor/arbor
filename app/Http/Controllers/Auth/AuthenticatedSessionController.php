@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use function App\Services\flash;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function create()
+    public function create(): View
     {
         if (! session()->has('url.intended')) {
             session()->put('url.intended', url()->previous());
@@ -19,7 +21,7 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request): Response
     {
         $request->authenticate();
 
@@ -28,7 +30,7 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('people.index');
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request): Response
     {
         auth()->guard('web')->logoutCurrentDevice();
 

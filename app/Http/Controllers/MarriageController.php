@@ -6,14 +6,16 @@ use App\Http\Requests\StoreMarriage;
 use App\Models\Activity;
 use App\Models\Marriage;
 use App\Models\Person;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 use function App\Services\flash;
 
 class MarriageController extends Controller
 {
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $this->authorize('create', Marriage::class);
 
@@ -27,7 +29,7 @@ class MarriageController extends Controller
         return view('marriages.create', ['marriage' => $marriage]);
     }
 
-    public function store(StoreMarriage $request)
+    public function store(StoreMarriage $request): Response
     {
         $this->authorize('create', Marriage::class);
 
@@ -40,14 +42,14 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
-    public function edit(Marriage $marriage)
+    public function edit(Marriage $marriage): View
     {
         $this->authorize('update', $marriage);
 
         return view('marriages.edit', ['marriage' => $marriage]);
     }
 
-    public function update(StoreMarriage $request, Marriage $marriage)
+    public function update(StoreMarriage $request, Marriage $marriage): Response
     {
         $this->authorize('update', $marriage);
 
@@ -58,7 +60,7 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
-    public function destroy(Marriage $marriage)
+    public function destroy(Marriage $marriage): Response
     {
         $this->authorize('delete', $marriage);
 
@@ -71,7 +73,7 @@ class MarriageController extends Controller
             : redirect()->route('people.show', $marriage->woman);
     }
 
-    public function restore(Marriage $marriage)
+    public function restore(Marriage $marriage): Response
     {
         $this->authorize('restore', $marriage);
 
@@ -82,7 +84,7 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
-    public function history(Marriage $marriage)
+    public function history(Marriage $marriage): View
     {
         $this->authorize('viewHistory', $marriage);
 
