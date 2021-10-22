@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class AddDateTuples extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('people', function (Blueprint $table) {
             $table->date('birth_date_from')->after('birth_date')->nullable();

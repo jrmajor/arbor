@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePeopleTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('people', function (Blueprint $table) {
             $table->id();

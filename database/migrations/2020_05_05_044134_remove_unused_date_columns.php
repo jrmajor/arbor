@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class RemoveUnusedDateColumns extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('people', function (Blueprint $table) {
             $table->dropColumn(['birth_date', 'death_date', 'funeral_date', 'burial_date']);

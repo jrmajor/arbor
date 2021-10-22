@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class ChangeColumnTypeFromIntToBool extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('people', function (Blueprint $table) {
             $table->boolean('visibility')->default(false)->change();

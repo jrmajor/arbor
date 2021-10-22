@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class AddBatchUuidColumnToActivityLogTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('activity_log', function (Blueprint $table) {
             $table->uuid('batch_uuid')->nullable()->after('properties');

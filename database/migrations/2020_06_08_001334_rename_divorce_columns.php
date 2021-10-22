@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class RenameDivorceColumns extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('marriages', function (Blueprint $table) {
             $table->renameColumn('ended', 'divorced');

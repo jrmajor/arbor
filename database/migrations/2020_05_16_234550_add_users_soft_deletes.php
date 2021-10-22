@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class AddUsersSoftDeletes extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
             $table->softDeletes();

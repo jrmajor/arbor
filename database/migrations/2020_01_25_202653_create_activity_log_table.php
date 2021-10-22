@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateActivityLogTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('activity_log', function (Blueprint $table) {
             $table->id();

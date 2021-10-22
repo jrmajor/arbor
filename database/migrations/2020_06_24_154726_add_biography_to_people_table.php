@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class AddBiographyToPeopleTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('people', function (Blueprint $table) {
             $table->string('biography', 10000)->nullable()->after('burial_place');

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class AddEventColumnToActivityLogTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('activity_log', function (Blueprint $table) {
             $table->string('event')->nullable()->after('subject_type');

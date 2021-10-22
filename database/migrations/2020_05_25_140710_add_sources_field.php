@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class AddSourcesField extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::table('people', function (Blueprint $table) {
             $table->json('sources')->nullable()->after('burial_place');

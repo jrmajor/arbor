@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMarriagesTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('marriages', function (Blueprint $table) {
             $table->bigIncrements('id');

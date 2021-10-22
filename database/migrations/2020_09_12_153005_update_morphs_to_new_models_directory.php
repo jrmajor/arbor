@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class UpdateMorphsToNewModelsDirectory extends Migration
 {
-    public function up()
+    public function up(): void
     {
         DB::table('activity_log')
             ->where('causer_type', 'App\\User')
