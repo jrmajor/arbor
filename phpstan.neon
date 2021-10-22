@@ -19,7 +19,6 @@ parameters:
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
         - '#^Parameter \#1 \$value of function Pest\\Laravel\\travel expects int, string given\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'
-        - '#^Result of method \w+(\\\w+)*::\w+\(\) \(void\) is used\.$#'
         - '#^Using nullsafe property access on non-nullable type mixed\. Use -> instead\.$#'
         -
             message: '#^Undefined variable: \$this$#'

@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
         $seeders = (new Finder())->files()->in(__DIR__ . '/sql');
 
         if (! $seeders->hasResults()) {
-            return $this->command->line('<comment>Found no raw sql seeders.</comment>');
+            $this->command->line('<comment>Found no raw sql seeders.</comment>');
+
+            return;
         }
 
         foreach ($seeders as $seed) {
