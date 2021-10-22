@@ -39,10 +39,7 @@ class ResetPassword extends Notification
             {
                 return $this
                     ->subject(__('passwords.password_reset'))
-                    ->text(
-                        'emails.reset-password',
-                        ['url' => $this->url],
-                    );
+                    ->text('emails.reset-password', ['url' => $this->url]);
             }
         };
     }
