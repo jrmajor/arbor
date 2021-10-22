@@ -45,7 +45,7 @@ class PersonController extends Controller
         return view('people.index', [
             'list' => $list,
             'activeLetter' => $letter,
-            'activeType' => mb_strtolower($type),
+            'activeType' => $type,
         ]);
     }
 
