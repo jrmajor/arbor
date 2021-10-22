@@ -11,13 +11,13 @@ use function App\Services\flash;
 
 class Settings extends Component
 {
-    public $email;
+    public string $email;
 
-    public $password;
+    public string $password = '';
 
-    public $password_confirmation;
+    public string $password_confirmation = '';
 
-    public $logout_password;
+    public string $logout_password = '';
 
     public function saveEmail(): void
     {
@@ -37,8 +37,8 @@ class Settings extends Component
             : flash('error', 'misc.an_unknown_error_occurred');
 
         $this->fill([
-            'password' => null,
-            'password_confirmation' => null,
+            'password' => '',
+            'password_confirmation' => '',
         ]);
     }
 
@@ -56,7 +56,7 @@ class Settings extends Component
             ? flash('success', 'settings.alerts.logged_out')
             : flash('error', 'misc.an_unknown_error_occurred');
 
-        $this->logout_password = null;
+        $this->logout_password = '';
     }
 
     public function mount(): void

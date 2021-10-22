@@ -22,7 +22,7 @@ test('users can view settings page')
 it('doesnt accept invalid email', function () {
     withPermissions(0)
         ->livewire(Settings::class)
-        ->set('email', null)
+        ->set('email', '')
         ->call('saveEmail')
         ->assertHasErrors(['email' => 'required'])
         ->set('email', 'abc.de')
@@ -49,7 +49,7 @@ it('can change email', function () {
 it('doesnt accept invalid password', function () {
     withPermissions(0)
         ->livewire(Settings::class)
-        ->set('password', null)
+        ->set('password', '')
         ->call('savePassword')
         ->assertHasErrors(['password' => 'required'])
         ->set('password', '1234567')
@@ -83,7 +83,7 @@ it('checks password when logging user out from other devices', function () {
 
     withPermissions(0)
         ->livewire(Settings::class)
-        ->set('logout_password', null)
+        ->set('logout_password', '')
         ->call('logoutOtherDevices')
         ->assertHasErrors('logout_password')
         ->set('logout_password', 'wrong_password')
