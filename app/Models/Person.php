@@ -60,7 +60,7 @@ class Person extends Model
         'visibility' => 'boolean',
     ];
 
-    protected static $dateRanges = [
+    protected static array $dateRanges = [
         'birth_date',
         'death_date',
         'funeral_date',

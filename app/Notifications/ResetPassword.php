@@ -35,7 +35,7 @@ class ResetPassword extends Notification
                 $this->to($to);
             }
 
-            public function build()
+            public function build(): static
             {
                 return $this
                     ->subject(__('passwords.password_reset'))

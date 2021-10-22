@@ -28,7 +28,7 @@ class ActivityLog extends Component
         ])->extends('layouts.app');
     }
 
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'components.pagination-links';
     }

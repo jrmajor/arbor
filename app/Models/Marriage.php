@@ -39,7 +39,7 @@ class Marriage extends Model
         'second_event_type' => MarriageEventTypeEnum::class . ':nullable',
     ];
 
-    protected static $dateRanges = [
+    protected static array $dateRanges = [
         'first_event_date',
         'second_event_date',
         'divorce_date',

@@ -7,32 +7,32 @@ use Illuminate\Support\Facades\Cache;
 
 class PersonObserver
 {
-    public function created(Person $person)
+    public function created(Person $person): void
     {
         $this->clearLettersCache();
     }
 
-    public function updated(Person $person)
+    public function updated(Person $person): void
     {
         $this->clearLettersCache();
     }
 
-    public function deleted(Person $person)
+    public function deleted(Person $person): void
     {
         $this->clearLettersCache();
     }
 
-    public function restored(Person $person)
+    public function restored(Person $person): void
     {
         $this->clearLettersCache();
     }
 
-    public function forceDeleted(Person $person)
+    public function forceDeleted(Person $person): void
     {
         $this->clearLettersCache();
     }
 
-    protected function clearLettersCache()
+    protected function clearLettersCache(): void
     {
         Cache::forget('letters_family');
         Cache::forget('letters_last');

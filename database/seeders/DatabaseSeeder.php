@@ -8,14 +8,14 @@ use Symfony\Component\Finder\Finder;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         // $this->call(UserSeeder::class);
 
         $this->callSqlSeeders();
     }
 
-    private function callSqlSeeders()
+    private function callSqlSeeders(): void
     {
         $seeders = (new Finder())->files()->in(__DIR__ . '/sql');
 

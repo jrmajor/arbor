@@ -3,8 +3,10 @@
 namespace App\View\Components;
 
 use App\Models\Person;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
+use stdClass;
 
 class Letters extends Component
 {
@@ -13,18 +15,18 @@ class Letters extends Component
         public ?string $activeType,
     ) { }
 
-    public function letters($type): Collection
+    public function letters(string $type): Collection
     {
         return Person::letters($type);
     }
 
-    public function isActive($letter, $type): bool
+    public function isActive(stdClass $letter, string $type): bool
     {
         return $letter->letter === $this->activeLetter
             && $type === $this->activeType;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('components.letters');
     }

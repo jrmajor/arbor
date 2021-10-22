@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         DB::table('users')->insert([
             'username' => 'maksiuP',

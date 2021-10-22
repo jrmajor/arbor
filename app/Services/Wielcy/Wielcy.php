@@ -25,7 +25,7 @@ final class Wielcy
         }
     }
 
-    private function getSource()
+    private function getSource(): ?string
     {
         return $this->source = Cache::remember(
             "wielcy.{$this->id}",
@@ -48,20 +48,20 @@ final class Wielcy
         );
     }
 
-    private function runParsers()
+    private function runParsers(): void
     {
         $this->parseName();
         $this->parseSex();
     }
 
-    private function parseName()
+    private function parseName(): void
     {
         $matches = Regex::match("/<meta property='og:title' content='([^']*)' \\/>/", $this->source);
 
         $this->attributes['name'] = $matches->groupOr(1, '');
     }
 
-    private function parseSex()
+    private function parseSex(): void
     {
         $matches = Regex::match("<img src=\"images/((?:fe)?male).png\" width=\"13\" height=\"13\"\nalt=\"M\" align=left>", $this->source);
 
