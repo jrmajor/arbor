@@ -15,11 +15,17 @@ class Letters extends Component
         public ?string $activeType,
     ) { }
 
+    /**
+     * @param 'family'|'last' $type
+     */
     public function letters(string $type): Collection
     {
         return Person::letters($type);
     }
 
+    /**
+     * @param 'f'|'l' $type
+     */
     public function isActive(stdClass $letter, string $type): bool
     {
         return $letter->letter === $this->activeLetter

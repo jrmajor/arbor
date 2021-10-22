@@ -22,6 +22,9 @@ abstract class TestCase extends BaseTestCase
         return $this->actingAs($user);
     }
 
+    /**
+     * @param array{class-string, string}&callable $action
+     */
     public function assertActionUsesFormRequest(array $action, string $formRequest): void
     {
         [$controller, $method] = $action;

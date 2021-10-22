@@ -28,6 +28,9 @@ class ActivityLog extends Component
         ])->extends('layouts.app');
     }
 
+    /**
+     * @phpstan-return view-string
+     */
     public function paginationView(): string
     {
         return 'components.pagination-links';

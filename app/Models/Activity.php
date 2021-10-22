@@ -52,6 +52,9 @@ class Activity extends Model implements ActivityContract
         return $this->changes();
     }
 
+    /**
+     * @param string|array ...$logNames
+     */
     public function scopeInLog(Builder $query, ...$logNames): Builder
     {
         if (is_array($logNames[0])) {
