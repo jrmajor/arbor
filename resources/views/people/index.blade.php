@@ -8,7 +8,8 @@
 
     <x-letters
       :activeLetter="$activeLetter ?? null"
-      :activeType="$activeType ?? null"/>
+      :activeType="$activeType ?? null"
+    />
 
     <hr class="-mx-6 my-5 border-t-2 border-dashed">
 
