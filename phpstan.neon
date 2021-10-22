@@ -1,5 +1,5 @@
 parameters:
-    level: 5
+    level: 6
     paths:
         - app
         - config
@@ -8,8 +8,10 @@ parameters:
         - tests
     excludePaths:
         - app/Providers/MacrosServiceProvider.php
+        - app/Services/Sources/Source.php
     scanFiles:
         - tests/Helpers.php
+    checkMissingIterableValueType: false
     ignoreErrors:
         - '#^Access to an undefined property Pest\\Expectation(\|Pest\\Support\\Extendable)?::\$\w+\.$#'
         - '#^Call to an undefined method Illuminate\\Foundation\\Testing\\TestCase::livewire\(\)\.$#'
