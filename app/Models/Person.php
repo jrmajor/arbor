@@ -123,32 +123,27 @@ class Person extends Model
 
     public function siblings(): Siblings
     {
-        return (new Siblings($this))
-            ->orderBy('birth_date_from');
+        return new Siblings($this);
     }
 
     public function siblings_mother(): HalfSiblings
     {
-        return (new HalfSiblings($this, 'mother'))
-            ->orderBy('birth_date_from');
+        return new HalfSiblings($this, 'mother');
     }
 
     public function siblings_father(): HalfSiblings
     {
-        return (new HalfSiblings($this, 'father'))
-            ->orderBy('birth_date_from');
+        return new HalfSiblings($this, 'father');
     }
 
     public function marriages(): Marriages
     {
-        return (new Marriages($this))
-            ->orderBy($this->sex === 'xx' ? 'woman_order' : 'man_order');
+        return new Marriages($this);
     }
 
     public function children(): Children
     {
-        return (new Children($this))
-            ->orderBy('birth_date_from');
+        return new Children($this);
     }
 
     /**

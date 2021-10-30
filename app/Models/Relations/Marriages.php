@@ -4,16 +4,11 @@ namespace App\Models\Relations;
 
 use App\Models\Marriage;
 use App\Models\Person;
-use Closure;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Database\Query\Expression;
 
 /**
  * @extends Relation<Person>
- *
- * @method $this orderBy(Closure|Builder|Expression|string $column, string $direction = 'asc')
  */
 class Marriages extends Relation
 {
@@ -22,7 +17,11 @@ class Marriages extends Relation
 
     public function __construct(Person $parent)
     {
-        parent::__construct(Marriage::query(), $parent);
+        $query = Marriage::query()->orderBy(
+            $parent->sex === 'xx' ? 'woman_order' : 'man_order',
+        );
+
+        parent::__construct($query, $parent);
     }
 
     public function addConstraints(): void

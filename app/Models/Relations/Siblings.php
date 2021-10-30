@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
  * @extends Relation<Person>
- *
- * @method $this orderBy($column, $direction = 'asc')
  */
 class Siblings extends Relation
 {
@@ -18,7 +16,7 @@ class Siblings extends Relation
 
     public function __construct(Person $parent)
     {
-        parent::__construct(Person::query(), $parent);
+        parent::__construct(Person::query()->orderBy('birth_date_from'), $parent);
     }
 
     public function addConstraints(): void
