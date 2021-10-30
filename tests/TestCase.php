@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use ReflectionClass;
 use ReflectionException;
@@ -13,13 +14,13 @@ use ReflectionParameter;
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+    use LazilyRefreshDatabase;
 
     public function withPermissions(int $permissions): self
     {
-        $user = User::factory()
-            ->create(['permissions' => $permissions]);
-
-        return $this->actingAs($user);
+        return $this->actingAs(
+            User::factory()->createOne(['permissions' => $permissions]),
+        );
     }
 
     /**
