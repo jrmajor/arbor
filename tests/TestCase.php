@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Pest\Livewire\InteractsWithLivewire;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionNamedType;
@@ -14,6 +15,7 @@ use ReflectionParameter;
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+    use InteractsWithLivewire;
     use LazilyRefreshDatabase;
 
     public function withPermissions(int $permissions): self
