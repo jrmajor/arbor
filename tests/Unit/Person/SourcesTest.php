@@ -40,7 +40,7 @@ test('sources are sanitized', function () {
         'Ignacy Płażewski, *Spojrzenie w przeszłość polskiej fotografii*, Warszawa, PIW, 1982, ISBN 83-06-00100-1',
     ];
 
-    /** @var Collection<Source> $sources */
+    /** @var Collection<int, Source> $sources */
     $sources = Person::factory()->create(['sources' => $raw])->sources;
 
     $sources = $sources->map(fn (Source $s) => $s->raw())->all();

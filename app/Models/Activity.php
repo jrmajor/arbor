@@ -38,6 +38,9 @@ class Activity extends Model implements ActivityContract
         return Arr::get($this->properties->toArray(), $propertyName);
     }
 
+    /**
+     * @return Collection<string, mixed>
+     */
     public function changes(): Collection
     {
         if (! $this->properties instanceof Collection) {
@@ -47,13 +50,18 @@ class Activity extends Model implements ActivityContract
         return $this->properties->only(['attributes', 'old']);
     }
 
+    /**
+     * @return Collection<string, mixed>
+     */
     public function getChangesAttribute(): Collection
     {
         return $this->changes();
     }
 
     /**
+     * @param Builder<self> $query
      * @param string|array ...$logNames
+     * @return Builder<self>
      */
     public function scopeInLog(Builder $query, ...$logNames): Builder
     {
@@ -64,6 +72,10 @@ class Activity extends Model implements ActivityContract
         return $query->whereIn('log_name', $logNames);
     }
 
+    /**
+     * @param Builder<self> $query
+     * @return Builder<self>
+     */
     public function scopeCausedBy(Builder $query, Model $causer): Builder
     {
         return $query
@@ -71,6 +83,10 @@ class Activity extends Model implements ActivityContract
             ->where('causer_id', $causer->getKey());
     }
 
+    /**
+     * @param Builder<self> $query
+     * @return Builder<self>
+     */
     public function scopeForSubject(Builder $query, Model $subject): Builder
     {
         return $query
@@ -78,16 +94,28 @@ class Activity extends Model implements ActivityContract
             ->where('subject_id', $subject->getKey());
     }
 
+    /**
+     * @param Builder<self> $query
+     * @return Builder<self>
+     */
     public function scopeForEvent(Builder $query, string $event): Builder
     {
         return $query->where('event', $event);
     }
 
+    /**
+     * @param Builder<self> $query
+     * @return Builder<self>
+     */
     public function scopeHasBatch(Builder $query): Builder
     {
         return $query->whereNotNull('batch_uuid');
     }
 
+    /**
+     * @param Builder<self> $query
+     * @return Builder<self>
+     */
     public function scopeForBatch(Builder $query, string $batchUuid): Builder
     {
         return $query->where('batch_uuid', $batchUuid);

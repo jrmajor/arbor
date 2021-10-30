@@ -17,6 +17,7 @@ class Letters extends Component
 
     /**
      * @param 'family'|'last' $type
+     * @return Collection<int, stdClass>
      */
     public function letters(string $type): Collection
     {

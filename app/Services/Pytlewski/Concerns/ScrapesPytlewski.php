@@ -229,6 +229,9 @@ trait ScrapesPytlewski
         } catch (InvalidArgumentException) { }
     }
 
+    /**
+     * @return Collection<int, array{id: string, name: string, date: string, place: string}>
+     */
     private function parseMarriages(string $marriages): Collection
     {
         $marriages = explode('</center>', $marriages)[1];
@@ -248,6 +251,9 @@ trait ScrapesPytlewski
             ]);
     }
 
+    /**
+     * @return Collection<int, array{id: string, name: string}>
+     */
     private function parseChildrenOrSiblings(string $children): Collection
     {
         $children = explode('</center>', $children)[1];

@@ -46,6 +46,9 @@ class Children extends Relation
         return $people;
     }
 
+    /**
+     * @param Collection<Person> $children
+     */
     public function match(array $people, Collection $children, $relation): array
     {
         if ($children->isEmpty()) {
@@ -65,6 +68,9 @@ class Children extends Relation
         return $people;
     }
 
+    /**
+     * @return Collection<Person>
+     */
     public function getResults(): Collection
     {
         return $this->query->get();

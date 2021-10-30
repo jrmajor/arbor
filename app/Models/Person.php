@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use stdClass;
 
 /**
  * @property-read string $birth_date
@@ -254,6 +255,7 @@ class Person extends Model
 
     /**
      * @param 'family'|'last' $type
+     * @return Collection<int, stdClass>
      */
     public static function letters(string $type): Collection
     {

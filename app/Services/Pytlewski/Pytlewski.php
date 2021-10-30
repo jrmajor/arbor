@@ -74,6 +74,9 @@ final class Pytlewski
         $this->relations = $this->matchRelatives($relatives);
     }
 
+    /**
+     * @return Collection<Person>
+     */
     protected function eagerLoadRelatives(): Collection
     {
         $ids = collect([
@@ -90,6 +93,9 @@ final class Pytlewski
             : new Collection();
     }
 
+    /**
+     * @param Collection<Person> $relatives
+     */
     protected function matchRelatives(Collection $relatives): array
     {
         $mother = isset($this->attributes['mother_surname']) || isset($this->attributes['mother_name'])
