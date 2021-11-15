@@ -106,6 +106,7 @@ test('users with permissions can add valid person', function () {
     }
 
     expect($person->sources)->toHaveCount(2);
+    /** @phpstan-ignore-next-line */
     expect($person->sources->map->raw()->all())
         ->toBe($this->validAttributes['sources']);
 

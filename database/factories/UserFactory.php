@@ -10,13 +10,11 @@ use Illuminate\Support\Str;
 
 /**
  * @extends Factory<User>
+ * @property Faker&InternetFaker $faker
  */
 class UserFactory extends Factory
 {
     protected $model = User::class;
-
-    /** @var Faker|InternetFaker */
-    protected $faker;
 
     public function definition(): array
     {

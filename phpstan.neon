@@ -15,11 +15,13 @@ parameters:
     checkGenericClassInNonGenericObjectType: true
     checkPhpDocMissingReturn: true
     ignoreErrors:
-        - '#^Method .* return type with generic class Illuminate\\Database\\Eloquent\\Relations\\\w+ does not specify its types: .*$#'
         - '#^Access to an undefined property Pest\\Expectation(\|Pest\\Support\\Extendable)?::\$\w+\.$#'
         - '#^Call to an undefined method Illuminate\\Foundation\\Testing\\TestCase::livewire\(\)\.$#'
         - '#^Call to an undefined method Pest\\Expectation\|Pest\\Support\\Extendable::(age|canRead|toBeCollection|toBeModel)\(\)\.$#'
         - '#^Call to an undefined method Pest\\PendingObjects\\TestCall::(get|post|withPermissions)\(\)\.$#'
+        - '#^Call to static method Illuminate\\Http\\Request::validate\(\) on a separate line has no effect\.$#'
+        - '#^Cannot use array destructuring on (App\\Models\\\w+\|)?Illuminate\\Database\\Eloquent\\Collection<App\\Models\\\w+>\.$#'
+        - '#^Method .* return type with generic class Illuminate\\Database\\Eloquent\\Relations\\\w+ does not specify its types: .*$#'
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
         - '#^Parameter \#1 \$value of function Pest\\Laravel\\travel expects int, string given\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'
