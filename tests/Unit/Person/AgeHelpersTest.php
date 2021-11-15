@@ -60,11 +60,11 @@ it('can calculate age with incomplete at date', function () {
         'birth_date_to' => '1975-03-22',
     ]);
 
-    $withoutDay = [carbon(2013, 7, 01), carbon(2013, 7, 31)];
+    $withoutDay = [carbon(2013, 7, 1), carbon(2013, 7, 31)];
 
-    $withoutDaySameMonth = [carbon(2015, 3, 01), carbon(2015, 3, 31)];
+    $withoutDaySameMonth = [carbon(2015, 3, 1), carbon(2015, 3, 31)];
 
-    $withoutMonth = [carbon(2016, 01, 01), carbon(2016, 12, 31)];
+    $withoutMonth = [carbon(2016, 1, 1), carbon(2016, 12, 31)];
 
     expect($person)
         ->age($withoutDay, true)->toBe(38)
@@ -81,7 +81,7 @@ it('can calculate age with incomplete dates', function () {
         'birth_date_to' => '1992-12-31',
     ]);
 
-    $at = [carbon(2010, 7, 01), carbon(2010, 7, 31)];
+    $at = [carbon(2010, 7, 1), carbon(2010, 7, 31)];
 
     expect($person->age($at, true))->toBe(18); // 17-18
     expect($person->age($at))->toBe('17-18');
