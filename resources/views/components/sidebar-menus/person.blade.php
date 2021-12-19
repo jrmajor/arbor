@@ -94,7 +94,7 @@
 
         <x-sidebar-menus.item
           :route="route('marriages.create', [
-            $person->sex === 'xx' ? 'woman' : 'man' => $person->id,
+            $person->sex === \App\Enums\Sex::Female ? 'woman' : 'man' => $person->id,
           ])"
           name="marriages.add_a_new_marriage"
         >

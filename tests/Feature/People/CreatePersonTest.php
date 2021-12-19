@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Sex;
 use App\Models\Person;
 use Illuminate\Support\Arr;
 
@@ -98,12 +99,14 @@ test('users with permissions can add valid person', function () {
     $person = Person::latest()->first();
 
     $attributesToCheck = Arr::except($this->validAttributes, [
-        'sources', ...$this->dates,
+        'sex', 'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
         expect($person->{$key})->toBe($attribute);
     }
+
+    expect($person->sex)->toBe(Sex::from($this->validAttributes['sex']));
 
     expect($person->sources)->toHaveCount(2);
     /** @phpstan-ignore-next-line */

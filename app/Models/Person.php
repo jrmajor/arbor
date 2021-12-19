@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Sex;
 use App\Models\Relations\Children;
 use App\Models\Relations\HalfSiblings;
 use App\Models\Relations\Marriages;
@@ -56,6 +57,7 @@ class Person extends Model
     protected $guarded = ['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
+        'sex' => Sex::class,
         'dead' => 'boolean',
         'sources' => SourcesCast::class,
         'visibility' => 'boolean',

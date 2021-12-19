@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Sex;
 use App\Models\Person;
 use Illuminate\Support\Arr;
 
@@ -106,7 +107,7 @@ test('guests cannot edit person', function () {
     $this->person->refresh();
 
     $attributesToCheck = Arr::except($this->oldAttributes, [
-        'sources', ...$this->dates,
+        'sex', 'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
@@ -122,7 +123,7 @@ test('users without permissions cannot edit person', function () {
     $this->person->refresh();
 
     $attributesToCheck = Arr::except($this->oldAttributes, [
-        'sources', ...$this->dates,
+        'sex', 'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
@@ -139,12 +140,14 @@ test('users with permissions can edit person', function () {
     $this->person->refresh();
 
     $attributesToCheck = Arr::except($this->newAttributes, [
-        'sources', ...$this->dates,
+        'sex', 'sources', ...$this->dates,
     ]);
 
     foreach ($attributesToCheck as $key => $attribute) {
         expect($this->person->{$key})->toBe($attribute);
     }
+
+    expect($this->person->sex)->toBe(Sex::from($this->newAttributes['sex']));
 
     expect($this->person->sources)->toHaveCount(2);
     expect($this->person->sources->map->raw()->all())

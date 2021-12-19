@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Sex;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StorePerson extends FormRequest
 {
@@ -12,7 +14,7 @@ class StorePerson extends FormRequest
             'id_wielcy' => 'string|max:20|nullable',
             'id_pytlewski' => 'integer|nullable',
 
-            'sex' => 'in:xx,xy|nullable',
+            'sex' => [new Enum(Sex::class), 'nullable'],
             'name' => 'required|string|max:100',
             'middle_name' => 'string|max:100|nullable',
             'family_name' => 'required|string|max:100',

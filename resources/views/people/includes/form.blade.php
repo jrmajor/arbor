@@ -28,26 +28,26 @@
             <div class="w-full sm:w-auto flex items-center">
               <input
                 type="radio" class="form-radio"
-                id="sex_1" name="sex"
-                value="xx" {{ (old('sex', $person->sex)) === 'xx' ? 'checked' : '' }}
+                id="sex_male" name="sex"
+                value="xy" {{ old('sex', $person->sex?->value) === 'xy' ? 'checked' : '' }}
                 x-model="sex">
-              <label class="ml-2" for="sex_1">{{ __('people.female') }}</label>
+              <label class="ml-2" for="sex_male">{{ __('people.male') }}</label>
             </div>
             <div class="w-full sm:w-auto flex items-center">
               <input
                 type="radio" class="form-radio"
-                id="sex_2" name="sex"
-                value="xy" {{ (old('sex', $person->sex)) === 'xy' ? 'checked' : '' }}
+                id="sex_female" name="sex"
+                value="xx" {{ old('sex', $person->sex?->value) === 'xx' ? 'checked' : '' }}
                 x-model="sex">
-              <label class="ml-2" for="sex_2">{{ __('people.male') }}</label>
+              <label class="ml-2" for="sex_female">{{ __('people.female') }}</label>
             </div>
             <div class="w-full sm:w-auto flex items-center">
               <input
                 type="radio" class="form-radio"
-                id="sex_3" name="sex"
-                value="" {{ (old('sex', $person->sex)) === null ? 'checked' : '' }}
+                id="sex_unknown" name="sex"
+                value="" {{ old('sex', $person->sex) === null ? 'checked' : '' }}
                 x-model="sex">
-              <label class="ml-2" for="sex_3">{{ __('people.unknown') }}</label>
+              <label class="ml-2" for="sex_unknown">{{ __('people.unknown') }}</label>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models\Relations;
 
+use App\Enums\Sex;
 use App\Models\Marriage;
 use App\Models\Person;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,7 +23,7 @@ class Marriages extends Relation
     public function __construct(Person $parent)
     {
         $query = Marriage::query()->orderBy(
-            $parent->sex === 'xx' ? 'woman_order' : 'man_order',
+            $parent->sex === Sex::Male ? 'man_order' : 'woman_order',
         );
 
         parent::__construct($query, $parent);
