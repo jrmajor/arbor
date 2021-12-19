@@ -9,4 +9,7 @@ $finder = PhpCsFixer\Finder::create()
     ->notName('_ide_helper*.php')
     ->ignoreVCS(true);
 
-return Major\CS\config($finder);
+return Major\CS\config($finder, [
+    // Removes new line between enum case and method.
+    'no_extra_blank_lines' => false,
+]);

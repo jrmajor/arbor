@@ -20,9 +20,9 @@ beforeEach(function () {
     $this->enums = ['rite', 'first_event_type', 'second_event_type'];
 
     $this->oldAttributes = [
-        'woman_id' => Person::factory()->woman()->create()->id,
+        'woman_id' => Person::factory()->female()->create()->id,
         'woman_order' => 1,
-        'man_id' => Person::factory()->man()->create()->id,
+        'man_id' => Person::factory()->male()->create()->id,
         'man_order' => 2,
         'rite' => 'roman_catholic',
         'first_event_type' => 'civil_marriage',
@@ -40,9 +40,9 @@ beforeEach(function () {
     ];
 
     $this->newAttributes = [
-        'woman_id' => Person::factory()->woman()->create()->id,
+        'woman_id' => Person::factory()->female()->create()->id,
         'woman_order' => 2,
-        'man_id' => Person::factory()->man()->create()->id,
+        'man_id' => Person::factory()->male()->create()->id,
         'man_order' => 1,
         'rite' => 'civil',
         'first_event_type' => 'concordat_marriage',

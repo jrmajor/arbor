@@ -5,8 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 it('can get siblings and half siblings', function () {
     [$person] = Person::factory(3)->create([
-        'mother_id' => $mother = Person::factory()->woman()->create(),
-        'father_id' => $father = Person::factory()->man()->create(),
+        'mother_id' => $mother = Person::factory()->female()->create(),
+        'father_id' => $father = Person::factory()->male()->create(),
     ]);
 
     assert($person instanceof Person);
@@ -45,8 +45,8 @@ it('can eagerly get siblings and half siblings', function () {
     Model::preventLazyLoading(false);
 
     [$firstPerson] = Person::factory(3)->create([
-        'mother_id' => $firstMother = Person::factory()->woman()->create(),
-        'father_id' => $firstFather = Person::factory()->man()->create(),
+        'mother_id' => $firstMother = Person::factory()->female()->create(),
+        'father_id' => $firstFather = Person::factory()->male()->create(),
     ]);
 
     Person::factory()
@@ -66,8 +66,8 @@ it('can eagerly get siblings and half siblings', function () {
         ->create(['father_id' => $firstFather]);
 
     [$secondPerson] = Person::factory(4)->create([
-        'mother_id' => $secondMother = Person::factory()->woman()->create(),
-        'father_id' => $secondFather = Person::factory()->man()->create(),
+        'mother_id' => $secondMother = Person::factory()->female()->create(),
+        'father_id' => $secondFather = Person::factory()->male()->create(),
     ]);
 
     Person::factory(3)

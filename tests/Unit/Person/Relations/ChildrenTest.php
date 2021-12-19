@@ -3,7 +3,7 @@
 use App\Models\Person;
 
 it('can get children', function () {
-    $father = Person::factory()->man()->create();
+    $father = Person::factory()->male()->create();
 
     Person::factory(2)
         ->withParents()
@@ -17,7 +17,7 @@ it('can get children', function () {
 });
 
 it('can eagerly get children', function () {
-    $mother = Person::factory()->woman()->create();
+    $mother = Person::factory()->female()->create();
 
     Person::factory(3)
         ->withoutParents()
@@ -27,7 +27,7 @@ it('can eagerly get children', function () {
         ->withParents()
         ->create(['mother_id' => $mother]);
 
-    $father = Person::factory()->man()->create();
+    $father = Person::factory()->male()->create();
 
     Person::factory()
         ->withoutParents()

@@ -5,7 +5,7 @@ use App\Models\Person;
 use Illuminate\Database\Eloquent\Model;
 
 it('can get marriages', function () {
-    $person = Person::factory()->woman()->create();
+    $person = Person::factory()->female()->create();
 
     Marriage::factory(3)->create(['woman_id' => $person]);
 
@@ -15,8 +15,8 @@ it('can get marriages', function () {
 it('can eagerly get marriages', function () {
     Model::preventLazyLoading(false);
 
-    $woman = Person::factory()->woman()->create();
-    $man = Person::factory()->man()->create();
+    $woman = Person::factory()->female()->create();
+    $man = Person::factory()->male()->create();
 
     Marriage::factory(3)->create(['woman_id' => $woman]);
     Marriage::factory(4)->create(['man_id' => $man]);

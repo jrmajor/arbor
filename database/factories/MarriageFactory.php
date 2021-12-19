@@ -17,8 +17,8 @@ class MarriageFactory extends Factory
     public function definition(): array
     {
         return [
-            'woman_id' => Person::factory()->woman()->create()->id,
-            'man_id' => Person::factory()->man()->create()->id,
+            'woman_id' => Person::factory()->female()->create()->id,
+            'man_id' => Person::factory()->male()->create()->id,
             'rite' => 'roman_catholic',
             'first_event_type' => 'civil_marriage',
             'first_event_date_from' => $this->faker->dateTimeBetween('-40 years', '-20 years')->format('Y-m-d'),

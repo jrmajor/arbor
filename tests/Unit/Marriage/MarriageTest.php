@@ -7,8 +7,8 @@ use App\Models\Person;
 
 it('can get man and woman', function () {
     $marriage = Marriage::factory()->create([
-        'woman_id' => $woman = Person::factory()->woman()->create(),
-        'man_id' => $man = Person::factory()->man()->create(),
+        'woman_id' => $woman = Person::factory()->female()->create(),
+        'man_id' => $man = Person::factory()->male()->create(),
     ]);
 
     expect($marriage->woman())->toBeModel($woman);
@@ -17,8 +17,8 @@ it('can get man and woman', function () {
 
 it('can get partner', function () {
     $marriage = Marriage::factory()->create([
-        'woman_id' => $woman = Person::factory()->woman()->create(),
-        'man_id' => $man = Person::factory()->man()->create(),
+        'woman_id' => $woman = Person::factory()->female()->create(),
+        'man_id' => $man = Person::factory()->male()->create(),
     ]);
 
     expect($marriage->partner($man))->toBeModel($woman);
@@ -26,8 +26,8 @@ it('can get partner', function () {
 });
 
 it('can get order in given person marriages', function () {
-    $woman = Person::factory()->woman()->create();
-    $man = Person::factory()->man()->create();
+    $woman = Person::factory()->female()->create();
+    $man = Person::factory()->male()->create();
 
     $marriages = Marriage::factory(2)
         ->sequence([
