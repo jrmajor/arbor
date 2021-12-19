@@ -65,11 +65,11 @@
           <div class="w-full">
             <select id="rite" name="rite" class="form-select w-full">
               <option value="">b/d</option>
-              @foreach (\App\Enums\MarriageRiteEnum::toArray() as $rite)
+              @foreach (\App\Enums\MarriageRite::cases() as $rite)
                 <option
-                  value="{{ $rite }}"
-                  {{ $rite === old('rite', (string) $marriage->rite) ? 'selected' : '' }}>
-                  {{ __('marriages.rites.' . $rite) }}
+                  value="{{ $rite->value }}"
+                  {{ $rite->value === old('rite', $marriage->rite?->value) ? 'selected' : '' }}>
+                  {{ __('marriages.rites.' . $rite->value) }}
                 </option>
               @endforeach
             </select>

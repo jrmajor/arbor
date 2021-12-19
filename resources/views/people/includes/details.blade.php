@@ -276,7 +276,7 @@ use App\Services\Pytlewski\Pytlewski;
                   {{ strtolower(roman($marriage->order($person))) }}.
                 @endif
                 @if ($marriage->rite)
-                  <strong>{{ __('marriages.rites.' . $marriage->rite) }}:</strong>
+                  <strong>{{ __('marriages.rites.' . $marriage->rite->value) }}:</strong>
                 @endif
 
                 <x-name :person="$marriage->partner($person)"/>

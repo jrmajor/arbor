@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\MarriageEventTypeEnum;
-use App\Enums\MarriageRiteEnum;
+use App\Enums\MarriageRite;
 use App\Models\Marriage;
 
 it('casts rite to enum', function () {
@@ -9,7 +9,7 @@ it('casts rite to enum', function () {
         'rite' => 'roman_catholic',
     ]);
 
-    expect(MarriageRiteEnum::roman_catholic()->equals($marriage->rite))->toBeTrue();
+    expect($marriage->rite)->toBe(MarriageRite::RomanCatholic);
 });
 
 test('rite is nullable', function () {

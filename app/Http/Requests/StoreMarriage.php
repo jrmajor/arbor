@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Enums\MarriageEventTypeEnum;
-use App\Enums\MarriageRiteEnum;
+use App\Enums\MarriageRite;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreMarriage extends FormRequest
 {
@@ -15,7 +16,7 @@ class StoreMarriage extends FormRequest
             'woman_order' => 'integer|nullable',
             'man_id' => 'required|integer|exists:people,id',
             'man_order' => 'integer|nullable',
-            'rite' => [MarriageRiteEnum::toRule(), 'nullable'],
+            'rite' => [new Enum(MarriageRite::class), 'nullable'],
 
             'first_event_type' => [MarriageEventTypeEnum::toRule(), 'nullable'],
             'first_event_date_from' => [

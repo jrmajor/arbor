@@ -129,7 +129,7 @@ test('users with permissions can edit marriage', function () {
     }
 
     foreach ($this->enums as $enum) {
-        expect((string) $this->marriage->{$enum})->toBe($this->newAttributes[$enum]);
+        expect($this->marriage->{$enum}?->value)->toBe($this->newAttributes[$enum]);
     }
 
     foreach ($this->dates as $date) {

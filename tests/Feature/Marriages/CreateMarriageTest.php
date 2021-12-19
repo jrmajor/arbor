@@ -97,7 +97,7 @@ test('users with permissions can add valid marriage', function () {
     }
 
     foreach ($this->enums as $enum) {
-        expect((string) $marriage->{$enum})->toBe($this->validAttributes[$enum]);
+        expect($marriage->{$enum}?->value)->toBe($this->validAttributes[$enum]);
     }
 
     foreach ($this->dates as $date) {
