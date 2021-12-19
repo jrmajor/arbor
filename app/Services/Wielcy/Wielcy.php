@@ -7,7 +7,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
-use Spatie\Regex\Regex;
+use Psl\Regex;
 
 final class Wielcy
 {
@@ -56,16 +56,16 @@ final class Wielcy
 
     private function parseName(): void
     {
-        $matches = Regex::match("/<meta property='og:title' content='([^']*)' \\/>/", $this->source);
+        $matches = Regex\first_match($this->source, "/<meta property='og:title' content='([^']*)' \\/>/");
 
-        $this->attributes['name'] = $matches->groupOr(1, '');
+        $this->attributes['name'] = $matches[1] ?? null;
     }
 
     private function parseSex(): void
     {
-        $matches = Regex::match("<img src=\"images/((?:fe)?male).png\" width=\"13\" height=\"13\"\nalt=\"M\" align=left>", $this->source);
+        $matches = Regex\first_match($this->source, "<img src=\"images/((?:fe)?male).png\" width=\"13\" height=\"13\"\nalt=\"M\" align=left>");
 
-        $this->attributes['sex'] = match ($matches->groupOr(1, '')) {
+        $this->attributes['sex'] = match ($matches[1] ?? null) {
             'male' => 'xy',
             'female' => 'xx',
             default => null,

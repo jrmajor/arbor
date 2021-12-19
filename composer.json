@@ -30,7 +30,6 @@
         "spatie/laravel-backup": "^7.6",
         "spatie/laravel-flash": "^1.8",
         "spatie/laravel-sitemap": "^6.0",
-        "spatie/regex": "^3.1",
         "symfony/css-selector": "^5.3",
         "symfony/dom-crawler": "^5.3",
         "tightenco/ziggy": "^1.4"

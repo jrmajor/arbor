@@ -26,6 +26,8 @@ parameters:
         - '#^Call to an undefined static method App\\Enums\\Sex::from\(\)\.$#'
         - '#^Cannot use array destructuring on (App\\Models\\\w+\|)?Illuminate\\Database\\Eloquent\\Collection<App\\Models\\\w+>\.$#'
         - '#^Method .* return type with generic class Illuminate\\Database\\Eloquent\\Relations\\\w+ does not specify its types: .*$#'
+        - '#^Method App\\Services\\Pytlewski\\Pytlewski::parseChildrenOrSiblings\(\) should return Illuminate\\Support\\Collection<int, array{id: string, name: string}> but returns Illuminate\\Support\\Collection<int, array{id: mixed, name: mixed}>\.$#'
+        - '#^Method App\\Services\\Pytlewski\\Pytlewski::parseMarriages\(\) should return Illuminate\\Support\\Collection<int, array{id: string, name: string, date: string, place: string}> but returns Illuminate\\Support\\Collection<int, array{id: mixed, name: mixed, date: mixed, place: mixed}>\.$#'
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
         - '#^Parameter \#1 \$value of function Pest\\Laravel\\travel expects int, string given\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'

@@ -7,8 +7,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
-use Spatie\Regex\MatchResult;
-use Spatie\Regex\Regex;
+use Psl\Regex;
 use Symfony\Component\DomCrawler\Crawler;
 
 trait ScrapesPytlewski
@@ -83,22 +82,23 @@ trait ScrapesPytlewski
 
         [$surnames, $names] = explode('<br>', $names);
 
-        $matches = Regex::match('/(.*) \\((.*)\\).*/', $surnames);
+        $matches = Regex\first_match($surnames, '/(.*) \\((.*)\\).*/');
 
-        $attributes = match ($matches->hasMatch()) {
+        $attributes = match ($matches !== null) {
             true => [
-                'last_name' => strip_tags($matches->group(1)),
-                'family_name' => strip_tags($matches->group(2)),
+                'last_name' => strip_tags($matches[1]),
+                'family_name' => strip_tags($matches[2]),
             ],
             false => ['family_name' => strip_tags($surnames)],
         };
 
         $names = explode('-', $names);
 
-        return array_merge([
+        return [
             'name' => array_shift($names),
             'middle_name' => implode(' ', $names),
-        ], $attributes);
+            ...$attributes,
+        ];
     }
 
     private function parseDates(Crawler $crawler): array
@@ -119,13 +119,13 @@ trait ScrapesPytlewski
 
         $dates = explode('<br>', $dates);
 
-        $matches = Regex::match('/ur\\. ([^ ]*) w ([^<]*)/', $dates[0]);
+        $matches = Regex\first_match($dates[0], '/ur\\. ([^ ]*) w ([^<]*)/');
 
-        if ($matches->hasMatch()) {
-            $attributes['birth_date'] = $matches->group(1);
+        if ($matches !== null) {
+            $attributes['birth_date'] = $matches[1];
 
-            if (! str_contains($matches->group(2), 'brak')) {
-                $attributes['birth_place'] = $matches->group(2);
+            if (! str_contains($matches[2], 'brak')) {
+                $attributes['birth_place'] = $matches[2];
             }
         }
 
@@ -133,16 +133,19 @@ trait ScrapesPytlewski
             return $attributes;
         }
 
-        $matches = Regex::match('/\\(zm\\. ([^ ]*)(?: w ([^<),]*)(?:,poch\\.([^<)]*)?\\)?)?)?/', $dates[1]);
+        $matches = Regex\first_match(
+            $dates[1],
+            '/\\(zm\\. ([^ ]*)(?: w ([^<),]*)(?:,poch\\.([^<)]*)?\\)?)?)?/',
+        );
 
-        if ($matches->hasMatch()) {
-            $attributes['death_date'] = $matches->group(1);
+        if ($matches !== null) {
+            $attributes['death_date'] = $matches[1];
 
-            if (! str_contains($matches->groupOr(2, ''), 'brak')) {
-                $attributes['death_place'] = $matches->groupOr(2, '');
+            if (! str_contains($matches[2] ?? '', 'brak')) {
+                $attributes['death_place'] = $matches[2] ?? null;
             }
 
-            $attributes['burial_place'] = $matches->groupOr(3, '');
+            $attributes['burial_place'] = $matches[3] ?? null;
         }
 
         return $attributes;
@@ -165,8 +168,8 @@ trait ScrapesPytlewski
         [$mother, $father] = explode('<br>', str_replace('-', ' ', $parents));
 
         $attributes = [
-            'mother_id' => Regex::match('/id=([0-9]+)/', $mother)->groupOr(1, ''),
-            'father_id' => Regex::match('/id=([0-9]+)/', $father)->groupOr(1, ''),
+            'mother_id' => Regex\first_match($mother, '/id=([0-9]+)/')[1] ?? null,
+            'father_id' => Regex\first_match($father, '/id=([0-9]+)/')[1] ?? null,
         ];
 
         $mother = explode(',', strip_tags($mother));
@@ -238,16 +241,19 @@ trait ScrapesPytlewski
         $marriages = explode('<br>', $marriages);
 
         return collect($marriages)
-            ->map(fn (string $marriage) => Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>(]+)(?:<\\/a><\\/u>)? ?(?:\\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\\))?/', $marriage))
-            ->reject(function (MatchResult $result) {
-                return ! $result->hasMatch()
-                    || str_starts_with($result->groupOr(2, ''), 'Nie zawar');
+            ->map(fn (string $marriage) => Regex\first_match(
+                $marriage,
+                '/(?:<u><a href=".*id=([0-9]*)">)?([^<>(]+)(?:<\\/a><\\/u>)? ?(?:\\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\\))?/',
+            ))
+            ->reject(function (?array $result) {
+                return $result === null
+                    || str_starts_with($result[2] ?? '', 'Nie zawar');
             })
-            ->map(fn (MatchResult $result) => [
-                'id' => $result->groupOr(1, ''),
-                'name' => $result->groupOr(2, ''),
-                'date' => $result->groupOr(3, ''),
-                'place' => $result->groupOr(4, ''),
+            ->map(fn (array $result) => [
+                'id' => $result[1] ?? null,
+                'name' => $result[2] ?? null,
+                'date' => $result[3] ?? null,
+                'place' => $result[4] ?? null,
             ]);
     }
 
@@ -260,14 +266,17 @@ trait ScrapesPytlewski
         $children = explode('; ', $children);
 
         return collect($children)
-            ->map(fn (string $child) => Regex::match('/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/', $child))
-            ->reject(function (MatchResult $result) {
-                return ! $result->hasMatch()
-                    || str_starts_with($result->groupOr(2, ''), 'Nie ma');
+            ->map(fn (string $child) => Regex\first_match(
+                $child,
+                '/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/',
+            ))
+            ->reject(function (?array $result) {
+                return $result === null
+                    || str_starts_with($result[2] ?? '', 'Nie ma');
             })
-            ->map(fn (MatchResult $result) => [
-                'id' => $result->groupOr(1, ''),
-                'name' => $result->groupOr(2, ''),
+            ->map(fn (array $result) => [
+                'id' => $result[1] ?? null,
+                'name' => $result[2] ?? null,
             ]);
     }
 
