@@ -3,16 +3,13 @@
 use App\Enums\MarriageEventTypeEnum;
 use App\Enums\MarriageRiteEnum;
 use App\Models\Marriage;
-use Spatie\Enum\Phpunit\EnumAssertions;
-
-uses(EnumAssertions::class);
 
 it('casts rite to enum', function () {
     $marriage = Marriage::factory()->create([
         'rite' => 'roman_catholic',
     ]);
 
-    $this->assertSameEnum(MarriageRiteEnum::roman_catholic(), $marriage->rite);
+    expect(MarriageRiteEnum::roman_catholic()->equals($marriage->rite))->toBeTrue();
 });
 
 test('rite is nullable', function () {
@@ -29,9 +26,9 @@ it('casts events types to enums', function () {
         'second_event_type' => 'church_marriage',
     ]);
 
-    $this->assertSameEnum(MarriageEventTypeEnum::civil_marriage(), $marriage->first_event_type);
+    expect(MarriageEventTypeEnum::civil_marriage()->equals($marriage->first_event_type))->toBeTrue();
 
-    $this->assertSameEnum(MarriageEventTypeEnum::church_marriage(), $marriage->second_event_type);
+    expect(MarriageEventTypeEnum::church_marriage()->equals($marriage->second_event_type))->toBeTrue();
 });
 
 test('events types are nullable', function () {
