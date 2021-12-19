@@ -91,11 +91,11 @@
           <div class="w-full">
             <select id="first_event_type" name="first_event_type" class="form-select w-full">
               <option value="">b/d</option>
-              @foreach (\App\Enums\MarriageEventTypeEnum::toArray() as $type)
+              @foreach (\App\Enums\MarriageEventType::cases() as $type)
                 <option
-                  value="{{ $type }}"
-                  {{ $type === old('first_event_type', (string) $marriage->first_event_type) ? 'selected' : '' }}>
-                  {{ __('marriages.event_types.' . $type) }}
+                  value="{{ $type->value }}"
+                  {{ $type->value === old('first_event_type', $marriage->first_event_type?->value) ? 'selected' : '' }}>
+                  {{ __('marriages.event_types.' . $type->value) }}
                 </option>
               @endforeach
             </select>
@@ -138,11 +138,11 @@
           <div class="w-full">
             <select id="second_event_type" name="second_event_type" class="form-select w-full">
               <option value="">b/d</option>
-              @foreach (\App\Enums\MarriageEventTypeEnum::toArray() as $type)
+              @foreach (\App\Enums\MarriageEventType::cases() as $type)
                 <option
-                  value="{{ $type }}"
-                  {{ $type === old('second_event_type', (string) $marriage->second_event_type) ? 'selected' : '' }}>
-                  {{ __('marriages.event_types.' . $type) }}
+                  value="{{ $type->value }}"
+                  {{ $type->value === old('second_event_type', $marriage->second_event_type?->value) ? 'selected' : '' }}>
+                  {{ __('marriages.event_types.' . $type->value) }}
                 </option>
               @endforeach
             </select>

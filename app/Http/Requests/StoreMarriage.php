@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\MarriageEventTypeEnum;
+use App\Enums\MarriageEventType;
 use App\Enums\MarriageRite;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
@@ -18,7 +18,7 @@ class StoreMarriage extends FormRequest
             'man_order' => 'integer|nullable',
             'rite' => [new Enum(MarriageRite::class), 'nullable'],
 
-            'first_event_type' => [MarriageEventTypeEnum::toRule(), 'nullable'],
+            'first_event_type' => [new Enum(MarriageEventType::class), 'nullable'],
             'first_event_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:first_event_date_to',
@@ -32,7 +32,7 @@ class StoreMarriage extends FormRequest
             ],
             'first_event_place' => 'string|max:100|nullable',
 
-            'second_event_type' => [MarriageEventTypeEnum::toRule(), 'nullable'],
+            'second_event_type' => [new Enum(MarriageEventType::class), 'nullable'],
             'second_event_date_from' => [
                 'date_format:Y-m-d',
                 'required_with:second_event_date_to',

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\MarriageEventTypeEnum;
+use App\Enums\MarriageEventType;
 use App\Enums\MarriageRite;
 use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
@@ -35,8 +35,8 @@ class Marriage extends Model
     protected $casts = [
         'divorced' => 'boolean',
         'rite' => MarriageRite::class,
-        'first_event_type' => MarriageEventTypeEnum::class . ':nullable',
-        'second_event_type' => MarriageEventTypeEnum::class . ':nullable',
+        'first_event_type' => MarriageEventType::class,
+        'second_event_type' => MarriageEventType::class,
     ];
 
     protected static array $dateRanges = [

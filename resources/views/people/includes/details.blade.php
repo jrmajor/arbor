@@ -297,7 +297,7 @@ use App\Services\Pytlewski\Pytlewski;
                 @endcan
                 @if ($marriage->hasFirstEvent())
                   @if ($marriage->first_event_type)
-                    <br>&nbsp;&nbsp;{{ __('marriages.event_types.'.$marriage->first_event_type) }}:
+                    <br>&nbsp;&nbsp;{{ __('marriages.event_types.' . $marriage->first_event_type->value) }}:
                   @else
                     <br>&nbsp;
                   @endif
@@ -311,7 +311,7 @@ use App\Services\Pytlewski\Pytlewski;
                 @endif
                 @if ($marriage->hasSecondEvent())
                   @if ($marriage->second_event_type)
-                    <br>&nbsp;&nbsp;{{ __('marriages.event_types.'.$marriage->second_event_type) }}:
+                    <br>&nbsp;&nbsp;{{ __('marriages.event_types.' . $marriage->second_event_type->value) }}:
                   @else
                     <br>&nbsp;
                   @endif

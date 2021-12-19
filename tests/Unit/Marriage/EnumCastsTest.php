@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\MarriageEventTypeEnum;
+use App\Enums\MarriageEventType;
 use App\Enums\MarriageRite;
 use App\Models\Marriage;
 
@@ -26,9 +26,9 @@ it('casts events types to enums', function () {
         'second_event_type' => 'church_marriage',
     ]);
 
-    expect(MarriageEventTypeEnum::civil_marriage()->equals($marriage->first_event_type))->toBeTrue();
+    expect($marriage->first_event_type)->toBe(MarriageEventType::CivilMarriage);
 
-    expect(MarriageEventTypeEnum::church_marriage()->equals($marriage->second_event_type))->toBeTrue();
+    expect($marriage->second_event_type)->toBe(MarriageEventType::ChurchMarriage);
 });
 
 test('events types are nullable', function () {
