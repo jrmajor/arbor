@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e87e8dae5bb86624600c417a9b4c9e9d",
+    "content-hash": "f55facbf54f9a081ccb4ae08e529899e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -202,6 +202,81 @@
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.208.5"
             },
             "time": "2021-12-13T20:17:56+00:00"
+        },
+        {
+            "name": "azjezz/psl",
+            "version": "2.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/azjezz/psl.git",
+                "reference": "2cac74d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/azjezz/psl/zipball/2cac74d",
+                "reference": "2cac74d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-intl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-sodium": "*",
+                "php": "~8.1.0",
+                "revolt/event-loop": "~0.1.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.4.0",
+                "php-coveralls/php-coveralls": "^2.5",
+                "php-standard-library/psalm-plugin": "^1.1.1",
+                "phpbench/phpbench": "^1.2.2",
+                "phpunit/phpunit": "^9.5.10",
+                "roave/infection-static-analysis-plugin": "1.13.x-dev",
+                "squizlabs/php_codesniffer": "^3.6.1",
+                "vimeo/psalm": "^4.11.2"
+            },
+            "suggest": {
+                "php-standard-library/psalm-plugin": "Psalm integration"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "name": "hhvm/hsl",
+                    "url": "https://github.com/hhvm/hsl"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psl\\": "src/Psl"
+                },
+                "files": [
+                    "src/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "azjezz",
+                    "email": "azjezz@protonmail.com"
+                }
+            ],
+            "description": "PHP Standard Library",
+            "support": {
+                "issues": "https://github.com/azjezz/psl/issues",
+                "source": "https://github.com/azjezz/psl/tree/2.0.x"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/php-standard-library",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2021-12-18T17:50:27+00:00"
         },
         {
             "name": "brick/math",
@@ -4493,6 +4568,78 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
+        },
+        {
+            "name": "revolt/event-loop",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/revoltphp/event-loop.git",
+                "reference": "a928073cc74501c1852fd9d8c8b02e550cb56517"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/a928073cc74501c1852fd9d8c8b02e550cb56517",
+                "reference": "a928073cc74501c1852fd9d8c8b02e550cb56517",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.7"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "jetbrains/phpstorm-stubs": "^2019.3",
+                "phpunit/phpunit": "^9",
+                "psalm/phar": "^4.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Revolt\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Piotrowski",
+                    "email": "aaron@trowski.com"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com"
+                },
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                }
+            ],
+            "description": "Rock-solid event loop for concurrent PHP applications.",
+            "keywords": [
+                "async",
+                "asynchronous",
+                "concurrency",
+                "event",
+                "event-loop",
+                "non-blocking",
+                "scheduler"
+            ],
+            "support": {
+                "issues": "https://github.com/revoltphp/event-loop/issues",
+                "source": "https://github.com/revoltphp/event-loop/tree/v0.1.1"
+            },
+            "time": "2021-12-10T00:49:26+00:00"
         },
         {
             "name": "sammyjo20/lasso",
@@ -13181,6 +13328,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "azjezz/psl": 20,
         "pestphp/pest-plugin-watch": 20
     },
     "prefer-stable": true,
