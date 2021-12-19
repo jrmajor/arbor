@@ -15,7 +15,7 @@ function formatBiography(?string $biography): ?string
     return (string) Str::of($biography)
         ->trim()
         ->replace(["\r\n", "\r"], "\n")
-        ->pipe('e')
+        ->pipe(e(...))
         ->prepend('<p>')
         ->append('</p>')
         ->replace("\n\n", "</p>\n<p>");
