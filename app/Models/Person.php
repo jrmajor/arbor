@@ -162,7 +162,7 @@ class Person extends Model
         $or = $this->birth_date_from->diffInYears($to_to);
 
         if ($raw) {
-            return (int) $or;
+            return $or;
         }
 
         return $either === $or ? $either : "{$either}-{$or}";
