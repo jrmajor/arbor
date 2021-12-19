@@ -19,12 +19,12 @@
       <div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
         <x-person-picker
           class="w-full sm:w-1/2"
-          :label="__('marriages.woman')" sex="xx"
+          :label="__('marriages.woman')" :sex="\App\Enums\Sex::Female"
           name="woman" :nullable="false"
           :initial="old('woman_id', $marriage->woman_id)"/>
         <x-person-picker
           class="w-full sm:w-1/2"
-          :label="__('marriages.man')" sex="xy"
+          :label="__('marriages.man')" :sex="\App\Enums\Sex::Male"
           name="man" :nullable="false"
           :initial="old('man_id', $marriage->man_id)"/>
       </div>

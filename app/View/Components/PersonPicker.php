@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Enums\Sex;
 use App\Models\Person;
 use Illuminate\View\Component;
 
@@ -12,7 +13,7 @@ class PersonPicker extends Component
     public function __construct(
         public string $name,
         public string $label,
-        protected string $sex,
+        protected Sex $sex,
         protected bool $nullable,
         ?int $initial,
     ) {

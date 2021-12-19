@@ -318,12 +318,12 @@
       <div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
         <x-person-picker
           class="w-full sm:w-1/2"
-          :label="__('people.mother')" sex="xx"
+          :label="__('people.mother')" :sex="\App\Enums\Sex::Female"
           name="mother" :nullable="true"
           :initial="old('mother_id', $person->mother_id)"/>
         <x-person-picker
           class="w-full sm:w-1/2"
-          :label="__('people.father')" sex="xy"
+          :label="__('people.father')" :sex="\App\Enums\Sex::Male"
           name="father" :nullable="true"
           :initial="old('father_id', $person->father_id)"/>
       </div>
