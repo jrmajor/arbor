@@ -60,7 +60,7 @@ class Marriage extends Model
         return $this->belongsTo(Person::class)->withTrashed();
     }
 
-    public function partner(Person $person): ?Person
+    public function partner(Person $person): Person
     {
         return match ($person->id) {
             $this->man_id => $this->woman,
