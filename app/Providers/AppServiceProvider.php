@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Model::preventLazyLoading(! app()->isProduction());
+        Model::preventLazyLoading(! $this->app->isProduction());
 
         Relation::enforceMorphMap([
             'marriage' => Models\Marriage::class,
