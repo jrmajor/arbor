@@ -7,7 +7,10 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
+use Psl\Fun;
+use Psl\Html;
 use Psl\Regex;
+use Psl\Str;
 use Symfony\Component\DomCrawler\Crawler;
 
 trait ScrapesPytlewski
@@ -57,12 +60,11 @@ trait ScrapesPytlewski
             return null;
         }
 
-        $source = iconv('Windows-1250', 'UTF-8', $source->body());
-
-        $source = strstr($source, '<table id="metrzyczka" width="481" height="451" border="0" cellpadding="0" cellspacing="0">');
-        $source = strstr($source, '<td background="images/spacer.gif" width="35" height="1"></td>', true);
-
-        return $source !== false ? $source : null;
+        return Fun\pipe(
+            fn ($s) => iconv('Windows-1250', 'UTF-8', $s) ?: '',
+            fn ($s) => Str\after($source, '<table border=0 align=center width=500><tr><td>') ?? '',
+            fn ($s) => Str\before($source, '<td background="images/spacer.gif" width="35" height="1"></td>'),
+        )($source->body());
     }
 
     private function parseNames(Crawler $crawler): array
@@ -80,23 +82,23 @@ trait ScrapesPytlewski
             return [];
         }
 
-        [$surnames, $names] = explode('<br>', $names);
+        [$surnames, $names] = Str\split($names, '<br>');
 
         $matches = Regex\first_match($surnames, '/(.*) \\((.*)\\).*/');
 
         $attributes = match ($matches !== null) {
             true => [
-                'last_name' => strip_tags($matches[1]),
-                'family_name' => strip_tags($matches[2]),
+                'last_name' => Html\strip_tags($matches[1]),
+                'family_name' => Html\strip_tags($matches[2]),
             ],
-            false => ['family_name' => strip_tags($surnames)],
+            false => ['family_name' => Html\strip_tags($surnames)],
         };
 
-        $names = explode('-', $names);
+        $names = Str\split($names, '-');
 
         return [
             'name' => array_shift($names),
-            'middle_name' => implode(' ', $names),
+            'middle_name' => Str\join($names, ' '),
             ...$attributes,
         ];
     }
@@ -117,14 +119,14 @@ trait ScrapesPytlewski
 
         $attributes = [];
 
-        $dates = explode('<br>', $dates);
+        $dates = Str\split($dates, '<br>');
 
         $matches = Regex\first_match($dates[0], '/ur\\. ([^ ]*) w ([^<]*)/');
 
         if ($matches !== null) {
             $attributes['birth_date'] = $matches[1];
 
-            if (! str_contains($matches[2], 'brak')) {
+            if (! Str\contains($matches[2], 'brak')) {
                 $attributes['birth_place'] = $matches[2];
             }
         }
@@ -141,7 +143,7 @@ trait ScrapesPytlewski
         if ($matches !== null) {
             $attributes['death_date'] = $matches[1];
 
-            if (! str_contains($matches[2] ?? '', 'brak')) {
+            if (! Str\contains($matches[2] ?? '', 'brak')) {
                 $attributes['death_place'] = $matches[2] ?? null;
             }
 
@@ -165,27 +167,27 @@ trait ScrapesPytlewski
             return [];
         }
 
-        [$mother, $father] = explode('<br>', str_replace('-', ' ', $parents));
+        [$mother, $father] = Str\split(Str\replace($parents, '-', ' '), '<br>');
 
         $attributes = [
             'mother_id' => Regex\first_match($mother, '/id=([0-9]+)/')[1] ?? null,
             'father_id' => Regex\first_match($father, '/id=([0-9]+)/')[1] ?? null,
         ];
 
-        $mother = explode(',', strip_tags($mother));
+        $mother = explode(',', Html\strip_tags($mother));
 
         if (count($mother) === 2) {
             [$attributes['mother_surname'], $attributes['mother_name']] = $mother;
         } else {
-            $attributes['mother_surname'] = implode(' ', $mother);
+            $attributes['mother_surname'] = Str\join($mother, ' ');
         }
 
-        $father = explode(',', strip_tags($father));
+        $father = explode(',', Html\strip_tags($father));
 
         if (count($father) === 2) {
             [$attributes['father_surname'], $attributes['father_name']] = $father;
         } else {
-            $attributes['father_surname'] = implode(' ', $father);
+            $attributes['father_surname'] = Str\join($father, ' ');
         }
 
         return $attributes;
@@ -237,8 +239,8 @@ trait ScrapesPytlewski
      */
     private function parseMarriages(string $marriages): Collection
     {
-        $marriages = explode('</center>', $marriages)[1];
-        $marriages = explode('<br>', $marriages);
+        $marriages = Str\split($marriages, '</center>')[1];
+        $marriages = Str\split($marriages, '<br>');
 
         return collect($marriages)
             ->map(fn (string $marriage) => Regex\first_match(
@@ -247,7 +249,7 @@ trait ScrapesPytlewski
             ))
             ->reject(function (?array $result) {
                 return $result === null
-                    || str_starts_with($result[2] ?? '', 'Nie zawar');
+                    || Str\starts_with($result[2] ?? '', 'Nie zawar');
             })
             ->map(fn (array $result) => [
                 'id' => $result[1] ?? null,
@@ -262,8 +264,8 @@ trait ScrapesPytlewski
      */
     private function parseChildrenOrSiblings(string $children): Collection
     {
-        $children = explode('</center>', $children)[1];
-        $children = explode('; ', $children);
+        $children = Str\split($children, '</center>')[1];
+        $children = Str\split($children, '; ');
 
         return collect($children)
             ->map(fn (string $child) => Regex\first_match(
@@ -272,7 +274,7 @@ trait ScrapesPytlewski
             ))
             ->reject(function (?array $result) {
                 return $result === null
-                    || str_starts_with($result[2] ?? '', 'Nie ma');
+                    || Str\starts_with($result[2] ?? '', 'Nie ma');
             })
             ->map(fn (array $result) => [
                 'id' => $result[1] ?? null,
