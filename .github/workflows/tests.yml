@@ -5,8 +5,9 @@ on:
     branches-ignore: [master]
 
 jobs:
-  pest:
+  unit-tests:
     name: Unit tests
+
     runs-on: ubuntu-latest
 
     services:
@@ -24,7 +25,8 @@ jobs:
           --health-retries=3
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -51,38 +53,8 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
-      - name: Run Pest
+      - name: Execute tests
         run: vendor/bin/pest
         env:
           DB_PORT: ${{ job.services.mysql.ports[3306] }}
           DB_PASSWORD: ''
-
-  phpstan:
-    name: Static analysis
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-
-      - name: Get Composer cache directory path
-        id: composer-cache-dir
-        run: |
-          echo "::set-output name=path::$(composer config cache-files-dir)"
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache-dir.outputs.path }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
-      - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-interaction
-
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse --no-progress --no-interaction

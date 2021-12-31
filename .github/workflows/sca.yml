@@ -1,12 +1,12 @@
-name: Style
+name: Static analysis
 
 on:
   push:
     branches-ignore: [master]
 
 jobs:
-  php:
-    name: PHP
+  phpstan:
+    name: PHPStan
 
     runs-on: ubuntu-latest
 
@@ -34,31 +34,10 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
 
-      - name: Run PHP-CS-Fixer
-        run: vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction
+      - name: Prepare Laravel application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
 
-  js:
-    name: JS
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Get Yarn cache directory path
-        id: yarn-cache-dir
-        run: echo "::set-output name=path::$(yarn cache dir)"
-
-      - name: Cache Yarn dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-dir.outputs.path }}
-          key: yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: yarn-
-
-      - name: Install Yarn dependencies
-        run: yarn install
-
-      - name: Run ESLint
-        run: yarn format
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse --no-progress --no-interaction
