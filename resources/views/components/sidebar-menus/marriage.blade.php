@@ -1,7 +1,7 @@
 <ul class="uppercase">
   <div class="flex flex-col xs:flex-row md:flex-col">
 
-    <div class="flex-grow">
+    <div class="grow">
 
       @unless ($marriage->trashed())
         <x-sidebar-menus.item
@@ -49,7 +49,7 @@
 
     </div>
 
-    <div class="flex-grow">
+    <div class="grow">
 
       <hr class="my-1 block xs:hidden md:block">
 

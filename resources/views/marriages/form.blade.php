@@ -60,7 +60,7 @@
             </div>
           </div>
         </div>
-        <div class="flex-grow flex flex-col">
+        <div class="grow flex flex-col">
           <label for="rite" class="w-full font-medium pb-1 text-gray-700">{{ __('marriages.rite') }}</label>
           <div class="w-full">
             <select id="rite" name="rite" class="form-select w-full">

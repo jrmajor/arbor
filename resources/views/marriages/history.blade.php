@@ -10,7 +10,7 @@
 
   <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-    <main class="flex-grow md:w-1/2 flex flex-col space-y-3">
+    <main class="grow md:w-1/2 flex flex-col space-y-3">
 
       @foreach ($activities as $activity)
 
@@ -59,7 +59,7 @@
 
     </main>
 
-    <div class="flex-shrink-0 p-1">
+    <div class="shrink-0 p-1">
       <x-sidebar-menus.marriage active="history" :marriage="$marriage"/>
     </div>
 

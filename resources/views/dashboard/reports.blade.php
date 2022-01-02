@@ -6,7 +6,7 @@
 
   <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-    <main class="flex-grow md:w-1/2 space-y-5">
+    <main class="grow md:w-1/2 space-y-5">
 
       @if ($shouldBeDead->isNotEmpty())
         <div>
@@ -43,7 +43,7 @@
 
     </main>
 
-    <div class="flex-shrink-0 p-1">
+    <div class="shrink-0 p-1">
       <x-sidebar-menus.dashboard active="reports"/>
     </div>
 

@@ -1,7 +1,7 @@
 <ul class="uppercase">
   <div class="flex flex-col xs:flex-row md:flex-col">
 
-    <div class="flex-grow">
+    <div class="grow">
 
       @unless ($person->trashed())
         <x-sidebar-menus.item
@@ -41,7 +41,7 @@
 
     </div>
 
-    <div class="flex-grow">
+    <div class="grow">
 
       @if (auth()->user()->can('changeVisibility', $person) && ! $person->trashed())
         <x-sidebar-menus.item

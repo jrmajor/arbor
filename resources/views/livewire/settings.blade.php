@@ -25,7 +25,7 @@
             type="text" class="form-input w-full sm:w-auto @error('email') invalid @enderror"
             wire:model.lazy="email">
           <button
-            type="button" class="btn flex-grow-0"
+            type="button" class="btn grow-0"
             wire:click="saveEmail">
             {{ __('misc.save') }}
           </button>

@@ -10,7 +10,7 @@
 
   <div class="flex flex-col md:flex-row space-x-2 space-y-2">
 
-    <main class="flex-grow md:w-1/2 p-6 bg-white rounded-lg shadow overflow-hidden">
+    <main class="grow md:w-1/2 p-6 bg-white rounded-lg shadow overflow-hidden">
       <form
         method="POST"
         action="{{ route('people.biography.update', $person) }}">
@@ -43,7 +43,7 @@
       </form>
     </main>
 
-    <div class="flex-shrink-0 p-1">
+    <div class="shrink-0 p-1">
       <x-sidebar-menus.person active="biography" :person="$person"/>
     </div>
 

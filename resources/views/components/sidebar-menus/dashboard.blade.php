@@ -1,7 +1,7 @@
 <ul class="uppercase">
   <div class="flex flex-col xs:flex-row md:flex-col">
 
-    <div class="flex-grow">
+    <div class="grow">
 
       <x-sidebar-menus.item
         :active="$active === 'users'"

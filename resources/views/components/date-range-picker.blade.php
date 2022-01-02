@@ -14,7 +14,7 @@
   </div>
   <div class="w-full">
     <div class="flex flex-nowrap items-center justify-between">
-      <div x-show="! advancedPicker" class="flex-grow flex-shrink flex">
+      <div x-show="! advancedPicker" class="grow shrink flex">
         <div class="flex items-center">
           <input
             type="text" class="form-input tabular-nums w-32"
@@ -26,8 +26,8 @@
           >
         </div>
       </div>
-      <div x-show="advancedPicker" class="flex-grow flex-shrink flex flex-wrap -mb-2">
-        <div class="flex-grow-0 flex items-center mb-2 mr-1">
+      <div x-show="advancedPicker" class="grow shrink flex flex-wrap -mb-2">
+        <div class="grow-0 flex items-center mb-2 mr-1">
           <p class="text-gray-900">{{ __('misc.date.between') }}</p>
           <input
             type="text" class="form-input tabular-nums w-32 ml-1 @error($name.'_from') invalid @enderror"
@@ -36,7 +36,7 @@
             maxlength="10"
           >
         </div>
-        <div class="flex-grow-0 flex items-center mb-2">
+        <div class="grow-0 flex items-center mb-2">
           <p class="text-gray-900">{{ __('misc.date.and') }}</p>
           <input
             type="text" class="form-input tabular-nums w-32 ml-1 @error($name.'_to') invalid @enderror"
