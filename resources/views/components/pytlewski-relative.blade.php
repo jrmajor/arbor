@@ -20,8 +20,8 @@
   @if ($pytlewski->surname)
     {{ $pytlewski->surname }},
   @endif
-  {{ $pytlewski->name }}
+  {{ $pytlewski->name }}{{--
 
-@if ($pytlewski->person || $pytlewski->id)
+--}}@if ($pytlewski->person || $pytlewski->id)
   </a>
 @endif

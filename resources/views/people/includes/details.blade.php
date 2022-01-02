@@ -32,51 +32,47 @@ use App\Services\Pytlewski\Pytlewski;
           class="btn-out leading-none text-xs rounded px-2">
           {{ __('people.pytlewski.show_more') }}
         </button>
-        <br>
-        <div x-show="open" x-on:click.outside="open = false" style="display: none;">
-          <small style="display: block; line-height: 1.45">
-            @if ($pytlewski->mother || $pytlewski->father)
-              &nbsp;&nbsp;{{ __('people.pytlewski.parents') }}:<br>
-              @if ($pytlewski->mother)
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <x-pytlewski-relative :pytlewski="$pytlewski->mother"/>
-                <br>
-              @endif
-              @if ($pytlewski->father)
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <x-pytlewski-relative :pytlewski="$pytlewski->father"/>
-                <br>
-              @endif
+        <small
+          x-show="open"
+          x-on:click.outside="open = false"
+          style="display: none;"
+          class="block -mt-0.5 ml-4 leading-tight"
+        >
+          @if ($pytlewski->mother || $pytlewski->father)
+            <p class="mt-1.5">{{ __('people.pytlewski.parents') }}:</p>
+            @if ($pytlewski->mother)
+              <p class="ml-4"><x-pytlewski-relative :pytlewski="$pytlewski->mother"/></p>
             @endif
-
-            @if ($pytlewski->marriages->isNotEmpty())
-              &nbsp;&nbsp;{{ __('people.pytlewski.marriages') }}:<br>
-              @foreach ($pytlewski->marriages as $marriage)
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <x-pytlewski-relative :pytlewski="$marriage"/>
-                <br>
-              @endforeach
+            @if ($pytlewski->father)
+              <p class="ml-4"><x-pytlewski-relative :pytlewski="$pytlewski->father"/></p>
             @endif
+          @endif
 
-            @if ($pytlewski->children->isNotEmpty())
-              &nbsp;&nbsp;{{ __('people.pytlewski.children') }}:<br>
+          @if ($pytlewski->marriages->isNotEmpty())
+            <p class="mt-1.5">{{ __('people.pytlewski.marriages') }}:</p>
+            @foreach ($pytlewski->marriages as $marriage)
+              <p class="ml-4"><x-pytlewski-relative :pytlewski="$marriage"/></p>
+            @endforeach
+          @endif
+
+          @if ($pytlewski->children->isNotEmpty())
+            <p class="mt-1.5">{{ __('people.pytlewski.children') }}:</p>
+            <p class="ml-4">
               @foreach ($pytlewski->children as $child)
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <x-pytlewski-relative :pytlewski="$child"/>
-                <br>
+                <x-pytlewski-relative :pytlewski="$child"/>{{ $loop->last ? '' : ', ' }}
               @endforeach
-            @endif
+            </p>
+          @endif
 
-            @if ($pytlewski->siblings->isNotEmpty())
-              &nbsp;&nbsp;{{ __('people.pytlewski.siblings') }}:<br>
+          @if ($pytlewski->siblings->isNotEmpty())
+            <p class="mt-1.5">{{ __('people.pytlewski.siblings') }}:</p>
+            <p class="ml-4">
               @foreach ($pytlewski->siblings as $sibling)
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <x-pytlewski-relative :pytlewski="$sibling"/>
-                <br>
+                <x-pytlewski-relative :pytlewski="$sibling"/>{{ $loop->last ? '' : ', ' }}
               @endforeach
-            @endif
-          </small>
-        </div>
+            </p>
+          @endif
+        </small>
       </dd>
     @endif
 
