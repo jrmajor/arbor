@@ -4,6 +4,9 @@ namespace App\Services;
 
 use App\Models\Person;
 use Carbon\Carbon;
+use Psl\Iter;
+use Psl\Math;
+use Psl\Vec;
 
 final class Age
 {
@@ -22,12 +25,8 @@ final class Age
             return null;
         }
 
-        [$toFrom, $toTo] = is_array($time) ? $time : [$time, $time];
-
-        $either = $this->person->birth_date_to->diffInYears($toFrom);
-        $or = $this->person->birth_date_from->diffInYears($toTo);
-
-        return $or;
+        return $this->person->birth_date_from
+            ->diffInYears(is_array($time) ? $time[1] : $time);
     }
 
     /**
@@ -44,7 +43,7 @@ final class Age
         $either = $this->person->birth_date_to->diffInYears($toFrom);
         $or = $this->person->birth_date_from->diffInYears($toTo);
 
-        return $either === $or ? $either : "{$either}-{$or}";
+        return $either === $or ? (string) $either : "{$either}-{$or}";
     }
 
     public function current(): ?int
@@ -84,35 +83,34 @@ final class Age
     public function estimatedBirthDate(): ?int
     {
         $interval = self::GENERATION_INTERVAL;
-        $prediction = collect();
+        $prediction = [];
 
         $motherYear = $this->person->mother?->birth_year;
         $fatherYear = $this->person->father?->birth_year;
 
         if ($motherYear && $fatherYear) {
-            $prediction->put('parents', (($motherYear + $fatherYear) / 2) + $interval);
+            $prediction['parents'] = (($motherYear + $fatherYear) / 2) + $interval;
         } elseif ($motherYear || $fatherYear) {
-            $prediction->put('parents', $motherYear + $fatherYear + $interval);
+            $prediction['parents'] = $motherYear + $fatherYear + $interval;
         }
 
-        $prediction->put('children',
-            $this->person->children->avg('birth_year') ? $this->person->children->avg('birth_year') - $interval : null,
-        );
+        if (null !== $children = $this->person->children->avg('birth_year')) {
+            $prediction['children'] = $children - $interval;
+        }
 
-        $prediction->put('partners',
-            $this->person->marriages
-                ->map->partner($this->person)
-                ->avg('birth_year'),
-        );
+        $prediction['partners'] = $this->person->marriages
+            ->map->partner($this->person)->avg('birth_year');
 
-        $prediction->put('siblings',
-            $this->person->siblings
-                ->merge($this->person->siblings_mother)
-                ->merge($this->person->siblings_father)
-                ->avg('birth_year'),
-        );
+        $prediction['siblings'] = $this->person->siblings
+            ->merge($this->person->siblings_mother)
+            ->merge($this->person->siblings_father)
+            ->avg('birth_year');
 
-        return $prediction->avg() ? (int) round($prediction->avg()) : null;
+        if ([] === $prediction = Vec\filter_nulls($prediction)) {
+            return null;
+        }
+
+        return (int) Math\round(array_sum($prediction) / Iter\count($prediction));
     }
 
     public function estimatedBirthDateError(): ?int
@@ -121,6 +119,6 @@ final class Age
             return null;
         }
 
-        return abs($this->estimatedBirthDate() - $this->person->birth_year);
+        return Math\abs($this->estimatedBirthDate() - $this->person->birth_year);
     }
 }
