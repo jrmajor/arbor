@@ -1,8 +1,7 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  mode: 'jit',
-  purge: [
+  content: [
     './resources/views/**/*.blade.php',
     './app/View/Components/**/*.php',
   ],
@@ -12,8 +11,8 @@ module.exports = {
       current: 'currentColor',
       black: colors.black,
       white: colors.white,
-      gray: colors.coolGray,
-      'cool-gray': colors.blueGray,
+      gray: colors.gray,
+      'cool-gray': colors.slate,
       red: colors.red,
       yellow: colors.yellow,
       green: colors.green,
