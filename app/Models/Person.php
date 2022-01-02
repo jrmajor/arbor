@@ -9,6 +9,7 @@ use App\Models\Relations\Marriages;
 use App\Models\Relations\Siblings;
 use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
+use App\Services\Age;
 use App\Services\Pytlewski\Pytlewski;
 use App\Services\Sources\SourcesCast;
 use App\Services\Wielcy\Wielcy;
@@ -54,8 +55,6 @@ class Person extends Model
     use LogsActivity;
     use TapsActivity;
 
-    public const generationInterval = 32;
-
     protected $guarded = ['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
@@ -88,6 +87,11 @@ class Person extends Model
     public function isVisible(): bool
     {
         return $this->visibility === true;
+    }
+
+    public function getAgeAttribute(): Age
+    {
+        return new Age($this);
     }
 
     public function mother(): BelongsTo
@@ -149,84 +153,6 @@ class Person extends Model
     public function children(): Children
     {
         return new Children($this);
-    }
-
-    /**
-     * @param Carbon[]|Carbon $to
-     */
-    public function age(array|Carbon $to, bool $raw = false): int|string|null
-    {
-        if (! $this->birth_date) {
-            return null;
-        }
-
-        [$to_from, $to_to] = is_array($to) ? $to : [$to, $to];
-
-        $either = $this->birth_date_to->diffInYears($to_from);
-        $or = $this->birth_date_from->diffInYears($to_to);
-
-        if ($raw) {
-            return $or;
-        }
-
-        return $either === $or ? $either : "{$either}-{$or}";
-    }
-
-    public function currentAge(bool $raw = false): int|string|null
-    {
-        return $this->age(now(), $raw);
-    }
-
-    public function ageAtDeath(bool $raw = false): int|string|null
-    {
-        if (! $this->death_date) {
-            return null;
-        }
-
-        return $this->age([$this->death_date_from, $this->death_date_to], $raw);
-    }
-
-    public function estimatedBirthDate(): ?int
-    {
-        $interval = self::generationInterval;
-        $prediction = collect();
-
-        $motherYear = $this->mother?->birth_year;
-        $fatherYear = $this->father?->birth_year;
-
-        if ($motherYear && $fatherYear) {
-            $prediction->put('parents', (($motherYear + $fatherYear) / 2) + $interval);
-        } elseif ($motherYear || $fatherYear) {
-            $prediction->put('parents', $motherYear + $fatherYear + $interval);
-        }
-
-        $prediction->put('children',
-            $this->children->avg('birth_year') ? $this->children->avg('birth_year') - $interval : null,
-        );
-
-        $prediction->put('partners',
-            $this->marriages
-                ->map->partner($this)
-                ->avg('birth_year'),
-        );
-
-        $prediction->put('siblings',
-            $this->siblings
-                ->merge($this->siblings_mother)
-                ->merge($this->siblings_father)
-                ->avg('birth_year'),
-        );
-
-        return $prediction->avg() ? (int) round($prediction->avg()) : null;
-    }
-
-    public function estimatedBirthDateError(): ?int
-    {
-        if (! $this->estimatedBirthDate() || ! $this->birth_year) {
-            return null;
-        }
-
-        return abs($this->estimatedBirthDate() - $this->birth_year);
     }
 
     public function formatSimpleDates(): ?string

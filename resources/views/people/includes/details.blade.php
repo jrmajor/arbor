@@ -126,27 +126,27 @@ use App\Services\Pytlewski\Pytlewski;
           {{ $person->birth_place }}<br>
           @php $some_birth_data_printed = true; @endphp
         @endif
-        @if (! $person->dead && $person->currentAge() !== null)
+        @if (! $person->dead && $person->age->prettyCurrent() !== null)
           @if ($some_birth_data_printed)
             &nbsp;&nbsp;
           @endif
           {{ __('people.current_age') }}:
-          {{ __('misc.year', ['rawAge' => $person->currentAge(true), 'age' => $person->currentAge()]) }}
+          {{ __('misc.year', ['rawAge' => $person->age->current(), 'age' => $person->age->prettyCurrent()]) }}
           <br>
           @php $some_birth_data_printed = true; @endphp
         @endif
         @if (
           (! $person->birth_date || auth()->user()?->isSuperAdmin())
-          && $person->estimatedBirthDate()
+          && $person->age->estimatedBirthDate() !== null
         )
           @if ($some_birth_data_printed === true)
             &nbsp;&nbsp;
           @endif
-          {{ __('people.estimated_birth_date') }}: {!! $person->estimatedBirthDate() !!}
-          @if ($person->estimatedBirthDateError())
+          {{ __('people.estimated_birth_date') }}: {!! $person->age->estimatedBirthDate() !!}
+          @if ($person->age->estimatedBirthDateError() !== null)
             <small>
-              (<strong>{{ $person->estimatedBirthDateError() }}</strong>
-              {{ __('misc.years_of_error', ['age' => $person->estimatedBirthDateError()]) }})
+              (<strong>{{ $person->age->estimatedBirthDateError() }}</strong>
+              {{ __('misc.years_of_error', ['age' => $person->age->estimatedBirthDateError()]) }})
             </small>
           @endif
         @endif
@@ -177,12 +177,12 @@ use App\Services\Pytlewski\Pytlewski;
             {{ $person->death_cause }}<br>
             @php $some_death_data_printed = true; @endphp
           @endif
-          @if ($person->ageAtDeath() !== null)
+          @if ($person->age->prettyAtDeath() !== null)
             @if ($some_death_data_printed)
               &nbsp;&nbsp;
             @endif
             {{ __('people.death_age') }}:
-            {{ __('misc.year', ['rawAge' => $person->ageAtDeath(true), 'age' => $person->ageAtDeath()]) }}
+            {{ __('misc.year', ['rawAge' => $person->age->atDeath(), 'age' => $person->age->prettyAtDeath()]) }}
           @endif
         </dd>
       @else

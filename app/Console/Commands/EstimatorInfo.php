@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Person;
+use App\Services\Age;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,7 @@ class EstimatorInfo extends Command
             ->filter(fn (Person $person) => $person->birth_year)
             ->map(fn (Person $person) => (object) [
                 'personId' => $person->id,
-                'error' => $person->estimatedBirthDateError(),
+                'error' => $person->age->estimatedBirthDateError(),
             ])
             ->whereNotNull('error')
             ->sortByDesc('error');
@@ -60,7 +61,7 @@ class EstimatorInfo extends Command
             ['variance', round($variance, 2)],
             ['standard deviation', round(sqrt($variance), 2)],
             ['real interval', round($generationInterval, 2)],
-            ['used interval', Person::generationInterval],
+            ['used interval', Age::GENERATION_INTERVAL],
         ]);
 
         $time = microtime(true) - $time;

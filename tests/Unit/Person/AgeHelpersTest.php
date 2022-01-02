@@ -18,8 +18,8 @@ final class AgeHelpersTest extends TestCase
 
         $at = carbon(2019, 8, 15);
 
-        $this->assertNull($person->age($at, true));
-        $this->assertNull($person->age($at));
+        $this->assertNull($person->age->at($at));
+        $this->assertNull($person->age->prettyAt($at));
     }
 
     #[TestDox('it can calculate age with complete dates')]
@@ -32,8 +32,8 @@ final class AgeHelpersTest extends TestCase
 
         $at = carbon(2019, 8, 15);
 
-        $this->assertSame(25, $person->age($at, true));
-        $this->assertSame(25, $person->age($at));
+        $this->assertSame(25, $person->age->at($at));
+        $this->assertSame('25', $person->age->prettyAt($at));
     }
 
     #[TestDox('it can calculate age with incomplete birth date')]
@@ -53,13 +53,13 @@ final class AgeHelpersTest extends TestCase
 
         $sameMonth = carbon(2006, 4, 16);
 
-        $this->assertSame(39, $withoutDay->age($differentMonth, true));
-        $this->assertSame(39, $withoutDay->age($differentMonth));
-        $this->assertSame(28, $withoutDay->age($sameMonth, true)); // 27-28
-        $this->assertSame('27-28', $withoutDay->age($sameMonth));
+        $this->assertSame(39, $withoutDay->age->at($differentMonth));
+        $this->assertSame('39', $withoutDay->age->prettyAt($differentMonth));
+        $this->assertSame(28, $withoutDay->age->at($sameMonth)); // 27-28
+        $this->assertSame('27-28', $withoutDay->age->prettyAt($sameMonth));
 
-        $this->assertSame(35, $withoutMonth->age($differentMonth, true)); // 34-35
-        $this->assertSame('34-35', $withoutMonth->age($differentMonth));
+        $this->assertSame(35, $withoutMonth->age->at($differentMonth)); // 34-35
+        $this->assertSame('34-35', $withoutMonth->age->prettyAt($differentMonth));
     }
 
     #[TestDox('it can calculate age with incomplete at date')]
@@ -76,12 +76,12 @@ final class AgeHelpersTest extends TestCase
 
         $withoutMonth = [carbon(2016, 1, 1), carbon(2016, 12, 31)];
 
-        $this->assertSame(38, $person->age($withoutDay, true));
-        $this->assertSame(38, $person->age($withoutDay));
-        $this->assertSame(40, $person->age($withoutDaySameMonth, true)); // 39-40
-        $this->assertSame('39-40', $person->age($withoutDaySameMonth));
-        $this->assertSame(41, $person->age($withoutMonth, true)); // 40-41
-        $this->assertSame('40-41', $person->age($withoutMonth));
+        $this->assertSame(38, $person->age->at($withoutDay));
+        $this->assertSame('38', $person->age->prettyAt($withoutDay));
+        $this->assertSame(40, $person->age->at($withoutDaySameMonth)); // 39-40
+        $this->assertSame('39-40', $person->age->prettyAt($withoutDaySameMonth));
+        $this->assertSame(41, $person->age->at($withoutMonth)); // 40-41
+        $this->assertSame('40-41', $person->age->prettyAt($withoutMonth));
     }
 
     #[TestDox('it can calculate age with incomplete dates')]
@@ -94,8 +94,8 @@ final class AgeHelpersTest extends TestCase
 
         $at = [carbon(2010, 7, 1), carbon(2010, 7, 31)];
 
-        $this->assertSame(18, $person->age($at, true)); // 17-18
-        $this->assertSame('17-18', $person->age($at));
+        $this->assertSame(18, $person->age->at($at)); // 17-18
+        $this->assertSame('17-18', $person->age->prettyAt($at));
     }
 
     #[TestDox('it can calculate current age')]
@@ -109,8 +109,8 @@ final class AgeHelpersTest extends TestCase
         $this->travelTo(carbon('2016-11-10'));
 
         $this->assertSame('2016-11-10', now()->format('Y-m-d'));
-        $this->assertSame(43, $person->currentAge(true));
-        $this->assertSame(43, $person->currentAge());
+        $this->assertSame(43, $person->age->current());
+        $this->assertSame('43', $person->age->prettyCurrent());
 
         $this->travelBack();
     }
@@ -125,7 +125,7 @@ final class AgeHelpersTest extends TestCase
             'death_date_to' => '1941-05-30',
         ]);
 
-        $this->assertSame(67, $person->ageAtDeath(true));
-        $this->assertSame(67, $person->ageAtDeath());
+        $this->assertSame(67, $person->age->atDeath());
+        $this->assertSame('67', $person->age->prettyAtDeath());
     }
 }
