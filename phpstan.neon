@@ -12,6 +12,7 @@ parameters:
         - app/Services/Sources/Source.php
     scanFiles:
         - tests/Helpers.php
+        - tests/TestDox.php
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: true
     checkPhpDocMissingReturn: true
@@ -26,6 +27,8 @@ parameters:
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
         - '#^Parameter \#1 \$value of function Pest\\Laravel\\travel expects int, string given\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'
+        - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
+        - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) is not writable\.$#'
         - '#^Using nullsafe property access on non-nullable type mixed\. Use -> instead\.$#'
         -
             message: '#^Undefined variable: \$this$#'

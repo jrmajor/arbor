@@ -1,115 +1,131 @@
 <?php
 
+namespace Tests\Unit\Person;
+
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-use function Pest\Laravel\travelBack;
-use function Pest\Laravel\travelTo;
+final class AgeHelpersTest extends TestCase
+{
+    #[TestDox('it returns null when calculating age without date')]
+    public function testAgeWithoutDate(): void
+    {
+        $person = Person::factory()->createOne([
+            'birth_date_from' => null,
+            'birth_date_to' => null,
+        ]);
 
-it('returns null when calculating age without date', function () {
-    $person = Person::factory()->create([
-        'birth_date_from' => null,
-        'birth_date_to' => null,
-    ]);
+        $at = carbon(2019, 8, 15);
 
-    $at = carbon(2019, 8, 15);
+        $this->assertNull($person->age($at, true));
+        $this->assertNull($person->age($at));
+    }
 
-    expect($person->age($at, true))->toBeNull();
-    expect($person->age($at))->toBeNull();
-});
+    #[TestDox('it can calculate age with complete dates')]
+    public function testAgeWithDates(): void
+    {
+        $person = Person::factory()->createOne([
+            'birth_date_from' => '1994-06-22',
+            'birth_date_to' => '1994-06-22',
+        ]);
 
-it('can calculate age with complete dates', function () {
-    $person = Person::factory()->create([
-        'birth_date_from' => '1994-06-22',
-        'birth_date_to' => '1994-06-22',
-    ]);
+        $at = carbon(2019, 8, 15);
 
-    $at = carbon(2019, 8, 15);
+        $this->assertSame(25, $person->age($at, true));
+        $this->assertSame(25, $person->age($at));
+    }
 
-    expect($person->age($at, true))->toBe(25);
-    expect($person->age($at))->toBe(25);
-});
+    #[TestDox('it can calculate age with incomplete birth date')]
+    public function testAgeIncompleteDate(): void
+    {
+        $withoutDay = Person::factory()->createOne([
+            'birth_date_from' => '1978-04-01',
+            'birth_date_to' => '1978-04-30',
+        ]);
 
-it('can calculate age with incomplete birth date', function () {
-    $withoutDay = Person::factory()->create([
-        'birth_date_from' => '1978-04-01',
-        'birth_date_to' => '1978-04-30',
-    ]);
+        $withoutMonth = Person::factory()->createOne([
+            'birth_date_from' => '1982-01-01',
+            'birth_date_to' => '1982-12-31',
+        ]);
 
-    $withoutMonth = Person::factory()->create([
-        'birth_date_from' => '1982-01-01',
-        'birth_date_to' => '1982-12-31',
-    ]);
+        $differentMonth = carbon(2017, 6, 15);
 
-    $differentMonth = carbon(2017, 6, 15);
+        $sameMonth = carbon(2006, 4, 16);
 
-    $sameMonth = carbon(2006, 4, 16);
+        $this->assertSame(39, $withoutDay->age($differentMonth, true));
+        $this->assertSame(39, $withoutDay->age($differentMonth));
+        $this->assertSame(28, $withoutDay->age($sameMonth, true)); // 27-28
+        $this->assertSame('27-28', $withoutDay->age($sameMonth));
 
-    expect($withoutDay)
-        ->age($differentMonth, true)->toBe(39)
-        ->age($differentMonth)->toBe(39)
-        ->age($sameMonth, true)->toBe(28) // 27-28
-        ->age($sameMonth)->toBe('27-28');
-    expect($withoutMonth)
-        ->age($differentMonth, true)->toBe(35) // 34-35
-        ->age($differentMonth)->toBe('34-35');
-});
+        $this->assertSame(35, $withoutMonth->age($differentMonth, true)); // 34-35
+        $this->assertSame('34-35', $withoutMonth->age($differentMonth));
+    }
 
-it('can calculate age with incomplete at date', function () {
-    $person = Person::factory()->create([
-        'birth_date_from' => '1975-03-22',
-        'birth_date_to' => '1975-03-22',
-    ]);
+    #[TestDox('it can calculate age with incomplete at date')]
+    public function testAgeIncompleteAtDate(): void
+    {
+        $person = Person::factory()->createOne([
+            'birth_date_from' => '1975-03-22',
+            'birth_date_to' => '1975-03-22',
+        ]);
 
-    $withoutDay = [carbon(2013, 7, 1), carbon(2013, 7, 31)];
+        $withoutDay = [carbon(2013, 7, 1), carbon(2013, 7, 31)];
 
-    $withoutDaySameMonth = [carbon(2015, 3, 1), carbon(2015, 3, 31)];
+        $withoutDaySameMonth = [carbon(2015, 3, 1), carbon(2015, 3, 31)];
 
-    $withoutMonth = [carbon(2016, 1, 1), carbon(2016, 12, 31)];
+        $withoutMonth = [carbon(2016, 1, 1), carbon(2016, 12, 31)];
 
-    expect($person)
-        ->age($withoutDay, true)->toBe(38)
-        ->age($withoutDay)->toBe(38)
-        ->age($withoutDaySameMonth, true)->toBe(40) // 39-40
-        ->age($withoutDaySameMonth)->toBe('39-40')
-        ->age($withoutMonth, true)->toBe(41) // 40-41
-        ->age($withoutMonth)->toBe('40-41');
-});
+        $this->assertSame(38, $person->age($withoutDay, true));
+        $this->assertSame(38, $person->age($withoutDay));
+        $this->assertSame(40, $person->age($withoutDaySameMonth, true)); // 39-40
+        $this->assertSame('39-40', $person->age($withoutDaySameMonth));
+        $this->assertSame(41, $person->age($withoutMonth, true)); // 40-41
+        $this->assertSame('40-41', $person->age($withoutMonth));
+    }
 
-it('can calculate age with incomplete dates', function () {
-    $person = Person::factory()->create([
-        'birth_date_from' => '1992-01-01',
-        'birth_date_to' => '1992-12-31',
-    ]);
+    #[TestDox('it can calculate age with incomplete dates')]
+    public function testAgeIncompleteDates(): void
+    {
+        $person = Person::factory()->createOne([
+            'birth_date_from' => '1992-01-01',
+            'birth_date_to' => '1992-12-31',
+        ]);
 
-    $at = [carbon(2010, 7, 1), carbon(2010, 7, 31)];
+        $at = [carbon(2010, 7, 1), carbon(2010, 7, 31)];
 
-    expect($person->age($at, true))->toBe(18); // 17-18
-    expect($person->age($at))->toBe('17-18');
-});
+        $this->assertSame(18, $person->age($at, true)); // 17-18
+        $this->assertSame('17-18', $person->age($at));
+    }
 
-it('can calculate current age', function () {
-    $person = Person::factory()->create([
-        'birth_date_from' => '1973-05-12',
-        'birth_date_to' => '1973-05-12',
-    ]);
+    #[TestDox('it can calculate current age')]
+    public function testCurrentAge(): void
+    {
+        $person = Person::factory()->createOne([
+            'birth_date_from' => '1973-05-12',
+            'birth_date_to' => '1973-05-12',
+        ]);
 
-    travelTo(carbon('2016-11-10'));
+        $this->travelTo(carbon('2016-11-10'));
 
-    expect(now()->format('Y-m-d'))->toBe('2016-11-10');
-    expect($person->currentAge(true))->toBe(43);
-    expect($person->currentAge())->toBe(43);
+        $this->assertSame('2016-11-10', now()->format('Y-m-d'));
+        $this->assertSame(43, $person->currentAge(true));
+        $this->assertSame(43, $person->currentAge());
 
-    travelBack();
-});
+        $this->travelBack();
+    }
 
-it('can calculate age age at death', function () {
-    $person = Person::factory()->create([
-        'birth_date_from' => '1874-04-08',
-        'birth_date_to' => '1874-04-08',
-        'death_date_from' => '1941-05-30',
-        'death_date_to' => '1941-05-30',
-    ]);
+    #[TestDox('it can calculate age age at death')]
+    public function testAgeAtDeath(): void
+    {
+        $person = Person::factory()->createOne([
+            'birth_date_from' => '1874-04-08',
+            'birth_date_to' => '1874-04-08',
+            'death_date_from' => '1941-05-30',
+            'death_date_to' => '1941-05-30',
+        ]);
 
-    expect($person->ageAtDeath(true))->toBe(67);
-    expect($person->ageAtDeath())->toBe(67);
-});
+        $this->assertSame(67, $person->ageAtDeath(true));
+        $this->assertSame(67, $person->ageAtDeath());
+    }
+}
