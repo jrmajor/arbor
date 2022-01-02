@@ -9,14 +9,14 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- pytlewski --}}
     @if ($person->id_pytlewski && ! $person->pytlewski)
-      <dt>{!! __('people.pytlewski.id') !!}&nbsp;</dt>
+      <dt>{!! __('people.pytlewski.id') !!}</dt>
       <dd>
         <a href="{{ Pytlewski::url($person->id_pytlewski) }}" target="_blank" class="a">
           {{ $person->id_pytlewski }}
         </a>
       </dd>
     @elseif ($pytlewski = $person->pytlewski)
-      <dt>{!! __('people.pytlewski.id') !!}&nbsp;</dt>
+      <dt>{!! __('people.pytlewski.id') !!}</dt>
       <dd x-data="{ open: false }">
         <a href="{{ $pytlewski->url }}" target="_blank" class="a">
           {{ $pytlewski->id}}
@@ -82,7 +82,7 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- wielcy --}}
     @if ($wielcy = $person->wielcy)
-      <dt>{!! __('people.wielcy.id') !!}&nbsp;</dt>
+      <dt>{!! __('people.wielcy.id') !!}</dt>
       <dd>
         <a href="{{ $wielcy->url }}" target="_blank" class="a">
           {{ $wielcy->id }}
@@ -95,24 +95,24 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- names --}}
     @if ($person->middle_name)
-      <dt>{{ __('people.names') }}&nbsp;</dt>
+      <dt>{{ __('people.names') }}</dt>
       <dd>{{ $person->name }} {{ $person->middle_name }}</dd>
     @else
-      <dt>{{ __('people.name') }}&nbsp;</dt>
+      <dt>{{ __('people.name') }}</dt>
       <dd>{{ $person->name }}</dd>
     @endif
 
-    <dt>{{ __('people.family_name') }}&nbsp;</dt>
+    <dt>{{ __('people.family_name') }}</dt>
     <dd>{{ $person->family_name }}</dd>
 
     @if ($person->last_name)
-      <dt>{{ __('people.last_name') }}&nbsp;</dt>
+      <dt>{{ __('people.last_name') }}</dt>
       <dd>{{ $person->last_name }}</dd>
     @endif
 
     {{-- birth --}}
     @if ($person->birth_date || $person->birth_place  || $person->estimatedBirthDate())
-      <dt>{{ __('people.birth') }}&nbsp;</dt>
+      <dt>{{ __('people.birth') }}</dt>
       <dd>
         @php $some_birth_data_printed = false; @endphp
         @if ($person->birth_date)
@@ -155,7 +155,7 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- death --}}
     @if ($person->dead)
-      <dt>{{ __('people.death') }}&nbsp;</dt>
+      <dt>{{ __('people.death') }}</dt>
       @if ($person->death_date || $person->death_place || $person->death_cause)
         <dd>
           @php $some_death_data_printed = false; @endphp
@@ -193,13 +193,13 @@ use App\Services\Pytlewski\Pytlewski;
     {{-- funeral --}}
     @if ($person->funeral_date || $person->funeral_place)
       @if ($person->funeral_date && ! $person->funeral_place)
-        <dt>{{ __('people.funeral') }}&nbsp;</dt>
+        <dt>{{ __('people.funeral') }}</dt>
         <dd>{{ $person->funeral_date }}</dd>
       @elseif ($person->funeral_place && ! $person->funeral_date)
-        <dt>{{ __('people.funeral') }}&nbsp;</dt>
+        <dt>{{ __('people.funeral') }}</dt>
         <dd>{{ $person->funeral_place }}</dd>
       @elseif ($person->funeral_place && $person->funeral_date)
-        <dt>{{ __('people.funeral') }}&nbsp;</dt>
+        <dt>{{ __('people.funeral') }}</dt>
         <dd>{{ $person->funeral_date }}<br/>&nbsp;&nbsp;{{ $person->funeral_place }}</dd>
       @endif
     @endif
@@ -207,30 +207,30 @@ use App\Services\Pytlewski\Pytlewski;
     {{-- burial --}}
     @if ($person->burial_date || $person->burial_place)
       @if ($person->burial_date && ! $person->burial_place)
-        <dt>{{ __('people.burial') }}&nbsp;</dt>
+        <dt>{{ __('people.burial') }}</dt>
         <dd>{{ $person->burial_date }}</dd>
       @elseif ($person->burial_place && ! $person->burial_date)
-        <dt>{{ __('people.burial') }}&nbsp;</dt>
+        <dt>{{ __('people.burial') }}</dt>
         <dd>{{ $person->burial_place }}</dd>
       @elseif ($person->burial_place && $person->burial_date)
-        <dt>{{ __('people.burial') }}&nbsp;</dt>
+        <dt>{{ __('people.burial') }}</dt>
         <dd>{{ $person->burial_date }}<br/>&nbsp;&nbsp;{{ $person->burial_place }}</dd>
       @endif
     @endif
 
     {{-- parents --}}
     @if ($person->mother)
-      <dt>{{ __('people.mother') }}&nbsp;</dt>
+      <dt>{{ __('people.mother') }}</dt>
       <dd><x-name :person="$person->mother"/></dd>
     @endif
     @if ($person->father)
-      <dt>{{ __('people.father') }}&nbsp;</dt>
+      <dt>{{ __('people.father') }}</dt>
       <dd><x-name :person="$person->father"/></dd>
     @endif
 
     {{-- siblings --}}
     @if ($person->siblings->isNotEmpty())
-      <dt>{{ __('people.siblings') }} ({{ $person->siblings->count() }})&nbsp;</dt>
+      <dt>{{ __('people.siblings') }} ({{ $person->siblings->count() }})</dt>
       <dd>
         <ul>
           @foreach ($person->siblings as $sibling)
@@ -242,7 +242,7 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- przyr. od str. matki --}}
     @if ($person->siblings_mother->isNotEmpty())
-      <dt>{{ __('people.siblings_mother') }} ({{ $person->siblings_mother->count() }})&nbsp;</dt>
+      <dt>{{ __('people.siblings_mother') }} ({{ $person->siblings_mother->count() }})</dt>
       <dd>
         <ul>
           @foreach ($person->siblings_mother as $sibling)
@@ -254,7 +254,7 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- przyr. od str. ojca --}}
     @if ($person->siblings_father->isNotEmpty())
-      <dt>{{ __('people.siblings_father') }} ({{ $person->siblings_father->count() }})&nbsp;</dt>
+      <dt>{{ __('people.siblings_father') }} ({{ $person->siblings_father->count() }})</dt>
       <dd>
         <ul>
           @foreach ($person->siblings_father as $sibling)
@@ -266,7 +266,7 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- marriages --}}
     @if ($person->marriages->isNotEmpty())
-      <dt>{{ __('people.marriages') }}&nbsp;</dt>
+      <dt>{{ __('people.marriages') }}</dt>
       <dd>
         <ul>
           @foreach ($person->marriages as $marriage)
@@ -353,7 +353,7 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- children --}}
     @if ($person->children->isNotEmpty())
-      <dt>{{ __('people.children') }} ({{ $person->children->count() }})&nbsp;</dt>
+      <dt>{{ __('people.children') }} ({{ $person->children->count() }})</dt>
       <dd>
         <ul>
           @foreach ($person->children as $child)
@@ -365,7 +365,7 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- sources --}}
     @if ($person->sources->isNotEmpty())
-      <dt>{{ __('people.sources') }}&nbsp;</dt>
+      <dt>{{ __('people.sources') }}</dt>
       <dd>
         <ul>
           @foreach ($person->sources as $source)
@@ -390,7 +390,7 @@ use App\Services\Pytlewski\Pytlewski;
       notes<br>
       note_deleted_you_can_see <a href="">earlier_versions</a> or <a href="">add_new_one</a>.
     </dd>
-    <dt>Notes <small>[no_notes]</small>&nbsp</dt>
+    <dt>Notes <small>[no_notes]</small></dt>
     <dd>
       <a href="" data-toggle="tooltip" data-html="true" title="click_to_create_note" target="_blank">[+]</a>
     </dd>

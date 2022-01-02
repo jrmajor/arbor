@@ -29,8 +29,8 @@
     @apply w-full font-bold sm:w-1/4 sm:overflow-hidden sm:whitespace-nowrap;
 
     &:after {
-      @apply hidden ml-0.5 font-normal text-[0.4rem] sm:inline;
-      content: ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+      @apply hidden ml-1 font-normal text-[0.4rem] sm:inline;
+      content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
      }
   }
 
