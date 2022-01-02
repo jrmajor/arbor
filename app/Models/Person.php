@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Psl\Str;
+use Psl\Vec;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use stdClass;
@@ -229,19 +231,12 @@ class Person extends Model
 
     public function formatSimpleDates(): ?string
     {
-        if ($this->birth_year && $this->death_year) {
-            return "∗{$this->birth_year}, ✝{$this->death_year}";
-        }
+        $dates = Vec\filter_nulls([
+            $this->birth_year ? "∗{$this->birth_year}" : null,
+            $this->death_year ? "✝{$this->death_year}" : null,
+        ]);
 
-        if ($this->birth_year) {
-            return "∗{$this->birth_year}";
-        }
-
-        if ($this->death_year) {
-            return "✝{$this->death_year}";
-        }
-
-        return null;
+        return $dates === [] ? null : Str\join($dates, ', ');
     }
 
     public function formatSimpleName(): string
