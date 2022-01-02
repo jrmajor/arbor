@@ -17,14 +17,9 @@ parameters:
     checkPhpDocMissingReturn: true
     ignoreErrors:
         - '#^Access to an undefined property Pest\\Expectation(\|Pest\\Support\\Extendable)?::\$\w+\.$#'
-        - '#^Access to undefined constant App\\Enums\\MarriageEventType::\w+\.$#'
-        - '#^Access to undefined constant App\\Enums\\MarriageRite::\w+\.$#'
-        - '#^Access to undefined constant App\\Enums\\Sex::\w+\.$#'
         - '#^Call to an undefined method Illuminate\\Foundation\\Testing\\TestCase::livewire\(\)\.$#'
         - '#^Call to an undefined method Pest\\Expectation\|Pest\\Support\\Extendable::(age|canRead|toBeCollection|toBeModel)\(\)\.$#'
         - '#^Call to an undefined method Pest\\PendingObjects\\TestCall::(get|post|withPermissions)\(\)\.$#'
-        - '#^Call to an undefined static method App\\Enums\\Sex::from\(\)\.$#'
-        - '#^Cannot use array destructuring on (App\\Models\\\w+\|)?Illuminate\\Database\\Eloquent\\Collection<App\\Models\\\w+>\.$#'
         - '#^Method .* return type with generic class Illuminate\\Database\\Eloquent\\Relations\\\w+ does not specify its types: .*$#'
         - '#^Method App\\Services\\Pytlewski\\Pytlewski::parseChildrenOrSiblings\(\) should return Illuminate\\Support\\Collection<int, array{id: string, name: string}> but returns Illuminate\\Support\\Collection<int, array{id: mixed, name: mixed}>\.$#'
         - '#^Method App\\Services\\Pytlewski\\Pytlewski::parseMarriages\(\) should return Illuminate\\Support\\Collection<int, array{id: string, name: string, date: string, place: string}> but returns Illuminate\\Support\\Collection<int, array{id: mixed, name: mixed, date: mixed, place: mixed}>\.$#'
@@ -35,6 +30,9 @@ parameters:
         -
             message: '#^Undefined variable: \$this$#'
             path: tests/
+        -
+            message: '#^Using nullsafe method call on non-nullable type App\\Enums\\Sex::Female\. Use -> instead\.$#'
+            path: database/factories/PersonFactory.php
         -
             message: '#^Match expression does not handle remaining value: string$#'
             path: app/Models/Relations/HalfSiblings.php
