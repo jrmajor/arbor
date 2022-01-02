@@ -1,3 +1,7 @@
 @import "base";
 @import "buttons";
 @import "forms";
+
+.indent-children-except-first p:not(:first-child) {
+  @apply ml-4;
+}

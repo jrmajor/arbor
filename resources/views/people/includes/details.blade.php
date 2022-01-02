@@ -113,42 +113,27 @@ use App\Services\Pytlewski\Pytlewski;
     {{-- birth --}}
     @if ($person->birth_date || $person->birth_place  || $person->age->estimatedBirthDate())
       <dt>{{ __('people.birth') }}</dt>
-      <dd>
-        @php $some_birth_data_printed = false; @endphp
-        @if ($person->birth_date)
-          {{ $person->birth_date }}<br>
-          @php $some_birth_data_printed = true; @endphp
-        @endif
-        @if ($person->birth_place)
-          @if ($some_birth_data_printed)
-            &nbsp;&nbsp;
-          @endif
-          {{ $person->birth_place }}<br>
-          @php $some_birth_data_printed = true; @endphp
-        @endif
+      <dd class="indent-children-except-first">
+        <x-optional-date-place :date="$person->birth_date" :place="$person->birth_place" multiline/>
         @if (! $person->dead && $person->age->prettyCurrent() !== null)
-          @if ($some_birth_data_printed)
-            &nbsp;&nbsp;
-          @endif
-          {{ __('people.current_age') }}:
-          {{ __('misc.year', ['rawAge' => $person->age->current(), 'age' => $person->age->prettyCurrent()]) }}
-          <br>
-          @php $some_birth_data_printed = true; @endphp
+          <p>
+            {{ __('people.current_age') }}:
+            {{ __('misc.year', ['rawAge' => $person->age->current(), 'age' => $person->age->prettyCurrent()]) }}
+          </p>
         @endif
         @if (
           (! $person->birth_date || auth()->user()?->isSuperAdmin())
           && $person->age->estimatedBirthDate() !== null
         )
-          @if ($some_birth_data_printed === true)
-            &nbsp;&nbsp;
-          @endif
-          {{ __('people.estimated_birth_date') }}: {!! $person->age->estimatedBirthDate() !!}
-          @if ($person->age->estimatedBirthDateError() !== null)
-            <small>
-              (<strong>{{ $person->age->estimatedBirthDateError() }}</strong>
-              {{ __('misc.years_of_error', ['age' => $person->age->estimatedBirthDateError()]) }})
-            </small>
-          @endif
+          <p>
+            {{ __('people.estimated_birth_date') }}: {!! $person->age->estimatedBirthDate() !!}
+            @if ($person->age->estimatedBirthDateError() !== null)
+              <small>
+                (<strong>{{ $person->age->estimatedBirthDateError() }}</strong>
+                {{ __('misc.years_of_error', ['age' => $person->age->estimatedBirthDateError()]) }})
+              </small>
+            @endif
+          </p>
         @endif
       </dd>
     @endif
@@ -157,32 +142,16 @@ use App\Services\Pytlewski\Pytlewski;
     @if ($person->dead)
       <dt>{{ __('people.death') }}</dt>
       @if ($person->death_date || $person->death_place || $person->death_cause)
-        <dd>
-          @php $some_death_data_printed = false; @endphp
-          @if ($person->death_date)
-            {{ $person->death_date }}<br>
-            @php $some_death_data_printed = true; @endphp
-          @endif
-          @if ($person->death_place)
-            @if ($some_death_data_printed)
-              &nbsp;&nbsp;
-            @endif
-            {{ $person->death_place }}<br>
-            @php $some_death_data_printed = true; @endphp
-          @endif
+        <dd class="indent-children-except-first">
+          <x-optional-date-place :date="$person->death_date" :place="$person->death_place" multiline/>
           @if ($person->death_cause)
-            @if ($some_death_data_printed)
-              &nbsp;&nbsp;
-            @endif
-            {{ $person->death_cause }}<br>
-            @php $some_death_data_printed = true; @endphp
+            <p>{{ $person->death_cause }}</p>
           @endif
           @if ($person->age->prettyAtDeath() !== null)
-            @if ($some_death_data_printed)
-              &nbsp;&nbsp;
-            @endif
-            {{ __('people.death_age') }}:
-            {{ __('misc.year', ['rawAge' => $person->age->atDeath(), 'age' => $person->age->prettyAtDeath()]) }}
+            <p>
+              {{ __('people.death_age') }}:
+              {{ __('misc.year', ['rawAge' => $person->age->atDeath(), 'age' => $person->age->prettyAtDeath()]) }}
+            </p>
           @endif
         </dd>
       @else
@@ -192,30 +161,18 @@ use App\Services\Pytlewski\Pytlewski;
 
     {{-- funeral --}}
     @if ($person->funeral_date || $person->funeral_place)
-      @if ($person->funeral_date && ! $person->funeral_place)
-        <dt>{{ __('people.funeral') }}</dt>
-        <dd>{{ $person->funeral_date }}</dd>
-      @elseif ($person->funeral_place && ! $person->funeral_date)
-        <dt>{{ __('people.funeral') }}</dt>
-        <dd>{{ $person->funeral_place }}</dd>
-      @elseif ($person->funeral_place && $person->funeral_date)
-        <dt>{{ __('people.funeral') }}</dt>
-        <dd>{{ $person->funeral_date }}<br/>&nbsp;&nbsp;{{ $person->funeral_place }}</dd>
-      @endif
+      <dt>{{ __('people.funeral') }}</dt>
+      <dd class="indent-children-except-first">
+        <x-optional-date-place :date="$person->funeral_date" :place="$person->funeral_place" multiline/>
+      </dd>
     @endif
 
     {{-- burial --}}
     @if ($person->burial_date || $person->burial_place)
-      @if ($person->burial_date && ! $person->burial_place)
-        <dt>{{ __('people.burial') }}</dt>
-        <dd>{{ $person->burial_date }}</dd>
-      @elseif ($person->burial_place && ! $person->burial_date)
-        <dt>{{ __('people.burial') }}</dt>
-        <dd>{{ $person->burial_place }}</dd>
-      @elseif ($person->burial_place && $person->burial_date)
-        <dt>{{ __('people.burial') }}</dt>
-        <dd>{{ $person->burial_date }}<br/>&nbsp;&nbsp;{{ $person->burial_place }}</dd>
-      @endif
+      <dt>{{ __('people.burial') }}</dt>
+      <dd class="indent-children-except-first">
+        <x-optional-date-place :date="$person->burial_date" :place="$person->burial_place" multiline/>
+      </dd>
     @endif
 
     {{-- parents --}}
@@ -271,7 +228,7 @@ use App\Services\Pytlewski\Pytlewski;
         <ul>
           @foreach ($person->marriages as $marriage)
             @can ('view', $marriage)
-              <li>
+              <li class="indent-children-except-first">
                 @if ($person->marriages->count() > 1 && $marriage->order($person))
                   {{ strtolower(roman($marriage->order($person))) }}.
                 @endif
@@ -282,58 +239,36 @@ use App\Services\Pytlewski\Pytlewski;
                 <x-name :person="$marriage->partner($person)"/>
 
                 @can('update', $marriage)
-                  <a
-                    href="{{ route('marriages.edit', ['marriage' => $marriage]) }}"
-                    class="a">
+                  <a href="{{ route('marriages.edit', ['marriage' => $marriage]) }}" class="a">
                     <small>[{{ __('marriages.marriage') }} №{{ $marriage->id }}]</small>
                   </a>
                   <a href="{{ route('people.create', [
                       'mother' => $marriage->woman_id,
-                      'father' => $marriage->man_id,
-                    ]) }}"
-                    class="a">
+                      'father' => $marriage->man_id]) }}"
+                    class="a"
+                  >
                     <small>[+]</small>
                   </a>
                 @endcan
                 @if ($marriage->hasFirstEvent())
-                  @if ($marriage->first_event_type)
-                    <br>&nbsp;&nbsp;{{ __('marriages.event_types.' . $marriage->first_event_type->value) }}:
-                  @else
-                    <br>&nbsp;
-                  @endif
-                  @if ($marriage->first_event_place && $marriage->first_event_date)
-                    {{ $marriage->first_event_place }}, {{ $marriage->first_event_date }}
-                  @elseif ($marriage->first_event_place)
-                    {{ $marriage->first_event_place }}
-                  @elseif ($marriage->first_event_date)
-                    {{ $marriage->first_event_date }}
-                  @endif
+                  <x-optional-date-place :date="$marriage->first_event_date" :place="$marriage->first_event_place">
+                    @if ($marriage->first_event_type)
+                      {{ __('marriages.event_types.' . $marriage->first_event_type->value) }}
+                    @endif
+                  </x-optional-date-place>
                 @endif
                 @if ($marriage->hasSecondEvent())
-                  @if ($marriage->second_event_type)
-                    <br>&nbsp;&nbsp;{{ __('marriages.event_types.' . $marriage->second_event_type->value) }}:
-                  @else
-                    <br>&nbsp;
-                  @endif
-                  @if ($marriage->second_event_place && $marriage->second_event_date)
-                    {{ $marriage->second_event_place }}, {{ $marriage->second_event_date }}
-                  @elseif ($marriage->second_event_place)
-                    {{ $marriage->second_event_place }}
-                  @elseif ($marriage->second_event_date)
-                    {{ $marriage->second_event_date }}
-                  @endif
+                  <x-optional-date-place :date="$marriage->second_event_date" :place="$marriage->second_event_place">
+                    @if ($marriage->second_event_type)
+                      {{ __('marriages.event_types.' . $marriage->second_event_type->value) }}
+                    @endif
+                  </x-optional-date-place>
                 @endif
 
                 @if ($marriage->divorced)
-                  @if ($marriage->divorce_place && $marriage->divorce_date)
-                    <br>&nbsp;&nbsp;{{ strtolower(__('marriages.divorced')) }}: {{ $marriage->divorce_place }}, {{ $marriage->divorce_date }}
-                  @elseif ($marriage->divorce_place)
-                    <br>&nbsp;&nbsp;{{ strtolower(__('marriages.divorced')) }}: {{ $marriage->divorce_place }}
-                  @elseif ($marriage->divorce_date)
-                    <br>&nbsp;&nbsp;{{ strtolower(__('marriages.divorced')) }}: {{ $marriage->divorce_date }}
-                  @else
-                    <br>&nbsp;&nbsp;{{ strtolower(__('marriages.divorced')) }}
-                  @endif
+                  <x-optional-date-place :date="$marriage->divorce_date" :place="$marriage->divorce_place">
+                    {{ strtolower(__('marriages.divorced')) }}
+                  </x-optional-date-place>
                 @endif
               </li>
             @else
