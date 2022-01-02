@@ -1,7 +1,7 @@
 <div>
   <h2>{{ __('people.index.by_family_name') }}:</h2>
 
-  <ul class="col-count-3 xs:col-count-4 sm:col-count-5 md:col-count-6 lg:col-count-8">
+  <ul class="columns-3 xs:columns-4 sm:columns-5 md:columns-6 lg:columns-8">
     @foreach ($letters('family') as $letter)
       <li>
         @if ($isActive($letter, 'f'))
@@ -21,7 +21,7 @@
 <div class="mt-4">
   <h2>{{ __('people.index.by_last_name') }}:</h2>
 
-  <ul class="col-count-3 xs:col-count-4 sm:col-count-5 md:col-count-6 lg:col-count-8">
+  <ul class="columns-3 xs:columns-4 sm:columns-5 md:columns-6 lg:columns-8">
     @foreach ($letters('last') as $letter)
       <li>
         @if ($isActive($letter, 'l'))
