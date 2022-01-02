@@ -189,13 +189,13 @@ class Person extends Model
         $interval = self::generationInterval;
         $prediction = collect();
 
-        $mother_year = $this->mother?->birth_year;
-        $father_year = $this->father?->birth_year;
+        $motherYear = $this->mother?->birth_year;
+        $fatherYear = $this->father?->birth_year;
 
-        if ($mother_year && $father_year) {
-            $prediction->put('parents', (($mother_year + $father_year) / 2) + $interval);
-        } elseif ($mother_year || $father_year) {
-            $prediction->put('parents', $mother_year + $father_year + $interval);
+        if ($motherYear && $fatherYear) {
+            $prediction->put('parents', (($motherYear + $fatherYear) / 2) + $interval);
+        } elseif ($motherYear || $fatherYear) {
+            $prediction->put('parents', $motherYear + $fatherYear + $interval);
         }
 
         $prediction->put('children',
