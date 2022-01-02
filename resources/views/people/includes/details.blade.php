@@ -111,7 +111,7 @@ use App\Services\Pytlewski\Pytlewski;
     @endif
 
     {{-- birth --}}
-    @if ($person->birth_date || $person->birth_place  || $person->estimatedBirthDate())
+    @if ($person->birth_date || $person->birth_place  || $person->age->estimatedBirthDate())
       <dt>{{ __('people.birth') }}</dt>
       <dd>
         @php $some_birth_data_printed = false; @endphp
