@@ -22,6 +22,6 @@
   @endif
   {{ $pytlewski->name }}{{--
 
---}}@if ($pytlewski->person || $pytlewski->id)
-  </a>
-@endif
+--}}@if ($pytlewski->person || $pytlewski->id){{--
+  --}}</a>{{--
+--}}@endif
