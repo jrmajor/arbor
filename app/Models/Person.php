@@ -131,12 +131,12 @@ class Person extends Model
 
     public function siblings_mother(): HalfSiblings
     {
-        return new HalfSiblings($this, 'mother');
+        return new HalfSiblings($this, Sex::Female);
     }
 
     public function siblings_father(): HalfSiblings
     {
-        return new HalfSiblings($this, 'father');
+        return new HalfSiblings($this, Sex::Male);
     }
 
     public function marriages(): Marriages

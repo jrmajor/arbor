@@ -34,8 +34,8 @@ parameters:
             message: '#^Using nullsafe method call on non-nullable type App\\Enums\\Sex::Female\. Use -> instead\.$#'
             path: database/factories/PersonFactory.php
         -
-            message: '#^Match expression does not handle remaining value: string$#'
-            path: app/Models/Relations/HalfSiblings.php
+            message: '#^Match expression does not handle remaining value: App\\Enums\\Sex#'
+            path: app/Models/Relations/Marriages.php
             count: 1
 
 includes:

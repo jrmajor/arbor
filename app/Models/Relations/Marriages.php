@@ -22,9 +22,11 @@ class Marriages extends Relation
 
     public function __construct(Person $parent)
     {
-        $query = Marriage::query()->orderBy(
-            $parent->sex === Sex::Male ? 'man_order' : 'woman_order',
-        );
+        $query = Marriage::query()->orderBy(match ($parent->sex) {
+            Sex::Male => 'man_order',
+            Sex::Female => 'woman_order',
+            null => 'first_event_date_from',
+        });
 
         parent::__construct($query, $parent);
     }

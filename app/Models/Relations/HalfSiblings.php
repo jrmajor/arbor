@@ -2,6 +2,7 @@
 
 namespace App\Models\Relations;
 
+use App\Enums\Sex;
 use App\Models\Person;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,13 +22,11 @@ class HalfSiblings extends Relation
 
     public function __construct(
         Person $parent,
-        public string $side,
+        public Sex $side,
     ) {
-        $this->sideKey = "{$side}_id";
-
-        $this->partnerKey = match ($side) {
-            'mother' => 'father_id',
-            'father' => 'mother_id',
+        [$this->sideKey, $this->partnerKey] = match ($side) {
+            Sex::Male => ['father_id', 'mother_id'],
+            Sex::Female => ['mother_id', 'father_id'],
         };
 
         parent::__construct(Person::query()->orderBy('birth_date_from'), $parent);
