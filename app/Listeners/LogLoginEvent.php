@@ -5,18 +5,16 @@ namespace App\Listeners;
 use App\Models\User;
 use Illuminate\Auth\Events\Login;
 use Jenssegers\Agent\Facades\Agent;
-use TypeError;
+use Psl\Type;
 
 class LogLoginEvent
 {
     public function handle(Login $event): void
     {
-        if (! $event->user instanceof User) {
-            throw new TypeError('$event->user should be instance of App\\Models\\User.');
-        }
+        $user = Type\instance_of(User::class)->coerce($event->user);
 
         activity('logins')
-            ->causedBy($event->user)
+            ->causedBy($user)
             ->withProperties($this->getAgent())
             ->log('logged-in');
     }
