@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "~8.1.0",
-        "azjezz/psl": "2.0.x-dev#2cac74d",
+        "azjezz/psl": "2.0.0-rc1",
         "doctrine/dbal": "^3.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1dcf251b555c569a6f12fa77c15ddc13",
+    "content-hash": "ef3c6e670b483d9a48182989595d22e7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -205,16 +205,16 @@
         },
         {
             "name": "azjezz/psl",
-            "version": "2.0.x-dev",
+            "version": "2.0.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/azjezz/psl.git",
-                "reference": "2cac74d"
+                "reference": "d7338475b32088d44d7f9367a8fb4f29f03a73a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/azjezz/psl/zipball/2cac74d",
-                "reference": "2cac74d",
+                "url": "https://api.github.com/repos/azjezz/psl/zipball/d7338475b32088d44d7f9367a8fb4f29f03a73a8",
+                "reference": "d7338475b32088d44d7f9367a8fb4f29f03a73a8",
                 "shasum": ""
             },
             "require": {
@@ -239,7 +239,6 @@
             "suggest": {
                 "php-standard-library/psalm-plugin": "Psalm integration"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "thanks": {
@@ -13275,7 +13274,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "azjezz/psl": 20,
         "pestphp/pest-plugin-watch": 20
     },
     "prefer-stable": true,
