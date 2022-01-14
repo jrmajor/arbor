@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Js;
 use Illuminate\View\Component;
 
@@ -104,7 +105,7 @@ class DateRangePicker extends Component
         return null;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('components.date-range-picker');
     }

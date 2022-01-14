@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use App\Enums\Sex;
 use App\Models\Person;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Js;
 use Illuminate\View\Component;
 
@@ -34,7 +35,7 @@ class PersonPicker extends Component
         ]);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('components.person-picker');
     }
