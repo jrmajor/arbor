@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use App\Enums\Sex;
 use App\Models\Person;
+use Illuminate\Support\Js;
 use Illuminate\View\Component;
 
 class PersonPicker extends Component
@@ -20,9 +21,9 @@ class PersonPicker extends Component
         $this->initial = $initial ? Person::find($initial) : null;
     }
 
-    public function pickerData(): array
+    public function pickerData(): Js
     {
-        return [
+        return new Js([
             'nullable' => $this->nullable,
             'sex' => $this->sex,
             'initial' => [
@@ -30,7 +31,7 @@ class PersonPicker extends Component
                 'name' => $this->initial?->formatSimpleName(),
                 'dates' => $this->initial?->formatSimpleDates(),
             ],
-        ];
+        ]);
     }
 
     public function render()

@@ -6,11 +6,9 @@
 <form
   method="POST"
   action="{{ $action === 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"
-  x-data="
-    @encodedjson([
-      'divorced' => (bool) old('divorced', $marriage->divorced),
-    ])
-  ">
+  x-data="{{ new \Illuminate\Support\Js(['divorced' => (bool) old('divorced', $marriage->divorced)]) }}"
+>
+
   @method($action === 'create' ? 'post' : 'put')
   @csrf
 

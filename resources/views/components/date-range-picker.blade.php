@@ -1,6 +1,6 @@
 <div
   {{ $attributes->merge(['class' => 'flex flex-col']) }}
-  x-data="dateRangePickerData(@encodedjson($pickerData()))"
+  x-data="dateRangePickerData({{ $pickerData() }})"
 >
   <div class="w-full pb-1 flex items-center">
     <label for="{{ $name }}_year" class="font-medium text-gray-700">{{ $label }}</label>

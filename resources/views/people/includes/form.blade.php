@@ -3,19 +3,24 @@
   @livewireScripts
 @endpush
 
+@php
+
+$data = new Illuminate\Support\Js([
+    'sex' => old('sex', $person->sex),
+    'dead' => (bool) old('dead', $person->dead),
+    'sources' => [
+        ...collect(old('sources', $person->sources))
+          ->map(fn ($source) => $source instanceof App\Services\Sources\Source ? $source->raw() : $source),
+    ],
+]);
+
+@endphp
+
 <form
   method="POST"
   action="{{ $action === 'create' ? route('people.store') : route('people.update', $person) }}"
-  x-data="
-    @encodedjson([
-      'sex' => old('sex', $person->sex),
-      'dead' => (bool) old('dead', $person->dead),
-      'sources' => [
-        ...collect(old('sources', $person->sources))
-          ->map(fn ($source) => $source instanceof App\Services\Sources\Source ? $source->raw() : $source)
-      ],
-    ])
-  ">
+  x-data="{{ $data }}"
+>
   @method($action === 'create' ? 'post' : 'put')
   @csrf
 

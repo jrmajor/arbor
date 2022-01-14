@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
+use Illuminate\Support\Js;
 use Illuminate\View\Component;
 
 class DateRangePicker extends Component
@@ -35,14 +36,14 @@ class DateRangePicker extends Component
             : $initialTo?->toImmutable();
     }
 
-    public function pickerData(): array
+    public function pickerData(): Js
     {
-        return [
+        return new Js([
             'simple' => $this->initialSimplePickerValue(),
             'from' => $this->initialFrom?->format('Y-m-d'),
             'to' => $this->initialTo?->format('Y-m-d'),
             'advancedPicker' => $this->hasErrors || ! $this->simplePickerCanBeUsed(),
-        ];
+        ]);
     }
 
     protected function simplePickerCanBeUsed(): bool

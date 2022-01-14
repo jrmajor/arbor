@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class MacrosServiceProvider extends ServiceProvider
@@ -15,10 +14,6 @@ class MacrosServiceProvider extends ServiceProvider
     {
         $this->registerCarbonMacros();
         $this->registerTrimArrayMacro();
-
-        Blade::directive('encodedjson', function ($expression) {
-            return "<?php echo e(json_encode({$expression})) ?>";
-        });
     }
 
     public function registerCarbonMacros(): void

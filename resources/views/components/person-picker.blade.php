@@ -1,6 +1,6 @@
 <div
   {{ $attributes->merge(['class' => 'flex flex-col']) }}
-  x-data="personPickerData(@encodedjson($pickerData()))"
+  x-data="personPickerData({{ $pickerData() }})"
 >
   <label for="{{ $name }}_search" class="w-full font-medium pb-1 text-gray-700">{{ $label }}</label>
   <div class="w-full">
