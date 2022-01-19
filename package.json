@@ -12,7 +12,7 @@
     },
     "dependencies": {
         "@tailwindcss/forms": "^0.4",
-        "alpinejs": "^3.7",
+        "alpinejs": "^3.8",
         "date-fns": "^2.28",
         "tailwindcss": "^3.0",
         "ziggy-js": "^1.4"
