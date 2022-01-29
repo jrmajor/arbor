@@ -9,12 +9,3 @@ mix
     require ('autoprefixer'),
   ])
   .version()
-
-if (! mix.inProduction()) {
-  require('laravel-mix-bundle-analyzer')
-
-  mix.bundleAnalyzer({
-    analyzerMode: 'static',
-    openAnalyzer: false,
-  })
-}
