@@ -1,10 +1,11 @@
 import Alpine from 'alpinejs'
 
+// @ts-ignore
 import menuSearch from './menuSearch'
 import './personPicker'
 import './dateRangePicker'
 
-window.Alpine = Alpine
+(window as any).Alpine = Alpine
 
 Alpine.data('menuSearch', menuSearch)
 
