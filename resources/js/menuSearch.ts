@@ -22,7 +22,7 @@ export default () => ({
       .then(response => response.json())
       .then(data => {
         this.people = data
-        if ((this.hovered ?? 0) > (this.people.length - 1)) this.hovered = null
+        if ((this.hovered ?? 0) > this.people.length - 1) this.hovered = null
       })
 
     this.previousSearch = this.search
