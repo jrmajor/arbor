@@ -1,6 +1,24 @@
 import route from 'ziggy-js'
 
-window.personPickerData = function (data) {
+interface Person {
+  id: number
+  name: string
+  dates: string | null
+}
+
+interface EmptyInitial {
+  id: null
+  name: null
+  dates: null
+}
+
+interface Data {
+  nullable: boolean
+  sex: 'xy' | 'xx'
+  initial: Person | EmptyInitial
+}
+
+(window as any).personPickerData = function (data: Data) {
   return {
     nullable: data.nullable,
     sex: data.sex,
@@ -9,12 +27,12 @@ window.personPickerData = function (data) {
       id: data.initial.id,
       name: data.initial.name,
     },
-    hovered: null,
+    hovered: null as number | null,
     open: false,
     shouldCloseOnBlur: true,
     previousSearch: '',
     search: '',
-    people: [],
+    people: [] as Person[],
 
     init() {
       if (this.initial.id !== null) this.people.push(this.initial)
@@ -27,33 +45,26 @@ window.personPickerData = function (data) {
       }
 
       if (this.search !== this.previousSearch) {
-        fetch(
-          route('people.search', {
-            sex: this.sex,
-            search: this.search,
-          }),
-        )
+        fetch(route('people.search', { sex: this.sex, search: this.search }))
           .then(response => response.json())
           .then(data => {
             this.people = data
-            if (this.hovered > this.people.length - 1) this.hovered = null
+            if ((this.hovered ?? 0) > this.people.length - 1) this.hovered = null
           })
 
         this.previousSearch = this.search
       }
     },
 
-    keydown(event) {
+    keydown(event: KeyboardEvent) {
       if (this.selected.id === null) return
 
-      if (event.key === 'Tab' ||
-        event.metaKey ||
-        event.ctrlKey) return
+      if (event.key === 'Tab' || event.metaKey || event.ctrlKey) return
 
       event.preventDefault()
     },
 
-    arrow(direction) {
+    arrow(direction: 'up' | 'down') {
       if (this.people.length === 0) return
 
       if (this.hovered === null) {
@@ -82,17 +93,17 @@ window.personPickerData = function (data) {
       if (! this.nullable && this.selected.id === null && this.initial.id !== null) {
         this.selected.id = this.initial.id
         this.selected.name = this.initial.name
-        this.search = null
+        this.search = ''
       }
 
       this.hovered = null
       this.shouldCloseOnBlur = true
     },
 
-    selectPerson(person) {
+    selectPerson(person: Person) {
       this.selected.id = person.id
       this.selected.name = person.name
-      this.search = null
+      this.search = ''
       this.open = false
     },
 
