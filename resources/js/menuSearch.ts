@@ -1,31 +1,34 @@
 import route from 'ziggy-js'
 
+interface Person {
+  id: number
+  name: string
+  dates: string | null
+  url: string
+}
+
 export default () => ({
-  hovered: null,
+  hovered: null as number | null,
   open: false,
   shouldCloseOnBlur: true,
   previousSearch: '',
   search: '',
-  people: [],
+  people: [] as Person[],
 
   findPeople() {
     if (this.search === this.previousSearch) return
 
-    fetch(
-      route('people.search', {
-        search: this.search,
-      }),
-    )
+    fetch(route('people.search', { search: this.search }))
       .then(response => response.json())
       .then(data => {
         this.people = data
-        if (this.hovered > this.people.length - 1) this.hovered = null
+        if ((this.hovered ?? 0) > (this.people.length - 1)) this.hovered = null
       })
 
     this.previousSearch = this.search
   },
 
-  arrow(direction) {
+  arrow(direction: 'up' | 'down') {
     if (this.people.length === 0) return
 
     if (this.hovered === null) {
@@ -39,7 +42,7 @@ export default () => ({
     if (this.hovered > this.people.length - 1) this.hovered = 0
   },
 
-  enter(event) {
+  enter(event: Event) {
     this.open = false
 
     if (this.hovered === null) return

@@ -1,6 +1,5 @@
 import Alpine from 'alpinejs'
 
-// @ts-ignore
 import menuSearch from './menuSearch'
 import './personPicker'
 import './dateRangePicker'
