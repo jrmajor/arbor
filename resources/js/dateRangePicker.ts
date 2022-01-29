@@ -1,6 +1,13 @@
 import { isValid, startOfMonth, lastDayOfMonth, startOfYear, lastDayOfYear, format } from 'date-fns'
 
-window.dateRangePickerData = function (data) {
+interface Data {
+  simple: string | null
+  from: string | null
+  to: string | null
+  advancedPicker: boolean
+}
+
+(window as any).dateRangePickerData = function (data: Data) {
   return {
     simple: data.simple,
     advanced: {
@@ -13,7 +20,7 @@ window.dateRangePickerData = function (data) {
     simpleChanged() {
       this.dateIsValid = true
 
-      this.simple = this.simple.trim()
+      this.simple = this.simple!.trim()
 
       if (this.simple.length === 0) {
         this.advanced.from = this.advanced.to = ''
@@ -82,7 +89,7 @@ window.dateRangePickerData = function (data) {
     },
 
     simpleBlurred() {
-      if (this.simple.slice(-1) === '-') this.simple = this.simple.slice(0, -1)
+      if (this.simple!.slice(-1) === '-') this.simple = this.simple!.slice(0, -1)
     },
 
     clearInvalidDate() {
