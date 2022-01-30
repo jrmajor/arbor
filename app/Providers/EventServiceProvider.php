@@ -10,6 +10,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
+    /** @var array<class-string, list<class-string>> */
     protected $listen = [
         Login::class => [LogLoginEvent::class],
     ];

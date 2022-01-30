@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TrustProxies extends Middleware
 {
+    /** @var list<string>|string|null */
     protected $proxies;
 
     protected $headers
