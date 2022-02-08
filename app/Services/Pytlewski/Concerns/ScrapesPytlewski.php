@@ -4,6 +4,7 @@ namespace App\Services\Pytlewski\Concerns;
 
 use Generator;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
@@ -31,15 +32,14 @@ trait ScrapesPytlewski
             return [];
         }
 
-        $attributes = collect()
-            ->merge($this->parseNames($crawler))
-            ->merge($this->parseDates($crawler))
-            ->merge($this->parseParents($crawler))
-            ->merge($this->parsePhoto($crawler))
-            ->merge($this->parseRelations($crawler))
-            ->merge($this->parseBio($crawler))
-            ->trim()
-            ->toArray();
+        $attributes = Arr::trim([
+            ...$this->parseNames($crawler),
+            ...$this->parseDates($crawler),
+            ...$this->parseParents($crawler),
+            ...$this->parsePhoto($crawler),
+            ...$this->parseRelations($crawler),
+            ...$this->parseBio($crawler),
+        ]);
 
         foreach (['marriages', 'children', 'siblings'] as $key) {
             $attributes[$key] ??= [];
