@@ -49,6 +49,7 @@
         "pestphp/pest-plugin-livewire": "^1.0",
         "pestphp/pest-plugin-watch": "1.x-dev",
         "phpstan/phpstan": "^1.4",
+        "phpstan/phpstan-phpunit": "^1.0",
         "phpunit/phpunit": "^9.5"
     },
     "minimum-stability": "dev",
