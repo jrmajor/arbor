@@ -44,6 +44,7 @@ class Activity extends Model implements ActivityContract
     public function changes(): Collection
     {
         if (! $this->properties instanceof Collection) {
+            /** @phpstan-ignore-next-line */
             return new Collection();
         }
 
