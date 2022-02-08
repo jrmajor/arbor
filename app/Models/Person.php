@@ -11,6 +11,7 @@ use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
 use App\Services\Age;
 use App\Services\Pytlewski\Pytlewski;
+use App\Services\Sources\Source;
 use App\Services\Sources\SourcesCast;
 use App\Services\Wielcy\Wielcy;
 use Carbon\Carbon;
@@ -33,15 +34,16 @@ use stdClass;
  * @property-read string $birth_date
  * @property-read ?Carbon $birth_date_from
  * @property-read ?Carbon $birth_date_to
- * @property-read string $death_date
+ * @property-read ?string $death_date
  * @property-read ?Carbon $death_date_from
  * @property-read ?Carbon $death_date_to
- * @property-read string $funeral_date
- * @property-read string $burial_date
+ * @property-read ?string $funeral_date
+ * @property-read ?string $burial_date
  * @property-read ?int $birth_year
  * @property-read ?int $death_year
  * @property-read ?int $funeral_year
  * @property-read ?int $burial_year
+ * @property-read Collection<int, Source> $sources
  * @property-read EloquentCollection<Person> $siblings
  * @property-read EloquentCollection<Marriage> $marriages
  * @property-read EloquentCollection<Person> $children
