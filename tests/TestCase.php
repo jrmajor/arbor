@@ -2,7 +2,9 @@
 
 namespace Tests;
 
+use App\Application;
 use App\Models\User;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -14,9 +16,17 @@ use ReflectionParameter;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
     use InteractsWithLivewire;
     use LazilyRefreshDatabase;
+
+    public function createApplication(): Application
+    {
+        $app = require __DIR__ . '/../bootstrap/app.php';
+
+        $app->make(Kernel::class)->bootstrap();
+
+        return $app;
+    }
 
     public function withPermissions(int $permissions): self
     {
