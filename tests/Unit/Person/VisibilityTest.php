@@ -1,42 +1,56 @@
 <?php
 
+namespace Tests\Unit\Person;
+
 use App\Models\Person;
+use Exception;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('can determine its visibility', function () {
-    $alive = Person::factory()->alive()->create();
-    $dead = Person::factory()->dead()->create();
+final class VisibilityTest extends TestCase
+{
+    #[TestDox('it can determine its visibility')]
+    public function testDetermine(): void
+    {
+        $alive = Person::factory()->alive()->create();
+        $dead = Person::factory()->dead()->create();
 
-    $alive->visibility = false;
-    expect($alive->isVisible())->toBeFalse();
-    $alive->visibility = true;
-    expect($alive->isVisible())->toBeTrue();
+        $alive->visibility = false;
+        $this->assertFalse($alive->isVisible());
+        $alive->visibility = true;
+        $this->assertTrue($alive->isVisible());
 
-    $dead->visibility = false;
-    expect($dead->isVisible())->toBeFalse();
-    $dead->visibility = true;
-    expect($dead->isVisible())->toBeTrue();
-});
+        $dead->visibility = false;
+        $this->assertFalse($dead->isVisible());
+        $dead->visibility = true;
+        $this->assertTrue($dead->isVisible());
+    }
 
-test('visibility can be updated', function () {
-    $person = Person::factory()->create([
-        'visibility' => false,
-    ]);
+    #[TestDox('visibility can be updated')]
+    public function testUpdate(): void
+    {
+        $person = Person::factory()->create(['visibility' => false]);
 
-    $person->fill(['visibility' => true])->save();
-    expect($person->visibility)->toBeFalse();
+        $person->fill(['visibility' => true])->save();
+        $this->assertFalse($person->visibility);
 
-    $person->forceFill(['visibility' => true])->save();
-    expect($person->visibility)->toBeTrue();
-});
+        $person->forceFill(['visibility' => true])->save();
+        $this->assertTrue($person->visibility);
+    }
 
-test("visibility can't be updated with other attributes", function () {
-    $person = Person::factory()->create([
-        'name' => 'Old Name',
-        'visibility' => false,
-    ]);
+    #[TestDox('visibility can not be updated with other attributes')]
+    public function testUpdateMany(): void
+    {
+        $person = Person::factory()->create([
+            'name' => 'Old Name',
+            'visibility' => false,
+        ]);
 
-    $person->forceFill([
-        'name' => 'New Name',
-        'visibility' => true,
-    ])->save();
-})->throws(Exception::class);
+        $this->expectException(Exception::class);
+
+        $person->forceFill([
+            'name' => 'New Name',
+            'visibility' => true,
+        ])->save();
+    }
+}
