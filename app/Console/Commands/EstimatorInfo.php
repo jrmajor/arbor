@@ -25,7 +25,7 @@ class EstimatorInfo extends Command
         $people = Person::query()
             ->whereNotNull('birth_date_from')
             ->get()
-            ->filter(fn (Person $person) => $person->birth_year)
+            ->filter(fn (Person $person) => $person->birth_year !== null)
             ->map(fn (Person $person) => (object) [
                 'personId' => $person->id,
                 'error' => $person->age->estimatedBirthDateError(),
@@ -46,7 +46,7 @@ class EstimatorInfo extends Command
             ->whereNotNull('birth_date_from')
             ->where(fn (Builder $q) => $q->whereHas('father')->orWhereHas('mother'))
             ->get()
-            ->filter(fn (Person $person) => $person->birth_year)
+            ->filter(fn (Person $person) => $person->birth_year !== null)
             ->map(fn (Person $person) => [
                 ($f = $person->father?->birth_year) ? $person->birth_year - $f : null,
                 ($m = $person->mother?->birth_year) ? $person->birth_year - $m : null,
