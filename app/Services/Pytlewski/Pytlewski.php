@@ -100,29 +100,29 @@ final class Pytlewski
     protected function matchRelatives(Collection $relatives): array
     {
         $mother = isset($this->attributes['mother_surname']) || isset($this->attributes['mother_name'])
-            ? Relative::hydrate([
-                'id' => $this->attributes['mother_id'] ?? null,
-                'person' => isset($this->attributes['mother_id']) ? $relatives
+            ? new Relative(
+                id: $this->attributes['mother_id'] ?? null,
+                name: $this->attributes['mother_name'] ?? null,
+                surname: $this->attributes['mother_surname'] ?? null,
+                person: isset($this->attributes['mother_id']) ? $relatives
                     ->where('id_pytlewski', $this->attributes['mother_id'])->first() : null,
-                'surname' => $this->attributes['mother_surname'] ?? null,
-                'name' => $this->attributes['mother_name'] ?? null,
-            ]) : null;
+            ) : null;
 
         $father = isset($this->attributes['father_surname']) || isset($this->attributes['father_name'])
-            ? Relative::hydrate([
-                'id' => $this->attributes['father_id'] ?? null,
-                'person' => isset($this->attributes['father_id']) ? $relatives
+            ? new Relative(
+                id: $this->attributes['father_id'] ?? null,
+                name: $this->attributes['father_name'] ?? null,
+                surname: $this->attributes['father_surname'] ?? null,
+                person: isset($this->attributes['father_id']) ? $relatives
                     ->where('id_pytlewski', $this->attributes['father_id'])->first() : null,
-                'surname' => $this->attributes['father_surname'] ?? null,
-                'name' => $this->attributes['father_name'] ?? null,
-            ]) : null;
+            ) : null;
 
         $marriages = Vec\map($this->attributes['marriages'] ?? [], function ($marriage) use ($relatives) {
             if (isset($marriage['id'])) {
                 $marriage['person'] = $relatives->where('id_pytlewski', $marriage['id'])->first();
             }
 
-            return Marriage::hydrate($marriage);
+            return new Marriage(...$marriage);
         });
 
         $children = Vec\map($this->attributes['children'] ?? [], function ($child) use ($relatives) {
@@ -130,7 +130,7 @@ final class Pytlewski
                 $child['person'] = $relatives->where('id_pytlewski', $child['id'])->first();
             }
 
-            return Relative::hydrate($child);
+            return new Relative(...$child);
         });
 
         $siblings = Vec\map($this->attributes['siblings'] ?? [], function ($sibling) use ($relatives) {
@@ -138,7 +138,7 @@ final class Pytlewski
                 $sibling['person'] = $relatives->where('id_pytlewski', $sibling['id'])->first();
             }
 
-            return Relative::hydrate($sibling);
+            return new Relative(...$sibling);
         });
 
         return compact('mother', 'father', 'marriages', 'children', 'siblings');

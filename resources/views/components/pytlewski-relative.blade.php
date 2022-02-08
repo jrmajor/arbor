@@ -6,13 +6,13 @@
     >
   @else
     <a
-      target="_blank" href="{{ $pytlewski->url }}"
+      target="_blank" href="{{ $pytlewski->url() }}"
       class="text-yellow-600 hover:text-yellow-700"
     >
   @endcan
 @elseif ($pytlewski->id)
   <a
-    target="_blank" href="{{ $pytlewski->url }}"
+    target="_blank" href="{{ $pytlewski->url() }}"
     class="text-red-600 hover:text-red-700"
   >
 @endif

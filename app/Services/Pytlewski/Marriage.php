@@ -2,11 +2,21 @@
 
 namespace App\Services\Pytlewski;
 
-/**
- * @property-read ?string $date
- * @property-read ?string $place
- */
-class Marriage extends Relative
+use App\Models\Person;
+
+final class Marriage
 {
-    protected array $keys = ['id', 'name', 'surname', 'date', 'place', 'person'];
+    public function __construct(
+        public readonly ?string $id = null,
+        public readonly ?string $name = null,
+        public readonly ?string $surname = null,
+        public readonly ?string $date = null,
+        public readonly ?string $place = null,
+        public readonly ?Person $person = null,
+    ) { }
+
+    public function url(): ?string
+    {
+        return $this->id !== null ? Pytlewski::url((int) $this->id) : null;
+    }
 }

@@ -3,39 +3,18 @@
 namespace App\Services\Pytlewski;
 
 use App\Models\Person;
-use InvalidArgumentException;
 
-/**
- * @property-read ?string $id
- * @property-read ?string $name
- * @property-read ?string $surname
- * @property-read ?Person $person
- */
-class Relative
+final class Relative
 {
-    protected array $keys = ['id', 'name', 'surname', 'person'];
-
-    final public function __construct(
-        protected array $attributes,
+    public function __construct(
+        public readonly ?string $id = null,
+        public readonly ?string $name = null,
+        public readonly ?string $surname = null,
+        public readonly ?Person $person = null,
     ) { }
 
-    final public static function hydrate(array $attributes): static
+    public function url(): ?string
     {
-        return new static($attributes);
-    }
-
-    final public function __get(string $key): mixed
-    {
-        if ($key === 'url') {
-            return $this->attributes['id'] ?? null
-                ? Pytlewski::url($this->attributes['id'])
-                : null;
-        }
-
-        if (in_array($key, $this->keys)) {
-            return $this->attributes[$key] ?? null;
-        }
-
-        throw new InvalidArgumentException("Key [{$key}] does not exist.");
+        return $this->id !== null ? Pytlewski::url((int) $this->id) : null;
     }
 }
