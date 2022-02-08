@@ -7,142 +7,151 @@ use App\Services\Pytlewski\Marriage;
 use App\Services\Pytlewski\Pytlewski;
 use App\Services\Pytlewski\Relative;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('can load relations', function (int $id, string $source, array $attributes) {
-    Http::fake([
-        Pytlewski::url($id) => Http::response($source),
-    ]);
-
-    $pytlewski = Pytlewski::find($id);
-
-    $id === 704
-        ? test704($pytlewski)
-        : testOther($pytlewski, $attributes);
-})->with('pytlewscy');
-
-function test704(Pytlewski $pytlewski): void
+final class RelationsTest extends TestCase
 {
-    $relatives = Person::factory(6)->sequence(
-        ['id_pytlewski' => 1420],
-        ['id_pytlewski' => 637],
-        ['id_pytlewski' => 705],
-        ['id_pytlewski' => 706],
-        ['id_pytlewski' => 707],
-        ['id_pytlewski' => 678],
-    )->create();
+    use UsesPytlewskiDataset;
 
-    [$mother, $father, $wife, $firstChild, $secondChild, $secondSibling] = $relatives;
+    /**
+     * @dataProvider provideScrapeCases
+     */
+    #[TestDox('it can load relations')]
+    public function testRelations(int $id, string $source, array $attributes): void
+    {
+        Http::fake([
+            Pytlewski::url($id) => Http::response($source),
+        ]);
 
-    expect($pytlewski->mother)
-        ->toBeInstanceOf(Relative::class)
-        ->id->toBe('1420')
-        ->person->id->toBe($mother->id)
-        ->surname->toBe('Ptakowska')
-        ->name->toBe('Maryanna');
+        $pytlewski = Pytlewski::find($id);
 
-    expect($pytlewski->father)
-        ->toBeInstanceOf(Relative::class)
-        ->id->toBe('637')
-        ->person->id->toBe($father->id)
-        ->surname->toBe('Pytlewski')
-        ->name->toBe('Łukasz');
-
-    expect($pytlewski->marriages)->toHaveCount(1);
-
-    expect($pytlewski->marriages[0])
-        ->toBeInstanceOf(Marriage::class)
-        ->id->toBe('705')
-        ->person->id->toBe($wife->id)
-        ->name->toBe('Frankiewicz, Bronisława')
-        ->date->toBe('29.09.1885')
-        ->place->toBe('Sulmierzyce');
-
-    expect($pytlewski->children)
-        ->toHaveCount(6)
-        ->each->toBeInstanceOf(Relative::class);
-
-    expect($pytlewski->children[0])
-        ->id->toBe('706')
-        ->person->id->toBe($firstChild->id)
-        ->name->toBe('Zygmunt-Stanisław');
-
-    expect($pytlewski->children[1])
-        ->id->toBe('707')
-        ->person->id->toBe($secondChild->id)
-        ->name->toBe('Seweryn');
-
-    expect($pytlewski->siblings)
-        ->toHaveCount(20)
-        ->each->toBeInstanceOf(Relative::class);
-
-    expect($pytlewski->siblings[0])
-        ->id->toBeNull()
-        ->person->toBeNull()
-        ->name->toBe('Roch-Tomasz');
-
-    expect($pytlewski->siblings[1])
-        ->id->toBe('678')
-        ->person->id->toBe($secondSibling->id)
-        ->name->toBe('Katarzyna');
-}
-
-function testOther(Pytlewski $pytlewski, array $attributes): void
-{
-    if (isset($attributes['mother_surname']) || isset($attributes['mother_name'])) {
-        expect($pytlewski->mother)
-            ->toBeInstanceOf(Relative::class)
-            ->id->toBe($attributes['mother_id'])
-            ->person->toBeNull()
-            ->surname->toBe($attributes['mother_surname'])
-            ->name->toBe($attributes['mother_name']);
-    } else {
-        expect($pytlewski->mother)->toBeNull();
+        $id === 704
+            ? $this->test704($pytlewski)
+            : $this->testOther($pytlewski, $attributes);
     }
 
-    if (isset($attributes['father_surname']) || isset($attributes['father_name'])) {
-        expect($pytlewski->father)
-            ->toBeInstanceOf(Relative::class)
-            ->id->toBe($attributes['father_id'])
-            ->person->toBeNull()
-            ->surname->toBe($attributes['father_surname'])
-            ->name->toBe($attributes['father_name']);
-    } else {
-        expect($pytlewski->father)->toBeNull();
+    private function test704(Pytlewski $pytlewski): void
+    {
+        $relatives = Person::factory(6)->sequence(
+            ['id_pytlewski' => 1420],
+            ['id_pytlewski' => 637],
+            ['id_pytlewski' => 705],
+            ['id_pytlewski' => 706],
+            ['id_pytlewski' => 707],
+            ['id_pytlewski' => 678],
+        )->create();
+
+        [$motherModel, $fatherModel, $wifeModel, $firstChild, $secondChild, $secondSibling] = $relatives;
+
+        $mother = $pytlewski->mother;
+        $this->assertInstanceOf(Relative::class, $mother);
+        $this->assertSame('1420', $mother->id);
+        $this->assertSame($motherModel->id, $mother->person->id);
+        $this->assertSame('Ptakowska', $mother->surname);
+        $this->assertSame('Maryanna', $mother->name);
+
+        $father = $pytlewski->father;
+        $this->assertInstanceOf(Relative::class, $father);
+        $this->assertSame('637', $father->id);
+        $this->assertSame($fatherModel->id, $father->person->id);
+        $this->assertSame('Pytlewski', $father->surname);
+        $this->assertSame('Łukasz', $father->name);
+
+        $this->assertCount(1, $pytlewski->marriages);
+
+        $marriage = $pytlewski->marriages[0];
+        $this->assertInstanceOf(Marriage::class, $marriage);
+        $this->assertSame('705', $marriage->id);
+        $this->assertSame($wifeModel->id, $marriage->person->id);
+        $this->assertSame('Frankiewicz, Bronisława', $marriage->name);
+        $this->assertSame('29.09.1885', $marriage->date);
+        $this->assertSame('Sulmierzyce', $marriage->place);
+
+        $this->assertCount(6, $pytlewski->children);
+        $this->assertInstanceOf(Relative::class, $pytlewski->children[0]);
+
+        $child = $pytlewski->children[0];
+        $this->assertSame('706', $child->id);
+        $this->assertSame($firstChild->id, $child->person->id);
+        $this->assertSame('Zygmunt-Stanisław', $child->name);
+
+        $child = $pytlewski->children[1];
+        $this->assertSame('707', $child->id);
+        $this->assertSame($secondChild->id, $child->person->id);
+        $this->assertSame('Seweryn', $child->name);
+
+        $this->assertCount(20, $pytlewski->siblings);
+        $this->assertInstanceOf(Relative::class, $pytlewski->siblings[0]);
+
+        $sibling = $pytlewski->siblings[0];
+        $this->assertNull($sibling->id);
+        $this->assertNull($sibling->person);
+        $this->assertSame('Roch-Tomasz', $sibling->name);
+
+        $sibling = $pytlewski->siblings[1];
+        $this->assertSame('678', $sibling->id);
+        $this->assertSame($secondSibling->id, $sibling->person->id);
+        $this->assertSame('Katarzyna', $sibling->name);
     }
 
-    foreach ($attributes['marriages'] as $marriageKey => $marriageAttributes) {
-        $marriage = $pytlewski->marriages[$marriageKey];
+    private function testOther(Pytlewski $pytlewski, array $attributes): void
+    {
+        $mother = $pytlewski->mother;
 
-        expect($marriage)
-            ->toBeInstanceOf(Marriage::class)
-            ->person->toBeNull();
-
-        foreach ($marriageAttributes as $key => $value) {
-            expect($marriage->{$key})->toBe($value);
+        if (isset($attributes['mother_surname']) || isset($attributes['mother_name'])) {
+            $this->assertInstanceOf(Relative::class, $mother);
+            $this->assertSame($attributes['mother_id'], $mother->id);
+            $this->assertNull($mother->person);
+            $this->assertSame($attributes['mother_surname'], $mother->surname);
+            $this->assertSame($attributes['mother_name'], $mother->name);
+        } else {
+            $this->assertNull($mother);
         }
-    }
 
-    foreach ($attributes['children'] as $childKey => $childAttributes) {
-        $child = $pytlewski->children[$childKey];
+        $father = $pytlewski->father;
 
-        expect($child)
-            ->toBeInstanceOf(Relative::class)
-            ->person->toBeNull();
-
-        foreach ($childAttributes as $key => $value) {
-            expect($child->{$key})->toBe($value);
+        if (isset($attributes['father_surname']) || isset($attributes['father_name'])) {
+            $this->assertInstanceOf(Relative::class, $father);
+            $this->assertSame($attributes['father_id'], $father->id);
+            $this->assertNull($father->person);
+            $this->assertSame($attributes['father_surname'], $father->surname);
+            $this->assertSame($attributes['father_name'], $father->name);
+        } else {
+            $this->assertNull($father);
         }
-    }
 
-    foreach ($attributes['siblings'] as $siblingKey => $siblingAttributes) {
-        $sibling = $pytlewski->siblings[$siblingKey];
+        foreach ($attributes['marriages'] as $marriageKey => $marriageAttributes) {
+            $marriage = $pytlewski->marriages[$marriageKey];
 
-        expect($sibling)
-            ->toBeInstanceOf(Relative::class)
-            ->person->toBeNull();
+            $this->assertInstanceOf(Marriage::class, $marriage);
+            $this->assertNull($marriage->person);
 
-        foreach ($siblingAttributes as $key => $value) {
-            expect($sibling->{$key})->toBe($value);
+            foreach ($marriageAttributes as $key => $value) {
+                $this->assertSame($value, $marriage->{$key});
+            }
+        }
+
+        foreach ($attributes['children'] as $childKey => $childAttributes) {
+            $child = $pytlewski->children[$childKey];
+
+            $this->assertInstanceOf(Relative::class, $child);
+            $this->assertNull($child->person);
+
+            foreach ($childAttributes as $key => $value) {
+                $this->assertSame($value, $child->{$key});
+            }
+        }
+
+        foreach ($attributes['siblings'] as $siblingKey => $siblingAttributes) {
+            $sibling = $pytlewski->siblings[$siblingKey];
+
+            $this->assertInstanceOf(Relative::class, $sibling);
+            $this->assertNull($sibling->person);
+
+            foreach ($siblingAttributes as $key => $value) {
+                $this->assertSame($value, $sibling->{$key});
+            }
         }
     }
 }
