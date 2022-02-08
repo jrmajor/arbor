@@ -7,6 +7,7 @@ use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 use InvalidArgumentException;
+use Psl\Vec;
 
 /**
  * @property-read int $id
@@ -116,32 +117,29 @@ final class Pytlewski
                 'name' => $this->attributes['father_name'] ?? null,
             ]) : null;
 
-        $marriages = collect($this->attributes['marriages'] ?? [])
-            ->map(function ($marriage) use ($relatives) {
-                if (isset($marriage['id'])) {
-                    $marriage['person'] = $relatives->where('id_pytlewski', $marriage['id'])->first();
-                }
+        $marriages = Vec\map($this->attributes['marriages'] ?? [], function ($marriage) use ($relatives) {
+            if (isset($marriage['id'])) {
+                $marriage['person'] = $relatives->where('id_pytlewski', $marriage['id'])->first();
+            }
 
-                return Marriage::hydrate($marriage);
-            });
+            return Marriage::hydrate($marriage);
+        });
 
-        $children = collect($this->attributes['children'] ?? [])
-            ->map(function ($child) use ($relatives) {
-                if (isset($child['id'])) {
-                    $child['person'] = $relatives->where('id_pytlewski', $child['id'])->first();
-                }
+        $children = Vec\map($this->attributes['children'] ?? [], function ($child) use ($relatives) {
+            if (isset($child['id'])) {
+                $child['person'] = $relatives->where('id_pytlewski', $child['id'])->first();
+            }
 
-                return Relative::hydrate($child);
-            });
+            return Relative::hydrate($child);
+        });
 
-        $siblings = collect($this->attributes['siblings'] ?? [])
-            ->map(function ($sibling) use ($relatives) {
-                if (isset($sibling['id'])) {
-                    $sibling['person'] = $relatives->where('id_pytlewski', $sibling['id'])->first();
-                }
+        $siblings = Vec\map($this->attributes['siblings'] ?? [], function ($sibling) use ($relatives) {
+            if (isset($sibling['id'])) {
+                $sibling['person'] = $relatives->where('id_pytlewski', $sibling['id'])->first();
+            }
 
-                return Relative::hydrate($sibling);
-            });
+            return Relative::hydrate($sibling);
+        });
 
         return compact('mother', 'father', 'marriages', 'children', 'siblings');
     }
