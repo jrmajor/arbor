@@ -1,17 +1,28 @@
 <?php
 
+namespace Tests\Unit\Person\Relations;
+
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('can get mother', function () {
-    $mother = Person::factory()->female()->create();
-    $person = Person::factory()->create(['mother_id' => $mother]);
+final class ParentsTest extends TestCase
+{
+    #[TestDox('it can get father')]
+    public function testFather(): void
+    {
+        $father = Person::factory()->male()->create();
+        $person = Person::factory()->create(['father_id' => $father]);
 
-    expect($person->mother)->toBeModel($mother);
-});
+        $this->assertSameModel($father, $person->father);
+    }
 
-it('can get father', function () {
-    $father = Person::factory()->male()->create();
-    $person = Person::factory()->create(['father_id' => $father]);
+    #[TestDox('it can get mother')]
+    public function testMother(): void
+    {
+        $mother = Person::factory()->female()->create();
+        $person = Person::factory()->create(['mother_id' => $mother]);
 
-    expect($person->father)->toBeModel($father);
-});
+        $this->assertSameModel($mother, $person->mother);
+    }
+}

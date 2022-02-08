@@ -1,46 +1,42 @@
 <?php
 
+namespace Tests\Unit\Person\Relations;
+
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('can get children', function () {
-    $father = Person::factory()->male()->create();
+final class ChildrenTest extends TestCase
+{
+    #[TestDox('it can get children')]
+    public function testGet(): void
+    {
+        $father = Person::factory()->male()->create();
 
-    Person::factory(2)
-        ->withParents()
-        ->create(['father_id' => $father]);
+        Person::factory(2)->withParents()->create(['father_id' => $father]);
+        Person::factory()->withoutParents()->create(['father_id' => $father]);
 
-    Person::factory()
-        ->withoutParents()
-        ->create(['father_id' => $father]);
+        $this->assertCount(3, $father->children);
+    }
 
-    expect($father->children)->toHaveCount(3);
-});
+    #[TestDox('it can eagerly get children')]
+    public function testEagerGet(): void
+    {
+        $mother = Person::factory()->female()->create();
 
-it('can eagerly get children', function () {
-    $mother = Person::factory()->female()->create();
+        Person::factory(3)->withoutParents()->create(['mother_id' => $mother]);
+        Person::factory(2)->withParents()->create(['mother_id' => $mother]);
 
-    Person::factory(3)
-        ->withoutParents()
-        ->create(['mother_id' => $mother]);
+        $father = Person::factory()->male()->create();
 
-    Person::factory(2)
-        ->withParents()
-        ->create(['mother_id' => $mother]);
+        Person::factory()->withoutParents()->create(['father_id' => $father]);
+        Person::factory(2)->withParents()->create(['father_id' => $father]);
 
-    $father = Person::factory()->male()->create();
+        [$mother, $father] = Person::query()
+            ->whereIn('id', [$mother->id, $father->id])
+            ->with('children')->get();
 
-    Person::factory()
-        ->withoutParents()
-        ->create(['father_id' => $father]);
-
-    Person::factory(2)
-        ->withParents()
-        ->create(['father_id' => $father]);
-
-    [$mother, $father] = Person::query()
-        ->whereIn('id', [$mother->id, $father->id])
-        ->with('children')->get();
-
-    expect($mother->children)->toHaveCount(5);
-    expect($father->children)->toHaveCount(3);
-});
+        $this->assertCount(5, $mother->children);
+        $this->assertCount(3, $father->children);
+    }
+}

@@ -1,32 +1,41 @@
 <?php
 
+namespace Tests\Unit\Person\Relations;
+
 use App\Models\Marriage;
 use App\Models\Person;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('can get marriages', function () {
-    $person = Person::factory()->female()->create();
+final class MarriagesTest extends TestCase
+{
+    #[TestDox('it can get marriages')]
+    public function testGet(): void
+    {
+        $person = Person::factory()->female()->create();
 
-    Marriage::factory(3)->create(['woman_id' => $person]);
+        Marriage::factory(3)->create(['woman_id' => $person]);
 
-    expect($person->marriages)->toHaveCount(3);
-});
+        $this->assertCount(3, $person->marriages);
+    }
 
-it('can eagerly get marriages', function () {
-    Model::preventLazyLoading(false);
+    #[TestDox('it can eagerly get marriages')]
+    public function testEagerGet(): void
+    {
+        Model::preventLazyLoading(false);
 
-    $woman = Person::factory()->female()->create();
-    $man = Person::factory()->male()->create();
+        $woman = Person::factory()->female()->create();
+        $man = Person::factory()->male()->create();
 
-    Marriage::factory(3)->create(['woman_id' => $woman]);
-    Marriage::factory(4)->create(['man_id' => $man]);
+        Marriage::factory(3)->create(['woman_id' => $woman]);
+        Marriage::factory(4)->create(['man_id' => $man]);
 
-    $people = Person::query()
-        ->whereIn('id', [$woman->id, $man->id])
-        ->with('children')->get();
+        $people = Person::query()
+            ->whereIn('id', [$woman->id, $man->id])
+            ->with('children')->get();
 
-    expect($people)->sequence(
-        fn ($e) => $e->marriages->toHaveCount(3),
-        fn ($e) => $e->marriages->toHaveCount(4),
-    );
-});
+        $this->assertCount(3, $people[0]->marriages);
+        $this->assertCount(4, $people[1]->marriages);
+    }
+}

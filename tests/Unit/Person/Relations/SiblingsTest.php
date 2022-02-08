@@ -1,122 +1,94 @@
 <?php
 
+namespace Tests\Unit\Person\Relations;
+
 use App\Models\Person;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('can get siblings and half siblings', function () {
-    [$person] = Person::factory(3)->create([
-        'mother_id' => $mother = Person::factory()->female()->create(),
-        'father_id' => $father = Person::factory()->male()->create(),
-    ]);
+final class SiblingsTest extends TestCase
+{
+    #[TestDox('it can get siblings and half siblings')]
+    public function testGet(): void
+    {
+        /** @var Person $person */
+        $person = Person::factory(3)->create([
+            'mother_id' => $mother = Person::factory()->female()->create(),
+            'father_id' => $father = Person::factory()->male()->create(),
+        ])->first();
 
-    assert($person instanceof Person);
+        Person::factory()->withParents()->create(['mother_id' => $mother]);
+        Person::factory(2)->withoutParents()->create(['mother_id' => $mother]);
+        Person::factory(3)->withParents()->create(['father_id' => $father]);
+        Person::factory()->withoutParents()->create(['father_id' => $father]);
 
-    Person::factory()
-        ->withParents()
-        ->create(['mother_id' => $mother]);
+        $this->assertCount(2, $person->siblings);
+        $this->assertCount(3, $person->siblings_mother);
+        $this->assertCount(4, $person->siblings_father);
 
-    Person::factory(2)
-        ->withoutParents()
-        ->create(['mother_id' => $mother]);
+        $person->mother_id = null;
+        tap($person)->save()->refresh();
 
-    Person::factory(3)
-        ->withParents()
-        ->create(['father_id' => $father]);
+        $this->assertCount(0, $person->siblings);
+        $this->assertCount(0, $person->siblings_mother);
+        $this->assertCount(6, $person->siblings_father);
+    }
 
-    Person::factory()
-        ->withoutParents()
-        ->create(['father_id' => $father]);
+    #[TestDox('it can eagerly get siblings and half siblings')]
+    public function testEagerGet(): void
+    {
+        Model::preventLazyLoading(false);
 
-    expect($person)
-        ->siblings->toHaveCount(2)
-        ->siblings_mother->toHaveCount(3)
-        ->siblings_father->toHaveCount(4);
+        [$firstPerson] = Person::factory(3)->create([
+            'mother_id' => $firstMother = Person::factory()->female()->create(),
+            'father_id' => $firstFather = Person::factory()->male()->create(),
+        ]);
 
-    $person->mother_id = null;
-    tap($person)->save()->refresh();
+        Person::factory()->withParents()->create(['mother_id' => $firstMother]);
+        Person::factory(2)->withoutParents()->create(['mother_id' => $firstMother]);
+        Person::factory(3)->withParents()->create(['father_id' => $firstFather]);
+        Person::factory()->withoutParents()->create(['father_id' => $firstFather]);
 
-    expect($person)
-        ->siblings->toBeEmpty()
-        ->siblings_mother->toBeEmpty()
-        ->siblings_father->toHaveCount(6);
-});
+        [$secondPerson] = Person::factory(4)->create([
+            'mother_id' => $secondMother = Person::factory()->female()->create(),
+            'father_id' => $secondFather = Person::factory()->male()->create(),
+        ]);
 
-it('can eagerly get siblings and half siblings', function () {
-    Model::preventLazyLoading(false);
+        Person::factory(3)->withParents()->create(['mother_id' => $secondMother]);
+        Person::factory(2)->withoutParents()->create(['mother_id' => $secondMother]);
+        Person::factory(2)->withParents()->create(['father_id' => $secondFather]);
+        Person::factory(4)->withoutParents()->create(['father_id' => $secondFather]);
 
-    [$firstPerson] = Person::factory(3)->create([
-        'mother_id' => $firstMother = Person::factory()->female()->create(),
-        'father_id' => $firstFather = Person::factory()->male()->create(),
-    ]);
+        $people = Person::query()
+            ->whereIn('id', [$firstPerson->id, $secondPerson->id])
+            ->with('siblings', 'siblings_mother', 'siblings_father')->get();
 
-    Person::factory()
-        ->withParents()
-        ->create(['mother_id' => $firstMother]);
+        $this->assertCount(2, $people[0]->siblings);
+        $this->assertCount(3, $people[0]->siblings_mother);
+        $this->assertCount(4, $people[0]->siblings_father);
 
-    Person::factory(2)
-        ->withoutParents()
-        ->create(['mother_id' => $firstMother]);
+        $this->assertCount(3, $people[1]->siblings);
+        $this->assertCount(5, $people[1]->siblings_mother);
+        $this->assertCount(6, $people[1]->siblings_father);
 
-    Person::factory(3)
-        ->withParents()
-        ->create(['father_id' => $firstFather]);
+        $firstPerson->update(['mother_id' => null]);
 
-    Person::factory()
-        ->withoutParents()
-        ->create(['father_id' => $firstFather]);
+        $secondPerson->update([
+            'mother_id' => null,
+            'father_id' => null,
+        ]);
 
-    [$secondPerson] = Person::factory(4)->create([
-        'mother_id' => $secondMother = Person::factory()->female()->create(),
-        'father_id' => $secondFather = Person::factory()->male()->create(),
-    ]);
+        $people = Person::query()
+            ->whereIn('id', [$firstPerson->id, $secondPerson->id])
+            ->with('siblings')->get();
 
-    Person::factory(3)
-        ->withParents()
-        ->create(['mother_id' => $secondMother]);
+        $this->assertCount(0, $people[0]->siblings);
+        $this->assertCount(0, $people[0]->siblings_mother);
+        $this->assertCount(6, $people[0]->siblings_father);
 
-    Person::factory(2)
-        ->withoutParents()
-        ->create(['mother_id' => $secondMother]);
-
-    Person::factory(2)
-        ->withParents()
-        ->create(['father_id' => $secondFather]);
-
-    Person::factory(4)
-        ->withoutParents()
-        ->create(['father_id' => $secondFather]);
-
-    $people = Person::whereIn('id', [$firstPerson->id, $secondPerson->id])
-        ->with('siblings', 'siblings_mother', 'siblings_father')->get();
-
-    expect($people[0])
-        ->siblings->toHaveCount(2)
-        ->siblings_mother->toHaveCount(3)
-        ->siblings_father->toHaveCount(4);
-
-    expect($people[1])
-        ->siblings->toHaveCount(3)
-        ->siblings_mother->toHaveCount(5)
-        ->siblings_father->toHaveCount(6);
-
-    $firstPerson->update(['mother_id' => null]);
-
-    $secondPerson->update([
-        'mother_id' => null,
-        'father_id' => null,
-    ]);
-
-    $people = Person::query()
-        ->whereIn('id', [$firstPerson->id, $secondPerson->id])
-        ->with('siblings')->get();
-
-    expect($people[0])
-        ->siblings->toBeEmpty()
-        ->siblings_mother->toBeEmpty()
-        ->siblings_father->toHaveCount(6);
-
-    expect($people[1])
-        ->siblings->toBeEmpty()
-        ->siblings_mother->toBeEmpty()
-        ->siblings_father->toBeEmpty();
-});
+        $this->assertCount(0, $people[1]->siblings);
+        $this->assertCount(0, $people[1]->siblings_mother);
+        $this->assertCount(0, $people[1]->siblings_father);
+    }
+}
