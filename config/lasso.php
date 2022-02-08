@@ -13,7 +13,7 @@ return [
     'storage' => [
         'disk' => 'assets',
         'upload_to' => 'lasso',
-        'environment' => env('LASSO_ENV', null),
+        'environment' => env('LASSO_ENV'),
         'prefix' => env('LASSO_PREFIX', ''),
         'max_bundles' => 5,
     ],
