@@ -24,9 +24,9 @@ use Psl\Vec;
  * @property-read ?string $bio
  * @property-read ?Relative $mother
  * @property-read ?Relative $father
- * @property-read Collection<int, Marriage> $marriages
- * @property-read Collection<int, Relative> $children
- * @property-read Collection<int, Relative> $siblings
+ * @property-read list<Marriage> $marriages
+ * @property-read list<Relative> $children
+ * @property-read list<Relative> $siblings
  */
 final class Pytlewski
 {

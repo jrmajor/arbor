@@ -48,14 +48,14 @@ use App\Services\Pytlewski\Pytlewski;
             @endif
           @endif
 
-          @if ($pytlewski->marriages->isNotEmpty())
+          @if ($pytlewski->marriages)
             <p class="mt-1.5">{{ __('people.pytlewski.marriages') }}:</p>
             @foreach ($pytlewski->marriages as $marriage)
               <p class="ml-4"><x-pytlewski-relative :pytlewski="$marriage"/></p>
             @endforeach
           @endif
 
-          @if ($pytlewski->children->isNotEmpty())
+          @if ($pytlewski->children)
             <p class="mt-1.5">{{ __('people.pytlewski.children') }}:</p>
             <p class="ml-4">
               @foreach ($pytlewski->children as $child)
@@ -64,7 +64,7 @@ use App\Services\Pytlewski\Pytlewski;
             </p>
           @endif
 
-          @if ($pytlewski->siblings->isNotEmpty())
+          @if ($pytlewski->siblings)
             <p class="mt-1.5">{{ __('people.pytlewski.siblings') }}:</p>
             <p class="ml-4">
               @foreach ($pytlewski->siblings as $sibling)
