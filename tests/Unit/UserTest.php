@@ -1,43 +1,45 @@
 <?php
 
+namespace Tests\Unit;
+
 use App\Models\User;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('correctly determines its abilities', function () {
-    $user = User::factory()->create([
-        'permissions' => 0,
-    ]);
+final class UserTest extends TestCase
+{
+    #[TestDox('it correctly determines its abilities')]
+    public function testAbilities(): void
+    {
+        $user = User::factory()->createOne(['permissions' => 0]);
 
-    expect($user)
-        ->canRead()->toBeFalse()
-        ->canWrite()->toBeFalse()
-        ->canViewHistory()->toBeFalse()
-        ->isSuperAdmin()->toBeFalse();
+        $this->assertFalse($user->canRead());
+        $this->assertFalse($user->canWrite());
+        $this->assertFalse($user->canViewHistory());
+        $this->assertFalse($user->isSuperAdmin());
 
-    $user->permissions = 1;
-    expect($user)
-        ->canRead()->toBeTrue()
-        ->canWrite()->toBeFalse()
-        ->canViewHistory()->toBeFalse()
-        ->isSuperAdmin()->toBeFalse();
+        $user->permissions = 1;
+        $this->assertTrue($user->canRead());
+        $this->assertFalse($user->canWrite());
+        $this->assertFalse($user->canViewHistory());
+        $this->assertFalse($user->isSuperAdmin());
 
-    $user->permissions = 2;
-    expect($user)
-        ->canRead()->toBeTrue()
-        ->canWrite()->toBeTrue()
-        ->canViewHistory()->toBeFalse()
-        ->isSuperAdmin()->toBeFalse();
+        $user->permissions = 2;
+        $this->assertTrue($user->canRead());
+        $this->assertTrue($user->canWrite());
+        $this->assertFalse($user->canViewHistory());
+        $this->assertFalse($user->isSuperAdmin());
 
-    $user->permissions = 3;
-    expect($user)
-        ->canRead()->toBeTrue()
-        ->canWrite()->toBeTrue()
-        ->canViewHistory()->toBeTrue()
-        ->isSuperAdmin()->toBeFalse();
+        $user->permissions = 3;
+        $this->assertTrue($user->canRead());
+        $this->assertTrue($user->canWrite());
+        $this->assertTrue($user->canViewHistory());
+        $this->assertFalse($user->isSuperAdmin());
 
-    $user->permissions = 4;
-    expect($user)
-        ->canRead()->toBeTrue()
-        ->canWrite()->toBeTrue()
-        ->canViewHistory()->toBeTrue()
-        ->isSuperAdmin()->toBeTrue();
-});
+        $user->permissions = 4;
+        $this->assertTrue($user->canRead());
+        $this->assertTrue($user->canWrite());
+        $this->assertTrue($user->canViewHistory());
+        $this->assertTrue($user->isSuperAdmin());
+    }
+}
