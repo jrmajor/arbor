@@ -1,42 +1,52 @@
 <?php
 
+namespace Tests\Unit\Marriage;
+
 use App\Enums\MarriageEventType;
 use App\Enums\MarriageRite;
 use App\Models\Marriage;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('casts rite to enum', function () {
-    $marriage = Marriage::factory()->create([
-        'rite' => 'roman_catholic',
-    ]);
+final class EnumCastsTest extends TestCase
+{
+    #[TestDox('it casts rite to enum')]
+    public function testRiteCast(): void
+    {
+        $marriage = Marriage::factory()->create(['rite' => 'roman_catholic']);
 
-    expect($marriage->rite)->toBe(MarriageRite::RomanCatholic);
-});
+        $this->assertSame(MarriageRite::RomanCatholic, $marriage->rite);
+    }
 
-test('rite is nullable', function () {
-    $marriage = Marriage::factory()->create([
-        'rite' => null,
-    ]);
+    #[TestDox('rite is nullable')]
+    public function testRiteNullable(): void
+    {
+        $marriage = Marriage::factory()->create(['rite' => null]);
 
-    expect($marriage->rite)->toBeNull();
-});
+        $this->assertNull($marriage->rite);
+    }
 
-it('casts events types to enums', function () {
-    $marriage = Marriage::factory()->create([
-        'first_event_type' => 'civil_marriage',
-        'second_event_type' => 'church_marriage',
-    ]);
+    #[TestDox('it casts event types to enums')]
+    public function testEventTypes(): void
+    {
+        $marriage = Marriage::factory()->create([
+            'first_event_type' => 'civil_marriage',
+            'second_event_type' => 'church_marriage',
+        ]);
 
-    expect($marriage->first_event_type)->toBe(MarriageEventType::CivilMarriage);
+        $this->assertSame(MarriageEventType::CivilMarriage, $marriage->first_event_type);
+        $this->assertSame(MarriageEventType::ChurchMarriage, $marriage->second_event_type);
+    }
 
-    expect($marriage->second_event_type)->toBe(MarriageEventType::ChurchMarriage);
-});
+    #[TestDox('events types are nullable')]
+    public function testEventsNullable(): void
+    {
+        $marriage = Marriage::factory()->create([
+            'first_event_type' => null,
+            'second_event_type' => null,
+        ]);
 
-test('events types are nullable', function () {
-    $marriage = Marriage::factory()->create([
-        'first_event_type' => null,
-        'second_event_type' => null,
-    ]);
-
-    expect($marriage->first_event_type)->toBeNull();
-    expect($marriage->second_event_type)->toBeNull();
-});
+        $this->assertNull($marriage->first_event_type);
+        $this->assertNull($marriage->second_event_type);
+    }
+}

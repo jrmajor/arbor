@@ -1,93 +1,106 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Marriage;
 
 use App\Models\Marriage;
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-it('can get man and woman', function () {
-    $marriage = Marriage::factory()->create([
-        'woman_id' => $woman = Person::factory()->female()->create(),
-        'man_id' => $man = Person::factory()->male()->create(),
-    ]);
+final class MarriageTest extends TestCase
+{
+    #[TestDox('it can get man and woman')]
+    public function testManWoman(): void
+    {
+        $marriage = Marriage::factory()->create([
+            'woman_id' => $woman = Person::factory()->female()->create(),
+            'man_id' => $man = Person::factory()->male()->create(),
+        ]);
 
-    expect($marriage->woman())->toBeModel($woman);
-    expect($marriage->man())->toBeModel($man);
-});
+        $this->assertSameModel($woman, $marriage->woman());
+        $this->assertSameModel($man, $marriage->man());
+    }
 
-it('can get partner', function () {
-    $marriage = Marriage::factory()->create([
-        'woman_id' => $woman = Person::factory()->female()->create(),
-        'man_id' => $man = Person::factory()->male()->create(),
-    ]);
+    #[TestDox('it can get partner')]
+    public function testPartner(): void
+    {
+        $marriage = Marriage::factory()->create([
+            'woman_id' => $woman = Person::factory()->female()->create(),
+            'man_id' => $man = Person::factory()->male()->create(),
+        ]);
 
-    expect($marriage->partner($man))->toBeModel($woman);
-    expect($marriage->partner($woman))->toBeModel($man);
-});
+        $this->assertSameModel($woman, $marriage->partner($man));
+        $this->assertSameModel($man, $marriage->partner($woman));
+    }
 
-it('can get order in given person marriages', function () {
-    $woman = Person::factory()->female()->create();
-    $man = Person::factory()->male()->create();
+    #[TestDox('it can get order in given person marriage')]
+    public function testOrder(): void
+    {
+        $woman = Person::factory()->female()->create();
+        $man = Person::factory()->male()->create();
 
-    $marriages = Marriage::factory(2)
-        ->sequence([
-            'woman_id' => $woman->id,
-            'woman_order' => null,
-            'man_id' => $man->id,
-            'man_order' => 1,
-        ], [
-            'man_id' => $man->id,
-            'man_order' => 2,
-        ])
-        ->create();
+        $marriages = Marriage::factory(2)
+            ->sequence([
+                'woman_id' => $woman->id,
+                'woman_order' => null,
+                'man_id' => $man->id,
+                'man_order' => 1,
+            ], [
+                'man_id' => $man->id,
+                'man_order' => 2,
+            ])
+            ->create();
 
-    [$firstMarriage, $secondMarriage] = $marriages;
+        [$firstMarriage, $secondMarriage] = $marriages;
 
-    expect($firstMarriage->order($woman))->toBeNull();
-    expect($firstMarriage->order($man))->toBe(1);
-    expect($secondMarriage->order($man))->toBe(2);
-});
+        $this->assertNull($firstMarriage->order($woman));
+        $this->assertSame(1, $firstMarriage->order($man));
+        $this->assertSame(2, $secondMarriage->order($man));
+    }
 
-it('can determine if has events', function () {
-    $marriages = Marriage::factory(3)
-        ->sequence([
-            'first_event_type' => 'civil_marriage',
-            'first_event_date_from' => '2014-06-23',
-            'first_event_date_to' => '2014-06-23',
-            'first_event_place' => 'Żnin, Polska',
-            'second_event_type' => null,
-            'second_event_date_from' => null,
-            'second_event_date_to' => null,
-            'second_event_place' => null,
-        ], [
-            'first_event_type' => 'concordat_marriage',
-            'first_event_date_from' => null,
-            'first_event_date_to' => null,
-            'first_event_place' => null,
-            'second_event_type' => null,
-            'second_event_date_from' => '1863-01-31',
-            'second_event_date_to' => '1863-01-31',
-            'second_event_place' => null,
-        ], [
-            'first_event_type' => null,
-            'first_event_date_from' => null,
-            'first_event_date_to' => null,
-            'first_event_place' => 'Lwów, Litwa',
-            'second_event_type' => 'civil_marriage',
-            'second_event_date_from' => '1863-01-31',
-            'second_event_date_to' => '1863-01-31',
-            'second_event_place' => null,
-        ])
-        ->create();
+    #[TestDox('it can determine if has events')]
+    public function testEvents(): void
+    {
+        $marriages = Marriage::factory(3)
+            ->sequence([
+                'first_event_type' => 'civil_marriage',
+                'first_event_date_from' => '2014-06-23',
+                'first_event_date_to' => '2014-06-23',
+                'first_event_place' => 'Żnin, Polska',
+                'second_event_type' => null,
+                'second_event_date_from' => null,
+                'second_event_date_to' => null,
+                'second_event_place' => null,
+            ], [
+                'first_event_type' => 'concordat_marriage',
+                'first_event_date_from' => null,
+                'first_event_date_to' => null,
+                'first_event_place' => null,
+                'second_event_type' => null,
+                'second_event_date_from' => '1863-01-31',
+                'second_event_date_to' => '1863-01-31',
+                'second_event_place' => null,
+            ], [
+                'first_event_type' => null,
+                'first_event_date_from' => null,
+                'first_event_date_to' => null,
+                'first_event_place' => 'Lwów, Litwa',
+                'second_event_type' => 'civil_marriage',
+                'second_event_date_from' => '1863-01-31',
+                'second_event_date_to' => '1863-01-31',
+                'second_event_place' => null,
+            ])
+            ->create();
 
-    [$firstMarriage, $secondMarriage, $thirdMarriage] = $marriages;
+        [$firstMarriage, $secondMarriage, $thirdMarriage] = $marriages;
 
-    expect($firstMarriage->hasFirstEvent())->toBeTrue();
-    expect($firstMarriage->hasSecondEvent())->toBeFalse();
+        $this->assertTrue($firstMarriage->hasFirstEvent());
+        $this->assertFalse($firstMarriage->hasSecondEvent());
 
-    expect($secondMarriage->hasFirstEvent())->toBeTrue();
-    expect($secondMarriage->hasSecondEvent())->toBeTrue();
+        $this->assertTrue($secondMarriage->hasFirstEvent());
+        $this->assertTrue($secondMarriage->hasSecondEvent());
 
-    expect($thirdMarriage->hasFirstEvent())->toBeTrue();
-    expect($thirdMarriage->hasSecondEvent())->toBeTrue();
-});
+        $this->assertTrue($thirdMarriage->hasFirstEvent());
+        $this->assertTrue($thirdMarriage->hasSecondEvent());
+    }
+}

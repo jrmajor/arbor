@@ -5,10 +5,14 @@ namespace Tests;
 use App\Application;
 use App\Models\User;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Pest\Livewire\InteractsWithLivewire;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Constraint\IsInstanceOf;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionNamedType;
@@ -32,6 +36,19 @@ abstract class TestCase extends BaseTestCase
     {
         return $this->actingAs(
             User::factory()->createOne(['permissions' => $permissions]),
+        );
+    }
+
+    public static function assertSameModel(Model|Relation $expected, mixed $actual): void
+    {
+        self::assertThat($actual, Assert::logicalOr(
+            new IsInstanceOf(Model::class),
+            new IsInstanceOf(Relation::class),
+        ));
+
+        self::assertTrue(
+            $actual->is($expected),
+            'Value is not expected Eloquent model.',
         );
     }
 
