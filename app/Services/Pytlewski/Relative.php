@@ -2,8 +2,15 @@
 
 namespace App\Services\Pytlewski;
 
+use App\Models\Person;
 use InvalidArgumentException;
 
+/**
+ * @property-read ?string $id
+ * @property-read ?string $name
+ * @property-read ?string $surname
+ * @property-read ?Person $person
+ */
 class Relative
 {
     protected array $keys = ['id', 'name', 'surname', 'person'];
