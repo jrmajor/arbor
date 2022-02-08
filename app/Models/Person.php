@@ -31,17 +31,21 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use stdClass;
 
 /**
- * @property-read string $birth_date
- * @property-read ?Carbon $birth_date_from
- * @property-read ?Carbon $birth_date_to
- * @property-read ?string $death_date
- * @property-read ?Carbon $death_date_from
- * @property-read ?Carbon $death_date_to
- * @property-read ?string $funeral_date
- * @property-read ?string $burial_date
+ * @property ?Carbon $birth_date_from
+ * @property ?Carbon $birth_date_to
+ * @property-read ?string $birth_date
  * @property-read ?int $birth_year
+ * @property ?Carbon $death_date_from
+ * @property ?Carbon $death_date_to
+ * @property-read ?string $death_date
  * @property-read ?int $death_year
+ * @property ?Carbon $funeral_date_from
+ * @property ?Carbon $funeral_date_to
+ * @property-read ?string $funeral_date
  * @property-read ?int $funeral_year
+ * @property ?Carbon $burial_date_from
+ * @property ?Carbon $burial_date_to
+ * @property-read ?string $burial_date
  * @property-read ?int $burial_year
  * @property-read Collection<int, Source> $sources
  * @property-read EloquentCollection<Person> $siblings
