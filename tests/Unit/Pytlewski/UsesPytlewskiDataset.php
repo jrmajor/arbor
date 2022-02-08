@@ -3,6 +3,7 @@
 namespace Tests\Unit\Pytlewski;
 
 use Generator;
+use Psl\File;
 
 trait UsesPytlewskiDataset
 {
@@ -19,7 +20,7 @@ trait UsesPytlewskiDataset
         ] as $id => $name) {
             yield $name => [
                 $id,
-                file_get_contents(__DIR__ . "/../../Datasets/Pytlewscy/{$id}.html"),
+                File\read(__DIR__ . "/../../Datasets/Pytlewscy/{$id}.html"),
                 require __DIR__ . "/../../Datasets/Pytlewscy/{$id}.php",
             ];
         }
