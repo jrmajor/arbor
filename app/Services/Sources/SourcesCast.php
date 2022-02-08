@@ -3,18 +3,22 @@
 namespace App\Services\Sources;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Support\Collection;
+use Psl\Json;
+use Psl\Type;
+use Psl\Vec;
 
 class SourcesCast implements CastsAttributes
 {
     /**
+     * @param ?string $value
      * @return Collection<int, Source>
      */
     public function get($model, string $key, $value, array $attributes): Collection
     {
-        return collect($model->fromJson($value))
-            ->map(fn ($raw) => Source::from($raw));
+        $sources = Type\vec(Type\string())->coerce(Json\decode($value ?? '[]'));
+
+        return collect($sources)->map(fn ($raw) => Source::from($raw));
     }
 
     public function set($model, string $key, $value, array $attributes): ?string
@@ -23,20 +27,13 @@ class SourcesCast implements CastsAttributes
             return null;
         }
 
-        $value = collect($value)
-            ->map(fn ($source) => Source::from($source))
-            ->map->sanitized()
-            ->filter(fn ($source) => $source !== null)
-            ->values()
-            ->toJson();
+        $value = Vec\map(
+            Type\Vec(Type\union(
+                Type\null(), Type\string(), Type\instance_of(Source::class),
+            ))->coerce($value),
+            fn ($source) => Source::from($source)->sanitized(),
+        );
 
-        /** @phpstan-ignore-next-line */
-        if ($value === false) {
-            throw JsonEncodingException::forAttribute(
-                $model, $key, json_last_error_msg(),
-            );
-        }
-
-        return $value;
+        return Json\encode(Vec\filter_nulls($value));
     }
 }
