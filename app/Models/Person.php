@@ -49,6 +49,8 @@ use stdClass;
  * @property-read ?int $burial_year
  * @property-read Collection<int, Source> $sources
  * @property-read EloquentCollection<Person> $siblings
+ * @property-read EloquentCollection<Person> $siblings_father
+ * @property-read EloquentCollection<Person> $siblings_mother
  * @property-read EloquentCollection<Marriage> $marriages
  * @property-read EloquentCollection<Person> $children
  * @property-read EloquentCollection<Activity> $activities
@@ -141,14 +143,14 @@ class Person extends Model
         return new Siblings($this);
     }
 
-    public function siblings_mother(): HalfSiblings
-    {
-        return new HalfSiblings($this, Sex::Female);
-    }
-
     public function siblings_father(): HalfSiblings
     {
         return new HalfSiblings($this, Sex::Male);
+    }
+
+    public function siblings_mother(): HalfSiblings
+    {
+        return new HalfSiblings($this, Sex::Female);
     }
 
     public function marriages(): Marriages
