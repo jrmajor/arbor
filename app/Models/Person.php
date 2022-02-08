@@ -48,12 +48,12 @@ use stdClass;
  * @property-read ?string $burial_date
  * @property-read ?int $burial_year
  * @property-read Collection<int, Source> $sources
- * @property-read EloquentCollection<Person> $siblings
- * @property-read EloquentCollection<Person> $siblings_father
- * @property-read EloquentCollection<Person> $siblings_mother
- * @property-read EloquentCollection<Marriage> $marriages
- * @property-read EloquentCollection<Person> $children
- * @property-read EloquentCollection<Activity> $activities
+ * @property-read EloquentCollection<int, Person> $siblings
+ * @property-read EloquentCollection<int, Person> $siblings_father
+ * @property-read EloquentCollection<int, Person> $siblings_mother
+ * @property-read EloquentCollection<int, Marriage> $marriages
+ * @property-read EloquentCollection<int, Person> $children
+ * @property-read EloquentCollection<int, Activity> $activities
  */
 class Person extends Model
 {

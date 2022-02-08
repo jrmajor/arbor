@@ -51,7 +51,7 @@ class Children extends Relation
     }
 
     /**
-     * @param Collection<Person> $children
+     * @param Collection<int, Person> $children
      */
     public function match(array $people, Collection $children, $relation): array
     {
@@ -73,7 +73,7 @@ class Children extends Relation
     }
 
     /**
-     * @return Collection<Person>
+     * @return Collection<int, Person>
      */
     public function getResults(): Collection
     {

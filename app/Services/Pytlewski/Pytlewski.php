@@ -23,9 +23,9 @@ use InvalidArgumentException;
  * @property-read ?string $bio
  * @property-read ?Relative $mother
  * @property-read ?Relative $father
- * @property-read Collection<Marriage> $marriages
- * @property-read Collection<Relative> $children
- * @property-read Collection<Relative> $siblings
+ * @property-read Collection<int, Marriage> $marriages
+ * @property-read Collection<int, Relative> $children
+ * @property-read Collection<int, Relative> $siblings
  */
 final class Pytlewski
 {
@@ -75,7 +75,7 @@ final class Pytlewski
     }
 
     /**
-     * @return Collection<Person>
+     * @return Collection<int, Person>
      */
     protected function eagerLoadRelatives(): Collection
     {
@@ -94,7 +94,7 @@ final class Pytlewski
     }
 
     /**
-     * @param Collection<Person> $relatives
+     * @param Collection<int, Person> $relatives
      */
     protected function matchRelatives(Collection $relatives): array
     {
