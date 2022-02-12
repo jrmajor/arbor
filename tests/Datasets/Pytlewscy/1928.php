@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'family_name' => 'Korwin-Szymanowska',
-    'last_name' => 'Chełmońska',
+    'familyName' => 'Korwin-Szymanowska',
+    'lastName' => 'Chełmońska',
     'name' => 'Maria',
-    'middle_name' => 'Ludwika',
-    'birth_date' => '15.07.1856',
-    'birth_place' => 'Żbikowie p.Czechowice',
-    'death_date' => '1942',
-    'death_place' => 'Gierczycach',
-    'mother_id' => null,
-    'mother_surname' => 'Sliwińska',
-    'mother_name' => 'Elżbieta',
-    'father_id' => null,
-    'father_surname' => 'Szymanowski',
-    'father_name' => 'Józef',
+    'middleName' => 'Ludwika',
+    'birthDate' => '15.07.1856',
+    'birthPlace' => 'Żbikowie p.Czechowice',
+    'deathDate' => '1942',
+    'deathPlace' => 'Gierczycach',
+    'motherId' => null,
+    'motherSurname' => 'Sliwińska',
+    'motherName' => 'Elżbieta',
+    'fatherId' => null,
+    'fatherSurname' => 'Szymanowski',
+    'fatherName' => 'Józef',
     'photo' => null,
     'marriages' => [
         [

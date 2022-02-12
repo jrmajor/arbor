@@ -11,11 +11,13 @@ use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
 use App\Services\Age;
 use App\Services\Pytlewski\Pytlewski;
+use App\Services\Pytlewski\PytlewskiFactory;
 use App\Services\Sources\Source;
 use App\Services\Sources\SourcesCast;
 use App\Services\Wielcy\Wielcy;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -48,6 +50,7 @@ use stdClass;
  * @property-read ?string $burial_date
  * @property-read ?int $burial_year
  * @property-read Collection<int, Source> $sources
+ * @property-read ?Pytlewski $pytlewski
  * @property-read EloquentCollection<int, Person> $siblings
  * @property-read EloquentCollection<int, Person> $siblings_father
  * @property-read EloquentCollection<int, Person> $siblings_mother
@@ -80,8 +83,6 @@ class Person extends Model
     ];
 
     protected ?Wielcy $wielcy = null;
-
-    protected ?Pytlewski $pytlewski = null;
 
     protected static function booting()
     {
@@ -125,17 +126,9 @@ class Person extends Model
         return $this->wielcy;
     }
 
-    public function getPytlewskiAttribute(): ?Pytlewski
+    public function pytlewski(): Attribute
     {
-        if (! $this->id_pytlewski) {
-            return null;
-        }
-
-        if (! $this->pytlewski) {
-            $this->pytlewski = Pytlewski::find($this->id_pytlewski);
-        }
-
-        return $this->pytlewski;
+        return new Attribute(fn () => app(PytlewskiFactory::class)->for($this));
     }
 
     public function siblings(): Siblings

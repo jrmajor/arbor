@@ -4,7 +4,7 @@ namespace Tests\Unit\Pytlewski;
 
 use App\Models\Person;
 use App\Services\Pytlewski\Marriage;
-use App\Services\Pytlewski\Pytlewski;
+use App\Services\Pytlewski\PytlewskiFactory;
 use App\Services\Pytlewski\Relative;
 use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -14,24 +14,29 @@ final class RelationsTest extends TestCase
 {
     use UsesPytlewskiDataset;
 
+    private PytlewskiFactory $factory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->factory = $this->app->make(PytlewskiFactory::class);
+    }
+
     /**
      * @dataProvider provideScrapeCases
      */
     #[TestDox('it can load relations')]
     public function testRelations(int $id, string $source, array $attributes): void
     {
-        Http::fake([
-            Pytlewski::url($id) => Http::response($source),
-        ]);
-
-        $pytlewski = Pytlewski::find($id);
+        Http::fake([PytlewskiFactory::url($id) => Http::response($source)]);
 
         $id === 704
-            ? $this->test704($pytlewski)
-            : $this->testOther($pytlewski, $attributes);
+            ? $this->test704()
+            : $this->testOther($id, $attributes);
     }
 
-    private function test704(Pytlewski $pytlewski): void
+    private function test704(): void
     {
         $relatives = Person::factory(6)->sequence(
             ['id_pytlewski' => 1420],
@@ -43,6 +48,8 @@ final class RelationsTest extends TestCase
         )->create();
 
         [$motherModel, $fatherModel, $wifeModel, $firstChild, $secondChild, $secondSibling] = $relatives;
+
+        $pytlewski = $this->factory->find(704);
 
         $mother = $pytlewski->mother;
         $this->assertInstanceOf(Relative::class, $mother);
@@ -95,28 +102,30 @@ final class RelationsTest extends TestCase
         $this->assertSame('Katarzyna', $sibling->name);
     }
 
-    private function testOther(Pytlewski $pytlewski, array $attributes): void
+    private function testOther(int $id, array $attributes): void
     {
+        $pytlewski = $this->factory->find($id);
+
         $mother = $pytlewski->mother;
 
-        if (isset($attributes['mother_surname']) || isset($attributes['mother_name'])) {
+        if (isset($attributes['motherSurname']) || isset($attributes['motherName'])) {
             $this->assertInstanceOf(Relative::class, $mother);
-            $this->assertSame($attributes['mother_id'], $mother->id);
+            $this->assertSame($attributes['motherId'], $mother->id);
             $this->assertNull($mother->person);
-            $this->assertSame($attributes['mother_surname'], $mother->surname);
-            $this->assertSame($attributes['mother_name'], $mother->name);
+            $this->assertSame($attributes['motherSurname'], $mother->surname);
+            $this->assertSame($attributes['motherName'], $mother->name);
         } else {
             $this->assertNull($mother);
         }
 
         $father = $pytlewski->father;
 
-        if (isset($attributes['father_surname']) || isset($attributes['father_name'])) {
+        if (isset($attributes['fatherSurname']) || isset($attributes['fatherName'])) {
             $this->assertInstanceOf(Relative::class, $father);
-            $this->assertSame($attributes['father_id'], $father->id);
+            $this->assertSame($attributes['fatherId'], $father->id);
             $this->assertNull($father->person);
-            $this->assertSame($attributes['father_surname'], $father->surname);
-            $this->assertSame($attributes['father_name'], $father->name);
+            $this->assertSame($attributes['fatherSurname'], $father->surname);
+            $this->assertSame($attributes['fatherName'], $father->name);
         } else {
             $this->assertNull($father);
         }

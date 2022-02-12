@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'family_name' => 'Pytlewski',
-    'last_name' => null,
+    'familyName' => 'Pytlewski',
+    'lastName' => null,
     'name' => 'Maciej',
-    'middle_name' => 'Kazimierz',
-    'birth_date' => '17.02.1859',
-    'birth_place' => 'Sulmierzyce',
-    'death_date' => null,
-    'death_place' => null,
-    'mother_id' => '1420',
-    'mother_surname' => 'Ptakowska',
-    'mother_name' => 'Maryanna',
-    'father_id' => '637',
-    'father_surname' => 'Pytlewski',
-    'father_name' => 'Łukasz',
+    'middleName' => 'Kazimierz',
+    'birthDate' => '17.02.1859',
+    'birthPlace' => 'Sulmierzyce',
+    'deathDate' => null,
+    'deathPlace' => null,
+    'motherId' => '1420',
+    'motherSurname' => 'Ptakowska',
+    'motherName' => 'Maryanna',
+    'fatherId' => '637',
+    'fatherSurname' => 'Pytlewski',
+    'fatherName' => 'Łukasz',
     'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08222006145226.jpg',
     'marriages' => [
         [

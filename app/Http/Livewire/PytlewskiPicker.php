@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Services\Pytlewski\Pytlewski;
+use App\Services\Pytlewski\PytlewskiFactory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -18,7 +19,7 @@ class PytlewskiPicker extends Component
             return '←';
         }
 
-        $pytlewski = Pytlewski::find((int) $this->pytlewskiId);
+        $pytlewski = app(PytlewskiFactory::class)->find((int) $this->pytlewskiId);
 
         if (! $pytlewski) {
             return __('people.pytlewski.not_found');
@@ -26,13 +27,13 @@ class PytlewskiPicker extends Component
 
         $result = $pytlewski->name . ' ';
 
-        if ($pytlewski->middle_name) {
-            $result .= $pytlewski->middle_name . ' ';
+        if ($pytlewski->middleName) {
+            $result .= $pytlewski->middleName . ' ';
         }
 
-        return $pytlewski->last_name
-            ? $result . "{$pytlewski->last_name} ({$pytlewski->family_name})"
-            : $result . $pytlewski->family_name;
+        return $pytlewski->lastName
+            ? $result . "{$pytlewski->lastName} ({$pytlewski->familyName})"
+            : $result . $pytlewski->familyName;
     }
 
     public function mount(int|null $id): void

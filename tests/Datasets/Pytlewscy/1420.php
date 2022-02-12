@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'family_name' => 'Ptakowska',
-    'last_name' => 'Pytlewska',
+    'familyName' => 'Ptakowska',
+    'lastName' => 'Pytlewska',
     'name' => 'Maryanna',
-    'middle_name' => null,
-    'birth_date' => '20.10.1825',
-    'birth_place' => 'Kleszczowie',
-    'death_date' => null,
-    'death_place' => null,
-    'mother_id' => '3186',
-    'mother_surname' => 'Bąblewska',
-    'mother_name' => 'Agnieszka',
-    'father_id' => null,
-    'father_surname' => 'Ptakowski',
-    'father_name' => 'Edward',
+    'middleName' => null,
+    'birthDate' => '20.10.1825',
+    'birthPlace' => 'Kleszczowie',
+    'deathDate' => null,
+    'deathPlace' => null,
+    'motherId' => '3186',
+    'motherSurname' => 'Bąblewska',
+    'motherName' => 'Agnieszka',
+    'fatherId' => null,
+    'fatherSurname' => 'Ptakowski',
+    'fatherName' => 'Edward',
     'photo' => null,
     'marriages' => [
         [

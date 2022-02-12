@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'family_name' => 'Kosela',
-    'last_name' => null,
+    'familyName' => 'Kosela',
+    'lastName' => null,
     'name' => 'Franciszek',
-    'middle_name' => null,
-    'birth_date' => '01.02.1940',
-    'birth_place' => 'Grabowcu',
-    'death_date' => null,
-    'death_place' => null,
-    'mother_id' => null,
-    'mother_surname' => 'Krzemińska',
-    'mother_name' => 'Aniela',
-    'father_id' => null,
-    'father_surname' => 'Kosela',
-    'father_name' => 'Stanisław',
+    'middleName' => null,
+    'birthDate' => '01.02.1940',
+    'birthPlace' => 'Grabowcu',
+    'deathDate' => null,
+    'deathPlace' => null,
+    'motherId' => null,
+    'motherSurname' => 'Krzemińska',
+    'motherName' => 'Aniela',
+    'fatherId' => null,
+    'fatherSurname' => 'Kosela',
+    'fatherName' => 'Stanisław',
     'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006081743.jpg',
     'marriages' => [
         [

@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'family_name' => 'Kosela',
-    'last_name' => 'Bobińska',
+    'familyName' => 'Kosela',
+    'lastName' => 'Bobińska',
     'name' => 'Iwona',
-    'middle_name' => null,
-    'birth_date' => null,
-    'birth_place' => 'Kielcach',
-    'death_date' => null,
-    'death_place' => null,
-    'mother_id' => null,
-    'mother_surname' => 'Pytlewska',
-    'mother_name' => 'Kornelia',
-    'father_id' => '543',
-    'father_surname' => 'Kosela',
-    'father_name' => 'Franciszek',
+    'middleName' => null,
+    'birthDate' => null,
+    'birthPlace' => 'Kielcach',
+    'deathDate' => null,
+    'deathPlace' => null,
+    'motherId' => null,
+    'motherSurname' => 'Pytlewska',
+    'motherName' => 'Kornelia',
+    'fatherId' => '543',
+    'fatherSurname' => 'Kosela',
+    'fatherName' => 'Franciszek',
     'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006090640.jpg',
     'marriages' => [
         [

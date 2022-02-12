@@ -22,10 +22,10 @@ use App\Services\Pytlewski\Pytlewski;
           {{ $pytlewski->id}}
           <small>
             {{ __('people.pytlewski.as') }}
-            <strong>{{ $pytlewski->last_name
-                      ? $pytlewski->last_name.' ('.$pytlewski->family_name.')'
-                      : $pytlewski->family_name }}</strong>
-            {{ $pytlewski->name }} {{ $pytlewski->middle_name }}
+            <strong>{{ $pytlewski->lastName
+                      ? $pytlewski->lastName.' ('.$pytlewski->familyName.')'
+                      : $pytlewski->familyName }}</strong>
+            {{ $pytlewski->name }} {{ $pytlewski->middleName }}
           </small>
         </a>
         <button x-on:click="open = true"
