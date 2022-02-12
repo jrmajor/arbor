@@ -16,6 +16,8 @@ use Psl\Fun;
 use Psl\Html;
 use Psl\Regex;
 use Psl\Str;
+use Psl\Type;
+use Psl\Type\Exception\CoercionException;
 use Psl\Vec;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -325,7 +327,7 @@ final class PytlewskiFactory
                     || Str\starts_with($result[2] ?? '', 'Nie zawar');
             })
             ->map(fn (array $result) => [
-                'id' => $result[1] ?? null,
+                'id' => $this->parseId($result[1] ?? null),
                 'name' => $result[2] ?? null,
                 'date' => $result[3] ?? null,
                 'place' => $result[4] ?? null,
@@ -351,9 +353,18 @@ final class PytlewskiFactory
                     || Str\starts_with($result[2] ?? '', 'Nie ma');
             })
             ->map(fn (array $result) => [
-                'id' => $result[1] ?? null,
+                'id' => $this->parseId($result[1] ?? null),
                 'name' => $result[2] ?? null,
             ]);
+    }
+
+    private function parseId(?string $id): ?int
+    {
+        try {
+            return Type\int()->coerce(Str\trim($id));
+        } catch (CoercionException) {
+            return null;
+        }
     }
 
     /**

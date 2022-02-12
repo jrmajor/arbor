@@ -18,11 +18,11 @@ return [
     'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006104940.jpg',
     'marriages' => [
         [
-            'id' => '1141',
+            'id' => 1141,
             'name' => 'Prewysz Kwinto, Anna',
         ],
         [
-            'id' => '555',
+            'id' => 555,
             'name' => 'Trelińska, Maria',
             'date' => '05.02.1940',
         ],
@@ -31,11 +31,11 @@ return [
         ['name' => 'Jadwiga'],
         ['name' => 'Irena'],
         [
-            'id' => '554',
+            'id' => 554,
             'name' => 'Zbigniew',
         ],
         [
-            'id' => '1140',
+            'id' => 1140,
             'name' => 'Bogdan',
         ],
     ],

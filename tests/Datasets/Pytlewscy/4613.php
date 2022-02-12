@@ -9,7 +9,7 @@ return [
     'birthPlace' => null,
     'deathDate' => null,
     'deathPlace' => null,
-    'motherId' => '634',
+    'motherId' => 634,
     'motherSurname' => null,
     'motherName' => null,
     'fatherId' => null,
@@ -18,13 +18,13 @@ return [
     'photo' => null,
     'marriages' => [
         [
-            'id' => '4612',
+            'id' => 4612,
             'name' => 'Białkowski, Wiktor',
         ],
     ],
     'children' => [
         [
-            'id' => '4611',
+            'id' => 4611,
             'name' => 'Karolina',
         ],
     ],

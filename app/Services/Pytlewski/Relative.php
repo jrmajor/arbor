@@ -7,7 +7,7 @@ use App\Models\Person;
 final class Relative
 {
     public function __construct(
-        public readonly ?string $id = null,
+        public readonly ?int $id = null,
         public readonly ?string $url = null,
         public readonly ?string $name = null,
         public readonly ?string $surname = null,

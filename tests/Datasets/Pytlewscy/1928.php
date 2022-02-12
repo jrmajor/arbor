@@ -18,7 +18,7 @@ return [
     'photo' => null,
     'marriages' => [
         [
-            'id' => '1927',
+            'id' => 1927,
             'name' => 'Chełmoński, Józef-Marian',
             'date' => '16.06.1878',
             'place' => 'Warszawa',
@@ -26,31 +26,31 @@ return [
     ],
     'children' => [
         [
-            'id' => '1953',
+            'id' => 1953,
             'name' => 'Jadwiga',
         ],
         [
-            'id' => '1926',
+            'id' => 1926,
             'name' => 'Zofia',
         ],
         [
-            'id' => '1956',
+            'id' => 1956,
             'name' => 'Józef',
         ],
         [
-            'id' => '1957',
+            'id' => 1957,
             'name' => 'Anna',
         ],
         [
-            'id' => '1958',
+            'id' => 1958,
             'name' => 'Tadeusz',
         ],
         [
-            'id' => '1959',
+            'id' => 1959,
             'name' => 'Maria',
         ],
         [
-            'id' => '1974',
+            'id' => 1974,
             'name' => 'Wanda',
         ],
     ],

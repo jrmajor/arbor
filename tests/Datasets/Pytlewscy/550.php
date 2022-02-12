@@ -12,7 +12,7 @@ return [
     'motherId' => null,
     'motherSurname' => 'Pytlewska',
     'motherName' => 'Kornelia',
-    'fatherId' => '543',
+    'fatherId' => 543,
     'fatherSurname' => 'Kosela',
     'fatherName' => 'Franciszek',
     'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006090640.jpg',

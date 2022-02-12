@@ -9,7 +9,7 @@ return [
     'birthPlace' => 'Kleszczowie',
     'deathDate' => null,
     'deathPlace' => null,
-    'motherId' => '3186',
+    'motherId' => 3186,
     'motherSurname' => 'Bąblewska',
     'motherName' => 'Agnieszka',
     'fatherId' => null,
@@ -18,7 +18,7 @@ return [
     'photo' => null,
     'marriages' => [
         [
-            'id' => '637',
+            'id' => 637,
             'name' => 'Pytlewski, Łukasz',
             'date' => '19.05.1852',
             'place' => 'Sulmierzyce',
@@ -27,24 +27,24 @@ return [
     'children' => [
         ['name' => 'Julianna'],
         [
-            'id' => '725',
+            'id' => 725,
             'name' => 'Florentyna-Franciszka',
         ],
         [
-            'id' => '1423',
+            'id' => 1423,
             'name' => 'Sabina',
         ],
         [
-            'id' => '704',
+            'id' => 704,
             'name' => 'Maciej-Kazimierz',
         ],
         [
-            'id' => '712',
+            'id' => 712,
             'name' => 'Franciszka',
         ],
         ['name' => 'Józefa'],
         [
-            'id' => '2908',
+            'id' => 2908,
             'name' => 'Marcjanna',
         ],
     ],
