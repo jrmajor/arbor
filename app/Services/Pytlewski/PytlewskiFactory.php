@@ -80,8 +80,8 @@ final class PytlewskiFactory
 
                 return Fun\pipe(
                     fn ($s) => iconv('Windows-1250', 'UTF-8', $s) ?: '',
-                    fn ($s) => Str\after($source, '<table border=0 align=center width=500><tr><td>') ?? '',
-                    fn ($s) => Str\before($source, '<td background="images/spacer.gif" width="35" height="1"></td>'),
+                    fn ($s) => Str\after($s, '<table border=0 align=center width=500><tr><td>') ?? '',
+                    fn ($s) => Str\before($s, '<td background="images/spacer.gif" width="35" height="1"></td>'),
                 )($source->body());
             },
         );
