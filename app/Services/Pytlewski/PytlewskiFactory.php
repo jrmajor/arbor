@@ -314,6 +314,7 @@ final class PytlewskiFactory
         $marriages = Str\split($marriages, '</center>')[1];
         $marriages = Str\split($marriages, '<br>');
 
+        /** @phpstan-ignore-next-line */
         return collect($marriages)
             ->map(fn (string $marriage) => Regex\first_match(
                 $marriage,
@@ -339,6 +340,7 @@ final class PytlewskiFactory
         $children = Str\split($children, '</center>')[1];
         $children = Str\split($children, '; ');
 
+        /** @phpstan-ignore-next-line */
         return collect($children)
             ->map(fn (string $child) => Regex\first_match(
                 $child,

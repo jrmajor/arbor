@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\Pytlewski\Pytlewski;
 use App\Services\Pytlewski\PytlewskiFactory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
