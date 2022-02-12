@@ -12,13 +12,13 @@ trait UsesPytlewskiDataset
         foreach ([
             543 => 'Franciszek Kosela',
             556 => 'Józef Major',
-            550 => 'Iwona Bobińska (Kosela)',
+            550 => 'Iwona Bobińska',
             704 => 'Maciej Kazimierz Pytlewski',
-            1420 => 'Maryanna Pytlewska (Ptakowska)',
-            1928 => 'Maria Ludwika Chełmońska (Korwin-Szymanowska)',
-            4613 => 'Adolfina Białkowska (Kolin)',
+            1420 => 'Maryanna Pytlewska',
+            1928 => 'Maria Ludwika Chełmońska',
+            4613 => 'Adolfina Białkowska',
         ] as $id => $name) {
-            yield $name => [
+            yield "{$id} ({$name})" => [
                 $id,
                 File\read(__DIR__ . "/../../Datasets/Pytlewscy/{$id}.html"),
                 require __DIR__ . "/../../Datasets/Pytlewscy/{$id}.php",
