@@ -64,9 +64,5 @@ class MacrosServiceProvider extends ServiceProvider
 
             return $array;
         });
-
-        Collection::macro('trim', function (): Collection {
-            return new static(Arr::trim($this->items));
-        });
     }
 }
