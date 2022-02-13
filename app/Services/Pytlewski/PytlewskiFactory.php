@@ -228,11 +228,11 @@ final class PytlewskiFactory
      */
     private function scrapeRelations(Crawler $crawler, RelativesRepository $relatives): array
     {
-        return Arr::trim([
+        return [
             'father' => $this->parseParent($crawler, $relatives, Sex::Male),
             'mother' => $this->parseParent($crawler, $relatives, Sex::Female),
             ...$this->parseRelations($crawler, $relatives),
-        ]);
+        ];
     }
 
     private function parseParent(Crawler $crawler, RelativesRepository $relatives, Sex $type): ?Relative
@@ -279,15 +279,21 @@ final class PytlewskiFactory
         }
 
         try {
-            yield 'marriages' => $this->parseMarriages($crawler->eq(0)->children()->first()->html(), $relatives);
+            $marriages = $crawler->eq(0)->children()->first()->html();
+
+            yield 'marriages' => $this->parseMarriages($marriages, $relatives);
         } catch (InvalidArgumentException) { }
 
         try {
-            yield 'children' => $this->parseChildrenOrSiblings($crawler->eq(1)->children()->first()->html(), $relatives);
+            $children = $crawler->eq(1)->children()->first()->html();
+
+            yield 'children' => $this->parseChildrenOrSiblings($children, $relatives);
         } catch (InvalidArgumentException) { }
 
         try {
-            yield 'siblings' => $this->parseChildrenOrSiblings($crawler->eq(2)->children()->first()->html(), $relatives);
+            $siblings = $crawler->eq(2)->children()->first()->html();
+
+            yield 'siblings' => $this->parseChildrenOrSiblings($siblings, $relatives);
         } catch (InvalidArgumentException) { }
     }
 
@@ -303,7 +309,9 @@ final class PytlewskiFactory
             fn (string $src) => Str\split($src, '</center>')[1],
             fn (string $src) => Str\split($src, '<br>'),
             fn (array $marriages) => Vec\map($marriages, fn (string $m) => Regex\first_match($m, $pattern)),
-            fn (array $m) => Vec\filter($m, fn (?array $match) => $match !== null && ! Str\starts_with($match[2] ?? '', 'Nie zawar')),
+            fn (array $m) => Vec\filter($m, function (?array $match) {
+                return $match !== null && ! Str\starts_with($match[2] ?? '', 'Nie zawar');
+            }),
             fn (array $result) => Vec\map($result, fn (array $m) => new Marriage(
                 $relatives,
                 id: parse_int($m[1] ?? null),
@@ -326,7 +334,9 @@ final class PytlewskiFactory
             fn (string $src) => Str\split($src, '</center>')[1],
             fn (string $src) => Str\split($src, '; '),
             fn (array $children) => Vec\map($children, fn (string $c) => Regex\first_match($c, $pattern)),
-            fn (array $c) => Vec\filter($c, fn (?array $match) => $match !== null && ! Str\starts_with($match[2] ?? '', 'Nie ma')),
+            fn (array $c) => Vec\filter($c, function (?array $match) {
+                return $match !== null && ! Str\starts_with($match[2] ?? '', 'Nie ma');
+            }),
             fn (array $result) => Vec\map($result, fn (array $c) => new Relative(
                 $relatives,
                 id: parse_int($c[1] ?? null),
