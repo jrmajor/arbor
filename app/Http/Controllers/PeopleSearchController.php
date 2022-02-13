@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Person;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Psl\Str;
+use Psl\Vec;
 use Symfony\Component\HttpFoundation\Response;
+
+use function App\trim_values;
 
 class PeopleSearchController extends Controller
 {
@@ -23,7 +26,7 @@ class PeopleSearchController extends Controller
         $sex = filled($request->get('sex')) ? $request->get('sex') : null;
 
         $whereFragment = function (Builder $q) use ($query) {
-            $queryFragments = Arr::trim(explode(' ', $query));
+            $queryFragments = Vec\filter_nulls(trim_values(Str\split($query, ' ')));
 
             foreach ($queryFragments as $fragment) {
                 $q->where(function (Builder $q) use ($fragment) {
