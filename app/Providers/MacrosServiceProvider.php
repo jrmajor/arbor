@@ -4,8 +4,6 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 
 class MacrosServiceProvider extends ServiceProvider
@@ -13,7 +11,6 @@ class MacrosServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerCarbonMacros();
-        $this->registerTrimArrayMacro();
     }
 
     public function registerCarbonMacros(): void
@@ -44,25 +41,6 @@ class MacrosServiceProvider extends ServiceProvider
                 'from' => $from->toDateString(),
                 'to' => $to->toDateString(),
             ]);
-        });
-    }
-
-    public function registerTrimArrayMacro(): void
-    {
-        Arr::macro('trim', function (array|Collection $array): array|Collection {
-            foreach ($array as $key => $value) {
-                $array[$key] = match (get_debug_type($value)) {
-                    'array', Collection::class => self::trim($value),
-                    'string' => trim($value),
-                    default => $value,
-                };
-
-                if (blank($array[$key])) {
-                    unset($array[$key]);
-                }
-            }
-
-            return $array;
         });
     }
 }
