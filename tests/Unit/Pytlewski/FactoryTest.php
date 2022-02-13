@@ -94,7 +94,7 @@ final class FactoryTest extends TestCase
         ];
 
         foreach (Arr::only($attributes, $keysToCheck) as $key => $value) {
-            $this->assertSame($value, $pytlewski->{$key});
+            $this->assertSame($value, $pytlewski->{$key}, "Value of {$key} does not match.");
         }
     }
 }
