@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Symfony\Component\HttpFoundation\Response;
 
-use function App\Services\flash;
+use function App\flash;
 
 class PasswordResetLinkController extends Controller
 {

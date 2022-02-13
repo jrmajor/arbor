@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
-use function App\Services\flash;
+use function App\flash;
 
 class NewPasswordController extends Controller
 {

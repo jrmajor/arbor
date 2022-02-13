@@ -7,7 +7,7 @@ use App\Models\Person;
 use Illuminate\Contracts\View\View;
 use Symfony\Component\HttpFoundation\Response;
 
-use function App\Services\flash;
+use function App\flash;
 
 class BiographyController extends Controller
 {

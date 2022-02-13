@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use function App\Services\flash;
+use function App\flash;
 
 class AuthenticatedSessionController extends Controller
 {

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
-use function App\Services\flash;
+use function App\flash;
 
 class Settings extends Component
 {

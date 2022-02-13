@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-use function App\Services\flash;
-use function App\Services\formatBiography;
+use function App\flash;
+use function App\formatBiography;
 
 class PersonController extends Controller
 {

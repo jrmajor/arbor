@@ -61,7 +61,6 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Services/helpers.php",
             "app/helpers.php",
             "helpers.php"
         ]
