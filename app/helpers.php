@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\HtmlString;
 use Psl\Fun;
 use Psl\Str;
 use Psl\Type;
@@ -13,14 +14,20 @@ function flash(string $class, string $text): void
     app(Flash::class)->flash(new FlashMessage(__($text), $class));
 }
 
-function formatBiography(?string $biography): ?string
+function formatBiography(?string $biography): HtmlString
 {
-    return $biography === null ? null : Fun\pipe(
+    if ($biography === null) {
+        return new HtmlString();
+    }
+
+    /** @phpstan-ignore-next-line */
+    return Fun\pipe(
         fn ($s) => Str\trim($s),
         fn ($s) => Str\replace_every($s, ["\r\n" => "\n", "\r" => "\n"]),
         fn ($s) => e($s),
         fn ($s) => "<p>{$s}</p>",
         fn ($s) => Str\replace($s, "\n\n", "</p>\n<p>"),
+        fn ($s) => new HtmlString($s),
     )($biography);
 }
 
