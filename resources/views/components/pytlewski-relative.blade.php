@@ -17,7 +17,7 @@
   >
 @endif
 
-  @if ($pytlewski->surname)
+  @isset ($pytlewski->surname)
     {{ $pytlewski->surname }},
   @endif
   {{ $pytlewski->name }}{{--

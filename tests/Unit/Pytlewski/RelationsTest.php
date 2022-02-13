@@ -54,14 +54,14 @@ final class RelationsTest extends TestCase
         $mother = $pytlewski->mother;
         $this->assertInstanceOf(Relative::class, $mother);
         $this->assertSame(1420, $mother->id);
-        $this->assertSame($motherModel->id, $mother->person->id);
+        $this->assertSame($motherModel->id, $mother->person?->id);
         $this->assertSame('Ptakowska', $mother->surname);
         $this->assertSame('Maryanna', $mother->name);
 
         $father = $pytlewski->father;
         $this->assertInstanceOf(Relative::class, $father);
         $this->assertSame(637, $father->id);
-        $this->assertSame($fatherModel->id, $father->person->id);
+        $this->assertSame($fatherModel->id, $father->person?->id);
         $this->assertSame('Pytlewski', $father->surname);
         $this->assertSame('Łukasz', $father->name);
 
@@ -70,7 +70,7 @@ final class RelationsTest extends TestCase
         $marriage = $pytlewski->marriages[0];
         $this->assertInstanceOf(Marriage::class, $marriage);
         $this->assertSame(705, $marriage->id);
-        $this->assertSame($wifeModel->id, $marriage->person->id);
+        $this->assertSame($wifeModel->id, $marriage->person?->id);
         $this->assertSame('Frankiewicz, Bronisława', $marriage->name);
         $this->assertSame('29.09.1885', $marriage->date);
         $this->assertSame('Sulmierzyce', $marriage->place);
@@ -80,12 +80,12 @@ final class RelationsTest extends TestCase
 
         $child = $pytlewski->children[0];
         $this->assertSame(706, $child->id);
-        $this->assertSame($firstChild->id, $child->person->id);
+        $this->assertSame($firstChild->id, $child->person?->id);
         $this->assertSame('Zygmunt-Stanisław', $child->name);
 
         $child = $pytlewski->children[1];
         $this->assertSame(707, $child->id);
-        $this->assertSame($secondChild->id, $child->person->id);
+        $this->assertSame($secondChild->id, $child->person?->id);
         $this->assertSame('Seweryn', $child->name);
 
         $this->assertCount(20, $pytlewski->siblings);
@@ -98,7 +98,7 @@ final class RelationsTest extends TestCase
 
         $sibling = $pytlewski->siblings[1];
         $this->assertSame(678, $sibling->id);
-        $this->assertSame($secondSibling->id, $sibling->person->id);
+        $this->assertSame($secondSibling->id, $sibling->person?->id);
         $this->assertSame('Katarzyna', $sibling->name);
     }
 

@@ -16,6 +16,7 @@ parameters:
     checkGenericClassInNonGenericObjectType: true
     checkPhpDocMissingReturn: true
     ignoreErrors:
+        - '#^Parameter \#\d+ \.\.\.\$stages of function Psl\\Fun\\pipe expects Closure.*, Closure.* given\.$#'
         - '#^Access to an undefined property Pest\\Expectation(\|Pest\\Support\\Extendable)?::\$\w+\.$#'
         - '#^Call to an undefined method Pest\\PendingObjects\\TestCall::(get|post|withPermissions)\(\)\.$#'
         - '#^Method .* return type with generic class Illuminate\\Database\\Eloquent\\Relations\\\w+ does not specify its types: .*$#'

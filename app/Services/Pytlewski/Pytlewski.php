@@ -4,9 +4,10 @@ namespace App\Services\Pytlewski;
 
 final class Pytlewski
 {
+    public readonly string $url;
+
     public function __construct(
         public readonly int $id,
-        public readonly string $url,
         public readonly ?string $familyName = null,
         public readonly ?string $lastName = null,
         public readonly ?string $name = null,
@@ -23,5 +24,7 @@ final class Pytlewski
         public readonly array $marriages = [],
         public readonly array $children = [],
         public readonly array $siblings = [],
-    ) { }
+    ) {
+        $this->url = PytlewskiFactory::url($id);
+    }
 }
