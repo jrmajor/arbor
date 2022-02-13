@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\HtmlString;
+use Psl\Dict;
 use Psl\Fun;
 use Psl\Str;
 use Psl\Type;
@@ -39,6 +40,20 @@ function nullable_trim(?string $string): ?string
     $string = Str\trim($string ?? '');
 
     return $string === '' ? null : $string;
+}
+
+/**
+ * Applies nullable trim to each value.
+ *
+ * @template T
+ *
+ * @param array<T, ?string> $array
+ * @return array<T, ?string>
+ */
+function trim_values(array $array): array
+{
+    /** @phpstan-ignore-next-line */
+    return Dict\map($array, fn (?string $v) => nullable_trim($v));
 }
 
 /**

@@ -7,10 +7,10 @@ use App\Models\Person;
 use Carbon\CarbonInterval;
 use Generator;
 use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
+use Psl\Dict;
 use Psl\Fun;
 use Psl\Html;
 use Psl\Regex;
@@ -20,6 +20,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 use function App\nullable_trim;
 use function App\parse_int;
+use function App\trim_values;
 
 final class PytlewskiFactory
 {
@@ -92,24 +93,24 @@ final class PytlewskiFactory
 
     /**
      * @return array{
-     *     familyName?: string, lastName?: string, name?: string, middleName?: string,
-     *     birthDate?: string, birthPlace?: string,
-     *     deathDate?: string, deathPlace?: string, burialPlace?: string,
-     *     photo?: string, bio?: string
+     *     familyName: ?string, lastName: ?string, name: ?string, middleName: ?string,
+     *     birthDate: ?string, birthPlace: ?string,
+     *     deathDate: ?string, deathPlace: ?string, burialPlace: ?string,
+     *     photo: ?string, bio: ?string
      * }
      */
     private function scrapeAttributes(Crawler $crawler): array
     {
-        return Arr::trim([
+        return [
             ...$this->parseNames($crawler),
             ...$this->parseDates($crawler),
-            ...$this->parsePhoto($crawler),
-            ...$this->parseBio($crawler),
-        ]);
+            'photo' => $this->parsePhoto($crawler),
+            'bio' => $this->parseBio($crawler),
+        ];
     }
 
     /**
-     * @return array{familyName?: string, lastName?: ?string, name?: string, middleName?: string}
+     * @return array{familyName: ?string, lastName: ?string, name: ?string, middleName: ?string}
      */
     private function parseNames(Crawler $crawler): array
     {
@@ -123,7 +124,7 @@ final class PytlewskiFactory
                 ->children()->first()
                 ->html();
         } catch (InvalidArgumentException) {
-            return [];
+            return Dict\from_keys(['familyName', 'lastName', 'name', 'middleName'], fn () => null);
         }
 
         [$surnames, $names] = Str\split($names, '<br>');
@@ -131,19 +132,22 @@ final class PytlewskiFactory
         $names = Str\split($names, '-');
         $matches = Regex\first_match($surnames, '/(.*) \\((.*)\\).*/');
 
-        return [
+        return trim_values([
             'familyName' => Html\strip_tags($matches ? $matches[2] : $surnames),
             'lastName' => $matches ? Html\strip_tags($matches[1]) : null,
             'name' => array_shift($names),
             'middleName' => Str\join($names, ' '),
-        ];
+        ]);
     }
 
     /**
-     * @return array{birthDate?: string, birthPlace?: string, deathDate?: string, deathPlace?: ?string, burialPlace?: ?string}
+     * @return array{birthDate: ?string, birthPlace: ?string, deathDate: ?string, deathPlace: ?string, burialPlace: ?string}
      */
     private function parseDates(Crawler $crawler): array
     {
+        $attributes = ['birthDate', 'birthPlace', 'deathDate', 'deathPlace', 'burialPlace'];
+        $attributes = Dict\from_keys($attributes, fn () => null);
+
         try {
             $dates = $crawler->eq(1)
                 ->children()->eq(1)
@@ -153,10 +157,8 @@ final class PytlewskiFactory
                 ->children()->eq(2)
                 ->html();
         } catch (InvalidArgumentException) {
-            return [];
+            return $attributes;
         }
-
-        $attributes = [];
 
         $dates = Str\split($dates, '<br>');
 
@@ -171,7 +173,7 @@ final class PytlewskiFactory
         }
 
         if (! isset($dates[1])) {
-            return $attributes;
+            return trim_values($attributes);
         }
 
         $pattern = '/\\(zm\\. ([^ ]*)(?: w ([^<),]*)(?:,poch\\.([^<)]*)?\\)?)?)?/';
@@ -187,35 +189,29 @@ final class PytlewskiFactory
             $attributes['burialPlace'] = $matches[3] ?? null;
         }
 
-        return $attributes;
+        return trim_values($attributes);
     }
 
-    /**
-     * @return array{photo?: string}
-     */
-    private function parsePhoto(Crawler $crawler): array
+    private function parsePhoto(Crawler $crawler): ?string
     {
         try {
             $photo = $crawler->eq(2)->children()->eq(1)->filter('img')->attr('src');
         } catch (InvalidArgumentException) {
-            return [];
+            return null;
         }
 
-        return ['photo' => "http://www.pytlewski.pl/index/drzewo/{$photo}"];
+        return "http://www.pytlewski.pl/index/drzewo/{$photo}";
     }
 
-    /**
-     * @return array{bio?: ?string}
-     */
-    private function parseBio(Crawler $crawler): array
+    private function parseBio(Crawler $crawler): ?string
     {
         try {
             $bio = $crawler->eq(5)->children()->eq(1)->text();
         } catch (InvalidArgumentException) {
-            return [];
+            return null;
         }
 
-        return ['bio' => $bio === 'pusto :(' ? null : $bio];
+        return $bio === 'pusto :(' ? null : $bio;
     }
 
     /**
