@@ -37,7 +37,7 @@ class PeopleSearchController extends Controller
             }
         };
 
-        $whereSex = function (Builder $q) use ($sex, ) {
+        $whereSex = function (Builder $q) use ($sex) {
             return $q->where(function (Builder $q) use ($sex) {
                 $q->where('sex', $sex)->orWhereNull('sex');
             });
