@@ -126,6 +126,9 @@ class Person extends Model
         return $this->wielcy;
     }
 
+    /**
+     * @return Attribute<?Pytlewski, never>
+     */
     public function pytlewski(): Attribute
     {
         return Attribute::get(fn () => app(PytlewskiFactory::class)->for($this));
