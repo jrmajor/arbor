@@ -31,11 +31,11 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
           restore-keys: composer-
 
-      - name: Tool cache
+      - name: PHP-CS-Fixer cache
         uses: actions/cache@v2
         with:
           path: .cache/.php-cs-fixer.cache
-          key: tools-cache
+          key: php-cs-fixer
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
