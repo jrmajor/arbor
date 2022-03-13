@@ -35,7 +35,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .cache/phpstan
-          key: phpstan
+          key: phpstan-${{ github.sha }}
+          restore-keys: phpstan-
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
