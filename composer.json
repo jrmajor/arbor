@@ -24,7 +24,6 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "livewire/livewire": "^2.10",
         "nesbot/carbon": "^2.57",
-        "sammyjo20/lasso": "^2.0",
         "spatie/laravel-activitylog": "^4.4",
         "spatie/laravel-backup": "^8.1",
         "spatie/laravel-flash": "^1.9",
