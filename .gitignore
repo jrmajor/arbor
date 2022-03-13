@@ -5,8 +5,6 @@
 /vendor
 .env
 .env.backup
-Homestead.json
-Homestead.yaml
 docker-compose.override.yml
 npm-debug.log
 yarn-error.log
