@@ -9,7 +9,7 @@ forgot_password = Przypomnij hasło
 sign_in = Loguj
 
 failed = Podany login lub hasło jest błędne.
-throttle = Zbyt dużo prób. Sporóbuj ponownie za { $seconds ->
+throttle = Zbyt dużo prób. Spróbuj ponownie za { $seconds ->
     [one] sekundę
     [few] { $seconds } sekundy
    *[many] { $seconds } sekund
