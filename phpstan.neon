@@ -28,7 +28,7 @@ parameters:
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'
         - '#^Parameter \#\d+ \.\.\.\$stages of function Psl\\Fun\\pipe expects Closure.*, Closure.* given\.$#'
         - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
-        - '#^Using nullsafe property access on non-nullable type mixed\. Use -> instead\.$#'
+        - '#^Using nullsafe property .ccess on non-nullable type mixed\. Use -> instead\.$#'
         -
             message: '#^Undefined variable: \$this$#'
             path: tests/
