@@ -15,9 +15,9 @@ final class LoginTest extends TestCase
     public function testUserForm(): void
     {
         $this->withPermissions(0)
-            ->get('/login')
+            ->get('login')
             ->assertStatus(302)
-            ->assertRedirect('/people');
+            ->assertRedirect('people');
 
         $this->assertAuthenticated();
     }
@@ -26,9 +26,9 @@ final class LoginTest extends TestCase
     public function testUser(): void
     {
         $this->withPermissions(0)
-            ->post('/login')
+            ->post('login')
             ->assertStatus(302)
-            ->assertRedirect('/people');
+            ->assertRedirect('people');
 
         $this->assertAuthenticated();
     }
@@ -36,13 +36,13 @@ final class LoginTest extends TestCase
     #[TestDox('it requires username')]
     public function testRequireUsername(): void
     {
-        $this->from('/login')
-            ->post('/login', [
+        $this->from('login')
+            ->post('login', [
                 'password' => 'password',
             ])
             ->assertSessionHasErrors('username')
             ->assertStatus(302)
-            ->assertRedirect('/login');
+            ->assertRedirect('login');
 
         $this->assertGuest();
     }
@@ -50,13 +50,13 @@ final class LoginTest extends TestCase
     #[TestDox('it requires password')]
     public function testRequirePassword(): void
     {
-        $this->from('/login')
-            ->post('/login', [
+        $this->from('login')
+            ->post('login', [
                 'username' => 'gracjan',
             ])
             ->assertSessionHasErrors('password')
             ->assertStatus(302)
-            ->assertRedirect('/login');
+            ->assertRedirect('login');
 
         $this->assertGuest();
     }
@@ -64,14 +64,14 @@ final class LoginTest extends TestCase
     #[TestDox('it checks if user exists')]
     public function testCheckUsername(): void
     {
-        $this->from('/login')
-            ->post('/login', [
+        $this->from('login')
+            ->post('login', [
                 'username' => 'gracjan',
                 'password' => 'hasło',
             ])
             ->assertSessionHasErrors('username')
             ->assertStatus(302)
-            ->assertRedirect('/login');
+            ->assertRedirect('login');
 
         $this->assertGuest();
     }
@@ -79,18 +79,16 @@ final class LoginTest extends TestCase
     #[TestDox('it checks password')]
     public function testCheckPassword(): void
     {
-        User::factory()->create([
-            'username' => 'gracjan',
-        ]);
+        User::factory()->create(['username' => 'gracjan']);
 
-        $this->from('/login')
-            ->post('/login', [
+        $this->from('login')
+            ->post('login', [
                 'username' => 'gracjan',
                 'password' => 'wrong',
             ])
             ->assertSessionHasErrors('username')
             ->assertStatus(302)
-            ->assertRedirect('/login');
+            ->assertRedirect('login');
 
         $this->assertGuest();
     }
@@ -100,18 +98,18 @@ final class LoginTest extends TestCase
     {
         $user = User::factory()->create([
             'username' => 'gracjan',
-            'password' => Hash::make($password = 'secret'),
+            'password' => Hash::make('secret'),
         ]);
 
         Event::fake();
 
-        $this->post('/login', [
+        $this->post('login', [
             'username' => 'gracjan',
             'password' => 'secret',
         ])
             ->assertSessionHasNoErrors()
             ->assertStatus(302)
-            ->assertRedirect('/people');
+            ->assertRedirect('people');
 
         $this->assertAuthenticatedAs($user);
 
@@ -125,18 +123,18 @@ final class LoginTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'gracjan@example.com',
-            'password' => Hash::make($password = 'secret'),
+            'password' => Hash::make('secret'),
         ]);
 
         Event::fake();
 
-        $this->post('/login', [
+        $this->post('login', [
             'username' => 'gracjan@example.com',
             'password' => 'secret',
         ])
             ->assertSessionHasNoErrors()
             ->assertStatus(302)
-            ->assertRedirect('/people');
+            ->assertRedirect('people');
 
         $this->assertAuthenticatedAs($user);
 

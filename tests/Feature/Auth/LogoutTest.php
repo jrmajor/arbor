@@ -17,7 +17,7 @@ final class LogoutTest extends TestCase
 
         Event::fake();
 
-        $this->actingAs($user)->post('/logout');
+        $this->actingAs($user)->post('logout');
 
         Event::assertDispatched(
             fn (CurrentDeviceLogout $event) => $event->user->is($user),
@@ -30,7 +30,7 @@ final class LogoutTest extends TestCase
     public function testRedirect(): void
     {
         $this->withPermissions(0)
-            ->post('/logout')
+            ->post('logout')
             ->assertStatus(302)
             ->assertRedirect('people');
     }
@@ -38,8 +38,7 @@ final class LogoutTest extends TestCase
     #[TestDox('it redirects to welcome page if no user is authenticated')]
     public function testNoUser(): void
     {
-        $this
-            ->post('/logout')
+        $this->post('logout')
             ->assertStatus(302)
             ->assertRedirect('people');
     }
