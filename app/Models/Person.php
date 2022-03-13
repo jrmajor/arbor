@@ -128,7 +128,7 @@ class Person extends Model
 
     public function pytlewski(): Attribute
     {
-        return new Attribute(fn () => app(PytlewskiFactory::class)->for($this));
+        return Attribute::get(fn () => app(PytlewskiFactory::class)->for($this));
     }
 
     public function siblings(): Siblings
