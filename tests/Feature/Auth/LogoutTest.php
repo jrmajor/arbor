@@ -1,34 +1,46 @@
 <?php
 
+namespace Tests\Feature\Auth;
+
 use App\Models\User;
 use Illuminate\Auth\Events\CurrentDeviceLogout;
 use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-use function Pest\Laravel\actingAs;
-use function Pest\Laravel\assertGuest;
+final class LogoutTest extends TestCase
+{
+    #[TestDox('it logs user out')]
+    public function testLogOut(): void
+    {
+        $user = User::factory()->create();
 
-it('logs user out', function () {
-    $user = User::factory()->create();
+        Event::fake();
 
-    Event::fake();
+        $this->actingAs($user)->post('/logout');
 
-    actingAs($user)
-        ->post('/logout');
+        Event::assertDispatched(
+            fn (CurrentDeviceLogout $event) => $event->user->is($user),
+        );
 
-    Event::assertDispatched(
-        fn (CurrentDeviceLogout $event) => $event->user->is($user),
-    );
+        $this->assertGuest();
+    }
 
-    assertGuest();
-});
+    #[TestDox('it redirects to welcome page after logging out')]
+    public function testRedirect(): void
+    {
+        $this->withPermissions(0)
+            ->post('/logout')
+            ->assertStatus(302)
+            ->assertRedirect('people');
+    }
 
-it('redirects to welcome page after logging out')
-    ->withPermissions(0)
-    ->post('/logout')
-    ->assertStatus(302)
-    ->assertRedirect('people');
-
-it('redirects to welcome page if no user is authenticated')
-    ->post('/logout')
-    ->assertStatus(302)
-    ->assertRedirect('people');
+    #[TestDox('it redirects to welcome page if no user is authenticated')]
+    public function testNoUser(): void
+    {
+        $this
+            ->post('/logout')
+            ->assertStatus(302)
+            ->assertRedirect('people');
+    }
+}

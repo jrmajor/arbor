@@ -1,131 +1,147 @@
 <?php
 
+namespace Tests\Feature\Auth;
+
 use App\Models\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-use function Pest\Laravel\assertAuthenticated;
-use function Pest\Laravel\assertAuthenticatedAs;
-use function Pest\Laravel\assertGuest;
-use function Pest\Laravel\from;
-use function Pest\Laravel\post;
-use function Tests\withPermissions;
+final class LoginTest extends TestCase
+{
+    #[TestDox('authenticated users are redirected when trying to access form')]
+    public function testUserForm(): void
+    {
+        $this->withPermissions(0)
+            ->get('/login')
+            ->assertStatus(302)
+            ->assertRedirect('/people');
 
-test('authenticated users are redirected when trying to access form', function () {
-    withPermissions(0)
-        ->get('/login')
-        ->assertStatus(302)
-        ->assertRedirect('/people');
+        $this->assertAuthenticated();
+    }
 
-    assertAuthenticated();
-});
+    #[TestDox('authenticated users are redirected when trying to log in')]
+    public function testUser(): void
+    {
+        $this->withPermissions(0)
+            ->post('/login')
+            ->assertStatus(302)
+            ->assertRedirect('/people');
 
-test('authenticated users are redirected when trying to log in', function () {
-    withPermissions(0)
-        ->post('/login')
-        ->assertStatus(302)
-        ->assertRedirect('/people');
+        $this->assertAuthenticated();
+    }
 
-    assertAuthenticated();
-});
+    #[TestDox('it requires username')]
+    public function testRequireUsername(): void
+    {
+        $this->from('/login')
+            ->post('/login', [
+                'password' => 'password',
+            ])
+            ->assertSessionHasErrors('username')
+            ->assertStatus(302)
+            ->assertRedirect('/login');
 
-it('requires username', function () {
-    from('/login')
-        ->post('/login', [
-            'password' => 'password',
-        ])
-        ->assertSessionHasErrors('username')
-        ->assertStatus(302)
-        ->assertRedirect('/login');
+        $this->assertGuest();
+    }
 
-    assertGuest();
-});
+    #[TestDox('it requires password')]
+    public function testRequirePassword(): void
+    {
+        $this->from('/login')
+            ->post('/login', [
+                'username' => 'gracjan',
+            ])
+            ->assertSessionHasErrors('password')
+            ->assertStatus(302)
+            ->assertRedirect('/login');
 
-it('requires password', function () {
-    from('/login')
-        ->post('/login', [
+        $this->assertGuest();
+    }
+
+    #[TestDox('it checks if user exists')]
+    public function testCheckUsername(): void
+    {
+        $this->from('/login')
+            ->post('/login', [
+                'username' => 'gracjan',
+                'password' => 'hasło',
+            ])
+            ->assertSessionHasErrors('username')
+            ->assertStatus(302)
+            ->assertRedirect('/login');
+
+        $this->assertGuest();
+    }
+
+    #[TestDox('it checks password')]
+    public function testCheckPassword(): void
+    {
+        User::factory()->create([
             'username' => 'gracjan',
-        ])
-        ->assertSessionHasErrors('password')
-        ->assertStatus(302)
-        ->assertRedirect('/login');
+        ]);
 
-    assertGuest();
-});
+        $this->from('/login')
+            ->post('/login', [
+                'username' => 'gracjan',
+                'password' => 'wrong',
+            ])
+            ->assertSessionHasErrors('username')
+            ->assertStatus(302)
+            ->assertRedirect('/login');
 
-it('checks if user exists', function () {
-    from('/login')
-        ->post('/login', [
+        $this->assertGuest();
+    }
+
+    #[TestDox('user can log in using username')]
+    public function testLogInUsername(): void
+    {
+        $user = User::factory()->create([
             'username' => 'gracjan',
-            'password' => 'hasło',
-        ])
-        ->assertSessionHasErrors('username')
-        ->assertStatus(302)
-        ->assertRedirect('/login');
+            'password' => Hash::make($password = 'secret'),
+        ]);
 
-    assertGuest();
-});
+        Event::fake();
 
-it('checks password', function () {
-    User::factory()->create([
-        'username' => 'gracjan',
-    ]);
-
-    from('/login')
-        ->post('/login', [
+        $this->post('/login', [
             'username' => 'gracjan',
-            'password' => 'wrong',
+            'password' => 'secret',
         ])
-        ->assertSessionHasErrors('username')
-        ->assertStatus(302)
-        ->assertRedirect('/login');
+            ->assertSessionHasNoErrors()
+            ->assertStatus(302)
+            ->assertRedirect('/people');
 
-    assertGuest();
-});
+        $this->assertAuthenticatedAs($user);
 
-test('user can log in using username', function () {
-    $user = User::factory()->create([
-        'username' => 'gracjan',
-        'password' => Hash::make($password = 'secret'),
-    ]);
+        Event::assertDispatched(
+            fn (Login $event) => $event->user->is($user),
+        );
+    }
 
-    Event::fake();
+    #[TestDox('user can log in using email')]
+    public function testLogInEmail(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'gracjan@example.com',
+            'password' => Hash::make($password = 'secret'),
+        ]);
 
-    post('/login', [
-        'username' => 'gracjan',
-        'password' => 'secret',
-    ])
-        ->assertSessionHasNoErrors()
-        ->assertStatus(302)
-        ->assertRedirect('/people');
+        Event::fake();
 
-    assertAuthenticatedAs($user);
+        $this->post('/login', [
+            'username' => 'gracjan@example.com',
+            'password' => 'secret',
+        ])
+            ->assertSessionHasNoErrors()
+            ->assertStatus(302)
+            ->assertRedirect('/people');
 
-    Event::assertDispatched(
-        fn (Login $event) => $event->user->is($user),
-    );
-});
+        $this->assertAuthenticatedAs($user);
 
-test('user can log in using email', function () {
-    $user = User::factory()->create([
-        'email' => 'gracjan@example.com',
-        'password' => Hash::make($password = 'secret'),
-    ]);
-
-    Event::fake();
-
-    post('/login', [
-        'username' => 'gracjan@example.com',
-        'password' => 'secret',
-    ])
-        ->assertSessionHasNoErrors()
-        ->assertStatus(302)
-        ->assertRedirect('/people');
-
-    assertAuthenticatedAs($user);
-
-    Event::assertDispatched(
-        fn (Login $event) => $event->user->is($user),
-    );
-});
+        Event::assertDispatched(
+            fn (Login $event) => $event->user->is($user),
+        );
+    }
+}
