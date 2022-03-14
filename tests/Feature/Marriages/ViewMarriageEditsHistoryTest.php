@@ -1,28 +1,43 @@
 <?php
 
+namespace Tests\Feature\Marriages;
+
 use App\Models\Marriage;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
 use function Pest\Laravel\get;
-use function Tests\withPermissions;
 
-beforeEach(function () {
-    $this->marriage = Marriage::factory()->create();
-});
+final class ViewMarriageEditsHistoryTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('guests are asked to log in when attempting to view marriage history', function () {
-    get("marriages/{$this->marriage->id}/history")
-        ->assertStatus(302)
-        ->assertRedirect('login');
-});
+        $this->marriage = Marriage::factory()->create();
+    }
 
-test('users without permissions cannot view marriage history', function () {
-    withPermissions(2)
-        ->get("marriages/{$this->marriage->id}/history")
-        ->assertStatus(403);
-});
+    #[TestDox('guests are asked to log in when attempting to view marriage history')]
+    public function testGuest(): void
+    {
+        get("marriages/{$this->marriage->id}/history")
+            ->assertStatus(302)
+            ->assertRedirect('login');
+    }
 
-test('users with permissions can view marriage history', function () {
-    withPermissions(3)
-        ->get("marriages/{$this->marriage->id}/history")
-        ->assertStatus(200);
-});
+    #[TestDox('users without permissions cannot view marriage history')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(2)
+            ->get("marriages/{$this->marriage->id}/history")
+            ->assertStatus(403);
+    }
+
+    #[TestDox('users with permissions can view marriage history')]
+    public function testOk(): void
+    {
+        $this->withPermissions(3)
+            ->get("marriages/{$this->marriage->id}/history")
+            ->assertStatus(200);
+    }
+}

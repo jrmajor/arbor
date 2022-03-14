@@ -1,64 +1,85 @@
 <?php
 
+namespace Tests\Feature\Marriages;
+
 use App\Models\Marriage;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
 use function Pest\Laravel\delete;
 use function Tests\latestLog;
-use function Tests\withPermissions;
 
-beforeEach(function () {
-    $this->marriage = Marriage::factory()->create();
-});
+final class DeleteMarriageTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('guests cannot delete marriage', function () {
-    delete("marriages/{$this->marriage->id}")
-        ->assertStatus(302)
-        ->assertRedirect('login');
+        $this->marriage = Marriage::factory()->create();
+    }
 
-    expect($this->marriage->fresh()->trashed())->toBeFalse();
-});
+    #[TestDox('guests cannot delete marriage')]
+    public function testGuest(): void
+    {
+        delete("marriages/{$this->marriage->id}")
+            ->assertStatus(302)
+            ->assertRedirect('login');
 
-test('users without permissions cannot delete marriage', function () {
-    withPermissions(1)
-        ->delete("marriages/{$this->marriage->id}")
-        ->assertStatus(403);
+        expect($this->marriage->fresh()->trashed())->toBeFalse();
+    }
 
-    expect($this->marriage->fresh()->trashed())->toBeFalse();
-});
+    #[TestDox('users without permissions cannot delete marriage')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(1)
+            ->delete("marriages/{$this->marriage->id}")
+            ->assertStatus(403);
 
-test('users with permissions can delete marriage', function () {
-    withPermissions(2)
-        ->delete("marriages/{$this->marriage->id}")
-        ->assertStatus(302);
+        expect($this->marriage->fresh()->trashed())->toBeFalse();
+    }
 
-    expect($this->marriage->fresh()->trashed())->toBeTrue();
-});
+    #[TestDox('users with permissions can delete marriage')]
+    public function testOk(): void
+    {
+        $this->withPermissions(2)
+            ->delete("marriages/{$this->marriage->id}")
+            ->assertStatus(302);
 
-test('users without permissions to view history are redirected to woman page', function () {
-    withPermissions(2)
-        ->delete("marriages/{$this->marriage->id}")
-        ->assertStatus(302)
-        ->assertRedirect("people/{$this->marriage->woman_id}");
-});
+        expect($this->marriage->fresh()->trashed())->toBeTrue();
+    }
 
-test('users with permissions to view history are redirected to marriage history', function () {
-    withPermissions(3)
-        ->delete("marriages/{$this->marriage->id}")
-        ->assertStatus(302)
-        ->assertRedirect("marriages/{$this->marriage->id}/history");
-});
+    #[TestDox('users without permissions to view history are redirected to woman page')]
+    public function testRedirectPermissions(): void
+    {
+        $this->withPermissions(2)
+            ->delete("marriages/{$this->marriage->id}")
+            ->assertStatus(302)
+            ->assertRedirect("people/{$this->marriage->woman_id}");
+    }
 
-test('marriage deletion is logged', function () {
-    $this->marriage->delete();
+    #[TestDox('users with permissions to view history are redirected to marriage history')]
+    public function testRedirect(): void
+    {
+        $this->withPermissions(3)
+            ->delete("marriages/{$this->marriage->id}")
+            ->assertStatus(302)
+            ->assertRedirect("marriages/{$this->marriage->id}/history");
+    }
 
-    expect($log = latestLog())
-        ->log_name->toBe('marriages')
-        ->description->toBe('deleted')
-        ->subject->toBeModel($this->marriage);
+    #[TestDox('marriage deletion is logged')]
+    public function testLogging(): void
+    {
+        $this->marriage->delete();
 
-    expect((string) $log->created_at)->toBe((string) $this->marriage->deleted_at);
+        expect($log = latestLog())
+            ->log_name->toBe('marriages')
+            ->description->toBe('deleted')
+            ->subject->toBeModel($this->marriage);
 
-    expect($log->properties->all())->toBe([
-        'attributes' => ['deleted_at' => $this->marriage->deleted_at->toJson()],
-    ]);
-});
+        expect((string) $log->created_at)->toBe((string) $this->marriage->deleted_at);
+
+        expect($log->properties->all())->toBe([
+            'attributes' => ['deleted_at' => $this->marriage->deleted_at->toJson()],
+        ]);
+    }
+}

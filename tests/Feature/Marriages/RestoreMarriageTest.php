@@ -1,57 +1,76 @@
 <?php
 
+namespace Tests\Feature\Marriages;
+
 use App\Models\Marriage;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
 use function Pest\Laravel\patch;
 use function Tests\latestLog;
-use function Tests\withPermissions;
 
-beforeEach(function () {
-    $this->marriage = Marriage::factory()->create(['deleted_at' => now()]);
-});
+final class RestoreMarriageTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('guests cannot restore marriage', function () {
-    patch("marriages/{$this->marriage->id}/restore")
-        ->assertStatus(302)
-        ->assertRedirect('login');
+        $this->marriage = Marriage::factory()->create(['deleted_at' => now()]);
+    }
 
-    expect($this->marriage->fresh()->trashed())->toBeTrue();
-});
+    #[TestDox('guests cannot restore marriage')]
+    public function testGuest(): void
+    {
+        patch("marriages/{$this->marriage->id}/restore")
+            ->assertStatus(302)
+            ->assertRedirect('login');
 
-test('users without permissions cannot restore marriage', function () {
-    withPermissions(2)
-        ->patch("marriages/{$this->marriage->id}/restore")
-        ->assertStatus(403);
+        expect($this->marriage->fresh()->trashed())->toBeTrue();
+    }
 
-    expect($this->marriage->fresh()->trashed())->toBeTrue();
-});
+    #[TestDox('users without permissions cannot restore marriage')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(2)
+            ->patch("marriages/{$this->marriage->id}/restore")
+            ->assertStatus(403);
 
-test('users with permissions can restore marriage', function () {
-    withPermissions(3)
-        ->patch("marriages/{$this->marriage->id}/restore")
-        ->assertStatus(302)
-        ->assertRedirect("people/{$this->marriage->woman_id}");
+        expect($this->marriage->fresh()->trashed())->toBeTrue();
+    }
 
-    expect($this->marriage->fresh()->trashed())->toBeFalse();
-});
+    #[TestDox('users with permissions can restore marriage')]
+    public function testOk(): void
+    {
+        $this->withPermissions(3)
+            ->patch("marriages/{$this->marriage->id}/restore")
+            ->assertStatus(302)
+            ->assertRedirect("people/{$this->marriage->woman_id}");
 
-test('marriage can be restored only when deleted', function () {
-    $this->marriage->restore();
+        expect($this->marriage->fresh()->trashed())->toBeFalse();
+    }
 
-    withPermissions(3)
-        ->patch("marriages/{$this->marriage->id}/restore")
-        ->assertStatus(404);
-});
+    #[TestDox('marriage can be restored only when deleted')]
+    public function testDeleted(): void
+    {
+        $this->marriage->restore();
 
-test('marriage restoration is logged', function () {
-    $this->marriage->restore();
+        $this->withPermissions(3)
+            ->patch("marriages/{$this->marriage->id}/restore")
+            ->assertStatus(404);
+    }
 
-    expect($log = latestLog())
-        ->log_name->toBe('marriages')
-        ->description->toBe('restored')
-        ->subject->toBeModel($this->marriage);
+    #[TestDox('marriage restoration is logged')]
+    public function testLogging(): void
+    {
+        $this->marriage->restore();
 
-    expect($log->properties->all())->toBe([
-        'attributes' => ['deleted_at' => null],
-    ]);
-});
+        expect($log = latestLog())
+            ->log_name->toBe('marriages')
+            ->description->toBe('restored')
+            ->subject->toBeModel($this->marriage);
+
+        expect($log->properties->all())->toBe([
+            'attributes' => ['deleted_at' => null],
+        ]);
+    }
+}
