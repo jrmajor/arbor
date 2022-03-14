@@ -1,16 +1,27 @@
 <?php
 
-test('guests are asked to log in when attempting to view users page')
-    ->get('dashboard/users')
-    ->assertStatus(302)
-    ->assertRedirect('login');
+namespace Tests\Feature\Dashboard;
 
-test('users without permissions cannot view users page')
-    ->withPermissions(3)
-    ->get('dashboard/users')
-    ->assertStatus(403);
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-test('users with permissions can view users page')
-    ->withPermissions(4)
-    ->get('dashboard/users')
-    ->assertStatus(200);
+final class UsersTest extends TestCase
+{
+    #[TestDox('guests are asked to log in when attempting to view users page')]
+    public function testGuest(): void
+    {
+        $this->get('dashboard/users')->assertStatus(302)->assertRedirect('login');
+    }
+
+    #[TestDox('users without permissions cannot view users page')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(3)->get('dashboard/users')->assertStatus(403);
+    }
+
+    #[TestDox('users with permissions can view users page')]
+    public function testOk(): void
+    {
+        $this->withPermissions(4)->get('dashboard/users')->assertStatus(200);
+    }
+}

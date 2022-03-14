@@ -1,16 +1,27 @@
 <?php
 
-test('guests are asked to log in when attempting to view activity log')
-    ->get('dashboard/activity-log')
-    ->assertStatus(302)
-    ->assertRedirect('login');
+namespace Tests\Feature\Dashboard;
 
-test('users without permissions cannot view activity log')
-    ->withPermissions(3)
-    ->get('dashboard/activity-log')
-    ->assertStatus(403);
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
-test('users with permissions can view activity log')
-    ->withPermissions(4)
-    ->get('dashboard/activity-log')
-    ->assertStatus(200);
+final class ActivityLogTest extends TestCase
+{
+    #[TestDox('guests are asked to log in when attempting to view activity log')]
+    public function testGuest(): void
+    {
+        $this->get('dashboard/activity-log')->assertStatus(302)->assertRedirect('login');
+    }
+
+    #[TestDox('users without permissions cannot view activity log')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(3)->get('dashboard/activity-log')->assertStatus(403);
+    }
+
+    #[TestDox('users with permissions can view activity log')]
+    public function testOk(): void
+    {
+        $this->withPermissions(4)->get('dashboard/activity-log')->assertStatus(200);
+    }
+}
