@@ -1,64 +1,85 @@
 <?php
 
+namespace Tests\Feature\People;
+
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
 use function Pest\Laravel\delete;
 use function Tests\latestLog;
-use function Tests\withPermissions;
 
-beforeEach(function () {
-    $this->person = Person::factory()->create();
-});
+final class DeletePersonTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('guests cannot delete person', function () {
-    delete("people/{$this->person->id}")
-        ->assertStatus(302)
-        ->assertRedirect('login');
+        $this->person = Person::factory()->create();
+    }
 
-    expect($this->person->fresh()->trashed())->toBeFalse();
-});
+    #[TestDox('guests cannot delete person')]
+    public function testGuest(): void
+    {
+        delete("people/{$this->person->id}")
+            ->assertStatus(302)
+            ->assertRedirect('login');
 
-test('users without permissions cannot delete person', function () {
-    withPermissions(1)
-        ->delete("people/{$this->person->id}")
-        ->assertStatus(403);
+        expect($this->person->fresh()->trashed())->toBeFalse();
+    }
 
-    expect($this->person->fresh()->trashed())->toBeFalse();
-});
+    #[TestDox('users without permissions cannot delete person')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(1)
+            ->delete("people/{$this->person->id}")
+            ->assertStatus(403);
 
-test('users with permissions can delete person', function () {
-    withPermissions(2)
-        ->delete("people/{$this->person->id}")
-        ->assertStatus(302);
+        expect($this->person->fresh()->trashed())->toBeFalse();
+    }
 
-    expect($this->person->fresh()->trashed())->toBeTrue();
-});
+    #[TestDox('users with permissions can delete person')]
+    public function testOk(): void
+    {
+        $this->withPermissions(2)
+            ->delete("people/{$this->person->id}")
+            ->assertStatus(302);
 
-test('users without permissions to view history are redirected to people index', function () {
-    withPermissions(2)
-        ->delete("people/{$this->person->id}")
-        ->assertStatus(302)
-        ->assertRedirect('people');
-});
+        expect($this->person->fresh()->trashed())->toBeTrue();
+    }
 
-test('users with permissions to view history are redirected to person history', function () {
-    withPermissions(3)
-        ->delete("people/{$this->person->id}")
-        ->assertStatus(302)
-        ->assertRedirect("people/{$this->person->id}/history");
-});
+    #[TestDox('users without permissions to view history are redirected to people index')]
+    public function testRedirectPermissions(): void
+    {
+        $this->withPermissions(2)
+            ->delete("people/{$this->person->id}")
+            ->assertStatus(302)
+            ->assertRedirect('people');
+    }
 
-test('person deletion is logged', function () {
-    $this->person->delete();
+    #[TestDox('users with permissions to view history are redirected to person history')]
+    public function testRedirect(): void
+    {
+        $this->withPermissions(3)
+            ->delete("people/{$this->person->id}")
+            ->assertStatus(302)
+            ->assertRedirect("people/{$this->person->id}/history");
+    }
 
-    expect($log = latestLog())
-        ->log_name->toBe('people')
-        ->description->toBe('deleted')
-        ->subject->toBeModel($this->person);
+    #[TestDox('person deletion is logged')]
+    public function testLogging(): void
+    {
+        $this->person->delete();
 
-    expect((string) $log->created_at)->toBe((string) $this->person->deleted_at);
+        expect($log = latestLog())
+            ->log_name->toBe('people')
+            ->description->toBe('deleted')
+            ->subject->toBeModel($this->person);
 
-    expect($log->properties->all())->toBe([
-        'attributes' => ['deleted_at' => $this->person->deleted_at->toJson()],
-    ]);
-});
+        expect((string) $log->created_at)->toBe((string) $this->person->deleted_at);
+
+        expect($log->properties->all())->toBe([
+            'attributes' => ['deleted_at' => $this->person->deleted_at->toJson()],
+        ]);
+    }
+}

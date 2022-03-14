@@ -1,72 +1,87 @@
 <?php
 
+namespace Tests\Feature\People;
+
 use App\Models\Activity;
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
 use function Pest\Laravel\put;
-use function Pest\Laravel\travel;
-use function Pest\Laravel\travelBack;
 use function Tests\latestLog;
-use function Tests\withPermissions;
 
-beforeEach(function () {
-    $this->person = Person::factory()->create();
-});
+final class ChangeVisibilityTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('guests cannot change persons visibility', function () {
-    put("people/{$this->person->id}/visibility")
-        ->assertStatus(302)
-        ->assertRedirect('login');
+        $this->person = Person::factory()->create();
+    }
 
-    expect($this->person->fresh()->isVisible())->toBeFalse();
-});
+    #[TestDox('guests cannot change persons visibility')]
+    public function testGuest(): void
+    {
+        put("people/{$this->person->id}/visibility")
+            ->assertStatus(302)
+            ->assertRedirect('login');
 
-test('users without permissions cannot change persons visibility', function () {
-    withPermissions(3)
-        ->put("people/{$this->person->id}/visibility")
-        ->assertStatus(403);
+        expect($this->person->fresh()->isVisible())->toBeFalse();
+    }
 
-    expect($this->person->fresh()->isVisible())->toBeFalse();
-});
+    #[TestDox('users without permissions cannot change persons visibility')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(3)
+            ->put("people/{$this->person->id}/visibility")
+            ->assertStatus(403);
 
-test('users with permissions can change persons visibility', function () {
-    expect($this->person->isVisible())->toBeFalse();
+        expect($this->person->fresh()->isVisible())->toBeFalse();
+    }
 
-    withPermissions(4)
-        ->from("people/{$this->person->id}/edit")
-        ->put("people/{$this->person->id}/visibility", [
-            'visibility' => true,
-        ])->assertStatus(302)
-        ->assertRedirect("people/{$this->person->id}/edit");
+    #[TestDox('users with permissions can change persons visibility')]
+    public function testOk(): void
+    {
+        expect($this->person->isVisible())->toBeFalse();
 
-    expect($this->person->fresh()->isVisible())->toBeTrue();
-});
+        $this->withPermissions(4)
+            ->from("people/{$this->person->id}/edit")
+            ->put("people/{$this->person->id}/visibility", [
+                'visibility' => true,
+            ])->assertStatus(302)
+            ->assertRedirect("people/{$this->person->id}/edit");
 
-test('visibility change is logged', function () {
-    expect($this->person->isVisible())->toBeFalse();
+        expect($this->person->fresh()->isVisible())->toBeTrue();
+    }
 
-    $count = Activity::count();
+    #[TestDox('visibility change is logged')]
+    public function testLogging(): void
+    {
+        expect($this->person->isVisible())->toBeFalse();
 
-    travel(5)->minutes();
+        $count = Activity::count();
 
-    withPermissions(4)
-        ->put("people/{$this->person->id}/visibility", [
-            'visibility' => true,
+        $this->travel(5)->minutes();
+
+        $this->withPermissions(4)
+            ->put("people/{$this->person->id}/visibility", [
+                'visibility' => true,
+            ]);
+
+        $this->travelBack();
+
+        expect(Activity::count())->toBe($count + 2); // visibility change and user creation
+
+        expect($log = latestLog())
+            ->log_name->toBe('people')
+            ->description->toBe('changed-visibility')
+            ->subject->toBeModel($this->person);
+
+        expect((string) $log->created_at)->toBe((string) $this->person->fresh()->updated_at);
+
+        expect($log->properties->all())->toBe([
+            'old' => ['visibility' => false],
+            'attributes' => ['visibility' => true],
         ]);
-
-    travelBack();
-
-    expect(Activity::count())->toBe($count + 2); // visibility change and user creation
-
-    expect($log = latestLog())
-        ->log_name->toBe('people')
-        ->description->toBe('changed-visibility')
-        ->subject->toBeModel($this->person);
-
-    expect((string) $log->created_at)->toBe((string) $this->person->fresh()->updated_at);
-
-    expect($log->properties->all())->toBe([
-        'old' => ['visibility' => false],
-        'attributes' => ['visibility' => true],
-    ]);
-});
+    }
+}

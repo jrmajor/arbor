@@ -1,107 +1,141 @@
 <?php
 
+namespace Tests\Feature\People;
+
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
 use function Pest\Laravel\get;
-use function Tests\withPermissions;
 
-test('guest cannot see hidden alive person', function () {
-    $person = Person::factory()->alive()->create();
+final class ViewPersonTest extends TestCase
+{
+    #[TestDox('guest cannot see hidden alive person')]
+    public function testGuestHiddenAlive(): void
+    {
+        $person = Person::factory()->alive()->create();
 
-    get("people/{$person->id}")
-        ->assertStatus(403);
-});
+        get("people/{$person->id}")
+            ->assertStatus(403);
+    }
 
-test('guest cannot see hidden dead person', function () {
-    $person = Person::factory()->dead()->create();
+    #[TestDox('guest cannot see hidden dead person')]
+    public function testGuestHiddenDead(): void
+    {
+        $person = Person::factory()->dead()->create();
 
-    get("people/{$person->id}")
-        ->assertStatus(403);
-});
+        get("people/{$person->id}")
+            ->assertStatus(403);
+    }
 
-test('guest can see visible alive person', function () {
-    $person = Person::factory()->alive()->create([
-        'visibility' => true,
-    ]);
+    #[TestDox('guest can see visible alive person')]
+    public function testGuestVisibleAlive(): void
+    {
+        $person = Person::factory()->alive()->create([
+            'visibility' => true,
+        ]);
 
-    get("people/{$person->id}")
-        ->assertStatus(200);
-});
+        get("people/{$person->id}")
+            ->assertStatus(200);
+    }
 
-test('guest can see visible dead person', function () {
-    $person = Person::factory()->dead()->create([
-        'visibility' => true,
-    ]);
+    #[TestDox('guest can see visible dead person')]
+    public function testGuestVisibleDead(): void
+    {
+        $person = Person::factory()->dead()->create([
+            'visibility' => true,
+        ]);
 
-    get("people/{$person->id}")
-        ->assertStatus(200);
-});
+        get("people/{$person->id}")
+            ->assertStatus(200);
+    }
 
-test('user with permissions can see hidden alive person', function () {
-    $person = Person::factory()->alive()->create();
+    #[TestDox('user with permissions can see hidden alive person')]
+    public function testUserHiddenAlive(): void
+    {
+        $person = Person::factory()->alive()->create();
 
-    withPermissions(1)
-        ->get("people/{$person->id}")
-        ->assertStatus(200);
-});
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertStatus(200);
+    }
 
-test('user with permissions can see hidden dead person', function () {
-    $person = Person::factory()->dead()->create();
+    #[TestDox('user with permissions can see hidden dead person')]
+    public function testUserHiddenDead(): void
+    {
+        $person = Person::factory()->dead()->create();
 
-    withPermissions(1)
-        ->get("people/{$person->id}")
-        ->assertStatus(200);
-});
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertStatus(200);
+    }
 
-test('user with permissions can see visible alive person', function () {
-    $person = Person::factory()->alive()->create([
-        'visibility' => true,
-    ]);
+    #[TestDox('user with permissions can see visible alive person')]
+    public function testUserVisibleAlive(): void
+    {
+        $person = Person::factory()->alive()->create([
+            'visibility' => true,
+        ]);
 
-    withPermissions(1)
-        ->get("people/{$person->id}")
-        ->assertStatus(200);
-});
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertStatus(200);
+    }
 
-test('user with permissions can see visible dead person', function () {
-    $person = Person::factory()->dead()->create([
-        'visibility' => true,
-    ]);
+    #[TestDox('user with permissions can see visible dead person')]
+    public function testUserVisibleDead(): void
+    {
+        $person = Person::factory()->dead()->create([
+            'visibility' => true,
+        ]);
 
-    withPermissions(1)
-        ->get("people/{$person->id}")
-        ->assertStatus(200);
-});
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertStatus(200);
+    }
 
-test('guest see 404 when attempting to view nonexistent person')
-    ->get('people/1')
-    ->assertStatus(404);
+    #[TestDox('guest see 404 when attempting to view nonexistent person')]
+    public function testGuestNonexistent(): void
+    {
+        $this->get('people/1')
+            ->assertStatus(404);
+    }
 
-test('user with insufficient permissions see 404 when attempting to view nonexistent person')
-    ->withPermissions(1)
-    ->get('people/1')
-    ->assertStatus(404);
+    #[TestDox('user with insufficient permissions see 404 when attempting to view nonexistent person')]
+    public function testPermissionsNonexistent(): void
+    {
+        $this->withPermissions(1)
+            ->get('people/1')
+            ->assertStatus(404);
+    }
 
-test('guest see 404 when attempting to view deleted person', function () {
-    $person = Person::factory()->create(['deleted_at' => now()]);
+    #[TestDox('guest see 404 when attempting to view deleted person')]
+    public function testGuestDeleted(): void
+    {
+        $person = Person::factory()->create(['deleted_at' => now()]);
 
-    get("people/{$person->id}")
-        ->assertStatus(404);
-});
+        get("people/{$person->id}")
+            ->assertStatus(404);
+    }
 
-test('users without permissions see 404 when attempting to view deleted person', function () {
-    $person = Person::factory()->create(['deleted_at' => now()]);
+    #[TestDox('users without permissions see 404 when attempting to view deleted person')]
+    public function testPermissionsDeleted(): void
+    {
+        $person = Person::factory()->create(['deleted_at' => now()]);
 
-    withPermissions(2)
-        ->get("people/{$person->id}")
-        ->assertStatus(404);
-});
+        $this->withPermissions(2)
+            ->get("people/{$person->id}")
+            ->assertStatus(404);
+    }
 
-test('user with permissions are redirected to edits history when attempting to view deleted person', function () {
-    $person = Person::factory()->create(['deleted_at' => now()]);
+    #[TestDox('user with permissions are redirected to edits history when attempting to view deleted person')]
+    public function testRedirectDeleted(): void
+    {
+        $person = Person::factory()->create(['deleted_at' => now()]);
 
-    withPermissions(3)
-        ->get("people/{$person->id}")
-        ->assertStatus(302)
-        ->assertRedirect("people/{$person->id}/history");
-});
+        $this->withPermissions(3)
+            ->get("people/{$person->id}")
+            ->assertStatus(302)
+            ->assertRedirect("people/{$person->id}/history");
+    }
+}

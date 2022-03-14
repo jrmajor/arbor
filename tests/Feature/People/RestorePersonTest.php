@@ -1,57 +1,76 @@
 <?php
 
+namespace Tests\Feature\People;
+
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
 use function Pest\Laravel\patch;
 use function Tests\latestLog;
-use function Tests\withPermissions;
 
-beforeEach(function () {
-    $this->person = Person::factory()->create(['deleted_at' => now()]);
-});
+final class RestorePersonTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('guests cannot restore person', function () {
-    patch("people/{$this->person->id}/restore")
-        ->assertStatus(302)
-        ->assertRedirect('login');
+        $this->person = Person::factory()->create(['deleted_at' => now()]);
+    }
 
-    expect($this->person->fresh()->trashed())->toBeTrue();
-});
+    #[TestDox('guests cannot restore person')]
+    public function testGuest(): void
+    {
+        patch("people/{$this->person->id}/restore")
+            ->assertStatus(302)
+            ->assertRedirect('login');
 
-test('users without permissions cannot restore person', function () {
-    withPermissions(2)
-        ->patch("people/{$this->person->id}/restore")
-        ->assertStatus(403);
+        expect($this->person->fresh()->trashed())->toBeTrue();
+    }
 
-    expect($this->person->fresh()->trashed())->toBeTrue();
-});
+    #[TestDox('users without permissions cannot restore person')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(2)
+            ->patch("people/{$this->person->id}/restore")
+            ->assertStatus(403);
 
-test('users with permissions can restore person', function () {
-    withPermissions(3)
-        ->patch("people/{$this->person->id}/restore")
-        ->assertStatus(302)
-        ->assertRedirect("people/{$this->person->id}");
+        expect($this->person->fresh()->trashed())->toBeTrue();
+    }
 
-    expect($this->person->fresh()->trashed())->toBeFalse();
-});
+    #[TestDox('users with permissions can restore person')]
+    public function testOk(): void
+    {
+        $this->withPermissions(3)
+            ->patch("people/{$this->person->id}/restore")
+            ->assertStatus(302)
+            ->assertRedirect("people/{$this->person->id}");
 
-test('person can be restored only when deleted', function () {
-    $this->person->restore();
+        expect($this->person->fresh()->trashed())->toBeFalse();
+    }
 
-    withPermissions(3)
-        ->patch("people/{$this->person->id}/restore")
-        ->assertStatus(404);
-});
+    #[TestDox('person can be restored only when deleted')]
+    public function testDeleted(): void
+    {
+        $this->person->restore();
 
-test('person restoration is logged', function () {
-    $this->person->restore();
+        $this->withPermissions(3)
+            ->patch("people/{$this->person->id}/restore")
+            ->assertStatus(404);
+    }
 
-    expect($log = latestLog())
-        ->log_name->toBe('people')
-        ->description->toBe('restored')
-        ->subject->toBeModel($this->person);
+    #[TestDox('person restoration is logged')]
+    public function testLogging(): void
+    {
+        $this->person->restore();
 
-    expect($log->properties->all())->toBe([
-        'attributes' => ['deleted_at' => null],
-    ]);
-});
+        expect($log = latestLog())
+            ->log_name->toBe('people')
+            ->description->toBe('restored')
+            ->subject->toBeModel($this->person);
+
+        expect($log->properties->all())->toBe([
+            'attributes' => ['deleted_at' => null],
+        ]);
+    }
+}

@@ -1,28 +1,43 @@
 <?php
 
+namespace Tests\Feature\People;
+
 use App\Models\Person;
+use PHPUnit\Framework\Attributes\TestDox;
+use Tests\TestCase;
 
 use function Pest\Laravel\get;
-use function Tests\withPermissions;
 
-beforeEach(function () {
-    $this->person = Person::factory()->create();
-});
+final class ViewPersonEditsHistoryTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-test('guests are asked to log in when attempting to view person history', function () {
-    get("people/{$this->person->id}/history")
-        ->assertStatus(302)
-        ->assertRedirect('login');
-});
+        $this->person = Person::factory()->create();
+    }
 
-test('users without permissions cannot view person history', function () {
-    withPermissions(2)
-        ->get("people/{$this->person->id}/history")
-        ->assertStatus(403);
-});
+    #[TestDox('guests are asked to log in when attempting to view person history')]
+    public function testGuest(): void
+    {
+        get("people/{$this->person->id}/history")
+            ->assertStatus(302)
+            ->assertRedirect('login');
+    }
 
-test('users with permissions can view person history', function () {
-    withPermissions(3)
-        ->get("people/{$this->person->id}/history")
-        ->assertStatus(200);
-});
+    #[TestDox('users without permissions cannot view person history')]
+    public function testPermissions(): void
+    {
+        $this->withPermissions(2)
+            ->get("people/{$this->person->id}/history")
+            ->assertStatus(403);
+    }
+
+    #[TestDox('users with permissions can view person history')]
+    public function testOk(): void
+    {
+        $this->withPermissions(3)
+            ->get("people/{$this->person->id}/history")
+            ->assertStatus(200);
+    }
+}
