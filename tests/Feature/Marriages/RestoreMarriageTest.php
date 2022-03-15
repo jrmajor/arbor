@@ -11,6 +11,8 @@ use function Tests\latestLog;
 
 final class RestoreMarriageTest extends TestCase
 {
+    private Marriage $marriage;
+
     protected function setUp(): void
     {
         parent::setUp();

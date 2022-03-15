@@ -11,6 +11,8 @@ use function Tests\latestLog;
 
 final class RestorePersonTest extends TestCase
 {
+    private Person $person;
+
     protected function setUp(): void
     {
         parent::setUp();

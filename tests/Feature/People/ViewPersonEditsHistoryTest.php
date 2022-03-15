@@ -10,6 +10,8 @@ use function Pest\Laravel\get;
 
 final class ViewPersonEditsHistoryTest extends TestCase
 {
+    private Person $person;
+
     protected function setUp(): void
     {
         parent::setUp();

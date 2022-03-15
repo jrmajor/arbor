@@ -12,6 +12,8 @@ use function Tests\latestLog;
 
 final class ChangeVisibilityTest extends TestCase
 {
+    private Person $person;
+
     protected function setUp(): void
     {
         parent::setUp();

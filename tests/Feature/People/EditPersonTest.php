@@ -14,14 +14,23 @@ use function Tests\latestLog;
 
 final class EditPersonTest extends TestCase
 {
+    private Person $person;
+
+    /** @var list<string> */
+    private array $dates = [
+        'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
+        'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
+    ];
+
+    /** @var array<string, mixed> */
+    private array $oldAttributes;
+
+    /** @var array<string, mixed> */
+    private array $newAttributes;
+
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->dates = [
-            'birth_date_from', 'death_date_from', 'funeral_date_from', 'burial_date_from',
-            'birth_date_to', 'death_date_to', 'funeral_date_to', 'burial_date_to',
-        ];
 
         $this->oldAttributes = [
             'id_wielcy' => 'psb.6305.3',

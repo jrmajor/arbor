@@ -14,16 +14,26 @@ use function Tests\latestLog;
 
 final class EditMarriageTest extends TestCase
 {
+    private Marriage $marriage;
+
+    /** @var list<string> */
+    private array $dates = [
+        'first_event_date_from', 'second_event_date_from', 'divorce_date_from',
+        'first_event_date_to', 'second_event_date_to', 'divorce_date_to',
+    ];
+
+    /** @var list<string> */
+    private array $enums = ['rite', 'first_event_type', 'second_event_type'];
+
+    /** @var array<string, mixed> */
+    private array $oldAttributes;
+
+    /** @var array<string, mixed> */
+    private array $newAttributes;
+
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->dates = [
-            'first_event_date_from', 'second_event_date_from', 'divorce_date_from',
-            'first_event_date_to', 'second_event_date_to', 'divorce_date_to',
-        ];
-
-        $this->enums = ['rite', 'first_event_type', 'second_event_type'];
 
         $this->oldAttributes = [
             'woman_id' => Person::factory()->female()->create()->id,

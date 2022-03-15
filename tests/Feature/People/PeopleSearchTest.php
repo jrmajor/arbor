@@ -3,6 +3,7 @@
 namespace Tests\Feature\People;
 
 use App\Models\Person;
+use Illuminate\Database\Eloquent\Collection;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -10,6 +11,9 @@ use function Pest\Laravel\get;
 
 final class PeopleSearchTest extends TestCase
 {
+    /** @var Collection<int, Person> */
+    private Collection $people;
+
     protected function setUp(): void
     {
         parent::setUp();
