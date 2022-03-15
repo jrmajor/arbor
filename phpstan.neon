@@ -11,7 +11,6 @@ parameters:
         - app/Services/Pytlewski/PytlewskiFactory.php
         - app/Services/Sources/Source.php
     scanFiles:
-        - tests/Helpers.php
         - tests/TestDox.php
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: true
