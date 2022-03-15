@@ -26,9 +26,6 @@ parameters:
         - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
         - '#^Using nullsafe property .ccess on non-nullable type mixed\. Use -> instead\.$#'
         -
-            message: '#^Undefined variable: \$this$#'
-            path: tests/
-        -
             message: '#^Using nullsafe method call on non-nullable type App\\Enums\\Sex::Female\. Use -> instead\.$#'
             path: database/factories/PersonFactory.php
     tmpDir: .cache/phpstan
