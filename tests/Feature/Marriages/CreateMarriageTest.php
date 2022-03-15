@@ -158,12 +158,12 @@ final class CreateMarriageTest extends TestCase
     {
         $count = Marriage::count();
 
-        $this->travel('+5 minutes');
+        $this->travel(5)->minutes();
 
         $this->withPermissions(2)
             ->post('marriages', $this->validAttributes);
 
-        $this->travel('back');
+        $this->travelBack();
 
         expect(Marriage::count())->toBe($count + 1);
 
