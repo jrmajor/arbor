@@ -21,10 +21,10 @@ Clone this repository and install it like you normally install Laravel applicati
 
 ## Testing
 
-This application uses Pest for testing and PHPStan for static analysis. MySQL 8 is required to run tests. You may set testing database name in `phpunit.xml` (defaults to `arbor_tests`).
+This application uses PHPUnit for testing and PHPStan for static analysis. MySQL 8 is required to run tests. You may set testing database name in `phpunit.xml` (defaults to `arbor_tests`).
 
 ```sh
-vendor/bin/pest              # Tests
-vendor/bin/phpstan analyse   # Static analysis
-vendor/bin/php-cs-fixer fix  # Formatting
+vendor/bin/phpunit --testdox  # Tests
+vendor/bin/phpstan analyse    # Static analysis
+vendor/bin/php-cs-fixer fix   # Formatting
 ```
