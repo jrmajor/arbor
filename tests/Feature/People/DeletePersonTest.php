@@ -6,7 +6,6 @@ use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\delete;
 use function Tests\latestLog;
 
 final class DeletePersonTest extends TestCase
@@ -23,7 +22,7 @@ final class DeletePersonTest extends TestCase
     #[TestDox('guests cannot delete person')]
     public function testGuest(): void
     {
-        delete("people/{$this->person->id}")
+        $this->delete("people/{$this->person->id}")
             ->assertStatus(302)
             ->assertRedirect('login');
 

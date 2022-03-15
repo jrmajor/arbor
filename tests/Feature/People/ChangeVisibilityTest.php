@@ -7,7 +7,6 @@ use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\put;
 use function Tests\latestLog;
 
 final class ChangeVisibilityTest extends TestCase
@@ -24,7 +23,7 @@ final class ChangeVisibilityTest extends TestCase
     #[TestDox('guests cannot change persons visibility')]
     public function testGuest(): void
     {
-        put("people/{$this->person->id}/visibility")
+        $this->put("people/{$this->person->id}/visibility")
             ->assertStatus(302)
             ->assertRedirect('login');
 

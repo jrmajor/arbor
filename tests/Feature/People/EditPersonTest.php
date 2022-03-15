@@ -8,8 +8,6 @@ use Illuminate\Support\Arr;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\get;
-use function Pest\Laravel\put;
 use function Tests\latestLog;
 
 final class EditPersonTest extends TestCase
@@ -94,7 +92,7 @@ final class EditPersonTest extends TestCase
     #[TestDox('guests are asked to log in when attempting to view edit person form')]
     public function testFormGuest(): void
     {
-        get("people/{$this->person->id}/edit")
+        $this->get("people/{$this->person->id}/edit")
             ->assertStatus(302)
             ->assertRedirect('login');
     }
@@ -126,7 +124,7 @@ final class EditPersonTest extends TestCase
     #[TestDox('guests cannot edit person')]
     public function testGuest(): void
     {
-        put("people/{$this->person->id}", $this->newAttributes)
+        $this->put("people/{$this->person->id}", $this->newAttributes)
             ->assertStatus(302)
             ->assertRedirect('login');
 

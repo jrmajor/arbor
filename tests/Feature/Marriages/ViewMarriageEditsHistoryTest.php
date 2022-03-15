@@ -6,8 +6,6 @@ use App\Models\Marriage;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\get;
-
 final class ViewMarriageEditsHistoryTest extends TestCase
 {
     private Marriage $marriage;
@@ -22,7 +20,7 @@ final class ViewMarriageEditsHistoryTest extends TestCase
     #[TestDox('guests are asked to log in when attempting to view marriage history')]
     public function testGuest(): void
     {
-        get("marriages/{$this->marriage->id}/history")
+        $this->get("marriages/{$this->marriage->id}/history")
             ->assertStatus(302)
             ->assertRedirect('login');
     }

@@ -6,8 +6,6 @@ use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\get;
-
 final class ViewPeopleLetterListingTest extends TestCase
 {
     #[TestDox('it works with no people')]
@@ -32,17 +30,17 @@ final class ViewPeopleLetterListingTest extends TestCase
             'last_name' => 'Mikke',
         ]);
 
-        get('/people/f/Z')
+        $this->get('/people/f/Z')
             ->assertStatus(200)
             ->assertSeeText('Ziobro')
             ->assertSeeText('Mikke');
 
-        get('/people/l/Z')
+        $this->get('/people/l/Z')
             ->assertStatus(200)
             ->assertSeeText('Zbyrowski')
             ->assertDontSeeText('Mikke');
 
-        get('/people/l/M')
+        $this->get('/people/l/M')
             ->assertStatus(200)
             ->assertDontSeeText('Zbyrowski')
             ->assertSeeText('Mikke');
@@ -56,7 +54,7 @@ final class ViewPeopleLetterListingTest extends TestCase
             'last_name' => 'Mikke',
         ]);
 
-        get('/people/f/Z')
+        $this->get('/people/f/Z')
             ->assertStatus(200)
             ->assertSeeText('[hidden]')
             ->assertDontSeeText('Ziobro')

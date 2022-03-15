@@ -6,7 +6,6 @@ use App\Models\Marriage;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\patch;
 use function Tests\latestLog;
 
 final class RestoreMarriageTest extends TestCase
@@ -23,7 +22,7 @@ final class RestoreMarriageTest extends TestCase
     #[TestDox('guests cannot restore marriage')]
     public function testGuest(): void
     {
-        patch("marriages/{$this->marriage->id}/restore")
+        $this->patch("marriages/{$this->marriage->id}/restore")
             ->assertStatus(302)
             ->assertRedirect('login');
 

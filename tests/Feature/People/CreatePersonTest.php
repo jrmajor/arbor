@@ -8,7 +8,6 @@ use Illuminate\Support\Arr;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\post;
 use function Tests\latestLog;
 
 final class CreatePersonTest extends TestCase
@@ -86,7 +85,7 @@ final class CreatePersonTest extends TestCase
     {
         $count = Person::count();
 
-        post('people', $this->validAttributes)
+        $this->post('people', $this->validAttributes)
             ->assertStatus(302)
             ->assertRedirect('login');
 

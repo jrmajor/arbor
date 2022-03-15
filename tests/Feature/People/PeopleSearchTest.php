@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\get;
-
 final class PeopleSearchTest extends TestCase
 {
     /** @var Collection<int, Person> */
@@ -58,7 +56,7 @@ final class PeopleSearchTest extends TestCase
     {
         $firstPerson = $this->people[0];
 
-        get('people/search?search=maj')
+        $this->get('people/search?search=maj')
             ->assertStatus(200)
             ->assertExactJson([
                 [

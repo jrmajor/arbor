@@ -6,8 +6,6 @@ use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\get;
-
 final class ViewPeopleIndexListingTest extends TestCase
 {
     #[TestDox('it works with no people')]
@@ -31,7 +29,7 @@ final class ViewPeopleIndexListingTest extends TestCase
             'last_name' => 'Mikke',
         ]);
 
-        get('/people')
+        $this->get('/people')
             ->assertStatus(200)
             ->assertSeeText('Z [2]')
             ->assertSeeText('M [1]')

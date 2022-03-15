@@ -8,8 +8,6 @@ use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\get;
-use function Pest\Laravel\patch;
 use function Tests\latestLog;
 
 final class BiographyTest extends TestCase
@@ -30,7 +28,7 @@ final class BiographyTest extends TestCase
     #[TestDox('guests are asked to log in when attempting to view biography form')]
     public function testFormGuest(): void
     {
-        get("people/{$this->person->id}/biography")
+        $this->get("people/{$this->person->id}/biography")
             ->assertStatus(302)
             ->assertRedirect('login');
     }
@@ -62,7 +60,7 @@ final class BiographyTest extends TestCase
     #[TestDox('guests cannot edit biography')]
     public function testGuest(): void
     {
-        patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography])
+        $this->patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography])
             ->assertStatus(302)
             ->assertRedirect('login');
 

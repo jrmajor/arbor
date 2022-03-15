@@ -6,7 +6,6 @@ use App\Models\Marriage;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\delete;
 use function Tests\latestLog;
 
 final class DeleteMarriageTest extends TestCase
@@ -23,7 +22,7 @@ final class DeleteMarriageTest extends TestCase
     #[TestDox('guests cannot delete marriage')]
     public function testGuest(): void
     {
-        delete("marriages/{$this->marriage->id}")
+        $this->delete("marriages/{$this->marriage->id}")
             ->assertStatus(302)
             ->assertRedirect('login');
 

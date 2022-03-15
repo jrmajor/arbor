@@ -6,7 +6,6 @@ use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\patch;
 use function Tests\latestLog;
 
 final class RestorePersonTest extends TestCase
@@ -23,7 +22,7 @@ final class RestorePersonTest extends TestCase
     #[TestDox('guests cannot restore person')]
     public function testGuest(): void
     {
-        patch("people/{$this->person->id}/restore")
+        $this->patch("people/{$this->person->id}/restore")
             ->assertStatus(302)
             ->assertRedirect('login');
 

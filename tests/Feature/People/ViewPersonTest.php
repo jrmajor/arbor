@@ -6,8 +6,6 @@ use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\get;
-
 final class ViewPersonTest extends TestCase
 {
     #[TestDox('guest cannot see hidden alive person')]
@@ -15,7 +13,7 @@ final class ViewPersonTest extends TestCase
     {
         $person = Person::factory()->alive()->create();
 
-        get("people/{$person->id}")
+        $this->get("people/{$person->id}")
             ->assertStatus(403);
     }
 
@@ -24,7 +22,7 @@ final class ViewPersonTest extends TestCase
     {
         $person = Person::factory()->dead()->create();
 
-        get("people/{$person->id}")
+        $this->get("people/{$person->id}")
             ->assertStatus(403);
     }
 
@@ -35,7 +33,7 @@ final class ViewPersonTest extends TestCase
             'visibility' => true,
         ]);
 
-        get("people/{$person->id}")
+        $this->get("people/{$person->id}")
             ->assertStatus(200);
     }
 
@@ -46,7 +44,7 @@ final class ViewPersonTest extends TestCase
             'visibility' => true,
         ]);
 
-        get("people/{$person->id}")
+        $this->get("people/{$person->id}")
             ->assertStatus(200);
     }
 
@@ -114,7 +112,7 @@ final class ViewPersonTest extends TestCase
     {
         $person = Person::factory()->create(['deleted_at' => now()]);
 
-        get("people/{$person->id}")
+        $this->get("people/{$person->id}")
             ->assertStatus(404);
     }
 

@@ -8,7 +8,6 @@ use Illuminate\Support\Arr;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Pest\Laravel\post;
 use function Tests\latestLog;
 
 final class CreateMarriageTest extends TestCase
@@ -79,7 +78,7 @@ final class CreateMarriageTest extends TestCase
     {
         $count = Marriage::count();
 
-        post('marriages', $this->validAttributes)
+        $this->post('marriages', $this->validAttributes)
             ->assertStatus(302)
             ->assertRedirect('login');
 
