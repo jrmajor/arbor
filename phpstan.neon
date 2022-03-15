@@ -18,7 +18,6 @@ parameters:
     ignoreErrors:
         - '#^Parameter \#1 .*Eloquent\\Builder<.*>::where\(\) expects .*, Closure.*: .*Eloquent\\Builder(<.*>)? given\.$#'
         - '#^Anonymous function should return .*Eloquent\\Builder<.*Model> but returns .*Eloquent\\Builder<App\\Models\\.*>\.$#'
-        - '#^Access to an undefined property Pest\\Expectation(\|Pest\\Support\\Extendable)?::\$\w+\.$#'
         - '#^Method .* has parameter .* with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types: .*$#'
         - '#^Method .* return type with generic class Illuminate\\Database\\Eloquent\\Relations\\\w+ does not specify its types: .*$#'
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
