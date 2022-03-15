@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use Faker\Generator as FakerGenerator;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -22,9 +23,7 @@ final class HelpersTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider provideFormatPeriodCases
-     */
+    #[DataProvider('provideFormatPeriodCases')]
     #[TestDox('format period from dates carbon macro')]
     public function testFormatPeriodTo(string $from, string $to, string $result): void
     {
@@ -46,16 +45,14 @@ final class HelpersTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider proviceRomanCases
-     */
+    #[DataProvider('provideRomanCases')]
     #[TestDox('roman() helper works')]
     public function testRomanHelper(int $arabic, string $roman): void
     {
         $this->assertSame($roman, roman($arabic));
     }
 
-    private function proviceRomanCases(): Generator
+    private function provideRomanCases(): Generator
     {
         yield from [
             [1, 'I'],

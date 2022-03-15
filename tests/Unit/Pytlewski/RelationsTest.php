@@ -7,6 +7,7 @@ use App\Services\Pytlewski\Marriage;
 use App\Services\Pytlewski\PytlewskiFactory;
 use App\Services\Pytlewski\Relative;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -23,9 +24,7 @@ final class RelationsTest extends TestCase
         $this->factory = $this->app->make(PytlewskiFactory::class);
     }
 
-    /**
-     * @dataProvider provideScrapeCases
-     */
+    #[DataProvider('provideScrapeCases')]
     #[TestDox('it can load relations')]
     public function testRelations(int $id, string $source, array $attributes): void
     {

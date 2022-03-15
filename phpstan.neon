@@ -10,8 +10,6 @@ parameters:
         - app/Providers/MacrosServiceProvider.php
         - app/Services/Pytlewski/PytlewskiFactory.php
         - app/Services/Sources/Source.php
-    scanFiles:
-        - tests/TestDox.php
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: true
     checkPhpDocMissingReturn: true

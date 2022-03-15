@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -76,9 +77,7 @@ final class FactoryTest extends TestCase
         Http::assertSentCount(0);
     }
 
-    /**
-     * @dataProvider provideScrapeCases
-     */
+    #[DataProvider('provideScrapeCases')]
     #[TestDox('it properly scrapes pytlewski.pl')]
     public function testScrape(int $id, string $source, array $attributes): void
     {
