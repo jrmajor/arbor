@@ -13,6 +13,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Pest\Livewire\InteractsWithLivewire;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\IsInstanceOf;
+use Psl\Iter;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionNamedType;
@@ -37,6 +38,19 @@ abstract class TestCase extends BaseTestCase
         return $this->actingAs(
             User::factory()->createOne(['permissions' => $permissions]),
         );
+    }
+
+    /**
+     * @param list<string> $keys
+     */
+    public static function assertDoesNotHaveKeys(array $keys, iterable $iterable): void
+    {
+        foreach ($keys as $key) {
+            self::assertFalse(
+                Iter\contains_key($iterable, $key),
+                "Failed asserting that a iterable does not have \"{$key}\" key.",
+            );
+        }
     }
 
     public static function assertSameModel(Model|Relation $expected, mixed $actual): void

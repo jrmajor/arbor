@@ -25,7 +25,7 @@ final class RestorePersonTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect('login');
 
-        expect($this->person->fresh()->trashed())->toBeTrue();
+        $this->assertTrue($this->person->fresh()->trashed());
     }
 
     #[TestDox('users without permissions cannot restore person')]
@@ -35,7 +35,7 @@ final class RestorePersonTest extends TestCase
             ->patch("people/{$this->person->id}/restore")
             ->assertStatus(403);
 
-        expect($this->person->fresh()->trashed())->toBeTrue();
+        $this->assertTrue($this->person->fresh()->trashed());
     }
 
     #[TestDox('users with permissions can restore person')]
@@ -46,7 +46,7 @@ final class RestorePersonTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect("people/{$this->person->id}");
 
-        expect($this->person->fresh()->trashed())->toBeFalse();
+        $this->assertFalse($this->person->fresh()->trashed());
     }
 
     #[TestDox('person can be restored only when deleted')]
@@ -69,8 +69,9 @@ final class RestorePersonTest extends TestCase
         $this->assertSame('restored', $log->description);
         $this->assertSameModel($this->person, $log->subject);
 
-        expect($log->properties->all())->toBe([
-            'attributes' => ['deleted_at' => null],
-        ]);
+        $this->assertSame(
+            ['attributes' => ['deleted_at' => null]],
+            $log->properties->all(),
+        );
     }
 }

@@ -119,7 +119,7 @@ final class EditMarriageTest extends TestCase
         $attributesToCheck = Arr::except($this->oldAttributes, array_merge($this->dates, $this->enums));
 
         foreach ($attributesToCheck as $key => $attribute) {
-            expect($this->marriage->{$key})->toBe($attribute);
+            $this->assertSame($attribute, $this->marriage->{$key});
         }
     }
 
@@ -135,7 +135,7 @@ final class EditMarriageTest extends TestCase
         $attributesToCheck = Arr::except($this->oldAttributes, array_merge($this->dates, $this->enums));
 
         foreach ($attributesToCheck as $key => $attribute) {
-            expect($this->marriage->{$key})->toBe($attribute);
+            $this->assertSame($attribute, $this->marriage->{$key});
         }
     }
 
@@ -153,16 +153,15 @@ final class EditMarriageTest extends TestCase
         $attributesToCheck = Arr::except($this->newAttributes, array_merge($this->dates, $this->enums));
 
         foreach ($attributesToCheck as $key => $attribute) {
-            expect($this->marriage->{$key})->toBe($attribute);
+            $this->assertSame($attribute, $this->marriage->{$key});
         }
 
         foreach ($this->enums as $enum) {
-            expect($this->marriage->{$enum}?->value)->toBe($this->newAttributes[$enum]);
+            $this->assertSame($this->newAttributes[$enum], $this->marriage->{$enum}?->value);
         }
 
         foreach ($this->dates as $date) {
-            expect($this->marriage->{$date}->toDateString())
-                ->toBe($this->newAttributes[$date]);
+            $this->assertSame($this->newAttributes[$date], $this->marriage->{$date}->toDateString());
         }
     }
 
@@ -195,25 +194,27 @@ final class EditMarriageTest extends TestCase
         $oldToCheck = Arr::except($this->oldAttributes, $this->dates);
 
         foreach ($oldToCheck as $key => $value) {
-            expect($log->properties['old'][$key])->toBe($value);
-            // 'Failed asserting that old attribute '.$key.' has the same value in log.'
+            $m = "Failed asserting that old attribute {$key} has the same value in log.";
+
+            $this->assertSame($value, $log->properties['old'][$key], $m);
         }
 
         $newToCheck = Arr::except($this->newAttributes, $this->dates);
 
         foreach ($newToCheck as $key => $value) {
-            expect($log->properties['attributes'][$key])->toBe($value);
-            // 'Failed asserting that attribute '.$key.' has the same value in log.'
+            $m = "Failed asserting that attribute {$key} has the same value in log.";
+
+            $this->assertSame($value, $log->properties['attributes'][$key], $m);
         }
 
-        expect($log->properties['old'])->not->toHaveKeys(['created_at', 'updated_at']);
-        expect($log->properties['attributes'])->not->toHaveKeys(['created_at', 'updated_at']);
+        $this->assertDoesNotHaveKeys(['created_at', 'updated_at'], $log->properties['old']);
+        $this->assertDoesNotHaveKeys(['created_at', 'updated_at'], $log->properties['attributes']);
 
-        expect((string) $log->created_at)->toBe((string) $this->marriage->updated_at);
+        $this->assertSame((string) $this->marriage->updated_at, (string) $log->created_at);
 
         foreach ($this->dates as $date) {
-            expect($log->properties['old'][$date])->toBe($this->oldAttributes[$date]);
-            expect($log->properties['attributes'][$date])->toBe($this->newAttributes[$date]);
+            $this->assertSame($this->oldAttributes[$date], $log->properties['old'][$date]);
+            $this->assertSame($this->newAttributes[$date], $log->properties['attributes'][$date]);
         }
     }
 }

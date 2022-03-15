@@ -81,7 +81,7 @@ final class CreateMarriageTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect('login');
 
-        expect(Marriage::count())->toBe($count);
+        $this->assertSame($count, Marriage::count());
     }
 
     #[TestDox('users without permissions cannot add valid marriage')]
@@ -93,7 +93,7 @@ final class CreateMarriageTest extends TestCase
             ->post('marriages', $this->validAttributes)
             ->assertStatus(403);
 
-        expect(Marriage::count())->toBe($count);
+        $this->assertSame($count, Marriage::count());
     }
 
     #[TestDox('users with permissions can add valid marriage')]
@@ -110,22 +110,22 @@ final class CreateMarriageTest extends TestCase
 
         $this->travelBack();
 
-        expect(Marriage::count())->toBe($count + 1);
+        $this->assertSame($count + 1, Marriage::count());
 
         $marriage = Marriage::latest()->first();
 
         $attributesToCheck = Arr::except($this->validAttributes, array_merge($this->dates, $this->enums));
 
         foreach ($attributesToCheck as $key => $attribute) {
-            expect($marriage->{$key})->toBe($attribute);
+            $this->assertSame($attribute, $marriage->{$key});
         }
 
         foreach ($this->enums as $enum) {
-            expect($marriage->{$enum}?->value)->toBe($this->validAttributes[$enum]);
+            $this->assertSame($this->validAttributes[$enum], $marriage->{$enum}?->value);
         }
 
         foreach ($this->dates as $date) {
-            expect($marriage->{$date}->toDateString())->toBe($this->validAttributes[$date]);
+            $this->assertSame($this->validAttributes[$date], $marriage->{$date}->toDateString());
         }
     }
 
@@ -163,7 +163,7 @@ final class CreateMarriageTest extends TestCase
 
         $this->travelBack();
 
-        expect(Marriage::count())->toBe($count + 1);
+        $this->assertSame($count + 1, Marriage::count());
 
         $marriage = Marriage::latest()->first();
 
@@ -175,18 +175,18 @@ final class CreateMarriageTest extends TestCase
         $attributesToCheck = Arr::except($this->validAttributes, $this->dates);
 
         foreach ($attributesToCheck as $key => $value) {
-            expect($log->properties['attributes'][$key])->toBe($value);
-            // 'Failed asserting that attribute '.$key.' has the same value in log.'
+            $m = "Failed asserting that attribute {$key} has the same value in log.";
+
+            $this->assertSame($value, $log->properties['attributes'][$key], $m);
         }
 
-        expect((string) $log->created_at)
-            ->toBe((string) $marriage->created_at)
-            ->toBe((string) $marriage->updated_at);
+        $this->assertSame((string) $marriage->created_at, (string) $log->created_at);
+        $this->assertSame((string) $marriage->updated_at, (string) $log->created_at);
 
-        expect($log->properties['attributes'])->not->toHaveKeys(['created_at', 'updated_at']);
+        $this->assertDoesNotHaveKeys(['created_at', 'updated_at'], $log->properties['attributes']);
 
         foreach ($this->dates as $date) {
-            expect($log->properties['attributes'][$date])->toBe($marriage->{$date}->format('Y-m-d'));
+            $this->assertSame($marriage->{$date}->format('Y-m-d'), $log->properties['attributes'][$date]);
         }
     }
 }

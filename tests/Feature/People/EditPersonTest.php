@@ -134,7 +134,7 @@ final class EditPersonTest extends TestCase
         ]);
 
         foreach ($attributesToCheck as $key => $attribute) {
-            expect($this->person->{$key})->toBe($attribute);
+            $this->assertSame($attribute, $this->person->{$key});
         }
     }
 
@@ -152,7 +152,7 @@ final class EditPersonTest extends TestCase
         ]);
 
         foreach ($attributesToCheck as $key => $attribute) {
-            expect($this->person->{$key})->toBe($attribute);
+            $this->assertSame($attribute, $this->person->{$key});
         }
     }
 
@@ -171,17 +171,19 @@ final class EditPersonTest extends TestCase
         ]);
 
         foreach ($attributesToCheck as $key => $attribute) {
-            expect($this->person->{$key})->toBe($attribute);
+            $this->assertSame($attribute, $this->person->{$key});
         }
 
-        expect($this->person->sex)->toBe(Sex::from($this->newAttributes['sex']));
+        $this->assertSame(Sex::from($this->newAttributes['sex']), $this->person->sex);
 
-        expect($this->person->sources)->toHaveCount(2);
-        expect($this->person->sources->map->raw()->all())
-            ->toBe($this->newAttributes['sources']);
+        $this->assertCount(2, $this->person->sources);
+        $this->assertSame(
+            $this->newAttributes['sources'],
+            $this->person->sources->map->raw()->all(),
+        );
 
         foreach ($this->dates as $date) {
-            expect($this->person->{$date}->toDateString())->toBe($this->newAttributes[$date]);
+            $this->assertSame($this->newAttributes[$date], $this->person->{$date}->toDateString());
         }
     }
 
@@ -216,8 +218,9 @@ final class EditPersonTest extends TestCase
         ]);
 
         foreach ($oldToCheck as $key => $value) {
-            expect($log->properties['old'][$key])->toBe($value);
-            // 'Failed asserting that old attribute '.$key.' has the same value in log.'
+            $m = "Failed asserting that old attribute {$key} has the same value in log.";
+
+            $this->assertSame($value, $log->properties['old'][$key], $m);
         }
 
         $newToCheck = Arr::except($this->newAttributes, [
@@ -225,24 +228,29 @@ final class EditPersonTest extends TestCase
         ]);
 
         foreach ($newToCheck as $key => $value) {
-            expect($log->properties['attributes'][$key])->toBe($value);
-            // 'Failed asserting that attribute '.$key.' has the same value in log.'
+            $m = "Failed asserting that attribute {$key} has the same value in log.";
+
+            $this->assertSame($value, $log->properties['attributes'][$key], $m);
         }
 
-        expect($log->properties['old'])
-            ->not->toHaveKeys(['dead', 'death_cause', 'created_at', 'updated_at']);
+        $this->assertDoesNotHaveKeys(
+            ['dead', 'death_cause', 'created_at', 'updated_at'],
+            $log->properties['old'],
+        );
 
-        expect($log->properties['attributes'])
-            ->not->toHaveKeys(['dead', 'death_cause', 'created_at', 'updated_at']);
+        $this->assertDoesNotHaveKeys(
+            ['dead', 'death_cause', 'created_at', 'updated_at'],
+            $log->properties['attributes'],
+        );
 
-        expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
+        $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
-        expect($log->properties['old']['sources'])->toBe($this->oldAttributes['sources']);
-        expect($log->properties['attributes']['sources'])->toBe($this->newAttributes['sources']);
+        $this->assertSame($this->oldAttributes['sources'], $log->properties['old']['sources']);
+        $this->assertSame($this->newAttributes['sources'], $log->properties['attributes']['sources']);
 
         foreach ($this->dates as $date) {
-            expect($log->properties['old'][$date])->toBe($this->oldAttributes[$date]);
-            expect($log->properties['attributes'][$date])->toBe($this->newAttributes[$date]);
+            $this->assertSame($this->oldAttributes[$date], $log->properties['old'][$date]);
+            $this->assertSame($this->newAttributes[$date], $log->properties['attributes'][$date]);
         }
     }
 }

@@ -62,8 +62,7 @@ final class BiographyTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect('login');
 
-        expect($this->person->fresh()->biography)
-            ->toBe($this->oldBiography);
+        $this->assertSame($this->oldBiography, $this->person->fresh()->biography);
     }
 
     #[TestDox('users without permissions cannot edit biography')]
@@ -73,8 +72,7 @@ final class BiographyTest extends TestCase
             ->patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography])
             ->assertStatus(403);
 
-        expect($this->person->fresh()->biography)
-            ->toBe($this->oldBiography);
+        $this->assertSame($this->oldBiography, $this->person->fresh()->biography);
     }
 
     #[TestDox('users with permissions can edit biography')]
@@ -85,8 +83,7 @@ final class BiographyTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect("people/{$this->person->id}");
 
-        expect($this->person->fresh()->biography)
-            ->toBe($this->newBiography);
+        $this->assertSame($this->newBiography, $this->person->fresh()->biography);
     }
 
     #[TestDox("biography field can't be longer than 10000 characters")]
@@ -96,8 +93,7 @@ final class BiographyTest extends TestCase
             ->patch("people/{$this->person->id}/biography", ['biography' => Str::random(10001)])
             ->assertSessionHasErrors(['biography']);
 
-        expect($this->person->fresh()->biography)
-            ->toBe($this->oldBiography);
+        $this->assertSame($this->oldBiography, $this->person->fresh()->biography);
     }
 
     #[TestDox('biography addition is logged')]
@@ -116,19 +112,19 @@ final class BiographyTest extends TestCase
 
         $this->person->refresh();
 
-        expect(Activity::count())->toBe($count + 2); // biography addition and user creation
+        $this->assertSame($count + 2, Activity::count()); // biography addition and user creation
 
         $log = Activity::newest();
         $this->assertSame('people', $log->log_name);
         $this->assertSame('added-biography', $log->description);
         $this->assertSameModel($this->person, $log->subject);
 
-        expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
+        $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
-        expect($log->properties->all())->toBe([
-            'new' => $this->newBiography,
-            'old' => null,
-        ]);
+        $this->assertSame(
+            ['new' => $this->newBiography, 'old' => null],
+            $log->properties->all(),
+        );
     }
 
     #[TestDox('biography edition is logged')]
@@ -145,19 +141,19 @@ final class BiographyTest extends TestCase
 
         $this->person->refresh();
 
-        expect(Activity::count())->toBe($count + 2); // biography edition and user creation
+        $this->assertSame($count + 2, Activity::count()); // biography edition and user creation
 
         $log = Activity::newest();
         $this->assertSame('people', $log->log_name);
         $this->assertSame('updated-biography', $log->description);
         $this->assertSameModel($this->person, $log->subject);
 
-        expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
+        $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
-        expect($log->properties->all())->toBe([
-            'new' => $this->newBiography,
-            'old' => $this->oldBiography,
-        ]);
+        $this->assertSame(
+            ['new' => $this->newBiography, 'old' => $this->oldBiography],
+            $log->properties->all(),
+        );
     }
 
     #[TestDox('biography deletion is logged')]
@@ -174,18 +170,18 @@ final class BiographyTest extends TestCase
 
         $this->person->refresh();
 
-        expect(Activity::count())->toBe($count + 2); // biography deletion and user creation
+        $this->assertSame($count + 2, Activity::count()); // biography deletion and user creation
 
         $log = Activity::newest();
         $this->assertSame('people', $log->log_name);
         $this->assertSame('deleted-biography', $log->description);
         $this->assertSameModel($this->person, $log->subject);
 
-        expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
+        $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
-        expect($log->properties->all())->toBe([
-            'new' => null,
-            'old' => $this->oldBiography,
-        ]);
+        $this->assertSame(
+            ['new' => null, 'old' => $this->oldBiography],
+            $log->properties->all(),
+        );
     }
 }

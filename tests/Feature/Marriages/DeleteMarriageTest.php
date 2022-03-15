@@ -25,7 +25,7 @@ final class DeleteMarriageTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect('login');
 
-        expect($this->marriage->fresh()->trashed())->toBeFalse();
+        $this->assertFalse($this->marriage->fresh()->trashed());
     }
 
     #[TestDox('users without permissions cannot delete marriage')]
@@ -35,7 +35,7 @@ final class DeleteMarriageTest extends TestCase
             ->delete("marriages/{$this->marriage->id}")
             ->assertStatus(403);
 
-        expect($this->marriage->fresh()->trashed())->toBeFalse();
+        $this->assertFalse($this->marriage->fresh()->trashed());
     }
 
     #[TestDox('users with permissions can delete marriage')]
@@ -45,7 +45,7 @@ final class DeleteMarriageTest extends TestCase
             ->delete("marriages/{$this->marriage->id}")
             ->assertStatus(302);
 
-        expect($this->marriage->fresh()->trashed())->toBeTrue();
+        $this->assertTrue($this->marriage->fresh()->trashed());
     }
 
     #[TestDox('users without permissions to view history are redirected to woman page')]
@@ -76,10 +76,11 @@ final class DeleteMarriageTest extends TestCase
         $this->assertSame('deleted', $log->description);
         $this->assertSameModel($this->marriage, $log->subject);
 
-        expect((string) $log->created_at)->toBe((string) $this->marriage->deleted_at);
+        $this->assertSame((string) $this->marriage->deleted_at, (string) $log->created_at);
 
-        expect($log->properties->all())->toBe([
-            'attributes' => ['deleted_at' => $this->marriage->deleted_at->toJson()],
-        ]);
+        $this->assertSame(
+            ['attributes' => ['deleted_at' => $this->marriage->deleted_at->toJson()]],
+            $log->properties->all(),
+        );
     }
 }

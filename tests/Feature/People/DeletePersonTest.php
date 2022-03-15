@@ -25,7 +25,7 @@ final class DeletePersonTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect('login');
 
-        expect($this->person->fresh()->trashed())->toBeFalse();
+        $this->assertFalse($this->person->fresh()->trashed());
     }
 
     #[TestDox('users without permissions cannot delete person')]
@@ -35,7 +35,7 @@ final class DeletePersonTest extends TestCase
             ->delete("people/{$this->person->id}")
             ->assertStatus(403);
 
-        expect($this->person->fresh()->trashed())->toBeFalse();
+        $this->assertFalse($this->person->fresh()->trashed());
     }
 
     #[TestDox('users with permissions can delete person')]
@@ -45,7 +45,7 @@ final class DeletePersonTest extends TestCase
             ->delete("people/{$this->person->id}")
             ->assertStatus(302);
 
-        expect($this->person->fresh()->trashed())->toBeTrue();
+        $this->assertTrue($this->person->fresh()->trashed());
     }
 
     #[TestDox('users without permissions to view history are redirected to people index')]
@@ -76,10 +76,11 @@ final class DeletePersonTest extends TestCase
         $this->assertSame('deleted', $log->description);
         $this->assertSameModel($this->person, $log->subject);
 
-        expect((string) $log->created_at)->toBe((string) $this->person->deleted_at);
+        $this->assertSame((string) $this->person->deleted_at, (string) $log->created_at);
 
-        expect($log->properties->all())->toBe([
-            'attributes' => ['deleted_at' => $this->person->deleted_at->toJson()],
-        ]);
+        $this->assertSame(
+            ['attributes' => ['deleted_at' => $this->person->deleted_at->toJson()]],
+            $log->properties->all(),
+        );
     }
 }

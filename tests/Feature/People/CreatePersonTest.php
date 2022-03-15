@@ -88,7 +88,7 @@ final class CreatePersonTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect('login');
 
-        expect(Person::count())->toBe($count);
+        $this->assertSame($count, Person::count());
     }
 
     #[TestDox('users without permissions cannot add valid person')]
@@ -100,7 +100,7 @@ final class CreatePersonTest extends TestCase
             ->post('people', $this->validAttributes)
             ->assertStatus(403);
 
-        expect(Person::count())->toBe($count);
+        $this->assertSame($count, Person::count());
     }
 
     #[TestDox('users with permissions can add valid person')]
@@ -117,7 +117,7 @@ final class CreatePersonTest extends TestCase
 
         $this->travelBack();
 
-        expect(Person::count())->toBe($count + 1);
+        $this->assertSame($count + 1, Person::count());
 
         $person = Person::latest()->first();
 
@@ -126,17 +126,19 @@ final class CreatePersonTest extends TestCase
         ]);
 
         foreach ($attributesToCheck as $key => $attribute) {
-            expect($person->{$key})->toBe($attribute);
+            $this->assertSame($attribute, $person->{$key});
         }
 
-        expect($person->sex)->toBe(Sex::from($this->validAttributes['sex']));
+        $this->assertSame(Sex::from($this->validAttributes['sex']), $person->sex);
 
-        expect($person->sources)->toHaveCount(2);
-        expect($person->sources->map->raw()->all())
-            ->toBe($this->validAttributes['sources']);
+        $this->assertCount(2, $person->sources);
+        $this->assertSame(
+            $this->validAttributes['sources'],
+            $person->sources->map->raw()->all(),
+        );
 
         foreach ($this->dates as $date) {
-            expect($person->{$date}->toDateString())->toBe($this->validAttributes[$date]);
+            $this->assertSame($this->validAttributes[$date], $person->{$date}->toDateString());
         }
     }
 
@@ -174,7 +176,7 @@ final class CreatePersonTest extends TestCase
 
         $this->travelBack();
 
-        expect(Person::count())->toBe($count + 1);
+        $this->assertSame($count + 1, Person::count());
 
         $person = Person::latest()->first();
 
@@ -188,20 +190,20 @@ final class CreatePersonTest extends TestCase
         ]);
 
         foreach ($attributesToCheck as $key => $value) {
-            expect($log->properties['attributes'][$key])->toBe($value);
-            // 'Failed asserting that attribute '.$key.' has the same value in log.'
+            $m = "Failed asserting that attribute {$key} has the same value in log.";
+
+            $this->assertSame($value, $log->properties['attributes'][$key], $m);
         }
 
-        expect((string) $log->created_at)
-            ->toBe((string) $person->created_at)
-            ->toBe((string) $person->updated_at);
+        $this->assertSame((string) $person->created_at, (string) $log->created_at);
+        $this->assertSame((string) $person->updated_at, (string) $log->created_at);
 
-        expect($log->properties['attributes'])->not->toHaveKeys(['created_at', 'updated_at']);
+        $this->assertDoesNotHaveKeys(['created_at', 'updated_at'], $log->properties['attributes']);
 
-        expect($log->properties['attributes']['sources'])->toBe($this->validAttributes['sources']);
+        $this->assertSame($this->validAttributes['sources'], $log->properties['attributes']['sources']);
 
         foreach ($this->dates as $date) {
-            expect($log->properties['attributes'][$date])->toBe($person->{$date}->format('Y-m-d'));
+            $this->assertSame($person->{$date}->format('Y-m-d'), $log->properties['attributes'][$date]);
         }
     }
 }

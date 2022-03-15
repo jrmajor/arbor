@@ -25,7 +25,7 @@ final class RestoreMarriageTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect('login');
 
-        expect($this->marriage->fresh()->trashed())->toBeTrue();
+        $this->assertTrue($this->marriage->fresh()->trashed());
     }
 
     #[TestDox('users without permissions cannot restore marriage')]
@@ -35,7 +35,7 @@ final class RestoreMarriageTest extends TestCase
             ->patch("marriages/{$this->marriage->id}/restore")
             ->assertStatus(403);
 
-        expect($this->marriage->fresh()->trashed())->toBeTrue();
+        $this->assertTrue($this->marriage->fresh()->trashed());
     }
 
     #[TestDox('users with permissions can restore marriage')]
@@ -46,7 +46,7 @@ final class RestoreMarriageTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect("people/{$this->marriage->woman_id}");
 
-        expect($this->marriage->fresh()->trashed())->toBeFalse();
+        $this->assertFalse($this->marriage->fresh()->trashed());
     }
 
     #[TestDox('marriage can be restored only when deleted')]
@@ -69,8 +69,9 @@ final class RestoreMarriageTest extends TestCase
         $this->assertSame('restored', $log->description);
         $this->assertSameModel($this->marriage, $log->subject);
 
-        expect($log->properties->all())->toBe([
-            'attributes' => ['deleted_at' => null],
-        ]);
+        $this->assertSame(
+            ['attributes' => ['deleted_at' => null]],
+            $log->properties->all(),
+        );
     }
 }

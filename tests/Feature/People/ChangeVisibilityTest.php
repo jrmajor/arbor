@@ -25,7 +25,7 @@ final class ChangeVisibilityTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect('login');
 
-        expect($this->person->fresh()->isVisible())->toBeFalse();
+        $this->assertFalse($this->person->fresh()->isVisible());
     }
 
     #[TestDox('users without permissions cannot change persons visibility')]
@@ -35,13 +35,13 @@ final class ChangeVisibilityTest extends TestCase
             ->put("people/{$this->person->id}/visibility")
             ->assertStatus(403);
 
-        expect($this->person->fresh()->isVisible())->toBeFalse();
+        $this->assertFalse($this->person->fresh()->isVisible());
     }
 
     #[TestDox('users with permissions can change persons visibility')]
     public function testOk(): void
     {
-        expect($this->person->isVisible())->toBeFalse();
+        $this->assertFalse($this->person->isVisible());
 
         $this->withPermissions(4)
             ->from("people/{$this->person->id}/edit")
@@ -50,13 +50,13 @@ final class ChangeVisibilityTest extends TestCase
             ])->assertStatus(302)
             ->assertRedirect("people/{$this->person->id}/edit");
 
-        expect($this->person->fresh()->isVisible())->toBeTrue();
+        $this->assertTrue($this->person->fresh()->isVisible());
     }
 
     #[TestDox('visibility change is logged')]
     public function testLogging(): void
     {
-        expect($this->person->isVisible())->toBeFalse();
+        $this->assertFalse($this->person->isVisible());
 
         $count = Activity::count();
 
@@ -69,18 +69,18 @@ final class ChangeVisibilityTest extends TestCase
 
         $this->travelBack();
 
-        expect(Activity::count())->toBe($count + 2); // visibility change and user creation
+        $this->assertSame($count + 2, Activity::count()); // visibility change and user creation
 
         $log = Activity::newest();
         $this->assertSame('people', $log->log_name);
         $this->assertSame('changed-visibility', $log->description);
         $this->assertSameModel($this->person, $log->subject);
 
-        expect((string) $log->created_at)->toBe((string) $this->person->fresh()->updated_at);
+        $this->assertSame((string) $this->person->fresh()->updated_at, (string) $log->created_at);
 
-        expect($log->properties->all())->toBe([
+        $this->assertSame([
             'old' => ['visibility' => false],
             'attributes' => ['visibility' => true],
-        ]);
+        ], $log->properties->all());
     }
 }
