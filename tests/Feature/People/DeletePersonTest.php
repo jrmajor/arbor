@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\People;
 
+use App\Models\Activity;
 use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
-
-use function Tests\latestLog;
 
 final class DeletePersonTest extends TestCase
 {
@@ -72,10 +71,10 @@ final class DeletePersonTest extends TestCase
     {
         $this->person->delete();
 
-        expect($log = latestLog())
-            ->log_name->toBe('people')
-            ->description->toBe('deleted')
-            ->subject->toBeModel($this->person);
+        $log = Activity::newest();
+        $this->assertSame('people', $log->log_name);
+        $this->assertSame('deleted', $log->description);
+        $this->assertSameModel($this->person, $log->subject);
 
         expect((string) $log->created_at)->toBe((string) $this->person->deleted_at);
 

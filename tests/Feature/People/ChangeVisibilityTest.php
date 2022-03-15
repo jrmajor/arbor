@@ -7,8 +7,6 @@ use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Tests\latestLog;
-
 final class ChangeVisibilityTest extends TestCase
 {
     private Person $person;
@@ -73,10 +71,10 @@ final class ChangeVisibilityTest extends TestCase
 
         expect(Activity::count())->toBe($count + 2); // visibility change and user creation
 
-        expect($log = latestLog())
-            ->log_name->toBe('people')
-            ->description->toBe('changed-visibility')
-            ->subject->toBeModel($this->person);
+        $log = Activity::newest();
+        $this->assertSame('people', $log->log_name);
+        $this->assertSame('changed-visibility', $log->description);
+        $this->assertSameModel($this->person, $log->subject);
 
         expect((string) $log->created_at)->toBe((string) $this->person->fresh()->updated_at);
 

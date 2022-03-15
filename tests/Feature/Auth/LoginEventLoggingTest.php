@@ -2,13 +2,12 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Facades\Agent;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
-
-use function Tests\latestLog;
 
 final class LoginEventLoggingTest extends TestCase
 {
@@ -25,7 +24,7 @@ final class LoginEventLoggingTest extends TestCase
 
         Auth::login($user);
 
-        $log = latestLog();
+        $log = Activity::newest();
 
         $this->assertSame('logins', $log->log_name);
         $this->assertSame('logged-in', $log->description);

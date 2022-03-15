@@ -2,13 +2,12 @@
 
 namespace Tests\Feature\Marriages;
 
+use App\Models\Activity;
 use App\Models\Marriage;
 use App\Models\Person;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
-
-use function Tests\latestLog;
 
 final class EditMarriageTest extends TestCase
 {
@@ -188,12 +187,10 @@ final class EditMarriageTest extends TestCase
 
         $this->marriage->refresh();
 
-        $log = latestLog();
-
-        expect($log)
-            ->log_name->toBe('marriages')
-            ->description->toBe('updated')
-            ->subject->toBeModel($this->marriage);
+        $log = Activity::newest();
+        $this->assertSame('marriages', $log->log_name);
+        $this->assertSame('updated', $log->description);
+        $this->assertSameModel($this->marriage, $log->subject);
 
         $oldToCheck = Arr::except($this->oldAttributes, $this->dates);
 

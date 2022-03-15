@@ -3,12 +3,11 @@
 namespace Tests\Feature\People;
 
 use App\Enums\Sex;
+use App\Models\Activity;
 use App\Models\Person;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
-
-use function Tests\latestLog;
 
 final class CreatePersonTest extends TestCase
 {
@@ -179,10 +178,10 @@ final class CreatePersonTest extends TestCase
 
         $person = Person::latest()->first();
 
-        expect($log = latestLog())
-            ->log_name->toBe('people')
-            ->description->toBe('created')
-            ->subject->toBeModel($person);
+        $log = Activity::newest();
+        $this->assertSame('people', $log->log_name);
+        $this->assertSame('created', $log->description);
+        $this->assertSameModel($person, $log->subject);
 
         $attributesToCheck = Arr::except($this->validAttributes, [
             'sources', ...$this->dates,

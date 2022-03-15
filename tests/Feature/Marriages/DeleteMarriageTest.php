@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Marriages;
 
+use App\Models\Activity;
 use App\Models\Marriage;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
-
-use function Tests\latestLog;
 
 final class DeleteMarriageTest extends TestCase
 {
@@ -72,10 +71,10 @@ final class DeleteMarriageTest extends TestCase
     {
         $this->marriage->delete();
 
-        expect($log = latestLog())
-            ->log_name->toBe('marriages')
-            ->description->toBe('deleted')
-            ->subject->toBeModel($this->marriage);
+        $log = Activity::newest();
+        $this->assertSame('marriages', $log->log_name);
+        $this->assertSame('deleted', $log->description);
+        $this->assertSameModel($this->marriage, $log->subject);
 
         expect((string) $log->created_at)->toBe((string) $this->marriage->deleted_at);
 

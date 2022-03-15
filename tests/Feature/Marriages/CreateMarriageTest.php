@@ -2,13 +2,12 @@
 
 namespace Tests\Feature\Marriages;
 
+use App\Models\Activity;
 use App\Models\Marriage;
 use App\Models\Person;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
-
-use function Tests\latestLog;
 
 final class CreateMarriageTest extends TestCase
 {
@@ -168,10 +167,10 @@ final class CreateMarriageTest extends TestCase
 
         $marriage = Marriage::latest()->first();
 
-        expect($log = latestLog())
-            ->log_name->toBe('marriages')
-            ->description->toBe('created')
-            ->subject->toBeModel($marriage);
+        $log = Activity::newest();
+        $this->assertSame('marriages', $log->log_name);
+        $this->assertSame('created', $log->description);
+        $this->assertSameModel($marriage, $log->subject);
 
         $attributesToCheck = Arr::except($this->validAttributes, $this->dates);
 

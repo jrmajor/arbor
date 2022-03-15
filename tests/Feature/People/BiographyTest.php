@@ -8,8 +8,6 @@ use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
-use function Tests\latestLog;
-
 final class BiographyTest extends TestCase
 {
     private Person $person;
@@ -120,10 +118,10 @@ final class BiographyTest extends TestCase
 
         expect(Activity::count())->toBe($count + 2); // biography addition and user creation
 
-        expect($log = latestLog())
-            ->log_name->toBe('people')
-            ->description->toBe('added-biography')
-            ->subject->toBeModel($this->person);
+        $log = Activity::newest();
+        $this->assertSame('people', $log->log_name);
+        $this->assertSame('added-biography', $log->description);
+        $this->assertSameModel($this->person, $log->subject);
 
         expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
@@ -149,10 +147,10 @@ final class BiographyTest extends TestCase
 
         expect(Activity::count())->toBe($count + 2); // biography edition and user creation
 
-        expect($log = latestLog())
-            ->log_name->toBe('people')
-            ->description->toBe('updated-biography')
-            ->subject->toBeModel($this->person);
+        $log = Activity::newest();
+        $this->assertSame('people', $log->log_name);
+        $this->assertSame('updated-biography', $log->description);
+        $this->assertSameModel($this->person, $log->subject);
 
         expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 
@@ -178,10 +176,10 @@ final class BiographyTest extends TestCase
 
         expect(Activity::count())->toBe($count + 2); // biography deletion and user creation
 
-        expect($log = latestLog())
-            ->log_name->toBe('people')
-            ->description->toBe('deleted-biography')
-            ->subject->toBeModel($this->person);
+        $log = Activity::newest();
+        $this->assertSame('people', $log->log_name);
+        $this->assertSame('deleted-biography', $log->description);
+        $this->assertSameModel($this->person, $log->subject);
 
         expect((string) $log->created_at)->toBe((string) $this->person->updated_at);
 

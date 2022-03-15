@@ -120,4 +120,9 @@ class Activity extends Model implements ActivityContract
     {
         return $query->where('batch_uuid', $batchUuid);
     }
+
+    public static function newest(): self
+    {
+        return self::query()->orderByDesc('id')->first();
+    }
 }
