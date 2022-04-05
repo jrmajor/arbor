@@ -26,8 +26,8 @@ class Marriage extends Model
 {
     use HasDateRanges;
     use HasFactory;
-    use SoftDeletes;
     use LogsActivity;
+    use SoftDeletes;
     use TapsActivity;
 
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];

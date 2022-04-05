@@ -62,8 +62,8 @@ class Person extends Model
 {
     use HasDateRanges;
     use HasFactory;
-    use SoftDeletes;
     use LogsActivity;
+    use SoftDeletes;
     use TapsActivity;
 
     protected $guarded = ['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'];
@@ -105,12 +105,12 @@ class Person extends Model
 
     public function mother(): BelongsTo
     {
-        return $this->belongsTo(Person::class);
+        return $this->belongsTo(self::class);
     }
 
     public function father(): BelongsTo
     {
-        return $this->belongsTo(Person::class);
+        return $this->belongsTo(self::class);
     }
 
     public function getWielcyAttribute(): ?Wielcy

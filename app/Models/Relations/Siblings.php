@@ -77,8 +77,8 @@ class Siblings extends Relation
      */
     public function getResults(): Collection
     {
-        return ! is_null($this->parent->mother_id)
-            && ! is_null($this->parent->father_id)
+        return $this->parent->mother_id !== null
+            && $this->parent->father_id !== null
                 ? $this->query->get()
                 : $this->related->newCollection();
     }

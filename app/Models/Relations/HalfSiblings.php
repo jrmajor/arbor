@@ -101,7 +101,7 @@ class HalfSiblings extends Relation
      */
     public function getResults(): Collection
     {
-        return ! is_null($this->parent->{$this->sideKey})
+        return $this->parent->{$this->sideKey} !== null
             ? $this->query->get()
             : $this->related->newCollection();
     }

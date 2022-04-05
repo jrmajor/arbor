@@ -10,8 +10,5 @@ $finder = PhpCsFixer\Finder::create()
     ->ignoreVCS(true);
 
 return Major\CS\config($finder, [
-    // Remove case as it removes new line between enum case and method.
-    'no_extra_blank_lines' => [
-        'tokens' => ['continue', 'curly_brace_block', 'default', 'extra', 'parenthesis_brace_block', 'switch', 'throw'],
-    ],
+    'strict_param' => false,
 ])->setCacheFile('.cache/.php-cs-fixer.cache');
