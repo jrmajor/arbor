@@ -7,7 +7,7 @@
         @if ($isActive($letter, 'f'))
           <strong>
         @endif
-        <a href="{{ route('people.letter', ['type' => 'f', 'letter' => $letter->letter]) }}" class="a">
+        <a href="{{ route('people.letter', ['type' => 'f', 'letter' => urlencode($letter->letter)]) }}" class="a">
           {{ $letter->letter }} <small>[{{ $letter->total }}]</small>
         </a>
         @if ($isActive($letter, 'f'))
@@ -27,7 +27,7 @@
         @if ($isActive($letter, 'l'))
           <strong>
         @endif
-        <a href="{{ route('people.letter', ['type' => 'l', 'letter' => $letter->letter]) }}" class="a">
+        <a href="{{ route('people.letter', ['type' => 'l', 'letter' => urlencode($letter->letter)]) }}" class="a">
           {{ $letter->letter }} <small>[{{ $letter->total }}]</small>
         </a>
         @if ($isActive($letter, 'l'))
