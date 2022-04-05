@@ -52,7 +52,6 @@ function nullable_trim(?string $string): ?string
  */
 function trim_values(array $array): array
 {
-    /** @phpstan-ignore-next-line */
     return Dict\map($array, fn (?string $v) => nullable_trim($v));
 }
 
