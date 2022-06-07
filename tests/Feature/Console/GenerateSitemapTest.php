@@ -10,13 +10,13 @@ use Tests\TestCase;
 
 final class GenerateSitemapTest extends TestCase
 {
-    private const SITEMAP_PATH = __DIR__ . '/../../../public/sitemap.xml';
+    private const SitemapPath = __DIR__ . '/../../../public/sitemap.xml';
 
     #[TestDox('it can generate sitemap')]
     public function testSitemap(): void
     {
-        if (Filesystem\exists(self::SITEMAP_PATH)) {
-            Filesystem\delete_file(self::SITEMAP_PATH);
+        if (Filesystem\exists(self::SitemapPath)) {
+            Filesystem\delete_file(self::SitemapPath);
         }
 
         $people = Person::factory()->createMany([
@@ -30,9 +30,9 @@ final class GenerateSitemapTest extends TestCase
             ->expectsOutput('Sitemap has been generated successfully.')
             ->assertExitCode(0);
 
-        $this->assertFileExists(self::SITEMAP_PATH);
+        $this->assertFileExists(self::SitemapPath);
 
-        $sitemap = File\read(self::SITEMAP_PATH);
+        $sitemap = File\read(self::SitemapPath);
 
         foreach ([
             '<loc>http://arbor.test</loc>' => true,

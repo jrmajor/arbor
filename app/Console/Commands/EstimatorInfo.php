@@ -61,7 +61,7 @@ class EstimatorInfo extends Command
             ['variance', round($variance, 2)],
             ['standard deviation', round(sqrt($variance), 2)],
             ['real interval', round($generationInterval, 2)],
-            ['used interval', Age::GENERATION_INTERVAL],
+            ['used interval', Age::GenerationInterval],
         ]);
 
         $time = microtime(true) - $time;

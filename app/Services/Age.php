@@ -10,7 +10,7 @@ use Psl\Vec;
 
 final class Age
 {
-    public const GENERATION_INTERVAL = 32;
+    public const GenerationInterval = 32;
 
     public function __construct(
         private Person $person,
@@ -82,7 +82,7 @@ final class Age
 
     public function estimatedBirthDate(): ?int
     {
-        $interval = self::GENERATION_INTERVAL;
+        $interval = self::GenerationInterval;
         $prediction = [];
 
         $motherYear = $this->person->mother?->birth_year;
