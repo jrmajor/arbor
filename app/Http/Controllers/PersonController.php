@@ -113,7 +113,7 @@ class PersonController extends Controller
         $this->authorize('changeVisibility', $person);
 
         $visibility = $request->validate([
-            'visibility' => 'required|boolean',
+            'visibility' => ['required', 'boolean'],
         ]);
 
         $person->forceFill($visibility)->save()

@@ -21,7 +21,7 @@ class Settings extends Component
 
     public function saveEmail(): void
     {
-        $this->validate(['email' => 'required|email']);
+        $this->validate(['email' => ['required', 'email']]);
 
         Auth::user()->update(['email' => $this->email])
             ? flash('success', 'settings.alerts.changes_have_been_saved')
@@ -30,7 +30,7 @@ class Settings extends Component
 
     public function savePassword(): void
     {
-        $this->validate(['password' => 'required|string|min:8|confirmed']);
+        $this->validate(['password' => ['required', 'string', 'min:8', 'confirmed']]);
 
         Auth::user()->update(['password' => Hash::make($this->password)])
             ? flash('success', 'settings.alerts.password_has_been_changed')
@@ -44,7 +44,7 @@ class Settings extends Component
 
     public function logoutOtherDevices(): void
     {
-        $this->validate(['logout_password' => 'required']);
+        $this->validate(['logout_password' => ['required']]);
 
         if (! Hash::check($this->logout_password, Auth::user()->password)) {
             $this->addError('logout_password', __('settings.wrong_password'));

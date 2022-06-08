@@ -29,9 +29,9 @@ class NewPasswordController extends Controller
     public function store(Request $request): Response
     {
         $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|string|confirmed|min:8',
+            'token' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', 'confirmed', 'min:8'],
         ]);
 
         $status = Password::reset(
