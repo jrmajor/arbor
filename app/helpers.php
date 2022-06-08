@@ -21,7 +21,6 @@ function formatBiography(?string $biography): HtmlString
         return new HtmlString();
     }
 
-    /** @phpstan-ignore-next-line */
     return Fun\pipe(
         fn ($s) => Str\trim($s),
         fn ($s) => Str\replace_every($s, ["\r\n" => "\n", "\r" => "\n"]),

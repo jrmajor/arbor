@@ -19,6 +19,7 @@ final class Relative
         public readonly ?string $name,
         public readonly ?string $surname = null,
     ) {
+        /** @phpstan-ignore-next-line */
         unset($this->person);
 
         $this->url = $id !== null ? PytlewskiFactory::url($id) : null;
