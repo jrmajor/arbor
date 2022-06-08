@@ -63,9 +63,4 @@ class LoginRequest extends FormRequest
     {
         return Str::lower($this->input('username')) . '|' . $this->ip();
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }

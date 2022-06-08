@@ -61,9 +61,4 @@ class StoreMarriage extends FormRequest
             'divorce_place' => 'string|max:100|nullable',
         ];
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }

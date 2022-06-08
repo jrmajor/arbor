@@ -15,9 +15,4 @@ class StoreBiography extends FormRequest
     {
         return $this->validated()['biography'];
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }

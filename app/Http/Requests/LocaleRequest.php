@@ -18,9 +18,4 @@ class LocaleRequest extends FormRequest
     {
         return $this->validated()['language'];
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }

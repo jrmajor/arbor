@@ -81,9 +81,4 @@ class StorePerson extends FormRequest
             'sources.*' => 'string|max:256|nullable',
         ];
     }
-
-    public function authorize(): bool
-    {
-        return true;
-    }
 }
