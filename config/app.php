@@ -49,8 +49,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        Jenssegers\Agent\AgentServiceProvider::class,
-
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
@@ -61,7 +59,6 @@ return [
     ],
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Carbon' => Carbon\Carbon::class,
         'Redis' => Illuminate\Support\Facades\Redis::class,
     ])->toArray(),
