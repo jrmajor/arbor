@@ -6,20 +6,9 @@ return [
 
     'stores' => [
 
-        'apc' => [
-            'driver' => 'apc',
-        ],
-
         'array' => [
             'driver' => 'array',
             'serialize' => false,
-        ],
-
-        'database' => [
-            'driver' => 'database',
-            'table' => 'cache',
-            'connection' => null,
-            'lock_connection' => null,
         ],
 
         'file' => [
@@ -67,6 +56,6 @@ return [
 
     ],
 
-    'prefix' => env('CACHE_PREFIX', 'arbor_cache'),
+    'prefix' => env('CACHE_PREFIX', 'arbor_cache_'),
 
 ];
