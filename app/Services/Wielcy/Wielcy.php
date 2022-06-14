@@ -7,6 +7,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
+use Psl\Iter;
 use Psl\Regex;
 
 final class Wielcy
@@ -84,7 +85,7 @@ final class Wielcy
         return match (true) {
             $key === 'id' => $this->id,
             $key === 'url' => self::url($this->id),
-            in_array($key, $this->keys) => $this->attributes[$key] ?? null,
+            Iter\contains($this->keys, $key) => $this->attributes[$key] ?? null,
             default => throw new InvalidArgumentException("Key [{$key}] does not exist."),
         };
     }
