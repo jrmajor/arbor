@@ -86,7 +86,9 @@ class HalfSiblings extends Relation
 
         foreach ($people as $person) {
             if ($person->{$this->sideKey} === null) {
-                return $person->setRelation($relation, $this->related->newCollection());
+                $person->setRelation($relation, $this->related->newCollection());
+
+                continue;
             }
 
             $person->setRelation(
