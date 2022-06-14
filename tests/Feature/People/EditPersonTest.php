@@ -6,6 +6,7 @@ use App\Enums\Sex;
 use App\Models\Activity;
 use App\Models\Person;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -115,6 +116,8 @@ final class EditPersonTest extends TestCase
     #[TestDox('users with permissions can view edit person form')]
     public function testForm(): void
     {
+        Http::fake();
+
         $this->withPermissions(2)
             ->get("people/{$this->person->id}/edit")
             ->assertStatus(200);

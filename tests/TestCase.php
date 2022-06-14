@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component as LivewireComponent;
 use Livewire\Livewire;
 use Livewire\Testing\TestableLivewire;
@@ -24,6 +25,13 @@ use ReflectionParameter;
 abstract class TestCase extends BaseTestCase
 {
     use LazilyRefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Http::preventStrayRequests();
+    }
 
     public function createApplication(): Application
     {
