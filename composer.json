@@ -41,7 +41,9 @@
         "mockery/mockery": "^1.5",
         "nunomaduro/collision": "^6.2",
         "nunomaduro/larastan": "^2.1",
+        "php-standard-library/phpstan-extension": "^1.0",
         "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan-mockery": "^1.1",
         "phpstan/phpstan-phpunit": "^1.1",
         "phpunit/phpunit": "10.0.x-dev#685553d",
         "spatie/laravel-ignition": "^1.2"

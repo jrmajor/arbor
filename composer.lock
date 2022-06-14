@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a3e23f23d9dfaec2e873cabefd486ef",
+    "content-hash": "0b26a8ff642bd4fe7fc41b13c282e929",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9635,6 +9635,59 @@
             "time": "2020-10-14T08:32:19+00:00"
         },
         {
+            "name": "php-standard-library/phpstan-extension",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-standard-library/phpstan-extension.git",
+                "reference": "53601fe346aa90cbeaf9916f15eed46a3cb90ead"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-standard-library/phpstan-extension/zipball/53601fe346aa90cbeaf9916f15eed46a3cb90ead",
+                "reference": "53601fe346aa90cbeaf9916f15eed46a3cb90ead",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^1.7"
+            },
+            "conflict": {
+                "azjezz/psl": "<1.6||>=3.0"
+            },
+            "require-dev": {
+                "azjezz/psl": "^1.6||^2.0",
+                "nikic/php-parser": "^4.14.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psl\\PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan PSL extension",
+            "support": {
+                "issues": "https://github.com/php-standard-library/phpstan-extension/issues",
+                "source": "https://github.com/php-standard-library/phpstan-extension/tree/1.0.0"
+            },
+            "time": "2022-06-10T11:39:34+00:00"
+        },
+        {
             "name": "phpdocumentor/reflection-common",
             "version": "2.2.0",
             "source": {
@@ -9868,6 +9921,56 @@
                 }
             ],
             "time": "2022-06-07T08:47:03+00:00"
+        },
+        {
+            "name": "phpstan/phpstan-mockery",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan-mockery.git",
+                "reference": "245b17ccd00f04be3c6b9fc6645f63793b37b2ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan-mockery/zipball/245b17ccd00f04be3c6b9fc6645f63793b37b2ea",
+                "reference": "245b17ccd00f04be3c6b9fc6645f63793b37b2ea",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0",
+                "phpstan/phpstan": "^1.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2.4",
+                "nikic/php-parser": "^4.13.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan Mockery extension",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan-mockery/issues",
+                "source": "https://github.com/phpstan/phpstan-mockery/tree/1.1.0"
+            },
+            "time": "2022-05-09T13:12:35+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",

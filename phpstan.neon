@@ -30,4 +30,6 @@ parameters:
 
 includes:
     - vendor/nunomaduro/larastan/extension.neon
+    - vendor/php-standard-library/phpstan-extension/extension.neon
+    - vendor/phpstan/phpstan-mockery/extension.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
