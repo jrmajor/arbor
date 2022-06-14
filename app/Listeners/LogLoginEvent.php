@@ -19,11 +19,14 @@ class LogLoginEvent
             ->log('logged-in');
     }
 
+    /**
+     * @return array{platform: ?string, browser: ?string, device: string}
+     */
     private function getAgent(): array
     {
         return [
-            'platform' => Agent::platform(),
-            'browser' => Agent::browser(),
+            'platform' => Agent::platform() ?: null,
+            'browser' => Agent::browser() ?: null,
             'device' => Agent::deviceType(),
         ];
     }
