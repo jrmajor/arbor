@@ -6,7 +6,7 @@ Arbor is genealogy application built in PHP 8 with Laravel framework. For fronte
 
 ### Requirements
 
-- PHP 8.0
+- PHP 8.1
 - MySQL 8
 
 ### Installation
