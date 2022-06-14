@@ -40,6 +40,9 @@ class Marriages extends Relation
         }
     }
 
+    /**
+     * @param list<Person> $people
+     */
     public function addEagerConstraints(array $people): void
     {
         $people = collect($people)->pluck('id');
@@ -49,6 +52,10 @@ class Marriages extends Relation
             ->orWhereIn('man_id', $people);
     }
 
+    /**
+     * @param list<Person> $people
+     * @return list<Person>
+     */
     public function initRelation(array $people, $relation): array
     {
         foreach ($people as $person) {
@@ -59,7 +66,9 @@ class Marriages extends Relation
     }
 
     /**
+     * @param list<Person> $people
      * @param Collection<int, Marriage> $marriages
+     * @return list<Person>
      */
     public function match(array $people, Collection $marriages, $relation): array
     {

@@ -39,6 +39,7 @@ class Marriage extends Model
         'second_event_type' => MarriageEventType::class,
     ];
 
+    /** @var list<string> */
     protected static array $dateRanges = [
         'first_event_date',
         'second_event_date',

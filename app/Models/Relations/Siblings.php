@@ -29,6 +29,9 @@ class Siblings extends Relation
         }
     }
 
+    /**
+     * @param list<Person> $people
+     */
     public function addEagerConstraints(array $people): void
     {
         $people = collect($people)->filter(function (Person $person) {
@@ -40,6 +43,10 @@ class Siblings extends Relation
             ->whereIn('father_id', $people->pluck('father_id')->filter());
     }
 
+    /**
+     * @param list<Person> $people
+     * @return list<Person>
+     */
     public function initRelation(array $people, $relation): array
     {
         foreach ($people as $person) {
@@ -50,7 +57,9 @@ class Siblings extends Relation
     }
 
     /**
+     * @param list<Person> $people
      * @param Collection<int, Person> $siblings
+     * @return list<Person>
      */
     public function match(array $people, Collection $siblings, $relation): array
     {

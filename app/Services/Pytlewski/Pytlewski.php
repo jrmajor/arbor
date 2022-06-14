@@ -21,8 +21,11 @@ final class Pytlewski
         public readonly ?string $bio = null,
         public readonly ?Relative $mother = null,
         public readonly ?Relative $father = null,
+        /** @var list<Marriage> */
         public readonly array $marriages = [],
+        /** @var list<Relative> */
         public readonly array $children = [],
+        /** @var list<Relative> */
         public readonly array $siblings = [],
     ) {
         $this->url = PytlewskiFactory::url($id);

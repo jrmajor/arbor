@@ -45,6 +45,9 @@ class HalfSiblings extends Relation
         }
     }
 
+    /**
+     * @param list<Person> $people
+     */
     public function addEagerConstraints(array $people): void
     {
         $people = collect($people)->filter(function (Person $person) {
@@ -57,6 +60,10 @@ class HalfSiblings extends Relation
         );
     }
 
+    /**
+     * @param list<Person> $people
+     * @return list<Person>
+     */
     public function initRelation(array $people, $relation): array
     {
         foreach ($people as $person) {
@@ -67,7 +74,9 @@ class HalfSiblings extends Relation
     }
 
     /**
+     * @param list<Person> $people
      * @param Collection<int, Person> $siblings
+     * @return list<Person>
      */
     public function match(array $people, Collection $siblings, $relation): array
     {

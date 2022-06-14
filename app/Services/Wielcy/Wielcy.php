@@ -13,8 +13,10 @@ final class Wielcy
 {
     private ?string $source;
 
+    /** @var array<string, mixed> */
     private array $attributes = [];
 
+    /** @var list<string> */
     private array $keys = ['sex', 'name'];
 
     public function __construct(

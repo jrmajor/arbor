@@ -9,6 +9,9 @@ use Illuminate\Validation\Rules\Enum;
 
 class StoreMarriage extends FormRequest
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function rules(): array
     {
         return [

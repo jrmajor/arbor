@@ -24,6 +24,9 @@ final class RelationsTest extends TestCase
         $this->factory = $this->app->make(PytlewskiFactory::class);
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     #[DataProvider('provideScrapeCases')]
     #[TestDox('it can load relations')]
     public function testRelations(int $id, string $source, array $attributes): void
@@ -101,6 +104,9 @@ final class RelationsTest extends TestCase
         $this->assertSame('Katarzyna', $sibling->name);
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     private function testOther(int $id, array $attributes): void
     {
         $pytlewski = $this->factory->find($id);

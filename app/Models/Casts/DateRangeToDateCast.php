@@ -6,6 +6,9 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class DateRangeToDateCast implements CastsAttributes
 {
+    /**
+     * @param array<string, mixed> $attributes
+     */
     public function get($model, string $key, $value, array $attributes): ?string
     {
         $from = "{$key}_from";
@@ -18,6 +21,9 @@ class DateRangeToDateCast implements CastsAttributes
         return $model->{$from}->formatPeriodTo($model->{$to});
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     public function set($model, string $key, $value, array $attributes)
     {
         return $value;

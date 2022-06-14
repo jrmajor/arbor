@@ -6,6 +6,9 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class DateRangeToYearCast implements CastsAttributes
 {
+    /**
+     * @param array<string, mixed> $attributes
+     */
     public function get($model, string $key, $value, array $attributes): ?int
     {
         $from = str_replace('year', 'date_from', $key);
@@ -18,6 +21,9 @@ class DateRangeToYearCast implements CastsAttributes
         return $model->{$from}?->year;
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     public function set($model, string $key, $value, array $attributes)
     {
         return $value;

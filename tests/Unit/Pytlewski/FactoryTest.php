@@ -77,6 +77,9 @@ final class FactoryTest extends TestCase
         Http::assertSentCount(0);
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     #[DataProvider('provideScrapeCases')]
     #[TestDox('it properly scrapes pytlewski.pl')]
     public function testScrape(int $id, string $source, array $attributes): void

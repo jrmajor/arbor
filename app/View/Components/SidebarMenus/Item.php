@@ -3,6 +3,7 @@
 namespace App\View\Components\SidebarMenus;
 
 use Exception;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Item extends Component
@@ -12,6 +13,7 @@ class Item extends Component
         public string $route,
         public bool $active = false,
         public bool $danger = false,
+        /** @var ?array{name: string, method: string} */
         public ?array $form = null,
     ) {
         if ($active && $danger) {
@@ -23,7 +25,7 @@ class Item extends Component
         }
     }
 
-    public function render()
+    public function render(): View
     {
         return view('components.sidebar-menus.item');
     }

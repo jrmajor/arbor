@@ -7,6 +7,9 @@ use Psl\File;
 
 trait UsesPytlewskiDataset
 {
+    /**
+     * @return Generator<string, array{int, string, array<string, mixed>}>
+     */
     private function provideScrapeCases(): Generator
     {
         foreach ([

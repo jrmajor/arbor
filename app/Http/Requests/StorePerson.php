@@ -8,6 +8,9 @@ use Illuminate\Validation\Rules\Enum;
 
 class StorePerson extends FormRequest
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function rules(): array
     {
         return [

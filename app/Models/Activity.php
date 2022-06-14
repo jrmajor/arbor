@@ -60,7 +60,7 @@ class Activity extends Model implements ActivityContract
 
     /**
      * @param Builder<self> $query
-     * @param string|array ...$logNames
+     * @param string|list<string> ...$logNames
      * @return Builder<self>
      */
     public function scopeInLog(Builder $query, ...$logNames): Builder

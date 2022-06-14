@@ -43,6 +43,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * @param list<string> $keys
+     * @param iterable<mixed, mixed> $iterable
      */
     public static function assertDoesNotHaveKeys(array $keys, iterable $iterable): void
     {

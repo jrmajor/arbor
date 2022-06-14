@@ -12,6 +12,7 @@ class SourcesCast implements CastsAttributes
 {
     /**
      * @param ?string $value
+     * @param array<string, mixed> $attributes
      * @return Collection<int, Source>
      */
     public function get($model, string $key, $value, array $attributes): Collection
@@ -21,6 +22,9 @@ class SourcesCast implements CastsAttributes
         return collect($sources)->map(fn ($raw) => Source::from($raw));
     }
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     public function set($model, string $key, $value, array $attributes): ?string
     {
         if ($value === null) {
