@@ -1,6 +1,9 @@
 ## About
 
-Arbor is genealogy application built in PHP 8 with Laravel framework. For frontend it uses Tailwind CSS and Alpine.js.
+Arbor is a genealogy application built in PHP 8 with Laravel framework.
+For frontend it uses Tailwind CSS and Alpine.js.
+
+![Screenshot of person view](resources/arbor.png)
 
 ## Installation
 
@@ -21,7 +24,7 @@ Clone this repository and install it like you normally install Laravel applicati
 
 ## Testing
 
-This application uses PHPUnit for testing and PHPStan for static analysis. MySQL 8 is required to run tests. You may set testing database name in `phpunit.xml` (defaults to `arbor_tests`).
+This application uses PHPUnit for testing and PHPStan for static analysis. MySQL 8 is required to run tests. You may set the testing database name in `phpunit.xml` (defaults to `arbor_tests`).
 
 ```sh
 vendor/bin/phpunit --testdox  # Tests
