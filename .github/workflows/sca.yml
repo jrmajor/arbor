@@ -39,7 +39,7 @@ jobs:
           restore-keys: phpstan-
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-interaction
+        run: composer install --no-progress --no-interaction
 
       - name: Prepare Laravel application
         run: |
