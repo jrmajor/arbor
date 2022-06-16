@@ -48,7 +48,7 @@ final class PeopleSearchTest extends TestCase
     {
         $this->get('people/search')
             ->assertStatus(200)
-            ->assertExactJson([]);
+            ->assertExactJson(['people' => [], 'hiddenCount' => 0]);
     }
 
     #[TestDox('it hides sensitive data from guests')]
@@ -59,12 +59,15 @@ final class PeopleSearchTest extends TestCase
         $this->get('people/search?search=maj')
             ->assertStatus(200)
             ->assertExactJson([
-                [
-                    'id' => $firstPerson->id,
-                    'name' => $firstPerson->formatSimpleName(),
-                    'dates' => $firstPerson->formatSimpleDates(),
-                    'url' => route('people.show', $firstPerson->id),
+                'people' => [
+                    [
+                        'id' => $firstPerson->id,
+                        'name' => $firstPerson->formatSimpleName(),
+                        'dates' => $firstPerson->formatSimpleDates(),
+                        'url' => route('people.show', $firstPerson->id),
+                    ],
                 ],
+                'hiddenCount' => 1,
             ]);
     }
 
@@ -78,18 +81,21 @@ final class PeopleSearchTest extends TestCase
             ->get('people/search?search=maj')
             ->assertStatus(200)
             ->assertExactJson([
-                [
-                    'id' => $firstPerson->id,
-                    'name' => $firstPerson->formatSimpleName(),
-                    'dates' => $firstPerson->formatSimpleDates(),
-                    'url' => route('people.show', $firstPerson->id),
+                'people' => [
+                    [
+                        'id' => $firstPerson->id,
+                        'name' => $firstPerson->formatSimpleName(),
+                        'dates' => $firstPerson->formatSimpleDates(),
+                        'url' => route('people.show', $firstPerson->id),
+                    ],
+                    [
+                        'id' => $secondPerson->id,
+                        'name' => $secondPerson->formatSimpleName(),
+                        'dates' => $secondPerson->formatSimpleDates(),
+                        'url' => route('people.show', $secondPerson->id),
+                    ],
                 ],
-                [
-                    'id' => $secondPerson->id,
-                    'name' => $secondPerson->formatSimpleName(),
-                    'dates' => $secondPerson->formatSimpleDates(),
-                    'url' => route('people.show', $secondPerson->id),
-                ],
+                'hiddenCount' => 0,
             ]);
     }
 }

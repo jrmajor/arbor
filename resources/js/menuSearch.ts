@@ -14,6 +14,7 @@ export default () => ({
   previousSearch: '',
   search: '',
   people: [] as Person[],
+  hiddenCount: 0,
 
   findPeople() {
     if (this.search === this.previousSearch) return
@@ -21,7 +22,9 @@ export default () => ({
     fetch(route('people.search', { search: this.search }))
       .then(response => response.json())
       .then(data => {
-        this.people = data
+        this.people = data.people
+        this.hiddenCount = data.hiddenCount
+
         if ((this.hovered ?? 0) > this.people.length - 1) this.hovered = null
       })
 

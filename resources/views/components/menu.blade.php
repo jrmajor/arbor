@@ -87,6 +87,11 @@
                     </li>
                   </a>
                 </template>
+                <template x-if="hiddenCount !== 0">
+                  <li class="select-none w-full px-3 py-1 text-gray-800 flex justify-between items-center">
+                    <small>+ <b x-text="hiddenCount"></b> hidden</small>
+                  </li>
+                </template>
               </ul>
             </template>
           </form>

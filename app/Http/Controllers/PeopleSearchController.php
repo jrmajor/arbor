@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Person;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Psl\Str;
 use Psl\Vec;
@@ -20,7 +19,7 @@ class PeopleSearchController extends Controller
         $query = $request->get('search');
 
         if (blank($query)) {
-            return response()->json([]);
+            return response()->json(['people' => [], 'hiddenCount' => 0]);
         }
 
         $sex = filled($request->get('sex')) ? $request->get('sex') : null;
@@ -46,19 +45,22 @@ class PeopleSearchController extends Controller
         $people = Person::query()
             ->where(fn (Builder $q) => $q->where('id', $query)->orWhere($whereFragment))
             ->when($sex, $whereSex)
-            ->unless(Auth::user()?->canRead(), fn (Builder $q) => $q->where('visibility', true))
             ->limit(10)
             ->get();
 
-        $response = $people
-            ->filter(fn (Person $person) => Gate::allows('view', $person))
-            ->map(fn (Person $person) => [
-                'id' => $person->id,
-                'name' => $person->formatSimpleName(),
-                'dates' => $person->formatSimpleDates(),
-                'url' => route('people.show', $person),
-            ]);
+        $people = $people->map(fn (Person $p) => Gate::allows('view', $p) ? $p : null);
 
-        return response()->json($response);
+        $hidden = $people->filter(fn (?Person $p) => $p === null);
+        $people = $people->filter(fn (?Person $p) => $p !== null)->values();
+
+        return response()->json([
+            'people' => $people->map(fn (Person $p) => [
+                'id' => $p->id,
+                'name' => $p->formatSimpleName(),
+                'dates' => $p->formatSimpleDates(),
+                'url' => route('people.show', $p),
+            ]),
+            'hiddenCount' => $hidden->count(),
+        ]);
     }
 }
