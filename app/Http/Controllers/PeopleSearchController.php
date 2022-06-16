@@ -6,6 +6,7 @@ use App\Models\Person;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Psl\Math;
 use Psl\Str;
 use Psl\Vec;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ class PeopleSearchController extends Controller
         $query = $request->get('search');
 
         if (blank($query)) {
-            return response()->json(['people' => [], 'hiddenCount' => 0]);
+            return response()->json(['people' => [], 'moreCount' => 0, 'hiddenCount' => 0]);
         }
 
         $sex = filled($request->get('sex')) ? $request->get('sex') : null;
@@ -45,7 +46,6 @@ class PeopleSearchController extends Controller
         $people = Person::query()
             ->where(fn (Builder $q) => $q->where('id', $query)->orWhere($whereFragment))
             ->when($sex, $whereSex)
-            ->limit(10)
             ->get();
 
         $people = $people->map(fn (Person $p) => Gate::allows('view', $p) ? $p : null);
@@ -54,12 +54,13 @@ class PeopleSearchController extends Controller
         $people = $people->filter(fn (?Person $p) => $p !== null)->values();
 
         return response()->json([
-            'people' => $people->map(fn (Person $p) => [
+            'people' => $people->take(10)->map(fn (Person $p) => [
                 'id' => $p->id,
                 'name' => $p->formatSimpleName(),
                 'dates' => $p->formatSimpleDates(),
                 'url' => route('people.show', $p),
             ]),
+            'moreCount' => Math\max([0, $people->count() - 10]),
             'hiddenCount' => $hidden->count(),
         ]);
     }

@@ -48,7 +48,7 @@ final class PeopleSearchTest extends TestCase
     {
         $this->get('people/search')
             ->assertStatus(200)
-            ->assertExactJson(['people' => [], 'hiddenCount' => 0]);
+            ->assertExactJson(['people' => [], 'moreCount' => 0, 'hiddenCount' => 0]);
     }
 
     #[TestDox('it hides sensitive data from guests')]
@@ -67,6 +67,7 @@ final class PeopleSearchTest extends TestCase
                         'url' => route('people.show', $firstPerson->id),
                     ],
                 ],
+                'moreCount' => 0,
                 'hiddenCount' => 1,
             ]);
     }
@@ -95,7 +96,24 @@ final class PeopleSearchTest extends TestCase
                         'url' => route('people.show', $secondPerson->id),
                     ],
                 ],
+                'moreCount' => 0,
                 'hiddenCount' => 0,
             ]);
+    }
+
+    #[TestDox('it shows total results count')]
+    public function testMoreCount(): void
+    {
+        Person::factory(15)->create([
+            'name' => 'Jan',
+            'family_name' => 'Major',
+            'visibility' => true,
+        ]);
+
+        $this->get('people/search?search=maj')
+            ->assertStatus(200)
+            ->assertJsonCount(10, 'people')
+            ->assertJsonPath('moreCount', 6)
+            ->assertJsonPath('hiddenCount', 1);
     }
 }

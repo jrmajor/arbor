@@ -87,9 +87,14 @@
                     </li>
                   </a>
                 </template>
-                <template x-if="hiddenCount !== 0">
+                <template x-if="moreCount !== 0 || hiddenCount !== 0">
                   <li class="select-none w-full px-3 py-1 text-gray-800 flex justify-between items-center">
-                    <small>+ <b x-text="hiddenCount"></b> hidden</small>
+                    <small>
+                      +
+                      <span x-show="moreCount !== 0"><b x-text="moreCount"></b> more</span>
+                      <span x-show="moreCount !== 0 && hiddenCount !== 0">and</span>
+                      <span x-show="hiddenCount !== 0"><b x-text="hiddenCount"></b> hidden</span>
+                    </small>
                   </li>
                 </template>
               </ul>

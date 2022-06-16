@@ -14,6 +14,7 @@ export default () => ({
   previousSearch: '',
   search: '',
   people: [] as Person[],
+  moreCount: 0,
   hiddenCount: 0,
 
   findPeople() {
@@ -23,6 +24,7 @@ export default () => ({
       .then(response => response.json())
       .then(data => {
         this.people = data.people
+        this.moreCount = data.moreCount
         this.hiddenCount = data.hiddenCount
 
         if ((this.hovered ?? 0) > this.people.length - 1) this.hovered = null
