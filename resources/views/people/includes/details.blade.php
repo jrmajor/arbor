@@ -1,6 +1,6 @@
 @php
 
-use App\Services\Pytlewski\Pytlewski;
+use App\Services\Pytlewski\PytlewskiFactory;
 
 @endphp
 
@@ -11,7 +11,7 @@ use App\Services\Pytlewski\Pytlewski;
     @if ($person->id_pytlewski && ! $person->pytlewski)
       <dt>{!! __('people.pytlewski.id') !!}</dt>
       <dd>
-        <a href="{{ Pytlewski::url($person->id_pytlewski) }}" target="_blank" class="a">
+        <a href="{{ PytlewskiFactory::url($person->id_pytlewski) }}" target="_blank" class="a">
           {{ $person->id_pytlewski }}
         </a>
       </dd>
