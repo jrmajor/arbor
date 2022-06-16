@@ -52,7 +52,7 @@
               type="search" class="form-input w-full h-9"
               x-model="search" name="s" autocomplete="off"
               x-on:input="findPeople" x-on:keydown.enter="enter" x-on:keydown.escape="$event.target.blur()"
-              x-on:keydown.arrow-up="arrow('up')" x-on:keydown.arrow-down="arrow('down')"
+              x-on:keydown.arrow-up.prevent="arrow('up')" x-on:keydown.arrow-down.prevent="arrow('down')"
               x-on:focus="open = shouldCloseOnBlur = true" x-on:blur="closeDropdown"
             >
             <button class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 active:text-gray-900 transition-colors duration-200">
