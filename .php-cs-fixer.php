@@ -2,6 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
+    ->append(['artisan'])
     ->notPath('bootstrap/cache')
     ->notPath('node_modules')
     ->notPath('storage')
