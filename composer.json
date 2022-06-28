@@ -67,12 +67,6 @@
         }
     },
     "config": {
-        "allow-plugins": {
-            "composer/package-versions-deprecated": true,
-            "pestphp/pest-plugin": true
-        },
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
         "sort-packages": true
     },
     "extra": {
@@ -87,8 +81,6 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-        "post-create-project-cmd": "@php artisan key:generate --ansi"
+        ]
     }
 }
