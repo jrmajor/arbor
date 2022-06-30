@@ -12,15 +12,15 @@
     @endif
 
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    @unless (app()->runningUnitTests())
-      <link rel="stylesheet" href="{{ mix('css/style.css') }}">
-    @endif
 
     @routes
+
     @unless (app()->runningUnitTests())
-      <script src="{{ mix('js/app.js') }}" defer></script>
+      @vite(['resources/css/style.css', 'resources/js/app.ts'])
     @endif
+
     @stack('scripts')
+
     @if (config('services.fathom.id'))
       <script src="https://cdn.usefathom.com/script.js" data-site="{{ config('services.fathom.id') }}" defer></script>
     @endif

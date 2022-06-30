@@ -8,5 +8,5 @@ class Application extends BaseApplication
 {
     public const SkeletonVersion = '9.2.0';
 
-    public const BreezeVersion = '1.7.1';
+    public const BreezeVersion = '1.10.0';
 }
