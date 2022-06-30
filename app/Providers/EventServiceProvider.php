@@ -19,4 +19,9 @@ class EventServiceProvider extends ServiceProvider
     {
         Person::observe(PersonObserver::class);
     }
+
+    public function shouldDiscoverEvents(): bool
+    {
+        return false;
+    }
 }

@@ -9,6 +9,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            'throw' => false,
         ],
 
         'public' => [
@@ -16,6 +17,7 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
+            'throw' => false,
         ],
 
         's3' => [
@@ -26,6 +28,7 @@ return [
             'bucket' => env('S3_BUCKET'),
             'endpoint' => env('S3_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
         ],
 
         'backup' => [
@@ -36,6 +39,7 @@ return [
             'bucket' => env('BACKUP_S3_BUCKET'),
             'endpoint' => env('BACKUP_S3_URL'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
         ],
 
     ],

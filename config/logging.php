@@ -6,7 +6,10 @@ return [
 
     'default' => 'errors',
 
-    'deprecations' => 'deprecations',
+    'deprecations' => [
+        'channel' => 'deprecations',
+        'trace' => false,
+    ],
 
     'channels' => [
         'errors' => [

@@ -21,6 +21,11 @@ return [
     'key' => env('APP_KEY'),
     'cipher' => 'AES-256-CBC',
 
+    'maintenance' => [
+        'driver' => 'file',
+        // 'store'  => 'redis',
+    ],
+
     'providers' => [
 
         Illuminate\Auth\AuthServiceProvider::class,
