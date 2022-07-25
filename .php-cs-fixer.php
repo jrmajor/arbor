@@ -10,6 +10,5 @@ $finder = PhpCsFixer\Finder::create()
     ->notName('_ide_helper*.php')
     ->ignoreVCSIgnored(true);
 
-return Major\CS\config($finder, [
-    'strict_param' => false,
-])->setCacheFile('.cache/.php-cs-fixer.cache');
+return Major\CS\config($finder)
+    ->setCacheFile('.cache/.php-cs-fixer.cache');
