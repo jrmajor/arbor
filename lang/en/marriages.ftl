@@ -5,6 +5,7 @@ menu =
     .edits_history = Edits history
 
     .delete = Delete
+    .delete_confirm = Are you sure you want to delete this marriage?
     .restore = Restore
 
 titles =

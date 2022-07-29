@@ -13,7 +13,7 @@ class Item extends Component
         public string $route,
         public bool $active = false,
         public bool $danger = false,
-        /** @var ?array{name: string, method: string} */
+        /** @var ?array{name: string, method: string, confirm?: bool} */
         public ?array $form = null,
     ) {
         if ($active && $danger) {

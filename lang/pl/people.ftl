@@ -16,6 +16,7 @@ menu =
     .make_visible = Opublicznij
 
     .delete = Usuń
+    .delete_confirm = Czy na pewno chcesz usunąć tę osobę?
     .restore = Przywróć
 
 titles =

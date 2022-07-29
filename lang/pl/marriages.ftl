@@ -5,6 +5,7 @@ menu =
     .edits_history = Historia edycji
 
     .delete = Usuń
+    .delete_confirm = Czy na pewno chcesz usunąć to małżeństwo?
     .restore = Przywróć
 
 titles =

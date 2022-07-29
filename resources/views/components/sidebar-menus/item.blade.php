@@ -17,9 +17,17 @@
 
   <a
     href="{{ $route }}"
-    @if ($form) x-data x-on:click.prevent="$refs.{{ $form['name'] }}Form.submit()" @endif
-    class="group focus:outline-none transition
-      {{ $danger ? 'text-red-600 hover:text-red-700 focus:text-red-700' : 'text-gray-700 hover:text-gray-800 focus:text-gray-800' }}"
+    @if ($form)
+      x-data
+      x-on:click.prevent="
+        @if ($form['confirm'] ?? false) confirm({{ json_encode($form['confirm']) }}) && @endif
+        $refs.{{ $form['name'] }}Form.submit()
+      "
+    @endif
+    class="
+      group focus:outline-none transition
+      {{ $danger ? 'text-red-600 hover:text-red-700 focus:text-red-700' : 'text-gray-700 hover:text-gray-800 focus:text-gray-800' }}
+    "
   >
     <li class="px-3 py-1 rounded transition
       {{ $danger ? 'group-hover:bg-red-200 group-focus:bg-red-300' : 'group-hover:bg-gray-200 group-focus:bg-gray-300' }}"
