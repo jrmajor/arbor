@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 
 /**
  * @extends Factory<User>
+ *
  * @property Faker&InternetFaker $faker
  */
 class UserFactory extends Factory
