@@ -46,7 +46,7 @@ jobs:
           restore-keys: composer-
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --no-interaction
+        run: composer install
 
       - name: Prepare Laravel application
         run: |
