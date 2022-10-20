@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Route;
 
 Route::get('dev/notify/reset-password', function (Request $request) {
     $user = $request->has('user')

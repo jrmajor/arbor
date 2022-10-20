@@ -45,8 +45,8 @@
         "phpstan/phpstan-mockery": "^1.1",
         "phpstan/phpstan-phpunit": "^1.1",
         "phpunit/phpunit": "10.0.x-dev#685553d",
-        "spatie/laravel-ignition": "^1.4",
-        "sebastian/diff": "5.0.x-dev as 4.0.4"
+        "sebastian/diff": "5.0.x-dev as 4.0.4",
+        "spatie/laravel-ignition": "^1.4"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
