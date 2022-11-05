@@ -1,0 +1,12 @@
+@package laravel/framework
+
+--- src/Illuminate/Foundation/Testing/TestCase.php
++++ src/Illuminate/Foundation/Testing/TestCase.php
+@@ -19,7 +19,7 @@
+ use Mockery\Exception\InvalidCountException;
+ use PHPUnit\Framework\ExpectationFailedException;
+ use PHPUnit\Framework\TestCase as BaseTestCase;
+-use PHPUnit\Util\Annotation\Registry;
++use PHPUnit\Metadata\Annotation\Parser\Registry;
+ use ReflectionProperty;
+ use Throwable;
