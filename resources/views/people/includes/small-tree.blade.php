@@ -78,7 +78,7 @@
       @endif
 
       <div class="w-full">
-        <x-name :person="$person"/>
+        <x-name :$person/>
       </div>
     </div>
   </div>

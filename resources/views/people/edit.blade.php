@@ -5,7 +5,7 @@
 @section('content')
 
   <h1 class="mb-3 leading-none text-3xl font-medium">
-    <x-person-title-bar :person="$person"/>
+    <x-person-title-bar :$person/>
   </h1>
 
   <div class="flex flex-col md:flex-row space-x-2 space-y-2">
@@ -15,7 +15,7 @@
     </main>
 
     <div class="shrink-0 p-1">
-      <x-sidebar-menus.person active="edit" :person="$person"/>
+      <x-sidebar-menus.person active="edit" :$person/>
     </div>
 
   </div>

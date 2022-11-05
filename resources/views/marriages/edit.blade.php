@@ -5,7 +5,7 @@
 @section('content')
 
   <h1 class="mb-3 leading-none text-3xl font-medium">
-    <x-marriage-title-bar :marriage="$marriage"/>
+    <x-marriage-title-bar :$marriage/>
   </h1>
 
   <div class="flex flex-col md:flex-row space-x-2 space-y-2">
@@ -15,7 +15,7 @@
     </main>
 
     <div class="shrink-0 p-1">
-      <x-sidebar-menus.marriage active="edit" :marriage="$marriage"/>
+      <x-sidebar-menus.marriage active="edit" :$marriage/>
     </div>
 
   </div>

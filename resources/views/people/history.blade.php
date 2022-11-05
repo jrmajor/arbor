@@ -5,7 +5,7 @@
 @section('content')
 
   <h1 class="mb-3 leading-none text-3xl font-medium">
-    <x-person-title-bar :person="$person"/>
+    <x-person-title-bar :$person/>
   </h1>
 
   <div class="flex flex-col md:flex-row space-x-2 space-y-2">
@@ -38,30 +38,30 @@
               @elseif ($activity['description'] === 'deleted-biography')
                 {{ __('people.history.deleted-biography') }}
               @else
-                <x-history.text :activity="$activity" :attribute="'id_pytlewski'"
+                <x-history.text :$activity :attribute="'id_pytlewski'"
                   :label="__('people.pytlewski.id')"/>
-                <x-history.text :activity="$activity" :attribute="'id_wielcy'"
+                <x-history.text :$activity :attribute="'id_wielcy'"
                   :label="__('people.wielcy.id')"/>
-                <x-history.sex :activity="$activity"/>
-                <x-history.text :activity="$activity" :attribute="'name'"/>
-                <x-history.text :activity="$activity" :attribute="'middle_name'"/>
-                <x-history.text :activity="$activity" :attribute="'family_name'"/>
-                <x-history.text :activity="$activity" :attribute="'last_name'"/>
-                <x-history.date :activity="$activity" :attribute="'birth_date'"/>
-                <x-history.text :activity="$activity" :attribute="'birth_place'"/>
-                <x-history.text :activity="$activity" :attribute="'dead'"/>
-                <x-history.date :activity="$activity" :attribute="'death_date'"/>
-                <x-history.text :activity="$activity" :attribute="'death_place'"/>
-                <x-history.text :activity="$activity" :attribute="'death_cause'"/>
-                <x-history.date :activity="$activity" :attribute="'funeral_date'"/>
-                <x-history.text :activity="$activity" :attribute="'funeral_place'"/>
-                <x-history.date :activity="$activity" :attribute="'burial_date'"/>
-                <x-history.text :activity="$activity" :attribute="'burial_place'"/>
-                <x-history.text :activity="$activity" :attribute="'mother_id'"
+                <x-history.sex :$activity/>
+                <x-history.text :$activity :attribute="'name'"/>
+                <x-history.text :$activity :attribute="'middle_name'"/>
+                <x-history.text :$activity :attribute="'family_name'"/>
+                <x-history.text :$activity :attribute="'last_name'"/>
+                <x-history.date :$activity :attribute="'birth_date'"/>
+                <x-history.text :$activity :attribute="'birth_place'"/>
+                <x-history.text :$activity :attribute="'dead'"/>
+                <x-history.date :$activity :attribute="'death_date'"/>
+                <x-history.text :$activity :attribute="'death_place'"/>
+                <x-history.text :$activity :attribute="'death_cause'"/>
+                <x-history.date :$activity :attribute="'funeral_date'"/>
+                <x-history.text :$activity :attribute="'funeral_place'"/>
+                <x-history.date :$activity :attribute="'burial_date'"/>
+                <x-history.text :$activity :attribute="'burial_place'"/>
+                <x-history.text :$activity :attribute="'mother_id'"
                   :label="__('people.mother')"/>
-                <x-history.text :activity="$activity" :attribute="'father_id'"
+                <x-history.text :$activity :attribute="'father_id'"
                   :label="__('people.father')"/>
-                <x-history.sources :activity="$activity" :attribute="'sources'"/>
+                <x-history.sources :$activity :attribute="'sources'"/>
               @endif
             </tbody>
           </table>
@@ -77,7 +77,7 @@
     </main>
 
     <div class="shrink-0 p-1">
-      <x-sidebar-menus.person active="history" :person="$person"/>
+      <x-sidebar-menus.person active="history" :$person/>
     </div>
 
   </div>

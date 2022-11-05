@@ -13,7 +13,7 @@
           <h2 class="mb-2 leading-none text-xl font-medium">Should be dead</h2>
           <ul class="w-full p-6 bg-white rounded-lg shadow">
             @foreach ($shouldBeDead as $person)
-              <li><x-name :person="$person"/></li>
+              <li><x-name :$person/></li>
             @endforeach
           </ul>
         </div>
@@ -24,7 +24,7 @@
           <h2 class="mb-2 leading-none text-xl font-medium">Visible alive</h2>
           <ul class="w-full p-6 bg-white rounded-lg shadow">
             @foreach ($visibleAlive as $person)
-              <li><x-name :person="$person"/></li>
+              <li><x-name :$person/></li>
             @endforeach
           </ul>
         </div>
@@ -35,7 +35,7 @@
           <h2 class="mb-2 leading-none text-xl font-medium">Invisible dead</h2>
           <ul class="w-full p-6 bg-white rounded-lg shadow">
             @foreach ($invisibleDead as $person)
-              <li><x-name :person="$person"/></li>
+              <li><x-name :$person/></li>
             @endforeach
           </ul>
         </div>

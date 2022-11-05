@@ -17,7 +17,7 @@
       <ul>
         @foreach ($list as $person)
           <li>
-            <x-name :person="$person" :bold="isset($active) ? $active['type'] : null"/>
+            <x-name :$person :bold="isset($active) ? $active['type'] : null"/>
           </li>
         @endforeach
       </ul>
