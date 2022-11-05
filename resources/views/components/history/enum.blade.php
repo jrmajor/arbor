@@ -1,4 +1,4 @@
-@if (Arr::has($activity['attributes'], $attribute))
+@if (array_key_exists($attribute, $activity['attributes']))
 
   <tr class="block w-full md:table-row md:w-auto">
 

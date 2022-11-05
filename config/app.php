@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
-
 return [
 
     'name' => 'Arbor',
@@ -59,10 +57,5 @@ return [
         App\Providers\TelescopeServiceProvider::class,
 
     ],
-
-    'aliases' => Facade::defaultAliases()->merge([
-        'Carbon' => Carbon\Carbon::class,
-        'Redis' => Illuminate\Support\Facades\Redis::class,
-    ])->toArray(),
 
 ];

@@ -1,6 +1,6 @@
 @if (
-  Arr::has($activity['attributes'], $attribute.'_from')
-  || Arr::has($activity['attributes'], $attribute.'_to')
+  array_key_exists($attribute.'_from', $activity['attributes'])
+  || array_key_exists($attribute.'_to', $activity['attributes'])
 )
 
   <tr class="block w-full md:table-row md:w-auto">
