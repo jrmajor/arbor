@@ -46,7 +46,8 @@
         "phpstan/phpstan-phpunit": "^1.1",
         "phpunit/phpunit": "10.0.x-dev#685553d",
         "sebastian/diff": "5.0.x-dev as 4.0.4",
-        "spatie/laravel-ignition": "^1.4"
+        "spatie/laravel-ignition": "^1.4",
+        "vaimo/composer-patches": "^5.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -67,11 +68,17 @@
         }
     },
     "config": {
+        "allow-plugins": {
+            "vaimo/composer-patches": true
+        },
         "sort-packages": true
     },
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "patcher": {
+            "search": "patches"
         }
     },
     "scripts": {
