@@ -11,7 +11,7 @@
     </h1>
 
     <main class="bg-white rounded-lg shadow px-5 py-4 w-full max-w-[32rem]">
-      <form method="POST" action="{{ route('password.update') }}">
+      <form method="POST" action="{{ route('password.store') }}">
         @csrf
         <input type="hidden" name="token" value="{{ $token }}">
 

@@ -21,7 +21,7 @@ Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
     ->middleware('guest')->name('password.reset');
 
 Route::post('reset-password', [NewPasswordController::class, 'store'])
-    ->middleware('guest')->name('password.update');
+    ->middleware('guest')->name('password.store');
 
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
