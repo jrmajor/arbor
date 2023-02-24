@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response;
 
 use function App\flash;
 
@@ -26,7 +26,7 @@ class NewPasswordController extends Controller
         ]);
     }
 
-    public function store(Request $request): Response
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'token' => ['required'],

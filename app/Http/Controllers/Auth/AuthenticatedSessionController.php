@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 use function App\flash;
 
@@ -21,7 +21,7 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function store(LoginRequest $request): Response
+    public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('people.index');
     }
 
-    public function destroy(Request $request): Response
+    public function destroy(Request $request): RedirectResponse
     {
         auth()->guard('web')->logoutCurrentDevice();
 
