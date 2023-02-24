@@ -9,7 +9,7 @@ For frontend it uses Tailwind CSS and Alpine.js.
 
 ### Requirements
 
-- PHP 8.1
+- PHP 8.2
 - MySQL 8
 
 ### Installation
