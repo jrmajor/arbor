@@ -183,6 +183,7 @@ class Person extends Model
 
     /**
      * @param 'family'|'last' $type
+     *
      * @return Collection<int, stdClass>
      */
     public static function letters(string $type): Collection

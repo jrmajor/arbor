@@ -54,6 +54,7 @@ class Marriages extends Relation
 
     /**
      * @param list<Person> $people
+     *
      * @return list<Person>
      */
     public function initRelation(array $people, $relation): array
@@ -68,6 +69,7 @@ class Marriages extends Relation
     /**
      * @param list<Person> $people
      * @param Collection<int, Marriage> $marriages
+     *
      * @return list<Person>
      */
     public function match(array $people, Collection $marriages, $relation): array

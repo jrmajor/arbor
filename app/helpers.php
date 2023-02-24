@@ -47,6 +47,7 @@ function nullable_trim(?string $string): ?string
  * @template T
  *
  * @param array<T, ?string> $array
+ *
  * @return array<T, ?string>
  */
 function trim_values(array $array): array

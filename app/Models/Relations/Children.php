@@ -46,6 +46,7 @@ class Children extends Relation
 
     /**
      * @param list<Person> $people
+     *
      * @return list<Person>
      */
     public function initRelation(array $people, $relation): array
@@ -60,6 +61,7 @@ class Children extends Relation
     /**
      * @param list<Person> $people
      * @param Collection<int, Person> $children
+     *
      * @return list<Person>
      */
     public function match(array $people, Collection $children, $relation): array

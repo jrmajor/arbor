@@ -61,6 +61,7 @@ class Activity extends Model implements ActivityContract
     /**
      * @param Builder<self> $query
      * @param string|list<string> ...$logNames
+     *
      * @return Builder<self>
      */
     public function scopeInLog(Builder $query, ...$logNames): Builder
@@ -74,6 +75,7 @@ class Activity extends Model implements ActivityContract
 
     /**
      * @param Builder<self> $query
+     *
      * @return Builder<self>
      */
     public function scopeCausedBy(Builder $query, Model $causer): Builder
@@ -85,6 +87,7 @@ class Activity extends Model implements ActivityContract
 
     /**
      * @param Builder<self> $query
+     *
      * @return Builder<self>
      */
     public function scopeForSubject(Builder $query, Model $subject): Builder
@@ -96,6 +99,7 @@ class Activity extends Model implements ActivityContract
 
     /**
      * @param Builder<self> $query
+     *
      * @return Builder<self>
      */
     public function scopeForEvent(Builder $query, string $event): Builder
@@ -105,6 +109,7 @@ class Activity extends Model implements ActivityContract
 
     /**
      * @param Builder<self> $query
+     *
      * @return Builder<self>
      */
     public function scopeHasBatch(Builder $query): Builder
@@ -114,6 +119,7 @@ class Activity extends Model implements ActivityContract
 
     /**
      * @param Builder<self> $query
+     *
      * @return Builder<self>
      */
     public function scopeForBatch(Builder $query, string $batchUuid): Builder

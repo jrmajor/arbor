@@ -13,6 +13,7 @@ class SourcesCast implements CastsAttributes
     /**
      * @param ?string $value
      * @param array<string, mixed> $attributes
+     *
      * @return Collection<int, Source>
      */
     public function get($model, string $key, $value, array $attributes): Collection
