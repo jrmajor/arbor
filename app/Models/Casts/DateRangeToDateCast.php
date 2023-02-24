@@ -4,6 +4,9 @@ namespace App\Models\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
+/**
+ * @implements CastsAttributes<string, never>
+ */
 class DateRangeToDateCast implements CastsAttributes
 {
     /**

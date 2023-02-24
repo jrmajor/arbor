@@ -4,7 +4,6 @@ namespace Tests\Unit\Person;
 
 use App\Models\Person;
 use App\Services\Sources\Source;
-use Illuminate\Support\Collection;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -17,14 +16,12 @@ final class SourcesTest extends TestCase
             'sources' => null,
         ])->sources;
 
-        $this->assertInstanceOf(Collection::class, $sources);
         $this->assertCount(0, $sources);
 
         $sources = Person::factory()->create([
             'sources' => [],
         ])->sources;
 
-        $this->assertInstanceOf(Collection::class, $sources);
         $this->assertCount(0, $sources);
 
         $sources = Person::factory()->create([
@@ -34,7 +31,6 @@ final class SourcesTest extends TestCase
             ],
         ])->sources;
 
-        $this->assertInstanceOf(Collection::class, $sources);
         $this->assertCount(2, $sources);
     }
 

@@ -8,6 +8,9 @@ use Psl\Json;
 use Psl\Type;
 use Psl\Vec;
 
+/**
+ * @implements CastsAttributes<Collection, list<string|Source|null>>
+ */
 class SourcesCast implements CastsAttributes
 {
     /**

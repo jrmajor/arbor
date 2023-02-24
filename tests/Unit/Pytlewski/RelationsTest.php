@@ -3,7 +3,6 @@
 namespace Tests\Unit\Pytlewski;
 
 use App\Models\Person;
-use App\Services\Pytlewski\Marriage;
 use App\Services\Pytlewski\PytlewskiFactory;
 use App\Services\Pytlewski\Relative;
 use Illuminate\Support\Facades\Http;
@@ -70,7 +69,6 @@ final class RelationsTest extends TestCase
         $this->assertCount(1, $pytlewski->marriages);
 
         $marriage = $pytlewski->marriages[0];
-        $this->assertInstanceOf(Marriage::class, $marriage);
         $this->assertSame(705, $marriage->id);
         $this->assertSame($wifeModel->id, $marriage->person?->id);
         $this->assertSame('Frankiewicz, Bronisława', $marriage->name);
@@ -78,7 +76,6 @@ final class RelationsTest extends TestCase
         $this->assertSame('Sulmierzyce', $marriage->place);
 
         $this->assertCount(6, $pytlewski->children);
-        $this->assertInstanceOf(Relative::class, $pytlewski->children[0]);
 
         $child = $pytlewski->children[0];
         $this->assertSame(706, $child->id);
@@ -91,7 +88,6 @@ final class RelationsTest extends TestCase
         $this->assertSame('Seweryn', $child->name);
 
         $this->assertCount(20, $pytlewski->siblings);
-        $this->assertInstanceOf(Relative::class, $pytlewski->siblings[0]);
 
         $sibling = $pytlewski->siblings[0];
         $this->assertNull($sibling->id);
@@ -138,7 +134,6 @@ final class RelationsTest extends TestCase
         foreach ($attributes['marriages'] as $marriageKey => $marriageAttributes) {
             $marriage = $pytlewski->marriages[$marriageKey];
 
-            $this->assertInstanceOf(Marriage::class, $marriage);
             $this->assertNull($marriage->person);
 
             foreach ($marriageAttributes as $key => $value) {
@@ -149,7 +144,6 @@ final class RelationsTest extends TestCase
         foreach ($attributes['children'] as $childKey => $childAttributes) {
             $child = $pytlewski->children[$childKey];
 
-            $this->assertInstanceOf(Relative::class, $child);
             $this->assertNull($child->person);
 
             foreach ($childAttributes as $key => $value) {
@@ -160,7 +154,6 @@ final class RelationsTest extends TestCase
         foreach ($attributes['siblings'] as $siblingKey => $siblingAttributes) {
             $sibling = $pytlewski->siblings[$siblingKey];
 
-            $this->assertInstanceOf(Relative::class, $sibling);
             $this->assertNull($sibling->person);
 
             foreach ($siblingAttributes as $key => $value) {

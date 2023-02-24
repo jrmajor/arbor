@@ -17,10 +17,12 @@ parameters:
         - '#^Anonymous function should return .*Eloquent\\Builder<.*Model> but returns .*Eloquent\\Builder<App\\Models\\.*>\.$#'
         - '#^Method .* has parameter .* with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types: .*$#'
         - '#^Method .* return type with generic class Illuminate\\Database\\Eloquent\\Relations\\\w+ does not specify its types: .*$#'
+        - '#^Method .+ should return .*Attribute<.+, \*NEVER\*> but returns .*Attribute<.+, \*NEVER\*>\.$#'
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
         - '#^Parameter \#1 .*Eloquent\\Builder<.*>::where\(\) expects .*, Closure.*: .*Eloquent\\Builder(<.*>)? given\.$#'
-        - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects int\|null, string given\.$#'
+        - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects DateTimeInterface\|int\|null, string given\.$#'
         - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
+        - '#^Static method Tests\\.+::provide\w+\(\) is unused\.$#'
         - '#^Unable to resolve the template type T in call to function Psl\\Regex\\first_match$#'
         - '#^Using nullsafe property .ccess on non-nullable type mixed\. Use -> instead\.$#'
         -

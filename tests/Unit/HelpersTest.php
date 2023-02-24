@@ -76,6 +76,7 @@ final class HelpersTest extends TestCase
     #[TestDox('faker() helper works')]
     public function testFakerHelper(): void
     {
+        /** @phpstan-ignore-next-line */
         $this->assertInstanceOf(FakerGenerator::class, faker());
     }
 }
