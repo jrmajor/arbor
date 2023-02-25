@@ -19,7 +19,7 @@
         "laravel/slack-notification-channel": "^2.5",
         "laravel/telescope": "^4.14",
         "laravel/tinker": "^2.8",
-        "laravel/ui": "^3.4",
+        "laravel/ui": "^4.2",
         "league/flysystem-aws-s3-v3": "^3.12",
         "livewire/livewire": "^2.12",
         "nesbot/carbon": "^2.66",
