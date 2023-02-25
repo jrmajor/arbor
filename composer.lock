@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c18980477f65c99101ac50f990678fa1",
+    "content-hash": "f57d8a9c9fdaaa92226721b6ff5b7d5c",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -5034,29 +5034,29 @@
         },
         {
             "name": "spatie/laravel-activitylog",
-            "version": "4.4.0",
+            "version": "dev-fix-tapping",
             "source": {
                 "type": "git",
-                "url": "https://github.com/spatie/laravel-activitylog.git",
-                "reference": "ba1b15d37f536d5525cdf84275a0414cd0d957d4"
+                "url": "https://github.com/jrmajor/laravel-activitylog.git",
+                "reference": "f85474f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-activitylog/zipball/ba1b15d37f536d5525cdf84275a0414cd0d957d4",
-                "reference": "ba1b15d37f536d5525cdf84275a0414cd0d957d4",
+                "url": "https://api.github.com/repos/jrmajor/laravel-activitylog/zipball/f85474f",
+                "reference": "f85474f",
                 "shasum": ""
             },
             "require": {
-                "illuminate/config": "^8.0 || ^9.0",
-                "illuminate/database": "^8.53 || ^9.0",
-                "illuminate/support": "^8.0 || ^9.0",
+                "illuminate/config": "^8.0 || ^9.0 || ^10.0",
+                "illuminate/database": "^8.69 || ^9.27 || ^10.0",
+                "illuminate/support": "^8.0 || ^9.0 || ^10.0",
                 "php": "^8.0",
                 "spatie/laravel-package-tools": "^1.6.3"
             },
             "require-dev": {
                 "ext-json": "*",
-                "orchestra/testbench": "^6.23 || ^7.0",
-                "phpunit/phpunit": "^9.5"
+                "orchestra/testbench": "^6.23 || ^7.0 || ^8.0",
+                "pestphp/pest": "^1.20"
             },
             "type": "library",
             "extra": {
@@ -5067,14 +5067,23 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
                 "psr-4": {
                     "Spatie\\Activitylog\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Spatie\\Activitylog\\Test\\": "tests"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "test": [
+                    "vendor/bin/pest"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -5108,20 +5117,19 @@
                 "user"
             ],
             "support": {
-                "issues": "https://github.com/spatie/laravel-activitylog/issues",
-                "source": "https://github.com/spatie/laravel-activitylog/tree/4.4.0"
+                "source": "https://github.com/jrmajor/laravel-activitylog/tree/fix-tapping"
             },
             "funding": [
                 {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
+                    "type": "github",
+                    "url": "https://github.com/spatie"
                 },
                 {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
+                    "type": "custom",
+                    "url": "https://spatie.be/open-source/support-us"
                 }
             ],
-            "time": "2022-01-12T17:33:02+00:00"
+            "time": "2023-02-25T21:54:15+00:00"
         },
         {
             "name": "spatie/laravel-backup",
@@ -12387,7 +12395,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "spatie/laravel-activitylog": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

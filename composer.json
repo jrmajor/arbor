@@ -23,7 +23,7 @@
         "league/flysystem-aws-s3-v3": "^3.12",
         "livewire/livewire": "^2.12",
         "nesbot/carbon": "^2.66",
-        "spatie/laravel-activitylog": "4.4.0",
+        "spatie/laravel-activitylog": "dev-fix-tapping#f85474f",
         "spatie/laravel-backup": "^8.1",
         "spatie/laravel-flash": "^1.9",
         "spatie/laravel-sitemap": "^6.2",
@@ -48,6 +48,12 @@
         "spatie/laravel-ignition": "^1.6",
         "vaimo/composer-patches": "^5.1"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/jrmajor/laravel-activitylog"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
