@@ -10,7 +10,7 @@ trait UsesPytlewskiDataset
     /**
      * @return Generator<string, array{int, string, array<string, mixed>}>
      */
-    private static function provideScrapeCases(): Generator
+    public static function provideScrapeCases(): Generator
     {
         foreach ([
             543 => 'Franciszek Kosela',

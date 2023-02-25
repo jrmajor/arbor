@@ -22,7 +22,6 @@ parameters:
         - '#^Parameter \#1 .*Eloquent\\Builder<.*>::where\(\) expects .*, Closure.*: .*Eloquent\\Builder(<.*>)? given\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects DateTimeInterface\|int\|null, string given\.$#'
         - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
-        - '#^Static method Tests\\.+::provide\w+\(\) is unused\.$#'
         - '#^Unable to resolve the template type T in call to function Psl\\Regex\\first_match$#'
         - '#^Using nullsafe property .ccess on non-nullable type mixed\. Use -> instead\.$#'
         -

@@ -32,7 +32,7 @@ final class HelpersTest extends TestCase
         $this->assertSame($result, $from->formatPeriodTo($to));
     }
 
-    private static function provideFormatPeriodCases(): Generator
+    public static function provideFormatPeriodCases(): Generator
     {
         yield from [
             ['1972-11-28', '1972-11-28', '1972-11-28'],
@@ -52,7 +52,7 @@ final class HelpersTest extends TestCase
         $this->assertSame($roman, roman($arabic));
     }
 
-    private static function provideRomanCases(): Generator
+    public static function provideRomanCases(): Generator
     {
         yield from [
             [1, 'I'],
