@@ -6,9 +6,9 @@ use App\Http\Requests\StorePerson;
 use App\Models\Activity;
 use App\Models\Person;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 use function App\flash;
 use function App\formatBiography;
@@ -61,7 +61,7 @@ class PersonController extends Controller
         return view('people.create', ['person' => $person]);
     }
 
-    public function store(StorePerson $request): Response
+    public function store(StorePerson $request): RedirectResponse
     {
         $this->authorize('create', Person::class);
 
@@ -74,7 +74,7 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function show(Person $person): View|Response
+    public function show(Person $person): View|RedirectResponse
     {
         if ($person->trashed()) {
             return Auth::user()?->canViewHistory()
@@ -97,7 +97,7 @@ class PersonController extends Controller
         return view('people.edit', ['person' => $person]);
     }
 
-    public function update(StorePerson $request, Person $person): Response
+    public function update(StorePerson $request, Person $person): RedirectResponse
     {
         $this->authorize('update', $person);
 
@@ -108,7 +108,7 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function changeVisibility(Request $request, Person $person): Response
+    public function changeVisibility(Request $request, Person $person): RedirectResponse
     {
         $this->authorize('changeVisibility', $person);
 
@@ -123,7 +123,7 @@ class PersonController extends Controller
         return back();
     }
 
-    public function destroy(Person $person): Response
+    public function destroy(Person $person): RedirectResponse
     {
         $this->authorize('delete', $person);
 
@@ -148,7 +148,7 @@ class PersonController extends Controller
             : redirect()->route('people.index');
     }
 
-    public function restore(Person $person): Response
+    public function restore(Person $person): RedirectResponse
     {
         $this->authorize('restore', $person);
 

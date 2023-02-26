@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBiography;
 use App\Models\Person;
 use Illuminate\Contracts\View\View;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\RedirectResponse;
 
 use function App\flash;
 
@@ -18,7 +18,7 @@ class BiographyController extends Controller
         return view('people.biography.edit', ['person' => $person]);
     }
 
-    public function update(StoreBiography $request, Person $person): Response
+    public function update(StoreBiography $request, Person $person): RedirectResponse
     {
         $this->authorize('update', $person);
 

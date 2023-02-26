@@ -7,9 +7,9 @@ use App\Models\Activity;
 use App\Models\Marriage;
 use App\Models\Person;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 use function App\flash;
 
@@ -29,7 +29,7 @@ class MarriageController extends Controller
         return view('marriages.create', ['marriage' => $marriage]);
     }
 
-    public function store(StoreMarriage $request): Response
+    public function store(StoreMarriage $request): RedirectResponse
     {
         $this->authorize('create', Marriage::class);
 
@@ -49,7 +49,7 @@ class MarriageController extends Controller
         return view('marriages.edit', ['marriage' => $marriage]);
     }
 
-    public function update(StoreMarriage $request, Marriage $marriage): Response
+    public function update(StoreMarriage $request, Marriage $marriage): RedirectResponse
     {
         $this->authorize('update', $marriage);
 
@@ -60,7 +60,7 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
-    public function destroy(Marriage $marriage): Response
+    public function destroy(Marriage $marriage): RedirectResponse
     {
         $this->authorize('delete', $marriage);
 
@@ -73,7 +73,7 @@ class MarriageController extends Controller
             : redirect()->route('people.show', $marriage->woman);
     }
 
-    public function restore(Marriage $marriage): Response
+    public function restore(Marriage $marriage): RedirectResponse
     {
         $this->authorize('restore', $marriage);
 
