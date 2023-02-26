@@ -14,9 +14,4 @@ class AuthServiceProvider extends ServiceProvider
         Models\Person::class => Policies\PersonPolicy::class,
         Models\Marriage::class => Policies\MarriagePolicy::class,
     ];
-
-    public function boot(): void
-    {
-        $this->registerPolicies();
-    }
 }
