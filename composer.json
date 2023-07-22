@@ -14,7 +14,7 @@
         "guzzlehttp/guzzle": "^7.7",
         "jenssegers/agent": "^2.6",
         "jrmajor/laravel-fluent": "^0.2.1",
-        "larabug/larabug": "dev-master#32216c1",
+        "larabug/larabug": "^3.0",
         "laravel/framework": "^10.15",
         "laravel/slack-notification-channel": "^2.5",
         "laravel/telescope": "^4.15",

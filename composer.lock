@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d31175d11eb78cf080cbbf27ab11e2c",
+    "content-hash": "c1274f90554701385a2a5cd2042b1aa3",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1996,22 +1996,21 @@
         },
         {
             "name": "larabug/larabug",
-            "version": "dev-master",
+            "version": "3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaraBug/LaraBug.git",
-                "reference": "32216c1"
+                "reference": "32216c1fdf36c4991cd7a3e11560751e98f9479e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaraBug/LaraBug/zipball/32216c1",
-                "reference": "32216c1",
+                "url": "https://api.github.com/repos/LaraBug/LaraBug/zipball/32216c1fdf36c4991cd7a3e11560751e98f9479e",
+                "reference": "32216c1fdf36c4991cd7a3e11560751e98f9479e",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.0.2 || ^7.0",
                 "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0",
-                "nesbot/carbon": "^2.62.1",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
@@ -2020,7 +2019,6 @@
                 "orchestra/testbench": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0",
                 "phpunit/phpunit": "^8.5.23 || ^9.5.12 || ^10.0.9"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2054,7 +2052,7 @@
             ],
             "support": {
                 "issues": "https://github.com/LaraBug/LaraBug/issues",
-                "source": "https://github.com/LaraBug/LaraBug/tree/master"
+                "source": "https://github.com/LaraBug/LaraBug/tree/3.0"
             },
             "funding": [
                 {
@@ -2062,7 +2060,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-16T12:07:12+00:00"
+            "time": "2023-02-20T08:10:10+00:00"
         },
         {
             "name": "laravel/framework",
@@ -12771,7 +12769,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "larabug/larabug": 20,
         "spatie/laravel-activitylog": 20
     },
     "prefer-stable": true,
