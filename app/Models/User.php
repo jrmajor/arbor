@@ -28,6 +28,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
     public function canRead(): bool
     {
         return $this->permissions >= 1;
@@ -53,8 +57,12 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    /**
+     * @return MorphOne<Activity>
+     */
     public function latestLogin(): MorphOne
     {
+        /** @phpstan-ignore-next-line  */
         return $this
             ->actions()
             ->one()

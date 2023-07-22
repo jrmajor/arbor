@@ -5,7 +5,6 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Hash;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -98,7 +97,7 @@ final class LoginTest extends TestCase
     {
         $user = User::factory()->create([
             'username' => 'gracjan',
-            'password' => Hash::make('secret'),
+            'password' => 'secret',
         ]);
 
         Event::fake();
@@ -123,7 +122,7 @@ final class LoginTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'gracjan@example.com',
-            'password' => Hash::make('secret'),
+            'password' => 'secret',
         ]);
 
         Event::fake();

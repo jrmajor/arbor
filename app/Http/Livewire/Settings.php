@@ -32,7 +32,7 @@ class Settings extends Component
     {
         $this->validate(['password' => ['required', 'string', 'min:8', 'confirmed']]);
 
-        Auth::user()->update(['password' => Hash::make($this->password)])
+        Auth::user()->update(['password' => $this->password])
             ? flash('success', 'settings.alerts.password_has_been_changed')
             : flash('error', 'misc.an_unknown_error_occurred');
 
