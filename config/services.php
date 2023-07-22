@@ -23,16 +23,6 @@ return [
         'webhook_url' => env('SLACK_WEBHOOK_URL'),
     ],
 
-    'stripe' => [
-        'model' => App\Models\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-        'webhook' => [
-            'secret' => env('STRIPE_WEBHOOK_SECRET'),
-            'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
-        ],
-    ],
-
     'fathom' => [
         'id' => env('FATHOM_SITE_ID'),
     ],

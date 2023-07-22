@@ -1,7 +1,5 @@
 <?php
 
-use Monolog\Handler\NullHandler;
-
 return [
 
     'default' => 'errors',
@@ -38,11 +36,6 @@ return [
             'level' => 'debug',
             'days' => 14,
             'replace_placeholders' => true,
-        ],
-
-        'null' => [
-            'driver' => 'monolog',
-            'handler' => NullHandler::class,
         ],
 
         'larabug' => [
