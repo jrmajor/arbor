@@ -5,6 +5,7 @@ return [
     'default' => env('MAIL_MAILER', 'smtp'),
 
     'mailers' => [
+
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
@@ -53,6 +54,7 @@ return [
             'transport' => 'failover',
             'mailers' => ['smtp', 'log'],
         ],
+
     ],
 
     'from' => [
