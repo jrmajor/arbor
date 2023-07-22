@@ -12,7 +12,7 @@ function carbon(
     ?int $hour = 0,
     ?int $minute = 0,
     ?int $second = 0,
-    DateTimeZone|string $tz = null,
+    DateTimeZone|string|null $tz = null,
 ): ?Carbon {
     return Carbon::create(...func_get_args()) ?: null;
 }

@@ -53,8 +53,10 @@ final class PersonFactory extends Factory
         ]);
     }
 
-    public function withoutParents(Person|int $father = null, Person|int $mother = null): self
-    {
+    public function withoutParents(
+        Person|int|null $father = null,
+        Person|int|null $mother = null,
+    ): self {
         return $this->state([
             'father_id' => $father,
             'mother_id' => $mother,

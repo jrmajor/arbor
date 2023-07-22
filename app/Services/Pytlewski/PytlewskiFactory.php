@@ -278,19 +278,22 @@ final class PytlewskiFactory
             $marriages = $crawler->eq(0)->children()->first()->html();
 
             yield 'marriages' => $this->parseMarriages($marriages, $relatives);
-        } catch (InvalidArgumentException) { }
+        } catch (InvalidArgumentException) {
+        }
 
         try {
             $children = $crawler->eq(1)->children()->first()->html();
 
             yield 'children' => $this->parseChildrenOrSiblings($children, $relatives);
-        } catch (InvalidArgumentException) { }
+        } catch (InvalidArgumentException) {
+        }
 
         try {
             $siblings = $crawler->eq(2)->children()->first()->html();
 
             yield 'siblings' => $this->parseChildrenOrSiblings($siblings, $relatives);
-        } catch (InvalidArgumentException) { }
+        } catch (InvalidArgumentException) {
+        }
     }
 
     /**

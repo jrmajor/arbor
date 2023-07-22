@@ -35,7 +35,7 @@ class PytlewskiPicker extends Component
             : $result . $pytlewski->familyName;
     }
 
-    public function mount(int|null $id): void
+    public function mount(?int $id): void
     {
         $this->pytlewskiId = (string) $id;
 
