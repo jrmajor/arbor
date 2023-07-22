@@ -15,13 +15,13 @@ final class SettingsTest extends TestCase
     #[TestDox('guest is asked to log in when attempting to view settings page')]
     public function testAuthGuest(): void
     {
-        $this->get('settings')->assertStatus(302)->assertRedirect('login');
+        $this->get('settings')->assertFound()->assertRedirect('login');
     }
 
     #[TestDox('user can view settings page')]
     public function testAuthUser(): void
     {
-        $this->withPermissions(0)->get('settings')->assertStatus(200);
+        $this->withPermissions(0)->get('settings')->assertOk();
     }
 
     #[TestDox('it does not accept invalid email')]

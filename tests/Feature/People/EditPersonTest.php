@@ -93,7 +93,7 @@ final class EditPersonTest extends TestCase
     public function testFormGuest(): void
     {
         $this->get("people/{$this->person->id}/edit")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -101,7 +101,7 @@ final class EditPersonTest extends TestCase
     public function testFormGuestNonexistent(): void
     {
         $this->get('people/2137/edit')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -110,7 +110,7 @@ final class EditPersonTest extends TestCase
     {
         $this->withPermissions(1)
             ->get("people/{$this->person->id}/edit")
-            ->assertStatus(403);
+            ->assertForbidden();
     }
 
     #[TestDox('users with permissions can view edit person form')]
@@ -120,14 +120,14 @@ final class EditPersonTest extends TestCase
 
         $this->withPermissions(2)
             ->get("people/{$this->person->id}/edit")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('guests cannot edit person')]
     public function testGuest(): void
     {
         $this->put("people/{$this->person->id}", $this->newAttributes)
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->person->refresh();
@@ -146,7 +146,7 @@ final class EditPersonTest extends TestCase
     {
         $this->withPermissions(1)
             ->put("people/{$this->person->id}", $this->newAttributes)
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->person->refresh();
 
@@ -164,7 +164,7 @@ final class EditPersonTest extends TestCase
     {
         $this->withPermissions(2)
             ->put("people/{$this->person->id}", $this->newAttributes)
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect("people/{$this->person->id}");
 
         $this->person->refresh();

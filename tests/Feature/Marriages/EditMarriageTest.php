@@ -79,7 +79,7 @@ final class EditMarriageTest extends TestCase
     public function testFormGuest(): void
     {
         $this->get("marriages/{$this->marriage->id}/edit")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -87,7 +87,7 @@ final class EditMarriageTest extends TestCase
     public function testFormGuestNonexistent(): void
     {
         $this->get('marriages/2137/edit')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -96,7 +96,7 @@ final class EditMarriageTest extends TestCase
     {
         $this->withPermissions(1)
             ->get("marriages/{$this->marriage->id}/edit")
-            ->assertStatus(403);
+            ->assertForbidden();
     }
 
     #[TestDox('users with permissions can view edit marriage form')]
@@ -104,14 +104,14 @@ final class EditMarriageTest extends TestCase
     {
         $this->withPermissions(2)
             ->get("marriages/{$this->marriage->id}/edit")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('guests cannot edit marriage')]
     public function testGuest(): void
     {
         $this->put("marriages/{$this->marriage->id}", $this->newAttributes)
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->marriage->refresh();
@@ -128,7 +128,7 @@ final class EditMarriageTest extends TestCase
     {
         $this->withPermissions(1)
             ->put("marriages/{$this->marriage->id}", $this->newAttributes)
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->marriage->refresh();
 
@@ -144,7 +144,7 @@ final class EditMarriageTest extends TestCase
     {
         $response = $this->withPermissions(2)
             ->put("marriages/{$this->marriage->id}", $this->newAttributes)
-            ->assertStatus(302);
+            ->assertFound();
 
         $this->marriage->refresh();
 

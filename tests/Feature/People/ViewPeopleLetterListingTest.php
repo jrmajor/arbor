@@ -11,8 +11,7 @@ final class ViewPeopleLetterListingTest extends TestCase
     #[TestDox('it works with no people')]
     public function testEmpty(): void
     {
-        $this->get('/people/f/H')
-            ->assertStatus(404);
+        $this->get('/people/f/H')->assertNotFound();
     }
 
     #[TestDox('it works with people')]
@@ -31,17 +30,17 @@ final class ViewPeopleLetterListingTest extends TestCase
         ]);
 
         $this->get('/people/f/Z')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSeeText('Ziobro')
             ->assertSeeText('Mikke');
 
         $this->get('/people/l/Z')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSeeText('Zbyrowski')
             ->assertDontSeeText('Mikke');
 
         $this->get('/people/l/M')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertDontSeeText('Zbyrowski')
             ->assertSeeText('Mikke');
     }
@@ -55,7 +54,7 @@ final class ViewPeopleLetterListingTest extends TestCase
         ]);
 
         $this->get('/people/f/Z')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSeeText('[hidden]')
             ->assertDontSeeText('Ziobro')
             ->assertDontSeeText('Mikke');

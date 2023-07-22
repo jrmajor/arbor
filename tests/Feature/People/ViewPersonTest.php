@@ -14,7 +14,7 @@ final class ViewPersonTest extends TestCase
         $person = Person::factory()->alive()->create();
 
         $this->get("people/{$person->id}")
-            ->assertStatus(403);
+            ->assertForbidden();
     }
 
     #[TestDox('guest cannot see hidden dead person')]
@@ -23,7 +23,7 @@ final class ViewPersonTest extends TestCase
         $person = Person::factory()->dead()->create();
 
         $this->get("people/{$person->id}")
-            ->assertStatus(403);
+            ->assertForbidden();
     }
 
     #[TestDox('guest can see visible alive person')]
@@ -34,7 +34,7 @@ final class ViewPersonTest extends TestCase
         ]);
 
         $this->get("people/{$person->id}")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('guest can see visible dead person')]
@@ -45,7 +45,7 @@ final class ViewPersonTest extends TestCase
         ]);
 
         $this->get("people/{$person->id}")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('user with permissions can see hidden alive person')]
@@ -55,7 +55,7 @@ final class ViewPersonTest extends TestCase
 
         $this->withPermissions(1)
             ->get("people/{$person->id}")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('user with permissions can see hidden dead person')]
@@ -65,7 +65,7 @@ final class ViewPersonTest extends TestCase
 
         $this->withPermissions(1)
             ->get("people/{$person->id}")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('user with permissions can see visible alive person')]
@@ -77,7 +77,7 @@ final class ViewPersonTest extends TestCase
 
         $this->withPermissions(1)
             ->get("people/{$person->id}")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('user with permissions can see visible dead person')]
@@ -89,14 +89,14 @@ final class ViewPersonTest extends TestCase
 
         $this->withPermissions(1)
             ->get("people/{$person->id}")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('guest see 404 when attempting to view nonexistent person')]
     public function testGuestNonexistent(): void
     {
         $this->get('people/1')
-            ->assertStatus(404);
+            ->assertNotFound();
     }
 
     #[TestDox('user with insufficient permissions see 404 when attempting to view nonexistent person')]
@@ -104,7 +104,7 @@ final class ViewPersonTest extends TestCase
     {
         $this->withPermissions(1)
             ->get('people/1')
-            ->assertStatus(404);
+            ->assertNotFound();
     }
 
     #[TestDox('guest see 404 when attempting to view deleted person')]
@@ -113,7 +113,7 @@ final class ViewPersonTest extends TestCase
         $person = Person::factory()->create(['deleted_at' => now()]);
 
         $this->get("people/{$person->id}")
-            ->assertStatus(404);
+            ->assertNotFound();
     }
 
     #[TestDox('users without permissions see 404 when attempting to view deleted person')]
@@ -123,7 +123,7 @@ final class ViewPersonTest extends TestCase
 
         $this->withPermissions(2)
             ->get("people/{$person->id}")
-            ->assertStatus(404);
+            ->assertNotFound();
     }
 
     #[TestDox('user with permissions are redirected to edits history when attempting to view deleted person')]
@@ -133,7 +133,7 @@ final class ViewPersonTest extends TestCase
 
         $this->withPermissions(3)
             ->get("people/{$person->id}")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect("people/{$person->id}/history");
     }
 }

@@ -22,7 +22,7 @@ final class RestorePersonTest extends TestCase
     public function testGuest(): void
     {
         $this->patch("people/{$this->person->id}/restore")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertTrue($this->person->fresh()->trashed());
@@ -33,7 +33,7 @@ final class RestorePersonTest extends TestCase
     {
         $this->withPermissions(2)
             ->patch("people/{$this->person->id}/restore")
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->assertTrue($this->person->fresh()->trashed());
     }
@@ -43,7 +43,7 @@ final class RestorePersonTest extends TestCase
     {
         $this->withPermissions(3)
             ->patch("people/{$this->person->id}/restore")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect("people/{$this->person->id}");
 
         $this->assertFalse($this->person->fresh()->trashed());
@@ -56,7 +56,7 @@ final class RestorePersonTest extends TestCase
 
         $this->withPermissions(3)
             ->patch("people/{$this->person->id}/restore")
-            ->assertStatus(404);
+            ->assertNotFound();
     }
 
     #[TestDox('person restoration is logged')]

@@ -52,7 +52,7 @@ final class CreateMarriageTest extends TestCase
     public function testFormGuest(): void
     {
         $this->get('marriages/create')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -61,7 +61,7 @@ final class CreateMarriageTest extends TestCase
     {
         $this->withPermissions(1)
             ->get('marriages/create')
-            ->assertStatus(403);
+            ->assertForbidden();
     }
 
     #[TestDox('users with permissions can view add marriage form')]
@@ -69,7 +69,7 @@ final class CreateMarriageTest extends TestCase
     {
         $this->withPermissions(2)
             ->get('marriages/create')
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('guest cannot add valid marriage')]
@@ -78,7 +78,7 @@ final class CreateMarriageTest extends TestCase
         $count = Marriage::count();
 
         $this->post('marriages', $this->validAttributes)
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertSame($count, Marriage::count());
@@ -91,7 +91,7 @@ final class CreateMarriageTest extends TestCase
 
         $this->withPermissions(1)
             ->post('marriages', $this->validAttributes)
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->assertSame($count, Marriage::count());
     }
@@ -105,7 +105,7 @@ final class CreateMarriageTest extends TestCase
 
         $this->withPermissions(2)
             ->post('marriages', $this->validAttributes)
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('people/' . Marriage::latest()->first()->woman_id);
 
         $this->travelBack();
@@ -137,7 +137,7 @@ final class CreateMarriageTest extends TestCase
 
         $this->withPermissions(2)
             ->get("marriages/create?woman={$woman->id}&man={$man->id}")
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSee((string) $woman->id)
             ->assertSee((string) $man->id);
     }

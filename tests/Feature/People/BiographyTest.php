@@ -27,7 +27,7 @@ final class BiographyTest extends TestCase
     public function testFormGuest(): void
     {
         $this->get("people/{$this->person->id}/biography")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -35,7 +35,7 @@ final class BiographyTest extends TestCase
     public function testFormGuestNonexistent(): void
     {
         $this->get('people/2137/biography')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -44,7 +44,7 @@ final class BiographyTest extends TestCase
     {
         $this->withPermissions(1)
             ->get("people/{$this->person->id}/biography")
-            ->assertStatus(403);
+            ->assertForbidden();
     }
 
     #[TestDox('users with permissions can view biography form')]
@@ -52,14 +52,14 @@ final class BiographyTest extends TestCase
     {
         $this->withPermissions(2)
             ->get("people/{$this->person->id}/biography")
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('guests cannot edit biography')]
     public function testGuest(): void
     {
         $this->patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography])
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertSame($this->oldBiography, $this->person->fresh()->biography);
@@ -70,7 +70,7 @@ final class BiographyTest extends TestCase
     {
         $this->withPermissions(1)
             ->patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography])
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->assertSame($this->oldBiography, $this->person->fresh()->biography);
     }
@@ -80,7 +80,7 @@ final class BiographyTest extends TestCase
     {
         $this->withPermissions(2)
             ->patch("people/{$this->person->id}/biography", ['biography' => $this->newBiography])
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect("people/{$this->person->id}");
 
         $this->assertSame($this->newBiography, $this->person->fresh()->biography);

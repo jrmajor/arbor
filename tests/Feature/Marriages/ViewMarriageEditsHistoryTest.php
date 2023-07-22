@@ -21,7 +21,7 @@ final class ViewMarriageEditsHistoryTest extends TestCase
     public function testGuest(): void
     {
         $this->get("marriages/{$this->marriage->id}/history")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -30,7 +30,7 @@ final class ViewMarriageEditsHistoryTest extends TestCase
     {
         $this->withPermissions(2)
             ->get("marriages/{$this->marriage->id}/history")
-            ->assertStatus(403);
+            ->assertForbidden();
     }
 
     #[TestDox('users with permissions can view marriage history')]
@@ -38,6 +38,6 @@ final class ViewMarriageEditsHistoryTest extends TestCase
     {
         $this->withPermissions(3)
             ->get("marriages/{$this->marriage->id}/history")
-            ->assertStatus(200);
+            ->assertOk();
     }
 }

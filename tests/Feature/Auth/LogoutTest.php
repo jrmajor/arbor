@@ -31,7 +31,7 @@ final class LogoutTest extends TestCase
     {
         $this->withPermissions(0)
             ->post('logout')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('people');
     }
 
@@ -39,7 +39,7 @@ final class LogoutTest extends TestCase
     public function testNoUser(): void
     {
         $this->post('logout')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('people');
     }
 }

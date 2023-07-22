@@ -59,7 +59,7 @@ final class CreatePersonTest extends TestCase
     public function testFormGuest(): void
     {
         $this->get('people/create')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
     }
 
@@ -68,7 +68,7 @@ final class CreatePersonTest extends TestCase
     {
         $this->withPermissions(1)
             ->get('people/create')
-            ->assertStatus(403);
+            ->assertForbidden();
     }
 
     #[TestDox('users with permissions can view add person form')]
@@ -76,7 +76,7 @@ final class CreatePersonTest extends TestCase
     {
         $this->withPermissions(2)
             ->get('people/create')
-            ->assertStatus(200);
+            ->assertOk();
     }
 
     #[TestDox('guest cannot add valid person')]
@@ -85,7 +85,7 @@ final class CreatePersonTest extends TestCase
         $count = Person::count();
 
         $this->post('people', $this->validAttributes)
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertSame($count, Person::count());
@@ -98,7 +98,7 @@ final class CreatePersonTest extends TestCase
 
         $this->withPermissions(1)
             ->post('people', $this->validAttributes)
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->assertSame($count, Person::count());
     }
@@ -112,7 +112,7 @@ final class CreatePersonTest extends TestCase
 
         $this->withPermissions(2)
             ->post('people', $this->validAttributes)
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('people/' . Person::latest()->first()->id);
 
         $this->travelBack();
@@ -150,7 +150,7 @@ final class CreatePersonTest extends TestCase
 
         $this->withPermissions(2)
             ->get("people/create?mother={$mother->id}&father={$father->id}")
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSee((string) $mother->id)
             ->assertSee((string) $father->id);
     }

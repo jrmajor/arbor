@@ -22,7 +22,7 @@ final class DeleteMarriageTest extends TestCase
     public function testGuest(): void
     {
         $this->delete("marriages/{$this->marriage->id}")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertFalse($this->marriage->fresh()->trashed());
@@ -33,7 +33,7 @@ final class DeleteMarriageTest extends TestCase
     {
         $this->withPermissions(1)
             ->delete("marriages/{$this->marriage->id}")
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->assertFalse($this->marriage->fresh()->trashed());
     }
@@ -43,7 +43,7 @@ final class DeleteMarriageTest extends TestCase
     {
         $this->withPermissions(2)
             ->delete("marriages/{$this->marriage->id}")
-            ->assertStatus(302);
+            ->assertFound();
 
         $this->assertTrue($this->marriage->fresh()->trashed());
     }
@@ -53,7 +53,7 @@ final class DeleteMarriageTest extends TestCase
     {
         $this->withPermissions(2)
             ->delete("marriages/{$this->marriage->id}")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect("people/{$this->marriage->woman_id}");
     }
 
@@ -62,7 +62,7 @@ final class DeleteMarriageTest extends TestCase
     {
         $this->withPermissions(3)
             ->delete("marriages/{$this->marriage->id}")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect("marriages/{$this->marriage->id}/history");
     }
 

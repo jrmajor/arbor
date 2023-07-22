@@ -12,7 +12,7 @@ final class ViewPeopleIndexListingTest extends TestCase
     public function testEmpty(): void
     {
         $this->get('/people')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSeeText('total: 0');
     }
 
@@ -30,7 +30,7 @@ final class ViewPeopleIndexListingTest extends TestCase
         ]);
 
         $this->get('/people')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSeeText('Z [2]')
             ->assertSeeText('M [1]')
             ->assertSeeText('Z [1]');

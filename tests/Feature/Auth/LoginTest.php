@@ -16,7 +16,7 @@ final class LoginTest extends TestCase
     {
         $this->withPermissions(0)
             ->get('login')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('people');
 
         $this->assertAuthenticated();
@@ -27,7 +27,7 @@ final class LoginTest extends TestCase
     {
         $this->withPermissions(0)
             ->post('login')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('people');
 
         $this->assertAuthenticated();
@@ -41,7 +41,7 @@ final class LoginTest extends TestCase
                 'password' => 'password',
             ])
             ->assertSessionHasErrors('username')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertGuest();
@@ -55,7 +55,7 @@ final class LoginTest extends TestCase
                 'username' => 'gracjan',
             ])
             ->assertSessionHasErrors('password')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertGuest();
@@ -70,7 +70,7 @@ final class LoginTest extends TestCase
                 'password' => 'hasło',
             ])
             ->assertSessionHasErrors('username')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertGuest();
@@ -87,7 +87,7 @@ final class LoginTest extends TestCase
                 'password' => 'wrong',
             ])
             ->assertSessionHasErrors('username')
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertGuest();
@@ -108,7 +108,7 @@ final class LoginTest extends TestCase
             'password' => 'secret',
         ])
             ->assertSessionHasNoErrors()
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('people');
 
         $this->assertAuthenticatedAs($user);
@@ -133,7 +133,7 @@ final class LoginTest extends TestCase
             'password' => 'secret',
         ])
             ->assertSessionHasNoErrors()
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('people');
 
         $this->assertAuthenticatedAs($user);

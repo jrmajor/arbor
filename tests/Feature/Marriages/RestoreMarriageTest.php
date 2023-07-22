@@ -22,7 +22,7 @@ final class RestoreMarriageTest extends TestCase
     public function testGuest(): void
     {
         $this->patch("marriages/{$this->marriage->id}/restore")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertTrue($this->marriage->fresh()->trashed());
@@ -33,7 +33,7 @@ final class RestoreMarriageTest extends TestCase
     {
         $this->withPermissions(2)
             ->patch("marriages/{$this->marriage->id}/restore")
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->assertTrue($this->marriage->fresh()->trashed());
     }
@@ -43,7 +43,7 @@ final class RestoreMarriageTest extends TestCase
     {
         $this->withPermissions(3)
             ->patch("marriages/{$this->marriage->id}/restore")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect("people/{$this->marriage->woman_id}");
 
         $this->assertFalse($this->marriage->fresh()->trashed());
@@ -56,7 +56,7 @@ final class RestoreMarriageTest extends TestCase
 
         $this->withPermissions(3)
             ->patch("marriages/{$this->marriage->id}/restore")
-            ->assertStatus(404);
+            ->assertNotFound();
     }
 
     #[TestDox('marriage restoration is logged')]

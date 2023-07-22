@@ -22,7 +22,7 @@ final class ChangeVisibilityTest extends TestCase
     public function testGuest(): void
     {
         $this->put("people/{$this->person->id}/visibility")
-            ->assertStatus(302)
+            ->assertFound()
             ->assertRedirect('login');
 
         $this->assertFalse($this->person->fresh()->isVisible());
@@ -33,7 +33,7 @@ final class ChangeVisibilityTest extends TestCase
     {
         $this->withPermissions(3)
             ->put("people/{$this->person->id}/visibility")
-            ->assertStatus(403);
+            ->assertForbidden();
 
         $this->assertFalse($this->person->fresh()->isVisible());
     }
@@ -47,7 +47,7 @@ final class ChangeVisibilityTest extends TestCase
             ->from("people/{$this->person->id}/edit")
             ->put("people/{$this->person->id}/visibility", [
                 'visibility' => true,
-            ])->assertStatus(302)
+            ])->assertFound()
             ->assertRedirect("people/{$this->person->id}/edit");
 
         $this->assertTrue($this->person->fresh()->isVisible());

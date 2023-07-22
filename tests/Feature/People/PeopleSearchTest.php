@@ -47,7 +47,7 @@ final class PeopleSearchTest extends TestCase
     public function testNoQuery(): void
     {
         $this->get('people/search')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertExactJson(['people' => [], 'moreCount' => 0, 'hiddenCount' => 0]);
     }
 
@@ -57,7 +57,7 @@ final class PeopleSearchTest extends TestCase
         $firstPerson = $this->people[0];
 
         $this->get('people/search?search=maj')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertExactJson([
                 'people' => [
                     [
@@ -80,7 +80,7 @@ final class PeopleSearchTest extends TestCase
 
         $this->withPermissions(1)
             ->get('people/search?search=maj')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertExactJson([
                 'people' => [
                     [
@@ -111,7 +111,7 @@ final class PeopleSearchTest extends TestCase
         ]);
 
         $this->get('people/search?search=maj')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertJsonCount(10, 'people')
             ->assertJsonPath('moreCount', 6)
             ->assertJsonPath('hiddenCount', 1);
