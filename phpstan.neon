@@ -20,6 +20,7 @@ parameters:
         - '#^Method .+ should return .*Attribute<.+, \*NEVER\*> but returns .*Attribute<.+, \*NEVER\*>\.$#'
         - '#^Method Faker\\Generator::lastName\(\) invoked with 1 parameter, 0 required\.$#'
         - '#^Parameter \#1 .*Eloquent\\Builder<.*>::where\(\) expects .*, Closure.*: .*Eloquent\\Builder(<.*>)? given\.$#'
+        - '#^Parameter \#1 \$action of method Tests\\TestCase::assertActionUsesFormRequest\(\) expects .*, array{.*} given\.$#'
         - '#^Parameter \#1 \$year of static method Carbon\\CarbonImmutable::create\(\) expects DateTimeInterface\|int\|null, string given\.$#'
         - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
         - '#^Unable to resolve the template type T in call to function Psl\\Regex\\first_match$#'
