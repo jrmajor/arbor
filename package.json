@@ -19,7 +19,7 @@
         "laravel-vite-plugin": "^0.7.8",
         "postcss": "^8.4",
         "postcss-nested": "^6.0",
-        "typescript": "^4.9",
+        "typescript": "^5.1",
         "vite": "^4.4"
     }
 }
