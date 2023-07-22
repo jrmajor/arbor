@@ -13,7 +13,7 @@ return [
     'sleep' => 60,
 
     'except' => [
-        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
+        Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
     ],
 
     'blacklist' => [
