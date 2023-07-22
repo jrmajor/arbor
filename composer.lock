@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1274f90554701385a2a5cd2042b1aa3",
+    "content-hash": "ad1804c44b78ee32a8912b9c75f0998f",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1757,16 +1757,16 @@
         },
         {
             "name": "jrmajor/fluent",
-            "version": "v0.4.2",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/fluent-php.git",
-                "reference": "5c89f9d8852d9285a55c1c3e865fca836098a7ea"
+                "reference": "4fea58c5b1fb082e93d43ce520142013f31e1d85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/fluent-php/zipball/5c89f9d8852d9285a55c1c3e865fca836098a7ea",
-                "reference": "5c89f9d8852d9285a55c1c3e865fca836098a7ea",
+                "url": "https://api.github.com/repos/jrmajor/fluent-php/zipball/4fea58c5b1fb082e93d43ce520142013f31e1d85",
+                "reference": "4fea58c5b1fb082e93d43ce520142013f31e1d85",
                 "shasum": ""
             },
             "require": {
@@ -1775,20 +1775,19 @@
                 "php": "8.1 - 8.2"
             },
             "require-dev": {
-                "azjezz/psl": "^2.3",
+                "azjezz/psl": "^2.6",
                 "ext-json": "*",
                 "ext-simplexml": "*",
-                "jrmajor/cs": "^0.4.6",
-                "jrmajor/exporter": "dev-master#6ada458",
-                "nunomaduro/collision": "^6.3",
+                "jrmajor/cs": "^0.5.1",
+                "jrmajor/exporter": "dev-master#691d32c",
+                "nunomaduro/collision": "^7.7",
                 "php-standard-library/psalm-plugin": "^2.2",
                 "phpbench/phpbench": "^1.2",
-                "phpunit/phpunit": "10.0.x-dev#74bdbf5",
+                "phpunit/phpunit": "^10.2",
                 "psalm/plugin-phpunit": "^0.18.0",
-                "sebastian/diff": "5.0.x-dev#7d8cf26 as 4.0.4",
-                "symfony/console": "^6.2",
-                "symfony/var-dumper": "^6.2",
-                "vimeo/psalm": "^5.1"
+                "symfony/console": "^6.3",
+                "symfony/var-dumper": "^6.3",
+                "vimeo/psalm": "^5.13"
             },
             "type": "library",
             "autoload": {
@@ -1826,7 +1825,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jrmajor/fluent-php/issues",
-                "source": "https://github.com/jrmajor/fluent-php/tree/v0.4.2"
+                "source": "https://github.com/jrmajor/fluent-php/tree/v1.0.0"
             },
             "funding": [
                 {
@@ -1834,32 +1833,32 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-26T14:52:54+00:00"
+            "time": "2023-07-09T16:10:17+00:00"
         },
         {
             "name": "jrmajor/laravel-fluent",
-            "version": "v0.2.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/laravel-fluent.git",
-                "reference": "bb66221db346f72d33eb8db5182cc49258b5a667"
+                "reference": "f39dff770ff06364d13b9610709bf9c2e42bb341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/laravel-fluent/zipball/bb66221db346f72d33eb8db5182cc49258b5a667",
-                "reference": "bb66221db346f72d33eb8db5182cc49258b5a667",
+                "url": "https://api.github.com/repos/jrmajor/laravel-fluent/zipball/f39dff770ff06364d13b9610709bf9c2e42bb341",
+                "reference": "f39dff770ff06364d13b9610709bf9c2e42bb341",
                 "shasum": ""
             },
             "require": {
-                "jrmajor/fluent": "^0.4.0",
-                "laravel/framework": "^9.0 || ^10.0",
+                "jrmajor/fluent": "^1.0",
+                "laravel/framework": "^10.0",
                 "php": "8.1 - 8.2"
             },
             "require-dev": {
-                "jrmajor/cs": "^0.5.0",
-                "orchestra/testbench": "^7.0 || ^8.0",
+                "jrmajor/cs": "^0.5.1",
+                "orchestra/testbench": "^8.0",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^10.2"
             },
             "type": "library",
             "extra": {
@@ -1902,7 +1901,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jrmajor/laravel-fluent/issues",
-                "source": "https://github.com/jrmajor/laravel-fluent/tree/v0.2.1"
+                "source": "https://github.com/jrmajor/laravel-fluent/tree/v1.0.0"
             },
             "funding": [
                 {
@@ -1910,7 +1909,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-24T17:40:33+00:00"
+            "time": "2023-07-09T16:59:38+00:00"
         },
         {
             "name": "jrmajor/pluralrules",
