@@ -24,7 +24,6 @@ class Activity extends Model implements ActivityContract
 
     public function subject(): MorphTo
     {
-        // @phpstan-ignore-next-line
         return $this->morphTo()->withTrashed();
     }
 
