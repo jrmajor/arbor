@@ -22,11 +22,17 @@ class Activity extends Model implements ActivityContract
         'properties' => 'collection',
     ];
 
+    /**
+     * @return MorphTo<Model, self>
+     */
     public function subject(): MorphTo
     {
         return $this->morphTo()->withTrashed();
     }
 
+    /**
+     * @return MorphTo<Model, self>
+     */
     public function causer(): MorphTo
     {
         return $this->morphTo();

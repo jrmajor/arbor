@@ -104,11 +104,17 @@ class Person extends Model
         return new Age($this);
     }
 
+    /**
+     * @return BelongsTo<self, self>
+     */
     public function mother(): BelongsTo
     {
         return $this->belongsTo(self::class);
     }
 
+    /**
+     * @return BelongsTo<self, self>
+     */
     public function father(): BelongsTo
     {
         return $this->belongsTo(self::class);

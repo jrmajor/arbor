@@ -51,11 +51,17 @@ class Marriage extends Model
         return $this->woman->isVisible() && $this->man->isVisible();
     }
 
+    /**
+     * @return BelongsTo<Person, self>
+     */
     public function woman(): BelongsTo
     {
         return $this->belongsTo(Person::class)->withTrashed();
     }
 
+    /**
+     * @return BelongsTo<Person, self>
+     */
     public function man(): BelongsTo
     {
         return $this->belongsTo(Person::class)->withTrashed();
