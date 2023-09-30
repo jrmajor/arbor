@@ -1,4 +1,4 @@
-import Alpine from 'alpinejs'
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm'
 
 import menuSearch from './menuSearch'
 import './personPicker'
@@ -8,4 +8,4 @@ import './dateRangePicker'
 
 Alpine.data('menuSearch', menuSearch)
 
-Alpine.start()
+Livewire.start()

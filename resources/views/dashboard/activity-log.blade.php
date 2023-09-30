@@ -1,8 +1,3 @@
-@push('scripts')
-  <livewire:styles>
-  <livewire:scripts>
-@endpush
-
 @section('title', 'Activity log')
 
 <div class="flex flex-col md:flex-row space-x-2 space-y-2">

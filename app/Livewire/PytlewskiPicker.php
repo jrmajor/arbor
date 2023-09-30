@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Services\Pytlewski\PytlewskiFactory;
 use Illuminate\Contracts\View\View;

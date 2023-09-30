@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Settings;
+use App\Livewire\Settings;
 use App\Models\User;
 use Illuminate\Auth\Events\OtherDeviceLogout;
 use Illuminate\Support\Facades\Event;

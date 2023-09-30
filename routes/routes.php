@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocaleController;
-use App\Http\Livewire\Dashboard\ActivityLog;
-use App\Http\Livewire\Dashboard\Users;
-use App\Http\Livewire\Settings;
+use App\Livewire\Dashboard\ActivityLog;
+use App\Livewire\Dashboard\Users;
+use App\Livewire\Settings;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'people')

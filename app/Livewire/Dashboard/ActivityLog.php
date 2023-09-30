@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard;
+namespace App\Livewire\Dashboard;
 
 use App\Models\Activity;
 use Illuminate\Contracts\View\View;

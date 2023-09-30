@@ -1,8 +1,3 @@
-@push('scripts')
-  <livewire:styles>
-  <livewire:scripts>
-@endpush
-
 @section('title', __('settings.settings'))
 
 <div>
@@ -23,7 +18,7 @@
         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-5 items-end sm:items-center">
           <input
             type="text" class="form-input w-full sm:w-auto @error('email') invalid @enderror"
-            wire:model.lazy="email">
+            wire:model.blur="email">
           <button
             type="button" class="btn grow-0"
             wire:click="saveEmail">
@@ -50,11 +45,11 @@
         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-5 items-end sm:items-center">
           <input
               type="password" class="form-input w-full sm:w-auto @error('password') invalid @enderror"
-              wire:model.lazy="password"
+              wire:model.blur="password"
               placeholder="{{ strtolower(__('settings.password')) }}">
           <input
             type="password" class="form-input w-full sm:w-auto @error('password') invalid @enderror"
-            wire:model.lazy="password_confirmation"
+            wire:model.blur="password_confirmation"
             placeholder="{{ strtolower(__('settings.confirm_password')) }}">
           <button
             type="button" class="btn"
@@ -82,7 +77,7 @@
         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-5 items-end sm:items-center">
           <input
             type="password" class="form-input w-full sm:w-auto @error('logout_password') invalid @enderror"
-            wire:model.lazy="logout_password"
+            wire:model.blur="logout_password"
             placeholder="{{ strtolower(__('settings.password')) }}">
           <button
             type="button" class="btn"

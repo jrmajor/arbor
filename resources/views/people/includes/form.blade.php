@@ -1,8 +1,3 @@
-@push('scripts')
-  @livewireStyles
-  @livewireScripts
-@endpush
-
 @php
 
 $data = new Illuminate\Support\Js([

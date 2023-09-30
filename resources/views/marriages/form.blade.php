@@ -1,8 +1,3 @@
-@push('scripts')
-  <livewire:styles>
-  <livewire:scripts>
-@endpush
-
 <form
   method="POST"
   action="{{ $action === 'create' ? route('marriages.store') : route('marriages.update', $marriage) }}"
