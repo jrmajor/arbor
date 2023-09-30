@@ -28,6 +28,6 @@ This application uses PHPUnit for testing and PHPStan for static analysis. MySQL
 
 ```sh
 vendor/bin/phpunit --testdox  # Tests
-vendor/bin/phpstan analyse    # Static analysis
+vendor/bin/phpstan analyze    # Static analysis
 vendor/bin/php-cs-fixer fix   # Formatting
 ```
