@@ -98,6 +98,8 @@ final class Age
             $prediction['children'] = $children - $interval;
         }
 
+        $this->person->marriages->load('man');
+        $this->person->marriages->load('woman');
         $prediction['partners'] = $this->person->marriages
             ->map->partner($this->person)->avg('birth_year');
 
