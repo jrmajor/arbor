@@ -4,7 +4,10 @@
     "module": "ES2020",
     "moduleResolution": "node",
     "baseUrl": "./",
-    "strict": true
+    "strict": true,
+    "paths": {
+      "ziggy-js": ["vendor/tightenco/ziggy"]
+    }
   },
   "include": ["resources/js/**/*"]
 }
