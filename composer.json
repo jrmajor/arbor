@@ -16,7 +16,7 @@
         "jrmajor/laravel-fluent": "^1.0",
         "larabug/larabug": "^3.0",
         "laravel/framework": "^10.25",
-        "laravel/slack-notification-channel": "^2.5",
+        "laravel/slack-notification-channel": "^3.1",
         "laravel/telescope": "^4.16",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
