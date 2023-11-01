@@ -1,0 +1,29 @@
+version: 2
+
+updates:
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+      day: thursday
+    groups:
+      minor:
+        update-types: [minor, patch]
+    labels: []
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: thursday
+    groups:
+      minor:
+        update-types: [minor, patch]
+    labels: []
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: thursday
+    labels: []
