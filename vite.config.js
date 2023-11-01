@@ -1,3 +1,4 @@
+import * as path from 'path'
 import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
 
@@ -8,4 +9,9 @@ export default defineConfig({
       refresh: true,
     }),
   ],
+  resolve: {
+    alias: {
+      'ziggy-js': path.resolve(__dirname, 'vendor/tightenco/ziggy'),
+    },
+  },
 })
