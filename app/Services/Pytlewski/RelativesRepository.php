@@ -17,13 +17,15 @@ final class RelativesRepository
 
     public function initialize(Pytlewski $pytlewski): void
     {
-        $this->ids = Dict\unique_scalar(Vec\filter_nulls(Vec\map([
+        $ids = Vec\map([
             $pytlewski->mother,
             $pytlewski->father,
             ...$pytlewski->marriages,
             ...$pytlewski->children,
             ...$pytlewski->siblings,
-        ], fn (Marriage|Relative|null $relative): ?int => $relative?->id)));
+        ], fn (Marriage|Relative|null $relative): ?int => $relative?->id);
+
+        $this->ids = Vec\values(Dict\unique_scalar(Vec\filter_nulls($ids)));
     }
 
     public function get(?int $id): ?Person
