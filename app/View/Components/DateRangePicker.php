@@ -29,11 +29,11 @@ class DateRangePicker extends Component
         }
 
         $this->initialFrom = is_string($initialFrom)
-            ? CarbonImmutable::create($initialFrom)
+            ? CarbonImmutable::parse($initialFrom)
             : $initialFrom?->toImmutable();
 
         $this->initialTo = is_string($initialTo)
-            ? CarbonImmutable::create($initialTo)
+            ? CarbonImmutable::parse($initialTo)
             : $initialTo?->toImmutable();
     }
 
