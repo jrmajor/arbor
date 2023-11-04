@@ -40,10 +40,10 @@ trait TapsActivity
             default => 'updated-biography',
         };
 
-        $activity->properties = [
+        $activity->properties = collect([
             'old' => $activity->properties['old']['biography'],
             'new' => $activity->properties['attributes']['biography'],
-        ];
+        ]);
     }
 
     private function modelUpdated(Activity $activity): void
@@ -66,15 +66,15 @@ trait TapsActivity
             }
         }
 
-        $activity->properties = compact('old', 'attributes');
+        $activity->properties = collect(['old' => $old, 'attributes' => $attributes]);
     }
 
     private function tapDeletedOrRestored(Activity $activity): void
     {
         $attributes = $activity->properties['old'] ?? $activity->properties['attributes'];
 
-        $activity->properties = [
+        $activity->properties = collect([
             'attributes' => Arr::only($attributes, 'deleted_at'),
-        ];
+        ]);
     }
 }
