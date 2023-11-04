@@ -48,7 +48,7 @@ interface Data {
         fetch(route('people.search', { sex: this.sex, search: this.search }))
           .then(response => response.json())
           .then(data => {
-            this.people = data
+            this.people = data.people
             if ((this.hovered ?? 0) > this.people.length - 1) this.hovered = null
           })
 
