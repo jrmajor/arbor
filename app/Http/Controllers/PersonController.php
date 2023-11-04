@@ -54,8 +54,8 @@ class PersonController extends Controller
         $this->authorize('create', Person::class);
 
         $person = new Person([
-            'father_id' => Person::find($request->input('father'))?->id,
-            'mother_id' => Person::find($request->input('mother'))?->id,
+            'father_id' => Person::find($request->integer('father'))?->id,
+            'mother_id' => Person::find($request->integer('mother'))?->id,
         ]);
 
         return view('people.create', ['person' => $person]);

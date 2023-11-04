@@ -22,8 +22,8 @@ class MarriageController extends Controller
         $marriage = new Marriage([
             'man_order' => 1,
             'woman_order' => 1,
-            'man_id' => Person::find($request->input('man'))?->id,
-            'woman_id' => Person::find($request->input('woman'))?->id,
+            'man_id' => Person::find($request->integer('man'))?->id,
+            'woman_id' => Person::find($request->integer('woman'))?->id,
         ]);
 
         return view('marriages.create', ['marriage' => $marriage]);
