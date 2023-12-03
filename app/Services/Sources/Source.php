@@ -88,7 +88,14 @@ final class Source implements Jsonable
                     continue;
                 }
 
-                $inline = $this->{'inline' . $inlineType}($excerpt);
+                $inline = match ($inlineType) {
+                    'EscapeSequence' => $this->inlineEscapeSequence($excerpt),
+                    'Italics' => $this->inlineItalics($excerpt),
+                    'ISBN' => $this->inlineISBN($excerpt),
+                    'Link' => $this->inlineLink($excerpt),
+                    'SpecialCharacter' => $this->inlineSpecialCharacter($excerpt),
+                    'Url' => $this->inlineUrl($excerpt),
+                };
 
                 if (! isset($inline)) {
                     continue;
