@@ -166,7 +166,7 @@ final class Source implements Jsonable
             return null;
         }
 
-        if (! preg_match('/^[*]((?:\\\\\\*|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*])/s', $excerpt['text'], $matches)) {
+        if (! preg_match('/^[*]((?:\\\\\\*|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*])/', $excerpt['text'], $matches)) {
             return null;
         }
 
@@ -191,7 +191,7 @@ final class Source implements Jsonable
             return null;
         }
 
-        if (! preg_match('/^ISBN ((?:978|979)?[- ]?(?:\\d[- ]?){9}[\\dXx])(\\s|$)/s', $excerpt['text'], $matches)) {
+        if (! preg_match('/^ISBN ((?:978|979)?[- ]?(?:\\d[- ]?){9}[\\dXx])(\\s|$)/', $excerpt['text'], $matches)) {
             return null;
         }
 
