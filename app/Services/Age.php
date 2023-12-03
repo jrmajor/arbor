@@ -10,7 +10,7 @@ use Psl\Vec;
 
 final class Age
 {
-    public const GenerationInterval = 32;
+    public const int GenerationInterval = 32;
 
     public function __construct(
         private Person $person,

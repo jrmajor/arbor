@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class Source implements Jsonable
 {
-    public const parsedownVersion = '1.7.4';
+    public const string ParsedownVersion = '1.7.4';
 
     protected $inlineTypes = [
         '"' => ['SpecialCharacter'],
