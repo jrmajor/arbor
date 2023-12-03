@@ -3,7 +3,8 @@
 namespace App\Services\Sources;
 
 use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Support\Str;
+use Psl\Regex;
+use Psl\Str;
 
 /**
  * @phpstan-type InlineType = 'EscapeSequence'|'Italics'|'ISBN'|'Link'|'SpecialCharacter'|'Url'
@@ -194,9 +195,7 @@ final class Source implements Jsonable
             return null;
         }
 
-        $number = Str::of($matches[1])
-            ->replace('-', '')
-            ->replace(' ', '');
+        $number = Str\replace_every($matches[1], ['-' => '', ' ' => '']);
 
         return [
             'extent' => $matches[2] === '' ? strlen($matches[0]) : strlen($matches[0]) - 1,
@@ -355,7 +354,7 @@ final class Source implements Jsonable
             return $element;
         }
 
-        if (! Str::startsWith(strtolower($element['attributes']['href']), ['http://', 'https://'])) {
+        if (! Regex\matches($element['attributes']['href'], '#^https?://#')) {
             $element['attributes']['href'] = str_replace(':', '%3A', $element['attributes']['href']);
         }
 
