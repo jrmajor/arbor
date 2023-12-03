@@ -1,6 +1,6 @@
 {
     "name": "jrmajor/arbor",
-    "description": "",
+    "description": "Genealogy application built in PHP",
     "license": "MIT",
     "type": "project",
     "keywords": [
