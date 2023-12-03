@@ -84,7 +84,7 @@ final class Source implements Jsonable
 
             foreach ($this->inlineTypes[$marker] as $inlineType) {
                 // check to see if the current inline type is nestable in the current context
-                if (! empty($nonNestables) && in_array($inlineType, $nonNestables)) {
+                if ($nonNestables && in_array($inlineType, $nonNestables)) {
                     continue;
                 }
 
@@ -97,7 +97,7 @@ final class Source implements Jsonable
                     'Url' => $this->inlineUrl($excerpt),
                 };
 
-                if (! isset($inline)) {
+                if ($inline === null) {
                     continue;
                 }
 
@@ -107,9 +107,7 @@ final class Source implements Jsonable
                 }
 
                 // sets a default inline position
-                if (! isset($inline['position'])) {
-                    $inline['position'] = $markerPosition;
-                }
+                $inline['position'] ??= $markerPosition;
 
                 // cause the new element to 'inherit' our non nestables
                 foreach ($nonNestables as $nonNestable) {
@@ -146,12 +144,14 @@ final class Source implements Jsonable
      */
     private function inlineEscapeSequence(array $excerpt): ?array
     {
-        if (isset($excerpt['text'][1]) && in_array($excerpt['text'][1], ['\\', '*', '[', ']', '(', ')'])) {
-            return [
-                'markup' => $excerpt['text'][1],
-                'extent' => 2,
-            ];
+        if (! in_array($excerpt['text'][1] ?? null, ['\\', '*', '[', ']', '(', ')'])) {
+            return null;
         }
+
+        return [
+            'markup' => $excerpt['text'][1],
+            'extent' => 2,
+        ];
     }
 
     /**
@@ -162,11 +162,11 @@ final class Source implements Jsonable
     private function inlineItalics(array $excerpt): ?array
     {
         if (! isset($excerpt['text'][1])) {
-            return;
+            return null;
         }
 
         if (! preg_match('/^[*]((?:\\\\\\*|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*])/s', $excerpt['text'], $matches)) {
-            return;
+            return null;
         }
 
         return [
@@ -187,11 +187,11 @@ final class Source implements Jsonable
     private function inlineISBN(array $excerpt): ?array
     {
         if (! isset($excerpt['text'][1])) {
-            return;
+            return null;
         }
 
         if (! preg_match('/^ISBN ((?:978|979)?[- ]?(?:\\d[- ]?){9}[\\dXx])(\\s|$)/s', $excerpt['text'], $matches)) {
-            return;
+            return null;
         }
 
         $number = Str::of($matches[1])
@@ -236,23 +236,23 @@ final class Source implements Jsonable
 
         $remainder = $excerpt['text'];
 
-        if (preg_match('/\\[((?:[^][]++|(?R))*+)\\]/', $remainder, $matches)) {
-            $element['text'] = $matches[1];
-
-            $extent += strlen($matches[0]);
-
-            $remainder = substr($remainder, $extent);
-        } else {
-            return;
+        if (! preg_match('/\\[((?:[^][]++|(?R))*+)\\]/', $remainder, $matches)) {
+            return null;
         }
 
-        if (preg_match('/^[(]\\s*+((?:[^ ()]++|[(][^ )]+[)])++)\\s*[)]/', $remainder, $matches)) {
-            $element['attributes']['href'] = $matches[1];
+        $element['text'] = $matches[1];
 
-            $extent += strlen($matches[0]);
-        } else {
-            return;
+        $extent += strlen($matches[0]);
+
+        $remainder = substr($remainder, $extent);
+
+        if (! preg_match('/^[(]\\s*+((?:[^ ()]++|[(][^ )]+[)])++)\\s*[)]/', $remainder, $matches)) {
+            return null;
         }
+
+        $element['attributes']['href'] = $matches[1];
+
+        $extent += strlen($matches[0]);
 
         return [
             'extent' => $extent,
@@ -288,25 +288,27 @@ final class Source implements Jsonable
     private function inlineUrl(array $excerpt): ?array
     {
         if (! isset($excerpt['text'][2]) || $excerpt['text'][2] !== '/') {
-            return;
+            return null;
         }
 
-        if (preg_match('/\\bhttps?:[\\/]{2}[^\\s<]+\\b\\/*/ui', $excerpt['context'], $matches, PREG_OFFSET_CAPTURE)) {
-            $url = $matches[0][0];
+        if (! preg_match('/\\bhttps?:[\\/]{2}[^\\s<]+\\b\\/*/ui', $excerpt['context'], $matches, PREG_OFFSET_CAPTURE)) {
+            return null;
+        }
 
-            return [
-                'extent' => strlen($matches[0][0]),
-                'position' => $matches[0][1],
-                'element' => [
-                    'name' => 'a',
-                    'text' => $url,
-                    'attributes' => [
-                        'href' => $url,
-                        'class' => 'a',
-                    ],
+        $url = $matches[0][0];
+
+        return [
+            'extent' => strlen($matches[0][0]),
+            'position' => $matches[0][1],
+            'element' => [
+                'name' => 'a',
+                'text' => $url,
+                'attributes' => [
+                    'href' => $url,
+                    'class' => 'a',
                 ],
-            ];
-        }
+            ],
+        ];
     }
 
     /**
@@ -318,39 +320,28 @@ final class Source implements Jsonable
 
         $markup = '<' . $element['name'];
 
-        if (isset($element['attributes'])) {
-            foreach ($element['attributes'] as $name => $value) {
-                if ($value === null) {
-                    continue;
-                }
-
-                $markup .= ' ' . $name . '="' . e($value) . '"';
-            }
-        }
-
-        if (isset($element['text'])) {
-            $text = $element['text'];
-        }
-
-        if (isset($text)) {
-            $markup .= '>';
-
-            if (! isset($element['nonNestables'])) {
-                $element['nonNestables'] = [];
+        foreach ($element['attributes'] ?? [] as $name => $value) {
+            if ($value === null) {
+                continue;
             }
 
-            if (isset($element['handler'])) {
-                $markup .= $this->{$element['handler']}($text, $element['nonNestables']);
-            } else {
-                $markup .= e($text, true);
-            }
-
-            $markup .= '</' . $element['name'] . '>';
-        } else {
-            $markup .= '/>';
+            $markup .= ' ' . $name . '="' . e($value) . '"';
         }
 
-        return $markup;
+        $text = $element['text'] ?? null;
+
+        if ($text === null) {
+            return $markup . '/>';
+        }
+
+        $markup .= '>';
+
+        $markup .= match ($element['handler'] ?? null) {
+            'line' => $this->line($text, $element['nonNestables'] ?? []),
+            null => e($text),
+        };
+
+        return $markup . '</' . $element['name'] . '>';
     }
 
     /**
