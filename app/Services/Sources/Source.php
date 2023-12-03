@@ -5,11 +5,11 @@ namespace App\Services\Sources;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Str;
 
-class Source implements Jsonable
+final class Source implements Jsonable
 {
     public const string ParsedownVersion = '1.7.4';
 
-    protected $inlineTypes = [
+    private array $inlineTypes = [
         '"' => ['SpecialCharacter'],
         '&' => ['SpecialCharacter'],
         '<' => ['SpecialCharacter'],
@@ -21,10 +21,10 @@ class Source implements Jsonable
         '\\' => ['EscapeSequence'],
     ];
 
-    protected $inlineMarkerList = '"&<>:[*I\\';
+    private string $inlineMarkerList = '"&<>:[*I\\';
 
     public function __construct(
-        protected ?string $raw,
+        private ?string $raw,
     ) { }
 
     public static function from(string|self|null $raw): self
@@ -54,7 +54,7 @@ class Source implements Jsonable
         return json_encode($this->raw, $options);
     }
 
-    protected function line($text, $nonNestables = [])
+    private function line(string $text, array $nonNestables = []): string
     {
         $markup = '';
 
@@ -116,7 +116,7 @@ class Source implements Jsonable
         return trim(preg_replace('/\\s+/', ' ', $markup));
     }
 
-    protected function inlineEscapeSequence($excerpt)
+    private function inlineEscapeSequence(array $excerpt): ?array
     {
         if (isset($excerpt['text'][1]) && in_array($excerpt['text'][1], ['\\', '*', '[', ']', '(', ')'])) {
             return [
@@ -126,7 +126,7 @@ class Source implements Jsonable
         }
     }
 
-    protected function inlineItalics($excerpt)
+    private function inlineItalics(array $excerpt): ?array
     {
         if (! isset($excerpt['text'][1])) {
             return;
@@ -146,7 +146,7 @@ class Source implements Jsonable
         ];
     }
 
-    protected function inlineISBN($excerpt)
+    private function inlineISBN(array $excerpt): ?array
     {
         if (! isset($excerpt['text'][1])) {
             return;
@@ -175,7 +175,7 @@ class Source implements Jsonable
         ];
     }
 
-    protected function inlineLink($excerpt)
+    private function inlineLink(array $excerpt): ?array
     {
         $element = [
             'name' => 'a',
@@ -217,7 +217,7 @@ class Source implements Jsonable
         ];
     }
 
-    protected function inlineSpecialCharacter($excerpt)
+    private function inlineSpecialCharacter(array $excerpt): array
     {
         if (preg_match('/^&#?\\w+;/', $excerpt['text'])) {
             return [
@@ -232,7 +232,7 @@ class Source implements Jsonable
         ];
     }
 
-    protected function inlineUrl($excerpt)
+    private function inlineUrl(array $excerpt): ?array
     {
         if (! isset($excerpt['text'][2]) || $excerpt['text'][2] !== '/') {
             return;
@@ -256,7 +256,7 @@ class Source implements Jsonable
         }
     }
 
-    protected function element(array $element)
+    private function element(array $element): string
     {
         $element = $this->sanitiseElement($element);
 
@@ -297,7 +297,7 @@ class Source implements Jsonable
         return $markup;
     }
 
-    protected function sanitiseElement(array $element)
+    private function sanitiseElement(array $element): array
     {
         if ($element['name'] !== 'a') {
             return $element;
