@@ -9,7 +9,6 @@ parameters:
     excludePaths:
         - app/Providers/MacrosServiceProvider.php
         - app/Services/Pytlewski/PytlewskiFactory.php
-        - app/Services/Sources/Source.php
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: true
     checkPhpDocMissingReturn: true
