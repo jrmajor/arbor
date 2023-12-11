@@ -17,11 +17,11 @@ class Item extends Component
         public ?array $form = null,
     ) {
         if ($active && $danger) {
-            throw new Exception();
+            throw new Exception('Sidebar item with "danger" attribute can not be active.');
         }
 
         if ($active && $form) {
-            throw new Exception();
+            throw new Exception('Sidebar item with "form" attribute can not be active.');
         }
     }
 
