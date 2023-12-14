@@ -15,7 +15,7 @@
     </main>
 
     <div class="shrink-0 p-1">
-      <x-sidebar-menus.person active="edit" :$person/>
+      <x-sidebar-menus.person activePage="edit" :$person/>
     </div>
 
   </div>

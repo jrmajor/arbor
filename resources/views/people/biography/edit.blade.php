@@ -44,7 +44,7 @@
     </main>
 
     <div class="shrink-0 p-1">
-      <x-sidebar-menus.person active="biography" :$person/>
+      <x-sidebar-menus.person activePage="biography" :$person/>
     </div>
 
   </div>

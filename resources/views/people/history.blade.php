@@ -77,7 +77,7 @@
     </main>
 
     <div class="shrink-0 p-1">
-      <x-sidebar-menus.person active="history" :$person/>
+      <x-sidebar-menus.person activePage="history" :$person/>
     </div>
 
   </div>

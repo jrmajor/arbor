@@ -44,7 +44,7 @@
   </main>
 
   <div class="shrink-0 p-1">
-    <x-sidebar-menus.dashboard active="users"/>
+    <x-sidebar-menus.dashboard activePage="users"/>
   </div>
 
 </div>

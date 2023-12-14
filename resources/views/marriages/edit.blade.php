@@ -15,7 +15,7 @@
     </main>
 
     <div class="shrink-0 p-1">
-      <x-sidebar-menus.marriage active="edit" :$marriage/>
+      <x-sidebar-menus.marriage activePage="edit" :$marriage/>
     </div>
 
   </div>

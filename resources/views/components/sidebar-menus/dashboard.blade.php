@@ -4,7 +4,7 @@
     <div class="grow">
 
       <x-sidebar-menus.item
-        :active="$active === 'users'"
+        :active="$activePage === 'users'"
         :route="route('dashboard.users')"
         name="misc.dashboard.users"
       >
@@ -12,7 +12,7 @@
       </x-sidebar-menus.item>
 
       <x-sidebar-menus.item
-        :active="$active === 'activityLog'"
+        :active="$activePage === 'activityLog'"
         :route="route('dashboard.activityLog')"
         name="misc.dashboard.activity_log"
       >
@@ -20,7 +20,7 @@
       </x-sidebar-menus.item>
 
       <x-sidebar-menus.item
-        :active="$active === 'reports'"
+        :active="$activePage === 'reports'"
         :route="route('dashboard.reports')"
         name="misc.dashboard.reports"
       >

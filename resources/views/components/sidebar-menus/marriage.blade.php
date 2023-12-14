@@ -5,7 +5,7 @@
 
       @unless ($marriage->trashed())
         <x-sidebar-menus.item
-          :active="$active === 'edit'"
+          :active="$activePage === 'edit'"
           :route="route('marriages.edit', $marriage)"
           name="marriages.menu.edit_marriage"
         >
@@ -15,7 +15,7 @@
 
       @can('viewHistory', $marriage)
         <x-sidebar-menus.item
-          :active="$active === 'history'"
+          :active="$activePage === 'history'"
           :route="route('marriages.history', $marriage)"
           name="marriages.menu.edits_history"
         >

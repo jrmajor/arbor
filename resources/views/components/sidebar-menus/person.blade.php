@@ -5,7 +5,7 @@
 
       @unless ($person->trashed())
         <x-sidebar-menus.item
-          :active="$active === 'show'"
+          :active="$activePage === 'show'"
           :route="route('people.show', $person)"
           name="people.menu.overview"
         >
@@ -13,7 +13,7 @@
         </x-sidebar-menus.item>
 
         <x-sidebar-menus.item
-          :active="$active === 'edit'"
+          :active="$activePage === 'edit'"
           :route="route('people.edit', $person)"
           name="people.menu.edit_person"
         >
@@ -21,7 +21,7 @@
         </x-sidebar-menus.item>
 
         <x-sidebar-menus.item
-          :active="$active === 'biography'"
+          :active="$activePage === 'biography'"
           :route="route('people.biography.edit', $person)"
           name="people.menu.edit_biography"
         >
@@ -31,7 +31,7 @@
 
       @can('viewHistory', $person)
         <x-sidebar-menus.item
-          :active="$active === 'history'"
+          :active="$activePage === 'history'"
           :route="route('people.history', $person)"
           name="people.menu.edits_history"
         >

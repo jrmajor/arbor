@@ -67,7 +67,7 @@
   </main>
 
   <div class="shrink-0 p-1">
-    <x-sidebar-menus.dashboard active="activityLog"/>
+    <x-sidebar-menus.dashboard activePage="activityLog"/>
   </div>
 
 </div>

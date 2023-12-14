@@ -60,7 +60,7 @@
     </main>
 
     <div class="shrink-0 p-1">
-      <x-sidebar-menus.marriage active="history" :$marriage/>
+      <x-sidebar-menus.marriage activePage="history" :$marriage/>
     </div>
 
   </div>
