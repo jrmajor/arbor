@@ -27,7 +27,7 @@
         "spatie/laravel-backup": "^8.4",
         "spatie/laravel-flash": "^1.9",
         "spatie/laravel-sitemap": "^7.0",
-        "symfony/css-selector": "^6.4",
+        "symfony/css-selector": "^7.0",
         "symfony/dom-crawler": "^6.4",
         "symfony/http-client": "^7.0",
         "symfony/mailgun-mailer": "^7.0",
