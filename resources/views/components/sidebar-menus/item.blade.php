@@ -3,7 +3,7 @@
   <span class="text-blue-700 transition">
     <li class="px-3 py-1 rounded transition">
       <span class="w-full border-b-2 border-dotted border-blue-500 flex items-center">
-        <svg class="h-4 w-4 mr-2 fill-current text-blue-600 transition"
+        <svg class="size-4 mr-2 fill-current text-blue-600 transition"
           viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
         >
           {{ $slot }}
@@ -34,7 +34,7 @@
     >
       <span class="w-full flex items-center">
         <svg
-          class="h-4 w-4 mr-2 fill-current transition
+          class="size-4 mr-2 fill-current transition
           @unless ($danger) text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700 @endif"
           viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
         >

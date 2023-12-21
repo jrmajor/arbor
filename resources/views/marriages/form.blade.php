@@ -171,7 +171,7 @@
       <label for="divorced" class="font-medium text-xl text-gray-900">{{ __('marriages.divorce') }}</label>
       <input type="hidden" id="divorced-hidden" name="divorced" value="0">
       <input
-        type="checkbox" class="form-checkbox ml-2 h-4 w-4"
+        type="checkbox" class="form-checkbox ml-2 size-4"
         id="divorced" name="divorced"
         value="1"
         x-model="divorced">

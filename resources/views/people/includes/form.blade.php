@@ -220,7 +220,7 @@ $data = new Illuminate\Support\Js([
       </label>
       <input type="hidden" id="dead-hidden" name="dead" value="0">
       <input
-        type="checkbox" class="form-checkbox ml-2 h-4 w-4"
+        type="checkbox" class="form-checkbox ml-2 size-4"
         id="dead" name="dead"
         value="1"
         x-model="dead">
@@ -334,7 +334,7 @@ $data = new Illuminate\Support\Js([
     <div class="w-full flex items-center justify-between mb-4">
       <div class="font-medium text-xl text-gray-900">{{ __('people.sources') }}</div>
       <button x-on:click.prevent="sources.push('')"
-        class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700 transition
+        class="size-6 p-1 rounded-full border border-blue-700 text-blue-700 transition
           hover:bg-blue-100 hover:text-blue-800
           focus:outline-none focus:ring
           active:bg-blue-600 active:border-blue-600 active:text-blue-100">
@@ -355,7 +355,7 @@ $data = new Illuminate\Support\Js([
                 <input type="text" class="form-input w-full" :name="'sources['+index+']'" x-model="sources[index]">
                 <div>
                   <button x-on:click.prevent="sources.splice(index, 1)"
-                    class="w-6 h-6 p-1 rounded-full border border-blue-700 text-blue-700 transition
+                    class="size-6 p-1 rounded-full border border-blue-700 text-blue-700 transition
                       hover:bg-blue-100 hover:text-blue-800
                       focus:outline-none focus:ring
                       active:bg-blue-600 active:border-blue-600 active:text-blue-100">

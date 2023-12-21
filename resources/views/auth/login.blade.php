@@ -43,7 +43,7 @@
 
         <div class="mt-4 flex flex-wrap justify-between items-center">
           <div class="mr-3 grow flex items-center" style="flex-grow: 10">
-            <input type="checkbox" name="remember" id="remember" class="form-checkbox h-3.5 w-3.5" {{ old('remember') ? 'checked' : '' }}>
+            <input type="checkbox" name="remember" id="remember" class="form-checkbox size-3.5" {{ old('remember') ? 'checked' : '' }}>
             <label for="remember" class="ml-1"><small>{{ __('auth.remember') }}</small></label>
           </div>
 

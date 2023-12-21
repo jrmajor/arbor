@@ -7,7 +7,7 @@
       'success' => 'bg-green-50 text-green-900',
     } }}"
   >
-    <svg class="flex-none w-5 h-5 mr-5 fill-current
+    <svg class="flex-none size-5 mr-5 fill-current
       {{ match(flash()->level) {
         'error' => 'text-red-500',
         'warning' => 'text-yellow-500',
