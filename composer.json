@@ -15,7 +15,7 @@
         "jenssegers/agent": "^2.6",
         "jrmajor/laravel-fluent": "^1.0",
         "larabug/larabug": "^3.0",
-        "laravel/framework": "^10.38",
+        "laravel/framework": "^10.39",
         "laravel/slack-notification-channel": "^3.1",
         "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.8",
