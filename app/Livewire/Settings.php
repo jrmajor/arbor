@@ -2,9 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 use function App\flash;
@@ -21,7 +23,16 @@ class Settings extends Component
 
     public function saveEmail(): void
     {
-        $this->validate(['email' => ['required', 'email']]);
+        $this->validate([
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore(Auth::user()->id),
+            ],
+        ]);
 
         Auth::user()->update(['email' => $this->email])
             ? flash('success', 'settings.alerts.changes_have_been_saved')
