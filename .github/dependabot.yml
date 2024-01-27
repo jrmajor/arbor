@@ -4,8 +4,7 @@ updates:
   - package-ecosystem: composer
     directory: /
     schedule:
-      interval: weekly
-      day: thursday
+      interval: monthly
     groups:
       composer:
         update-types: [minor, patch]
