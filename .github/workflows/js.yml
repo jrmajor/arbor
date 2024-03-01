@@ -1,0 +1,66 @@
+name: JS
+
+on:
+  push:
+    branches-ignore: [master]
+
+jobs:
+  types:
+    name: Types
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'yarn'
+
+      - name: Install npm dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Check types
+        run: yarn tsc --strict --noEmit
+        
+  build:
+    name: Build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'yarn'
+
+      - name: Install npm dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Get Composer cache directory path
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Build Vite
+        run: yarn build
