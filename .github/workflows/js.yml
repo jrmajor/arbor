@@ -23,7 +23,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Check types
-        run: yarn tsc --strict --noEmit
+        run: yarn types
         
   build:
     name: Build
