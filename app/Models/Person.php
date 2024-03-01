@@ -203,11 +203,11 @@ class Person extends Model
         return Cache::rememberForever(
             "letters_{$type}",
             fn () => DB::table('people')
-                ->selectRaw("
+                ->selectRaw(<<<SQL
                     left({$nameQuery}, 1)
                     collate utf8mb4_0900_as_ci as letter,
                     count(*) as total
-                ")
+                    SQL)
                 ->groupBy('letter')
                 ->orderBy('letter')
                 ->whereNull('deleted_at')
