@@ -12,13 +12,13 @@ return [
     'channels' => [
         'errors' => [
             'driver' => 'stack',
-            'channels' => ['daily_errors', 'larabug'],
+            'channels' => ['daily_errors'],
             'ignore_exceptions' => false,
         ],
 
         'deprecations' => [
             'driver' => 'stack',
-            'channels' => ['daily_deprecations', 'larabug'],
+            'channels' => ['daily_deprecations'],
             'ignore_exceptions' => false,
         ],
 
@@ -36,10 +36,6 @@ return [
             'level' => 'debug',
             'days' => 14,
             'replace_placeholders' => true,
-        ],
-
-        'larabug' => [
-            'driver' => 'larabug',
         ],
     ],
 
