@@ -1,7 +1,7 @@
 @php
 
 $data = new Illuminate\Support\Js([
-    'sex' => old('sex', $person->sex),
+    'sex' => old('sex', $person->sex) ?? '',
     'dead' => (bool) old('dead', $person->dead),
     'sources' => [
         ...collect(old('sources', $person->sources))
