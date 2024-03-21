@@ -10,7 +10,13 @@ class RenameDivorceColumns extends Migration
     {
         Schema::table('marriages', function (Blueprint $table) {
             $table->renameColumn('ended', 'divorced');
+        });
+
+        Schema::table('marriages', function (Blueprint $table) {
             $table->renameColumn('end_date_from', 'divorce_date_from');
+        });
+
+        Schema::table('marriages', function (Blueprint $table) {
             $table->renameColumn('end_date_to', 'divorce_date_to');
         });
 
