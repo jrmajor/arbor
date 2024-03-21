@@ -9,8 +9,8 @@ return [
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
+            'host' => env('MAIL_HOST', '127.0.0.1'),
+            'port' => env('MAIL_PORT', 1025),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
@@ -51,27 +51,11 @@ return [
             'mailers' => ['smtp', 'log'],
         ],
 
-        'roundrobin' => [
-            'transport' => 'roundrobin',
-            'mailers' => [
-                'ses',
-                'postmark',
-            ],
-        ],
-
     ],
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'arbor@npng.pl'),
         'name' => env('MAIL_FROM_NAME', 'Arbor'),
-    ],
-
-    'markdown' => [
-        'theme' => 'default',
-
-        'paths' => [
-            resource_path('views/vendor/mail'),
-        ],
     ],
 
 ];

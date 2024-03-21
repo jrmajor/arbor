@@ -2,7 +2,7 @@
 
 return [
 
-    'default' => env('CACHE_DRIVER', 'file'),
+    'default' => env('CACHE_STORE', 'file'),
 
     'stores' => [
 
@@ -25,6 +25,6 @@ return [
 
     ],
 
-    'prefix' => env('CACHE_PREFIX', 'arbor_cache_'),
+    'prefix' => 'arbor_cache_',
 
 ];
