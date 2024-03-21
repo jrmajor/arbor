@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\ServiceProvider;
-
 return [
 
     'name' => 'Arbor',
@@ -25,14 +23,5 @@ return [
         'driver' => 'file',
         // 'store' => 'redis',
     ],
-
-    'providers' => ServiceProvider::defaultProviders()->merge([
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\MacrosServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\TelescopeServiceProvider::class,
-    ])->toArray(),
 
 ];
