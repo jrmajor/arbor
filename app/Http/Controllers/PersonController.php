@@ -31,10 +31,10 @@ class PersonController extends Controller
 
         $list = match ($type) {
             'f' => Person::query()
-                ->whereRaw('left(family_name, 1) collate utf8mb4_0900_as_ci = ?', $letter)
+                ->whereRaw('substr(family_name, 1, 1) /* collate utf8mb4_0900_as_ci */ = ?', $letter)
                 ->orderBy('family_name')->orderBy('name')->get(),
             'l' => Person::query()
-                ->whereRaw('left(ifnull(last_name, family_name), 1) collate utf8mb4_0900_as_ci = ?', $letter)
+                ->whereRaw('substr(ifnull(last_name, family_name), 1, 1) /* collate utf8mb4_0900_as_ci */ = ?', $letter)
                 ->orderByRaw('ifnull(last_name, family_name) asc')->orderBy('name')->get(),
         };
 

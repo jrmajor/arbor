@@ -204,8 +204,9 @@ class Person extends Model
             "letters_{$type}",
             fn () => DB::table('people')
                 ->selectRaw(<<<SQL
-                    left({$nameQuery}, 1)
-                    collate utf8mb4_0900_as_ci as letter,
+                    substr({$nameQuery}, 1, 1)
+                    /* collate utf8mb4_0900_as_ci */
+                    as letter,
                     count(*) as total
                     SQL)
                 ->groupBy('letter')
