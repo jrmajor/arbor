@@ -14,8 +14,7 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
-      day: thursday
+      interval: monthly
     groups:
       npm:
         update-types: [minor, patch]
@@ -25,6 +24,5 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-      day: thursday
+      interval: monthly
     labels: []
