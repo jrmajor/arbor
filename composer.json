@@ -19,7 +19,7 @@
         "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
-        "league/flysystem-aws-s3-v3": "^3.24",
+        "league/flysystem-aws-s3-v3": "^3.25",
         "livewire/livewire": "^3.4",
         "nesbot/carbon": "^2.72",
         "spatie/laravel-activitylog": "dev-fix-tapping#f85474f",
