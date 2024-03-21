@@ -13,11 +13,6 @@ class RouteServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->routes(function () {
-            Route::middleware('web')
-                ->group(base_path('routes/routes.php'));
-        });
-
         Route::bind('trashedPerson', fn ($id) => Person::onlyTrashed()->findOrFail($id));
 
         Route::bind('anyPerson', fn ($id) => Person::withTrashed()->findOrFail($id));

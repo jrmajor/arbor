@@ -1,22 +1,21 @@
 <?php
 
-$app = new App\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__),
-);
+use App\Application;
+use App\Http\Middleware\SetLocale;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Session\Middleware\AuthenticateSession;
 
-$app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class,
-);
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__ . '/../routes/routes.php',
+        commands: __DIR__ . '/../routes/console.php',
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->appendToGroup('web', AuthenticateSession::class);
+        $middleware->appendToGroup('web', SetLocale::class);
 
-$app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class,
-);
-
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class,
-);
-
-return $app;
+        $middleware->redirectUsersTo('/people');
+    })
+    ->withExceptions(function (Exceptions $exceptions) { })
+    ->create();
