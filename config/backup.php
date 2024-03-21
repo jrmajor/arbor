@@ -22,7 +22,7 @@ return [
             ],
 
             'databases' => [
-                'mysql',
+                'default',
             ],
 
         ],

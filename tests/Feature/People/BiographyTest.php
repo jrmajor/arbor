@@ -122,7 +122,7 @@ final class BiographyTest extends TestCase
         $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
         $this->assertSame(
-            ['new' => $this->newBiography, 'old' => null],
+            ['old' => null, 'new' => $this->newBiography],
             $log->properties->all(),
         );
     }
@@ -151,7 +151,7 @@ final class BiographyTest extends TestCase
         $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
         $this->assertSame(
-            ['new' => $this->newBiography, 'old' => $this->oldBiography],
+            ['old' => $this->oldBiography, 'new' => $this->newBiography],
             $log->properties->all(),
         );
     }
@@ -180,7 +180,7 @@ final class BiographyTest extends TestCase
         $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
         $this->assertSame(
-            ['new' => null, 'old' => $this->oldBiography],
+            ['old' => $this->oldBiography, 'new' => null],
             $log->properties->all(),
         );
     }

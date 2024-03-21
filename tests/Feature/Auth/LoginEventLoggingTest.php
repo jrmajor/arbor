@@ -32,9 +32,9 @@ final class LoginEventLoggingTest extends TestCase
         $this->assertNull($log->subject);
 
         $this->assertSame([
-            'device' => 'desktop',
-            'browser' => 'Chrome',
             'platform' => 'OS X',
+            'browser' => 'Chrome',
+            'device' => 'desktop',
         ], $log->properties->all());
     }
 }

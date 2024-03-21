@@ -10,20 +10,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: arbor_tests
-        ports:
-          - 3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -52,12 +38,10 @@ jobs:
         run: |
           cp .env.example .env
           php artisan key:generate
+          touch database/testing.sqlite
 
       - name: Execute tests
         run: vendor/bin/phpunit
-        env:
-          DB_PORT: ${{ job.services.mysql.ports[3306] }}
-          DB_PASSWORD: ''
   
   types:
     name: Types

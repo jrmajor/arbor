@@ -7,13 +7,6 @@ For frontend it uses Tailwind CSS and Alpine.js.
 
 ## Installation
 
-### Requirements
-
-- PHP 8.2
-- MySQL 8
-
-### Installation
-
 Clone this repository and install it like you normally install Laravel application.
 
 - Install dependencies (`composer install && yarn install`)
@@ -24,7 +17,7 @@ Clone this repository and install it like you normally install Laravel applicati
 
 ## Testing
 
-This application uses PHPUnit for testing and PHPStan for static analysis. MySQL 8 is required to run tests. You may set the testing database name in `phpunit.xml` (defaults to `arbor_tests`).
+This application uses PHPUnit for testing and PHPStan for static analysis.
 
 ```sh
 vendor/bin/phpunit --testdox  # Tests

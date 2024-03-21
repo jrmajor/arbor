@@ -79,8 +79,8 @@ final class ChangeVisibilityTest extends TestCase
         $this->assertSame((string) $this->person->fresh()->updated_at, (string) $log->created_at);
 
         $this->assertSame([
-            'old' => ['visibility' => false],
             'attributes' => ['visibility' => true],
+            'old' => ['visibility' => false],
         ], $log->properties->all());
     }
 }
