@@ -27,7 +27,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('people.index');
+        return redirect()->intended(route('people.index'));
     }
 
     public function destroy(Request $request): RedirectResponse
