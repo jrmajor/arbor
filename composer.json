@@ -20,7 +20,7 @@
         "laravel/ui": "^4.5",
         "league/flysystem-aws-s3-v3": "^3.25",
         "livewire/livewire": "^3.4",
-        "nesbot/carbon": "^2.72",
+        "nesbot/carbon": "^3.2",
         "spatie/laravel-activitylog": "dev-fix-tapping#9d38653",
         "spatie/laravel-backup": "^8.6",
         "spatie/laravel-flash": "^1.10",
