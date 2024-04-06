@@ -25,7 +25,7 @@ final class Age
             return null;
         }
 
-        return $this->person->birth_date_from
+        return (int) $this->person->birth_date_from
             ->diffInYears(is_array($time) ? $time[1] : $time);
     }
 
@@ -40,8 +40,8 @@ final class Age
 
         [$toFrom, $toTo] = is_array($time) ? $time : [$time, $time];
 
-        $either = $this->person->birth_date_to->diffInYears($toFrom);
-        $or = $this->person->birth_date_from->diffInYears($toTo);
+        $either = (int) $this->person->birth_date_to->diffInYears($toFrom);
+        $or = (int) $this->person->birth_date_from->diffInYears($toTo);
 
         return $either === $or ? (string) $either : "{$either}-{$or}";
     }
