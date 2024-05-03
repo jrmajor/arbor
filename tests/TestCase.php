@@ -2,9 +2,7 @@
 
 namespace Tests;
 
-use App\Application;
 use App\Models\User;
-use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
@@ -31,15 +29,6 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         Http::preventStrayRequests();
-    }
-
-    public function createApplication(): Application
-    {
-        $app = require __DIR__ . '/../bootstrap/app.php';
-
-        $app->make(Kernel::class)->bootstrap();
-
-        return $app;
     }
 
     public function withPermissions(int $permissions): self
