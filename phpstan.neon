@@ -9,6 +9,8 @@ parameters:
     excludePaths:
         - app/Providers/MacrosServiceProvider.php
         - app/Services/Pytlewski/PytlewskiFactory.php
+    stubFiles:
+        - phpstan.stub
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: true
     checkPhpDocMissingReturn: true

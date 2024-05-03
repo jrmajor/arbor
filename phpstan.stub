@@ -1,0 +1,12 @@
+<?php
+
+namespace {
+    /**
+     * @param string $path
+     *
+     * @return non-empty-string
+     */
+    function base_path($path = '')
+    {
+    }
+}
