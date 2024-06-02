@@ -11,9 +11,9 @@ parameters:
         - app/Services/Pytlewski/PytlewskiFactory.php
     stubFiles:
         - phpstan.stub
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: true
+    checkModelProperties: true
     checkPhpDocMissingReturn: true
+    checkModelAppends: true
     ignoreErrors:
         - '#^Method .* has parameter .* with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types: .*$#'
         - '#^Parameter \#1 \$action of method Tests\\TestCase::assertActionUsesFormRequest\(\) expects .*, array{.*} given\.$#'
