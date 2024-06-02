@@ -15,9 +15,7 @@ parameters:
     checkGenericClassInNonGenericObjectType: true
     checkPhpDocMissingReturn: true
     ignoreErrors:
-        - '#^Anonymous function should return .*Eloquent\\Builder<.*Model> but returns .*Eloquent\\Builder<App\\Models\\.*>\.$#'
         - '#^Method .* has parameter .* with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types: .*$#'
-        - '#^Parameter \#1 .*Eloquent\\Builder<.*>::where\(\) expects .*, Closure.*: .*Eloquent\\Builder(<.*>)? given\.$#'
         - '#^Parameter \#1 \$action of method Tests\\TestCase::assertActionUsesFormRequest\(\) expects .*, array{.*} given\.$#'
         - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
         - '#^Unable to resolve the template type T in call to function Psl\\Regex\\first_match$#'
