@@ -138,7 +138,7 @@ class Person extends Model
      */
     public function pytlewski(): Attribute
     {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore return.type */
         return Attribute::get(fn () => app(PytlewskiFactory::class)->for($this));
     }
 

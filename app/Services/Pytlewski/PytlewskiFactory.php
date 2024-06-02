@@ -303,7 +303,7 @@ final class PytlewskiFactory
     {
         $pattern = '/(?:<u><a href=".*id=([0-9]*)">)?([^<>(]+)(?:<\\/a><\\/u>)? ?(?:\\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\\))?/';
 
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore */
         return Fun\pipe(
             fn (string $src) => Str\split($src, '</center>')[1],
             fn (string $src) => Str\split($src, '<br>'),
@@ -328,7 +328,7 @@ final class PytlewskiFactory
     {
         $pattern = '/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/';
 
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore */
         return Fun\pipe(
             fn (string $src) => Str\split($src, '</center>')[1],
             fn (string $src) => Str\split($src, '; '),

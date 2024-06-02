@@ -62,7 +62,7 @@ class User extends Authenticatable
      */
     public function latestLogin(): MorphOne
     {
-        /** @phpstan-ignore-next-line  */
+        /** @phpstan-ignore method.notFound */
         return $this
             ->actions()
             ->one()

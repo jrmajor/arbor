@@ -8,7 +8,7 @@ use Psl\Str;
 
 final class Marriage
 {
-    /** @phpstan-ignore-next-line It's lazily initialized by __get. */
+    /** @phpstan-ignore property.uninitializedReadonly (it's lazily initialized by __get) */
     public readonly ?Person $person;
 
     public readonly ?string $url;
@@ -20,7 +20,7 @@ final class Marriage
         public readonly ?string $date,
         public readonly ?string $place,
     ) {
-        /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore property.uninitializedReadonly */
         unset($this->person);
 
         $this->url = $id !== null ? PytlewskiFactory::url($id) : null;
