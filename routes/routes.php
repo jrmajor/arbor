@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Route;
 Route::permanentRedirect('/', 'people')
     ->name('welcome');
 
-Route::redirect('search', 'people');
-
 Route::post('locale', LocaleController::class)
     ->name('locale.store');
 
