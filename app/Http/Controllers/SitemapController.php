@@ -13,7 +13,6 @@ class SitemapController extends Controller
     public function __invoke(Request $request): Response
     {
         $sitemap = Sitemap::create()
-            ->add(Url::create('/')->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY))
             ->add(Url::create('/people')->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY));
 
         Person::lazy(100)

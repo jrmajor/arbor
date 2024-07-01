@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Console;
+namespace Tests\Feature;
 
 use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -23,12 +23,11 @@ final class GenerateSitemapTest extends TestCase
             ->assertHeader('Content-Type', 'text/xml; charset=UTF-8');
 
         foreach ([
-            '<loc>http://arbor.test</loc>' => true,
-            '<loc>http://arbor.test/people</loc>' => true,
-            "<loc>http://arbor.test/people/{$people[0]->id}</loc>" => false,
-            "<loc>http://arbor.test/people/{$people[1]->id}</loc>" => false,
-            "<loc>http://arbor.test/people/{$people[2]->id}</loc>" => true,
-            "<loc>http://arbor.test/people/{$people[3]->id}</loc>" => true,
+            '<loc>' . url('http://arbor.test/people') . '</loc>' => true,
+            '<loc>' . url("http://arbor.test/people/{$people[0]->id}") . '</loc>' => false,
+            '<loc>' . url("http://arbor.test/people/{$people[1]->id}") . '</loc>' => false,
+            '<loc>' . url("http://arbor.test/people/{$people[2]->id}") . '</loc>' => true,
+            '<loc>' . url("http://arbor.test/people/{$people[3]->id}") . '</loc>' => true,
         ] as $part => $present) {
             if ($present) {
                 $response->assertSee($part, false);
