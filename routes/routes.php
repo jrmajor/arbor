@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\SitemapController;
 use App\Livewire\Dashboard\ActivityLog;
 use App\Livewire\Dashboard\Users;
 use App\Livewire\Settings;
@@ -32,6 +33,9 @@ require __DIR__ . '/auth.php';
 require __DIR__ . '/people.php';
 
 require __DIR__ . '/marriages.php';
+
+Route::get('sitemap.xml', SitemapController::class)
+    ->name('sitemap');
 
 if (app()->isLocal()) {
     require __DIR__ . '/dev.php';

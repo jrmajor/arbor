@@ -4,21 +4,13 @@ namespace Tests\Feature\Console;
 
 use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
-use Psl\File;
-use Psl\Filesystem;
 use Tests\TestCase;
 
 final class GenerateSitemapTest extends TestCase
 {
-    private const SitemapPath = __DIR__ . '/../../../public/sitemap.xml';
-
-    #[TestDox('it can generate sitemap')]
+    #[TestDox('it shows correct sitemap')]
     public function testSitemap(): void
     {
-        if (Filesystem\exists(self::SitemapPath)) {
-            Filesystem\delete_file(self::SitemapPath);
-        }
-
         $people = Person::factory()->createMany([
             ['name' => 'Hidden'],
             ['name' => 'Hidden'],
@@ -26,13 +18,9 @@ final class GenerateSitemapTest extends TestCase
             ['name' => 'Koxemiasz Kajnor', 'visibility' => true],
         ]);
 
-        $this->artisan('sitemap:generate')
-            ->expectsOutput('Sitemap has been generated successfully.')
-            ->assertExitCode(0);
-
-        $this->assertFileExists(self::SitemapPath);
-
-        $sitemap = File\read(self::SitemapPath);
+        $response = $this->get('sitemap.xml')
+            ->assertOk()
+            ->assertHeader('Content-Type', 'text/xml; charset=UTF-8');
 
         foreach ([
             '<loc>http://arbor.test</loc>' => true,
@@ -43,9 +31,9 @@ final class GenerateSitemapTest extends TestCase
             "<loc>http://arbor.test/people/{$people[3]->id}</loc>" => true,
         ] as $part => $present) {
             if ($present) {
-                $this->assertStringContainsString($part, $sitemap);
+                $response->assertSee($part, false);
             } else {
-                $this->assertStringNotContainsString($part, $sitemap);
+                $response->assertDontSee($part, false);
             }
         }
     }

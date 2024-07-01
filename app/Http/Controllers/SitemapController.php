@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Http\Controllers;
 
 use App\Models\Person;
-use Illuminate\Console\Command;
+use Illuminate\Http\Request;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
+use Symfony\Component\HttpFoundation\Response;
 
-class GenerateSitemap extends Command
+class SitemapController extends Controller
 {
-    protected $signature = 'sitemap:generate';
-
-    protected $description = 'Generate sitemap.';
-
-    public function handle(): void
+    public function __invoke(Request $request): Response
     {
         $sitemap = Sitemap::create()
             ->add(Url::create('/')->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY))
@@ -24,11 +21,9 @@ class GenerateSitemap extends Command
             ->each(fn (Person $person) => $sitemap->add(
                 Url::create("/people/{$person->id}")
                     ->setLastModificationDate($person->updated_at)
-                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY),
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY),
             ));
 
-        $sitemap->writeToFile(public_path('sitemap.xml'));
-
-        $this->info('Sitemap has been generated successfully.');
+        return $sitemap->toResponse($request);
     }
 }
