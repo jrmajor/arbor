@@ -14,9 +14,9 @@
     "devDependencies": {
         "@types/alpinejs": "^3.13",
         "autoprefixer": "^10.4",
-        "laravel-vite-plugin": "^1.0.4",
+        "laravel-vite-plugin": "^1.0.5",
         "postcss": "^8.4",
-        "postcss-nested": "^6.0",
+        "postcss-nested": "^6.2",
         "typescript": "^5.5",
         "vite": "^5.3"
     }
