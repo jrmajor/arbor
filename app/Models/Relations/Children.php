@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * @extends Relation<Person>
+ * @extends Relation<Person, Person, Collection<int, Person>>
  */
 class Children extends Relation
 {

@@ -16,6 +16,7 @@ use App\Services\Sources\Source;
 use App\Services\Sources\SourcesCast;
 use App\Services\Wielcy\Wielcy;
 use Carbon\Carbon;
+use Database\Factories\PersonFactory;
 use Exception;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -61,7 +62,10 @@ use stdClass;
 class Person extends Model
 {
     use HasDateRanges;
+
+    /** @use HasFactory<PersonFactory> */
     use HasFactory;
+
     use LogsActivity;
     use SoftDeletes;
     use TapsActivity;
@@ -105,7 +109,7 @@ class Person extends Model
     }
 
     /**
-     * @return BelongsTo<self, self>
+     * @return BelongsTo<self, $this>
      */
     public function mother(): BelongsTo
     {
@@ -113,7 +117,7 @@ class Person extends Model
     }
 
     /**
-     * @return BelongsTo<self, self>
+     * @return BelongsTo<self, $this>
      */
     public function father(): BelongsTo
     {
@@ -138,7 +142,6 @@ class Person extends Model
      */
     public function pytlewski(): Attribute
     {
-        /** @phpstan-ignore return.type */
         return Attribute::get(fn () => app(PytlewskiFactory::class)->for($this));
     }
 

@@ -26,7 +26,7 @@ parameters:
 
 includes:
     - vendor/phpstan/phpstan/conf/bleedingEdge.neon
-    - vendor/larastan/larastan/extension.neon
+    - vendor/calebdw/larastan/extension.neon
     - vendor/php-standard-library/phpstan-extension/extension.neon
     - vendor/phpstan/phpstan-mockery/extension.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon

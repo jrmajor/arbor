@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +16,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class User extends Authenticatable
 {
     use CausesActivity;
+
+    /** @use HasFactory<UserFactory> */
     use HasFactory;
+
     use LogsActivity;
     use Notifiable;
     use SoftDeletes;
@@ -58,7 +62,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return MorphOne<Activity>
+     * @return MorphOne<Activity, self>
      */
     public function latestLogin(): MorphOne
     {

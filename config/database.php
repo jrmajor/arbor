@@ -2,7 +2,9 @@
 
 return [
 
-    'default' => env('DB_CONNECTION', 'default'),
+    'default' => isset($GLOBALS['__phpstanAutoloadFunctions'])
+        ? '_phpstan'
+        : env('DB_CONNECTION', 'default'),
 
     'connections' => [
 

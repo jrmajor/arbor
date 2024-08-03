@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * @extends Relation<Person>
+ * @extends Relation<Marriage, Person, Collection<int, Marriage>>
  */
 class Marriages extends Relation
 {

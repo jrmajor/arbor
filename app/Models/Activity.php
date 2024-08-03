@@ -23,7 +23,7 @@ class Activity extends Model implements ActivityContract
     ];
 
     /**
-     * @return MorphTo<Model, self>
+     * @return MorphTo<Model, $this>
      */
     public function subject(): MorphTo
     {
@@ -31,7 +31,7 @@ class Activity extends Model implements ActivityContract
     }
 
     /**
-     * @return MorphTo<Model, self>
+     * @return MorphTo<Model, $this>
      */
     public function causer(): MorphTo
     {

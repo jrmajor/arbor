@@ -6,6 +6,7 @@ use App\Enums\MarriageEventType;
 use App\Enums\MarriageRite;
 use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
+use Database\Factories\MarriageFactory;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,7 +26,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Marriage extends Model
 {
     use HasDateRanges;
+
+    /** @use HasFactory<MarriageFactory> */
     use HasFactory;
+
     use LogsActivity;
     use SoftDeletes;
     use TapsActivity;
@@ -52,7 +56,7 @@ class Marriage extends Model
     }
 
     /**
-     * @return BelongsTo<Person, self>
+     * @return BelongsTo<Person, $this>
      */
     public function woman(): BelongsTo
     {
@@ -60,7 +64,7 @@ class Marriage extends Model
     }
 
     /**
-     * @return BelongsTo<Person, self>
+     * @return BelongsTo<Person, $this>
      */
     public function man(): BelongsTo
     {
