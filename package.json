@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "types": "tsc --strict --noEmit"
+        "check": "svelte-check --tsconfig ./tsconfig.json"
     },
     "dependencies": {
         "@inertiajs/svelte": "^1.2.0",
@@ -21,6 +21,7 @@
         "laravel-vite-plugin": "^1.0.5",
         "postcss": "^8.4",
         "postcss-nested": "^6.2",
+        "svelte-check": "^3.8.5",
         "typescript": "^5.5",
         "vite": "^5.3"
     }

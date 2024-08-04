@@ -16,8 +16,12 @@
     "checkJs": true,
   },
   "include": [
-    "resources/js/classic/*.ts",
+    "resources/js/**/*.ts",
+    "resources/js/**/*.svelte",
     "*.config.ts",
     "*.config.js",
+  ],
+  "exclude": [
+    "resources/js/classicApp.ts",
   ],
 }
