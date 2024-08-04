@@ -4,7 +4,6 @@ namespace Tests\Unit\Person;
 
 use App\Models\Person;
 use PHPUnit\Framework\Attributes\TestDox;
-use stdClass;
 use Tests\TestCase;
 
 final class StaticMethodsTest extends TestCase
@@ -25,7 +24,7 @@ final class StaticMethodsTest extends TestCase
                 ['letter' => 'Š', 'total' => 1],
                 ['letter' => 'Ż', 'total' => 1],
             ],
-            Person::letters('family')->map(fn (stdClass $std) => (array) $std)->all(),
+            Person::letters('family')->map(fn ($l) => (array) $l)->all(),
         );
 
         $this->assertSame(
@@ -34,7 +33,7 @@ final class StaticMethodsTest extends TestCase
                 ['letter' => 'M', 'total' => 1],
                 ['letter' => 'Š', 'total' => 2],
             ],
-            Person::letters('last')->map(fn (stdClass $std) => (array) $std)->all(),
+            Person::letters('last')->map(fn ($l) => (array) $l)->all(),
         );
     }
 }

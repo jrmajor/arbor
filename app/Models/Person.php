@@ -31,7 +31,6 @@ use Psl\Str;
 use Psl\Vec;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
-use stdClass;
 
 /**
  * @property ?Carbon $birth_date_from
@@ -194,7 +193,7 @@ class Person extends Model
     /**
      * @param 'family'|'last' $type
      *
-     * @return Collection<int, stdClass>
+     * @return Collection<int, object{letter: string, total: int}>
      */
     public static function letters(string $type): Collection
     {
