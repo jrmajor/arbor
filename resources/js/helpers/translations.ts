@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { FluentBundle, FluentResource, type FluentVariable } from '@fluent/bundle';
 import type { Pattern } from '@fluent/bundle/esm/ast';
-import { createContext } from './context';
 
 import enMisc from '../../../lang/en/misc.ftl?raw';
 import plMisc from '../../../lang/pl/misc.ftl?raw';
@@ -18,10 +17,8 @@ import deMarriages from '../../../lang/de/marriages.ftl?raw';
 
 export type Language = 'en' | 'pl' | 'de';
 
-export const languageContext = createContext<Language>();
-
 export function t(key: string, args: Record<string, FluentVariable> = {}) {
-	const language = languageContext.get();
+	const language = window.userLanguage;
 	const [bundleName, messageName, attrName] = key.split('.');
 	const bundle = bundles[language][bundleName];
 	if (!bundle) {
