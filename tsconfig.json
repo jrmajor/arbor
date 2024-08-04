@@ -1,13 +1,24 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ES2020",
-    "moduleResolution": "node",
-    "baseUrl": "./",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
     "strict": true,
+    "noEmit": true,
+    "baseUrl": ".",
     "paths": {
-      "ziggy-js": ["vendor/tightenco/ziggy"]
-    }
+        "@/*": ["resources/js/*"],
+        "ziggy-js": ["vendor/tightenco/ziggy"]
+    },
+    "types": ["node", "vite/client"],
+    "allowJs": true,
+    "checkJs": true,
   },
-  "include": ["resources/js/**/*"]
+  "include": [
+    "resources/js/**/*.ts",
+    "*.config.ts",
+    "*.config.js",
+  ],
+  "exclude": ["resources/js/app.ts"],
 }
