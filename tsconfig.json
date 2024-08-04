@@ -20,5 +20,5 @@
     "*.config.ts",
     "*.config.js",
   ],
-  "exclude": ["resources/js/app.ts"],
+  "exclude": ["resources/js/classicApp.ts"],
 }

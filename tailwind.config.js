@@ -4,8 +4,8 @@ import forms from '@tailwindcss/forms';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './resources/views/**/*.blade.php',
     './app/View/Components/**/*.php',
+    './resources/views/**/*.blade.php',
   ],
   theme: {
     colors: {

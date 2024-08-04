@@ -20,6 +20,6 @@ class Users extends Component
 
         return view('dashboard.users', [
             'users' => $users,
-        ])->extends('layouts.app');
+        ])->extends('layouts.app-classic');
     }
 }

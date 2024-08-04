@@ -5,21 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @hasSection('title')
-      <title>@yield('title') - {{ config('app.name') }}</title>
-    @else
-      <title>{{ config('app.name') }}</title>
-    @endif
+    @yield('head')
 
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     @routes
 
-    @unless (app()->runningUnitTests())
-      @vite(['resources/css/style.css', 'resources/js/app.ts'])
-    @endif
-
     @livewireScriptConfig
+    @livewireStyles
 
     @if (config('services.fathom.id'))
       <script src="https://cdn.usefathom.com/script.js" data-site="{{ config('services.fathom.id') }}" defer></script>

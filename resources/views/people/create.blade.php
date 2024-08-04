@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-classic')
 
 @section('title', __('people.titles.new_person'))
 

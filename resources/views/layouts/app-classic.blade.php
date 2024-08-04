@@ -1,5 +1,17 @@
 @extends('layouts.base')
 
+@section('head')
+    @hasSection('title')
+      <title>@yield('title') - {{ config('app.name') }}</title>
+    @else
+      <title>{{ config('app.name') }}</title>
+    @endif
+
+    @unless (app()->runningUnitTests())
+      @vite(['resources/css/style.css', 'resources/js/classicApp.ts'])
+    @endif
+@endsection
+
 @section('body')
 
   <x-menu/>

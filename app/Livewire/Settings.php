@@ -79,6 +79,6 @@ class Settings extends Component
     {
         return view('livewire.settings', [
             'user' => Auth::user(),
-        ])->extends('layouts.app');
+        ])->extends('layouts.app-classic');
     }
 }

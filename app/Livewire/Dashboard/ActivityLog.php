@@ -25,7 +25,7 @@ class ActivityLog extends Component
 
         return view('dashboard.activity-log', [
             'activities' => $activities,
-        ])->extends('layouts.app');
+        ])->extends('layouts.app-classic');
     }
 
     /**

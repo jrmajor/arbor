@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-classic')
 
 @section('title', __('marriages.titles.new_marriage'))
 
