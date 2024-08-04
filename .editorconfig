@@ -11,5 +11,15 @@ trim_trailing_whitespace = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{blade.php,html,js,ts,css,yml,yaml}]
+[*.{blade.php,html,css,yml,yaml}]
 indent_size = 2
+
+[*.{js,ts,svelte}]
+indent_size = 2
+indent_style = tab
+
+[resources/js/classic/*.ts]
+indent_style = space
+
+[resources/js/classicApp.ts]
+indent_style = space
