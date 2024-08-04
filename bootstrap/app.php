@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->appendToGroup('web', SetLocale::class);
 
         $middleware->redirectUsersTo('/people');
+
+        $middleware->web(append: [
+            App\Http\Middleware\HandleInertiaRequests::class,
+            Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         Sentry::handles($exceptions);

@@ -16,9 +16,8 @@
     "checkJs": true,
   },
   "include": [
-    "resources/js/**/*.ts",
+    "resources/js/classic/*.ts",
     "*.config.ts",
     "*.config.js",
   ],
-  "exclude": ["resources/js/classicApp.ts"],
 }
