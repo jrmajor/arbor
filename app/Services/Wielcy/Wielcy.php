@@ -10,6 +10,12 @@ use InvalidArgumentException;
 use Psl\Iter;
 use Psl\Regex;
 
+/**
+ * @property-read string $id
+ * @property-read string $url
+ * @property-read ?string $name
+ * @property-read 'xy'|'xx'|null $sex
+ */
 final class Wielcy
 {
     private ?string $source;

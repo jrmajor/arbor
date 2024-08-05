@@ -6,6 +6,8 @@ use App\Models;
 use App\Models\Observers\PersonObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Flash\Flash;
@@ -14,6 +16,9 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        JsonResource::withoutWrapping();
+        ResourceCollection::withoutWrapping();
+
         $this->registerModelsConfig();
         $this->registerRouteBindings();
 

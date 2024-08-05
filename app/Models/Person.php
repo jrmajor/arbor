@@ -123,17 +123,22 @@ class Person extends Model
         return $this->belongsTo(self::class);
     }
 
-    public function getWielcyAttribute(): ?Wielcy
+    /**
+     * @return Attribute<?Wielcy, never>
+     */
+    public function wielcy(): Attribute
     {
-        if (! $this->id_wielcy) {
-            return null;
-        }
+        return Attribute::get(function (): ?Wielcy {
+            if (! $this->id_wielcy) {
+                return null;
+            }
 
-        if (! $this->wielcy) {
-            $this->wielcy = new Wielcy($this->id_wielcy);
-        }
+            if (! $this->wielcy) {
+                $this->wielcy = new Wielcy($this->id_wielcy);
+            }
 
-        return $this->wielcy;
+            return $this->wielcy;
+        });
     }
 
     /**

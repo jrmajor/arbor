@@ -154,11 +154,11 @@ export default [
 			// todo: https://github.com/sveltejs/eslint-plugin-svelte/issues/837
 			// 'svelte/html-self-closing': ['error', { void: 'never', normal: 'never' }],
 			'svelte/max-attributes-per-line': ['error', { singleline: 8 }],
-			'svelte/mustache-spacing': 'error',
+			'svelte/mustache-spacing': 'off', // false positives
 			'svelte/no-spaces-around-equal-signs-in-attribute': 'error',
 			'svelte/prefer-class-directive': 'error',
 			'svelte/prefer-style-directive': 'error',
-			'svelte/shorthand-attribute': 'error',
+			'svelte/shorthand-attribute': 'off', // false positives
 			'svelte/shorthand-directive': 'error',
 			'svelte/sort-attributes': ['error', { order: [
 				'this',

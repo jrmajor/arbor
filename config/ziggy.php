@@ -8,6 +8,6 @@ return [
 
     'skip-route-function' => true,
 
-    'only' => ['people.search'],
+    'only' => ['people.*'],
 
 ];
