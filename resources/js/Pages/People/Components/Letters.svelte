@@ -20,12 +20,12 @@
 	<ul class="columns-3 xs:columns-4 sm:columns-5 md:columns-6 lg:columns-8">
 		{#each letters.family as letter}
 			<li>
-				<a href={route('people.letter', { type: 'f', letter: letter.letter })} class="a">
-					{#if activeType === 'f' && activeLetter === letter.letter}
-						<strong>{letter.letter} <small>[{letter.total}]</small></strong>
-					{:else}
-						{letter.letter} <small>[{letter.total}]</small>
-					{/if}
+				<a
+					href={route('people.letter', { type: 'f', letter: letter.letter })}
+					class="a"
+					class:font-bold={activeType === 'f' && activeLetter === letter.letter}
+				>
+					{letter.letter} <small>[{letter.total}]</small>
 				</a>
 			</li>
 		{/each}
@@ -38,12 +38,12 @@
 	<ul class="columns-3 xs:columns-4 sm:columns-5 md:columns-6 lg:columns-8">
 		{#each letters.last as letter}
 			<li>
-				<a href={route('people.letter', { type: 'l', letter: letter.letter })} class="a">
-					{#if activeType === 'l' && activeLetter === letter.letter}
-						<strong>{letter.letter} <small>[{letter.total}]</small></strong>
-					{:else}
-						{letter.letter} <small>[{letter.total}]</small>
-					{/if}
+				<a
+					href={route('people.letter', { type: 'l', letter: letter.letter })}
+					class="a"
+					class:font-bold={activeType === 'l' && activeLetter === letter.letter}
+				>
+					{letter.letter} <small>[{letter.total}]</small>
 				</a>
 			</li>
 		{/each}
