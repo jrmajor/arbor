@@ -5,7 +5,7 @@
 	import Name from '@/Components/Name.svelte';
 	import Letters from './Components/Letters.svelte';
 
-	let { people, letters, activeType, activeLetter, flash }: {
+	let { people, letters, activeType, activeLetter, ...rest }: {
 		people: Person[];
 		letters: LettersType;
 		activeType: 'f' | 'l' | null;
@@ -17,7 +17,7 @@
 	<title>{t('people.titles.index')} - Arbor</title>
 </svelte:head>
 
-<Layout {flash}>
+<Layout {...rest}>
 	<main class="p-6 bg-white rounded-lg shadow">
 		<Letters {letters} {activeType} {activeLetter}/>
 

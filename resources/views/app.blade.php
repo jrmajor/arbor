@@ -19,9 +19,7 @@
 @endsection
 
 @section('body')
-
   <x-menu/>
 
   @inertia
-
 @endsection

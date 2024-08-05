@@ -4,7 +4,7 @@
 	import Layout from '@/Layouts/Layout.svelte';
 	import Letters from './Components/Letters.svelte';
 
-	let { total, letters, flash }: {
+	let { total, letters, ...rest }: {
 		total: number;
 		letters: LettersType;
 	} & SharedProps = $props();
@@ -14,7 +14,7 @@
 	<title>{t('people.titles.index')} - Arbor</title>
 </svelte:head>
 
-<Layout {flash}>
+<Layout {...rest}>
 	<main class="p-6 bg-white rounded-lg shadow">
 		<Letters {letters}/>
 
