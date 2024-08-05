@@ -14,7 +14,23 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
+            'flash' => $this->getFlash(),
             'user' => $this->getUser($request),
+        ];
+    }
+
+    /**
+     * @return ?array<string, string>
+     */
+    public function getFlash(): ?array
+    {
+        if (! $message = flash()->getMessage()) {
+            return null;
+        }
+
+        return [
+            'level' => $message->level,
+            'message' => $message->message,
         ];
     }
 

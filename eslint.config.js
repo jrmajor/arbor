@@ -19,6 +19,7 @@ export default [
 				...globals.node,
 				SharedProps: 'readonly',
 				SharedUser: 'readonly',
+				FlashData: 'readonly',
 			},
 		},
 		rules: {
