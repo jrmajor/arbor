@@ -13,7 +13,13 @@ final class ViewPeopleIndexListingTest extends TestCase
     public function testEmpty(): void
     {
         $this->get('/people')->assertOk()->assertInertia(function (Assert $page) {
-            $page->component('People/Index');
+            $page->assertProps([
+                'total' => 0,
+                'letters' => [
+                    'family' => [],
+                    'last' => [],
+                ],
+            ])->component('People/Index');
         });
     }
 
@@ -31,7 +37,18 @@ final class ViewPeopleIndexListingTest extends TestCase
         ]);
 
         $this->get('/people')->assertOk()->assertInertia(function (Assert $page) {
-            $page->component('People/Index');
+            $page->assertProps([
+                'total' => 2,
+                'letters' => [
+                    'family' => [
+                        ['letter' => 'Z', 'count' => 2],
+                    ],
+                    'last' => [
+                        ['letter' => 'M', 'count' => 1],
+                        ['letter' => 'Z', 'count' => 1],
+                    ],
+                ],
+            ])->component('People/Index');
         });
     }
 }

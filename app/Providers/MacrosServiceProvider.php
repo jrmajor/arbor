@@ -13,7 +13,7 @@ class MacrosServiceProvider extends ServiceProvider
         $this->registerCarbonMacros();
     }
 
-    public function registerCarbonMacros(): void
+    private function registerCarbonMacros(): void
     {
         Carbon::macro('formatPeriodTo', static function (Carbon $to): string {
             /** @var CarbonImmutable $from */
