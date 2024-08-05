@@ -1,14 +1,20 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { type RouteList } from 'ziggy-js';
+	import Menu from './Menu/Menu.svelte';
 	import Flash from './Flash.svelte';
 
-	let { flash, children }: {
+	let { flash, activeRoute, user, children }: {
 		flash: FlashData | null;
+		activeRoute: keyof RouteList;
+		user: SharedUser | null;
 		children: Snippet;
 	} = $props();
 
 	const currentYear = new Date().getFullYear();
 </script>
+
+<Menu {activeRoute} {user}/>
 
 <div class="container mx-auto my-1 p-2 pt-5">
 	{#if flash}

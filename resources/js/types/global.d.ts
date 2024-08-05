@@ -5,8 +5,9 @@ import type { Language } from '@/helpers/translations';
 export {};
 
 declare global {
-	var userLanguage: Language;
 	var arborProps: {
+		appName: string;
 		currentLocale: Language;
+		otherAvailableLocales: Language[];
 	};
 }

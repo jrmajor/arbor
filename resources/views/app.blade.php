@@ -5,7 +5,9 @@
 
     <script>
       var arborProps = {
+        appName: {{ new Js(config('app.name')) }},
         currentLocale: {{ new Js(app()->getLocale()) }},
+        otherAvailableLocales: {{ new Js(array_values(array_diff(config('app.available_locales'), [app()->getLocale()]))) }},
       };
     </script>
 
@@ -19,7 +21,5 @@
 @endsection
 
 @section('body')
-  <x-menu/>
-
   @inertia
 @endsection

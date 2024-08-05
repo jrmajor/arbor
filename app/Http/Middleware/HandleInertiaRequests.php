@@ -15,6 +15,7 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'flash' => $this->getFlash(),
+            'activeRoute' => $request->route()->getName(),
             'user' => $this->getUser($request),
         ];
     }
@@ -45,6 +46,8 @@ class HandleInertiaRequests extends Middleware
 
         return [
             'username' => $user->username,
+            'canWrite' => $user->canWrite(),
+            'isSuperAdmin' => $user->isSuperAdmin(),
         ];
     }
 }

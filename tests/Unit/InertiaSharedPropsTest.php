@@ -20,7 +20,7 @@ final class InertiaSharedPropsTest extends TestCase
         Route::middleware('web')->get(
             'inertia-shared-props-test',
             fn () => Inertia::render('InertiaSharedPropsTest', []),
-        );
+        )->name('test.inertiaProps');
     }
 
     #[TestDox('it shares errors and guest from request')]
@@ -33,6 +33,7 @@ final class InertiaSharedPropsTest extends TestCase
                 $this->assertSame([
                     'errors' => [],
                     'flash' => null,
+                    'activeRoute' => 'test.inertiaProps',
                     'user' => null,
                 ], $page->toArray()['props']);
             });
@@ -54,8 +55,11 @@ final class InertiaSharedPropsTest extends TestCase
                         'level' => 'success',
                         'message' => 'Changes have been saved.',
                     ],
+                    'activeRoute' => 'test.inertiaProps',
                     'user' => [
                         'username' => $user->username,
+                        'canWrite' => false,
+                        'isSuperAdmin' => false,
                     ],
                 ], $page->toArray()['props']);
             });

@@ -8,6 +8,15 @@ return [
 
     'skip-route-function' => true,
 
-    'only' => ['people.*'],
+    'only' => [
+        'login',
+        'logout',
+        'password.*',
+        'people.*',
+        'marriages.*',
+        'dashboard.*',
+        'settings',
+        'locale.*',
+    ],
 
 ];

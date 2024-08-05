@@ -81,7 +81,7 @@ class MacrosServiceProvider extends ServiceProvider
 
         AssertableJson::macro('assertProps', function (array $expected): AssertableJson {
             $props = $this->toArray()['props'];
-            $props = Arr::except($props, ['errors', 'flash', 'user']);
+            $props = Arr::except($props, ['errors', 'flash', 'activeRoute', 'user']);
             Assert::assertSame($expected, $props);
 
             return $this;
