@@ -1,3 +1,13 @@
+export type Letters = {
+	family: Letter[];
+	last: Letter[];
+};
+
+type Letter = {
+	letter: string;
+	total: number;
+};
+
 type PersonCommon = {
 	id: number;
 	visible: boolean;
