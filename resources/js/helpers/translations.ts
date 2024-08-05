@@ -18,7 +18,7 @@ import deMarriages from '../../../lang/de/marriages.ftl?raw';
 export type Language = 'en' | 'pl' | 'de';
 
 export function t(key: string, args: Record<string, FluentVariable> = {}) {
-	const language = window.userLanguage;
+	const language = globalThis.arborProps.currentLocale;
 	const [bundleName, messageName, attrName] = key.split('.');
 	const bundle = bundles[language][bundleName];
 	if (!bundle) {

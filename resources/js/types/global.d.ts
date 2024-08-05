@@ -6,4 +6,7 @@ export {};
 
 declare global {
 	var userLanguage: Language;
+	var arborProps: {
+		currentLocale: Language;
+	};
 }
