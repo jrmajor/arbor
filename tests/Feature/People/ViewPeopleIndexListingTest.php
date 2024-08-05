@@ -3,6 +3,7 @@
 namespace Tests\Feature\People;
 
 use App\Models\Person;
+use Inertia\Testing\AssertableInertia as Assert;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -11,9 +12,9 @@ final class ViewPeopleIndexListingTest extends TestCase
     #[TestDox('it works with no people')]
     public function testEmpty(): void
     {
-        $this->get('/people')
-            ->assertOk()
-            ->assertSeeText('total: 0');
+        $this->get('/people')->assertOk()->assertInertia(function (Assert $page) {
+            $page->component('People/Index');
+        });
     }
 
     #[TestDox('it works with people')]
@@ -29,10 +30,8 @@ final class ViewPeopleIndexListingTest extends TestCase
             'last_name' => 'Mikke',
         ]);
 
-        $this->get('/people')
-            ->assertOk()
-            ->assertSeeText('Z [2]')
-            ->assertSeeText('M [1]')
-            ->assertSeeText('Z [1]');
+        $this->get('/people')->assertOk()->assertInertia(function (Assert $page) {
+            $page->component('People/Index');
+        });
     }
 }

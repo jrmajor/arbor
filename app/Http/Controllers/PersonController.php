@@ -9,17 +9,25 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 use function App\flash;
 use function App\formatBiography;
 
 class PersonController extends Controller
 {
-    public function index(): View
+    public function index(): Response
     {
         $this->authorize('viewAny', Person::class);
 
-        return view('people.index');
+        return Inertia::render('People/Index', [
+            'total' => Person::count(),
+            'letters' => [
+                'family' => Person::letters('family'),
+                'last' => Person::letters('last'),
+            ],
+        ]);
     }
 
     /**
