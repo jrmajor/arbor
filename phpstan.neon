@@ -7,7 +7,6 @@ parameters:
         - routes
         - tests
     excludePaths:
-        - app/Providers/MacrosServiceProvider.php
         - app/Services/Pytlewski/PytlewskiFactory.php
     stubFiles:
         - phpstan.stub
@@ -15,7 +14,6 @@ parameters:
     checkPhpDocMissingReturn: true
     checkModelAppends: true
     ignoreErrors:
-        - '#^Call to an undefined method Inertia\\Testing\\AssertableInertia::assertProps\(\)\.$#'
         - '#^Method .* has parameter .* with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types: .*$#'
         - '#^Parameter \#1 \$action of method Tests\\TestCase::assertActionUsesFormRequest\(\) expects .*, array{.*} given\.$#'
         - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'

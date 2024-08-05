@@ -4,20 +4,34 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Testing\Fluent\AssertableJson;
+use Illuminate\Testing\TestResponse;
+use Inertia\Testing\AssertableInertia;
+use PHPUnit\Framework\Assert;
 
 class MacrosServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
         $this->registerCarbonMacros();
+
+        if (
+            $this->app->runningUnitTests()
+            || isset($GLOBALS['__phpstanAutoloadFunctions'])
+        ) {
+            $this->registerTestingMacros();
+        }
     }
 
     private function registerCarbonMacros(): void
     {
         Carbon::macro('formatPeriodTo', static function (Carbon $to): string {
-            /** @var CarbonImmutable $from */
+            /** @phpstan-ignore staticMethod.notFound */
             $from = self::this()->toImmutable();
+            assert($from instanceof CarbonImmutable);
+
             $to = $to->toImmutable();
 
             if ($from->equalTo($to)) {
@@ -41,6 +55,36 @@ class MacrosServiceProvider extends ServiceProvider
                 'from' => $from->toDateString(),
                 'to' => $to->toDateString(),
             ]);
+        });
+    }
+
+    private function registerTestingMacros(): void
+    {
+        TestResponse::macro('assertInertiaResponse', function (
+            int $status,
+            array $props,
+            string $component,
+        ): TestResponse {
+            return $this
+                ->assertStatus($status)
+                ->assertInertia(function (AssertableInertia $page) use ($component, $props) {
+                    $page->component($component)->assertProps($props);
+                });
+        });
+
+        TestResponse::macro('assertInertiaOk', function (
+            array $props,
+            string $component,
+        ): TestResponse {
+            return $this->assertInertiaResponse(200, $props, $component);
+        });
+
+        AssertableJson::macro('assertProps', function (array $expected): AssertableJson {
+            $props = $this->toArray()['props'];
+            $props = Arr::except($props, ['errors', 'flash', 'user']);
+            Assert::assertSame($expected, $props);
+
+            return $this;
         });
     }
 }

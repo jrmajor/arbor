@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Livewire\Component as LivewireComponent;
 use Livewire\Features\SupportTesting\Testable as TestableLivewire;
 use Livewire\Livewire;
@@ -29,14 +27,6 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        AssertableJson::macro('assertProps', function (array $expected): AssertableJson {
-            $props = $this->toArray()['props'];
-            $props = Arr::except($props, ['errors', 'flash', 'user']);
-            Assert::assertSame($expected, $props);
-
-            return $this;
-        });
 
         Http::preventStrayRequests();
     }
