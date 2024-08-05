@@ -198,7 +198,7 @@ class Person extends Model
     /**
      * @param 'family'|'last' $type
      *
-     * @return Collection<int, object{letter: string, total: int}>
+     * @return Collection<int, object{letter: string, count: int}>
      */
     public static function letters(string $type): Collection
     {
@@ -214,7 +214,7 @@ class Person extends Model
                     substr({$nameQuery}, 1, 1)
                     /* collate utf8mb4_0900_as_ci */
                     as letter,
-                    count(*) as total
+                    count(*) as count
                     SQL)
                 ->groupBy('letter')
                 ->orderBy('letter')

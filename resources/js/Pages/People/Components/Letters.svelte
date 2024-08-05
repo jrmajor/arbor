@@ -25,7 +25,7 @@
 					class="a"
 					class:font-bold={activeType === 'f' && activeLetter === letter.letter}
 				>
-					{letter.letter} <small>[{letter.total}]</small>
+					{letter.letter} <small>[{letter.count}]</small>
 				</a>
 			</li>
 		{/each}
@@ -43,7 +43,7 @@
 					class="a"
 					class:font-bold={activeType === 'l' && activeLetter === letter.letter}
 				>
-					{letter.letter} <small>[{letter.total}]</small>
+					{letter.letter} <small>[{letter.count}]</small>
 				</a>
 			</li>
 		{/each}

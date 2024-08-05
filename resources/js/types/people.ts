@@ -5,7 +5,7 @@ export type Letters = {
 
 type Letter = {
 	letter: string;
-	total: number;
+	count: number;
 };
 
 type PersonCommon = {

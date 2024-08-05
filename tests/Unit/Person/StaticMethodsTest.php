@@ -20,18 +20,18 @@ final class StaticMethodsTest extends TestCase
 
         $this->assertSame(
             [
-                ['letter' => 'M', 'total' => 2],
-                ['letter' => 'Š', 'total' => 1],
-                ['letter' => 'Ż', 'total' => 1],
+                ['letter' => 'M', 'count' => 2],
+                ['letter' => 'Š', 'count' => 1],
+                ['letter' => 'Ż', 'count' => 1],
             ],
             Person::letters('family')->map(fn ($l) => (array) $l)->all(),
         );
 
         $this->assertSame(
             [
-                ['letter' => 'H', 'total' => 1],
-                ['letter' => 'M', 'total' => 1],
-                ['letter' => 'Š', 'total' => 2],
+                ['letter' => 'H', 'count' => 1],
+                ['letter' => 'M', 'count' => 1],
+                ['letter' => 'Š', 'count' => 2],
             ],
             Person::letters('last')->map(fn ($l) => (array) $l)->all(),
         );

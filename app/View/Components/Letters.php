@@ -18,7 +18,7 @@ class Letters extends Component
     /**
      * @param 'family'|'last' $type
      *
-     * @return Collection<int, object{letter: string, total: int}>
+     * @return Collection<int, object{letter: string, count: int}>
      */
     public function letters(string $type): Collection
     {
