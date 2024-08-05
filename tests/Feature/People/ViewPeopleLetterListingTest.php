@@ -19,30 +19,76 @@ final class ViewPeopleLetterListingTest extends TestCase
     {
         $this->withPermissions(1);
 
-        Person::factory()->create([
-            'family_name' => 'Zbyrowski',
-            'last_name' => null,
+        $people = Person::factory()->createMany([
+            [
+                'family_name' => 'Zbyrowski',
+                'last_name' => null,
+            ],
+            [
+                'family_name' => 'Ziobro',
+                'last_name' => 'Mikke',
+            ],
         ]);
 
-        Person::factory()->create([
-            'family_name' => 'Ziobro',
-            'last_name' => 'Mikke',
-        ]);
+        $expectedLetters = [
+            'family' => [
+                ['letter' => 'Z', 'count' => 2],
+            ],
+            'last' => [
+                ['letter' => 'M', 'count' => 1],
+                ['letter' => 'Z', 'count' => 1],
+            ],
+        ];
 
-        $this->get('/people/f/Z')
-            ->assertOk()
-            ->assertSeeText('Ziobro')
-            ->assertSeeText('Mikke');
+        $expectedPeople = [
+            [
+                'id' => 1,
+                'visible' => true,
+                'canBeEdited' => false,
+                'name' => $people[0]->name,
+                'familyName' => 'Zbyrowski',
+                'lastName' => null,
+                'isDead' => $people[0]->dead,
+                'birthYear' => $people[0]->birth_year,
+                'deathYear' => $people[0]->death_year,
+                'pytlewskiUrl' => null,
+                'wielcyUrl' => null,
+            ],
+            [
+                'id' => 2,
+                'visible' => true,
+                'canBeEdited' => false,
+                'name' => $people[1]->name,
+                'familyName' => 'Ziobro',
+                'lastName' => 'Mikke',
+                'isDead' => $people[1]->dead,
+                'birthYear' => $people[1]->birth_year,
+                'deathYear' => $people[1]->death_year,
+                'pytlewskiUrl' => null,
+                'wielcyUrl' => null,
+            ],
+        ];
 
-        $this->get('/people/l/Z')
-            ->assertOk()
-            ->assertSeeText('Zbyrowski')
-            ->assertDontSeeText('Mikke');
+        $this->get('/people/f/Z')->assertInertiaOk([
+            'people' => $expectedPeople,
+            'letters' => $expectedLetters,
+            'activeType' => 'f',
+            'activeLetter' => 'Z',
+        ], 'People/Letter');
 
-        $this->get('/people/l/M')
-            ->assertOk()
-            ->assertDontSeeText('Zbyrowski')
-            ->assertSeeText('Mikke');
+        $this->get('/people/l/Z')->assertInertiaOk([
+            'people' => [$expectedPeople[0]],
+            'letters' => $expectedLetters,
+            'activeType' => 'l',
+            'activeLetter' => 'Z',
+        ], 'People/Letter');
+
+        $this->get('/people/l/M')->assertInertiaOk([
+            'people' => [$expectedPeople[1]],
+            'letters' => $expectedLetters,
+            'activeType' => 'l',
+            'activeLetter' => 'M',
+        ], 'People/Letter');
     }
 
     #[TestDox('it hides sensitive data to guests')]
@@ -53,10 +99,26 @@ final class ViewPeopleLetterListingTest extends TestCase
             'last_name' => 'Mikke',
         ]);
 
-        $this->get('/people/f/Z')
-            ->assertOk()
-            ->assertSeeText('[hidden]')
-            ->assertDontSeeText('Ziobro')
-            ->assertDontSeeText('Mikke');
+        $this->get('/people/f/Z')->assertInertiaOk([
+            'people' => [
+                [
+                    'id' => 1,
+                    'visible' => false,
+                    'canBeEdited' => false,
+                    'pytlewskiUrl' => null,
+                    'wielcyUrl' => null,
+                ],
+            ],
+            'letters' => [
+                'family' => [
+                    ['letter' => 'Z', 'count' => 1],
+                ],
+                'last' => [
+                    ['letter' => 'M', 'count' => 1],
+                ],
+            ],
+            'activeType' => 'f',
+            'activeLetter' => 'Z',
+        ], 'People/Letter');
     }
 }

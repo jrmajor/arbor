@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
+	import { inertia } from '@inertiajs/svelte';
 	import type { Letters } from '@/types/people';
 	import { t } from '@/helpers/translations';
 
@@ -21,6 +22,7 @@
 		{#each letters.family as letter}
 			<li>
 				<a
+					use:inertia
 					href={route('people.letter', { type: 'f', letter: letter.letter })}
 					class="a"
 					class:font-bold={activeType === 'f' && activeLetter === letter.letter}
@@ -39,6 +41,7 @@
 		{#each letters.last as letter}
 			<li>
 				<a
+					use:inertia
 					href={route('people.letter', { type: 'l', letter: letter.letter })}
 					class="a"
 					class:font-bold={activeType === 'l' && activeLetter === letter.letter}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePerson;
+use App\Http\Resources\People\PersonResource;
 use App\Models\Activity;
 use App\Models\Person;
 use Illuminate\Contracts\View\View;
@@ -33,11 +34,11 @@ class PersonController extends Controller
     /**
      * @param 'f'|'l' $type
      */
-    public function letter(string $type, string $letter): View
+    public function letter(Request $request, string $type, string $letter): Response
     {
         $this->authorize('viewAny', Person::class);
 
-        $list = match ($type) {
+        $people = match ($type) {
             'f' => Person::query()
                 ->whereRaw('substr(family_name, 1, 1) /* collate utf8mb4_0900_as_ci */ = ?', $letter)
                 ->orderBy('family_name')->orderBy('name')->get(),
@@ -46,14 +47,18 @@ class PersonController extends Controller
                 ->orderByRaw('ifnull(last_name, family_name) asc')->orderBy('name')->get(),
         };
 
-        if ($list->isEmpty()) {
+        if ($people->isEmpty()) {
             abort(404);
         }
 
-        return view('people.index', [
-            'list' => $list,
-            'activeLetter' => $letter,
+        return Inertia::render('People/Letter', [
+            'people' => PersonResource::collection($people)->toResponse($request)->getData(true),
+            'letters' => [
+                'family' => Person::letters('family'),
+                'last' => Person::letters('last'),
+            ],
             'activeType' => $type,
+            'activeLetter' => $letter,
         ]);
     }
 
