@@ -41,8 +41,8 @@ jobs:
           touch database/testing.sqlite
 
       - name: Execute tests
-        run: vendor/bin/phpunit
-  
+        run: php artisan test --parallel
+
   types:
     name: Types
 
@@ -86,7 +86,7 @@ jobs:
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyze --no-progress --no-interaction
-        
+
   style:
     name: Style
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21d49eaa79467a6c859812bc22070e33",
+    "content-hash": "6fca11b4e140470bbf029a277ce725bd",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -8747,6 +8747,99 @@
                 "source": "https://github.com/barryvdh/ReflectionDocBlock/tree/v2.1.1"
             },
             "time": "2023-06-14T05:06:27+00:00"
+        },
+        {
+            "name": "brianium/paratest",
+            "version": "v7.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paratestphp/paratest.git",
+                "reference": "90a0ba27d1347e054d62fea30f3414f09fe9bad3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/90a0ba27d1347e054d62fea30f3414f09fe9bad3",
+                "reference": "90a0ba27d1347e054d62fea30f3414f09fe9bad3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-pcre": "*",
+                "ext-reflection": "*",
+                "ext-simplexml": "*",
+                "fidry/cpu-core-counter": "^1.1.0",
+                "jean85/pretty-package-versions": "^2.0.6",
+                "php": "~8.2.0 || ~8.3.0",
+                "phpunit/php-code-coverage": "^11.0.3",
+                "phpunit/php-file-iterator": "^5.0.0",
+                "phpunit/php-timer": "^7.0.0",
+                "phpunit/phpunit": "^11.2.1",
+                "sebastian/environment": "^7.1.0",
+                "symfony/console": "^6.4.8 || ^7.1.1",
+                "symfony/process": "^6.4.8 || ^7.1.1"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^12.0.0",
+                "ext-pcov": "*",
+                "ext-posix": "*",
+                "phpstan/phpstan": "^1.11.4",
+                "phpstan/phpstan-deprecation-rules": "^1.2.0",
+                "phpstan/phpstan-phpunit": "^1.4.0",
+                "phpstan/phpstan-strict-rules": "^1.6.0",
+                "squizlabs/php_codesniffer": "^3.10.1",
+                "symfony/filesystem": "^6.4.8 || ^7.1.1"
+            },
+            "bin": [
+                "bin/paratest",
+                "bin/paratest_for_phpstorm"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ParaTest\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brian Scaturro",
+                    "email": "scaturrob@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Filippo Tessarotto",
+                    "email": "zoeslam@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Parallel testing for PHP",
+            "homepage": "https://github.com/paratestphp/paratest",
+            "keywords": [
+                "concurrent",
+                "parallel",
+                "phpunit",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/paratestphp/paratest/issues",
+                "source": "https://github.com/paratestphp/paratest/tree/v7.5.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/Slamdunk",
+                    "type": "github"
+                },
+                {
+                    "url": "https://paypal.me/filippotessarotto",
+                    "type": "paypal"
+                }
+            ],
+            "time": "2024-06-12T13:02:43+00:00"
         },
         {
             "name": "calebdw/larastan",
