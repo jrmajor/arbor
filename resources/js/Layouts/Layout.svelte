@@ -11,7 +11,7 @@
 		children: Snippet;
 	} = $props();
 
-	const currentYear = new Date().getFullYear();
+	const { currentYear } = globalThis.arborProps;
 </script>
 
 <Menu {activeRoute} {user}/>

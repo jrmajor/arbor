@@ -10,5 +10,6 @@ declare global {
 		currentLocale: Language;
 		fallbackLocale: Language;
 		otherAvailableLocales: Language[];
+		currentYear: number;
 	};
 }
