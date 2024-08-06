@@ -16,26 +16,10 @@
 
 {#if person.wielcyUrl || person.pytlewskiUrl}
 	<div class="inline-block space-y-[0.139rem]">
-		{#if person.wielcyUrl}
-			<!-- svelte-ignore a11y_missing_content -->
-			<a
-				class="block w-[0.417rem] h-[0.417rem] bg-[#73adff] border border-[#205daf]"
-				href={person.wielcyUrl}
-				target="_blank"
-			></a>
-		{:else}
-			<span class="block w-[0.417rem] h-[0.417rem] bg-[#f5f8fc] border border-[#7ab8ff]"></span>
-		{/if}
-		{#if person.pytlewskiUrl}
-			<!-- svelte-ignore a11y_missing_content -->
-			<a
-				class="block w-[0.417rem] h-[0.417rem] bg-[#79d96a] border border-[#208712]"
-				href={person.pytlewskiUrl}
-				target="_blank"
-			></a>
-		{:else}
-			<span class="block w-[0.417rem] h-[0.417rem] bg-[#f5f8fc] border border-[#7ae16c]"></span>
-		{/if}
+		<!-- svelte-ignore a11y_missing_content -->
+		<a href={person.wielcyUrl} target="_blank" class="wielcy" class:missing={!person.wielcyUrl}></a>
+		<!-- svelte-ignore a11y_missing_content -->
+		<a href={person.pytlewskiUrl} target="_blank" class="pytlewski" class:missing={!person.pytlewskiUrl}></a>
 	</div>
 {/if}
 
@@ -67,3 +51,32 @@
 		<small>[№{person.id}]</small>
 	</a>
 {/if}
+
+<style lang="postcss">
+	.wielcy, .pytlewski {
+		display: block;
+		width: 0.417rem;
+		height: 0.417rem;
+		border-width: 1px;
+	}
+
+	.wielcy {
+		background-color: #73adff;
+		border-color: #205daf;
+	}
+
+	.pytlewski {
+		background-color: #79d96a;
+		border-color: #208712;
+	}
+
+	.wielcy.missing {
+		background-color: #f5f8fc;
+		border-color: #7ab8ff;
+	}
+
+	.pytlewski.missing {
+		background-color: #f5f8fc;
+		border-color: #7ae16c;
+	}
+</style>
