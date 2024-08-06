@@ -39,7 +39,7 @@
 				</Item>
 			{/if}
 
-			{#if person.canHaveHistoryViewed}
+			{#if person.perm.viewHistory}
 				<Item
 					name="people.menu.edits_history"
 					href={route('people.history', person)}
@@ -51,7 +51,7 @@
 		</div>
 
 		<div class="grow">
-			{#if person.canHaveVisibilityChanged && !person.isTrashed}
+			{#if person.perm.changeVisibility && !person.isTrashed}
 				<Item
 					name={person.isVisible ? 'people.menu.make_invisible' : 'people.menu.make_visible'}
 					href={route('people.changeVisibility', person)}
@@ -81,7 +81,7 @@
 				>
 					<path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/>
 				</Item>
-			{:else if person.canHaveHistoryViewed}
+			{:else if person.perm.viewHistory}
 				<Item
 					name="people.menu.restore"
 					href={route('people.restore', person)}

@@ -15,7 +15,9 @@ type PersonCommon = {
 	visible: boolean;
 	pytlewskiUrl: string | null;
 	wielcyUrl: string | null;
-	canBeUpdated: boolean;
+	perm: {
+		update: boolean;
+	};
 };
 
 type VisiblePerson = PersonCommon & {
@@ -49,11 +51,13 @@ export type PersonPage = {
 	isDead: boolean;
 	isTrashed: boolean;
 	isVisible: boolean;
-	canBeUpdated: boolean;
-	canHaveVisibilityChanged: boolean;
-	canBeDeleted: boolean;
-	canBeRestored: boolean;
-	canHaveHistoryViewed: boolean;
+	perm: {
+		update: boolean;
+		changeVisibility: boolean;
+		delete: boolean;
+		restore: boolean;
+		viewHistory: boolean;
+	};
 };
 
 export type ShowPersonResource = PersonPage & {
@@ -112,6 +116,8 @@ type Marriage = {
 	divorceDate: string | null;
 	divorcePlace: string | null;
 	partner: Person;
-	canBeViewed: boolean;
-	canBeUpdated: boolean;
+	perm: {
+		view: boolean;
+		update: boolean;
+	};
 };

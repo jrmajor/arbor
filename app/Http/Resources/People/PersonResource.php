@@ -41,7 +41,9 @@ final class PersonResource extends JsonResource
 
                 return ['father' => $father, 'mother' => $mother];
             }),
-            'canBeUpdated' => Gate::allows('update', $this->resource),
+            'perm' => [
+                'update' => Gate::allows('update', $this->resource),
+            ],
         ];
     }
 }

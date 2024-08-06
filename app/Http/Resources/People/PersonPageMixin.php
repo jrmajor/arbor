@@ -25,11 +25,13 @@ trait PersonPageMixin
             'isDead' => $this->resource->dead,
             'isTrashed' => $this->resource->trashed(),
             'isVisible' => $this->resource->isVisible(),
-            'canBeUpdated' => Gate::allows('update', $this->resource),
-            'canHaveVisibilityChanged' => Gate::allows('changeVisibility', $this->resource),
-            'canBeDeleted' => Gate::allows('delete', $this->resource),
-            'canBeRestored' => Gate::allows('restore', $this->resource),
-            'canHaveHistoryViewed' => Gate::allows('viewHistory', $this->resource),
+            'perm' => [
+                'update' => Gate::allows('update', $this->resource),
+                'changeVisibility' => Gate::allows('changeVisibility', $this->resource),
+                'delete' => Gate::allows('delete', $this->resource),
+                'restore' => Gate::allows('restore', $this->resource),
+                'viewHistory' => Gate::allows('viewHistory', $this->resource),
+            ],
         ];
     }
 }

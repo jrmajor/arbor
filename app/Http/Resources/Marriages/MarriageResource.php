@@ -39,8 +39,10 @@ final class MarriageResource extends JsonResource
             'divorceDate' => $this->resource->divorce_date,
             'divorcePlace' => $this->resource->divorce_place,
             'partner' => new PersonResource($this->resource->partner($this->partnerFor)),
-            'canBeViewed' => Gate::allows('view', $this->resource),
-            'canBeUpdated' => Gate::allows('update', $this->resource),
+            'perm' => [
+                'view' => Gate::allows('view', $this->resource),
+                'update' => Gate::allows('update', $this->resource),
+            ],
         ];
     }
 }
