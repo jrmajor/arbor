@@ -20,7 +20,6 @@ class PersonResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'visible' => $visible = Gate::allows('view', $this->resource),
-            'canBeEdited' => Gate::allows('update', $this->resource),
             $this->mergeWhen($visible, [
                 'name' => $this->resource->name,
                 'familyName' => $this->resource->family_name,
@@ -32,6 +31,7 @@ class PersonResource extends JsonResource
             'pytlewskiUrl' => $this->resource->pytlewski?->url,
             // @phpstan-ignore property.protected
             'wielcyUrl' => $this->resource->wielcy?->url,
+            'canBeUpdated' => Gate::allows('update', $this->resource),
         ];
     }
 }

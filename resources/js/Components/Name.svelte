@@ -46,7 +46,7 @@
 	<small>[{t('misc.hidden')}]</small>
 {/if}
 
-{#if person.canBeEdited}
+{#if person.canBeUpdated}
 	<a href={route('people.edit', person)} class="a">
 		<small>[№{person.id}]</small>
 	</a>

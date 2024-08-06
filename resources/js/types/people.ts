@@ -11,9 +11,9 @@ type Letter = {
 type PersonCommon = {
 	id: number;
 	visible: boolean;
-	canBeEdited: boolean;
 	pytlewskiUrl: string | null;
 	wielcyUrl: string | null;
+	canBeUpdated: boolean;
 };
 
 type VisiblePerson = PersonCommon & {

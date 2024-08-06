@@ -44,7 +44,6 @@ final class ViewPeopleLetterListingTest extends TestCase
             [
                 'id' => 1,
                 'visible' => true,
-                'canBeEdited' => false,
                 'name' => $people[0]->name,
                 'familyName' => 'Zbyrowski',
                 'lastName' => null,
@@ -53,11 +52,11 @@ final class ViewPeopleLetterListingTest extends TestCase
                 'deathYear' => $people[0]->death_year,
                 'pytlewskiUrl' => null,
                 'wielcyUrl' => null,
+                'canBeUpdated' => false,
             ],
             [
                 'id' => 2,
                 'visible' => true,
-                'canBeEdited' => false,
                 'name' => $people[1]->name,
                 'familyName' => 'Ziobro',
                 'lastName' => 'Mikke',
@@ -66,6 +65,7 @@ final class ViewPeopleLetterListingTest extends TestCase
                 'deathYear' => $people[1]->death_year,
                 'pytlewskiUrl' => null,
                 'wielcyUrl' => null,
+                'canBeUpdated' => false,
             ],
         ];
 
@@ -104,9 +104,9 @@ final class ViewPeopleLetterListingTest extends TestCase
                 [
                     'id' => 1,
                     'visible' => false,
-                    'canBeEdited' => false,
                     'pytlewskiUrl' => null,
                     'wielcyUrl' => null,
+                    'canBeUpdated' => false,
                 ],
             ],
             'letters' => [
