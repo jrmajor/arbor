@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
+	import { slide } from 'svelte/transition';
 	import { type RouteList } from 'ziggy-js';
 	import Menu from './Menu/Menu.svelte';
 	import Flash from './Flash.svelte';
@@ -23,7 +24,9 @@
 
 <div class="container mx-auto my-1 p-2 pt-5">
 	{#if flash}
-		<Flash {...flash}/>
+		<div class="mb-6" in:slide out:slide>
+			<Flash {...flash}/>
+		</div>
 	{/if}
 
 	{@render children()}
