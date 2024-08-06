@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.errors')
 
 @section('title')
   {{ __('misc.titles.error') }} @yield('code')
