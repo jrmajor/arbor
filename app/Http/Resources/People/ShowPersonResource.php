@@ -31,8 +31,10 @@ final class ShowPersonResource extends JsonResource
         return [
             ...$this->personMixin(),
             'middleName' => $this->resource->middle_name,
+            'birthYear' => $this->resource->birth_year,
             'birthDate' => $this->resource->birth_date,
             'birthPlace' => $this->resource->birth_place,
+            'deathYear' => $this->resource->death_year,
             'deathDate' => $this->resource->death_date,
             'deathPlace' => $this->resource->death_place,
             'deathCause' => $this->resource->death_cause,

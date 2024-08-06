@@ -62,8 +62,10 @@ export type PersonPage = {
 
 export type ShowPersonResource = PersonPage & {
 	middleName: string | null;
+	birthYear: number | null;
 	birthDate: string | null;
 	birthPlace: string | null;
+	deathYear: number | null;
 	deathDate: string | null;
 	deathPlace: string | null;
 	deathCause: string | null;
