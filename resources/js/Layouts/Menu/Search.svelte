@@ -22,6 +22,13 @@
 	let hoveredIndex: number | null = $state(null);
 
 	function oninput() {
+		isOpen = true;
+
+		if (search.length < 1) {
+			results = [];
+			return;
+		}
+
 		if (search === previousSearch) return;
 
 		fetch(route('people.search', { search }))
@@ -42,6 +49,7 @@
 			ArrowUp: () => arrow('up'),
 			ArrowDown: () => arrow('down'),
 			Enter: enter,
+			Escape: closeDropdown,
 		}[event.key];
 
 		if (!listener) return;
