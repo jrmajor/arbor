@@ -4,23 +4,27 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Inertia\Response;
 
 use function App\flash;
 
+/**
+ * todo: cancel button should revoke token.
+ */
 class NewPasswordController extends Controller
 {
     use ResetsPasswords;
 
-    public function create(Request $request, string $token): View
+    public function create(Request $request, string $token): Response
     {
-        return view('auth.reset-password', [
+        return Inertia::render('Auth/ResetPassword', [
             'token' => $token,
             'email' => $request->email,
         ]);
