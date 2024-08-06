@@ -19,8 +19,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
 /**
  * @property-read string $first_event_date
  * @property-read string $second_event_date
+ * @property-read string $divorce_date
  * @property-read ?int $first_event_year
  * @property-read ?int $second_event_year
+ * @property-read ?int $divorce_year
  * @property-read EloquentCollection<int, Activity> $activities
  */
 class Marriage extends Model

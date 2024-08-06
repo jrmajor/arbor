@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\Gate;
 /**
  * @property Person $resource
  */
-class PersonResource extends JsonResource
+final class PersonResource extends JsonResource
 {
+    public int $recursiveWithParents = 0;
+
     /**
      * @return array<mixed>
      */
@@ -31,6 +33,14 @@ class PersonResource extends JsonResource
             'pytlewskiUrl' => $this->resource->pytlewski?->url,
             // @phpstan-ignore property.protected
             'wielcyUrl' => $this->resource->wielcy?->url,
+            $this->mergeWhen($this->recursiveWithParents > 0, function () {
+                $father = new self($this->resource->father);
+                $father->recursiveWithParents = $this->recursiveWithParents - 1;
+                $mother = new self($this->resource->mother);
+                $mother->recursiveWithParents = $this->recursiveWithParents - 1;
+
+                return ['father' => $father, 'mother' => $mother];
+            }),
             'canBeUpdated' => Gate::allows('update', $this->resource),
         ];
     }

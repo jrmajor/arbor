@@ -3,19 +3,17 @@
 namespace App\Http\Resources\People;
 
 use App\Models\Person;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Gate;
 
 /**
  * @property Person $resource
  */
-class PersonPageResource extends JsonResource
+trait PersonPageMixin
 {
     /**
      * @return array<mixed>
      */
-    public function toArray(Request $request): array
+    public function personMixin(): array
     {
         return [
             'id' => $this->resource->id,
