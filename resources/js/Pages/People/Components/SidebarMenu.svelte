@@ -10,7 +10,7 @@
 	} = $props();
 </script>
 
-<ul class="uppercase">
+<ul>
 	<div class="flex flex-col xs:flex-row md:flex-col">
 		<div class="grow">
 			{#if !person.isTrashed}

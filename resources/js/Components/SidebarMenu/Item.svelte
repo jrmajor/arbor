@@ -29,9 +29,10 @@
 				},
 			};
 		}
-		if (!visitOptions.confirm) return visitOptions;
+		if (!visitOptions.confirm) return { ...visitOptions, href };
 		return {
 			...visitOptions,
+			href,
 			onBefore: () => confirm(visitOptions.confirm),
 		};
 	});
@@ -40,7 +41,7 @@
 {#if active}
 	<span class="text-blue-700 transition">
 		<li class="px-3 py-1 rounded transition">
-			<span class="w-full border-b-2 border-dotted border-blue-500 flex items-center">
+			<span class="flex w-full items-center border-b-2 border-dotted border-blue-500 uppercase">
 				<svg
 					viewBox="0 0 20 20"
 					xmlns="http://www.w3.org/2000/svg"
@@ -53,11 +54,12 @@
 		</li>
 	</span>
 {:else}
-	<a
+	<svelte:element
+		this={!visitOptions || visitOptions.method === 'get' ? 'a' : 'button'}
 		use:inertia={computedVisitOptions}
-		href={href}
+		href={visitOptions ? null : href}
 		class="
-			group focus:outline-none transition
+			group block w-full uppercase transition focus:outline-none
 			{danger ? 'text-red-600 hover:text-red-700 focus:text-red-700' : 'text-gray-700 hover:text-gray-800 focus:text-gray-800'}
 		"
 	>
@@ -77,5 +79,5 @@
 				{t(name)}
 			</span>
 		</li>
-	</a>
+	</svelte:element>
 {/if}
