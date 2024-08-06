@@ -5,90 +5,16 @@
 	import toRoman from '@/helpers/toRoman';
 	import Name from '@/Components/Name.svelte';
 	import OptionalDatePlace from '../OptionalDatePlace.svelte';
-	import PytlewskiRelative from '../PytlewskiRelative.svelte';
+	import PytlewskiSection from '../DetailsSections/PytlewskiSection.svelte';
 
 	let { person }: { person: ShowPersonResource } = $props();
 
-	let pytlewskiIsOpen = $state(false);
-
-	let pytlewski = $derived(person.pytlewski);
 	let wielcy = $derived(person.wielcy);
 </script>
 
 <div class="p-6 bg-white rounded-lg shadow">
 	<dl>
-		<!-- pytlewski -->
-		{#if person.pytlewskiId && !pytlewski}
-			<dt>{@html t('people.pytlewski.id')}</dt>
-			<dd>
-				<a href={person.pytlewskiUrl} target="_blank" class="a">
-					{person.pytlewskiId}
-				</a>
-			</dd>
-		{:else if pytlewski}
-			<dt>{@html t('people.pytlewski.id')}</dt>
-			<dd>
-				<a href={person.pytlewskiUrl} target="_blank" class="a">
-					{person.pytlewskiId}
-					<small>
-						{t('people.pytlewski.as')}
-						{#if pytlewski.lastName}
-							{pytlewski.lastName} ({pytlewski.familyName})
-						{:else}
-							{pytlewski.familyName}
-						{/if}
-						{pytlewski.name} {pytlewski.middleName}
-					</small>
-				</a>
-				<button
-					onclick={() => pytlewskiIsOpen = !pytlewskiIsOpen}
-					class="btn-out leading-none text-xs rounded px-2"
-				>
-					{t('people.pytlewski.show_more')}
-				</button>
-				{#if pytlewskiIsOpen}
-					<!-- todo: in:slide out:slide -->
-					<small class="block -mt-0.5 ml-4 leading-tight">
-						{#if pytlewski.mother || pytlewski.father}
-							<p class="mt-1.5">{t('people.pytlewski.parents')}:</p>
-							{#if pytlewski.mother}
-								<p class="ml-4"><PytlewskiRelative person={pytlewski.mother}/></p>
-							{/if}
-							{#if pytlewski.father}
-								<p class="ml-4"><PytlewskiRelative person={pytlewski.father}/></p>
-							{/if}
-						{/if}
-
-						{#if pytlewski.marriages.length}
-							<p class="mt-1.5">{t('people.pytlewski.marriages')}:</p>
-							{#each pytlewski.marriages as marriage}
-								<p class="ml-4"><PytlewskiRelative person={marriage}/></p>
-							{/each}
-						{/if}
-
-						{#if pytlewski.children.length}
-							<p class="mt-1.5">{t('people.pytlewski.children')}:</p>
-							<p class="ml-4">
-								{#each pytlewski.children as child, i}
-									{i > 0 ? ', ' : ''}
-									<PytlewskiRelative person={child}/>
-								{/each}
-							</p>
-						{/if}
-
-						{#if pytlewski.siblings.length}
-							<p class="mt-1.5">{t('people.pytlewski.siblings')}:</p>
-							<p class="ml-4">
-								{#each pytlewski.siblings as sibling, i}
-									{i > 0 ? ', ' : ''}
-									<PytlewskiRelative person={sibling}/>
-								{/each}
-							</p>
-						{/if}
-					</small>
-				{/if}
-			</dd>
-		{/if}
+		<PytlewskiSection {person}/>
 
 		<!-- wielcy -->
 		{#if wielcy}
