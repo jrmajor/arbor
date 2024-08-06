@@ -32,6 +32,12 @@ final class LoginTest extends TestCase
         $this->assertAuthenticated();
     }
 
+    #[TestDox('unauthenticated users can view login form')]
+    public function testForm(): void
+    {
+        $this->get('login')->assertInertiaOk([], 'Auth/Login');
+    }
+
     #[TestDox('it requires username')]
     public function testRequireUsername(): void
     {
