@@ -96,11 +96,14 @@
 		onfocus={() => isOpen = shouldCloseOnBlur = true}
 		onblur={closeDropdown}
 	>
-	<button class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 active:text-gray-900 transition-colors duration-200">
+	<div
+		class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2
+			text-gray-700 transition-colors duration-200 active:text-gray-900"
+	>
 		<svg class="fill-current size-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 			<path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
 		</svg>
-	</button>
+	</div>
 	{#if isOpen && search.length}
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<ul
