@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import { type RouteList } from 'ziggy-js';
 	import Menu from './Menu/Menu.svelte';
 	import Flash from './Flash.svelte';
@@ -12,6 +12,11 @@
 	} = $props();
 
 	const { currentYear } = globalThis.arborProps;
+
+	let mailto = $state('');
+	$effect(() => {
+		mailto = atob('anJoLm1qckBnbWFpbC5jb20=');
+	});
 </script>
 
 <Menu {activeRoute} {user}/>
@@ -24,6 +29,6 @@
 	{@render children()}
 
 	<footer class="m-1 px-3 pt-2 text-center text-gray-600 text-sm">
-		&copy; 2018-{currentYear} <a href={`mailto:${atob('anJoLm1qckBnbWFpbC5jb20=')}`}>Jeremiasz Major</a>
+		&copy; 2018-{currentYear} <a href={`mailto:${mailto}`}>Jeremiasz Major</a>
 	</footer>
 </div>
