@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
+	import { inertia } from '@inertiajs/svelte';
 	import type { Person } from '@/types/people';
 	import { t } from '@/helpers/translations';
 
@@ -24,7 +25,7 @@
 {/if}
 
 {#if person.visible}
-	<a href={route('people.show', person)} class="a" class:italic={person.isDead}>
+	<a use:inertia href={route('people.show', person)} class="a" class:italic={person.isDead}>
 		{person.name}
 		{#if person.lastName}
 			<span class:font-semibold={bold === 'l'}>{person.lastName}</span>

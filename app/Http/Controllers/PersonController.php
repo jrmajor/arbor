@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePerson;
 use App\Http\Resources\People\PersonResource;
+use App\Http\Resources\People\ShowPersonResource;
 use App\Models\Activity;
 use App\Models\Person;
 use Illuminate\Contracts\View\View;
@@ -87,7 +88,7 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function show(Person $person): View|RedirectResponse
+    public function show(Request $request, Person $person): View|Response|RedirectResponse
     {
         if ($person->trashed()) {
             return Auth::user()?->canViewHistory()
@@ -97,9 +98,15 @@ class PersonController extends Controller
 
         $this->authorize('view', $person);
 
-        return view('people.person', [
-            'person' => $person,
-            'biography' => formatBiography($person->biography),
+        if ($request->boolean('old')) {
+            return view('people.person', [
+                'person' => $person,
+                'biography' => formatBiography($person->biography),
+            ]);
+        }
+
+        return Inertia::render('People/Show', [
+            'person' => new ShowPersonResource($person),
         ]);
     }
 
