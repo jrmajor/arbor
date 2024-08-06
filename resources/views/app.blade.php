@@ -15,7 +15,6 @@
 
     @unless (app()->runningUnitTests())
       @vite('resources/css/style.css')
-      @vite('resources/js/classicApp.ts')
       @vite(['resources/js/inertiaApp.ts', "resources/js/Pages/{$page['component']}.svelte"])
     @endif
 

@@ -12,7 +12,6 @@
     @routes
 
     @livewireScriptConfig
-    @livewireStyles
 
     @if (config('services.fathom.id'))
       <script

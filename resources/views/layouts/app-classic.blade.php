@@ -10,6 +10,8 @@
     @unless (app()->runningUnitTests())
       @vite(['resources/css/style.css', 'resources/js/classicApp.ts'])
     @endif
+
+    @livewireStyles
 @endsection
 
 @section('body')
