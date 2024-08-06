@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { inertia } from '@inertiajs/svelte';
+	import { inertia, router } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 
 	let { user }: { user: SharedUser | null } = $props();
@@ -75,7 +75,7 @@
 	function enter() {
 		if (hoveredIndex === null) return;
 		isOpen = false;
-		window.location.href = results[hoveredIndex].url;
+		router.get(results[hoveredIndex].url);
 	}
 
 	function closeDropdown() {
