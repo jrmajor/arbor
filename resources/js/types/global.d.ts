@@ -8,6 +8,7 @@ declare global {
 	var arborProps: {
 		appName: string;
 		currentLocale: Language;
+		fallbackLocale: Language;
 		otherAvailableLocales: Language[];
 	};
 }

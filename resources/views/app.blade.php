@@ -7,6 +7,7 @@
       var arborProps = {
         appName: {{ new Js(config('app.name')) }},
         currentLocale: {{ new Js(app()->getLocale()) }},
+        fallbackLocale: {{ new Js(config('app.fallback_locale')) }},
         otherAvailableLocales: {{ new Js(array_values(array_diff(config('app.available_locales'), [app()->getLocale()]))) }},
       };
     </script>
