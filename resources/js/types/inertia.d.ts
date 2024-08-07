@@ -8,7 +8,15 @@ declare module '@inertiajs/svelte' {
 	export const Link: Component;
 	export function createInertiaApp(options: {
 		id?: string;
-		resolve(name: string): Promise<Component>;
+		resolve(name: string): Promise<
+			| Component
+			| {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				default: Component<any, any, any>;
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				layout: Array<Component<any, any, any>> | Component<any, any, any> | undefined;
+			}
+		>;
 		setup(props: { el: Element; App: Component; props: Record<string, unknown> }): void;
 		title?(title: string): string;
 		progress?:
