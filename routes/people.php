@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\BiographyController;
 use App\Http\Controllers\PeopleSearchController;
 use App\Http\Controllers\PersonController;
@@ -46,3 +47,6 @@ Route::get('people/{person}/biography', [BiographyController::class, 'edit'])
 
 Route::patch('people/{person}/biography', [BiographyController::class, 'update'])
     ->middleware('auth')->name('people.biography.update');
+
+Route::get('ajax/pytlewski-name', [AjaxController::class, 'pytlewskiName'])
+    ->middleware('auth')->name('ajax.pytlewskiName');

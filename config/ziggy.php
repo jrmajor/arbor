@@ -17,6 +17,7 @@ return [
         'dashboard.*',
         'settings',
         'locale.*',
+        'ajax.*',
     ],
 
 ];
