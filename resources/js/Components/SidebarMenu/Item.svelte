@@ -36,6 +36,8 @@
 			onBefore: () => confirm(visitOptions.confirm),
 		};
 	});
+
+	let shouldBeLink = $derived((computedVisitOptions.method ?? 'get') === 'get');
 </script>
 
 {#if active}
@@ -55,9 +57,9 @@
 	</span>
 {:else}
 	<svelte:element
-		this={!visitOptions || visitOptions.method === 'get' ? 'a' : 'button'}
+		this={shouldBeLink ? 'a' : 'button'}
 		use:inertia={computedVisitOptions}
-		href={visitOptions ? null : href}
+		href={shouldBeLink ? href : null}
 		class="
 			group block w-full uppercase transition focus:outline-none
 			{danger ? 'text-red-600 hover:text-red-700 focus:text-red-700' : 'text-gray-700 hover:text-gray-800 focus:text-gray-800'}
