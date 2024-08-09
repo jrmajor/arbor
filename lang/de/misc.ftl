@@ -48,6 +48,7 @@ delete = Löschen
 cancel = Cancel
 null = Null
 
+loading = Laden…
 no_results = Keine Ergebnisse
 
 an_unknown_error_occurred = Ein unbekannter Fehler ist aufgetreten.

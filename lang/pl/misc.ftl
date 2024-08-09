@@ -50,6 +50,7 @@ delete = Usuń
 cancel = Anuluj
 null = brak
 
+loading = ładowanie…
 no_results = Brak wyników
 
 an_unknown_error_occurred = Wystąpił nieznany błąd.
