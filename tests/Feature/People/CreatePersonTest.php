@@ -76,7 +76,7 @@ final class CreatePersonTest extends TestCase
     {
         $this->withPermissions(2)
             ->get('people/create')
-            ->assertOk();
+            ->assertInertiaComponent('People/Create');
     }
 
     #[TestDox('guest cannot add valid person')]

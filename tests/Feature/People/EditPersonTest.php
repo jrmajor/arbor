@@ -120,7 +120,7 @@ final class EditPersonTest extends TestCase
 
         $this->withPermissions(2)
             ->get("people/{$this->person->id}/edit")
-            ->assertOk();
+            ->assertInertiaComponent('People/Edit');
     }
 
     #[TestDox('guests cannot edit person')]

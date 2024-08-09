@@ -48,7 +48,7 @@
 {/if}
 
 {#if person.perm.update}
-	<a href={route('people.edit', person)} class="a">
+	<a use:inertia href={route('people.edit', person)} class="a">
 		<small>[№{person.id}]</small>
 	</a>
 {/if}

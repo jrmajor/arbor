@@ -60,10 +60,14 @@ class MacrosServiceProvider extends ServiceProvider
 
     private function registerTestingMacros(): void
     {
+        TestResponse::macro('assertInertiaComponent', function (string $component): TestResponse {
+            return $this
+                ->assertOk()
+                ->assertInertia(fn (AssertableInertia $page) => $page->component($component));
+        });
+
         TestResponse::macro('assertInertiaResponse', function (
-            int $status,
-            array $props,
-            string $component,
+            int $status, array $props, string $component,
         ): TestResponse {
             return $this
                 ->assertStatus($status)
@@ -73,8 +77,7 @@ class MacrosServiceProvider extends ServiceProvider
         });
 
         TestResponse::macro('assertInertiaOk', function (
-            array $props,
-            string $component,
+            array $props, string $component,
         ): TestResponse {
             return $this->assertInertiaResponse(200, $props, $component);
         });

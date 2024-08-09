@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePerson;
+use App\Http\Resources\People\EditPersonResource;
 use App\Http\Resources\People\PersonResource;
 use App\Http\Resources\People\ShowPersonResource;
 use App\Models\Activity;
@@ -117,11 +118,17 @@ class PersonController extends Controller
         ]);
     }
 
-    public function edit(Person $person): View
+    public function edit(Request $request, Person $person): View|Response
     {
         $this->authorize('update', $person);
 
-        return view('people.edit', ['person' => $person]);
+        if ($request->boolean('old')) {
+            return view('people.edit', ['person' => $person]);
+        }
+
+        return Inertia::render('People/Edit', [
+            'person' => new EditPersonResource($person),
+        ]);
     }
 
     public function update(StorePerson $request, Person $person): RedirectResponse
