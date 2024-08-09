@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PersonPage, EditPersonResource } from '@/types/people';
+	import { t } from '@/helpers/translations';
 	import TitleBar from './Components/TitleBar.svelte';
 	import SidebarMenu from './Components/SidebarMenu.svelte';
 	import Form from './Components/Form/Form.svelte';
@@ -8,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>{person.simpleName} - Arbor</title>
+	<title>{person.simpleName} - {t('people.titles.editing')} - Arbor</title>
 </svelte:head>
 
 <h1 class="mb-3 leading-none text-3xl font-medium">
