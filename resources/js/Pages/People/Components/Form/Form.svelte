@@ -13,7 +13,7 @@
 		action: 'create' | 'edit';
 	} = $props();
 
-	let form = useForm({
+	const form = useForm({
 		sex: person.sex,
 		name: person.name,
 		middle_name: person.middleName,

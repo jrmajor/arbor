@@ -12,7 +12,7 @@
 	const title = authLayoutTitle.get();
 	$title = t('passwords.password_reset');
 
-	let form = useForm({ token, email, password: '', password_confirmation: '' });
+	const form = useForm({ token, email, password: '', password_confirmation: '' });
 
 	function onsubmit(event: SubmitEvent) {
 		event.preventDefault();

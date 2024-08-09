@@ -9,7 +9,7 @@
 	const title = authLayoutTitle.get();
 	$title = t('auth.signing_in');
 
-	let form = useForm({ username: '', password: '', remember: false });
+	const form = useForm({ username: '', password: '', remember: false });
 
 	function onsubmit(event: SubmitEvent) {
 		event.preventDefault();
