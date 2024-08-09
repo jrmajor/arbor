@@ -26,9 +26,9 @@
 			<small>
 				{t('people.pytlewski.as')}
 				{#if pytlewski.lastName}
-					{pytlewski.lastName} ({pytlewski.familyName})
+					<strong>{pytlewski.lastName} ({pytlewski.familyName})</strong>
 				{:else}
-					{pytlewski.familyName}
+					<strong>{pytlewski.familyName}</strong>
 				{/if}
 				{pytlewski.name} {pytlewski.middleName}
 			</small>
