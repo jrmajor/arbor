@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
+	import { inertia } from '@inertiajs/svelte';
 	import type { ShowPersonResource } from '@/types/people';
 	import { t } from '@/helpers/translations';
 	import toRoman from '@/helpers/toRoman';
@@ -177,6 +178,7 @@
 									</a>
 									<!-- todo: check correct permission -->
 									<a
+										use:inertia
 										href={route('people.create', {
 											mother: person.sex === 'xy' ? marriage.partner.id : person.id,
 											father: person.sex === 'xy' ? person.id : marriage.partner.id,

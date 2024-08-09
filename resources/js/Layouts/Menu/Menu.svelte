@@ -70,6 +70,7 @@
 
 				{#if user?.canWrite}
 					<a
+						use:inertia
 						href={route('people.create')}
 						class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
 							hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100

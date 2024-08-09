@@ -100,6 +100,34 @@ export type ShowPersonResource = PersonPage & {
 	sources: string[];
 };
 
+export type EditPersonResource = {
+	id: number;
+	sex: Sex | null;
+	name: string;
+	middleName: string | null;
+	familyName: string;
+	lastName: string | null;
+	wielcyId: string | null;
+	pytlewskiId: number | null;
+	birthDateFrom: string | null;
+	birthDateTo: string | null;
+	birthPlace: string | null;
+	isDead: boolean;
+	deathDateFrom: string | null;
+	deathDateTo: string | null;
+	deathPlace: string | null;
+	deathCause: string | null;
+	funeralDateFrom: string | null;
+	funeralDateTo: string | null;
+	funeralPlace: string | null;
+	burialDateFrom: string | null;
+	burialDateTo: string | null;
+	burialPlace: string | null;
+	fatherId: number | null;
+	motherId: number | null;
+	sources: string[];
+};
+
 type Marriage = {
 	id: number;
 	order: number | null;
