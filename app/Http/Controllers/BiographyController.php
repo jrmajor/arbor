@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBiography;
+use App\Http\Resources\People\EditBiographyResource;
 use App\Models\Person;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
+use Inertia\Response;
 
 use function App\flash;
 
 class BiographyController extends Controller
 {
-    public function edit(Person $person): View
+    public function edit(Person $person): Response
     {
         $this->authorize('update', $person);
 
-        return view('people.biography.edit', ['person' => $person]);
+        return Inertia::render('People/EditBiography', [
+            'person' => new EditBiographyResource($person),
+        ]);
     }
 
     public function update(StoreBiography $request, Person $person): RedirectResponse

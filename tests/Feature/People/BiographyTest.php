@@ -52,7 +52,7 @@ final class BiographyTest extends TestCase
     {
         $this->withPermissions(2)
             ->get("people/{$this->person->id}/biography")
-            ->assertOk();
+            ->assertInertiaComponent('People/EditBiography');
     }
 
     #[TestDox('guests cannot edit biography')]
