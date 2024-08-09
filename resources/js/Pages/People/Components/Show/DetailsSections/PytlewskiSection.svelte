@@ -40,7 +40,7 @@
 			{t('people.pytlewski.show_more')}
 		</button>
 		{#if isOpen}
-			<div in:slide out:slide>
+			<div transition:slide>
 				<PytlewskiDetails {pytlewski}/>
 			</div>
 		{/if}

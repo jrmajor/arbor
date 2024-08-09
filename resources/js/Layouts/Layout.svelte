@@ -24,7 +24,7 @@
 
 <div class="container mx-auto my-1 p-2 pt-5">
 	{#if flash}
-		<div class="mb-6" in:slide out:slide>
+		<div class="mb-6" transition:slide>
 			<Flash {...flash}/>
 		</div>
 	{/if}
