@@ -1,0 +1,85 @@
+<script lang="ts">
+	import type { PersonPage } from '@/types/people';
+	import type { Activity } from '@/types/resources/activities';
+	import { t } from '@/helpers/translations';
+	import HistorySex from '@/Components/History/Sex.svelte';
+	import HistorySources from '@/Components/History/Sources.svelte';
+	import HistoryText from '@/Components/History/Text.svelte';
+	import TitleBar from './Components/TitleBar.svelte';
+	import SidebarMenu from './Components/SidebarMenu.svelte';
+
+	let { person, activities }: {
+		person: PersonPage;
+		activities: Activity[];
+	} & SharedProps = $props();
+</script>
+
+<svelte:head>
+	<title>{person.simpleName} - {t('people.titles.edits_history')} - Arbor</title>
+</svelte:head>
+
+<h1 class="mb-3 leading-none text-3xl font-medium">
+	<TitleBar {person}/>
+</h1>
+
+<div class="flex flex-col md:flex-row space-x-2 space-y-2">
+	<main class="grow md:w-1/2 flex flex-col space-y-3">
+		{#each activities as activity}
+			<div class="p-6 bg-white rounded-lg shadow overflow-hidden">
+				{#if activity.description === 'deleted'}
+					{t('people.history.deleted')}
+				{:else if activity.description === 'restored'}
+					{t('people.history.restored')}
+				{:else if activity.description === 'changed-visibility'}
+					{activity.attributes!.visibility ? t('people.history.made_visible') : t('people.history.made_invisible')}
+				{:else if activity.description === 'added-biography'}
+					{t('people.history.added-biography')}
+					<div class="mt-3 p-4 bg-gray-50 text-gray-700 rounded-md space-y-2 break-words">
+						{@html activity.new}
+					</div>
+				{:else if activity.description === 'updated-biography'}
+					{t('people.history.updated-biography')}
+					<div class="mt-3 p-4 bg-gray-50 text-gray-700 rounded-md space-y-2 break-words">
+						{@html activity.new}
+					</div>
+				{:else if activity.description === 'deleted-biography'}
+					{t('people.history.deleted-biography')}
+				{:else}
+					<table class="block md:table">
+						<tbody class="block md:table-row-group">
+							<HistoryText {activity} attribute="id_pytlewski" label="people.pytlewski.id"/>
+							<HistoryText {activity} attribute="id_wielcy" label="people.wielcy.id"/>
+							<HistorySex {activity}/>
+							<HistoryText {activity} attribute="name" label="people.name"/>
+							<HistoryText {activity} attribute="middle_name" label="people.middle_name"/>
+							<HistoryText {activity} attribute="family_name" label="people.family_name"/>
+							<HistoryText {activity} attribute="last_name" label="people.last_name"/>
+							<HistoryText {activity} attribute="birth_date" label="people.birth_date"/>
+							<HistoryText {activity} attribute="birth_place" label="people.birth_place"/>
+							<HistoryText {activity} attribute="dead" label="people.dead"/>
+							<HistoryText {activity} attribute="death_date" label="people.death_date"/>
+							<HistoryText {activity} attribute="death_place" label="people.death_place"/>
+							<HistoryText {activity} attribute="death_cause" label="people.death_cause"/>
+							<HistoryText {activity} attribute="funeral_date" label="people.funeral_date"/>
+							<HistoryText {activity} attribute="funeral_place" label="people.funeral_place"/>
+							<HistoryText {activity} attribute="burial_date" label="people.burial_date"/>
+							<HistoryText {activity} attribute="burial_place" label="people.burial_place"/>
+							<HistoryText {activity} attribute="mother_id" label="people.mother"/>
+							<HistoryText {activity} attribute="father_id" label="people.father"/>
+							<HistorySources {activity}/>
+						</tbody>
+					</table>
+				{/if}
+
+				<div class="-m-6 mt-5 px-6 py-4 bg-gray-50 flex items-center justify-between">
+					{activity.causer}
+					<small>{activity.datetime}</small>
+				</div>
+			</div>
+		{/each}
+	</main>
+
+	<div class="shrink-0 p-1">
+		<SidebarMenu {person} activePage="history"/>
+	</div>
+</div>

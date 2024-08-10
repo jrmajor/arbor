@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePerson;
+use App\Http\Resources\ActivityResource;
 use App\Http\Resources\People\EditPersonResource;
+use App\Http\Resources\People\PersonPageResource;
 use App\Http\Resources\People\PersonResource;
 use App\Http\Resources\People\ShowPersonResource;
-use App\Models\Activity;
 use App\Models\Person;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -193,35 +194,15 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function history(Person $person): View
+    public function history(Person $person): Response
     {
         $this->authorize('viewHistory', $person);
 
-        $activities = $person->activities
-            ->load('causer')
-            ->reverse()
-            ->map(function (Activity $activity) {
-                $newActivity = [
-                    'model' => $activity,
-                    'causer' => $activity->causer,
-                    'description' => $activity->description,
-                    'old' => $activity->properties['old'] ?? false,
-                ];
+        $activities = $person->activities->load('causer')->reverse()->values();
 
-                if ($activity->properties->has('attributes')) {
-                    $newActivity['attributes'] = $activity->properties['attributes'];
-                }
-
-                if ($activity->properties->has('new')) {
-                    $newActivity['new'] = $activity->properties['new'];
-                }
-
-                return $newActivity;
-            });
-
-        return view('people.history', [
-            'person' => $person,
-            'activities' => $activities,
+        return Inertia::render('People/History', [
+            'person' => new PersonPageResource($person),
+            'activities' => ActivityResource::collection($activities),
         ]);
     }
 }

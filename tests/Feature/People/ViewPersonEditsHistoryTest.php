@@ -38,6 +38,6 @@ final class ViewPersonEditsHistoryTest extends TestCase
     {
         $this->withPermissions(3)
             ->get("people/{$this->person->id}/history")
-            ->assertOk();
+            ->assertInertiaComponent('People/History');
     }
 }
