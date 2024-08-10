@@ -6,6 +6,7 @@ use App\Enums\MarriageEventType;
 use App\Enums\MarriageRite;
 use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
+use Carbon\Carbon;
 use Database\Factories\MarriageFactory;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,12 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
+ * @property-read ?Carbon $first_event_date_from
+ * @property-read ?Carbon $first_event_date_to
+ * @property-read ?Carbon $second_event_date_from
+ * @property-read ?Carbon $second_event_date_to
+ * @property-read ?Carbon $divorce_date_from
+ * @property-read ?Carbon $divorce_date_to
  * @property-read string $first_event_date
  * @property-read string $second_event_date
  * @property-read string $divorce_date

@@ -173,7 +173,7 @@
 								<Name person={marriage.partner}/>
 
 								{#if marriage.perm.update}
-									<a href={route('marriages.edit', { marriage })} class="a">
+									<a use:inertia href={route('marriages.edit', { marriage })} class="a">
 										<small>[{t('marriages.marriage')} №{marriage.id}]</small>
 									</a>
 									<!-- todo: check correct permission -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMarriage;
 use App\Http\Resources\ActivityResource;
+use App\Http\Resources\Marriages\EditMarriageResource;
 use App\Http\Resources\Marriages\MarriagePageResource;
 use App\Models\Marriage;
 use App\Models\Person;
@@ -52,11 +53,17 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
-    public function edit(Marriage $marriage): View
+    public function edit(Request $request, Marriage $marriage): View|Response
     {
         $this->authorize('update', $marriage);
 
-        return view('marriages.edit', ['marriage' => $marriage]);
+        if ($request->boolean('old')) {
+            return view('marriages.edit', ['marriage' => $marriage]);
+        }
+
+        return Inertia::render('Marriages/Edit', [
+            'marriage' => new EditMarriageResource($marriage),
+        ]);
     }
 
     public function update(StoreMarriage $request, Marriage $marriage): RedirectResponse
