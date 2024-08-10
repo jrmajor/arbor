@@ -18,7 +18,7 @@
 		value: number | null;
 		initialValue: number | null;
 		sex: Sex | null;
-		nullable: boolean;
+		nullable?: boolean;
 		error: string | null;
 		class?: string;
 	} = $props();

@@ -18,18 +18,25 @@ use function App\flash;
 
 class MarriageController extends Controller
 {
-    public function create(Request $request): View
+    public function create(Request $request): View|Response
     {
         $this->authorize('create', Marriage::class);
 
-        $marriage = new Marriage([
-            'man_order' => 1,
-            'woman_order' => 1,
-            'man_id' => Person::find($request->integer('man'))?->id,
-            'woman_id' => Person::find($request->integer('woman'))?->id,
-        ]);
+        if ($request->boolean('old')) {
+            $marriage = new Marriage([
+                'man_order' => 1,
+                'woman_order' => 1,
+                'man_id' => Person::find($request->integer('man'))?->id,
+                'woman_id' => Person::find($request->integer('woman'))?->id,
+            ]);
 
-        return view('marriages.create', ['marriage' => $marriage]);
+            return view('marriages.create', ['marriage' => $marriage]);
+        }
+
+        return Inertia::render('Marriages/Create', [
+            'manId' => $request->integer('man') ?: null,
+            'womanId' => $request->integer('woman') ?: null,
+        ]);
     }
 
     public function store(StoreMarriage $request): RedirectResponse
