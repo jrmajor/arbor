@@ -27,24 +27,21 @@
 
 <form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
 	<div>
-		<fieldset>
-			<!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
-			<div class="w-full flex flex-col">
-				<!-- svelte-ignore a11y_autofocus -->
-				<textarea
-					autofocus
-					id="biography"
-					rows="20"
-					bind:value={$form.biography}
-					class="form-input w-full min-h-full resize-y"
-					class:invalid={$form.errors.biography}
-				></textarea>
-				{#if $form.errors.biography}
-					<div class="w-full leading-none mt-1">
-						<small class="text-red-500">{$form.errors.biography}</small>
-					</div>
-				{/if}
-			</div>
+		<fieldset class="w-full flex flex-col">
+			<!-- svelte-ignore a11y_autofocus -->
+			<textarea
+				autofocus
+				id="biography"
+				rows="20"
+				bind:value={$form.biography}
+				class="form-input w-full min-h-full resize-y"
+				class:invalid={$form.errors.biography}
+			></textarea>
+			{#if $form.errors.biography}
+				<div class="w-full leading-none mt-1">
+					<small class="text-red-500">{$form.errors.biography}</small>
+				</div>
+			{/if}
 		</fieldset>
 
 		<div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">

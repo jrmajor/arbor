@@ -186,36 +186,33 @@
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('people.external_links')}</div>
 		</div>
-		<fieldset>
-			<!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
-			<div class="space-y-5 md:space-y-0 md:space-x-5 flex flex-col md:flex-row">
-				<div class="w-full md:w-1/2 flex flex-col">
-					<label for="id_wielcy" class="w-full font-medium pb-1 text-gray-700">{@html t('people.wielcy.id')}</label>
-					<div class="w-full flex">
-						<input
-							type="text"
-							id="id_wielcy"
-							bind:value={$form.id_wielcy}
-							class="form-input rounded-r-none w-1/4 md:w-3/8 z-10"
-							class:invalid={$form.errors.id_wielcy}
-						>
-						<input
-							type="text"
-							id="wielcy_search"
-							placeholder={t('misc.coming_soon')}
-							disabled
-							class="form-input rounded-l-none -ml-px w-3/4 md:w-5/8"
-						>
+		<fieldset class="space-y-5 md:space-y-0 md:space-x-5 flex flex-col md:flex-row">
+			<div class="w-full md:w-1/2 flex flex-col">
+				<label for="id_wielcy" class="w-full font-medium pb-1 text-gray-700">{@html t('people.wielcy.id')}</label>
+				<div class="w-full flex">
+					<input
+						type="text"
+						id="id_wielcy"
+						bind:value={$form.id_wielcy}
+						class="form-input rounded-r-none w-1/4 md:w-3/8 z-10"
+						class:invalid={$form.errors.id_wielcy}
+					>
+					<input
+						type="text"
+						id="wielcy_search"
+						placeholder={t('misc.coming_soon')}
+						disabled
+						class="form-input rounded-l-none -ml-px w-3/4 md:w-5/8"
+					>
+				</div>
+				{#if $form.errors.id_wielcy}
+					<div class="w-full leading-none mt-1">
+						<small class="text-red-500">{$form.errors.id_wielcy}</small>
 					</div>
-					{#if $form.errors.id_wielcy}
-						<div class="w-full leading-none mt-1">
-							<small class="text-red-500">{$form.errors.id_wielcy}</small>
-						</div>
-					{/if}
-				</div>
-				<div class="w-full md:w-1/2">
-					<PytlewskiPicker bind:value={$form.id_pytlewski} error={$form.errors.id_pytlewski ?? null}/>
-				</div>
+				{/if}
+			</div>
+			<div class="w-full md:w-1/2">
+				<PytlewskiPicker bind:value={$form.id_pytlewski} error={$form.errors.id_pytlewski ?? null}/>
 			</div>
 		</fieldset>
 
@@ -256,35 +253,32 @@
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('people.birth')}</div>
 		</div>
-		<fieldset>
-			<!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
-			<div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-				<div class="w-full sm:w-1/2 flex flex-col">
-					<label for="birth_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
-					<div class="w-full">
-						<input
-							type="text"
-							id="birth_place"
-							bind:value={$form.birth_place}
-							class="form-input w-full"
-							class:invalid={$form.errors.birth_place}
-						>
-						{#if $form.errors.birth_place}
-							<div class="w-full leading-none mt-1">
-								<small class="text-red-500">{$form.errors.birth_place}</small>
-							</div>
-						{/if}
-					</div>
+		<fieldset class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
+			<div class="w-full sm:w-1/2 flex flex-col">
+				<label for="birth_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
+				<div class="w-full">
+					<input
+						type="text"
+						id="birth_place"
+						bind:value={$form.birth_place}
+						class="form-input w-full"
+						class:invalid={$form.errors.birth_place}
+					>
+					{#if $form.errors.birth_place}
+						<div class="w-full leading-none mt-1">
+							<small class="text-red-500">{$form.errors.birth_place}</small>
+						</div>
+					{/if}
 				</div>
-				<DateRangePicker
-					label={t('misc.date.date')}
-					bind:from={$form.birth_date_from}
-					bind:to={$form.birth_date_to}
-					errorFrom={$form.errors.birth_date_from ?? null}
-					errorTo={$form.errors.birth_date_to ?? null}
-					class="w-full sm:w-1/2"
-				/>
 			</div>
+			<DateRangePicker
+				label={t('misc.date.date')}
+				bind:from={$form.birth_date_from}
+				bind:to={$form.birth_date_to}
+				errorFrom={$form.errors.birth_date_from ?? null}
+				errorTo={$form.errors.birth_date_to ?? null}
+				class="w-full sm:w-1/2"
+			/>
 		</fieldset>
 
 		<hr class="mt-7 mb-6">

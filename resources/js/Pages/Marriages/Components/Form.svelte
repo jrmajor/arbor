@@ -125,47 +125,44 @@
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('marriages.first_event')}</div>
 		</div>
-		<fieldset>
-			<!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
-			<div class="space-y-5 lg:space-y-0 lg:space-x-5 flex flex-col lg:flex-row">
-				<div class="w-full lg:w-1/3 flex flex-col">
-					<label for="first_event_type" class="w-full font-medium pb-1 text-gray-700">{t('marriages.event_type')}</label>
+		<fieldset class="space-y-5 lg:space-y-0 lg:space-x-5 flex flex-col lg:flex-row">
+			<div class="w-full lg:w-1/3 flex flex-col">
+				<label for="first_event_type" class="w-full font-medium pb-1 text-gray-700">{t('marriages.event_type')}</label>
+				<div class="w-full">
+					<select id="first_event_type" bind:value={$form.first_event_type} class="form-select w-full">
+						<option value={null}>b/d</option>
+						{#each EVENT_TYPES as type}
+							<option value={type}>{t(`marriages.event_types.${type}`)}</option>
+						{/each}
+					</select>
+				</div>
+			</div>
+			<div class="space-y-5 sm:space-y-0 sm:space-x-5 w-full sm:w-full lg:w-2/3 flex flex-col sm:flex-row">
+				<div class="w-full sm:w-1/2 flex flex-col">
+					<label for="first_event_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
 					<div class="w-full">
-						<select id="first_event_type" bind:value={$form.first_event_type} class="form-select w-full">
-							<option value={null}>b/d</option>
-							{#each EVENT_TYPES as type}
-								<option value={type}>{t(`marriages.event_types.${type}`)}</option>
-							{/each}
-						</select>
+						<input
+							type="text"
+							id="first_event_place"
+							bind:value={$form.first_event_place}
+							class="form-input w-full"
+							class:invalid={$form.errors.first_event_place}
+						>
+						{#if $form.errors.first_event_place}
+							<div class="w-full leading-none mt-1">
+								<small class="text-red-500">{$form.errors.first_event_place}</small>
+							</div>
+						{/if}
 					</div>
 				</div>
-				<div class="space-y-5 sm:space-y-0 sm:space-x-5 w-full sm:w-full lg:w-2/3 flex flex-col sm:flex-row">
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="first_event_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="first_event_place"
-								bind:value={$form.first_event_place}
-								class="form-input w-full"
-								class:invalid={$form.errors.first_event_place}
-							>
-							{#if $form.errors.first_event_place}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.first_event_place}</small>
-								</div>
-							{/if}
-						</div>
-					</div>
-					<DateRangePicker
-						label={t('misc.date.date')}
-						bind:from={$form.first_event_date_from}
-						bind:to={$form.first_event_date_to}
-						errorFrom={$form.errors.first_event_date_from ?? null}
-						errorTo={$form.errors.first_event_date_to ?? null}
-						class="w-full sm:w-1/2"
-					/>
-				</div>
+				<DateRangePicker
+					label={t('misc.date.date')}
+					bind:from={$form.first_event_date_from}
+					bind:to={$form.first_event_date_to}
+					errorFrom={$form.errors.first_event_date_from ?? null}
+					errorTo={$form.errors.first_event_date_to ?? null}
+					class="w-full sm:w-1/2"
+				/>
 			</div>
 		</fieldset>
 
@@ -174,47 +171,44 @@
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('marriages.second_event')}</div>
 		</div>
-		<fieldset>
-			<!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
-			<div class="space-y-5 lg:space-y-0 lg:space-x-5 flex flex-col lg:flex-row">
-				<div class="w-full lg:w-1/3 flex flex-col">
-					<label for="second_event_type" class="w-full font-medium pb-1 text-gray-700">{t('marriages.event_type')}</label>
+		<fieldset class="space-y-5 lg:space-y-0 lg:space-x-5 flex flex-col lg:flex-row">
+			<div class="w-full lg:w-1/3 flex flex-col">
+				<label for="second_event_type" class="w-full font-medium pb-1 text-gray-700">{t('marriages.event_type')}</label>
+				<div class="w-full">
+					<select id="second_event_type" bind:value={$form.second_event_type} class="form-select w-full">
+						<option value={null}>b/d</option>
+						{#each EVENT_TYPES as type}
+							<option value={type}>{t(`marriages.event_types.${type}`)}</option>
+						{/each}
+					</select>
+				</div>
+			</div>
+			<div class="space-y-5 sm:space-y-0 sm:space-x-5 w-full sm:w-full lg:w-2/3 flex flex-col sm:flex-row">
+				<div class="w-full sm:w-1/2 flex flex-col">
+					<label for="second_event_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
 					<div class="w-full">
-						<select id="second_event_type" bind:value={$form.second_event_type} class="form-select w-full">
-							<option value={null}>b/d</option>
-							{#each EVENT_TYPES as type}
-								<option value={type}>{t(`marriages.event_types.${type}`)}</option>
-							{/each}
-						</select>
+						<input
+							type="text"
+							id="second_event_place"
+							bind:value={$form.second_event_place}
+							class="form-input w-full"
+							class:invalid={$form.errors.second_event_place}
+						>
+						{#if $form.errors.second_event_place}
+							<div class="w-full leading-none mt-1">
+								<small class="text-red-500">{$form.errors.second_event_place}</small>
+							</div>
+						{/if}
 					</div>
 				</div>
-				<div class="space-y-5 sm:space-y-0 sm:space-x-5 w-full sm:w-full lg:w-2/3 flex flex-col sm:flex-row">
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="second_event_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="second_event_place"
-								bind:value={$form.second_event_place}
-								class="form-input w-full"
-								class:invalid={$form.errors.second_event_place}
-							>
-							{#if $form.errors.second_event_place}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.second_event_place}</small>
-								</div>
-							{/if}
-						</div>
-					</div>
-					<DateRangePicker
-						label={t('misc.date.date')}
-						bind:from={$form.second_event_date_from}
-						bind:to={$form.second_event_date_to}
-						errorFrom={$form.errors.second_event_date_from ?? null}
-						errorTo={$form.errors.second_event_date_to ?? null}
-						class="w-full sm:w-1/2"
-					/>
-				</div>
+				<DateRangePicker
+					label={t('misc.date.date')}
+					bind:from={$form.second_event_date_from}
+					bind:to={$form.second_event_date_to}
+					errorFrom={$form.errors.second_event_date_from ?? null}
+					errorTo={$form.errors.second_event_date_to ?? null}
+					class="w-full sm:w-1/2"
+				/>
 			</div>
 		</fieldset>
 
@@ -231,35 +225,32 @@
 			>
 		</div>
 		{#if $form.divorced}
-			<fieldset transition:slide>
-				<!-- https://bugs.chromium.org/p/chromium/issues/detail?id=375693 -->
-				<div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="divorce_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="divorce_place"
-								bind:value={$form.divorce_place}
-								class="form-input w-full"
-								class:invalid={$form.errors.divorce_place}
-							>
-							{#if $form.errors.divorce_place}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.divorce_place}</small>
-								</div>
-							{/if}
-						</div>
+			<fieldset class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row" transition:slide>
+				<div class="w-full sm:w-1/2 flex flex-col">
+					<label for="divorce_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
+					<div class="w-full">
+						<input
+							type="text"
+							id="divorce_place"
+							bind:value={$form.divorce_place}
+							class="form-input w-full"
+							class:invalid={$form.errors.divorce_place}
+						>
+						{#if $form.errors.divorce_place}
+							<div class="w-full leading-none mt-1">
+								<small class="text-red-500">{$form.errors.divorce_place}</small>
+							</div>
+						{/if}
 					</div>
-					<DateRangePicker
-						label={t('misc.date.date')}
-						bind:from={$form.divorce_date_from}
-						bind:to={$form.divorce_date_to}
-						errorFrom={$form.errors.divorce_date_from ?? null}
-						errorTo={$form.errors.divorce_date_to ?? null}
-						class="w-full sm:w-1/2"
-					/>
 				</div>
+				<DateRangePicker
+					label={t('misc.date.date')}
+					bind:from={$form.divorce_date_from}
+					bind:to={$form.divorce_date_to}
+					errorFrom={$form.errors.divorce_date_from ?? null}
+					errorTo={$form.errors.divorce_date_to ?? null}
+					class="w-full sm:w-1/2"
+				/>
 			</fieldset>
 		{/if}
 
