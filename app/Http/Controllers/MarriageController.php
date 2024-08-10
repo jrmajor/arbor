@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMarriage;
-use App\Models\Activity;
+use App\Http\Resources\ActivityResource;
+use App\Http\Resources\Marriages\MarriagePageResource;
 use App\Models\Marriage;
 use App\Models\Person;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 use function App\flash;
 
@@ -84,24 +87,15 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
-    public function history(Marriage $marriage): View
+    public function history(Marriage $marriage): Response
     {
         $this->authorize('viewHistory', $marriage);
 
-        $activities = $marriage->activities
-            ->load('causer')
-            ->reverse()
-            ->map(fn (Activity $activity) => [
-                'model' => $activity,
-                'causer' => $activity->causer,
-                'description' => $activity->description,
-                'old' => $activity->properties['old'] ?? false,
-                'attributes' => $activity->properties['attributes'],
-            ]);
+        $activities = $marriage->activities->load('causer')->reverse()->values();
 
-        return view('marriages.history', [
-            'marriage' => $marriage,
-            'activities' => $activities,
+        return Inertia::render('Marriages/History', [
+            'marriage' => new MarriagePageResource($marriage),
+            'activities' => ActivityResource::collection($activities),
         ]);
     }
 }
