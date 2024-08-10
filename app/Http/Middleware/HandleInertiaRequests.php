@@ -46,6 +46,7 @@ class HandleInertiaRequests extends Middleware
 
         return [
             'username' => $user->username,
+            'email' => $user->email,
             'canWrite' => $user->canWrite(),
             'isSuperAdmin' => $user->isSuperAdmin(),
         ];

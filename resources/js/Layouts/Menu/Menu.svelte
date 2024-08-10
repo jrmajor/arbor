@@ -146,7 +146,8 @@
 					</a>
 				{:else}
 					<a
-						href={route('settings')}
+						use:inertia
+						href={route('settings.edit')}
 						class="lg:hidden px-3 py-1 text-gray-800
 							hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
 							rounded uppercase
@@ -154,7 +155,7 @@
 							focus:outline-none hover:no-underline
 							transition-colors duration-200"
 					>
-						<div class="w-full {activeRoute === 'settings' ? 'border-b-2 border-dotted border-blue-500' : ''} flex items-center">
+						<div class="w-full {activeRoute === 'settings.edit' ? 'border-b-2 border-dotted border-blue-500' : ''} flex items-center">
 							<svg class="fill-current size-4 mr-2" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 								<path d="M3.94 6.5L2.22 3.64l1.42-1.42L6.5 3.94c.52-.3 1.1-.54 1.7-.7L9 0h2l.8 3.24c.6.16 1.18.4 1.7.7l2.86-1.72 1.42 1.42-1.72 2.86c.3.52.54 1.1.7 1.7L20 9v2l-3.24.8c-.16.6-.4 1.18-.7 1.7l1.72 2.86-1.42 1.42-2.86-1.72c-.52.3-1.1.54-1.7.7L11 20H9l-.8-3.24c-.6-.16-1.18-.4-1.7-.7l-2.86 1.72-1.42-1.42 1.72-2.86c-.3-.52-.54-1.1-.7-1.7L0 11V9l3.24-.8c.16-.6.4-1.18.7-1.7zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 							</svg>
@@ -217,11 +218,12 @@
 
 								<div class="flex flex-col overflow-hidden bg-white rounded-lg shadow-2xl">
 									<a
-										href={route('settings')}
+										use:inertia
+										href={route('settings.edit')}
 										class="pl-5 pr-12 py-4 text-gray-800
 											hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
 											border-l-2 border-solid border-transparent
-											{activeRoute === 'settings' ? 'border-blue-500' : 'hover:border-gray-400 focus:border-gray-400 active:border-blue-500'}
+											{activeRoute === 'settings.edit' ? 'border-blue-500' : 'hover:border-gray-400 focus:border-gray-400 active:border-blue-500'}
 											focus:outline-none hover:no-underline
 											transition-colors duration-200"
 									>

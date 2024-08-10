@@ -179,7 +179,7 @@
           </a>
         @else
           <a
-            href="{{ route('settings') }}"
+            href="{{ route('settings.edit') }}"
             class="lg:hidden px-3 py-1 text-gray-800
               hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100
               rounded uppercase
@@ -242,7 +242,7 @@
 
               <div class="flex flex-col overflow-hidden bg-white rounded-lg shadow-2xl">
                 <a
-                  href="{{ route('settings') }}"
+                  href="{{ route('settings.edit') }}"
                   class="pl-5 pr-12 py-4 text-gray-800
                     hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
                     border-l-2 border-solid border-transparent

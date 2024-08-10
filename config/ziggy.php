@@ -15,7 +15,7 @@ return [
         'people.*',
         'marriages.*',
         'dashboard.*',
-        'settings',
+        'settings.*',
         'locale.*',
         'ajax.*',
     ],

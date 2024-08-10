@@ -10,6 +10,7 @@ declare global {
 
 	type SharedUser = {
 		username: string;
+		email: string;
 		canWrite: boolean;
 		isSuperAdmin: boolean;
 	} | null;

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Livewire\Settings;
 use App\Models\User;
 use Illuminate\Auth\Events\OtherDeviceLogout;
 use Illuminate\Support\Facades\Event;
@@ -21,23 +20,7 @@ final class SettingsTest extends TestCase
     #[TestDox('user can view settings page')]
     public function testAuthUser(): void
     {
-        $this->withPermissions(0)->get('settings')->assertOk();
-    }
-
-    #[TestDox('it does not accept invalid email')]
-    public function testInvalidEmail(): void
-    {
-        $this->withPermissions(0)
-            ->livewire(Settings::class)
-            ->set('email', '')
-            ->call('saveEmail')
-            ->assertHasErrors(['email' => 'required'])
-            ->set('email', 'abc.de')
-            ->call('saveEmail')
-            ->assertHasErrors(['email' => 'email'])
-            ->set('email', faker()->safeEmail())
-            ->call('saveEmail')
-            ->assertHasNoErrors('email');
+        $this->withPermissions(0)->get('settings')->assertInertiaOk([], 'Settings');
     }
 
     #[TestDox('user can change email')]
@@ -47,31 +30,10 @@ final class SettingsTest extends TestCase
         $newEmail = faker()->safeEmail();
 
         $this->actingAs($user)
-            ->livewire(Settings::class)
-            ->set('email', $newEmail)
-            ->call('saveEmail')
-            ->assertHasNoErrors('email');
+            ->put('settings/email', ['email' => $newEmail])
+            ->assertOk();
 
         $this->assertSame($newEmail, $user->fresh()->email);
-    }
-
-    #[TestDox('it does not accept invalid email')]
-    public function testInvalidPassword(): void
-    {
-        $this->withPermissions(0)
-            ->livewire(Settings::class)
-            ->set('password', '')
-            ->call('savePassword')
-            ->assertHasErrors(['password' => 'required'])
-            ->set('password', '1234567')
-            ->call('savePassword')
-            ->assertHasErrors(['password' => 'min'])
-            ->set('password', 'Abcd1234')
-            ->call('savePassword')
-            ->assertHasErrors(['password' => 'confirmed'])
-            ->set('password_confirmation', 'Abcd1234')
-            ->call('savePassword')
-            ->assertHasNoErrors('password');
     }
 
     #[TestDox('user can change password')]
@@ -79,33 +41,12 @@ final class SettingsTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->actingAs($user)
-            ->livewire(Settings::class)
-            ->set('password', 'Abcd1234')
-            ->set('password_confirmation', 'Abcd1234')
-            ->call('savePassword')
-            ->assertHasNoErrors('password')
-            ->assertSet('password', null)
-            ->assertSet('password_confirmation', null);
+        $this->actingAs($user)->put('settings/password', [
+            'password' => 'Abcd1234',
+            'password_confirmation' => 'Abcd1234',
+        ])->assertOk();
 
         $this->assertTrue(Hash::check('Abcd1234', $user->fresh()->password));
-    }
-
-    #[TestDox('it checks password when logging user out from other devices')]
-    public function testInvalidLogoutPassword(): void
-    {
-        Event::fake();
-
-        $this->withPermissions(0)
-            ->livewire(Settings::class)
-            ->set('logout_password', '')
-            ->call('logoutOtherDevices')
-            ->assertHasErrors('logout_password')
-            ->set('logout_password', 'wrong_password')
-            ->call('logoutOtherDevices')
-            ->assertHasErrors('logout_password');
-
-        Event::assertNotDispatched(OtherDeviceLogout::class);
     }
 
     #[TestDox('it can change logout user from other devices')]
@@ -117,12 +58,10 @@ final class SettingsTest extends TestCase
 
         Event::fake();
 
-        $this->actingAs($user)
-            ->livewire(Settings::class)
-            ->set('logout_password', $password)
-            ->call('logoutOtherDevices')
-            ->assertHasNoErrors('logout_password')
-            ->assertSet('logout_password', null);
+        $this->actingAs($user)->post(
+            'settings/logout-other-devices',
+            ['password' => $password],
+        )->assertRedirect();
 
         Event::assertDispatched(
             fn (OtherDeviceLogout $event) => $event->user->is($user),

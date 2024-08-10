@@ -58,6 +58,7 @@ final class InertiaSharedPropsTest extends TestCase
                     'activeRoute' => 'test.inertiaProps',
                     'user' => [
                         'username' => $user->username,
+                        'email' => $user->email,
                         'canWrite' => false,
                         'isSuperAdmin' => false,
                     ],

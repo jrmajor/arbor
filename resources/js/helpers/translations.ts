@@ -8,6 +8,8 @@ import deMisc from '../../../lang/de/misc.ftl?raw';
 import enAuth from '../../../lang/en/auth.ftl?raw';
 import plAuth from '../../../lang/pl/auth.ftl?raw';
 import deAuth from '../../../lang/de/auth.ftl?raw';
+import enSettings from '../../../lang/en/settings.ftl?raw';
+import plSettings from '../../../lang/pl/settings.ftl?raw';
 import enPasswords from '../../../lang/en/passwords.ftl?raw';
 import plPasswords from '../../../lang/pl/passwords.ftl?raw';
 import enPeople from '../../../lang/en/people.ftl?raw';
@@ -79,6 +81,7 @@ const bundles: Record<Language, Record<string, FluentBundle>> = {
 	en: {
 		misc: createBundle('en', enMisc),
 		auth: createBundle('en', enAuth),
+		settings: createBundle('en', enSettings),
 		passwords: createBundle('en', enPasswords),
 		people: createBundle('en', enPeople),
 		marriages: createBundle('en', enMarriages),
@@ -86,6 +89,7 @@ const bundles: Record<Language, Record<string, FluentBundle>> = {
 	pl: {
 		misc: createBundle('pl', plMisc),
 		auth: createBundle('pl', plAuth),
+		settings: createBundle('pl', plSettings),
 		passwords: createBundle('pl', plPasswords),
 		people: createBundle('pl', plPeople),
 		marriages: createBundle('pl', plMarriages),
