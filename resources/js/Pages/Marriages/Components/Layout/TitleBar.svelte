@@ -5,11 +5,11 @@
 	let { marriage }: { marriage: MarriagePage } = $props();
 </script>
 
-<span class:invalid={marriage.woman.isDead}>
+<span class:italic={marriage.woman.isDead}>
 	{marriage.woman.name} {marriage.woman.familyName}
 </span>
 +
-<span class:invalid={marriage.man.isDead}>
+<span class:italic={marriage.man.isDead}>
 	{marriage.man.name} {marriage.man.familyName}
 </span>
 
