@@ -45,6 +45,4 @@
 	{t('people.add_a_new_person')}
 </h1>
 
-<main class="p-6 bg-white rounded-lg shadow overflow-hidden">
-	<Form {person} action="create"/>
-</main>
+<Form {person} action="create"/>

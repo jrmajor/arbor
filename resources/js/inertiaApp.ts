@@ -4,15 +4,23 @@ import { mount, type Component } from 'svelte';
 import AuthLayout from '@/Layouts/AuthLayout.svelte';
 import Layout from '@/Layouts/Layout.svelte';
 
+type ComponentFile = {
+	default: Component;
+	layout?: Component;
+};
+
 createInertiaApp({
 	async resolve(name) {
 		const page = await resolvePageComponent(
 			`./Pages/${name}.svelte`,
-			import.meta.glob<{ default: Component }>('./Pages/**/*.svelte'),
+			import.meta.glob<ComponentFile>('./Pages/**/*.svelte'),
 		);
 		return {
 			default: page.default,
-			layout: name.startsWith('Auth/') ? AuthLayout : Layout,
+			layout: [
+				name.startsWith('Auth/') ? AuthLayout : Layout,
+				...(page.layout ? [page.layout] : []),
+			],
 		};
 	},
 	setup({ el, App, props }) {

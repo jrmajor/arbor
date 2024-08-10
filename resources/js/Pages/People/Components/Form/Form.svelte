@@ -64,7 +64,7 @@
 	}
 </script>
 
-<form {onsubmit}>
+<form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
 	<div>
 		<fieldset class="space-y-5">
 			<div class="flex flex-col">
