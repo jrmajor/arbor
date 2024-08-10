@@ -7,7 +7,6 @@ use App\Http\Resources\ActivityResource;
 use App\Http\Resources\Marriages\EditMarriageResource;
 use App\Http\Resources\Marriages\MarriagePageResource;
 use App\Models\Marriage;
-use App\Models\Person;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,20 +18,9 @@ use function App\flash;
 
 class MarriageController extends Controller
 {
-    public function create(Request $request): View|Response
+    public function create(Request $request): Response
     {
         $this->authorize('create', Marriage::class);
-
-        if ($request->boolean('old')) {
-            $marriage = new Marriage([
-                'man_order' => 1,
-                'woman_order' => 1,
-                'man_id' => Person::find($request->integer('man'))?->id,
-                'woman_id' => Person::find($request->integer('woman'))?->id,
-            ]);
-
-            return view('marriages.create', ['marriage' => $marriage]);
-        }
 
         return Inertia::render('Marriages/Create', [
             'manId' => $request->integer('man') ?: null,
