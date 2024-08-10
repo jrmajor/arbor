@@ -7,7 +7,6 @@ use App\Http\Resources\ActivityResource;
 use App\Http\Resources\Marriages\EditMarriageResource;
 use App\Http\Resources\Marriages\MarriagePageResource;
 use App\Models\Marriage;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,13 +40,9 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
-    public function edit(Request $request, Marriage $marriage): View|Response
+    public function edit(Marriage $marriage): Response
     {
         $this->authorize('update', $marriage);
-
-        if ($request->boolean('old')) {
-            return view('marriages.edit', ['marriage' => $marriage]);
-        }
 
         return Inertia::render('Marriages/Edit', [
             'marriage' => new EditMarriageResource($marriage),
