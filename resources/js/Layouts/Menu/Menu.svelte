@@ -75,8 +75,8 @@
 						class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
 							hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
 							rounded lg:rounded-none uppercase lg:normal-case
-							border-b-2 border-solid border-transparent
-							{activeRoute === 'people.create' ? 'lg:border-blue-500' : 'lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500'}
+							border-b-2 border-solid
+							{activeRoute === 'people.create' ? 'lg:border-blue-500' : 'border-transparent lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500'}
 							focus:outline-none hover:no-underline
 							transition-colors duration-200"
 					>
@@ -95,8 +95,8 @@
 						class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
 							hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
 							rounded lg:rounded-none uppercase lg:normal-case
-							border-b-2 border-solid border-transparent
-							{activeRoute.startsWith('dashboard') ? 'lg:border-blue-500' : 'lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500'}
+							border-b-2 border-solid
+							{activeRoute.startsWith('dashboard') ? 'lg:border-blue-500' : 'border-transparent lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500'}
 							focus:outline-none hover:no-underline
 							transition-colors duration-200"
 					>
@@ -191,12 +191,11 @@
 							class="
 								px-3 pt-6 pb-4 text-gray-800
 								hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
-								border-b-2 border-solid border-transparent
-								hover:border-gray-400 focus:border-gray-400 active:border-blue-500
+								border-b-2 border-solid
 								focus:outline-none hover:no-underline
 								transition-color duration-200
 								flex items-center
-								{dropdown ? 'border-blue-500 hover:border-blue-500 focus:border-blue-500' : ''}
+								{dropdown ? 'border-blue-500' : 'border-transparent hover:border-gray-400 focus:border-gray-400 active:border-blue-500'}
 							"
 						>
 							{user.username}
@@ -222,8 +221,8 @@
 										href={route('settings.edit')}
 										class="pl-5 pr-12 py-4 text-gray-800
 											hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
-											border-l-2 border-solid border-transparent
-											{activeRoute === 'settings.edit' ? 'border-blue-500' : 'hover:border-gray-400 focus:border-gray-400 active:border-blue-500'}
+											border-l-2 border-solid
+											{activeRoute === 'settings.edit' ? 'border-blue-500' : 'border-transparent hover:border-gray-400 focus:border-gray-400 active:border-blue-500'}
 											focus:outline-none hover:no-underline
 											transition-colors duration-200"
 									>
