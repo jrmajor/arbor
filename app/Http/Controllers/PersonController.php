@@ -65,18 +65,9 @@ class PersonController extends Controller
         ]);
     }
 
-    public function create(Request $request): View|Response
+    public function create(Request $request): Response
     {
         $this->authorize('create', Person::class);
-
-        if ($request->boolean('old')) {
-            $person = new Person([
-                'father_id' => Person::find($request->integer('father'))?->id,
-                'mother_id' => Person::find($request->integer('mother'))?->id,
-            ]);
-
-            return view('people.create', ['person' => $person]);
-        }
 
         return Inertia::render('People/Create', [
             'fatherId' => $request->integer('father') ?: null,
