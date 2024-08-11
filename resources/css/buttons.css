@@ -5,7 +5,7 @@
     @apply text-white bg-blue-600;
     @apply transition;
 
-    &[disabled] {
+    &[disabled], &.disabled {
       @apply bg-gray-500;
       @apply cursor-default;
     }
@@ -34,7 +34,7 @@
     @apply text-blue-700;
     @apply transition;
 
-    &[disabled] {
+    &[disabled], &.disabled {
       @apply border-gray-500 text-gray-500;
       @apply cursor-default;
     }

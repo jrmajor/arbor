@@ -20,6 +20,10 @@ export default [
 				SharedProps: 'readonly',
 				SharedUser: 'readonly',
 				FlashData: 'readonly',
+				PaginatedResource: 'readonly',
+				PaginationLinks: 'readonly',
+				PaginationMeta: 'readonly',
+				PaginationLink: 'readonly',
 			},
 		},
 		rules: {
