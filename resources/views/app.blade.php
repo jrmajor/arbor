@@ -3,16 +3,6 @@
 @section('head')
     <title inertia>{{ config('app.name') }}</title>
 
-    <script>
-      var arborProps = {
-        appName: {{ new Js(config('app.name')) }},
-        currentLocale: {{ new Js(app()->getLocale()) }},
-        fallbackLocale: {{ new Js(config('app.fallback_locale')) }},
-        otherAvailableLocales: {{ new Js(array_values(array_diff(config('app.available_locales'), [app()->getLocale()]))) }},
-        currentYear: {{ now()->year }},
-      };
-    </script>
-
     @unless (app()->runningUnitTests())
       @vite('resources/css/style.css')
       @vite(['resources/js/inertiaApp.ts', "resources/js/Pages/{$page['component']}.svelte"])

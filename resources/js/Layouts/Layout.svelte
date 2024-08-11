@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
 	import { slide } from 'svelte/transition';
-	import { type RouteList } from 'ziggy-js';
 	import Menu from './Menu/Menu.svelte';
 	import Flash from './Flash.svelte';
 
-	let { flash, activeRoute, user, children }: {
-		flash: FlashData | null;
-		activeRoute: keyof RouteList;
-		user: SharedUser | null;
-		children: Snippet;
-	} = $props();
-
-	const { currentYear } = globalThis.arborProps;
+	let {
+		currentYear,
+		currentLocale,
+		availableLocales,
+		flash,
+		activeRoute,
+		user,
+		children,
+	}: { children: Snippet } & SharedProps = $props();
 
 	let mailto = $state('');
 	$effect(() => {
@@ -20,7 +20,7 @@
 	});
 </script>
 
-<Menu {activeRoute} {user}/>
+<Menu {activeRoute} {user} {currentLocale} {availableLocales}/>
 
 <div class="container mx-auto my-1 p-2 pt-5">
 	{#if flash}

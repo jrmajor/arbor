@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { route, type RouteList } from 'ziggy-js';
 	import { inertia } from '@inertiajs/svelte';
-	import { t } from '@/helpers/translations';
+	import { t, type Language } from '@/helpers/translations';
 	import Search from './Search.svelte';
 
-	let { activeRoute, user }: {
+	let { activeRoute, user, currentLocale, availableLocales }: {
 		activeRoute: keyof RouteList;
 		user: SharedUser | null;
+		currentLocale: Language;
+		availableLocales: Language[];
 	} = $props();
 
 	let containerElement: HTMLElement;
@@ -250,14 +252,14 @@
 				<div class="lg:mt-1 px-2 py-1 text-gray-800 text-sm flex items-center">
 					{t('misc.language')}:&nbsp;
 					<div>
-						{#each globalThis.arborProps.otherAvailableLocales as locale}
-							{#if locale !== globalThis.arborProps.currentLocale}
+						{#each availableLocales as locale}
+							{#if locale !== currentLocale}
 								<button
 									use:inertia={{
 										href: route('locale.store'),
 										method: 'post',
 										data: { language: locale },
-										onFinish: () => location.reload(),
+										onSuccess: () => location.reload(),
 									}}
 									class="btn-out leading-none text-xs rounded px-2"
 								>

@@ -37,7 +37,7 @@ export function t(key: string, args: Record<string, FluentVariable> = {}) {
 }
 
 function getPatternOrFallback(key: string) {
-	const { currentLocale, fallbackLocale } = globalThis.arborProps;
+	const { currentLocale, fallbackLocale } = globalThis.globalProps;
 
 	const [bundleName, messageName, attrName] = key.split('.');
 

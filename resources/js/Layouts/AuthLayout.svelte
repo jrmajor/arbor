@@ -4,7 +4,7 @@
 	import { route } from 'ziggy-js';
 	import { authLayoutTitle } from '@/helpers/context';
 
-	let { children }: { children: Snippet } = $props();
+	let { appName, children }: { children: Snippet } & SharedProps = $props();
 
 	const title = authLayoutTitle.set(writable(null));
 </script>
@@ -20,7 +20,7 @@
 		</main>
 
 		<a href={route('people.index')} class="a text-base">
-			<small>{globalThis.arborProps.appName}</small>
+			<small>{appName}</small>
 		</a>
 	</div>
 </div>

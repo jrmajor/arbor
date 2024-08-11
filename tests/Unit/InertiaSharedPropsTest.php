@@ -32,6 +32,11 @@ final class InertiaSharedPropsTest extends TestCase
             ->assertInertia(function (Assert $page) {
                 $this->assertSame([
                     'errors' => [],
+                    'appName' => config('app.name'),
+                    'currentYear' => now()->year,
+                    'currentLocale' => 'en',
+                    'fallbackLocale' => 'en',
+                    'availableLocales' => ['pl', 'en', 'de'],
                     'flash' => null,
                     'activeRoute' => 'test.inertiaProps',
                     'user' => null,
@@ -51,6 +56,11 @@ final class InertiaSharedPropsTest extends TestCase
             ->assertInertia(function (Assert $page) use ($user) {
                 $this->assertSame([
                     'errors' => [],
+                    'appName' => config('app.name'),
+                    'currentYear' => now()->year,
+                    'currentLocale' => 'en',
+                    'fallbackLocale' => 'en',
+                    'availableLocales' => ['pl', 'en', 'de'],
                     'flash' => [
                         'level' => 'success',
                         'message' => 'Changes have been saved.',

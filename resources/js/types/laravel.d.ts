@@ -1,8 +1,14 @@
 import type { RouteList } from 'ziggy-js';
+import type { Language } from '@/helpers/translations';
 
 declare global {
 	interface SharedProps {
 		errors: Record<string, string>;
+		appName: string;
+		currentYear: number;
+		currentLocale: Language;
+		fallbackLocale: Language;
+		availableLocales: Language[];
 		flash: FlashData | null;
 		activeRoute: keyof RouteList;
 		user: SharedUser;

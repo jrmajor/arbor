@@ -1,6 +1,7 @@
 import { createInertiaApp } from '@inertiajs/svelte';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { mount, type Component } from 'svelte';
+import TranslationsContext from '@/Layouts/TranslationContext.svelte';
 import AuthLayout from '@/Layouts/AuthLayout.svelte';
 import Layout from '@/Layouts/Layout.svelte';
 
@@ -18,6 +19,7 @@ createInertiaApp({
 		return {
 			default: page.default,
 			layout: [
+				TranslationsContext,
 				name.startsWith('Auth/') ? AuthLayout : Layout,
 				...(page.layout ? [page.layout] : []),
 			],
