@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
 	import { inertia } from '@inertiajs/svelte';
-	import type { ShowPersonResource } from '@/types/people';
+	import type { ShowPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import toRoman from '@/helpers/toRoman';
 	import Name from '@/Components/Name.svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
 	import { inertia } from '@inertiajs/svelte';
-	import type { Letters } from '@/types/people';
+	import type { Letters } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 
 	let {

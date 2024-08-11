@@ -5,7 +5,7 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
 	import { useForm } from '@inertiajs/svelte';
-	import type { PersonPage } from '@/types/people';
+	import type { PersonPage } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 
 	let { person }: {

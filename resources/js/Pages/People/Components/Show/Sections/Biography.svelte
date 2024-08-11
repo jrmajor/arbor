@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ShowPersonResource } from '@/types/people';
+	import type { ShowPersonResource } from '@/types/resources/people';
 
 	let { person }: { person: ShowPersonResource } = $props();
 </script>

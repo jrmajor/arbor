@@ -2,7 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import { route } from 'ziggy-js';
 	import { useForm } from '@inertiajs/svelte';
-	import { Sex } from '@/types/people';
+	import { Sex } from '@/types/resources/people';
 	import { RITES, EVENT_TYPES, type EditMarriageResource } from '@/types/resources/marriages';
 	import { t } from '@/helpers/translations';
 	import DateRangePicker from '@/Components/DateRangePicker.svelte';

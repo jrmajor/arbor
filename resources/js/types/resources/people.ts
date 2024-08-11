@@ -36,11 +36,6 @@ type HiddenPerson = PersonCommon & {
 
 export type Person = VisiblePerson | HiddenPerson;
 
-export enum Sex {
-	MALE = 'xy',
-	FEMALE = 'xx',
-}
-
 export type PersonPage = {
 	id: number;
 	sex: Sex;
@@ -151,3 +146,8 @@ type Marriage = {
 		update: boolean;
 	};
 };
+
+export enum Sex {
+	MALE = 'xy',
+	FEMALE = 'xx',
+}

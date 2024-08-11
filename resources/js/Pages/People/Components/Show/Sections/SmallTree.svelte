@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ShowPersonResource } from '@/types/people';
+	import type { ShowPersonResource } from '@/types/resources/people';
 	import Name from '@/Components/Name.svelte';
 
 	let { person }: { person: ShowPersonResource } = $props();

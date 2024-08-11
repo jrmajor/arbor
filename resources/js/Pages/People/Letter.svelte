@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Letters as LettersType, Person } from '@/types/people';
+	import type { Letters as LettersType, Person } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import Name from '@/Components/Name.svelte';
 	import Letters from './Components/Letters.svelte';

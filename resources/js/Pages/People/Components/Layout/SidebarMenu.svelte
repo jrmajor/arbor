@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { Sex, type PersonPage } from '@/types/people';
+	import { Sex, type PersonPage } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import Item from '@/Components/SidebarMenu/Item.svelte';
 

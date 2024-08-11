@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import type { PersonPage } from '@/types/people';
+	import type { PersonPage } from '@/types/resources/people';
 	import type { Activity } from '@/types/resources/activities';
 	import { t } from '@/helpers/translations';
 	import HistorySex from '@/Components/History/Sex.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Pytlewski } from '@/types/pytlewski';
+	import type { Pytlewski } from '@/types/resources/pytlewski';
 	import { t } from '@/helpers/translations';
 	import PytlewskiRelative from './PytlewskiRelative.svelte';
 

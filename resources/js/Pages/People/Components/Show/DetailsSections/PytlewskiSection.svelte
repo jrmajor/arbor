@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import type { ShowPersonResource } from '@/types/people';
+	import type { ShowPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import PytlewskiDetails from '../DetailsSections/PytlewskiDetails.svelte';
 

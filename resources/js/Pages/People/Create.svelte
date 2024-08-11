@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { EditPersonResource } from '@/types/people';
+	import type { EditPersonResource } from '@/types/resources/people';
 	import { t } from	'@/helpers/translations';
 	import Form from './Components/Form/Form.svelte';
 

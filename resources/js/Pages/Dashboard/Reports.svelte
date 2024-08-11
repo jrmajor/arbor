@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import type { Person } from '@/types/people';
+	import type { Person } from '@/types/resources/people';
 	import Name from '@/Components/Name.svelte';
 
 	let { shouldBeDead, visibleAlive, invisibleDead }: {

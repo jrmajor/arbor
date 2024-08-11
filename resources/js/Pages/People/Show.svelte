@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import type { ShowPersonResource } from '@/types/people';
+	import type { ShowPersonResource } from '@/types/resources/people';
 	import Details from './Components/Show/Sections/Details.svelte';
 	import Biography from './Components/Show/Sections/Biography.svelte';
 	import SmallTree from './Components/Show/Sections/SmallTree.svelte';

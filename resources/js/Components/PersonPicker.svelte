@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { SvelteMap } from 'svelte/reactivity';
 	import { route } from 'ziggy-js';
-	import type { Sex } from '@/types/people';
+	import type { Sex } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import { onMount } from 'svelte';
 

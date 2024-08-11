@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import type { PersonPage } from '@/types/people';
+	import type { PersonPage } from '@/types/resources/people';
 	import TitleBar from './TitleBar.svelte';
 	import SidebarMenu from './SidebarMenu.svelte';
 
