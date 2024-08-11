@@ -22,6 +22,6 @@ final class UsersTest extends TestCase
     #[TestDox('users with permissions can view users page')]
     public function testOk(): void
     {
-        $this->withPermissions(4)->get('dashboard/users')->assertOk();
+        $this->withPermissions(4)->get('dashboard/users')->assertInertiaComponent('Dashboard/Users');
     }
 }

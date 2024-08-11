@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Dashboard\UserResource;
 use App\Models\Person;
+use App\Models\User;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class DashboardController extends Controller
 {
@@ -20,6 +24,18 @@ class DashboardController extends Controller
 
             return $next($request);
         });
+    }
+
+    public function users(): Response
+    {
+        $users = User::query()
+            ->with('latestLogin')
+            ->get()
+            ->sortByDesc(fn ($user) => $user->latestLogin?->created_at);
+
+        return Inertia::render('Dashboard/Users', [
+            'users' => UserResource::collection($users),
+        ]);
     }
 
     public function reports(): View

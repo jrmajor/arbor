@@ -4,7 +4,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\SitemapController;
 use App\Livewire\Dashboard\ActivityLog;
-use App\Livewire\Dashboard\Users;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'people')
@@ -13,7 +12,7 @@ Route::permanentRedirect('/', 'people')
 Route::post('locale', LocaleController::class)
     ->name('locale.store');
 
-Route::get('dashboard/users', Users::class)
+Route::get('dashboard/users', [DashboardController::class, 'users'])
     ->middleware('auth')->name('dashboard.users');
 
 Route::get('dashboard/activity-log', ActivityLog::class)
