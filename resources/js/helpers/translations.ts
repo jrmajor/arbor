@@ -18,6 +18,10 @@ import dePeople from '../../../lang/de/people.ftl?raw';
 import enMarriages from '../../../lang/en/marriages.ftl?raw';
 import plMarriages from '../../../lang/pl/marriages.ftl?raw';
 import deMarriages from '../../../lang/de/marriages.ftl?raw';
+import enActivities from '../../../lang/en/activities.ftl?raw';
+import plActivities from '../../../lang/pl/activities.ftl?raw';
+import enUsers from '../../../lang/en/users.ftl?raw';
+import plUsers from '../../../lang/pl/users.ftl?raw';
 
 export type Language = 'en' | 'pl' | 'de';
 
@@ -85,6 +89,8 @@ const bundles: Record<Language, Record<string, FluentBundle>> = {
 		passwords: createBundle('en', enPasswords),
 		people: createBundle('en', enPeople),
 		marriages: createBundle('en', enMarriages),
+		activities: createBundle('en', enActivities),
+		users: createBundle('en', enUsers),
 	},
 	pl: {
 		misc: createBundle('pl', plMisc),
@@ -93,6 +99,8 @@ const bundles: Record<Language, Record<string, FluentBundle>> = {
 		passwords: createBundle('pl', plPasswords),
 		people: createBundle('pl', plPeople),
 		marriages: createBundle('pl', plMarriages),
+		activities: createBundle('pl', plActivities),
+		users: createBundle('pl', plUsers),
 	},
 	de: {
 		misc: createBundle('de', deMisc),

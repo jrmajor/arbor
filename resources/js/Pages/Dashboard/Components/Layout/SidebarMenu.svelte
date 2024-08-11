@@ -21,6 +21,7 @@
 				name="misc.dashboard.activity_log"
 				active={activeRoute === 'dashboard.activityLog'}
 				href={route('dashboard.activityLog')}
+				visitOptions={{}}
 			>
 				<path d="M7.5 1.5a1 1 0 01.949.684L12.5 14.338l1.551-4.654A1 1 0 0115 9h4a1 1 0 110 2h-3.28l-2.271 6.816a1 1 0 01-1.898 0L7.5 5.662l-1.551 4.654A1 1 0 015 11H1a1 1 0 110-2h3.28L6.55 2.184A1 1 0 017.5 1.5z"/>
 			</Item>

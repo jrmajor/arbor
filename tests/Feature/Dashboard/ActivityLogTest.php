@@ -22,6 +22,6 @@ final class ActivityLogTest extends TestCase
     #[TestDox('users with permissions can view activity log')]
     public function testOk(): void
     {
-        $this->withPermissions(4)->get('dashboard/activity-log')->assertOk();
+        $this->withPermissions(4)->get('dashboard/activity-log')->assertInertiaComponent('Dashboard/ActivityLog');
     }
 }

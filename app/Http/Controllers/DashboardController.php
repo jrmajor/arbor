@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Dashboard\ActivityResource;
 use App\Http\Resources\Dashboard\UserResource;
 use App\Http\Resources\People\PersonResource;
+use App\Models\Activity;
 use App\Models\Person;
 use App\Models\User;
 use Closure;
@@ -36,6 +38,19 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard/Users', [
             'users' => UserResource::collection($users),
         ]);
+    }
+
+    public function activityLog(Request $request): Response
+    {
+        $activities = Activity::latest()
+            ->with(['causer', 'subject'])
+            ->whereIn('log_name', ['users', 'people', 'marriages'])
+            ->paginate();
+
+        return Inertia::render(
+            'Dashboard/ActivityLog',
+            ActivityResource::collection($activities)->toResponse($request)->getData(true),
+        );
     }
 
     public function reports(): Response
