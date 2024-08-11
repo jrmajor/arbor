@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { setLocale } from '@/helpers/translationsState.svelte';
 
 	let {
 		currentLocale,
@@ -7,7 +8,8 @@
 		children,
 	}: { children: Snippet } & SharedProps = $props();
 
-	globalThis.globalProps = { currentLocale, fallbackLocale };
+	setLocale(currentLocale, fallbackLocale);
+	$effect(() => setLocale(currentLocale, fallbackLocale));
 </script>
 
 {@render children()}

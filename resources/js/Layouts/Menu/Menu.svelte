@@ -259,7 +259,6 @@
 										href: route('locale.store'),
 										method: 'post',
 										data: { language: locale },
-										onSuccess: () => location.reload(),
 									}}
 									class="btn-out leading-none text-xs rounded px-2"
 								>
