@@ -60,8 +60,6 @@ class PeopleSearchController extends Controller
                 'id' => $p->id,
                 'name' => $p->formatSimpleName(),
                 'dates' => $p->formatSimpleDates(),
-                // todo: generate url on the frontend
-                'url' => route('people.show', $p),
             ]),
             'moreCount' => Math\max([0, $people->count() - 10]),
             'hiddenCount' => $hidden->count(),

@@ -9,7 +9,6 @@
 		id: number;
 		name: string;
 		dates: string | null;
-		url: string;
 	};
 
 	let search = $state('');
@@ -75,7 +74,7 @@
 	function enter() {
 		if (hoveredIndex === null) return;
 		isOpen = false;
-		router.get(results[hoveredIndex].url);
+		router.get(route('people.show', results[hoveredIndex]));
 	}
 
 	function closeDropdown() {
