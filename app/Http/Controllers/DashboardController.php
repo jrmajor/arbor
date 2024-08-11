@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Dashboard\UserResource;
+use App\Http\Resources\People\PersonResource;
 use App\Models\Person;
 use App\Models\User;
 use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function reports(): View
+    public function reports(): Response
     {
         $shouldBeDead = Person::where('dead', false)
             ->where(fn (Builder $q) => $q->whereNotNull([
@@ -54,9 +54,10 @@ class DashboardController extends Controller
         $invisibleDead = Person::where('dead', true)
             ->where('visibility', false)->get();
 
-        return view(
-            'dashboard.reports',
-            compact('shouldBeDead', 'visibleAlive', 'invisibleDead'),
-        );
+        return Inertia::render('Dashboard/Reports', [
+            'shouldBeDead' => PersonResource::collection($shouldBeDead),
+            'visibleAlive' => PersonResource::collection($visibleAlive),
+            'invisibleDead' => PersonResource::collection($invisibleDead),
+        ]);
     }
 }

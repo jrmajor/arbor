@@ -22,6 +22,6 @@ final class ReportsTest extends TestCase
     #[TestDox('users with permissions can view reports')]
     public function testOk(): void
     {
-        $this->withPermissions(4)->get('dashboard/reports')->assertOk();
+        $this->withPermissions(4)->get('dashboard/reports')->assertInertiaComponent('Dashboard/Reports');
     }
 }
