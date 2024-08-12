@@ -204,7 +204,6 @@ export default [
 	{
 		ignores: [
 			'public',
-			'resources/js/classic',
 			'resources/js/helpers/ziggy.*',
 			'vendor',
 			'vite.config.[jt]s.timestamp-*',

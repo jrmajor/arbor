@@ -8,7 +8,7 @@
     @endif
 
     @unless (app()->runningUnitTests())
-      @vite(['resources/css/style.css', 'resources/js/classicApp.ts'])
+      @vite('resources/css/style.css')
     @endif
 @endsection
 

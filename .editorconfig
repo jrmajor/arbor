@@ -17,6 +17,3 @@ indent_size = 2
 [*.{js,ts,svelte}]
 indent_size = 2
 indent_style = tab
-
-[resources/js/classicApp.ts]
-indent_style = space
