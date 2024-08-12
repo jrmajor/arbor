@@ -112,6 +112,7 @@
 				{/if}
 
 				{#if !user}
+					<!-- todo: obfuscate email -->
 					<a
 						href="mailto:jeremiah.major@npng.pl"
 						class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
