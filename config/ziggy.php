@@ -3,7 +3,7 @@
 return [
 
     'output' => [
-        'path' => 'resources/js/types/ziggy.js',
+        'path' => 'resources/js/helpers/ziggy.js',
     ],
 
     'skip-route-function' => true,
