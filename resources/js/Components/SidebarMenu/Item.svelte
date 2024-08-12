@@ -7,37 +7,25 @@
 	let {
 		name,
 		href,
-		visitOptions = null,
+		visitOptions = {},
 		active = false,
 		danger = false,
 		children,
 	}: {
 		name: string;
 		href: string;
-		visitOptions?: (Omit<VisitOptions, 'onBefore'> & { confirm?: string }) | null;
+		visitOptions?: (Omit<VisitOptions, 'href' | 'onBefore'> & { confirm?: string });
 		active?: boolean;
 		danger?: boolean;
 		children: Snippet;
 	} = $props();
 
-	let computedVisitOptions: VisitOptions = $derived.by(() => {
-		if (!visitOptions) {
-			return {
-				onBefore() {
-					window.location.href = href;
-					return false;
-				},
-			};
-		}
-		if (!visitOptions.confirm) return { ...visitOptions, href };
-		return {
-			...visitOptions,
-			href,
-			onBefore: () => confirm(visitOptions.confirm),
-		};
-	});
+	let shouldBeLink = $derived((visitOptions.method ?? 'get') === 'get');
 
-	let shouldBeLink = $derived((computedVisitOptions.method ?? 'get') === 'get');
+	function onBefore() {
+		if (!visitOptions.confirm) return true;
+		return confirm(visitOptions.confirm);
+	}
 </script>
 
 {#if active}
@@ -58,7 +46,7 @@
 {:else}
 	<svelte:element
 		this={shouldBeLink ? 'a' : 'button'}
-		use:inertia={computedVisitOptions}
+		use:inertia={{ ...visitOptions, href, onBefore }}
 		href={shouldBeLink ? href : null}
 		class="
 			group block w-full uppercase transition focus:outline-none
