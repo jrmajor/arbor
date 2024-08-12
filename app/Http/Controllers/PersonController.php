@@ -17,7 +17,6 @@ use Inertia\Inertia;
 use Inertia\Response;
 
 use function App\flash;
-use function App\formatBiography;
 
 class PersonController extends Controller
 {
@@ -88,7 +87,7 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function show(Request $request, Person $person): View|Response|RedirectResponse
+    public function show(Person $person): View|Response|RedirectResponse
     {
         if ($person->trashed()) {
             return Auth::user()?->canViewHistory()
@@ -97,13 +96,6 @@ class PersonController extends Controller
         }
 
         $this->authorize('view', $person);
-
-        if ($request->boolean('old')) {
-            return view('people.person', [
-                'person' => $person,
-                'biography' => formatBiography($person->biography),
-            ]);
-        }
 
         return Inertia::render('People/Show', [
             'person' => new ShowPersonResource($person),
