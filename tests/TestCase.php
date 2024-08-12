@@ -9,9 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Http;
-use Livewire\Component as LivewireComponent;
-use Livewire\Features\SupportTesting\Testable as TestableLivewire;
-use Livewire\Livewire;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\IsInstanceOf;
 use Psl\Iter;
@@ -96,13 +93,5 @@ abstract class TestCase extends BaseTestCase
         $this->assertTrue(
             $actual, "Failed asserting that {$controller}@{$method} uses {$formRequest} form request.",
         );
-    }
-
-    /**
-     * @param class-string<LivewireComponent> $name
-     */
-    protected function livewire(string $name): TestableLivewire
-    {
-        return Livewire::test($name);
     }
 }

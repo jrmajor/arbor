@@ -11,8 +11,6 @@
 
     @routes
 
-    @livewireScriptConfig
-
     @if (config('services.fathom.id'))
       <script
         src="https://cdn.usefathom.com/script.js"

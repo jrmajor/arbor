@@ -31,7 +31,6 @@ return [
     'breadcrumbs' => [
         'logs' => true,
         'cache' => true,
-        'livewire' => true,
         'sql_queries' => true,
         'sql_bindings' => false,
         'queue_info' => true,
