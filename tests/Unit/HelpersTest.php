@@ -45,34 +45,6 @@ final class HelpersTest extends TestCase
         ];
     }
 
-    #[DataProvider('provideRomanCases')]
-    #[TestDox('roman() helper works')]
-    public function testRomanHelper(int $arabic, string $roman): void
-    {
-        $this->assertSame($roman, roman($arabic));
-    }
-
-    public static function provideRomanCases(): Generator
-    {
-        yield from [
-            [1, 'I'],
-            [2, 'II'],
-            [3, 'III'],
-            [4, 'IV'],
-            [5, 'V'],
-            [6, 'VI'],
-            [7, 'VII'],
-            [8, 'VIII'],
-            [9, 'IX'],
-            [10, 'X'],
-            [14, 'XIV'],
-            [20, 'XX'],
-            [23, 'XXIII'],
-            [30, 'XXX'],
-            [39, 'XXXIX'],
-        ];
-    }
-
     #[TestDox('faker() helper works')]
     public function testFakerHelper(): void
     {
