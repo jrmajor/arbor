@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { useForm } from '@inertiajs/svelte';
+	import { inertia, useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import { authLayoutTitle } from '@/helpers/context';
 
@@ -42,7 +42,7 @@
 
 	<div class="mt-4 flex justify-between items-center">
 		<div>
-			<a href={route('login')} class="a mr-1">
+			<a use:inertia href={route('login')} class="a mr-1">
 				<small>{t('auth.sign_in')}</small>
 			</a>
 		</div>

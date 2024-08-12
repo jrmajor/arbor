@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { useForm } from '@inertiajs/svelte';
+	import { inertia, useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import { authLayoutTitle } from '@/helpers/context';
 
@@ -65,7 +65,7 @@
 		</div>
 
 		<div class="grow flex items-center justify-between">
-			<a href={route('password.request')} class="a mr-1">
+			<a use:inertia href={route('password.request')} class="a mr-1">
 				<small>{t('auth.forgot_password')}</small>
 			</a>
 			<button type="submit" class="btn ml-1">

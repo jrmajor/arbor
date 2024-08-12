@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import { route } from 'ziggy-js';
+	import { inertia } from '@inertiajs/svelte';
 	import type { ActivityResource } from '@/types/resources/dashboard';
 	import { t } from '@/helpers/translations';
 	import PaginationLinks from '@/Components/PaginationLinks.svelte';
@@ -27,11 +28,11 @@
 
 						<td class="p-1">
 							{#if activity.logName === 'people'}
-								<a href={route('people.history', activity.subjectId)} class="a">
+								<a use:inertia href={route('people.history', activity.subjectId)} class="a">
 									{t('people.person')} №{activity.subjectId}
 								</a>
 							{:else if activity.logName === 'marriages'}
-								<a href={route('marriages.history', activity.subjectId)} class="a">
+								<a use:inertia href={route('marriages.history', activity.subjectId)} class="a">
 									{t('marriages.marriage')} №{activity.subjectId}
 								</a>
 							{:else if activity.logName === 'users'}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { useForm } from '@inertiajs/svelte';
+	import { inertia, useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import { authLayoutTitle } from '@/helpers/context';
 
@@ -75,7 +75,7 @@
 
 	<div class="mt-4 flex justify-between items-center">
 		<div>
-			<a href={route('people.index')} class="a mr-1">
+			<a use:inertia href={route('people.index')} class="a mr-1">
 				<small>{t('misc.cancel')}</small>
 			</a>
 		</div>

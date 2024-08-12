@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { route } from 'ziggy-js';
+	import { inertia } from '@inertiajs/svelte';
 	import { authLayoutTitle } from '@/helpers/context';
 
 	let { appName, children }: { children: Snippet } & SharedProps = $props();
@@ -19,7 +20,7 @@
 			{@render children()}
 		</main>
 
-		<a href={route('people.index')} class="a text-base">
+		<a use:inertia href={route('people.index')} class="a text-base">
 			<small>{appName}</small>
 		</a>
 	</div>
