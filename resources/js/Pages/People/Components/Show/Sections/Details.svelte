@@ -61,10 +61,10 @@
 				{#if person.age.estimatedBirthDate}
 					<p>
 						{t('people.estimated_birth_date')}: {person.age.estimatedBirthDate}
-						{#if person.age.estimatedBirthDateError}
+						{#if person.age.estimatedBirthDateError !== null}
 							<small>
 								(<strong>{person.age.estimatedBirthDateError}</strong>
-								{t('misc.years_of_error', { age: person.age.estimatedBirthDateError })})
+								{t('misc.years_of_error', { age: person.age.estimatedBirthDateError! })})
 							</small>
 						{/if}
 					</p>
