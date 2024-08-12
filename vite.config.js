@@ -9,7 +9,7 @@ export default defineConfig({
 			input: [
 				'resources/css/style.css',
 				'resources/js/classicApp.ts',
-				'resources/js/inertiaApp.ts',
+				'resources/js/browser.ts',
 			],
 			refresh: true,
 		}),

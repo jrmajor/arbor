@@ -5,7 +5,7 @@
 
     @unless (app()->runningUnitTests())
       @vite('resources/css/style.css')
-      @vite(['resources/js/inertiaApp.ts', "resources/js/Pages/{$page['component']}.svelte"])
+      @vite(['resources/js/browser.ts', "resources/js/Pages/{$page['component']}.svelte"])
     @endif
 
     @inertiaHead
