@@ -110,13 +110,9 @@ class PersonController extends Controller
         ]);
     }
 
-    public function edit(Request $request, Person $person): View|Response
+    public function edit(Person $person): View|Response
     {
         $this->authorize('update', $person);
-
-        if ($request->boolean('old')) {
-            return view('people.edit', ['person' => $person]);
-        }
 
         return Inertia::render('People/Edit', [
             'person' => new EditPersonResource($person),
