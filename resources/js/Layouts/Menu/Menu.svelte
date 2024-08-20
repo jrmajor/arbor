@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { scale } from 'svelte/transition';
 	import { route, type RouteList } from 'ziggy-js';
 	import { inertia } from '@inertiajs/svelte';
 	import { t, type Language } from '@/helpers/translations';
@@ -202,12 +203,13 @@
 							"
 						>
 							{user.username}
-							<svg class="fill-current size-5 ml-1" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-								{#if dropdown}
-									<path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z"/>
-								{:else}
-									<path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-								{/if}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								class="fill-current size-5 ml-1 transition-transform duration-150"
+								class:rotate-180={!dropdown}
+							>
+								<path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z"/>
 							</svg>
 						</button>
 
@@ -215,6 +217,8 @@
 							<div
 								bind:this={dropdownElement}
 								class="flex absolute right-0 z-10 flex-col items-end"
+								style:transform-origin="calc(100% - 2rem) top"
+								transition:scale={{ duration: 150, start: 0.9 }}
 							>
 								<div class="size-0 mr-8 z-20 border-8 border-t-0 border-r-transparent border-l-transparent border-b-white"></div>
 
