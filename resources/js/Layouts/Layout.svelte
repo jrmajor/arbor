@@ -16,6 +16,7 @@
 
 	let mailto = $state('');
 	$effect(() => {
+		// setting it in effect should prevent it from being rendered on server
 		mailto = atob('anJoLm1qckBnbWFpbC5jb20=');
 	});
 </script>
