@@ -9,7 +9,7 @@ declare global {
 		currentLocale: Language;
 		fallbackLocale: Language;
 		availableLocales: Language[];
-		flash: FlashData | null;
+		flash: FlashMessage | null;
 		activeRoute: keyof RouteList;
 		user: SharedUser;
 	}
@@ -21,7 +21,7 @@ declare global {
 		isSuperAdmin: boolean;
 	} | null;
 
-	type FlashData = {
+	type FlashMessage = {
 		level: 'error' | 'warning' | 'success';
 		message: string;
 	};

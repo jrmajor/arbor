@@ -19,7 +19,7 @@ export default [
 				...globals.node,
 				SharedProps: 'readonly',
 				SharedUser: 'readonly',
-				FlashData: 'readonly',
+				FlashMessage: 'readonly',
 				PaginatedResource: 'readonly',
 				PaginationLinks: 'readonly',
 				PaginationMeta: 'readonly',

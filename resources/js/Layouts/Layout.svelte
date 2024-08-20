@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
-	import { slide } from 'svelte/transition';
 	import Menu from './Menu/Menu.svelte';
-	import Flash from './Flash.svelte';
+	import FlashMessages from './FlashMessages.svelte';
 
 	let {
 		currentYear,
@@ -24,11 +23,7 @@
 <Menu {activeRoute} {user} {currentLocale} {availableLocales}/>
 
 <div class="container mx-auto my-1 p-2 pt-5">
-	{#if flash}
-		<div class="mb-6" transition:slide>
-			<Flash {...flash}/>
-		</div>
-	{/if}
+	<FlashMessages {flash}/>
 
 	{@render children()}
 
