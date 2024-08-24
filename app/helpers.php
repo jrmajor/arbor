@@ -22,9 +22,6 @@ function formatBiography(?string $biography): HtmlString
     }
 
     return Fun\pipe(
-        // todo: normalize whitespace before saving to db
-        fn ($s) => Str\trim($s),
-        fn ($s) => Str\replace_every($s, ["\r\n" => "\n", "\r" => "\n"]),
         fn ($s) => e($s),
         fn ($s) => "<p>{$s}</p>",
         fn ($s) => Str\replace($s, "\n\n", "</p>\n<p>"),

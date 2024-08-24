@@ -13,6 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->append(App\Http\Middleware\NormalizeLinebreaks::class);
+
         $middleware->appendToGroup('web', AuthenticateSession::class);
         $middleware->appendToGroup('web', SetLocale::class);
 

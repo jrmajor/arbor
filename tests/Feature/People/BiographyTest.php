@@ -86,6 +86,17 @@ final class BiographyTest extends TestCase
         $this->assertSame($this->newBiography, $this->person->fresh()->biography);
     }
 
+    #[TestDox('whitespace in biography is normalized')]
+    public function testWhitespace(): void
+    {
+        $this->withPermissions(2)
+            ->patch("people/{$this->person->id}/biography", ['biography' => "  foo\r\nbar\n\rbaz\n"])
+            ->assertFound()
+            ->assertRedirect("people/{$this->person->id}");
+
+        $this->assertSame("foo\nbar\n\nbaz", $this->person->fresh()->biography);
+    }
+
     #[TestDox("biography field can't be longer than 10000 characters")]
     public function testValidation(): void
     {
