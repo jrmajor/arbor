@@ -6,6 +6,7 @@
 	import type { PersonPage } from '@/types/resources/people';
 	import type { Activity } from '@/types/resources/activities';
 	import { t } from '@/helpers/translations';
+	import ParagraphsFromNewlines from '@/Components/ParagraphsFromNewlines.svelte';
 	import HistorySex from '@/Components/History/Sex.svelte';
 	import HistorySources from '@/Components/History/Sources.svelte';
 	import HistoryText from '@/Components/History/Text.svelte';
@@ -31,12 +32,12 @@
 		{:else if activity.description === 'added-biography'}
 			{t('people.history.added-biography')}
 			<div class="mt-3 p-4 bg-gray-50 text-gray-700 rounded-md space-y-2 break-words">
-				{@html activity.new}
+				<ParagraphsFromNewlines text={activity.new as unknown as string}/>
 			</div>
 		{:else if activity.description === 'updated-biography'}
 			{t('people.history.updated-biography')}
 			<div class="mt-3 p-4 bg-gray-50 text-gray-700 rounded-md space-y-2 break-words">
-				{@html activity.new}
+				<ParagraphsFromNewlines text={activity.new as unknown as string}/>
 			</div>
 		{:else if activity.description === 'deleted-biography'}
 			{t('people.history.deleted-biography')}

@@ -10,8 +10,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Psl\Dict;
 use Psl\Str;
 
-use function App\formatBiography;
-
 /**
  * @property Activity $resource
  */
@@ -31,9 +29,6 @@ final class ActivityResource extends JsonResource
         $attributes = Dict\map($attributes, function ($value) {
             return match ($this->resource->description) {
                 'created', 'updated' => $this->serializeAttributes($value),
-                'added-biography',
-                'updated-biography',
-                'deleted-biography' => is_string($value) ? (string) formatBiography($value) : $value,
                 default => $value,
             };
         });

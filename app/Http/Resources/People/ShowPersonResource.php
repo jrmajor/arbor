@@ -11,8 +11,6 @@ use App\Services\Sources\Source;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use function App\formatBiography;
-
 /**
  * @property Person $resource
  */
@@ -81,8 +79,7 @@ final class ShowPersonResource extends JsonResource
                 // @phpstan-ignore property.protected
                 'name' => $this->resource->wielcy->name,
             ]),
-            // todo: handle on the frontend
-            'biography' => $this->resource->biography ? (string) formatBiography($this->resource->biography) : null,
+            'biography' => $this->resource->biography,
             'sources' => $this->resource->sources->map(fn (Source $s) => $s->markup()),
         ];
     }

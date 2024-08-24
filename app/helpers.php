@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Illuminate\Support\HtmlString;
 use Psl\Dict;
-use Psl\Fun;
 use Psl\Str;
 use Psl\Type;
 use Spatie\Flash\Flash;
@@ -13,20 +11,6 @@ use Spatie\Flash\Message as FlashMessage;
 function flash(string $class, string $text): void
 {
     app(Flash::class)->flash(new FlashMessage(__($text), $class));
-}
-
-function formatBiography(?string $biography): HtmlString
-{
-    if ($biography === null) {
-        return new HtmlString();
-    }
-
-    return Fun\pipe(
-        fn ($s) => e($s),
-        fn ($s) => "<p>{$s}</p>",
-        fn ($s) => Str\replace($s, "\n\n", "</p>\n<p>"),
-        fn ($s) => new HtmlString($s),
-    )($biography);
 }
 
 /**
