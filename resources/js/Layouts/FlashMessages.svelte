@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { slide } from 'svelte/transition';
 	import { router } from '@inertiajs/svelte';
+	import { flide } from '@/helpers/transitions';
 	import Message from './FlashMessage.svelte';
 
 	let { flash }: { flash: FlashMessage | null } = $props();
@@ -21,10 +21,19 @@
 	}
 </script>
 
-<div class="{messages.length ? 'mb-6' : 'mb-0'} flex flex-col gap-3">
+<div>
 	{#each messages as message, i (message.id)}
-		<div class="message" transition:slide>
+		<div class="message" transition:flide>
 			<Message {...message} ondismiss={() => messages.splice(i, 1)}/>
 		</div>
 	{/each}
 </div>
+
+<style lang="postcss">
+	.message {
+		@apply mb-3;
+	}
+	.message:last-child {
+		@apply mb-6;
+	}
+</style>
