@@ -19,7 +19,7 @@
 <main class="p-6 bg-white rounded-lg shadow">
 	<Letters {letters} {activeType} {activeLetter}/>
 
-	<hr class="-mx-6 my-5 border-t-2 border-dashed">
+	<hr class="-mx-6 my-5 border-t-2 border-dashed text-gray-200">
 
 	<ul>
 		{#each people as person}

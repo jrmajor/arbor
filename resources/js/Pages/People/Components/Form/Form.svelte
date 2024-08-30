@@ -181,7 +181,7 @@
 			</div>
 		</fieldset>
 
-		<hr class="mt-7 mb-6">
+		<hr class="mt-7 mb-6 text-gray-200">
 
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('people.external_links')}</div>
@@ -216,7 +216,7 @@
 			</div>
 		</fieldset>
 
-		<hr class="mt-7 mb-6">
+		<hr class="mt-7 mb-6 text-gray-200">
 
 		<!--
 		<div class="flex flex-wrap mb-2">
@@ -281,7 +281,7 @@
 			/>
 		</fieldset>
 
-		<hr class="mt-7 mb-6">
+		<hr class="mt-7 mb-6 text-gray-200">
 
 		<div class="w-full flex items-center mb-4">
 			<label for="dead" class="font-medium text-xl text-gray-900">
@@ -402,7 +402,7 @@
 			</fieldset>
 		{/if}
 
-		<hr class="mt-7 mb-6">
+		<hr class="mt-7 mb-6 text-gray-200">
 
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('people.parents')}</div>
@@ -430,7 +430,7 @@
 			</div>
 		</fieldset>
 
-		<hr class="mt-7 mb-6">
+		<hr class="mt-7 mb-6 text-gray-200">
 
 		<div class="w-full flex items-center justify-between mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('people.sources')}</div>

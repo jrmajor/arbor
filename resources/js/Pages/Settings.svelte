@@ -60,7 +60,7 @@
 		</div>
 	</form>
 
-	<hr class="mt-7 mb-6">
+	<hr class="mt-7 mb-6 text-gray-200">
 
 	<form onsubmit={submitPassword} class="flex flex-col lg:flex-row">
 		<h2 class="w-full lg:w-1/3 lg:w-1/4 font-medium text-xl text-gray-900 mb-4 sm:mb-0">
@@ -94,7 +94,7 @@
 		</div>
 	</form>
 
-	<hr class="mt-7 mb-6">
+	<hr class="mt-7 mb-6 text-gray-200">
 
 	<form onsubmit={submitLogout} class="flex flex-col lg:flex-row">
 		<h2 class="w-full lg:w-1/3 lg:w-1/4 font-medium text-xl text-gray-900 mb-4 sm:mb-0">

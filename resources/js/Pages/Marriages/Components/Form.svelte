@@ -120,7 +120,7 @@
 			</div>
 		</fieldset>
 
-		<hr class="mt-7 mb-6">
+		<hr class="mt-7 mb-6 text-gray-200">
 
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('marriages.first_event')}</div>
@@ -166,7 +166,7 @@
 			</div>
 		</fieldset>
 
-		<hr class="mt-7 mb-6">
+		<hr class="mt-7 mb-6 text-gray-200">
 
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('marriages.second_event')}</div>
@@ -212,7 +212,7 @@
 			</div>
 		</fieldset>
 
-		<hr class="mt-7 mb-6">
+		<hr class="mt-7 mb-6 text-gray-200">
 
 		<div class="w-full flex items-center mb-4">
 			<label for="divorced" class="font-medium text-xl text-gray-900">{t('marriages.divorce')}</label>

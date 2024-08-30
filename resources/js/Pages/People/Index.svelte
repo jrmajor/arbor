@@ -16,7 +16,7 @@
 <main class="p-6 bg-white rounded-lg shadow">
 	<Letters {letters}/>
 
-	<hr class="-mx-6 my-5 border-t-2 border-dashed">
+	<hr class="-mx-6 my-5 border-t-2 border-dashed text-gray-200">
 
 	<div class="text-center">
 		<small>

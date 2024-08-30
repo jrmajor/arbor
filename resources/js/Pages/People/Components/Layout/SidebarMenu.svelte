@@ -93,7 +93,7 @@
 			{/if}
 
 			{#if !person.isTrashed}
-				<hr class="my-1">
+				<hr class="my-1 text-gray-200">
 
 				<Item
 					name="marriages.add_a_new_marriage"

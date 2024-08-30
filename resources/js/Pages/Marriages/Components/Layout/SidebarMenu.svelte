@@ -58,7 +58,7 @@
 		</div>
 
 		<div class="grow">
-			<hr class="my-1 block xs:hidden md:block">
+			<hr class="my-1 text-gray-200 block xs:hidden md:block">
 
 			<Item
 				name="marriages.add_child"
@@ -67,7 +67,7 @@
 				<path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
 			</Item>
 
-			<hr class="my-1">
+			<hr class="my-1 text-gray-200">
 
 			<Item
 				name="marriages.woman"
