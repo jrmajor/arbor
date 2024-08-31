@@ -14,7 +14,6 @@
 		disabled = false,
 		outline = false,
 		small = false,
-		red = false,
 		class: className = '',
 		children,
 	}: {
@@ -26,7 +25,6 @@
 		disabled?: boolean;
 		outline?: boolean;
 		small?: boolean;
-		red?: boolean;
 		class?: string;
 		children: Snippet;
 	} = $props();
@@ -52,7 +50,6 @@
 		class:btn={!outline}
 		class:btn-out={outline}
 		class:small
-		class:red
 	>
 		{@render children()}
 	</button>
@@ -66,7 +63,6 @@
 		class:disabled
 		class:btn-out={outline}
 		class:small
-		class:red
 	>
 		{@render children()}
 	</a>
@@ -77,7 +73,6 @@
 		class:disabled
 		class:btn-out={outline}
 		class:small
-		class:red
 	>
 		{@render children()}
 	</span>
@@ -99,16 +94,6 @@
       @apply hover:bg-blue-500;
       @apply focus:outline-none focus:border-blue-700 focus:ring;
       @apply active:bg-blue-700;
-    }
-
-    &.red {
-      @apply bg-red-600;
-
-      &:enabled {
-        @apply hover:bg-red-500;
-        @apply focus:border-red-700 focus:ring ring-red-500/50;
-        @apply active:bg-red-700;
-      }
     }
   }
 
