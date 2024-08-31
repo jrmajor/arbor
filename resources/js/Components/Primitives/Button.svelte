@@ -46,9 +46,9 @@
 		{onclick}
 		{type}
 		{disabled}
-		class={className}
-		class:btn={!outline}
-		class:btn-out={outline}
+		class="btn {className}"
+		class:btn-solid={!outline}
+		class:btn-outline={outline}
 		class:small
 	>
 		{@render children()}
@@ -58,20 +58,20 @@
 		use:action={inertiaArgs ?? {}}
 		{href}
 		{rel}
-		class={className}
-		class:btn={!outline}
+		class="btn {className}"
 		class:disabled
-		class:btn-out={outline}
+		class:btn-solid={!outline}
+		class:btn-outline={outline}
 		class:small
 	>
 		{@render children()}
 	</a>
 {:else}
 	<span
-		class={className}
-		class:btn={!outline}
+		class="btn {className}"
 		class:disabled
-		class:btn-out={outline}
+		class:btn-solid={!outline}
+		class:btn-outline={outline}
 		class:small
 	>
 		{@render children()}
@@ -79,15 +79,23 @@
 {/if}
 
 <style lang="postcss">
-  .btn {
-    @apply inline-flex items-center;
-    @apply rounded-md px-4 py-2 leading-5;
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		@apply rounded-md;
+		@apply transition;
+
+		&[disabled], &.disabled {
+      @apply cursor-default;
+    }
+	}
+
+  .btn-solid {
+    @apply px-4 py-1.5;
     @apply text-white bg-blue-600;
-    @apply transition;
 
     &[disabled], &.disabled {
       @apply bg-gray-500;
-      @apply cursor-default;
     }
 
     &:enabled {
@@ -97,16 +105,13 @@
     }
   }
 
-  .btn-out {
-    @apply inline-flex items-center;
-    @apply px-3 py-1 rounded-md;
+  .btn-outline {
+    @apply px-3 py-1;
     @apply border border-blue-700;
     @apply text-blue-700;
-    @apply transition;
 
     &[disabled], &.disabled {
       @apply border-gray-500 text-gray-500;
-      @apply cursor-default;
     }
 
     &:enabled {
