@@ -48,10 +48,11 @@
 		{onclick}
 		{type}
 		{disabled}
-		class="{className} {small ? 'leading-none text-xs rounded px-2' : ''}"
+		class={className}
 		class:btn={!outline}
-		class:btn-red={red}
 		class:btn-out={outline}
+		class:small
+		class:red
 	>
 		{@render children()}
 	</button>
@@ -60,22 +61,77 @@
 		use:action={inertiaArgs ?? {}}
 		{href}
 		{rel}
-		class="{className} {small ? 'leading-none text-xs rounded px-2' : ''}"
+		class={className}
 		class:btn={!outline}
-		class:btn-red={red}
-		class:btn-out={outline}
 		class:disabled
+		class:btn-out={outline}
+		class:small
+		class:red
 	>
 		{@render children()}
 	</a>
 {:else}
 	<span
-		class="{className} {small ? 'leading-none text-xs rounded px-2' : ''}"
+		class={className}
 		class:btn={!outline}
-		class:btn-red={red}
-		class:btn-out={outline}
 		class:disabled
+		class:btn-out={outline}
+		class:small
+		class:red
 	>
 		{@render children()}
 	</span>
 {/if}
+
+<style lang="postcss">
+  .btn {
+    @apply inline-flex items-center;
+    @apply rounded-md px-4 py-2 leading-5;
+    @apply text-white bg-blue-600;
+    @apply transition;
+
+    &[disabled], &.disabled {
+      @apply bg-gray-500;
+      @apply cursor-default;
+    }
+
+    &:enabled {
+      @apply hover:bg-blue-500;
+      @apply focus:outline-none focus:border-blue-700 focus:ring;
+      @apply active:bg-blue-700;
+    }
+
+    &.red {
+      @apply bg-red-600;
+
+      &:enabled {
+        @apply hover:bg-red-500;
+        @apply focus:border-red-700 focus:ring ring-red-500/50;
+        @apply active:bg-red-700;
+      }
+    }
+  }
+
+  .btn-out {
+    @apply inline-flex items-center;
+    @apply px-3 py-1 rounded-md;
+    @apply border border-blue-700;
+    @apply text-blue-700;
+    @apply transition;
+
+    &[disabled], &.disabled {
+      @apply border-gray-500 text-gray-500;
+      @apply cursor-default;
+    }
+
+    &:enabled {
+      @apply hover:bg-blue-100 hover:text-blue-800;
+      @apply focus:outline-none focus:ring;
+      @apply active:bg-blue-600 active:border-blue-600 active:text-blue-100;
+    }
+  }
+
+	.small {
+		@apply leading-none text-xs rounded px-2;
+	}
+</style>
