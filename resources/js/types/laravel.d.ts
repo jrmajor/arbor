@@ -22,6 +22,7 @@ declare global {
 	} | null;
 
 	type FlashMessage = {
+		id: string;
 		level: 'error' | 'warning' | 'success';
 		message: string;
 	};

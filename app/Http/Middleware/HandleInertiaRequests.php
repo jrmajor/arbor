@@ -35,6 +35,7 @@ class HandleInertiaRequests extends Middleware
         }
 
         return [
+            'id' => $message->class,
             'level' => $message->level,
             'message' => $message->message,
         ];

@@ -1,24 +1,23 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { SvelteSet } from 'svelte/reactivity';
 	import { router } from '@inertiajs/svelte';
 	import { flide } from '@/helpers/transitions';
 	import Message from './FlashMessage.svelte';
 
 	let { flash }: { flash: FlashMessage | null } = $props();
 
-	type MessageWithId = FlashMessage & { id: number };
-
-	let messages: MessageWithId[] = $state(flash ? [addId(flash)] : []);
+	let displayedIds = new SvelteSet(flash ? [flash.id] : []);
+	let messages = $state(flash ? [flash] : []);
 
 	onMount(() => {
 		router.on('finish', () => {
-			if (flash) messages.push(addId(flash));
+			if (!flash) return;
+			if (displayedIds.has(flash.id)) return;
+			displayedIds.add(flash.id);
+			messages.push(flash);
 		});
 	});
-
-	function addId(message: FlashMessage) {
-		return { ...message, id: Math.floor(Math.random() * (10 ** 8)) };
-	}
 </script>
 
 <div>

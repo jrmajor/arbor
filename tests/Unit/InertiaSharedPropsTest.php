@@ -54,6 +54,10 @@ final class InertiaSharedPropsTest extends TestCase
             ->get('inertia-shared-props-test')
             ->assertOk()
             ->assertInertia(function (Assert $page) use ($user) {
+                $flashId = $page->toArray()['props']['flash']['id'] ?? null;
+                $this->assertIsString($flashId);
+                $this->assertTrue(strlen($flashId) === 8);
+
                 $this->assertSame([
                     'errors' => [],
                     'appName' => config('app.name'),
@@ -62,6 +66,7 @@ final class InertiaSharedPropsTest extends TestCase
                     'fallbackLocale' => 'en',
                     'availableLocales' => ['pl', 'en', 'de'],
                     'flash' => [
+                        'id' => $flashId,
                         'level' => 'success',
                         'message' => 'Changes have been saved.',
                     ],

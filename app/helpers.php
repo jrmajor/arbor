@@ -3,14 +3,19 @@
 namespace App;
 
 use Psl\Dict;
+use Psl\SecureRandom;
 use Psl\Str;
 use Psl\Type;
 use Spatie\Flash\Flash;
 use Spatie\Flash\Message as FlashMessage;
 
-function flash(string $class, string $text): void
+function flash(string $level, string $text): void
 {
-    app(Flash::class)->flash(new FlashMessage(__($text), $class));
+    app(Flash::class)->flash(new FlashMessage(
+        __($text),
+        SecureRandom\string(8),
+        $level,
+    ));
 }
 
 /**
