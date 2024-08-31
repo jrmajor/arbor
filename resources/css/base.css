@@ -20,34 +20,4 @@
   small {
     @apply font-normal text-gray-500;
   }
-
-  dl {
-    display: grid;
-    grid-template-columns: 1fr;
-
-    @media screen(sm) {
-      grid-template-columns: min-content 1fr;
-    }
-  }
-
-  dt {
-    @apply font-bold sm:relative sm:overflow-hidden sm:whitespace-nowrap;
-
-    @media screen(sm) {
-      width: calc(100% + 1.5rem);
-    }
-
-    &::after {
-      @apply absolute ml-1.5 mt-[0.67rem] font-normal text-[0.4rem] hidden sm:inline;
-      content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
-     }
-  }
-
-  dd {
-    @apply pb-1 pl-4 sm:ml-6;
-  }
-
-  dd:last-child {
-    @apply pb-0;
-  }
 }

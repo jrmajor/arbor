@@ -4,6 +4,7 @@
 	import type { ShowPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import toRoman from '@/helpers/toRoman';
+	import DataList from '@/Components/Primitives/DataList.svelte';
 	import Name from '@/Components/Name.svelte';
 	import OptionalDatePlace from '../OptionalDatePlace.svelte';
 	import PytlewskiSection from '../DetailsSections/PytlewskiSection.svelte';
@@ -14,7 +15,7 @@
 </script>
 
 <div class="p-6 bg-white rounded-lg shadow">
-	<dl>
+	<DataList>
 		<PytlewskiSection {person}/>
 
 		<!-- wielcy -->
@@ -271,5 +272,5 @@
 			<a href="" data-toggle="tooltip" data-html="true" title="click_to_create_note" target="_blank">[+]</a>
 		</dd>
 		-->
-	</dl>
+	</DataList>
 </div>
