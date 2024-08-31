@@ -253,23 +253,23 @@
 
 		<!-- notes -->
 		<!--
-    <dt>
-      Notes
-      <a href="" data-toggle="tooltip" data-html="true" title="show_notes_versions">
-        <small>[total 234_version]</small>
-      </a>&nbsp;
-      <a href="" data-toggle="tooltip" title="edit_notes" target="_blank">
-        <small>[+]</small>
-      </a>&nbsp;
-    </dt>
-    <dd>
-      notes<br>
-      note_deleted_you_can_see <a href="">earlier_versions</a> or <a href="">add_new_one</a>.
-    </dd>
-    <dt>Notes <small>[no_notes]</small></dt>
-    <dd>
-      <a href="" data-toggle="tooltip" data-html="true" title="click_to_create_note" target="_blank">[+]</a>
-    </dd>
-    -->
+		<dt>
+			Notes
+			<a href="" data-toggle="tooltip" data-html="true" title="show_notes_versions">
+				<small>[total 234_version]</small>
+			</a>&nbsp;
+			<a href="" data-toggle="tooltip" title="edit_notes" target="_blank">
+				<small>[+]</small>
+			</a>&nbsp;
+		</dt>
+		<dd>
+			notes<br>
+			note_deleted_you_can_see <a href="">earlier_versions</a> or <a href="">add_new_one</a>.
+		</dd>
+		<dt>Notes <small>[no_notes]</small></dt>
+		<dd>
+			<a href="" data-toggle="tooltip" data-html="true" title="click_to_create_note" target="_blank">[+]</a>
+		</dd>
+		-->
 	</dl>
 </div>

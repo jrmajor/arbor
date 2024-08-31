@@ -87,39 +87,39 @@
 
 		&[disabled], &.disabled {
 			cursor: default;
-    }
+		}
 	}
 
-  .btn-solid {
-    @apply px-4 py-1.5;
-    @apply text-white bg-blue-600;
+	.btn-solid {
+		@apply px-4 py-1.5;
+		@apply text-white bg-blue-600;
 
-    &[disabled], &.disabled {
-      @apply bg-gray-500;
-    }
-
-		&:not([disabled]):not(.disabled) {
-      @apply hover:bg-blue-500;
-      @apply focus:outline-none focus:border-blue-700 focus:ring;
-      @apply active:bg-blue-700;
-    }
-  }
-
-  .btn-outline {
-    @apply px-3 py-1;
-    @apply border border-blue-700;
-    @apply text-blue-700;
-
-    &[disabled], &.disabled {
-      @apply border-gray-500 text-gray-500;
-    }
+		&[disabled], &.disabled {
+			@apply bg-gray-500;
+		}
 
 		&:not([disabled]):not(.disabled) {
-      @apply hover:bg-blue-300/20 hover:text-blue-800;
-      @apply focus:outline-none focus:ring;
-      @apply active:bg-blue-600 active:border-blue-600 active:text-blue-100;
-    }
-  }
+			@apply hover:bg-blue-500;
+			@apply focus:outline-none focus:border-blue-700 focus:ring;
+			@apply active:bg-blue-700;
+		}
+	}
+
+	.btn-outline {
+		@apply px-3 py-1;
+		@apply border border-blue-700;
+		@apply text-blue-700;
+
+		&[disabled], &.disabled {
+			@apply border-gray-500 text-gray-500;
+		}
+
+		&:not([disabled]):not(.disabled) {
+			@apply hover:bg-blue-300/20 hover:text-blue-800;
+			@apply focus:outline-none focus:ring;
+			@apply active:bg-blue-600 active:border-blue-600 active:text-blue-100;
+		}
+	}
 
 	.small {
 		@apply leading-none text-xs rounded px-2;
