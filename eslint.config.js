@@ -29,6 +29,7 @@ export default [
 		rules: {
 			// seems broken, causes parse errors
 			'@typescript-eslint/no-unused-expressions': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
 			// js
 			'arrow-body-style': 'error',
 			'block-scoped-var': 'error',

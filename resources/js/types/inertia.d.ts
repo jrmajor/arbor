@@ -11,9 +11,7 @@ declare module '@inertiajs/svelte' {
 		resolve(name: string): Promise<
 			| Component
 			| {
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				default: Component<any, any, any>;
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				layout: Array<Component<any, any, any>> | Component<any, any, any> | undefined;
 			}
 		>;
