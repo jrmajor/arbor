@@ -41,11 +41,11 @@
 		</div>
 	{/if}
 
-	<div class="mt-4 flex justify-between items-center">
-		<a use:inertia href={route('login')} class="a mr-1">
+	<div class="mt-4 flex items-center justify-between gap-2">
+		<a use:inertia href={route('login')} class="a">
 			<small>{t('auth.sign_in')}</small>
 		</a>
-		<Button type="submit" class="ml-1">
+		<Button type="submit">
 			{t('passwords.send_link')}
 		</Button>
 	</div>

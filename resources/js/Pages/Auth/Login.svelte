@@ -59,17 +59,17 @@
 		</div>
 	{/if}
 
-	<div class="mt-4 flex flex-wrap justify-between items-center">
-		<div class="mr-3 grow flex items-center" style:flex-grow="10">
+	<div class="mt-4 flex flex-wrap items-center justify-between gap-2">
+		<div class="flex grow items-center" style:flex-grow="10">
 			<input type="checkbox" bind:checked={$form.remember} id="remember" class="form-checkbox size-3.5">
 			<label for="remember" class="ml-1"><small>{t('auth.remember')}</small></label>
 		</div>
 
-		<div class="grow flex items-center justify-between">
-			<a use:inertia href={route('password.request')} class="a mr-1">
+		<div class="flex grow items-center justify-between gap-2">
+			<a use:inertia href={route('password.request')} class="a">
 				<small>{t('auth.forgot_password')}</small>
 			</a>
-			<Button type="submit" class="ml-1">
+			<Button type="submit">
 				{t('auth.sign_in')}
 			</Button>
 		</div>

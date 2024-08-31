@@ -14,7 +14,6 @@
 		disabled = false,
 		outline = false,
 		small = false,
-		class: className = '',
 		children,
 	}: {
 		type?: 'button' | 'submit' | 'link';
@@ -25,7 +24,6 @@
 		disabled?: boolean;
 		outline?: boolean;
 		small?: boolean;
-		class?: string;
 		children: Snippet;
 	} = $props();
 
@@ -46,7 +44,7 @@
 		{onclick}
 		{type}
 		{disabled}
-		class="btn {className}"
+		class="btn"
 		class:btn-solid={!outline}
 		class:btn-outline={outline}
 		class:small
@@ -58,7 +56,7 @@
 		use:action={inertiaArgs ?? {}}
 		{href}
 		{rel}
-		class="btn {className}"
+		class="btn"
 		class:disabled
 		class:btn-solid={!outline}
 		class:btn-outline={outline}
@@ -68,7 +66,7 @@
 	</a>
 {:else}
 	<span
-		class="btn {className}"
+		class="btn"
 		class:disabled
 		class:btn-solid={!outline}
 		class:btn-outline={outline}

@@ -74,11 +74,11 @@
 		</div>
 	{/if}
 
-	<div class="mt-4 flex justify-between items-center">
-		<a use:inertia href={route('people.index')} class="a mr-1">
+	<div class="mt-4 flex items-center justify-between gap-2">
+		<a use:inertia href={route('people.index')} class="a">
 			<small>{t('misc.cancel')}</small>
 		</a>
-		<Button type="submit" class="ml-1">
+		<Button type="submit">
 			{t('passwords.reset_password')}
 		</Button>
 	</div>
