@@ -86,7 +86,7 @@
 		@apply transition;
 
 		&[disabled], &.disabled {
-      @apply cursor-default;
+			cursor: default;
     }
 	}
 
@@ -98,7 +98,7 @@
       @apply bg-gray-500;
     }
 
-    &:enabled {
+		&:not([disabled]):not(.disabled) {
       @apply hover:bg-blue-500;
       @apply focus:outline-none focus:border-blue-700 focus:ring;
       @apply active:bg-blue-700;
@@ -114,8 +114,8 @@
       @apply border-gray-500 text-gray-500;
     }
 
-    &:enabled {
-      @apply hover:bg-blue-100 hover:text-blue-800;
+		&:not([disabled]):not(.disabled) {
+      @apply hover:bg-blue-300/20 hover:text-blue-800;
       @apply focus:outline-none focus:ring;
       @apply active:bg-blue-600 active:border-blue-600 active:text-blue-100;
     }
