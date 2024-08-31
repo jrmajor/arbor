@@ -51,8 +51,8 @@ female = female
 male = male
 unknown = unknown
 external_links = External links
+id_in = ID in
 pytlewski =
-    .id = ID in <a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
     .as = as
     .show_more = show more
     .parents = Parents
@@ -61,7 +61,6 @@ pytlewski =
     .siblings = Siblings
     .not_found = not found
 wielcy =
-    .id = ID in <a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
     .as = as
 name = Name
 middle_name = Middle names

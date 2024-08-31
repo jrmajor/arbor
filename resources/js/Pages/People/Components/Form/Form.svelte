@@ -189,7 +189,10 @@
 		</div>
 		<fieldset class="space-y-5 md:space-y-0 md:space-x-5 flex flex-col md:flex-row">
 			<div class="w-full md:w-1/2 flex flex-col">
-				<label for="id_wielcy" class="w-full font-medium pb-1 text-gray-700">{@html t('people.wielcy.id')}</label>
+				<label for="id_wielcy" class="w-full font-medium pb-1 text-gray-700">
+					{t('people.id_in')}
+					<a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
+				</label>
 				<div class="w-full flex">
 					<input
 						type="text"

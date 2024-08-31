@@ -50,8 +50,8 @@ female = Frau
 male = Mann
 unknown = unbekannte
 external_links = External links
+id_in = Personen-ID in
 pytlewski =
-    .id = Personen-ID in <a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
     .as = als
     .show_more = anzeigen weiterer
     .parents = Eltern
@@ -60,7 +60,6 @@ pytlewski =
     .siblings = Geschwister
     .not_found = nicht gefunden
 wielcy =
-    .id = Personen-ID in <a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
     .as = als
 name = Name
 middle_name = Namen

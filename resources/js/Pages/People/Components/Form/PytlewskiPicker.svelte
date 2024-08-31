@@ -34,7 +34,8 @@
 
 <div class="flex flex-col">
 	<label for="id_pytlewski" class="w-full font-medium pb-1 text-gray-700">
-		{@html t('people.pytlewski.id')}
+		{t('people.id_in')}
+		<a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
 	</label>
 	<div class="w-full flex">
 		<input

@@ -13,14 +13,20 @@
 </script>
 
 {#if person.pytlewskiId && !pytlewski}
-	<dt>{@html t('people.pytlewski.id')}</dt>
+	<dt>
+		{t('people.id_in')}
+		<a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
+	</dt>
 	<dd>
 		<a href={person.pytlewskiUrl} target="_blank" class="a">
 			{person.pytlewskiId}
 		</a>
 	</dd>
 {:else if pytlewski}
-	<dt>{@html t('people.pytlewski.id')}</dt>
+	<dt>
+		{t('people.id_in')}
+		<a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
+	</dt>
 	<dd>
 		<a href={person.pytlewskiUrl} target="_blank" class="a">
 			{person.pytlewskiId}

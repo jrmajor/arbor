@@ -20,7 +20,10 @@
 
 		<!-- wielcy -->
 		{#if wielcy}
-			<dt>{@html t('people.wielcy.id')}</dt>
+			<dt>
+				{t('people.id_in')}
+				<a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
+			</dt>
 			<dd>
 				<a href={wielcy.url} target="_blank" class="a">
 					{wielcy.id}

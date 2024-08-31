@@ -44,8 +44,18 @@
 		{:else}
 			<table class="block md:table">
 				<tbody class="block md:table-row-group">
-					<HistoryText {activity} attribute="id_pytlewski" label="people.pytlewski.id"/>
-					<HistoryText {activity} attribute="id_wielcy" label="people.wielcy.id"/>
+					<HistoryText {activity} attribute="id_pytlewski">
+						{#snippet label()}
+							{t('people.id_in')}
+							<a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
+						{/snippet}
+					</HistoryText>
+					<HistoryText {activity} attribute="id_wielcy">
+						{#snippet label()}
+							{t('people.id_in')}
+							<a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
+						{/snippet}
+					</HistoryText>
 					<HistorySex {activity}/>
 					<HistoryText {activity} attribute="name" label="people.name"/>
 					<HistoryText {activity} attribute="middle_name" label="people.middle_name"/>
