@@ -3,6 +3,7 @@
 	import { inertia, useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import { authLayoutTitle } from '@/helpers/context';
+	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { errors }: SharedProps = $props();
 
@@ -68,9 +69,9 @@
 			<a use:inertia href={route('password.request')} class="a mr-1">
 				<small>{t('auth.forgot_password')}</small>
 			</a>
-			<button type="submit" class="btn ml-1">
+			<Button type="submit" class="ml-1">
 				{t('auth.sign_in')}
-			</button>
+			</Button>
 		</div>
 	</div>
 </form>

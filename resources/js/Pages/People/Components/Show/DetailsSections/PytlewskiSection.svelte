@@ -3,6 +3,7 @@
 	import type { ShowPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import PytlewskiDetails from '../DetailsSections/PytlewskiDetails.svelte';
+	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { person }: { person: ShowPersonResource } = $props();
 
@@ -33,12 +34,9 @@
 				{pytlewski.name} {pytlewski.middleName}
 			</small>
 		</a>
-		<button
-			onclick={() => isOpen = !isOpen}
-			class="btn-out leading-none text-xs rounded px-2"
-		>
+		<Button onclick={() => isOpen = !isOpen} outline small>
 			{t('people.pytlewski.show_more')}
-		</button>
+		</Button>
 		{#if isOpen}
 			<div transition:slide>
 				<PytlewskiDetails {pytlewski}/>

@@ -3,6 +3,7 @@
 	import { inertia, useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import { authLayoutTitle } from '@/helpers/context';
+	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { errors }: SharedProps = $props();
 
@@ -41,15 +42,11 @@
 	{/if}
 
 	<div class="mt-4 flex justify-between items-center">
-		<div>
-			<a use:inertia href={route('login')} class="a mr-1">
-				<small>{t('auth.sign_in')}</small>
-			</a>
-		</div>
-		<div>
-			<button type="submit" class="btn ml-1">
-				{t('passwords.send_link')}
-			</button>
-		</div>
+		<a use:inertia href={route('login')} class="a mr-1">
+			<small>{t('auth.sign_in')}</small>
+		</a>
+		<Button type="submit" class="ml-1">
+			{t('passwords.send_link')}
+		</Button>
 	</div>
 </form>

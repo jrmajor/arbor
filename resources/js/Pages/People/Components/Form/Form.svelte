@@ -6,6 +6,7 @@
 	import { t } from '@/helpers/translations';
 	import DateRangePicker from '@/Components/DateRangePicker.svelte';
 	import PersonPicker from '@/Components/PersonPicker.svelte';
+	import Button from '@/Components/Primitives/Button.svelte';
 	import PytlewskiPicker from './PytlewskiPicker.svelte';
 
 	let { person, action }: {
@@ -482,9 +483,7 @@
 		</fieldset>
 
 		<div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
-			<button type="submit" class="btn">
-				{t('misc.save')}
-			</button>
+			<Button type="submit">{t('misc.save')}</Button>
 		</div>
 	</div>
 </form>

@@ -7,6 +7,7 @@
 	import { useForm } from '@inertiajs/svelte';
 	import type { PersonPage } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
+	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { person }: {
 		person: { biography: string | null } & PersonPage;
@@ -45,9 +46,7 @@
 		</fieldset>
 
 		<div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
-			<button type="submit" class="btn">
-				{t('misc.save')}
-			</button>
+			<Button type="submit">{t('misc.save')}</Button>
 		</div>
 	</div>
 </form>

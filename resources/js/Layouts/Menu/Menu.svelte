@@ -3,6 +3,7 @@
 	import { route, type RouteList } from 'ziggy-js';
 	import { inertia } from '@inertiajs/svelte';
 	import { t, type Language } from '@/helpers/translations';
+	import Button from '@/Components/Primitives/Button.svelte';
 	import Search from './Search.svelte';
 
 	let { activeRoute, user, currentLocale, availableLocales }: {
@@ -259,16 +260,17 @@
 					<div>
 						{#each availableLocales as locale}
 							{#if locale !== currentLocale}
-								<button
-									use:inertia={{
+								<Button
+									inertia={{
 										href: route('locale.store'),
 										method: 'post',
 										data: { language: locale },
 									}}
-									class="btn-out leading-none text-xs rounded px-2"
+									outline
+									small
 								>
 									{locale.toUpperCase()}
-								</button>
+								</Button>
 								<span class="hidden"></span>
 							{/if}
 						{/each}

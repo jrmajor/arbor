@@ -2,6 +2,7 @@
 	import { route } from 'ziggy-js';
 	import { useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
+	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { user }: SharedProps = $props();
 
@@ -49,7 +50,7 @@
 					class="form-input w-full sm:w-auto"
 					class:invalid={$emailForm.errors.email}
 				>
-				<button class="btn grow-0">{t('misc.save')}</button>
+				<Button type="submit">{t('misc.save')}</Button>
 			</div>
 
 			{#if $emailForm.errors.email}
@@ -83,7 +84,7 @@
 					class="form-input w-full sm:w-auto"
 					class:invalid={$passwordForm.errors.password}
 				>
-				<button class="btn">{t('misc.save')}</button>
+				<Button type="submit">{t('misc.save')}</Button>
 			</div>
 
 			{#if $passwordForm.errors.password}
@@ -110,7 +111,7 @@
 					class="form-input w-full sm:w-auto"
 					class:invalid={$logoutForm.errors.password}
 				>
-				<button class="btn">{t('settings.logout')}</button>
+				<Button type="submit">{t('settings.logout')}</Button>
 			</div>
 
 			{#if $logoutForm.errors.password}

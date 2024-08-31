@@ -3,6 +3,7 @@
 	import { inertia, useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import { authLayoutTitle } from '@/helpers/context';
+	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { token, email, errors }: {
 		token: string;
@@ -74,15 +75,11 @@
 	{/if}
 
 	<div class="mt-4 flex justify-between items-center">
-		<div>
-			<a use:inertia href={route('people.index')} class="a mr-1">
-				<small>{t('misc.cancel')}</small>
-			</a>
-		</div>
-		<div>
-			<button type="submit" class="btn ml-1">
-				{t('passwords.reset_password')}
-			</button>
-		</div>
+		<a use:inertia href={route('people.index')} class="a mr-1">
+			<small>{t('misc.cancel')}</small>
+		</a>
+		<Button type="submit" class="ml-1">
+			{t('passwords.reset_password')}
+		</Button>
 	</div>
 </form>
