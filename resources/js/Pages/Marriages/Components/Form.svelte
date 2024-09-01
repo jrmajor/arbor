@@ -123,7 +123,6 @@
 					bind:to={$form.first_event_date_to}
 					errorFrom={$form.errors.first_event_date_from ?? null}
 					errorTo={$form.errors.first_event_date_to ?? null}
-					class="w-full sm:w-1/2"
 				/>
 			</div>
 		</fieldset>
@@ -156,7 +155,6 @@
 					bind:to={$form.second_event_date_to}
 					errorFrom={$form.errors.second_event_date_from ?? null}
 					errorTo={$form.errors.second_event_date_to ?? null}
-					class="w-full sm:w-1/2"
 				/>
 			</div>
 		</fieldset>
@@ -184,7 +182,6 @@
 					bind:to={$form.divorce_date_to}
 					errorFrom={$form.errors.divorce_date_from ?? null}
 					errorTo={$form.errors.divorce_date_to ?? null}
-					class="w-full sm:w-1/2"
 				/>
 			</fieldset>
 		{/if}

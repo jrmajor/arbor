@@ -20,14 +20,12 @@
 		to = $bindable(),
 		errorFrom,
 		errorTo,
-		class: className = '',
 	}: {
 		label: string;
 		from: string | null;
 		to: string | null;
 		errorFrom: string | null;
 		errorTo: string | null;
-		class?: string;
 	} = $props();
 
 	const id = `date${Math.floor(Math.random() * (10 ** 8))}`;
@@ -168,7 +166,7 @@
 	}
 </script>
 
-<div class="flex grow basis-full flex-col {className}">
+<div class="flex grow basis-full flex-col">
 	<div class="w-full pb-1 flex items-center">
 		<label for={id} class="font-medium text-gray-700">{label}</label>
 		<button

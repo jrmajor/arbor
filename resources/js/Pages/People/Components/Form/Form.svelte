@@ -185,7 +185,6 @@
 				bind:to={$form.birth_date_to}
 				errorFrom={$form.errors.birth_date_from ?? null}
 				errorTo={$form.errors.birth_date_to ?? null}
-				class="w-full sm:w-1/2"
 			/>
 		</fieldset>
 
