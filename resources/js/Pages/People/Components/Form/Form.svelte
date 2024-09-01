@@ -195,7 +195,6 @@
 			<label for="dead" class="font-medium text-xl text-gray-900">
 				{$form.sex === 'xx' ? t('people.dead.xx') : t('people.dead.xy')}
 			</label>
-			<input type="hidden" id="dead-hidden" name="dead" value="0">
 			<input
 				type="checkbox"
 				id="dead"

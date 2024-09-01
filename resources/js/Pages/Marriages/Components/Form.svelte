@@ -202,7 +202,6 @@
 
 		<div class="w-full flex items-center mb-4">
 			<label for="divorced" class="font-medium text-xl text-gray-900">{t('marriages.divorce')}</label>
-			<input type="hidden" id="divorced-hidden" name="divorced" value="0">
 			<input
 				type="checkbox"
 				id="divorced"
