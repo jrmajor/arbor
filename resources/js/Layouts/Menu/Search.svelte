@@ -87,6 +87,15 @@
 		hoveredIndex = null;
 		shouldCloseOnBlur = true;
 	}
+
+	router.on('start', closeDropdown);
+	router.on('finish', () => {
+		search = '';
+		previousSearch = '';
+		results = [];
+		moreCount = 0;
+		hiddenCount = 0;
+	});
 </script>
 
 <form
