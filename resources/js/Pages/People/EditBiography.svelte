@@ -8,6 +8,7 @@
 	import type { PersonPage } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import Button from '@/Components/Primitives/Button.svelte';
+	import * as Form from '@/Components/Forms';
 
 	let { person }: {
 		person: { biography: string | null } & PersonPage;
@@ -38,11 +39,7 @@
 				class="form-input w-full min-h-full resize-y"
 				class:invalid={$form.errors.biography}
 			></textarea>
-			{#if $form.errors.biography}
-				<div class="w-full leading-none mt-1">
-					<small class="text-red-500">{$form.errors.biography}</small>
-				</div>
-			{/if}
+			<Form.Error error={$form.errors.biography}/>
 		</fieldset>
 
 		<div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">

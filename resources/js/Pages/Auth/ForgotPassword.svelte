@@ -5,6 +5,7 @@
 	import { authLayoutTitle } from '@/helpers/context';
 	import Link from '@/Components/Primitives/Link.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
+	import * as Form from '@/Components/Forms';
 
 	let { errors }: SharedProps = $props();
 
@@ -36,11 +37,7 @@
 			>
 		</div>
 	</div>
-	{#if errors.email}
-		<div class="w-full leading-none mt-1 text-left">
-			<small class="text-red-500">{errors.email}</small>
-		</div>
-	{/if}
+	<Form.Error error={errors.email}/>
 
 	<div class="mt-4 flex items-center justify-between gap-2">
 		<Link href={route('login')}>

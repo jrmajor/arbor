@@ -8,6 +8,7 @@
 	import PersonPicker from '@/Components/PersonPicker.svelte';
 	import Link from '@/Components/Primitives/Link.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
+	import * as Form from '@/Components/Forms';
 	import PytlewskiPicker from './PytlewskiPicker.svelte';
 
 	let { person, action }: {
@@ -119,11 +120,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.name}
 							>
-							{#if $form.errors.name}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.name}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.name}/>
 						</div>
 					</div>
 					<div class="w-full sm:w-1/2 flex flex-col">
@@ -136,11 +133,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.middle_name}
 							>
-							{#if $form.errors.middle_name}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.middle_name}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.middle_name}/>
 						</div>
 					</div>
 				</div>
@@ -155,11 +148,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.family_name}
 							>
-							{#if $form.errors.family_name}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.family_name}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.family_name}/>
 						</div>
 					</div>
 					<div class="w-full sm:w-1/2 flex flex-col">
@@ -172,11 +161,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.last_name}
 							>
-							{#if $form.errors.last_name}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.last_name}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.last_name}/>
 						</div>
 					</div>
 				</div>
@@ -210,11 +195,7 @@
 						class="form-input rounded-l-none -ml-px w-3/4 md:w-5/8"
 					>
 				</div>
-				{#if $form.errors.id_wielcy}
-					<div class="w-full leading-none mt-1">
-						<small class="text-red-500">{$form.errors.id_wielcy}</small>
-					</div>
-				{/if}
+				<Form.Error error={$form.errors.id_wielcy}/>
 			</div>
 			<div class="w-full md:w-1/2">
 				<PytlewskiPicker bind:value={$form.id_pytlewski} error={$form.errors.id_pytlewski ?? null}/>
@@ -269,11 +250,7 @@
 						class="form-input w-full"
 						class:invalid={$form.errors.birth_place}
 					>
-					{#if $form.errors.birth_place}
-						<div class="w-full leading-none mt-1">
-							<small class="text-red-500">{$form.errors.birth_place}</small>
-						</div>
-					{/if}
+					<Form.Error error={$form.errors.birth_place}/>
 				</div>
 			</div>
 			<DateRangePicker
@@ -313,11 +290,7 @@
 							class="form-input w-full sm:w-2/3 lg:w-1/3"
 							class:invalid={$form.errors.death_cause}
 						>
-						{#if $form.errors.death_cause}
-							<div class="w-full leading-none mt-1">
-								<small class="text-red-500">{$form.errors.death_cause}</small>
-							</div>
-						{/if}
+						<Form.Error error={$form.errors.death_cause}/>
 					</div>
 				</div>
 
@@ -332,11 +305,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.death_place}
 							>
-							{#if $form.errors.death_place}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.death_place}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.death_place}/>
 						</div>
 					</div>
 					<DateRangePicker
@@ -360,11 +329,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.funeral_place}
 							>
-							{#if $form.errors.funeral_place}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.funeral_place}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.funeral_place}/>
 						</div>
 					</div>
 					<DateRangePicker
@@ -388,11 +353,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.burial_place}
 							>
-							{#if $form.errors.burial_place}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.burial_place}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.burial_place}/>
 						</div>
 					</div>
 					<DateRangePicker
@@ -478,11 +439,7 @@
 						{/each}
 					</div>
 				{/if}
-				{#if sourceError}
-					<div class="w-full leading-none mt-1">
-						<small class="text-red-500">{sourceError}</small>
-					</div>
-				{/if}
+				<Form.Error error={sourceError}/>
 			</div>
 		</fieldset>
 

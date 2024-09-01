@@ -12,6 +12,7 @@
 		isSameMonth,
 	} from 'date-fns';
 	import { t } from '@/helpers/translations';
+	import * as Form from '@/Components/Forms';
 
 	let {
 		label,
@@ -225,15 +226,7 @@
 				</div>
 			{/if}
 		</div>
-		{#if errorFrom}
-			<div class="w-full leading-none mt-1">
-				<small class="text-red-500">{errorFrom}</small>
-			</div>
-		{/if}
-		{#if errorTo}
-			<div class="w-full leading-none mt-1">
-				<small class="text-red-500">{errorTo}</small>
-			</div>
-		{/if}
+		<Form.Error error={errorFrom}/>
+		<Form.Error error={errorTo}/>
 	</div>
 </div>

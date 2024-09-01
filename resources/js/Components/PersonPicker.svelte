@@ -4,6 +4,7 @@
 	import type { Sex } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import { onMount } from 'svelte';
+	import * as Form from '@/Components/Forms';
 
 	let {
 		label,
@@ -201,9 +202,7 @@
 				</ul>
 			{/if}
 		</div>
-		{#if error}
-			<small class="text-red-500">{error}</small>
-		{/if}
+		<Form.Error error={error}/>
 	</div>
 </div>
 

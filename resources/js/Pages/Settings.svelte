@@ -3,6 +3,7 @@
 	import { useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import Button from '@/Components/Primitives/Button.svelte';
+	import * as Form from '@/Components/Forms';
 
 	let { user }: SharedProps = $props();
 
@@ -52,12 +53,7 @@
 				>
 				<Button type="submit">{t('misc.save')}</Button>
 			</div>
-
-			{#if $emailForm.errors.email}
-				<div class="w-full leading-none mt-1">
-					<small class="text-red-500">{$emailForm.errors.email}</small>
-				</div>
-			{/if}
+			<Form.Error error={$emailForm.errors.email}/>
 		</div>
 	</form>
 
@@ -86,12 +82,7 @@
 				>
 				<Button type="submit">{t('misc.save')}</Button>
 			</div>
-
-			{#if $passwordForm.errors.password}
-				<div class="w-full leading-none mt-1">
-					<small class="text-red-500">{$passwordForm.errors.password}</small>
-				</div>
-			{/if}
+			<Form.Error error={$passwordForm.errors.password}/>
 		</div>
 	</form>
 
@@ -113,12 +104,7 @@
 				>
 				<Button type="submit">{t('settings.logout')}</Button>
 			</div>
-
-			{#if $logoutForm.errors.password}
-				<div class="w-full leading-none mt-1">
-					<small class="text-red-500">{$logoutForm.errors.password}</small>
-				</div>
-			{/if}
+			<Form.Error error={$logoutForm.errors.password}/>
 		</div>
 	</form>
 </main>

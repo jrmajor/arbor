@@ -3,6 +3,7 @@
 	import { route } from 'ziggy-js';
 	import { t } from '@/helpers/translations';
 	import Link from '@/Components/Primitives/Link.svelte';
+	import * as Form from '@/Components/Forms';
 
 	let { value = $bindable(), error }: {
 		value: string | null;
@@ -56,9 +57,5 @@
 			disabled
 		>
 	</div>
-	{#if error}
-		<div class="w-full leading-none mt-1">
-			<small class="text-red-500">{error}</small>
-		</div>
-	{/if}
+	<Form.Error error={error}/>
 </div>

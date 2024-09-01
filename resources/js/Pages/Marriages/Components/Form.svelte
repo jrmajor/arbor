@@ -8,6 +8,7 @@
 	import DateRangePicker from '@/Components/DateRangePicker.svelte';
 	import PersonPicker from '@/Components/PersonPicker.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
+	import * as Form from '@/Components/Forms';
 
 	let { marriage, action }: {
 		marriage: EditMarriageResource;
@@ -82,11 +83,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.woman_order}
 							>
-							{#if $form.errors.woman_order}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.woman_order}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.woman_order}/>
 						</div>
 					</div>
 					<div class="flex flex-col">
@@ -99,11 +96,7 @@
 								class="form-input w-full"
 								class:invalid={$form.errors.man_order}
 							>
-							{#if $form.errors.man_order}
-								<div class="w-full leading-none mt-1">
-									<small class="text-red-500">{$form.errors.man_order}</small>
-								</div>
-							{/if}
+							<Form.Error error={$form.errors.man_order}/>
 						</div>
 					</div>
 				</div>
@@ -149,11 +142,7 @@
 							class="form-input w-full"
 							class:invalid={$form.errors.first_event_place}
 						>
-						{#if $form.errors.first_event_place}
-							<div class="w-full leading-none mt-1">
-								<small class="text-red-500">{$form.errors.first_event_place}</small>
-							</div>
-						{/if}
+						<Form.Error error={$form.errors.first_event_place}/>
 					</div>
 				</div>
 				<DateRangePicker
@@ -195,11 +184,7 @@
 							class="form-input w-full"
 							class:invalid={$form.errors.second_event_place}
 						>
-						{#if $form.errors.second_event_place}
-							<div class="w-full leading-none mt-1">
-								<small class="text-red-500">{$form.errors.second_event_place}</small>
-							</div>
-						{/if}
+						<Form.Error error={$form.errors.second_event_place}/>
 					</div>
 				</div>
 				<DateRangePicker
@@ -237,11 +222,7 @@
 							class="form-input w-full"
 							class:invalid={$form.errors.divorce_place}
 						>
-						{#if $form.errors.divorce_place}
-							<div class="w-full leading-none mt-1">
-								<small class="text-red-500">{$form.errors.divorce_place}</small>
-							</div>
-						{/if}
+						<Form.Error error={$form.errors.divorce_place}/>
 					</div>
 				</div>
 				<DateRangePicker
