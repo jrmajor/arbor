@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { inertia, useForm } from '@inertiajs/svelte';
+	import { useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import { authLayoutTitle } from '@/helpers/context';
+	import Link from '@/Components/Primitives/Link.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { errors }: SharedProps = $props();
@@ -66,9 +67,9 @@
 		</div>
 
 		<div class="flex grow items-center justify-between gap-2">
-			<a use:inertia href={route('password.request')} class="a">
+			<Link href={route('password.request')}>
 				<small>{t('auth.forgot_password')}</small>
-			</a>
+			</Link>
 			<Button type="submit">
 				{t('auth.sign_in')}
 			</Button>

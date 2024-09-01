@@ -4,9 +4,9 @@
 
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { inertia } from '@inertiajs/svelte';
 	import type { ActivityResource } from '@/types/resources/dashboard';
 	import { t } from '@/helpers/translations';
+	import Link from '@/Components/Primitives/Link.svelte';
 	import PaginationLinks from '@/Components/PaginationLinks.svelte';
 
 	let { data: activities, meta }: PaginatedResource<ActivityResource> & SharedProps = $props();
@@ -28,13 +28,13 @@
 
 						<td class="p-1">
 							{#if activity.logName === 'people'}
-								<a use:inertia href={route('people.history', activity.subjectId)} class="a">
+								<Link href={route('people.history', activity.subjectId)}>
 									{t('people.person')} №{activity.subjectId}
-								</a>
+								</Link>
 							{:else if activity.logName === 'marriages'}
-								<a use:inertia href={route('marriages.history', activity.subjectId)} class="a">
+								<Link href={route('marriages.history', activity.subjectId)}>
 									{t('marriages.marriage')} №{activity.subjectId}
-								</a>
+								</Link>
 							{:else if activity.logName === 'users'}
 								{t('users.user')} №{activity.subjectId}
 							{/if}

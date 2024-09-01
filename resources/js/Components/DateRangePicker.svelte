@@ -173,7 +173,7 @@
 		<button
 			type="button"
 			onclick={() => advancedPicker = !advancedPicker}
-			class="ml-2 a underline leading-none text-sm"
+			class="ml-2 text-sm leading-none text-blue-700 underline transition-colors duration-100 hover:text-blue-800 focus:text-blue-800"
 		>
 			<!-- todo: block simple picker when date is complex -->
 			{advancedPicker ? t('misc.date.simple') : t('misc.date.advanced')}

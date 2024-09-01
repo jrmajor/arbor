@@ -6,6 +6,7 @@
 	import { t } from '@/helpers/translations';
 	import DateRangePicker from '@/Components/DateRangePicker.svelte';
 	import PersonPicker from '@/Components/PersonPicker.svelte';
+	import Link from '@/Components/Primitives/Link.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import PytlewskiPicker from './PytlewskiPicker.svelte';
 
@@ -191,7 +192,7 @@
 			<div class="w-full md:w-1/2 flex flex-col">
 				<label for="id_wielcy" class="w-full font-medium pb-1 text-gray-700">
 					{t('people.id_in')}
-					<a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
+					<Link href="http://www.wielcy.pl/" external>wielcy.pl</Link>
 				</label>
 				<div class="w-full flex">
 					<input

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { inertia } from '@inertiajs/svelte';
 	import type { Letters } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
+	import Link from '@/Components/Primitives/Link.svelte';
 
 	let {
 		letters,
@@ -20,15 +20,11 @@
 
 	<ul class="columns-3 xs:columns-4 sm:columns-5 md:columns-6 lg:columns-8">
 		{#each letters.family as letter}
-			<li>
-				<a
-					use:inertia
-					href={route('people.letter', { type: 'f', letter: letter.letter })}
-					class="a"
-					class:font-bold={activeType === 'f' && activeLetter === letter.letter}
-				>
-					{letter.letter} <small>[{letter.count}]</small>
-				</a>
+			<li class:font-bold={activeType === 'f' && activeLetter === letter.letter}>
+				<Link href={route('people.letter', { type: 'f', letter: letter.letter })}>
+					{letter.letter}
+					<small>[{letter.count}]</small>
+				</Link>
 			</li>
 		{/each}
 	</ul>
@@ -39,15 +35,11 @@
 
 	<ul class="columns-3 xs:columns-4 sm:columns-5 md:columns-6 lg:columns-8">
 		{#each letters.last as letter}
-			<li>
-				<a
-					use:inertia
-					href={route('people.letter', { type: 'l', letter: letter.letter })}
-					class="a"
-					class:font-bold={activeType === 'l' && activeLetter === letter.letter}
-				>
-					{letter.letter} <small>[{letter.count}]</small>
-				</a>
+			<li class:font-bold={activeType === 'l' && activeLetter === letter.letter}>
+				<Link href={route('people.letter', { type: 'l', letter: letter.letter })}>
+					{letter.letter}
+					<small>[{letter.count}]</small>
+				</Link>
 			</li>
 		{/each}
 	</ul>

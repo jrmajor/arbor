@@ -6,6 +6,7 @@
 	import type { PersonPage } from '@/types/resources/people';
 	import type { Activity } from '@/types/resources/activities';
 	import { t } from '@/helpers/translations';
+	import Link from '@/Components/Primitives/Link.svelte';
 	import ParagraphsFromNewlines from '@/Components/ParagraphsFromNewlines.svelte';
 	import HistorySex from '@/Components/History/Sex.svelte';
 	import HistorySources from '@/Components/History/Sources.svelte';
@@ -47,13 +48,13 @@
 					<HistoryText {activity} attribute="id_pytlewski">
 						{#snippet label()}
 							{t('people.id_in')}
-							<a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
+							<Link href="http://www.pytlewski.pl/index/drzewo/" external>pytlewski.pl</Link>
 						{/snippet}
 					</HistoryText>
 					<HistoryText {activity} attribute="id_wielcy">
 						{#snippet label()}
 							{t('people.id_in')}
-							<a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
+							<Link href="http://www.wielcy.pl/" external>wielcy.pl</Link>
 						{/snippet}
 					</HistoryText>
 					<HistorySex {activity}/>

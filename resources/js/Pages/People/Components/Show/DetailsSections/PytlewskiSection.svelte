@@ -2,8 +2,9 @@
 	import { slide } from 'svelte/transition';
 	import type { ShowPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
-	import PytlewskiDetails from '../DetailsSections/PytlewskiDetails.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
+	import Link from '@/Components/Primitives/Link.svelte';
+	import PytlewskiDetails from '../DetailsSections/PytlewskiDetails.svelte';
 
 	let { person }: { person: ShowPersonResource } = $props();
 
@@ -15,20 +16,20 @@
 {#if person.pytlewskiId && !pytlewski}
 	<dt>
 		{t('people.id_in')}
-		<a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
+		<Link href="http://www.pytlewski.pl/index/drzewo/" external>pytlewski.pl</Link>
 	</dt>
 	<dd>
-		<a href={person.pytlewskiUrl} target="_blank" class="a">
+		<Link href={person.pytlewskiUrl} external>
 			{person.pytlewskiId}
-		</a>
+		</Link>
 	</dd>
 {:else if pytlewski}
 	<dt>
 		{t('people.id_in')}
-		<a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
+		<Link href="http://www.pytlewski.pl/index/drzewo/" external>pytlewski.pl</Link>
 	</dt>
 	<dd>
-		<a href={person.pytlewskiUrl} target="_blank" class="a">
+		<Link href={person.pytlewskiUrl} external>
 			{person.pytlewskiId}
 			<small>
 				{t('people.pytlewski.as')}
@@ -39,7 +40,7 @@
 				{/if}
 				{pytlewski.name} {pytlewski.middleName}
 			</small>
-		</a>
+		</Link>
 		<Button onclick={() => isOpen = !isOpen} outline small>
 			{t('people.pytlewski.show_more')}
 		</Button>

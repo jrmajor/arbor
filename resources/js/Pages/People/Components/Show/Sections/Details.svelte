@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { inertia } from '@inertiajs/svelte';
 	import type { ShowPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import toRoman from '@/helpers/toRoman';
+	import Link from '@/Components/Primitives/Link.svelte';
 	import DataList from '@/Components/Primitives/DataList.svelte';
 	import Name from '@/Components/Name.svelte';
 	import Source from '@/Components/Source.svelte';
@@ -23,15 +23,15 @@
 		{#if wielcy}
 			<dt>
 				{t('people.id_in')}
-				<a href="http://www.wielcy.pl/" target="_blank" class="a">wielcy.pl</a>
+				<Link href="http://www.wielcy.pl/" external>wielcy.pl</Link>
 			</dt>
 			<dd>
-				<a href={wielcy.url} target="_blank" class="a">
+				<Link href={wielcy.url} external>
 					{wielcy.id}
 					{#if wielcy.name}
 						<small>{t('people.wielcy.as')} {wielcy.name}</small>
 					{/if}
-				</a>
+				</Link>
 			</dd>
 		{/if}
 
@@ -178,20 +178,18 @@
 								<Name person={marriage.partner}/>
 
 								{#if marriage.perm.update}
-									<a use:inertia href={route('marriages.edit', { marriage })} class="a">
+									<Link href={route('marriages.edit', { marriage })}>
 										<small>[{t('marriages.marriage')} №{marriage.id}]</small>
-									</a>
+									</Link>
 									<!-- todo: check correct permission -->
-									<a
-										use:inertia
+									<Link
 										href={route('people.create', {
 											mother: person.sex === 'xy' ? marriage.partner.id : person.id,
 											father: person.sex === 'xy' ? person.id : marriage.partner.id,
 										})}
-										class="a"
 									>
 										<small>[+]</small>
-									</a>
+									</Link>
 								{/if}
 
 								{#if marriage.firstEvent}

@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { route } from 'ziggy-js';
 	import { t } from '@/helpers/translations';
+	import Link from '@/Components/Primitives/Link.svelte';
 
 	let { value = $bindable(), error }: {
 		value: string | null;
@@ -35,7 +36,7 @@
 <div class="flex flex-col">
 	<label for="id_pytlewski" class="w-full font-medium pb-1 text-gray-700">
 		{t('people.id_in')}
-		<a href="http://www.pytlewski.pl/index/drzewo/" target="_blank" class="a">pytlewski.pl</a>
+		<Link href="http://www.pytlewski.pl/index/drzewo/" external>pytlewski.pl</Link>
 	</label>
 	<div class="w-full flex">
 		<input

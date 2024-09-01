@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { inertia } from '@inertiajs/svelte';
 	import type { Person } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
+	import Link from '@/Components/Primitives/Link.svelte';
 
 	let {
 		person,
@@ -25,32 +25,34 @@
 {/if}
 
 {#if person.visible}
-	<a use:inertia href={route('people.show', person)} class="a" class:italic={person.isDead}>
-		{person.name}
-		{#if person.lastName}
-			<span class:font-semibold={bold === 'l'}>{person.lastName}</span>
-			(<span class:font-semibold={bold === 'f'}>{person.familyName}</span>)
-		{:else}
-			<span class:font-semibold={bold}>{person.familyName}</span>
-		{/if}
-		{#if showYears}
-			{#if person.birthYear && person.deathYear}
-				(&#8727;&#xFE0E;{person.birthYear}, &#10013;&#xFE0E;{person.deathYear})
-			{:else if person.birthYear}
-				(&#8727;&#xFE0E;{person.birthYear})
-			{:else if person.deathYear}
-				(&#10013;&#xFE0E;{person.deathYear})
+	<Link href={route('people.show', person)}>
+		<span class:italic={person.isDead}>
+			{person.name}
+			{#if person.lastName}
+				<span class:font-semibold={bold === 'l'}>{person.lastName}</span>
+				(<span class:font-semibold={bold === 'f'}>{person.familyName}</span>)
+			{:else}
+				<span class:font-semibold={bold}>{person.familyName}</span>
 			{/if}
-		{/if}
-	</a>
+			{#if showYears}
+				{#if person.birthYear && person.deathYear}
+					(&#8727;&#xFE0E;{person.birthYear}, &#10013;&#xFE0E;{person.deathYear})
+				{:else if person.birthYear}
+					(&#8727;&#xFE0E;{person.birthYear})
+				{:else if person.deathYear}
+					(&#10013;&#xFE0E;{person.deathYear})
+				{/if}
+			{/if}
+		</span>
+	</Link>
 {:else}
 	<small>[{t('misc.hidden')}]</small>
 {/if}
 
 {#if person.perm.update}
-	<a use:inertia href={route('people.edit', person)} class="a">
+	<Link href={route('people.edit', person)}>
 		<small>[№{person.id}]</small>
-	</a>
+	</Link>
 {/if}
 
 <style lang="postcss">

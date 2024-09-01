@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import { inertia, useForm } from '@inertiajs/svelte';
+	import { useForm } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
 	import { authLayoutTitle } from '@/helpers/context';
+	import Link from '@/Components/Primitives/Link.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { token, email, errors }: {
@@ -75,9 +76,9 @@
 	{/if}
 
 	<div class="mt-4 flex items-center justify-between gap-2">
-		<a use:inertia href={route('people.index')} class="a">
+		<Link href={route('people.index')}>
 			<small>{t('misc.cancel')}</small>
-		</a>
+		</Link>
 		<Button type="submit">
 			{t('passwords.reset_password')}
 		</Button>

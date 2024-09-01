@@ -3,20 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  .a {
-    @apply text-blue-700;
-    @apply transition-colors duration-100;
-    @apply hover:text-blue-800 focus:text-blue-800;
-
-    & small {
-      @apply text-gray-700;
-    }
-
-    &:hover small, &:focus small {
-      @apply text-gray-800;
-    }
-  }
-
   small {
     @apply font-normal text-gray-500;
   }
