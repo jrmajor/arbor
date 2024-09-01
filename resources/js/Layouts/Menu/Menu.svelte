@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { scale } from 'svelte/transition';
 	import { route, type RouteList } from 'ziggy-js';
-	import { inertia } from '@inertiajs/svelte';
+	import { inertia, router } from '@inertiajs/svelte';
 	import { t, type Language } from '@/helpers/translations';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import Search from './Search.svelte';
@@ -24,6 +24,13 @@
 		if (open && !containerElement.contains(event.target as Node)) open = false;
 		if (dropdown && !dropdownElement.contains(event.target as Node)) dropdown = false;
 	}
+
+	router.on('start', () => {
+		dropdown = false;
+	});
+	router.on('finish', () => {
+		open = false;
+	});
 </script>
 
 <svelte:document onclick={clickOutside}/>
