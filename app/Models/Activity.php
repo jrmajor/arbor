@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use Spatie\Activitylog\Contracts\Activity as ActivityContract;
 
 /**
- * @property Collection|null $properties
+ * @property Collection<string, mixed>|null $properties
  */
 class Activity extends Model implements ActivityContract
 {

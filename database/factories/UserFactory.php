@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
  * @extends Factory<User>
  *
  * @property Faker&InternetFaker $faker
+ *
+ * @phpstan-ignore propertyTag.unresolvableType
  */
 class UserFactory extends Factory
 {
