@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Activity } from '@/types/resources/activities';
 	import { t } from '@/helpers/translations';
+	import Source from '@/Components/Source.svelte';
 
 	let { activity }: { activity: Activity } = $props();
 </script>
@@ -16,7 +17,7 @@
 				{#if Array.isArray(activity.old.sources) && activity.old.sources.length}
 					{#each activity.old.sources as source, i}
 						{i > 0 ? ', ' : ''}
-						<small>{@html source}</small>
+						<Source html={source}/>
 					{/each}
 				{:else}
 					<span class="text-gray-500">{t('misc.null')}</span>
@@ -30,7 +31,7 @@
 			{#if Array.isArray(activity.attributes.sources) && activity.attributes.sources.length}
 				{#each activity.attributes.sources as source, i}
 					{i > 0 ? ', ' : ''}
-					<small>{@html source}</small>
+					<Source html={source}/>
 				{/each}
 			{:else}
 				<span class="text-gray-500">{t('misc.null')}</span>

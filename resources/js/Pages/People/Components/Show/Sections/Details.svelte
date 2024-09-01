@@ -6,6 +6,7 @@
 	import toRoman from '@/helpers/toRoman';
 	import DataList from '@/Components/Primitives/DataList.svelte';
 	import Name from '@/Components/Name.svelte';
+	import Source from '@/Components/Source.svelte';
 	import OptionalDatePlace from '../OptionalDatePlace.svelte';
 	import PytlewskiSection from '../DetailsSections/PytlewskiSection.svelte';
 
@@ -249,7 +250,7 @@
 			<dd>
 				<ul>
 					{#each person.sources as source}
-						<li><small class="text-black">{@html source}</small></li>
+						<li><Source html={source}/></li>
 					{/each}
 				</ul>
 			</dd>

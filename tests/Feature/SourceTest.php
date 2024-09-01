@@ -30,7 +30,7 @@ final class SourceTest extends TestCase
     public function testWhitespace(): void
     {
         $this->assertSame(
-            '<i>text</i> <a href="https://example.com" class="a"><i>link</i> text</a>',
+            '<i>text</i> <a href="https://example.com"><i>link</i> text</a>',
             Source::from("   *text*     \n    [  *link*\ntext](https://example.com)\r\n")->markup(),
         );
     }
@@ -57,7 +57,7 @@ final class SourceTest extends TestCase
     public function testLinksParse(): void
     {
         $this->assertSame(
-            '<a href="https://wikipedia.com/wiki" class="a">wiki</a>',
+            '<a href="https://wikipedia.com/wiki">wiki</a>',
             Source::from('[wiki](https://wikipedia.com/wiki)')->markup(),
         );
     }
@@ -75,7 +75,7 @@ final class SourceTest extends TestCase
     public function testUrls(): void
     {
         $this->assertSame(
-            '<a href="https://wikipedia.com/wiki" class="a">https://wikipedia.com/wiki</a>',
+            '<a href="https://wikipedia.com/wiki">https://wikipedia.com/wiki</a>',
             Source::from('https://wikipedia.com/wiki')->markup(),
         );
     }
@@ -84,7 +84,7 @@ final class SourceTest extends TestCase
     public function testOnlyHttpLinks(): void
     {
         $this->assertSame(
-            '<a href="git%3A//wikipedia.com/wiki" class="a">git</a>',
+            '<a href="git%3A//wikipedia.com/wiki">git</a>',
             Source::from('[git](git://wikipedia.com/wiki)')->markup(),
         );
     }
@@ -93,7 +93,7 @@ final class SourceTest extends TestCase
     public function testItalicsParse(): void
     {
         $this->assertSame(
-            '<i>text</i> <a href="https://weird.*domain*" class="a"><i>link</i> text</a>',
+            '<i>text</i> <a href="https://weird.*domain*"><i>link</i> text</a>',
             Source::from('*text* [*link* text](https://weird.*domain*)')->markup(),
         );
     }
@@ -102,7 +102,7 @@ final class SourceTest extends TestCase
     public function testItalicsEscape(): void
     {
         $this->assertSame(
-            '*text* <a href="https://weird.*domain*" class="a">*link* text</a>',
+            '*text* <a href="https://weird.*domain*">*link* text</a>',
             Source::from('\\*text\\* [\\*link* text](https://weird.*domain*)')->markup(),
         );
     }
@@ -113,12 +113,12 @@ final class SourceTest extends TestCase
         $this->app->setLocale('pl');
 
         $this->assertSame(
-            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/0306406158" target="_blank" title="ISBN 0-306-40615-8 w Wikipedii" class="a">ISBN 0-306-40615-8</a>',
+            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/0306406158" target="_blank" title="ISBN 0-306-40615-8 w Wikipedii">ISBN 0-306-40615-8</a>',
             Source::from('exampIe ISBN 0-306-40615-8')->markup(),
         );
 
         $this->assertSame(
-            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/030640615X" target="_blank" title="ISBN 0-306-40615-X w Wikipedii" class="a">ISBN 0-306-40615-X</a> text',
+            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/030640615X" target="_blank" title="ISBN 0-306-40615-X w Wikipedii">ISBN 0-306-40615-X</a> text',
             Source::from('exampIe ISBN 0-306-40615-X text')->markup(),
         );
     }
@@ -129,14 +129,14 @@ final class SourceTest extends TestCase
         app()->setLocale('pl');
 
         $this->assertSame(
-            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/0306406158" target="_blank" title="ISBN 0-306-40615-8 w Wikipedii" class="a">ISBN 0-306-40615-8</a>',
+            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/0306406158" target="_blank" title="ISBN 0-306-40615-8 w Wikipedii">ISBN 0-306-40615-8</a>',
             Source::from('exampIe ISBN 0-306-40615-8')->markup(),
         );
 
         app()->setLocale('en');
 
         $this->assertSame(
-            'exampIe <a href="https://en.wikipedia.org/wiki/Special:BookSources/0306406158" target="_blank" title="ISBN 0-306-40615-8 in Wikipedia" class="a">ISBN 0-306-40615-8</a>',
+            'exampIe <a href="https://en.wikipedia.org/wiki/Special:BookSources/0306406158" target="_blank" title="ISBN 0-306-40615-8 in Wikipedia">ISBN 0-306-40615-8</a>',
             Source::from('exampIe ISBN 0-306-40615-8')->markup(),
         );
     }
@@ -147,12 +147,12 @@ final class SourceTest extends TestCase
         app()->setLocale('pl');
 
         $this->assertSame(
-            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/9780306406157" target="_blank" title="ISBN 978-0-306-40615-7 w Wikipedii" class="a">ISBN 978-0-306-40615-7</a> text',
+            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/9780306406157" target="_blank" title="ISBN 978-0-306-40615-7 w Wikipedii">ISBN 978-0-306-40615-7</a> text',
             Source::from('exampIe ISBN 978-0-306-40615-7 text')->markup(),
         );
 
         $this->assertSame(
-            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/9790306406157" target="_blank" title="ISBN 979-0-306-40615-7 w Wikipedii" class="a">ISBN 979-0-306-40615-7</a> text',
+            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/9790306406157" target="_blank" title="ISBN 979-0-306-40615-7 w Wikipedii">ISBN 979-0-306-40615-7</a> text',
             Source::from('exampIe ISBN 979-0-306-40615-7 text')->markup(),
         );
 
@@ -168,14 +168,14 @@ final class SourceTest extends TestCase
         app()->setLocale('pl');
 
         $this->assertSame(
-            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/9780306406157" target="_blank" title="ISBN 978-0-306-40615-7 w Wikipedii" class="a">ISBN 978-0-306-40615-7</a> text',
+            'exampIe <a href="https://pl.wikipedia.org/wiki/Specjalna:Książki/9780306406157" target="_blank" title="ISBN 978-0-306-40615-7 w Wikipedii">ISBN 978-0-306-40615-7</a> text',
             Source::from('exampIe ISBN 978-0-306-40615-7 text')->markup(),
         );
 
         app()->setLocale('en');
 
         $this->assertSame(
-            'exampIe <a href="https://en.wikipedia.org/wiki/Special:BookSources/9780306406157" target="_blank" title="ISBN 978-0-306-40615-7 in Wikipedia" class="a">ISBN 978-0-306-40615-7</a> text',
+            'exampIe <a href="https://en.wikipedia.org/wiki/Special:BookSources/9780306406157" target="_blank" title="ISBN 978-0-306-40615-7 in Wikipedia">ISBN 978-0-306-40615-7</a> text',
             Source::from('exampIe ISBN 978-0-306-40615-7 text')->markup(),
         );
     }

@@ -207,7 +207,6 @@ final class Source implements Jsonable
                     'href' => __('people.isbn_url') . $number,
                     'target' => '_blank',
                     'title' => 'ISBN ' . $matches[1] . ' ' . __('people.isbn_in_wikipedia'),
-                    'class' => 'a',
                 ],
             ],
         ];
@@ -228,7 +227,6 @@ final class Source implements Jsonable
             'attributes' => [
                 'href' => null,
                 'title' => null,
-                'class' => 'a',
             ],
         ];
 
@@ -305,7 +303,6 @@ final class Source implements Jsonable
                 'text' => $url,
                 'attributes' => [
                     'href' => $url,
-                    'class' => 'a',
                 ],
             ],
         ];
