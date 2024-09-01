@@ -70,100 +70,35 @@
 <form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
 	<div>
 		<fieldset class="space-y-5">
-			<div class="flex flex-col">
-				<legend class="w-full font-medium pb-1 text-gray-700">{t('people.sex')}</legend>
-				<div class="w-full">
-					<div class="flex flex-col sm:flex-row sm:space-x-6">
-						<div class="w-full sm:w-auto flex items-center">
-							<input
-								type="radio"
-								id="sex_male"
-								bind:group={$form.sex}
-								value="xy"
-								class="form-radio"
-							>
-							<label class="ml-2" for="sex_male">{t('people.male')}</label>
-						</div>
-						<div class="w-full sm:w-auto flex items-center">
-							<input
-								type="radio"
-								id="sex_female"
-								bind:group={$form.sex}
-								value="xx"
-								class="form-radio"
-							>
-							<label class="ml-2" for="sex_female">{t('people.female')}</label>
-						</div>
-						<div class="w-full sm:w-auto flex items-center">
-							<input
-								type="radio"
-								id="sex_unknown"
-								bind:group={$form.sex}
-								value={null}
-								class="form-radio"
-							>
-							<label class="ml-2" for="sex_unknown">{t('people.unknown')}</label>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Form.Field error={$form.errors.sex}>
+				<Form.Label legend>{t('people.sex')}</Form.Label>
+				<Form.RadioGroup bind:value={$form.sex}>
+					<Form.Radio value="xy">{t('people.male')}</Form.Radio>
+					<Form.Radio value="xx">{t('people.female')}</Form.Radio>
+					<Form.Radio value={null}>{t('people.unknown')}</Form.Radio>
+				</Form.RadioGroup>
+			</Form.Field>
 
-			<div class="space-y-5 lg:space-y-0 lg:space-x-5 flex flex-col lg:flex-row">
-				<div class="space-y-5 sm:space-y-0 sm:space-x-5 w-full lg:w-1/2 flex flex-col sm:flex-row">
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="name" class="w-full font-medium pb-1 text-gray-700">{t('people.name')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="name"
-								bind:value={$form.name}
-								class="form-input w-full"
-								class:invalid={$form.errors.name}
-							>
-							<Form.Error error={$form.errors.name}/>
-						</div>
-					</div>
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="middle_name" class="w-full font-medium pb-1 text-gray-700">{t('people.middle_name')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="middle_name"
-								bind:value={$form.middle_name}
-								class="form-input w-full"
-								class:invalid={$form.errors.middle_name}
-							>
-							<Form.Error error={$form.errors.middle_name}/>
-						</div>
-					</div>
+			<div class="flex flex-col gap-5 lg:flex-row">
+				<div class="flex flex-col gap-5 sm:flex-row lg:w-1/2">
+					<Form.Field error={$form.errors.name}>
+						<Form.Label>{t('people.name')}</Form.Label>
+						<Form.Input bind:value={$form.name}/>
+					</Form.Field>
+					<Form.Field error={$form.errors.middle_name}>
+						<Form.Label>{t('people.middle_name')}</Form.Label>
+						<Form.Input bind:value={$form.middle_name}/>
+					</Form.Field>
 				</div>
-				<div class="space-y-5 sm:space-y-0 sm:space-x-5 w-full lg:w-1/2 flex flex-col sm:flex-row">
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="family_name" class="w-full font-medium pb-1 text-gray-700">{t('people.family_name')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="family_name"
-								bind:value={$form.family_name}
-								class="form-input w-full"
-								class:invalid={$form.errors.family_name}
-							>
-							<Form.Error error={$form.errors.family_name}/>
-						</div>
-					</div>
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="last_name" class="w-full font-medium pb-1 text-gray-700">{t('people.last_name')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="last_name"
-								bind:value={$form.last_name}
-								class="form-input w-full"
-								class:invalid={$form.errors.last_name}
-							>
-							<Form.Error error={$form.errors.last_name}/>
-						</div>
-					</div>
+				<div class="flex w-full flex-col gap-5 sm:flex-row lg:w-1/2">
+					<Form.Field error={$form.errors.family_name}>
+						<Form.Label>{t('people.family_name')}</Form.Label>
+						<Form.Input bind:value={$form.family_name}/>
+					</Form.Field>
+					<Form.Field error={$form.errors.last_name}>
+						<Form.Label>{t('people.last_name')}</Form.Label>
+						<Form.Input bind:value={$form.last_name}/>
+					</Form.Field>
 				</div>
 			</div>
 		</fieldset>
@@ -239,20 +174,11 @@
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('people.birth')}</div>
 		</div>
-		<fieldset class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-			<div class="w-full sm:w-1/2 flex flex-col">
-				<label for="birth_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
-				<div class="w-full">
-					<input
-						type="text"
-						id="birth_place"
-						bind:value={$form.birth_place}
-						class="form-input w-full"
-						class:invalid={$form.errors.birth_place}
-					>
-					<Form.Error error={$form.errors.birth_place}/>
-				</div>
-			</div>
+		<fieldset class="gap-5 flex flex-col sm:flex-row">
+			<Form.Field error={$form.errors.birth_place}>
+				<Form.Label>{t('misc.place')}</Form.Label>
+				<Form.Input bind:value={$form.birth_place}/>
+			</Form.Field>
 			<DateRangePicker
 				label={t('misc.date.date')}
 				bind:from={$form.birth_date_from}
@@ -280,89 +206,52 @@
 
 		{#if $form.dead}
 			<fieldset class="space-y-5" transition:slide>
-				<div class="w-full">
-					<label for="death_cause" class="w-full font-medium pb-1 text-gray-700">{t('people.death_cause')}</label>
-					<div class="w-full">
-						<input
-							type="text"
-							id="death_cause"
-							bind:value={$form.death_cause}
-							class="form-input w-full sm:w-2/3 lg:w-1/3"
-							class:invalid={$form.errors.death_cause}
-						>
-						<Form.Error error={$form.errors.death_cause}/>
-					</div>
+				<div class="w-full lg:w-1/2 lg:pr-2.5">
+					<Form.Field error={$form.errors.death_cause}>
+						<Form.Label>{t('people.death_cause')}</Form.Label>
+						<Form.Input bind:value={$form.death_cause}/>
+					</Form.Field>
 				</div>
 
-				<div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="death_place" class="w-full font-medium pb-1 text-gray-700">{t('people.death_place')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="death_place"
-								bind:value={$form.death_place}
-								class="form-input w-full"
-								class:invalid={$form.errors.death_place}
-							>
-							<Form.Error error={$form.errors.death_place}/>
-						</div>
-					</div>
+				<div class="gap-5 flex flex-col sm:flex-row">
+					<Form.Field error={$form.errors.death_place}>
+						<Form.Label>{t('people.death_place')}</Form.Label>
+						<Form.Input bind:value={$form.death_place}/>
+					</Form.Field>
 					<DateRangePicker
 						label={t('people.death_date')}
 						bind:from={$form.death_date_from}
 						bind:to={$form.death_date_to}
 						errorFrom={$form.errors.death_date_from ?? null}
 						errorTo={$form.errors.death_date_to ?? null}
-						class="w-full sm:w-1/2"
 					/>
 				</div>
 
 				<div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="funeral_place" class="w-full font-medium pb-1 text-gray-700">{t('people.funeral_place')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="funeral_place"
-								bind:value={$form.funeral_place}
-								class="form-input w-full"
-								class:invalid={$form.errors.funeral_place}
-							>
-							<Form.Error error={$form.errors.funeral_place}/>
-						</div>
-					</div>
+					<Form.Field error={$form.errors.funeral_place}>
+						<Form.Label>{t('people.funeral_place')}</Form.Label>
+						<Form.Input bind:value={$form.funeral_place}/>
+					</Form.Field>
 					<DateRangePicker
 						label={t('people.funeral_date')}
 						bind:from={$form.funeral_date_from}
 						bind:to={$form.funeral_date_to}
 						errorFrom={$form.errors.funeral_date_from ?? null}
 						errorTo={$form.errors.funeral_date_to ?? null}
-						class="w-full sm:w-1/2"
 					/>
 				</div>
 
 				<div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-					<div class="w-full sm:w-1/2 flex flex-col">
-						<label for="burial_place" class="w-full font-medium pb-1 text-gray-700">{t('people.burial_place')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="burial_place"
-								bind:value={$form.burial_place}
-								class="form-input w-full"
-								class:invalid={$form.errors.burial_place}
-							>
-							<Form.Error error={$form.errors.burial_place}/>
-						</div>
-					</div>
+					<Form.Field error={$form.errors.burial_place}>
+						<Form.Label>{t('people.burial_place')}</Form.Label>
+						<Form.Input bind:value={$form.burial_place}/>
+					</Form.Field>
 					<DateRangePicker
 						label={t('people.burial_date')}
 						bind:from={$form.burial_date_from}
 						bind:to={$form.burial_date_to}
 						errorFrom={$form.errors.burial_date_from ?? null}
 						errorTo={$form.errors.burial_date_to ?? null}
-						class="w-full sm:w-1/2"
 					/>
 				</div>
 			</fieldset>
@@ -420,7 +309,7 @@
 						<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 						{#each $form.sources as _, index (index)}
 							<div class="w-full flex items-center space-x-2">
-								<input type="text" class="form-input w-full" bind:value={$form.sources[index]}>
+								<Form.Input bind:value={$form.sources[index]}/>
 								<div>
 									<button
 										type="button"
