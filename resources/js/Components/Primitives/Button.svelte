@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
-	import type { Action } from 'svelte/action';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import { inertia } from '@inertiajs/svelte';
 	import type { VisitOptions } from '@inertiajs/core';
+	import { voidAction } from '@/helpers/utils';
 
 	let {
 		type = 'button',
@@ -26,9 +26,6 @@
 		small?: boolean;
 		children: Snippet;
 	} = $props();
-
-	// eslint-disable-next-line func-style
-	const voidAction: Action<HTMLButtonElement, any> = () => ({});
 
 	let inertiaArgs = $derived.by(() => {
 		if (type === 'link') return inertiaProp ?? {};

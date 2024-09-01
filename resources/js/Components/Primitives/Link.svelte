@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
-	import type { Action } from 'svelte/action';
 	import { inertia } from '@inertiajs/svelte';
+	import { voidAction } from '@/helpers/utils';
 
 	let {
 		href,
@@ -12,9 +12,6 @@
 		external?: boolean;
 		children: Snippet;
 	} = $props();
-
-	// eslint-disable-next-line func-style
-	const voidAction: Action<HTMLButtonElement, any> = () => ({});
 
 	let action = $derived(external ? voidAction : inertia);
 </script>
