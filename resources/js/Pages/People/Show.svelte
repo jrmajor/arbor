@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	export { default as layout } from './Components/Layout/Layout.svelte';
 </script>
 
