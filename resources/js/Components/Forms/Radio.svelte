@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { randomId } from '@/helpers/utils';
-	import { radioGroupContext } from './contexts';
+	import { formFieldContext, radioGroupContext } from './contexts';
 
 	let { value, children }: {
 		value: string | null;
@@ -10,6 +10,7 @@
 
 	const id = randomId();
 
+	const formField = formFieldContext.get();
 	const radioContext = radioGroupContext.get();
 
 	let checked = $state(radioContext.value === value);
@@ -32,7 +33,10 @@
 		{id}
 		{checked}
 		{value}
-		class="border-gray-300 focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0"
+		class="
+			border-gray-300 focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0
+			{formField.error ? 'border-red-600 text-red-500 focus:ring-red-500/50' : ''}
+		"
 		{onchange}
 	>
 	<label class="ml-2" for={id}>
