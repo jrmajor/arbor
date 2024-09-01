@@ -52,7 +52,7 @@
 <form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
 	<div>
 		<fieldset class="space-y-5">
-			<div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
+			<div class="flex flex-col gap-5 sm:flex-row">
 				<PersonPicker
 					label={t('marriages.woman')}
 					bind:value={$form.woman_id}
@@ -71,46 +71,27 @@
 				/>
 			</div>
 
-			<div class="w-full space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-				<div class="flex flex-row space-x-5">
-					<div class="flex flex-col">
-						<label for="woman_order" class="w-full font-medium pb-1 text-gray-700">{t('marriages.woman_order')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="woman_order"
-								bind:value={$form.woman_order}
-								class="form-input w-full"
-								class:invalid={$form.errors.woman_order}
-							>
-							<Form.Error error={$form.errors.woman_order}/>
-						</div>
-					</div>
-					<div class="flex flex-col">
-						<label for="man_order" class="w-full font-medium pb-1 text-gray-700">{t('marriages.man_order')}</label>
-						<div class="w-full">
-							<input
-								type="text"
-								id="man_order"
-								bind:value={$form.man_order}
-								class="form-input w-full"
-								class:invalid={$form.errors.man_order}
-							>
-							<Form.Error error={$form.errors.man_order}/>
-						</div>
-					</div>
+			<div class="flex w-full flex-col gap-5 sm:flex-row">
+				<div class="flex grow basis-full flex-row gap-5">
+					<Form.Field error={$form.errors.woman_order}>
+						<Form.Label>{t('marriages.woman_order')}</Form.Label>
+						<Form.Input bind:value={$form.woman_order}/>
+					</Form.Field>
+					<Form.Field error={$form.errors.man_order}>
+						<Form.Label>{t('marriages.man_order')}</Form.Label>
+						<Form.Input bind:value={$form.man_order}/>
+					</Form.Field>
 				</div>
-				<div class="grow flex flex-col">
-					<label for="rite" class="w-full font-medium pb-1 text-gray-700">{t('marriages.rite')}</label>
-					<div class="w-full">
-						<select id="rite" bind:value={$form.rite} class="form-select w-full">
-							<option value={null}>b/d</option>
-							{#each RITES as rite}
-								<option value={rite}>{t(`marriages.rites.${rite}`)}</option>
-							{/each}
-						</select>
-					</div>
-				</div>
+
+				<Form.Field error={$form.errors.rite}>
+					<Form.Label>{t('marriages.rite')}</Form.Label>
+					<Form.Select bind:value={$form.rite}>
+						<option value={null}>b/d</option>
+						{#each RITES as rite}
+							<option value={rite}>{t(`marriages.rites.${rite}`)}</option>
+						{/each}
+					</Form.Select>
+				</Form.Field>
 			</div>
 		</fieldset>
 
@@ -119,32 +100,23 @@
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('marriages.first_event')}</div>
 		</div>
-		<fieldset class="space-y-5 lg:space-y-0 lg:space-x-5 flex flex-col lg:flex-row">
-			<div class="w-full lg:w-1/3 flex flex-col">
-				<label for="first_event_type" class="w-full font-medium pb-1 text-gray-700">{t('marriages.event_type')}</label>
-				<div class="w-full">
-					<select id="first_event_type" bind:value={$form.first_event_type} class="form-select w-full">
+		<fieldset class="flex flex-col gap-5 lg:flex-row">
+			<div class="w-full lg:w-1/3">
+				<Form.Field error={$form.errors.first_event_type}>
+					<Form.Label>{t('marriages.event_type')}</Form.Label>
+					<Form.Select bind:value={$form.first_event_type}>
 						<option value={null}>b/d</option>
 						{#each EVENT_TYPES as type}
 							<option value={type}>{t(`marriages.event_types.${type}`)}</option>
 						{/each}
-					</select>
-				</div>
+					</Form.Select>
+				</Form.Field>
 			</div>
-			<div class="space-y-5 sm:space-y-0 sm:space-x-5 w-full sm:w-full lg:w-2/3 flex flex-col sm:flex-row">
-				<div class="w-full sm:w-1/2 flex flex-col">
-					<label for="first_event_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
-					<div class="w-full">
-						<input
-							type="text"
-							id="first_event_place"
-							bind:value={$form.first_event_place}
-							class="form-input w-full"
-							class:invalid={$form.errors.first_event_place}
-						>
-						<Form.Error error={$form.errors.first_event_place}/>
-					</div>
-				</div>
+			<div class="flex w-full flex-col gap-5 sm:flex-row lg:w-2/3">
+				<Form.Field error={$form.errors.first_event_place}>
+					<Form.Label>{t('misc.place')}</Form.Label>
+					<Form.Input bind:value={$form.first_event_place}/>
+				</Form.Field>
 				<DateRangePicker
 					label={t('misc.date.date')}
 					bind:from={$form.first_event_date_from}
@@ -161,32 +133,23 @@
 		<div class="w-full mb-4">
 			<div class="font-medium text-xl text-gray-900">{t('marriages.second_event')}</div>
 		</div>
-		<fieldset class="space-y-5 lg:space-y-0 lg:space-x-5 flex flex-col lg:flex-row">
-			<div class="w-full lg:w-1/3 flex flex-col">
-				<label for="second_event_type" class="w-full font-medium pb-1 text-gray-700">{t('marriages.event_type')}</label>
-				<div class="w-full">
-					<select id="second_event_type" bind:value={$form.second_event_type} class="form-select w-full">
+		<fieldset class="flex flex-col gap-5 lg:flex-row">
+			<div class="w-full lg:w-1/3">
+				<Form.Field error={$form.errors.second_event_type}>
+					<Form.Label>{t('marriages.event_type')}</Form.Label>
+					<Form.Select bind:value={$form.second_event_type}>
 						<option value={null}>b/d</option>
 						{#each EVENT_TYPES as type}
 							<option value={type}>{t(`marriages.event_types.${type}`)}</option>
 						{/each}
-					</select>
-				</div>
+					</Form.Select>
+				</Form.Field>
 			</div>
-			<div class="space-y-5 sm:space-y-0 sm:space-x-5 w-full sm:w-full lg:w-2/3 flex flex-col sm:flex-row">
-				<div class="w-full sm:w-1/2 flex flex-col">
-					<label for="second_event_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
-					<div class="w-full">
-						<input
-							type="text"
-							id="second_event_place"
-							bind:value={$form.second_event_place}
-							class="form-input w-full"
-							class:invalid={$form.errors.second_event_place}
-						>
-						<Form.Error error={$form.errors.second_event_place}/>
-					</div>
-				</div>
+			<div class="flex w-full flex-col gap-5 sm:flex-row lg:w-2/3">
+				<Form.Field error={$form.errors.second_event_place}>
+					<Form.Label>{t('misc.place')}</Form.Label>
+					<Form.Input bind:value={$form.second_event_place}/>
+				</Form.Field>
 				<DateRangePicker
 					label={t('misc.date.date')}
 					bind:from={$form.second_event_date_from}
@@ -211,19 +174,10 @@
 		</div>
 		{#if $form.divorced}
 			<fieldset class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row" transition:slide>
-				<div class="w-full sm:w-1/2 flex flex-col">
-					<label for="divorce_place" class="w-full font-medium pb-1 text-gray-700">{t('misc.place')}</label>
-					<div class="w-full">
-						<input
-							type="text"
-							id="divorce_place"
-							bind:value={$form.divorce_place}
-							class="form-input w-full"
-							class:invalid={$form.errors.divorce_place}
-						>
-						<Form.Error error={$form.errors.divorce_place}/>
-					</div>
-				</div>
+				<Form.Field error={$form.errors.divorce_place}>
+					<Form.Label>{t('misc.place')}</Form.Label>
+					<Form.Input bind:value={$form.divorce_place}/>
+				</Form.Field>
 				<DateRangePicker
 					label={t('misc.date.date')}
 					bind:from={$form.divorce_date_from}
