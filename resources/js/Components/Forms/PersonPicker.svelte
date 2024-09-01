@@ -1,30 +1,22 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { SvelteMap } from 'svelte/reactivity';
 	import { route } from 'ziggy-js';
 	import type { Sex } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
-	import { onMount } from 'svelte';
-	import * as Form from '@/Components/Forms';
+	import { formFieldContext } from './contexts';
 
 	let {
-		label,
 		value = $bindable(),
 		initialValue = null,
 		sex = null,
 		nullable = false,
-		error,
-		class: className = '',
 	}: {
-		label: string;
 		value: number | null;
 		initialValue: number | null;
 		sex: Sex | null;
 		nullable?: boolean;
-		error: string | null;
-		class?: string;
 	} = $props();
-
-	const id = `person${Math.floor(Math.random() * (10 ** 8))}`;
 
 	interface Person {
 		id: number;
@@ -142,67 +134,65 @@
 		hoveredIndex = null;
 		shouldCloseOnBlur = true;
 	}
+
+	const formField = formFieldContext.get();
 </script>
 
-<div class="flex flex-col {className}">
-	<label for={id} class="w-full font-medium pb-1 text-gray-700">{label}</label>
-	<div class="w-full">
-		<div class="relative w-full">
-			<!-- svelte-ignore a11y_click_events_have_key_events -->
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div
-				onclick={() => searchInput.focus()}
-				class="dropdown-icon cursor-text form-select"
-				class:invalid={error}
-			>
-				<div class="pr-4">
-					<span>{value ? (names.get(value) ?? t('misc.loading')) : ''}</span><!--
+<div class="w-full">
+	<div class="relative w-full">
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<div
+			onclick={() => searchInput.focus()}
+			class="dropdown-icon cursor-text form-select"
+			class:invalid={formField.error}
+		>
+			<div class="pr-4">
+				<span>{value ? (names.get(value) ?? t('misc.loading')) : ''}</span><!--
 				--><input
-						bind:this={searchInput}
-						{id}
-						type="text"
-						bind:value={searchValue}
-						autocomplete="off"
-						{onkeydown}
-						{oninput}
-						onfocus={() => isOpen = shouldCloseOnBlur = true}
-						onblur={closeDropdown}
-						class="p-0 outline-none border-0 focus:ring-0"
-						style:width={value ? '4px' : '100%'}
-						style:margin-left={value ? '1px' : '0'}
-					>
-				</div>
-			</div>
-			{#if isOpen && searchValue}
-				<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-				<ul
-					class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
-					onmousedown={() => shouldCloseOnBlur = false}
+					bind:this={searchInput}
+					id={formField.id}
+					type="text"
+					bind:value={searchValue}
+					autocomplete="off"
+					{onkeydown}
+					{oninput}
+					onfocus={() => isOpen = shouldCloseOnBlur = true}
+					onblur={closeDropdown}
+					class="p-0 outline-none border-0 focus:ring-0"
+					style:width={value ? '4px' : '100%'}
+					style:margin-left={value ? '1px' : '0'}
 				>
-					{#each results as person, index (person.id)}
-						<!-- svelte-ignore a11y_click_events_have_key_events -->
-						<!-- svelte-ignore a11y_mouse_events_have_key_events -->
-						<li
-							onmouseover={() => hoveredIndex = index}
-							onclick={() => select(person)}
-							class="select-none w-full px-3 py-1 text-gray-800 flex justify-between items-center"
-							class:bg-cool-gray-100={hoveredIndex === index}
-						>
-							<span>
-								<span>{person.name}</span>
-								<small>[№{person.id}]</small>
-							</span>
-							<span class="text-gray-800">{value === person.id ? '✓ ' : ''}</span>
-						</li>
-					{:else}
-						<li class="w-full px-3 py-1 text-gray-600">
-							{t('misc.no_results')}
-						</li>
-					{/each}
-				</ul>
-			{/if}
+			</div>
 		</div>
-		<Form.Error error={error}/>
+		{#if isOpen && searchValue}
+			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+			<ul
+				class="absolute mt-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
+				onmousedown={() => shouldCloseOnBlur = false}
+			>
+				{#each results as person, index (person.id)}
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
+					<!-- svelte-ignore a11y_mouse_events_have_key_events -->
+					<li
+						onmouseover={() => hoveredIndex = index}
+						onclick={() => select(person)}
+						class="select-none w-full px-3 py-1 text-gray-800 flex justify-between items-center"
+						class:bg-cool-gray-100={hoveredIndex === index}
+					>
+						<span>
+							<span>{person.name}</span>
+							<small>[№{person.id}]</small>
+						</span>
+						<span class="text-gray-800">{value === person.id ? '✓ ' : ''}</span>
+					</li>
+				{:else}
+					<li class="w-full px-3 py-1 text-gray-600">
+						{t('misc.no_results')}
+					</li>
+				{/each}
+			</ul>
+		{/if}
 	</div>
 </div>
 

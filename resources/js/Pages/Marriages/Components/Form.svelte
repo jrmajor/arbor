@@ -6,7 +6,6 @@
 	import { RITES, EVENT_TYPES, type EditMarriageResource } from '@/types/resources/marriages';
 	import { t } from '@/helpers/translations';
 	import DateRangePicker from '@/Components/DateRangePicker.svelte';
-	import PersonPicker from '@/Components/PersonPicker.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import * as Form from '@/Components/Forms';
 
@@ -53,22 +52,22 @@
 	<div>
 		<fieldset class="space-y-5">
 			<div class="flex flex-col gap-5 sm:flex-row">
-				<PersonPicker
-					label={t('marriages.woman')}
-					bind:value={$form.woman_id}
-					initialValue={marriage.woman.id}
-					sex={Sex.FEMALE}
-					error={$form.errors.woman_id ?? null}
-					class="w-full sm:w-1/2"
-				/>
-				<PersonPicker
-					label={t('marriages.man')}
-					bind:value={$form.man_id}
-					initialValue={marriage.man.id}
-					sex={Sex.MALE}
-					error={$form.errors.man_id ?? null}
-					class="w-full sm:w-1/2"
-				/>
+				<Form.Field error={$form.errors.woman_id}>
+					<Form.Label>{t('marriages.woman')}</Form.Label>
+					<Form.PersonPicker
+						bind:value={$form.woman_id}
+						initialValue={marriage.woman.id}
+						sex={Sex.FEMALE}
+					/>
+				</Form.Field>
+				<Form.Field error={$form.errors.man_id}>
+					<Form.Label>{t('marriages.man')}</Form.Label>
+					<Form.PersonPicker
+						bind:value={$form.man_id}
+						initialValue={marriage.man.id}
+						sex={Sex.MALE}
+					/>
+				</Form.Field>
 			</div>
 
 			<div class="flex w-full flex-col gap-5 sm:flex-row">

@@ -5,7 +5,6 @@
 	import { Sex, type EditPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import DateRangePicker from '@/Components/DateRangePicker.svelte';
-	import PersonPicker from '@/Components/PersonPicker.svelte';
 	import Link from '@/Components/Primitives/Link.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import * as Form from '@/Components/Forms';
@@ -262,24 +261,24 @@
 		</div>
 		<fieldset class="space-y-5">
 			<div class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row">
-				<PersonPicker
-					label={t('people.mother')}
-					bind:value={$form.mother_id}
-					initialValue={person.motherId}
-					sex={Sex.FEMALE}
-					nullable
-					error={$form.errors.mother_id ?? null}
-					class="w-full sm:w-1/2"
-				/>
-				<PersonPicker
-					label={t('people.father')}
-					bind:value={$form.father_id}
-					initialValue={person.fatherId}
-					sex={Sex.MALE}
-					nullable
-					error={$form.errors.father_id ?? null}
-					class="w-full sm:w-1/2"
-				/>
+				<Form.Field error={$form.errors.mother_id}>
+					<Form.Label>{t('people.mother')}</Form.Label>
+					<Form.PersonPicker
+						bind:value={$form.mother_id}
+						initialValue={person.motherId}
+						sex={Sex.FEMALE}
+						nullable
+					/>
+				</Form.Field>
+				<Form.Field error={$form.errors.father_id}>
+					<Form.Label>{t('people.father')}</Form.Label>
+					<Form.PersonPicker
+						bind:value={$form.father_id}
+						initialValue={person.fatherId}
+						sex={Sex.MALE}
+						nullable
+					/>
+				</Form.Field>
 			</div>
 		</fieldset>
 
