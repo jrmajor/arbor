@@ -2,6 +2,7 @@
 	import { route } from 'ziggy-js';
 	import { inertia, router } from '@inertiajs/svelte';
 	import { t } from '@/helpers/translations';
+	import { hotkey } from '@/helpers/hotkey';
 
 	let { user }: { user: SharedUser | null } = $props();
 
@@ -104,12 +105,13 @@
 	onsubmit={(e) => e.preventDefault()}
 >
 	<input
+		use:hotkey={'s,/'}
 		type="search"
 		class="form-input w-full h-9"
 		autocomplete="off"
 		bind:value={search}
 		{onkeydown}
-		oninput={oninput}
+		{oninput}
 		onfocus={() => isOpen = shouldCloseOnBlur = true}
 		onblur={closeDropdown}
 	>

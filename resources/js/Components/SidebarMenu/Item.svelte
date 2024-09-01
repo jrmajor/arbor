@@ -3,10 +3,13 @@
 	import { inertia } from '@inertiajs/svelte';
 	import { type VisitOptions } from '@inertiajs/core';
 	import { t } from '@/helpers/translations';
+	import { voidAction } from '@/helpers/utils';
+	import { hotkey as hotkeyAction } from '@/helpers/hotkey';
 
 	let {
 		name,
 		href,
+		hotkey = null,
 		visitOptions = {},
 		active = false,
 		danger = false,
@@ -14,6 +17,7 @@
 	}: {
 		name: string;
 		href: string;
+		hotkey?: string | null;
 		visitOptions?: (Omit<VisitOptions, 'href' | 'onBefore'> & { confirm?: string });
 		active?: boolean;
 		danger?: boolean;
@@ -21,6 +25,8 @@
 	} = $props();
 
 	let shouldBeLink = $derived((visitOptions.method ?? 'get') === 'get');
+
+	let optionalHotkeyAction = $derived(hotkey ? hotkeyAction : voidAction);
 
 	function onBefore() {
 		if (!visitOptions.confirm) return true;
@@ -47,6 +53,7 @@
 	<svelte:element
 		this={shouldBeLink ? 'a' : 'button'}
 		use:inertia={{ ...visitOptions, href, onBefore }}
+		use:optionalHotkeyAction={hotkey}
 		href={shouldBeLink ? href : null}
 		class="
 			group block w-full uppercase transition focus:outline-none
