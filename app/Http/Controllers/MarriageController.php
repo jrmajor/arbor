@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMarriage;
+use App\Http\Requests\CreateMarriage;
+use App\Http\Requests\EditMarriage;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\Marriages\EditMarriageResource;
 use App\Http\Resources\Marriages\MarriagePageResource;
@@ -27,7 +28,7 @@ class MarriageController extends Controller
         ]);
     }
 
-    public function store(StoreMarriage $request): RedirectResponse
+    public function store(CreateMarriage $request): RedirectResponse
     {
         $this->authorize('create', Marriage::class);
 
@@ -49,7 +50,7 @@ class MarriageController extends Controller
         ]);
     }
 
-    public function update(StoreMarriage $request, Marriage $marriage): RedirectResponse
+    public function update(EditMarriage $request, Marriage $marriage): RedirectResponse
     {
         $this->authorize('update', $marriage);
 

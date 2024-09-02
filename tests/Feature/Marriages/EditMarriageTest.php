@@ -53,9 +53,7 @@ final class EditMarriageTest extends TestCase
         ];
 
         $this->newAttributes = [
-            'woman_id' => Person::factory()->female()->create()->id,
             'woman_order' => 2,
-            'man_id' => Person::factory()->male()->create()->id,
             'man_order' => 1,
             'rite' => 'civil',
             'first_event_type' => 'concordat_marriage',
@@ -170,7 +168,7 @@ final class EditMarriageTest extends TestCase
     {
         $this->assertActionUsesFormRequest(
             [\App\Http\Controllers\MarriageController::class, 'update'],
-            \App\Http\Requests\StoreMarriage::class,
+            \App\Http\Requests\EditMarriage::class,
         );
     }
 
@@ -191,7 +189,7 @@ final class EditMarriageTest extends TestCase
         $this->assertSame('updated', $log->description);
         $this->assertSameModel($this->marriage, $log->subject);
 
-        $oldToCheck = Arr::except($this->oldAttributes, $this->dates);
+        $oldToCheck = Arr::except($this->oldAttributes, ['man_id', 'woman_id', ...$this->dates]);
 
         foreach ($oldToCheck as $key => $value) {
             $m = "Failed asserting that old attribute {$key} has the same value in log.";
@@ -199,7 +197,7 @@ final class EditMarriageTest extends TestCase
             $this->assertSame($value, $log->properties['old'][$key], $m);
         }
 
-        $newToCheck = Arr::except($this->newAttributes, $this->dates);
+        $newToCheck = Arr::except($this->newAttributes, ['man_id', 'woman_id', ...$this->dates]);
 
         foreach ($newToCheck as $key => $value) {
             $m = "Failed asserting that attribute {$key} has the same value in log.";
@@ -207,8 +205,8 @@ final class EditMarriageTest extends TestCase
             $this->assertSame($value, $log->properties['attributes'][$key], $m);
         }
 
-        $this->assertDoesNotHaveKeys(['created_at', 'updated_at'], $log->properties['old']);
-        $this->assertDoesNotHaveKeys(['created_at', 'updated_at'], $log->properties['attributes']);
+        $this->assertDoesNotHaveKeys(['man_id', 'woman_id', 'created_at', 'updated_at'], $log->properties['old']);
+        $this->assertDoesNotHaveKeys(['man_id', 'woman_id', 'created_at', 'updated_at'], $log->properties['attributes']);
 
         $this->assertSame((string) $this->marriage->updated_at, (string) $log->created_at);
 

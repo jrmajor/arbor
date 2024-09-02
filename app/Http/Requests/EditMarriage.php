@@ -7,7 +7,7 @@ use App\Enums\MarriageRite;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class StoreMarriage extends FormRequest
+class EditMarriage extends FormRequest
 {
     /**
      * @return array<string, mixed>
@@ -15,9 +15,7 @@ class StoreMarriage extends FormRequest
     public function rules(): array
     {
         return [
-            'woman_id' => ['required', 'integer', 'exists:people,id'],
             'woman_order' => ['integer', 'nullable'],
-            'man_id' => ['required', 'integer', 'exists:people,id'],
             'man_order' => ['integer', 'nullable'],
             'rite' => [new Enum(MarriageRite::class), 'nullable'],
 

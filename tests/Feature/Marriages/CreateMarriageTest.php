@@ -147,7 +147,7 @@ final class CreateMarriageTest extends TestCase
     {
         $this->assertActionUsesFormRequest(
             [\App\Http\Controllers\MarriageController::class, 'store'],
-            \App\Http\Requests\StoreMarriage::class,
+            \App\Http\Requests\CreateMarriage::class,
         );
     }
 

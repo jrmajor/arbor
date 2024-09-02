@@ -11,11 +11,13 @@
 		initialValue = null,
 		sex = null,
 		nullable = false,
+		disabled = false,
 	}: {
 		value: number | null;
 		initialValue: number | null;
 		sex: Sex | null;
 		nullable?: boolean;
+		disabled?: boolean;
 	} = $props();
 
 	interface Person {
@@ -24,7 +26,7 @@
 		dates: string | null;
 	}
 
-	let searchInput: HTMLInputElement;
+	let searchInput: HTMLInputElement | null = $state(null);
 
 	let searchValue = $state('');
 	let previousSearchValue = '';
@@ -143,26 +145,29 @@
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
-			onclick={() => searchInput.focus()}
-			class="dropdown-icon cursor-text form-select"
+			onclick={() => searchInput?.focus()}
+			class="dropdown-icon select"
+			class:disabled
 			class:invalid={formField.error}
 		>
 			<div class="pr-4">
 				<span>{value ? (names.get(value) ?? t('misc.loading')) : ''}</span><!--
-				--><input
-					bind:this={searchInput}
-					id={formField.id}
-					type="text"
-					bind:value={searchValue}
-					autocomplete="off"
-					{onkeydown}
-					{oninput}
-					onfocus={() => isOpen = shouldCloseOnBlur = true}
-					onblur={closeDropdown}
-					class="p-0 outline-none border-0 focus:ring-0"
-					style:width={value ? '4px' : '100%'}
-					style:margin-left={value ? '1px' : '0'}
-				>
+				-->{#if !disabled}
+					<input
+						bind:this={searchInput}
+						id={formField.id}
+						type="text"
+						bind:value={searchValue}
+						autocomplete="off"
+						{onkeydown}
+						{oninput}
+						onfocus={() => isOpen = shouldCloseOnBlur = true}
+						onblur={closeDropdown}
+						class="p-0 outline-none border-0 focus:ring-0"
+						style:width={value ? '4px' : '100%'}
+						style:margin-left={value ? '1px' : '0'}
+					>
+				{/if}
 			</div>
 		</div>
 		{#if isOpen && searchValue}
@@ -202,5 +207,31 @@
 		background-position: right .5rem center;
 		background-repeat: no-repeat;
 		background-size: 1.5em 1.5em;
+	}
+
+	.select {
+		cursor: text;
+		@apply px-3 py-1.5 pr-9 rounded-md border border-gray-300;
+
+		&:not(.disabled) {
+			@apply focus:border-blue-600 focus:ring focus:ring-blue-500/50;
+			@apply focus-within:border-blue-600 focus-within:ring focus-within:ring-blue-500/50;
+			@apply active:border-blue-600 active:ring active:ring-blue-500/50;
+		}
+	}
+
+	.invalid {
+		@apply border-red-600;
+
+		&:not(.disabled) {
+			@apply focus:ring-red-500/50;
+			@apply focus-within:ring-red-500/50;
+			@apply active:ring-red-500/50;
+		}
+	}
+
+	.disabled {
+		cursor: default;
+		@apply text-gray-700 bg-gray-100;
 	}
 </style>

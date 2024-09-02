@@ -57,6 +57,7 @@
 						bind:value={$form.woman_id}
 						initialValue={marriage.woman.id}
 						sex={Sex.FEMALE}
+						disabled={action === 'edit'}
 					/>
 				</Form.Field>
 				<Form.Field error={$form.errors.man_id}>
@@ -65,6 +66,7 @@
 						bind:value={$form.man_id}
 						initialValue={marriage.man.id}
 						sex={Sex.MALE}
+						disabled={action === 'edit'}
 					/>
 				</Form.Field>
 			</div>
