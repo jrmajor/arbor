@@ -2,22 +2,27 @@
 	import { type Snippet } from 'svelte';
 	import { inertia } from '@inertiajs/svelte';
 	import { voidAction } from '@/helpers/utils';
+	import { hotkey as hotkeyAction } from '@/helpers/hotkey';
 
 	let {
 		href,
+		hotkey = null,
 		external = false,
 		children,
 	}: {
 		href: string | null;
+		hotkey?: string | null;
 		external?: boolean;
 		children: Snippet;
 	} = $props();
 
-	let action = $derived(external ? voidAction : inertia);
+	let optionalInrtiaAction = $derived(external ? voidAction : inertia);
+	let optionalHotkeyAction = $derived(hotkey ? hotkeyAction : voidAction);
 </script>
 
 <a
-	use:action
+	use:optionalInrtiaAction
+	use:optionalHotkeyAction={hotkey}
 	{href}
 	target={external ? '_blank' : null}
 	class="text-blue-700 transition-colors duration-100 hover:text-blue-800 focus:text-blue-800"

@@ -165,7 +165,7 @@
 			<dt>{t('people.marriages')}</dt>
 			<dd>
 				<ul>
-					{#each person.marriages as marriage}
+					{#each person.marriages as marriage, i}
 						{#if marriage.perm.view}
 							<li class="indent-children-except-first">
 								{#if person.marriages.length > 1 && marriage.order}
@@ -178,7 +178,10 @@
 								<Name person={marriage.partner}/>
 
 								{#if marriage.perm.update}
-									<Link href={route('marriages.edit', { marriage })}>
+									<Link
+										href={route('marriages.edit', { marriage })}
+										hotkey={person.marriages.length === 1 ? 'm' : `m ${i + 1}`}
+									>
 										<small>[{t('marriages.marriage')} №{marriage.id}]</small>
 									</Link>
 									<!-- todo: check correct permission -->

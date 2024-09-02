@@ -5,4 +5,4 @@ export function randomId() {
 }
 
 // eslint-disable-next-line func-style
-export const voidAction: Action<HTMLButtonElement, any> = () => ({});
+export const voidAction: Action<HTMLElement, any> = () => ({});
