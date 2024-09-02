@@ -4,7 +4,6 @@
 	import { useForm } from '@inertiajs/svelte';
 	import { Sex, type EditPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
-	import DateRangePicker from '@/Components/DateRangePicker.svelte';
 	import Link from '@/Components/Primitives/Link.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import * as Form from '@/Components/Forms';
@@ -178,7 +177,7 @@
 				<Form.Label>{t('misc.place')}</Form.Label>
 				<Form.Input bind:value={$form.birth_place}/>
 			</Form.Field>
-			<DateRangePicker
+			<Form.DateRangePicker
 				label={t('misc.date.date')}
 				bind:from={$form.birth_date_from}
 				bind:to={$form.birth_date_to}
@@ -215,7 +214,7 @@
 						<Form.Label>{t('people.death_place')}</Form.Label>
 						<Form.Input bind:value={$form.death_place}/>
 					</Form.Field>
-					<DateRangePicker
+					<Form.DateRangePicker
 						label={t('people.death_date')}
 						bind:from={$form.death_date_from}
 						bind:to={$form.death_date_to}
@@ -229,7 +228,7 @@
 						<Form.Label>{t('people.funeral_place')}</Form.Label>
 						<Form.Input bind:value={$form.funeral_place}/>
 					</Form.Field>
-					<DateRangePicker
+					<Form.DateRangePicker
 						label={t('people.funeral_date')}
 						bind:from={$form.funeral_date_from}
 						bind:to={$form.funeral_date_to}
@@ -243,7 +242,7 @@
 						<Form.Label>{t('people.burial_place')}</Form.Label>
 						<Form.Input bind:value={$form.burial_place}/>
 					</Form.Field>
-					<DateRangePicker
+					<Form.DateRangePicker
 						label={t('people.burial_date')}
 						bind:from={$form.burial_date_from}
 						bind:to={$form.burial_date_to}

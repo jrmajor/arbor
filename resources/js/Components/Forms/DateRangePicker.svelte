@@ -167,7 +167,7 @@
 </script>
 
 <div class="flex grow basis-full flex-col">
-	<div class="w-full pb-1 flex items-center">
+	<div class="flex items-center pb-1">
 		<label for={id} class="font-medium text-gray-700">{label}</label>
 		<button
 			type="button"
@@ -178,11 +178,11 @@
 			{advancedPicker ? t('misc.date.simple') : t('misc.date.advanced')}
 		</button>
 	</div>
-	<div class="w-full">
+	<div>
 		<div class="flex flex-nowrap items-center justify-between">
 			{#if advancedPicker}
-				<div class="grow shrink flex flex-wrap -mb-2">
-					<div class="grow-0 flex items-center mb-2 mr-1">
+				<div class="-mb-2 flex shrink grow flex-wrap">
+					<div class="mb-2 mr-1 flex grow-0 items-center">
 						<p class="text-gray-900">{t('misc.date.between')}</p>
 						<input
 							type="text"
@@ -190,24 +190,24 @@
 							{id}
 							bind:value={from}
 							placeholder={t('misc.date.format')}
-							class="form-input tabular-nums w-32 ml-1"
+							class="form-input ml-1 w-32 tabular-nums"
 							class:invalid={errorFrom}
 						>
 					</div>
-					<div class="grow-0 flex items-center mb-2">
+					<div class="mb-2 flex grow-0 items-center">
 						<p class="text-gray-900">{t('misc.date.and')}</p>
 						<input
 							type="text"
 							maxlength="10"
 							bind:value={to}
 							placeholder={t('misc.date.format')}
-							class="form-input tabular-nums w-32 ml-1"
+							class="form-input ml-1 w-32 tabular-nums"
 							class:invalid={errorTo}
 						>
 					</div>
 				</div>
 			{:else}
-				<div class="grow shrink flex">
+				<div class="flex shrink grow">
 					<div class="flex items-center">
 						<input
 							type="text"
@@ -217,7 +217,7 @@
 							oninput={onSimpleInput}
 							onblur={onSimpleBlur}
 							placeholder={t('misc.date.format')}
-							class="form-input tabular-nums w-32"
+							class="form-input w-32 tabular-nums"
 							class:invalid={!dateIsValid}
 						>
 					</div>

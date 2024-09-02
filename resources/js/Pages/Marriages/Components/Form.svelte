@@ -5,7 +5,6 @@
 	import { Sex } from '@/types/resources/people';
 	import { RITES, EVENT_TYPES, type EditMarriageResource } from '@/types/resources/marriages';
 	import { t } from '@/helpers/translations';
-	import DateRangePicker from '@/Components/DateRangePicker.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import * as Form from '@/Components/Forms';
 
@@ -116,7 +115,7 @@
 					<Form.Label>{t('misc.place')}</Form.Label>
 					<Form.Input bind:value={$form.first_event_place}/>
 				</Form.Field>
-				<DateRangePicker
+				<Form.DateRangePicker
 					label={t('misc.date.date')}
 					bind:from={$form.first_event_date_from}
 					bind:to={$form.first_event_date_to}
@@ -148,7 +147,7 @@
 					<Form.Label>{t('misc.place')}</Form.Label>
 					<Form.Input bind:value={$form.second_event_place}/>
 				</Form.Field>
-				<DateRangePicker
+				<Form.DateRangePicker
 					label={t('misc.date.date')}
 					bind:from={$form.second_event_date_from}
 					bind:to={$form.second_event_date_to}
@@ -175,7 +174,7 @@
 					<Form.Label>{t('misc.place')}</Form.Label>
 					<Form.Input bind:value={$form.divorce_place}/>
 				</Form.Field>
-				<DateRangePicker
+				<Form.DateRangePicker
 					label={t('misc.date.date')}
 					bind:from={$form.divorce_date_from}
 					bind:to={$form.divorce_date_to}
