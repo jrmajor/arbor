@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite dev",
         "build": "vite build",
-        "check": "php artisan ziggy:generate --types-only && svelte-check --tsconfig ./tsconfig.json",
+        "check": "php artisan ziggy:generate --types-only && svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
         "check:watch": "php artisan ziggy:generate --types-only && svelte-check --tsconfig ./tsconfig.json --watch",
         "lint": "eslint . --max-warnings 0"
     },
@@ -19,8 +19,8 @@
         "tailwindcss": "^3.4"
     },
     "devDependencies": {
+        "@jrmajor/eslint-config": "^0.0.1",
         "@stylistic/eslint-plugin": "^2.7",
-        "@types/eslint": "^9.6",
         "@types/eslint__js": "^8.42.3",
         "@types/node": "^22.5",
         "autoprefixer": "^10.4",
@@ -32,7 +32,7 @@
         "postcss-nested": "^6.2",
         "svelte-check": "^3.8",
         "typescript": "^5.5",
-        "typescript-eslint": "^8.3",
+        "typescript-eslint": "^8.4",
         "vite": "^5.4"
     }
 }
