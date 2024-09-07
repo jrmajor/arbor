@@ -1,7 +1,8 @@
-import * as path from 'path';
+import { dirname, resolve } from 'path';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
+import fluent from './resources/js/viteFluent';
 
 export default defineConfig({
 	plugins: [
@@ -17,10 +18,15 @@ export default defineConfig({
 				}
 			},
 		}),
+		fluent({
+			resolveLocale(path) {
+				return dirname(path).slice(-2);
+			},
+		}),
 	],
 	resolve: {
 		alias: {
-			'ziggy-js': path.resolve(__dirname, 'vendor/tightenco/ziggy'),
+			'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
 		},
 	},
 });
