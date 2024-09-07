@@ -4,7 +4,7 @@
 	import { t } from '@/helpers/translations';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import Link from '@/Components/Primitives/Link.svelte';
-	import PytlewskiDetails from '../DetailsSections/PytlewskiDetails.svelte';
+	import PytlewskiDetails from './PytlewskiDetails.svelte';
 
 	let { person }: { person: ShowPersonResource } = $props();
 

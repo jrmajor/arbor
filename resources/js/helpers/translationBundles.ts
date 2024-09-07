@@ -1,3 +1,5 @@
+/* eslint-disable import/order */
+
 import { FluentBundle, FluentResource } from '@fluent/bundle';
 import { type Language } from './translations';
 

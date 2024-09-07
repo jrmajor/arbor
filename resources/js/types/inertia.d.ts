@@ -1,6 +1,8 @@
 declare module '@inertiajs/svelte' {
 	import type { Component } from 'svelte';
+	// eslint-disable-next-line import/no-duplicates
 	import type { Action } from 'svelte/action';
+	// eslint-disable-next-line import/no-duplicates
 	import type { Readable, Writable } from 'svelte/store';
 	import type { FormDataConvertible, Method, Page, Progress, Router, VisitOptions } from '@inertiajs/core';
 
