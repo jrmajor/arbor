@@ -1,15 +1,19 @@
 @layer components {
   .form-input, .form-select {
     @apply px-3 py-1.5 rounded-md border border-gray-300;
-    @apply focus:border-blue-600 focus:ring focus:ring-blue-500/50;
-    @apply focus-within:border-blue-600 focus-within:ring focus-within:ring-blue-500/50;
-    @apply active:border-blue-600 active:ring active:ring-blue-500/50;
+
+    &:not([disabled]) {
+      @apply focus:border-blue-600 focus:ring focus:ring-blue-500/50;
+      @apply active:border-blue-600 active:ring active:ring-blue-500/50;
+    }
 
     &.invalid {
       @apply border-red-600;
-      @apply focus:ring-red-500/50;
-      @apply focus-within:ring-red-500/50;
-      @apply active:ring-red-500/50;
+
+      &:not([disabled]) {
+        @apply focus:ring-red-500/50;
+        @apply active:ring-red-500/50;
+      }
     }
 
     &[disabled] {
