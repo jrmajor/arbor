@@ -19,6 +19,7 @@
         "tailwindcss": "^3.4"
     },
     "devDependencies": {
+        "@fluent/syntax": "^0.19.0",
         "@jrmajor/eslint-config": "^0.0.5",
         "@stylistic/eslint-plugin": "^2.7",
         "@types/eslint__js": "^8.42.3",
