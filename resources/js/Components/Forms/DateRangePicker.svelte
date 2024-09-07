@@ -12,7 +12,7 @@
 		isSameMonth,
 	} from 'date-fns';
 	import { t } from '@/helpers/translations';
-	import * as Form from '@/Components/Forms';
+	import Error from './Error.svelte';
 
 	let {
 		label,
@@ -224,7 +224,7 @@
 				</div>
 			{/if}
 		</div>
-		<Form.Error error={errorFrom}/>
-		<Form.Error error={errorTo}/>
+		<Error error={errorFrom}/>
+		<Error error={errorTo}/>
 	</div>
 </div>
