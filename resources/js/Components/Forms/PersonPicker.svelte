@@ -26,7 +26,8 @@
 		dates: string | null;
 	}
 
-	let searchInput: HTMLInputElement | null = $state(null);
+	// svelte-ignore non_reactive_update
+	let searchInput: HTMLInputElement | null = null;
 
 	let searchValue = $state('');
 	let previousSearchValue = '';
