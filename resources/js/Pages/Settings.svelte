@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { route } from 'ziggy-js';
 	import { useForm } from '@inertiajs/svelte';
+	import { route } from 'ziggy-js';
 	import { t } from '@/helpers/translations';
-	import Button from '@/Components/Primitives/Button.svelte';
 	import * as Form from '@/Components/Forms';
+	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { user }: SharedProps = $props();
 

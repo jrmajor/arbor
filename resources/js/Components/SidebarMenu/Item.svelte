@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
-	import { inertia } from '@inertiajs/svelte';
 	import { type VisitOptions } from '@inertiajs/core';
+	import { inertia } from '@inertiajs/svelte';
+	import { hotkey as hotkeyAction } from '@/helpers/hotkey';
 	import { t } from '@/helpers/translations';
 	import { voidAction } from '@/helpers/utils';
-	import { hotkey as hotkeyAction } from '@/helpers/hotkey';
 
 	let {
 		name,

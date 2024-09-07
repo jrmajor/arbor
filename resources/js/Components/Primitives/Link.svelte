@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
 	import { inertia } from '@inertiajs/svelte';
-	import { voidAction } from '@/helpers/utils';
 	import { hotkey as hotkeyAction } from '@/helpers/hotkey';
+	import { voidAction } from '@/helpers/utils';
 
 	let {
 		href,

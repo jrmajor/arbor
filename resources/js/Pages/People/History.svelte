@@ -3,14 +3,14 @@
 </script>
 
 <script lang="ts">
-	import type { PersonPage } from '@/types/resources/people';
 	import type { Activity } from '@/types/resources/activities';
+	import type { PersonPage } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
-	import Link from '@/Components/Primitives/Link.svelte';
-	import ParagraphsFromNewlines from '@/Components/ParagraphsFromNewlines.svelte';
 	import HistorySex from '@/Components/History/Sex.svelte';
 	import HistorySources from '@/Components/History/Sources.svelte';
 	import HistoryText from '@/Components/History/Text.svelte';
+	import ParagraphsFromNewlines from '@/Components/ParagraphsFromNewlines.svelte';
+	import Link from '@/Components/Primitives/Link.svelte';
 
 	let { person, activities }: {
 		person: PersonPage;

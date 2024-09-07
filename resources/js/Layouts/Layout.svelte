@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
-	import Menu from './Menu/Menu.svelte';
 	import FlashMessages from './FlashMessages.svelte';
+	import Menu from './Menu/Menu.svelte';
 
 	let {
 		currentYear,

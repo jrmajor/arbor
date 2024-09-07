@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import { route } from 'ziggy-js';
 	import { useForm } from '@inertiajs/svelte';
-	import { Sex } from '@/types/resources/people';
+	import { route } from 'ziggy-js';
 	import { RITES, EVENT_TYPES, type EditMarriageResource } from '@/types/resources/marriages';
+	import { Sex } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
-	import Button from '@/Components/Primitives/Button.svelte';
 	import * as Form from '@/Components/Forms';
+	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { marriage, action }: {
 		marriage: EditMarriageResource;

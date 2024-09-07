@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
-	import { inertia } from '@inertiajs/svelte';
 	import type { VisitOptions } from '@inertiajs/core';
+	import { inertia } from '@inertiajs/svelte';
 	import { voidAction } from '@/helpers/utils';
 
 	let {

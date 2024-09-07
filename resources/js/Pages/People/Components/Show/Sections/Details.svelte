@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
 	import type { ShowPersonResource } from '@/types/resources/people';
-	import { t } from '@/helpers/translations';
 	import toRoman from '@/helpers/toRoman';
-	import Link from '@/Components/Primitives/Link.svelte';
-	import DataList from '@/Components/Primitives/DataList.svelte';
+	import { t } from '@/helpers/translations';
 	import Name from '@/Components/Name.svelte';
+	import DataList from '@/Components/Primitives/DataList.svelte';
+	import Link from '@/Components/Primitives/Link.svelte';
 	import Source from '@/Components/Source.svelte';
-	import OptionalDatePlace from '../OptionalDatePlace.svelte';
 	import PytlewskiSection from '../DetailsSections/PytlewskiSection.svelte';
+	import OptionalDatePlace from '../OptionalDatePlace.svelte';
 
 	let { person }: { person: ShowPersonResource } = $props();
 

@@ -3,11 +3,11 @@
 </script>
 
 <script lang="ts">
-	import type { MarriagePage } from '@/types/resources/marriages';
 	import type { Activity } from '@/types/resources/activities';
+	import type { MarriagePage } from '@/types/resources/marriages';
 	import { t } from '@/helpers/translations';
-	import HistoryText from '@/Components/History/Text.svelte';
 	import HistoryEnum from '@/Components/History/Enum.svelte';
+	import HistoryText from '@/Components/History/Text.svelte';
 
 	let { activities }: {
 		marriage: MarriagePage;

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { MarriagePage } from '@/types/resources/marriages';
-	import TitleBar from './TitleBar.svelte';
 	import SidebarMenu from './SidebarMenu.svelte';
+	import TitleBar from './TitleBar.svelte';
 
 	let { marriage, activeRoute, children }: {
 		marriage: MarriagePage;

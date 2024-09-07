@@ -1,7 +1,7 @@
 import * as path from 'path';
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import laravel from 'laravel-vite-plugin';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [

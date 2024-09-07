@@ -1,8 +1,8 @@
 import { type Component } from 'svelte';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import TranslationsContext from '@/Layouts/TranslationContext.svelte';
 import AuthLayout from '@/Layouts/AuthLayout.svelte';
 import Layout from '@/Layouts/Layout.svelte';
+import TranslationsContext from '@/Layouts/TranslationContext.svelte';
 
 export async function resolve(name: string) {
 	const page = await resolvePageComponent(

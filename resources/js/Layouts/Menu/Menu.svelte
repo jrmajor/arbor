@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { scale } from 'svelte/transition';
-	import { route, type RouteList } from 'ziggy-js';
 	import { inertia, router } from '@inertiajs/svelte';
+	import { route, type RouteList } from 'ziggy-js';
+	import { hotkey } from '@/helpers/hotkey';
 	import { t, type Language } from '@/helpers/translations';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import Search from './Search.svelte';
-	import { hotkey } from '@/helpers/hotkey';
 
 	let { activeRoute, user, currentLocale, availableLocales }: {
 		activeRoute: keyof RouteList;

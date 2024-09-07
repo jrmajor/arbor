@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { route } from 'ziggy-js';
 	import { useForm } from '@inertiajs/svelte';
-	import { t } from '@/helpers/translations';
+	import { route } from 'ziggy-js';
 	import { authLayoutTitle } from '@/helpers/context';
-	import Link from '@/Components/Primitives/Link.svelte';
-	import Button from '@/Components/Primitives/Button.svelte';
+	import { t } from '@/helpers/translations';
 	import * as Form from '@/Components/Forms';
+	import Button from '@/Components/Primitives/Button.svelte';
+	import Link from '@/Components/Primitives/Link.svelte';
 
 	let { token, email, errors }: {
 		token: string;

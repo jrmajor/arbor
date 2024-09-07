@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import { route } from 'ziggy-js';
 	import { useForm } from '@inertiajs/svelte';
+	import { route } from 'ziggy-js';
 	import { Sex, type EditPersonResource } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
-	import Link from '@/Components/Primitives/Link.svelte';
-	import Button from '@/Components/Primitives/Button.svelte';
 	import * as Form from '@/Components/Forms';
+	import Button from '@/Components/Primitives/Button.svelte';
+	import Link from '@/Components/Primitives/Link.svelte';
 	import PytlewskiPicker from './PytlewskiPicker.svelte';
 
 	let { person, action }: {

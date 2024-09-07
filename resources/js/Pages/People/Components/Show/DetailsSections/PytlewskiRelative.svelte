@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { route } from 'ziggy-js';
 	import { inertia } from '@inertiajs/svelte';
+	import { route } from 'ziggy-js';
 	import type { PytlewskiRelative } from '@/types/resources/pytlewski';
 
 	type Relative = Omit<PytlewskiRelative, 'surname'> & Partial<Pick<PytlewskiRelative, 'surname'>>;

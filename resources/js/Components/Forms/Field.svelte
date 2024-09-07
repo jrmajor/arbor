@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { formFieldContext } from './contexts';
 	import { randomId } from '@/helpers/utils';
 	import Error from './Error.svelte';
+	import { formFieldContext } from './contexts';
 
 	let { error, children }: {
 		error: string | null | undefined;

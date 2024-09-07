@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { route } from 'ziggy-js';
 	import { inertia, router } from '@inertiajs/svelte';
-	import { t } from '@/helpers/translations';
+	import { route } from 'ziggy-js';
 	import { hotkey } from '@/helpers/hotkey';
+	import { t } from '@/helpers/translations';
 
 	let { user }: { user: SharedUser | null } = $props();
 

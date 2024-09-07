@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { route } from 'ziggy-js';
 	import { t } from '@/helpers/translations';
-	import Link from '@/Components/Primitives/Link.svelte';
 	import * as Form from '@/Components/Forms';
+	import Link from '@/Components/Primitives/Link.svelte';
 
 	let { value = $bindable(), error }: {
 		value: string | null;

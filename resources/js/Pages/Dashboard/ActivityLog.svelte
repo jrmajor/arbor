@@ -6,8 +6,8 @@
 	import { route } from 'ziggy-js';
 	import type { ActivityResource } from '@/types/resources/dashboard';
 	import { t } from '@/helpers/translations';
-	import Link from '@/Components/Primitives/Link.svelte';
 	import PaginationLinks from '@/Components/PaginationLinks.svelte';
+	import Link from '@/Components/Primitives/Link.svelte';
 
 	let { data: activities, meta }: PaginatedResource<ActivityResource> & SharedProps = $props();
 </script>
