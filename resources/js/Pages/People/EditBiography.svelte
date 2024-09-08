@@ -30,9 +30,7 @@
 <form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
 	<div>
 		<fieldset class="w-full flex flex-col">
-			<!-- svelte-ignore a11y_autofocus -->
 			<textarea
-				autofocus
 				id="biography"
 				rows="20"
 				bind:value={$form.biography}
