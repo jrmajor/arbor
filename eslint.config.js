@@ -19,6 +19,9 @@ export default [
 				PaginationLink: 'readonly',
 			},
 		},
+		rules: {
+			'svelte/block-lang': ['error', { script: 'ts', style: 'postcss' }],
+		},
 	},
 	{
 		ignores: [
