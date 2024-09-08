@@ -30,40 +30,35 @@
 <form {onsubmit}>
 	<div class="flex flex-wrap">
 		<div class="w-full">
-			<input
-				type="text"
+			<Form.Input
 				bind:value={$form.email}
 				autocomplete="email"
-				placeholder={t('passwords.email')}
-				class="form-input w-full"
-				class:invalid={errors.email}
-			>
+				placeholder={t('passwords.email').toLowerCase()}
+				error={errors.email}
+			/>
 		</div>
 	</div>
 	<Form.Error error={errors.email}/>
 
 	<div class="flex flex-wrap mt-4">
 		<div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
-			<!-- svelte-ignore a11y_autofocus -->
-			<input
-				autofocus
-				type="password"
+			<Form.Input
 				bind:value={$form.password}
+				type="password"
+				autofocus
 				autocomplete="new-password"
 				placeholder={t('passwords.password').toLowerCase()}
-				class="form-input w-full"
-				class:invalid={errors.password}
-			>
+				error={errors.password}
+			/>
 		</div>
 		<div class="w-full sm:w-1/2 sm:pl-1">
-			<input
-				type="password"
+			<Form.Input
 				bind:value={$form.password_confirmation}
+				type="password"
 				autocomplete="current-password"
 				placeholder={t('passwords.confirm_password').toLowerCase()}
-				class="form-input w-full"
-				class:invalid={errors.password}
-			>
+				error={errors.password}
+			/>
 		</div>
 	</div>
 	<Form.Error error={errors.password}/>

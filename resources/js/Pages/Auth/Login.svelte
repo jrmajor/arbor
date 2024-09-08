@@ -27,26 +27,22 @@
 <form {onsubmit}>
 	<div class="flex flex-wrap">
 		<div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
-			<!-- svelte-ignore a11y_autofocus -->
-			<input
-				autofocus
-				type="text"
+			<Form.Input
 				bind:value={$form.username}
+				autofocus
 				autocomplete="username"
 				placeholder={t('auth.username_or_email').toLowerCase()}
-				class="form-input w-full"
-				class:invalid={errors.username || errors.password}
-			>
+				error={errors.username || errors.password}
+			/>
 		</div>
 		<div class="w-full sm:w-1/2 sm:pl-1">
-			<input
-				type="password"
+			<Form.Input
 				bind:value={$form.password}
+				type="password"
 				autocomplete="current-password"
 				placeholder={t('auth.password').toLowerCase()}
-				class="form-input w-full"
-				class:invalid={errors.username || errors.password}
-			>
+				error={errors.username || errors.password}
+			/>
 		</div>
 	</div>
 

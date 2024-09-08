@@ -27,14 +27,12 @@
 <form {onsubmit}>
 	<div class="flex flex-wrap">
 		<div class="w-full">
-			<input
-				type="text"
+			<Form.Input
 				bind:value={$form.email}
 				autocomplete="email"
-				placeholder={t('passwords.email')}
-				class="form-input w-full"
-				class:invalid={errors.email}
-			>
+				placeholder={t('passwords.email').toLowerCase()}
+				error={errors.email}
+			/>
 		</div>
 	</div>
 	<Form.Error error={errors.email}/>
