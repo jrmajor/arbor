@@ -1,5 +1,5 @@
 @layer components {
-  .form-input, .form-select {
+  .form-input {
     @apply px-3 py-1.5 rounded-md border border-gray-300;
 
     &:not([disabled]) {
@@ -23,18 +23,5 @@
     &[disabled] {
       @apply text-gray-700 bg-gray-100;
     }
-  }
-
-  .form-select {
-    @apply pr-9;
-  }
-
-  .form-checkbox {
-    @apply rounded;
-  }
-
-  .form-checkbox, .form-radio {
-    @apply border-gray-300;
-    @apply focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0;
   }
 }
