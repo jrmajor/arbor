@@ -161,15 +161,14 @@
 
 		<hr class="mt-7 mb-6 text-gray-200">
 
-		<div class="w-full flex items-center mb-4">
-			<label for="divorced" class="font-medium text-xl text-gray-900">{t('marriages.divorce')}</label>
-			<input
-				type="checkbox"
-				id="divorced"
-				bind:checked={$form.divorced}
-				class="form-checkbox ml-2 size-4"
-			>
+		<div class="mb-4">
+			<Form.Checkbox bind:checked={$form.divorced}>
+				<span class="font-medium text-xl text-gray-900">
+					{t('marriages.divorce')}
+				</span>
+			</Form.Checkbox>
 		</div>
+
 		{#if $form.divorced}
 			<fieldset class="space-y-5 sm:space-y-0 sm:space-x-5 flex flex-col sm:flex-row" transition:slide>
 				<Form.Field error={$form.errors.divorce_place}>

@@ -35,6 +35,7 @@
 			/>
 		</div>
 	</div>
+
 	<Form.Error error={errors.email}/>
 
 	<div class="mt-4 flex items-center justify-between gap-2">

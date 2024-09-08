@@ -1,3 +1,4 @@
+export { default as Checkbox } from './Checkbox.svelte';
 export { default as DateRangePicker } from './DateRangePicker.svelte';
 export { default as Error } from './Error.svelte';
 export { default as Field } from './Field.svelte';

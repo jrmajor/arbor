@@ -188,16 +188,12 @@
 
 		<hr class="mt-7 mb-6 text-gray-200">
 
-		<div class="w-full flex items-center mb-4">
-			<label for="dead" class="font-medium text-xl text-gray-900">
-				{$form.sex === 'xx' ? t('people.dead.xx') : t('people.dead.xy')}
-			</label>
-			<input
-				type="checkbox"
-				id="dead"
-				bind:checked={$form.dead}
-				class="form-checkbox ml-2 size-4"
-			>
+		<div class="mb-4">
+			<Form.Checkbox bind:checked={$form.dead}>
+				<span class="font-medium text-xl text-gray-900">
+					{$form.sex === 'xx' ? t('people.dead.xx') : t('people.dead.xy')}
+				</span>
+			</Form.Checkbox>
 		</div>
 
 		{#if $form.dead}

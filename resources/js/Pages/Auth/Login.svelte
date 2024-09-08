@@ -49,10 +49,11 @@
 	<Form.Error error={errors.username}/>
 	<Form.Error error={errors.password}/>
 
-	<div class="mt-4 flex flex-wrap items-center justify-between gap-2">
-		<div class="flex grow items-center" style:flex-grow="10">
-			<input type="checkbox" bind:checked={$form.remember} id="remember" class="form-checkbox size-3.5">
-			<label for="remember" class="ml-1"><small>{t('auth.remember')}</small></label>
+	<div class="mt-4 flex items-center justify-between gap-2">
+		<div class="flex grow" style:flex-grow="10">
+			<Form.Checkbox bind:checked={$form.remember} size="sm">
+				<small>{t('auth.remember')}</small>
+			</Form.Checkbox>
 		</div>
 
 		<div class="flex grow items-center justify-between gap-2">
