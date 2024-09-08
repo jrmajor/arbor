@@ -7,3 +7,4 @@ export { default as PersonPicker } from './PersonPicker.svelte';
 export { default as Radio } from './Radio.svelte';
 export { default as RadioGroup } from './RadioGroup.svelte';
 export { default as Select } from './Select.svelte';
+export { default as Textarea } from './Textarea.svelte';

@@ -28,20 +28,11 @@
 </svelte:head>
 
 <form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
-	<div>
-		<fieldset class="w-full flex flex-col">
-			<textarea
-				id="biography"
-				rows="20"
-				bind:value={$form.biography}
-				class="form-input w-full min-h-full resize-y"
-				class:invalid={$form.errors.biography}
-			></textarea>
-			<Form.Error error={$form.errors.biography}/>
-		</fieldset>
+	<Form.Field error={$form.errors.biography}>
+		<Form.Textarea bind:value={$form.biography} rows={20}/>
+	</Form.Field>
 
-		<div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
-			<Button type="submit">{t('misc.save')}</Button>
-		</div>
+	<div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
+		<Button type="submit">{t('misc.save')}</Button>
 	</div>
 </form>

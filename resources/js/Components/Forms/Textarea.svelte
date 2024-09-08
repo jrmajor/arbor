@@ -3,16 +3,19 @@
 
 	let {
 		value = $bindable(),
+		rows,
 	}: {
 		value: string | number | null;
+		rows: number;
 	} = $props();
 
 	const formField = formFieldContext.get();
 </script>
 
-<input
+<textarea
 	id={formField?.id}
 	bind:value
-	class="form-input w-full"
+	{rows}
+	class="form-input w-full min-h-full resize-y"
 	class:invalid={formField?.error}
-/>
+></textarea>
