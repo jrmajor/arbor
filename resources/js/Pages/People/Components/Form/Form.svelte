@@ -288,6 +288,7 @@
 					hover:bg-blue-100 hover:text-blue-800
 					focus:outline-none focus:ring
 					active:border-blue-600 active:bg-blue-600 active:text-blue-100"
+				aria-label="Add source"
 			>
 				<svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M8 6V2.5H6V6H2.5v2H6v3.5h2V8h3.5V6H8z"/>
@@ -310,6 +311,7 @@
 											hover:bg-blue-100 hover:text-blue-800
 											focus:outline-none focus:ring
 											active:bg-blue-600 active:border-blue-600 active:text-blue-100"
+										aria-label="Remove source"
 									>
 										<svg class="fill-current" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
 											<path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 8h-9V6h9v2z"/>

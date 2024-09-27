@@ -17,9 +17,9 @@
 
 {#if person.wielcyUrl || person.pytlewskiUrl}
 	<div class="inline-block space-y-[0.139rem]">
-		<!-- svelte-ignore a11y_missing_content -->
+		<!-- svelte-ignore a11y_consider_explicit_label -->
 		<a href={person.wielcyUrl} target="_blank" class="wielcy" class:missing={!person.wielcyUrl}></a>
-		<!-- svelte-ignore a11y_missing_content -->
+		<!-- svelte-ignore a11y_consider_explicit_label -->
 		<a href={person.pytlewskiUrl} target="_blank" class="pytlewski" class:missing={!person.pytlewskiUrl}></a>
 	</div>
 {/if}
