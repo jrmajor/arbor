@@ -14,7 +14,7 @@
         "@inertiajs/svelte": "^1.2",
         "@sveltejs/vite-plugin-svelte": "4.0.0-next.6",
         "@tailwindcss/forms": "^0.5.8",
-        "date-fns": "^3.6",
+        "date-fns": "^4.1",
         "svelte": "5.0.0-next.242",
         "tailwindcss": "^3.4"
     },
