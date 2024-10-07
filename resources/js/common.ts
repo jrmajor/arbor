@@ -7,7 +7,10 @@ import TranslationsContext from '@/Layouts/TranslationContext.svelte';
 export async function resolve(name: string) {
 	const page = await resolvePageComponent(
 		`./Pages/${name}.svelte`,
-		import.meta.glob<ComponentFile>('./Pages/**/*.svelte'),
+		{
+			...import.meta.glob<ComponentFile>('./Pages/*.svelte'),
+			...import.meta.glob<ComponentFile>('./Pages/*/*.svelte'),
+		},
 	);
 	return {
 		default: page.default,
