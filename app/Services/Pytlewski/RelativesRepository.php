@@ -47,6 +47,7 @@ final class RelativesRepository
             $this->loaded = [];
         }
 
+        /** @phpstan-ignore argument.templateType */
         $this->loaded = Person::query()
             ->whereIn('id_pytlewski', $this->ids)->get()
             ->keyBy(fn (Person $p) => $p->id_pytlewski)->all();

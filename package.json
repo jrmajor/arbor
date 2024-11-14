@@ -23,6 +23,7 @@
         "@jrmajor/eslint-config": "^0.0.6",
         "@stylistic/eslint-plugin": "^2.8",
         "@types/node": "^22.7",
+        "@types/qs": "^6.9.17",
         "autoprefixer": "^10.4",
         "eslint": "^9.11",
         "eslint-plugin-svelte": "^2.44",
