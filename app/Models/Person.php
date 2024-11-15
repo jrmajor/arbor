@@ -12,7 +12,6 @@ use App\Models\Traits\TapsActivity;
 use App\Services\Age;
 use App\Services\Pytlewski\Pytlewski;
 use App\Services\Pytlewski\PytlewskiFactory;
-use App\Services\Sources\Source;
 use App\Services\Sources\SourcesCast;
 use App\Services\Wielcy\Wielcy;
 use Carbon\Carbon;
@@ -49,14 +48,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read ?int $funeral_year
  * @property-read ?string $burial_date
  * @property-read ?int $burial_year
- * @property-read Collection<int, Source> $sources
  * @property-read ?Pytlewski $pytlewski
  * @property-read EloquentCollection<int, Person> $siblings
  * @property-read EloquentCollection<int, Person> $siblings_father
  * @property-read EloquentCollection<int, Person> $siblings_mother
  * @property-read EloquentCollection<int, Marriage> $marriages
  * @property-read EloquentCollection<int, Person> $children
- * @property-read EloquentCollection<int, Activity> $activities
  */
 class Person extends Model
 {

@@ -8,7 +8,6 @@ use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
 use Carbon\Carbon;
 use Database\Factories\MarriageFactory;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,7 +29,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read ?int $first_event_year
  * @property-read ?int $second_event_year
  * @property-read ?int $divorce_year
- * @property-read EloquentCollection<int, Activity> $activities
  */
 class Marriage extends Model
 {
