@@ -29,7 +29,6 @@ final class ActivityResource extends JsonResource
             'logName' => $this->resource->log_name,
             'description' => $description,
             'subjectId' => $this->resource->subject_id,
-            // @phpstan-ignore property.notFound
             'causer' => $this->resource->causer?->username,
             'datetime' => $this->resource->created_at->format('Y-m-d H:i'),
         ];

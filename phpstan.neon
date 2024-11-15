@@ -11,8 +11,6 @@ parameters:
     stubFiles:
         - phpstan.stub
     checkModelProperties: true
-    checkPhpDocMissingReturn: true
-    checkModelAppends: true
     ignoreErrors:
         - '#^Method .* has parameter .* with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types: .*$#'
         - '#^Parameter \#1 \$action of method Tests\\TestCase::assertActionUsesFormRequest\(\) expects .*, array{.*} given\.$#'
@@ -25,7 +23,8 @@ parameters:
 
 includes:
     - vendor/phpstan/phpstan/conf/bleedingEdge.neon
-    - vendor/calebdw/larastan/extension.neon
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
     - vendor/php-standard-library/phpstan-extension/extension.neon
     - vendor/phpstan/phpstan-mockery/extension.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon

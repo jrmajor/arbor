@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3491dcf149d70cbe124d6c1e5693c280",
+    "content-hash": "5c91651e66a0a7826b32990c131bd700",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -8705,102 +8705,6 @@
             "time": "2024-10-15T12:38:31+00:00"
         },
         {
-            "name": "calebdw/larastan",
-            "version": "2.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/calebdw/larastan.git",
-                "reference": "7df707a3a884b8015d45bc5c15e097146024d9b7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/calebdw/larastan/zipball/7df707a3a884b8015d45bc5c15e097146024d9b7",
-                "reference": "7df707a3a884b8015d45bc5c15e097146024d9b7",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "illuminate/console": "^9.52.16 || ^10.28.0 || ^11.16.0",
-                "illuminate/container": "^9.52.16 || ^10.28.0 || ^11.16.0",
-                "illuminate/contracts": "^9.52.16 || ^10.28.0 || ^11.16.0",
-                "illuminate/database": "^9.52.16 || ^10.28.0 || ^11.16.0",
-                "illuminate/http": "^9.52.16 || ^10.28.0 || ^11.16.0",
-                "illuminate/pipeline": "^9.52.16 || ^10.28.0 || ^11.16.0",
-                "illuminate/support": "^9.52.16 || ^10.28.0 || ^11.16.0",
-                "php": "^8.0.2",
-                "phpmyadmin/sql-parser": "^5.9.0",
-                "phpstan/phpstan": "^1.11.2"
-            },
-            "require-dev": {
-                "doctrine/coding-standard": "^12.0",
-                "nikic/php-parser": "^4.19.1",
-                "orchestra/canvas": "^7.11.1 || ^8.11.0 || ^9.0.2",
-                "orchestra/testbench": "^7.33.0 || ^8.13.0 || ^9.0.3",
-                "phpunit/phpunit": "^9.6.13 || ^10.5.16"
-            },
-            "suggest": {
-                "orchestra/testbench": "Using Larastan for analysing a package needs Testbench"
-            },
-            "default-branch": true,
-            "type": "phpstan-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                },
-                "phpstan": {
-                    "includes": [
-                        "extension.neon"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Larastan\\Larastan\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Can Vural",
-                    "email": "can9119@gmail.com"
-                },
-                {
-                    "name": "Nuno Maduro",
-                    "email": "enunomaduro@gmail.com"
-                },
-                {
-                    "name": "Caleb White",
-                    "email": "cdwhite3@pm.me"
-                }
-            ],
-            "description": "Larastan - Discover bugs in your code without running it. A phpstan/phpstan wrapper for Laravel",
-            "homepage": "https://github.com/calebdw/larastan",
-            "keywords": [
-                "PHPStan",
-                "code analyse",
-                "code analysis",
-                "larastan",
-                "laravel",
-                "package",
-                "php",
-                "static analysis"
-            ],
-            "support": {
-                "issues": "https://github.com/calebdw/larastan/issues",
-                "source": "https://github.com/calebdw/larastan/tree/v2.10.3"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/calebdw",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-08-02T15:28:41+00:00"
-        },
-        {
             "name": "clue/ndjson-react",
             "version": "v1.3.0",
             "source": {
@@ -9706,6 +9610,99 @@
             "time": "2024-02-24T08:53:34+00:00"
         },
         {
+            "name": "larastan/larastan",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/larastan/larastan.git",
+                "reference": "88f46e3f2cd9d2a14dba13ef293b822a75832e62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/larastan/larastan/zipball/88f46e3f2cd9d2a14dba13ef293b822a75832e62",
+                "reference": "88f46e3f2cd9d2a14dba13ef293b822a75832e62",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^11.15.0",
+                "illuminate/container": "^11.15.0",
+                "illuminate/contracts": "^11.15.0",
+                "illuminate/database": "^11.15.0",
+                "illuminate/http": "^11.15.0",
+                "illuminate/pipeline": "^11.15.0",
+                "illuminate/support": "^11.15.0",
+                "php": "^8.2",
+                "phpmyadmin/sql-parser": "^5.9.0",
+                "phpstan/phpstan": "^2.0.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^12.0",
+                "laravel/framework": "^11.15.0",
+                "mockery/mockery": "^1.6",
+                "nikic/php-parser": "^5.3",
+                "orchestra/canvas": "^v9.1.3",
+                "orchestra/testbench-core": "^9.5.2",
+                "phpstan/phpstan-deprecation-rules": "^2.0.0",
+                "phpunit/phpunit": "^10.5.16"
+            },
+            "suggest": {
+                "orchestra/testbench": "Using Larastan for analysing a package needs Testbench"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Larastan\\Larastan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Can Vural",
+                    "email": "can9119@gmail.com"
+                },
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "Larastan - Discover bugs in your code without running it. A phpstan/phpstan wrapper for Laravel",
+            "keywords": [
+                "PHPStan",
+                "code analyse",
+                "code analysis",
+                "larastan",
+                "laravel",
+                "package",
+                "php",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/larastan/larastan/issues",
+                "source": "https://github.com/larastan/larastan/tree/v3.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/canvural",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-11-15T09:38:34+00:00"
+        },
+        {
             "name": "loophp/phposinfo",
             "version": "1.8.0",
             "source": {
@@ -10190,32 +10187,33 @@
         },
         {
             "name": "php-standard-library/phpstan-extension",
-            "version": "1.0.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-standard-library/phpstan-extension.git",
-                "reference": "53601fe346aa90cbeaf9916f15eed46a3cb90ead"
+                "reference": "e3e77739a205a8825d56fb9495620923b20ca9fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-standard-library/phpstan-extension/zipball/53601fe346aa90cbeaf9916f15eed46a3cb90ead",
-                "reference": "53601fe346aa90cbeaf9916f15eed46a3cb90ead",
+                "url": "https://api.github.com/repos/php-standard-library/phpstan-extension/zipball/e3e77739a205a8825d56fb9495620923b20ca9fc",
+                "reference": "e3e77739a205a8825d56fb9495620923b20ca9fc",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^1.7"
+                "phpstan/phpstan": "^2.0"
             },
             "conflict": {
-                "azjezz/psl": "<1.6||>=3.0"
+                "azjezz/psl": "<1.6||>=4.0"
             },
             "require-dev": {
-                "azjezz/psl": "^1.6||^2.0",
+                "azjezz/psl": "^1.6||^2.0||^3.0",
+                "composer/semver": "^3.3",
                 "nikic/php-parser": "^4.14.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpunit/phpunit": "^9.5"
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -10237,9 +10235,9 @@
             "description": "PHPStan PSL extension",
             "support": {
                 "issues": "https://github.com/php-standard-library/phpstan-extension/issues",
-                "source": "https://github.com/php-standard-library/phpstan-extension/tree/1.0.0"
+                "source": "https://github.com/php-standard-library/phpstan-extension/tree/2.0.0"
             },
-            "time": "2022-06-10T11:39:34+00:00"
+            "time": "2024-11-11T13:31:12+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -10354,16 +10352,16 @@
         },
         {
             "name": "phpmyadmin/sql-parser",
-            "version": "5.9.0",
+            "version": "5.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmyadmin/sql-parser.git",
-                "reference": "011fa18a4e55591fac6545a821921dd1d61c6984"
+                "reference": "b14fd66496a22d8dd7f7e2791edd9e8674422f17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/011fa18a4e55591fac6545a821921dd1d61c6984",
-                "reference": "011fa18a4e55591fac6545a821921dd1d61c6984",
+                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/b14fd66496a22d8dd7f7e2791edd9e8674422f17",
+                "reference": "b14fd66496a22d8dd7f7e2791edd9e8674422f17",
                 "shasum": ""
             },
             "require": {
@@ -10381,8 +10379,7 @@
                 "phpstan/extension-installer": "^1.1",
                 "phpstan/phpstan": "^1.9.12",
                 "phpstan/phpstan-phpunit": "^1.3.3",
-                "phpunit/php-code-coverage": "*",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+                "phpunit/phpunit": "^8.5 || ^9.6",
                 "psalm/plugin-phpunit": "^0.16.1",
                 "vimeo/psalm": "^4.11",
                 "zumba/json-serializer": "~3.0.2"
@@ -10438,7 +10435,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-01-20T20:34:02+00:00"
+            "time": "2024-11-10T04:10:31+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -10489,20 +10486,20 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "384af967d35b2162f69526c7276acadce534d0e1"
+                "reference": "ab4e9b4415a5fc9e4d27f7fe16c8bc9d067dcd6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/384af967d35b2162f69526c7276acadce534d0e1",
-                "reference": "384af967d35b2162f69526c7276acadce534d0e1",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ab4e9b4415a5fc9e4d27f7fe16c8bc9d067dcd6d",
+                "reference": "ab4e9b4415a5fc9e4d27f7fe16c8bc9d067dcd6d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0"
+                "php": "^7.4|^8.0"
             },
             "conflict": {
                 "phpstan/phpstan-shim": "*"
@@ -10543,33 +10540,32 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-27T09:18:05+00:00"
+            "time": "2024-11-11T15:43:04+00:00"
         },
         {
             "name": "phpstan/phpstan-mockery",
-            "version": "1.1.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-mockery.git",
-                "reference": "88ae85931768efd3aaf3cce4cb9cb54c4d157d03"
+                "reference": "89a949d0ac64298e88b7c7fa00caee565c198394"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-mockery/zipball/88ae85931768efd3aaf3cce4cb9cb54c4d157d03",
-                "reference": "88ae85931768efd3aaf3cce4cb9cb54c4d157d03",
+                "url": "https://api.github.com/repos/phpstan/phpstan-mockery/zipball/89a949d0ac64298e88b7c7fa00caee565c198394",
+                "reference": "89a949d0ac64298e88b7c7fa00caee565c198394",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.10"
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.0"
             },
             "require-dev": {
-                "mockery/mockery": "^1.2.4",
-                "nikic/php-parser": "^4.13.0",
+                "mockery/mockery": "^1.6.11",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpunit/phpunit": "^9.5"
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -10591,36 +10587,35 @@
             "description": "PHPStan Mockery extension",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-mockery/issues",
-                "source": "https://github.com/phpstan/phpstan-mockery/tree/1.1.2"
+                "source": "https://github.com/phpstan/phpstan-mockery/tree/2.0.0"
             },
-            "time": "2024-01-10T13:50:05+00:00"
+            "time": "2024-10-14T03:18:12+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "1.4.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "f3ea021866f4263f07ca3636bf22c64be9610c11"
+                "reference": "4b6ad7fab8683ff4efd7887ba26ef8ee171c7475"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/f3ea021866f4263f07ca3636bf22c64be9610c11",
-                "reference": "f3ea021866f4263f07ca3636bf22c64be9610c11",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/4b6ad7fab8683ff4efd7887ba26ef8ee171c7475",
+                "reference": "4b6ad7fab8683ff4efd7887ba26ef8ee171c7475",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.11"
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.0"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.0"
             },
             "require-dev": {
-                "nikic/php-parser": "^4.13.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-strict-rules": "^1.5.1",
-                "phpunit/phpunit": "^9.5"
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -10643,9 +10638,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.4.0"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.1"
             },
-            "time": "2024-04-20T06:39:00+00:00"
+            "time": "2024-11-12T12:48:00+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -13389,8 +13384,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "spatie/laravel-activitylog": 20,
-        "calebdw/larastan": 20
+        "spatie/laravel-activitylog": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

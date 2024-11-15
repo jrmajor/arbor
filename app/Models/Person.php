@@ -128,6 +128,7 @@ class Person extends Model
      */
     public function wielcy(): Attribute
     {
+        /** @phpstan-ignore return.type */
         return Attribute::get(function (): ?Wielcy {
             if (! $this->id_wielcy) {
                 return null;
@@ -146,6 +147,7 @@ class Person extends Model
      */
     public function pytlewski(): Attribute
     {
+        /** @phpstan-ignore return.type */
         return Attribute::get(fn () => app(PytlewskiFactory::class)->for($this));
     }
 

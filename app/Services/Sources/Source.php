@@ -198,7 +198,6 @@ final class Source implements Jsonable
         $number = Str\replace_every($matches[1], ['-' => '', ' ' => '']);
 
         return [
-            // @phpstan-ignore identical.alwaysFalse
             'extent' => $matches[2] === '' ? strlen($matches[0]) : strlen($matches[0]) - 1,
             'element' => [
                 'name' => 'a',
