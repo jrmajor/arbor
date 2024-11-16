@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
-	import { type VisitOptions } from '@inertiajs/core';
 	import { inertia } from '@inertiajs/svelte';
 	import { hotkey as hotkeyAction } from '@/helpers/hotkey';
 	import { t } from '@/helpers/translations';
@@ -23,6 +22,8 @@
 		danger?: boolean;
 		children: Snippet;
 	} = $props();
+
+	type VisitOptions = NonNullable<Parameters<typeof inertia>[1]>;
 
 	let shouldBeLink = $derived((visitOptions.method ?? 'get') === 'get');
 

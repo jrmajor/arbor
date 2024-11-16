@@ -5,6 +5,7 @@ import { resolve } from './common';
 createInertiaApp({
 	resolve,
 	setup({ el, App, props }) {
+		// @ts-expect-error
 		mount(App, { target: el, props });
 	},
 	progress: {
