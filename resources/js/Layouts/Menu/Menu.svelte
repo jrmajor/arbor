@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import { inertia, router } from '@inertiajs/svelte';
 	import { route, type RouteList } from 'ziggy-js';
@@ -26,11 +27,13 @@
 		if (dropdown && !dropdownElement.contains(event.target as Node)) dropdown = false;
 	}
 
-	router.on('start', () => {
-		dropdown = false;
-	});
-	router.on('finish', () => {
-		open = false;
+	onMount(() => {
+		router.on('start', () => {
+			dropdown = false;
+		});
+		router.on('finish', () => {
+			open = false;
+		});
 	});
 </script>
 

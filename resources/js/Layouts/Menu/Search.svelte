@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { inertia, router } from '@inertiajs/svelte';
 	import { route } from 'ziggy-js';
 	import { hotkey } from '@/helpers/hotkey';
@@ -89,13 +90,15 @@
 		shouldCloseOnBlur = true;
 	}
 
-	router.on('start', closeDropdown);
-	router.on('finish', () => {
-		search = '';
-		previousSearch = '';
-		results = [];
-		moreCount = 0;
-		hiddenCount = 0;
+	onMount(() => {
+		router.on('start', closeDropdown);
+		router.on('finish', () => {
+			search = '';
+			previousSearch = '';
+			results = [];
+			moreCount = 0;
+			hiddenCount = 0;
+		});
 	});
 </script>
 
