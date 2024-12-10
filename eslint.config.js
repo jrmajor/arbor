@@ -25,6 +25,7 @@ export default [
 	},
 	{
 		ignores: [
+			'bootstrap/ssr',
 			'public',
 			'resources/js/types/ziggy.*',
 		],
