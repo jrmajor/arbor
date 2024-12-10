@@ -243,22 +243,21 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/retry/-/retry-0.4.1.tgz#9a96ce501bc62df46c4031fbd970e3cc6b10f07b"
   integrity sha512-c7hNEllBlenFTHBky65mhq8WD2kbN9Q6gk0bTk8lSBvc554jpXSkST1iePudpt7+A/AQvuHs9EMqjHDXMY1lrA==
 
-"@inertiajs/core@1.3.0-beta.2":
-  version "1.3.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@inertiajs/core/-/core-1.3.0-beta.2.tgz#6aad2bda7012bc8b0d357a24fbeb3f7461fe7cdf"
-  integrity sha512-q3C5kdwSaH6x1PYEWDSmvBLbzR7Xnwlczgt4+9MHnE7/FabZjbg0we5wvolNRI5FnMslp5vqEP6kI7pcDZSfag==
+"@inertiajs/core@2.0.0-beta.3":
+  version "2.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@inertiajs/core/-/core-2.0.0-beta.3.tgz#e11b43551cb47a4ac15e1db8fcb04109ec4c6285"
+  integrity sha512-CjfOdDQ9ifxi0eCLxdPtcACcVBY5JgkH+zBoUQhvNUFOkylk7vDVr8KUOt8LG0XpwX4Hs6c6+sloNPlwFO+nDw==
   dependencies:
     axios "^1.6.0"
     deepmerge "^4.0.0"
-    nprogress "^0.2.0"
     qs "^6.9.0"
 
-"@inertiajs/svelte@1.3.0-beta.2":
-  version "1.3.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@inertiajs/svelte/-/svelte-1.3.0-beta.2.tgz#ffb870d0165865a50347896e62395312ddcebc52"
-  integrity sha512-xT9k0h1WD8yVHJmG7RwHyPkNaLaWtiFClm7oAD6ecnLl+Y4TS1TUzrSc/qBfurRnvNqhjSIIZyoZB7liqT64XQ==
+"@inertiajs/svelte@2.0.0-beta.3":
+  version "2.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@inertiajs/svelte/-/svelte-2.0.0-beta.3.tgz#c81228df37da8583de41a666a23d4c8ffdab09cc"
+  integrity sha512-ygPjc1e0+VJS1HLj6I+Rg32lDj45UEkxodMe6l1ObCW3ic6BvIMwjhRI8F+bU6/FrvbzKULIwI4naWCuiX0OxA==
   dependencies:
-    "@inertiajs/core" "1.3.0-beta.2"
+    "@inertiajs/core" "2.0.0-beta.3"
     html-escape "^2.0.0"
     lodash "^4.5.0"
 
@@ -2043,11 +2042,6 @@ normalize-range@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==
-
-nprogress@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
-  integrity sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==
 
 object-assign@^4.0.1:
   version "4.1.1"
