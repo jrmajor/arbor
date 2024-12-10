@@ -67,7 +67,6 @@ class Marriage extends Model
      */
     public function woman(): BelongsTo
     {
-        /** @phpstan-ignore return.type */
         return $this->belongsTo(Person::class)->withTrashed();
     }
 
@@ -76,7 +75,6 @@ class Marriage extends Model
      */
     public function man(): BelongsTo
     {
-        /** @phpstan-ignore return.type */
         return $this->belongsTo(Person::class)->withTrashed();
     }
 
