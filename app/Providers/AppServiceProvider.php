@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\InertiaHttpGateway;
 use App\Models;
 use App\Models\Observers\PersonObserver;
 use Illuminate\Database\Eloquent\Model;
@@ -10,12 +11,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Ssr\Gateway;
 use Spatie\Flash\Flash;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        $this->app->bind(Gateway::class, InertiaHttpGateway::class);
+
         JsonResource::withoutWrapping();
         ResourceCollection::withoutWrapping();
 
