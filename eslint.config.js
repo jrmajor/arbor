@@ -26,7 +26,7 @@ export default [
 	{
 		ignores: [
 			'public',
-			'resources/js/helpers/ziggy.*',
+			'resources/js/types/ziggy.*',
 		],
 	},
 ];
