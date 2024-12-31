@@ -20,7 +20,7 @@
 		type="checkbox"
 		bind:checked
 		{id}
-		class="rounded border-gray-300 focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0"
+		class="rounded border-gray-300 outline-none focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0"
 		class:size-3.5={size === 'sm'}
 	>
 	<label for={id} class={size === 'sm' ? 'ml-1.5' : 'ml-2'}>

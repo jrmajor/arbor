@@ -34,7 +34,7 @@
 		{checked}
 		{value}
 		class="
-			border-gray-300 focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0
+			border-gray-300 outline-none focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0
 			{formField.error ? 'border-red-600 text-red-500 focus:ring-red-500/50' : ''}
 		"
 		{onchange}
