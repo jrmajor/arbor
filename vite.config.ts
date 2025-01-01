@@ -27,6 +27,9 @@ export default defineConfig({
 		}),
 		inertia('resources/js/viteSsr.ts'),
 	],
+	build: {
+		assetsInlineLimit: 4096,
+	},
 	resolve: {
 		alias: {
 			'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
