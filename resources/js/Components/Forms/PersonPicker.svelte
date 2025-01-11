@@ -147,9 +147,11 @@
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			onclick={() => searchInput?.focus()}
-			class="dropdown-icon select"
-			class:disabled
-			class:invalid={formField.error}
+			class={{
+				'dropdown-icon select': true,
+				disabled,
+				invalid: formField.error,
+			}}
 		>
 			<div class="pr-4">
 				<span>{value ? (names.get(value) ?? t('misc.loading')) : ''}</span><!--

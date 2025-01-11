@@ -78,9 +78,10 @@
 			</button>
 
 			<div
-				class="flex-col pb-2 mt-2 w-full lg:!flex lg:flex-row lg:w-auto lg:mt-0 lg:pb-0 lg:items-center"
-				class:flex={open}
-				class:hidden={!open}
+				class={[
+					'flex-col pb-2 mt-2 w-full lg:!flex lg:flex-row lg:w-auto lg:mt-0 lg:pb-0 lg:items-center',
+					open ? 'flex' : 'hidden',
+				]}
 			>
 				<Search {user}/>
 

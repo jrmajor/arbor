@@ -41,10 +41,11 @@
 		{onclick}
 		{type}
 		{disabled}
-		class="btn"
-		class:btn-solid={!outline}
-		class:btn-outline={outline}
-		class:small
+		class={[
+			'btn',
+			outline ? 'btn-outline' : 'btn-solid',
+			small && 'small',
+		]}
 	>
 		{@render children()}
 	</button>
@@ -53,21 +54,25 @@
 		use:action={inertiaArgs ?? {}}
 		{href}
 		{rel}
-		class="btn"
-		class:disabled
-		class:btn-solid={!outline}
-		class:btn-outline={outline}
-		class:small
+		class={{
+			btn: true,
+			disabled,
+			'btn-solid': !outline,
+			'btn-outline': outline,
+			small,
+		}}
 	>
 		{@render children()}
 	</a>
 {:else}
 	<span
-		class="btn"
-		class:disabled
-		class:btn-solid={!outline}
-		class:btn-outline={outline}
-		class:small
+		class={{
+			btn: true,
+			disabled,
+			'btn-solid': !outline,
+			'btn-outline': outline,
+			small,
+		}}
 	>
 		{@render children()}
 	</span>
