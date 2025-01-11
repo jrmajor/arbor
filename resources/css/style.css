@@ -1,4 +1,4 @@
-@import './base.css';
+@import './tailwind.css';
 @import './forms.css';
 
 .indent-children-except-first p:not(:first-child) {
