@@ -47,7 +47,7 @@
 	}
 </script>
 
-<form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
+<form {onsubmit} class="p-6 bg-white rounded-lg shadow-sm overflow-hidden">
 	<div>
 		<fieldset class="space-y-5">
 			<div class="flex flex-col gap-5 sm:flex-row">

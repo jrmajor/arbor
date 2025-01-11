@@ -24,7 +24,7 @@
 	}[level]);
 </script>
 
-<div class="flex w-full items-center justify-between rounded-lg p-5 shadow {colors}">
+<div class="flex w-full items-center justify-between rounded-lg p-5 shadow-sm {colors}">
 	<div class="flex items-center">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

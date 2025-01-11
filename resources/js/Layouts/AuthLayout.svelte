@@ -16,7 +16,7 @@
 			{$title}
 		</h1>
 
-		<main class="bg-white rounded-lg shadow px-5 py-4 w-full max-w-[32rem]">
+		<main class="bg-white rounded-lg shadow-sm px-5 py-4 w-full max-w-[32rem]">
 			{@render children()}
 		</main>
 

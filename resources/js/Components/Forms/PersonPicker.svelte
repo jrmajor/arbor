@@ -204,7 +204,9 @@
 	</div>
 </div>
 
-<style lang="postcss">
+<style>
+	@reference '$style';
+
 	.dropdown-icon {
 		background-image: url(./dropdown.svg);
 		background-position: right .5rem center;
@@ -217,9 +219,9 @@
 		@apply px-3 py-1.5 pr-9 rounded-md border border-gray-300;
 
 		&:not(.disabled) {
-			@apply focus:border-blue-600 focus:ring focus:ring-blue-500/50;
-			@apply focus-within:border-blue-600 focus-within:ring focus-within:ring-blue-500/50;
-			@apply active:border-blue-600 active:ring active:ring-blue-500/50;
+			@apply focus:border-blue-600 focus:ring-3 focus:ring-blue-500/50;
+			@apply focus-within:border-blue-600 focus-within:ring-3 focus-within:ring-blue-500/50;
+			@apply active:border-blue-600 active:ring-3 active:ring-blue-500/50;
 		}
 	}
 

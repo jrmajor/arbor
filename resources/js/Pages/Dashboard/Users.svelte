@@ -16,7 +16,7 @@
 	<title>Users - Arbor</title>
 </svelte:head>
 
-<main class="grow md:w-1/2 p-6 bg-white rounded-lg shadow">
+<main class="grow md:w-1/2 p-6 bg-white rounded-lg shadow-sm">
 	<table>
 		<thead>
 			<tr>

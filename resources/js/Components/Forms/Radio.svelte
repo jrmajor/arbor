@@ -33,10 +33,11 @@
 		{id}
 		{checked}
 		{value}
-		class="
-			border-gray-300 outline-none focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0
-			{formField.error ? 'border-red-600 text-red-500 focus:ring-red-500/50' : ''}
-		"
+		class={[
+			'border-gray-300 outline-none checked:border-transparent',
+			'focus:border-blue-600 focus:ring-3 focus:ring-blue-500/50 focus:ring-offset-0',
+			formField.error && 'border-red-600 text-red-500 focus:ring-red-500/50',
+		]}
 		{onchange}
 	>
 	<label class="ml-2" for={id}>

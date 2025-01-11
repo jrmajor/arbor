@@ -47,12 +47,12 @@
 			{oninput}
 			id="id_pytlewski"
 			autocomplete="off"
-			class="form-input rounded-r-none w-1/4 md:w-3/8 z-10"
+			class="form-input rounded-r-none w-1/4 md:w-3/12 z-10"
 			class:invalid={error}
 		>
 		<input
 			type="text"
-			class="form-input rounded-l-none -ml-px w-3/4 md:w-5/8"
+			class="form-input rounded-l-none -ml-px w-3/4 md:w-9/12"
 			value={result ?? t('people.pytlewski.not_found')}
 			disabled
 		>

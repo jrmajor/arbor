@@ -6,12 +6,14 @@
 
 <dl>{@render children()}</dl>
 
-<style lang="postcss">
+<style>
+	@reference '$style';
+
 	dl {
 		display: grid;
 		grid-template-columns: 1fr;
 
-		@media screen(sm) {
+		@media (width >= theme(--breakpoint-sm)) {
 			grid-template-columns: min-content 1fr;
 		}
 	}
@@ -19,7 +21,7 @@
 	dl :global(dt) {
 		@apply font-bold sm:relative sm:overflow-hidden sm:whitespace-nowrap;
 
-		@media screen(sm) {
+		@media (width >= theme(--breakpoint-sm)) {
 			width: calc(100% + 1.5rem);
 		}
 

@@ -27,7 +27,7 @@
 
 	{@render children()}
 
-	<footer class="m-1 px-3 pt-2 text-center text-gray-600 text-sm">
+	<footer class="mt-3 mb-1 px-3 text-center text-gray-600 text-sm">
 		&copy; 2018-{currentYear}
 		<a href={`mailto:${mailto}`} class="hover:text-gray-900">Jeremiasz Major</a>
 	</footer>

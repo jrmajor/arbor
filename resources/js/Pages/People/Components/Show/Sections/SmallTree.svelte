@@ -6,7 +6,7 @@
 </script>
 
 {#if person.father || person.mother}
-	<div class="rounded-lg bg-white p-6 shadow">
+	<div class="rounded-lg bg-white p-6 shadow-sm">
 		<div class="text-center">
 			<div class="flex w-full text-sm">
 				<div class="flex w-1/2 flex-col justify-center md:flex-row">

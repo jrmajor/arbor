@@ -21,7 +21,8 @@
 		bind:checked
 		{id}
 		class={[
-			'rounded border-gray-300 outline-none focus:border-blue-600 focus:ring focus:ring-blue-500/50 focus:ring-offset-0',
+			'rounded-sm border-gray-300 outline-none checked:border-transparent',
+			'focus:border-blue-600 focus:ring-3 focus:ring-blue-500/50 focus:ring-offset-0',
 			size === 'sm' && 'size-3.5',
 		]}
 	>

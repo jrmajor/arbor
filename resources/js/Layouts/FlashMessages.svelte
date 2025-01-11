@@ -28,7 +28,9 @@
 	{/each}
 </div>
 
-<style lang="postcss">
+<style>
+	@reference '$style';
+
 	.message {
 		@apply mb-3;
 	}

@@ -37,7 +37,7 @@
 
 {#if active}
 	<span class="text-blue-700 transition">
-		<li class="px-3 py-1 rounded transition">
+		<li class="px-3 py-1 rounded-sm transition">
 			<span class="flex w-full items-center border-b-2 border-dotted border-blue-500 uppercase">
 				<svg
 					viewBox="0 0 20 20"

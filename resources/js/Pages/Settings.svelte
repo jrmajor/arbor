@@ -35,7 +35,7 @@
 	{t('settings.user')}: {user!.username}
 </h1>
 
-<main class="p-6 bg-white rounded-lg shadow">
+<main class="p-6 bg-white rounded-lg shadow-sm">
 	<form onsubmit={submitEmail} class="flex flex-col">
 		<h2 class="font-medium text-xl text-gray-900 mb-4">
 			{t('settings.email')}

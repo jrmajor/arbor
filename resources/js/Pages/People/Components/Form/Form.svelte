@@ -65,7 +65,7 @@
 	}
 </script>
 
-<form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
+<form {onsubmit} class="p-6 bg-white rounded-lg shadow-sm overflow-hidden">
 	<div>
 		<fieldset class="space-y-5">
 			<Form.Field error={$form.errors.sex}>
@@ -117,7 +117,7 @@
 						type="text"
 						id="id_wielcy"
 						bind:value={$form.id_wielcy}
-						class="form-input rounded-r-none w-1/4 md:w-3/8 z-10"
+						class="form-input rounded-r-none w-1/4 md:w-3/12 z-10"
 						class:invalid={$form.errors.id_wielcy}
 					>
 					<input
@@ -125,7 +125,7 @@
 						id="wielcy_search"
 						placeholder={t('misc.coming_soon')}
 						disabled
-						class="form-input rounded-l-none -ml-px w-3/4 md:w-5/8"
+						class="form-input rounded-l-none -ml-px w-3/4 md:w-9/12"
 					>
 				</div>
 				<Form.Error error={$form.errors.id_wielcy}/>
@@ -286,7 +286,7 @@
 				onclick={() => $form.sources = [...$form.sources, '']}
 				class="size-6 rounded-full border border-blue-700 p-1 text-blue-700 transition
 					hover:bg-blue-100 hover:text-blue-800
-					focus:outline-none focus:ring
+					focus:outline-none focus:ring-3 focus:ring-blue-500/50
 					active:border-blue-600 active:bg-blue-600 active:text-blue-100"
 				aria-label="Add source"
 			>
@@ -309,7 +309,7 @@
 										onclick={() => $form.sources = [...$form.sources.slice(0, index), ...$form.sources.slice(index + 1)]}
 										class="size-6 p-1 rounded-full border border-blue-700 text-blue-700 transition
 											hover:bg-blue-100 hover:text-blue-800
-											focus:outline-none focus:ring
+											focus:outline-none focus:ring-3 focus:ring-blue-500/50
 											active:bg-blue-600 active:border-blue-600 active:text-blue-100"
 										aria-label="Remove source"
 									>

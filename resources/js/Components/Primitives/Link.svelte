@@ -30,7 +30,9 @@
 	{@render children()}
 </a>
 
-<style lang="postcss">
+<style>
+	@reference '$style';
+
 	a :global(small) {
 		@apply text-gray-700;
 	}

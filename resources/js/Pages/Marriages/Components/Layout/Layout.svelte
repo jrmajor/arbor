@@ -14,12 +14,12 @@
 	<TitleBar {marriage}/>
 </h1>
 
-<div class="flex flex-col md:flex-row space-x-2 space-y-2">
+<div class="flex flex-col gap-2 md:flex-row">
 	<main class="grow md:w-1/2 flex flex-col space-y-3">
 		{@render children()}
 	</main>
 
-	<div class="shrink-0 p-1">
+	<div class="shrink-0 p-1 md:py-3">
 		<SidebarMenu {marriage} {activeRoute}/>
 	</div>
 </div>

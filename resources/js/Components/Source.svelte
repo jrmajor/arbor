@@ -6,7 +6,9 @@
 	{@html html}
 </small>
 
-<style lang="postcss">
+<style>
+	@reference '$style';
+
 	small {
 		@apply text-black;
 

@@ -55,7 +55,7 @@
 	</Link>
 {/if}
 
-<style lang="postcss">
+<style>
 	.wielcy, .pytlewski {
 		display: block;
 		width: 0.417rem;

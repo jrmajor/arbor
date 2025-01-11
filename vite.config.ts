@@ -1,5 +1,6 @@
-import { dirname, resolve } from 'path';
+import { dirname } from 'path';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import tailwindcss from '@tailwindcss/vite';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 import inertia from './resources/js/inertiaVitePlugin';
@@ -20,6 +21,7 @@ export default defineConfig({
 				}
 			},
 		}),
+		tailwindcss(),
 		fluent({
 			resolveLocale(path) {
 				return dirname(path).slice(-2);
@@ -32,7 +34,8 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
+			'ziggy-js': `${import.meta.dirname}/vendor/tightenco/ziggy`,
+			$style: `${import.meta.dirname}/resources/css/style.css`,
 		},
 	},
 });

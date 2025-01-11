@@ -1,27 +1,25 @@
-@layer components {
-  .form-input {
-    @apply rounded-md border border-gray-300 bg-white px-3 py-1.5 outline-none;
+@utility form-input {
+  @apply rounded-md border border-gray-300 bg-white px-3 py-1.5 outline-none;
+
+  &:not([disabled]) {
+    @apply focus:ring-3 active:ring-3;
+  }
+
+  &:not([disabled]):not(.invalid) {
+    @apply focus:border-blue-600 focus:ring-blue-500/50;
+    @apply active:border-blue-600 active:ring-blue-500/50;
+  }
+
+  &.invalid {
+    @apply border-red-600;
 
     &:not([disabled]) {
-      @apply focus:ring active:ring;
+      @apply focus:ring-red-500/50;
+      @apply active:ring-red-500/50;
     }
+  }
 
-    &:not([disabled]):not(.invalid) {
-      @apply focus:border-blue-600 focus:ring-blue-500/50;
-      @apply active:border-blue-600 active:ring-blue-500/50;
-    }
-
-    &.invalid {
-      @apply border-red-600;
-
-      &:not([disabled]) {
-        @apply focus:ring-red-500/50;
-        @apply active:ring-red-500/50;
-      }
-    }
-
-    &[disabled] {
-      @apply text-gray-700 bg-gray-100;
-    }
+  &[disabled] {
+    @apply text-gray-700 bg-gray-100;
   }
 }

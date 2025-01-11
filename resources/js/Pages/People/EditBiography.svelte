@@ -27,7 +27,7 @@
 	<title>{person.simpleName} - {t('people.titles.biography_editing')} - Arbor</title>
 </svelte:head>
 
-<form {onsubmit} class="p-6 bg-white rounded-lg shadow overflow-hidden">
+<form {onsubmit} class="p-6 bg-white rounded-lg shadow-sm overflow-hidden">
 	<Form.Field error={$form.errors.biography}>
 		<Form.Textarea bind:value={$form.biography} rows={20}/>
 	</Form.Field>

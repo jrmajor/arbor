@@ -16,8 +16,8 @@
 	<title>Activity log - Arbor</title>
 </svelte:head>
 
-<main class="grow md:w-1/2 space-y-2 flex flex-col items-center">
-	<div class="w-full p-6 bg-white rounded-lg shadow">
+<main class="grow md:w-1/2 gap-3 flex flex-col items-center">
+	<div class="w-full p-6 bg-white rounded-lg shadow-sm">
 		<table>
 			<tbody>
 				{#each activities as activity (activity.id)}

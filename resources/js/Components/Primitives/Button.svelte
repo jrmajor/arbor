@@ -78,7 +78,9 @@
 	</span>
 {/if}
 
-<style lang="postcss">
+<style>
+	@reference '$style';
+
 	.btn {
 		display: inline-flex;
 		align-items: center;
@@ -100,7 +102,7 @@
 
 		&:not([disabled]):not(.disabled) {
 			@apply hover:bg-blue-500;
-			@apply focus:outline-none focus:border-blue-700 focus:ring;
+			@apply focus:outline-none focus:border-blue-700 focus:ring-3 focus:ring-blue-500/50;
 			@apply active:bg-blue-700;
 		}
 	}
@@ -116,7 +118,7 @@
 
 		&:not([disabled]):not(.disabled) {
 			@apply hover:bg-blue-300/20 hover:text-blue-800;
-			@apply focus:outline-none focus:ring;
+			@apply focus:outline-none focus:ring-3 focus:ring-blue-500/50;
 			@apply active:bg-blue-600 active:border-blue-600 active:text-blue-100;
 		}
 	}

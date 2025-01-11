@@ -20,7 +20,7 @@
 </svelte:head>
 
 {#each activities as activity}
-	<div class="p-6 bg-white rounded-lg shadow overflow-hidden">
+	<div class="p-6 bg-white rounded-lg shadow-sm overflow-hidden">
 		{#if activity.description === 'deleted'}
 			{t('marriages.history.deleted')}
 		{:else if activity.description === 'restored'}

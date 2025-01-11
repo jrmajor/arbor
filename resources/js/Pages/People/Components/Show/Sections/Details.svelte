@@ -15,7 +15,7 @@
 	let wielcy = $derived(person.wielcy);
 </script>
 
-<div class="p-6 bg-white rounded-lg shadow">
+<div class="p-6 bg-white rounded-lg shadow-sm">
 	<DataList>
 		<PytlewskiSection {person}/>
 

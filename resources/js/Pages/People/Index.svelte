@@ -13,7 +13,7 @@
 	<title>{t('people.titles.index')} - Arbor</title>
 </svelte:head>
 
-<main class="p-6 bg-white rounded-lg shadow">
+<main class="p-6 bg-white rounded-lg shadow-sm">
 	<Letters {letters}/>
 
 	<hr class="-mx-6 my-5 border-t-2 border-dashed text-gray-200">

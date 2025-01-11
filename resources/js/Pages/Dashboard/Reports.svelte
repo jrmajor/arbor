@@ -21,7 +21,7 @@
 	{#if shouldBeDead.length}
 		<div>
 			<h2 class="mb-2 leading-none text-xl font-medium">Should be dead</h2>
-			<ul class="w-full p-6 bg-white rounded-lg shadow">
+			<ul class="w-full p-6 bg-white rounded-lg shadow-sm">
 				{#each shouldBeDead as person}
 					<li><Name {person}/></li>
 				{/each}
@@ -32,7 +32,7 @@
 	{#if visibleAlive.length}
 		<div>
 			<h2 class="mb-2 leading-none text-xl font-medium">Visible alive</h2>
-			<ul class="w-full p-6 bg-white rounded-lg shadow">
+			<ul class="w-full p-6 bg-white rounded-lg shadow-sm">
 				{#each visibleAlive as person}
 					<li><Name {person}/></li>
 				{/each}
@@ -43,7 +43,7 @@
 	{#if invisibleDead.length}
 		<div>
 			<h2 class="mb-2 leading-none text-xl font-medium">Invisible dead</h2>
-			<ul class="w-full p-6 bg-white rounded-lg shadow">
+			<ul class="w-full p-6 bg-white rounded-lg shadow-sm">
 				{#each invisibleDead as person}
 					<li><Name {person}/></li>
 				{/each}

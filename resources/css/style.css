@@ -1,5 +1,5 @@
-@import "./base.css";
-@import "./forms.css";
+@import './base.css';
+@import './forms.css';
 
 .indent-children-except-first p:not(:first-child) {
   @apply ml-4;
