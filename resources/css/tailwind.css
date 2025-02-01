@@ -5,9 +5,10 @@
 @plugin '@tailwindcss/forms';
 
 @theme {
+  --font-sans: InterVariable, ui-sans-serif, system-ui, sans-serif;
+
   --color-*: initial;
-  --color-transparent: transparent;
-  --color-current: currentColor;
+
   --color-black: #000;
   --color-white: #fff;
 
@@ -88,10 +89,6 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
-
-  --font-sans: InterVariable, ui-sans-serif, system-ui, sans-serif;
-
-  --stroke-width-3: 3;
 }
 
 @layer base {
