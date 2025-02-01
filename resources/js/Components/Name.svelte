@@ -16,7 +16,7 @@
 </script>
 
 {#if person.wielcyUrl || person.pytlewskiUrl}
-	<div class="inline-block space-y-[0.139rem]">
+	<div>
 		<!-- svelte-ignore a11y_consider_explicit_label -->
 		<a href={person.wielcyUrl} target="_blank" class="wielcy" class:missing={!person.wielcyUrl}></a>
 		<!-- svelte-ignore a11y_consider_explicit_label -->
@@ -56,16 +56,21 @@
 {/if}
 
 <style>
+	div:has(.wielcy) {
+		display: inline-block;
+	}
+
 	.wielcy, .pytlewski {
 		display: block;
-		width: 0.417rem;
-		height: 0.417rem;
+		width: calc(6rem / 14);
+		height: calc(6rem / 14);
 		border-width: 1px;
 	}
 
 	.wielcy {
 		background-color: #73adff;
 		border-color: #205daf;
+		margin-bottom: calc(2rem / 14);
 	}
 
 	.pytlewski {
