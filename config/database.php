@@ -14,6 +14,9 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => true,
+            'busy_timeout' => null,
+            'journal_mode' => null,
+            'synchronous' => null,
         ],
 
     ],
@@ -30,6 +33,7 @@ return [
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
             'prefix' => env('REDIS_PREFIX', 'arbor_database_'),
+            'persistent' => env('REDIS_PERSISTENT', false),
         ],
 
         'default' => [

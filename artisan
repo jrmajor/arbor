@@ -7,7 +7,8 @@ define('LaravelStart', microtime(true));
 
 require __DIR__ . '/vendor/autoload.php';
 
-$status = (require_once __DIR__ . '/bootstrap/app.php')
-    ->handleCommand(new ArgvInput());
+$app = require_once __DIR__ . '/bootstrap/app.php';
+
+$status = $app->handleCommand(new ArgvInput());
 
 exit($status);

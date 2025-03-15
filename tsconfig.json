@@ -5,6 +5,8 @@
     "moduleResolution": "bundler",
     "verbatimModuleSyntax": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
@@ -15,6 +17,7 @@
     "allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
+    "useDefineForClassFields": true,
   },
   "include": [
     "resources/js/**/*.ts",

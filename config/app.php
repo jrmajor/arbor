@@ -9,6 +9,7 @@ return [
 
     'url' => env('APP_URL', 'https://arbor.test'),
 
+    // todo: change to UTC
     'timezone' => 'Europe/Warsaw',
     'locale' => 'en',
     'available_locales' => ['pl', 'en', 'de'],
