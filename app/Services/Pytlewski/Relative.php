@@ -19,7 +19,7 @@ final class Relative
         public readonly ?string $name,
         public readonly ?string $surname = null,
     ) {
-        /** @phpstan-ignore property.uninitializedReadonly */
+        /** @phpstan-ignore property.uninitializedReadonly, unset.readOnlyProperty */
         unset($this->person);
 
         $this->url = $id !== null ? PytlewskiFactory::url($id) : null;

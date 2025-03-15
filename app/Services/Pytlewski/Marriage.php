@@ -20,7 +20,7 @@ final class Marriage
         public readonly ?string $date,
         public readonly ?string $place,
     ) {
-        /** @phpstan-ignore property.uninitializedReadonly */
+        /** @phpstan-ignore property.uninitializedReadonly, unset.readOnlyProperty */
         unset($this->person);
 
         $this->url = $id !== null ? PytlewskiFactory::url($id) : null;

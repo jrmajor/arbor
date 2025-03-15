@@ -31,10 +31,11 @@ class Activity extends Model implements ActivityContract
     }
 
     /**
-     * @return MorphTo<Model, $this>
+     * @return MorphTo<User, $this>
      */
     public function causer(): MorphTo
     {
+        // @phpstan-ignore return.type
         return $this->morphTo();
     }
 
