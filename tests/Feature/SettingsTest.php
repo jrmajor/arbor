@@ -53,7 +53,7 @@ final class SettingsTest extends TestCase
     public function testLogoutDevices(): void
     {
         $user = User::factory()->create([
-            'password' => $password = faker()->password,
+            'password' => $password = faker()->password(),
         ]);
 
         Event::fake();

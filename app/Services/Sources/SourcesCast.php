@@ -37,7 +37,7 @@ class SourcesCast implements CastsAttributes
 
         $value = Vec\map(
             Type\Vec(Type\union(
-                Type\null(), Type\string(), Type\instance_of(Source::class),
+                Type\string(), Type\instance_of(Source::class),
             ))->coerce($value),
             fn ($source) => Source::from($source)->sanitized(),
         );

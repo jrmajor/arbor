@@ -38,10 +38,10 @@ final class Source implements Jsonable
     private string $inlineMarkerList = '"&<>:[*I\\';
 
     public function __construct(
-        private ?string $raw,
+        private string $raw,
     ) { }
 
-    public static function from(string|self|null $raw): self
+    public static function from(string|self $raw): self
     {
         return $raw instanceof self ? $raw : new self($raw);
     }
@@ -58,7 +58,7 @@ final class Source implements Jsonable
         return $collapsed === '' ? null : $collapsed;
     }
 
-    public function raw(): ?string
+    public function raw(): string
     {
         return $this->raw;
     }
