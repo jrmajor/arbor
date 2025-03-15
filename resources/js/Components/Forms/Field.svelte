@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { randomId } from '@/helpers/utils';
 	import Error from './Error.svelte';
 	import { formFieldContext } from './contexts';
 
@@ -9,8 +8,10 @@
 		children: Snippet;
 	} = $props();
 
+	const id = $props.id();
+
 	formFieldContext.set({
-		id: randomId(),
+		id,
 		get error() {
 			return error;
 		},

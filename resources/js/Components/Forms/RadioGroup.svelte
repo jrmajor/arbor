@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { randomId } from '@/helpers/utils';
 	import { radioGroupContext } from './contexts';
 
 	let {
@@ -11,8 +10,10 @@
 		children: Snippet;
 	} = $props();
 
+	const id = $props.id();
+
 	radioGroupContext.set({
-		id: randomId(),
+		id,
 		get value() {
 			return value;
 		},

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { randomId } from '@/helpers/utils';
 
 	let {
 		checked = $bindable(),
@@ -12,7 +11,7 @@
 		children: Snippet;
 	} = $props();
 
-	const id = randomId();
+	const id = $props.id();
 </script>
 
 <div class="flex grow items-center">

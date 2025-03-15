@@ -28,7 +28,7 @@
 		errorTo: string | null;
 	} = $props();
 
-	const id = `date${Math.floor(Math.random() * (10 ** 8))}`;
+	const id = $props.id();
 
 	let simple = $state(simplePickerValue() ?? '');
 	let dateIsValid = $state(true);

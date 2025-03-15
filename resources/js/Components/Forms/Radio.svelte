@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { randomId } from '@/helpers/utils';
 	import { formFieldContext, radioGroupContext } from './contexts';
 
 	let { value, children }: {
@@ -8,7 +7,7 @@
 		children: Snippet;
 	} = $props();
 
-	const id = randomId();
+	const id = $props.id();
 
 	const formField = formFieldContext.get();
 	const radioContext = radioGroupContext.get();
