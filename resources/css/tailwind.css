@@ -1,6 +1,6 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
 
-@source '../views';
+@source '..';
 
 @plugin '@tailwindcss/forms';
 
