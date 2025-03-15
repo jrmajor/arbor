@@ -31,4 +31,4 @@
 	{placeholder}
 	class="form-input w-full"
 	class:invalid={formField?.error || error}
-/>
+>

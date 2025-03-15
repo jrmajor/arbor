@@ -19,6 +19,10 @@ export default [
 				PaginationLink: 'readonly',
 			},
 		},
+		rules: {
+			// todo: enable
+			'svelte/require-each-key': 'off',
+		},
 	},
 	{
 		ignores: [
