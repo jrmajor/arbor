@@ -16,14 +16,6 @@ return [
             'foreign_key_constraints' => true,
         ],
 
-        'testing' => [
-            'driver' => 'sqlite',
-            'url' => env('DB_URL'),
-            'database' => env('DB_DATABASE', database_path('testing.sqlite')),
-            'prefix' => '',
-            'foreign_key_constraints' => true,
-        ],
-
     ],
 
     'migrations' => [
