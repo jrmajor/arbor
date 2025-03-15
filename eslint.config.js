@@ -1,10 +1,10 @@
 import base, { svelte } from '@jrmajor/eslint-config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-	...base,
-	...svelte,
+export default defineConfig([
+	base,
+	svelte,
 	{
 		languageOptions: {
 			globals: {
@@ -24,11 +24,9 @@ export default [
 			'svelte/require-each-key': 'off',
 		},
 	},
-	{
-		ignores: [
-			'bootstrap/ssr',
-			'public',
-			'resources/js/types/ziggy.*',
-		],
-	},
-];
+	globalIgnores([
+		'bootstrap/ssr',
+		'public',
+		'resources/js/types/ziggy.*',
+	]),
+]);
