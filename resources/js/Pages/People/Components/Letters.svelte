@@ -21,7 +21,7 @@
 	<ul class="columns-3 xs:columns-4 sm:columns-5 md:columns-6 lg:columns-8">
 		{#each letters.family as letter}
 			<li class:font-bold={activeType === 'f' && activeLetter === letter.letter}>
-				<Link href={route('people.letter', { type: 'f', letter: letter.letter })}>
+				<Link href={route('people.letter', { type: 'f', letter: encodeURIComponent(letter.letter) })}>
 					{letter.letter}
 					<small>[{letter.count}]</small>
 				</Link>
@@ -36,7 +36,7 @@
 	<ul class="columns-3 xs:columns-4 sm:columns-5 md:columns-6 lg:columns-8">
 		{#each letters.last as letter}
 			<li class:font-bold={activeType === 'l' && activeLetter === letter.letter}>
-				<Link href={route('people.letter', { type: 'l', letter: letter.letter })}>
+				<Link href={route('people.letter', { type: 'l', letter: encodeURIComponent(letter.letter) })}>
 					{letter.letter}
 					<small>[{letter.count}]</small>
 				</Link>
