@@ -68,9 +68,9 @@ final class PytlewskiFactory
 
     private function getSource(int $id): ?string
     {
-        return Cache::remember(
+        return Cache::flexible(
             "pytlewski.{$id}",
-            CarbonInterval::week(),
+            [CarbonInterval::week(), CarbonInterval::year()],
             function () use ($id): ?string {
                 try {
                     $source = Http::timeout(2)->get(self::url($id));

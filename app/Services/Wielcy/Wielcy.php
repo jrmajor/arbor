@@ -36,9 +36,9 @@ final class Wielcy
 
     private function getSource(): ?string
     {
-        return $this->source = Cache::remember(
+        return $this->source = Cache::flexible(
             "wielcy.{$this->id}",
-            CarbonInterval::day(),
+            [CarbonInterval::day(), CarbonInterval::year()],
             function (): ?string {
                 try {
                     $source = Http::timeout(2)->get(self::url($this->id));

@@ -3,11 +3,10 @@
 namespace Tests\Unit\Pytlewski;
 
 use App\Services\Pytlewski\PytlewskiFactory;
-use Carbon\CarbonInterval;
-use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
@@ -67,9 +66,9 @@ final class FactoryTest extends TestCase
     {
         Http::fake();
 
-        Cache::shouldReceive('remember')
+        Cache::shouldReceive('flexible')
             ->once()
-            ->with('pytlewski.556', CarbonInterval::class, Closure::class)
+            ->with('pytlewski.556', Mockery::any(), Mockery::any())
             ->andReturn('');
 
         $this->factory->find(556);
