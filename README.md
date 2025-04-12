@@ -9,11 +9,11 @@ and frontend built in Svelte with Inertia.js and Tailwind CSS.
 
 Clone this repository and install it like you normally install Laravel application.
 
-- Install dependencies (`composer install && yarn install`)
+- Install dependencies (`composer install && pnpm install`)
 - Copy `.env.example` to `.env` and set environment variables
 - Set application key with `php artisan key:generate`
 - Run database migrations (`php artisan migrate`)
-- Start Vite dev server with `yarn dev`
+- Start dev server with `composer dev`
 
 ## Testing
 

@@ -14,13 +14,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install npm dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -43,7 +46,7 @@ jobs:
         run: composer install
 
       - name: Check types
-        run: yarn run check
+        run: pnpm check
 
   lint:
     name: Lint
@@ -54,16 +57,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install npm dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
 
       - name: Run ESLint
-        run: yarn run lint
+        run: pnpm lint
 
   build:
     name: Build
@@ -74,13 +80,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install npm dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -103,4 +112,4 @@ jobs:
         run: composer install
 
       - name: Build Vite
-        run: yarn build
+        run: pnpm build

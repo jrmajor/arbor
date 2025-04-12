@@ -1,6 +1,7 @@
 {
     "private": true,
     "type": "module",
+    "packageManager": "pnpm@10.8.0",
     "scripts": {
         "dev": "vite dev",
         "build": "vite build && vite build --ssr",
@@ -33,6 +34,6 @@
     },
     "volta": {
         "node": "22.11.0",
-        "yarn": "1.22.22"
+        "pnpm": "10.8.0"
     }
 }
