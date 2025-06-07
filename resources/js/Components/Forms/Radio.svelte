@@ -12,11 +12,7 @@
 	const formField = formFieldContext.get();
 	const radioContext = radioGroupContext.get();
 
-	let checked = $state(radioContext.value === value);
-
-	$effect(() => {
-		checked = radioContext.value === value;
-	});
+	const checked = $derived(radioContext.value === value);
 
 	function onchange(event: Event) {
 		const target = event.target as HTMLInputElement;
