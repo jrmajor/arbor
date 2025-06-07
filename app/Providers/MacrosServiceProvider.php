@@ -27,6 +27,7 @@ class MacrosServiceProvider extends ServiceProvider
 
     private function registerCarbonMacros(): void
     {
+        /** @phpstan-ignore argument.staticClosure */
         Carbon::macro('formatPeriodTo', static function (Carbon $to): string {
             /** @phpstan-ignore staticMethod.notFound */
             $from = self::this()->toImmutable();
