@@ -14,6 +14,9 @@ importers:
       '@github/hotkey':
         specifier: ^3.1
         version: 3.1.1
+      '@inertiajs/core':
+        specifier: ^2.0
+        version: 2.0.11
       '@inertiajs/svelte':
         specifier: ^2.0
         version: 2.0.11(svelte@5.33.17)
@@ -27,7 +30,7 @@ importers:
         specifier: ^5.33
         version: 5.33.17
       tailwindcss:
-        specifier: ^4.1.8
+        specifier: ^4.1
         version: 4.1.8
     devDependencies:
       '@fluent/syntax':
@@ -40,7 +43,7 @@ importers:
         specifier: ^5.1
         version: 5.1.0(svelte@5.33.17)(vite@6.3.5(@types/node@22.15.30)(jiti@2.4.2)(lightningcss@1.30.1))
       '@tailwindcss/vite':
-        specifier: ^4.1.8
+        specifier: ^4.1
         version: 4.1.8(vite@6.3.5(@types/node@22.15.30)(jiti@2.4.2)(lightningcss@1.30.1))
       '@types/node':
         specifier: ^22.15
@@ -1163,10 +1166,6 @@ packages:
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
-
-  has-symbols@1.0.3:
-    resolution: {integrity: sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==}
-    engines: {node: '>= 0.4'}
 
   has-symbols@1.1.0:
     resolution: {integrity: sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==}
@@ -2756,13 +2755,11 @@ snapshots:
 
   has-flag@4.0.0: {}
 
-  has-symbols@1.0.3: {}
-
   has-symbols@1.1.0: {}
 
   has-tostringtag@1.0.2:
     dependencies:
-      has-symbols: 1.0.3
+      has-symbols: 1.1.0
 
   hasown@2.0.2:
     dependencies:
