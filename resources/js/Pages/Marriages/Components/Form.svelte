@@ -2,7 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import { useForm } from '@inertiajs/svelte';
 	import { route } from 'ziggy-js';
-	import { RITES, EVENT_TYPES, type EditMarriageResource } from '@/types/resources/marriages';
+	import { EVENT_TYPES, RITES, type EditMarriageResource } from '@/types/resources/marriages';
 	import { Sex } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import * as Form from '@/Components/Forms';

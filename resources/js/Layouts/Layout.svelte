@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import FlashMessages from './FlashMessages.svelte';
 	import Menu from './Menu/Menu.svelte';
 
@@ -14,7 +14,7 @@
 	}: { children: Snippet } & SharedProps = $props();
 
 	let mailto = $state('');
-	$effect(() => {
+	onMount(() => {
 		// setting it in effect should prevent it from being rendered on server
 		mailto = atob('anJoLm1qckBnbWFpbC5jb20=');
 	});

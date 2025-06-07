@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import type { PersonPage, EditPersonResource } from '@/types/resources/people';
+	import type { EditPersonResource, PersonPage } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
 	import Form from './Components/Form/Form.svelte';
 

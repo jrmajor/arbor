@@ -1,5 +1,5 @@
 import { extname } from 'path';
-import { parse, Visitor, type Annotation } from '@fluent/syntax';
+import { Visitor, parse, type Annotation } from '@fluent/syntax';
 import type { Plugin } from 'vite';
 
 interface PluginOptions {

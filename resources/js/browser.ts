@@ -1,4 +1,4 @@
-import { mount, hydrate } from 'svelte';
+import { hydrate, mount } from 'svelte';
 import { createInertiaApp } from '@inertiajs/svelte';
 import { resolve } from './common';
 

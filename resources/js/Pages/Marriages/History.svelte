@@ -4,15 +4,11 @@
 
 <script lang="ts">
 	import type { Activity } from '@/types/resources/activities';
-	import type { MarriagePage } from '@/types/resources/marriages';
 	import { t } from '@/helpers/translations';
 	import HistoryEnum from '@/Components/History/Enum.svelte';
 	import HistoryText from '@/Components/History/Text.svelte';
 
-	let { activities }: {
-		marriage: MarriagePage;
-		activities: Activity[];
-	} & SharedProps = $props();
+	let { activities }: { activities: Activity[] } & SharedProps = $props();
 </script>
 
 <svelte:head>
