@@ -33,15 +33,14 @@
         "typescript": "^5.8",
         "vite": "^6.3"
     },
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "@tailwindcss/oxide",
-            "esbuild",
-            "unrs-resolver"
-        ]
-    },
-    "volta": {
-        "node": "22.16.0",
-        "pnpm": "10.11.1"
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "10.11.1"
+        },
+        "runtime": {
+            "name": "node",
+            "version": "22.16.0"
+        }
     }
 }

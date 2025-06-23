@@ -1,0 +1,10 @@
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - esbuild
+  - unrs-resolver
+
+useNodeVersion: 22.16.0
+
+engineStrict: true
+strictDepBuilds: true
+strictPeerDependencies: true
