@@ -2,5 +2,5 @@
 @import './forms.css';
 
 .indent-children-except-first p:not(:first-child) {
-  @apply ml-4;
+	@apply ml-4;
 }

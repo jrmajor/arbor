@@ -1,30 +1,30 @@
 parameters:
-    level: 6
-    paths:
-        - app
-        - config
-        - database
-        - routes
-        - tests
-    excludePaths:
-        - app/Services/Pytlewski/PytlewskiFactory.php
-    stubFiles:
-        - phpstan.stub
-    checkModelProperties: true
-    ignoreErrors:
-        - '#^Method .* has parameter .* with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types: .*$#'
-        - '#^Parameter \#1 \$action of method Tests\\TestCase::assertActionUsesFormRequest\(\) expects .*, array{.*} given\.$#'
-        - '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
-        - '#^Unable to resolve the template type T in call to function Psl\\Regex\\first_match$#'
-        -
-            message: '#^Using nullsafe method call on non-nullable type App\\Enums\\Sex::Female\. Use -> instead\.$#'
-            path: database/factories/PersonFactory.php
-    tmpDir: .cache/phpstan
+	level: 6
+	paths:
+		- app
+		- config
+		- database
+		- routes
+		- tests
+	excludePaths:
+		- app/Services/Pytlewski/PytlewskiFactory.php
+	stubFiles:
+		- phpstan.stub
+	checkModelProperties: true
+	ignoreErrors:
+		- '#^Method .* has parameter .* with generic class Illuminate\\Database\\Eloquent\\Relations\\Relation but does not specify its types: .*$#'
+		- '#^Parameter \#1 \$action of method Tests\\TestCase::assertActionUsesFormRequest\(\) expects .*, array{.*} given\.$#'
+		- '#^Property App\\Models\\\w+::\$\w+_date_(from|to) \(Carbon\\Carbon\|null\) does not accept string\.$#'
+		- '#^Unable to resolve the template type T in call to function Psl\\Regex\\first_match$#'
+		-
+			message: '#^Using nullsafe method call on non-nullable type App\\Enums\\Sex::Female\. Use -> instead\.$#'
+			path: database/factories/PersonFactory.php
+	tmpDir: .cache/phpstan
 
 includes:
-    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
-    - vendor/larastan/larastan/extension.neon
-    - vendor/nesbot/carbon/extension.neon
-    - vendor/php-standard-library/phpstan-extension/extension.neon
-    - vendor/phpstan/phpstan-mockery/extension.neon
-    - vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/phpstan/phpstan/conf/bleedingEdge.neon
+	- vendor/larastan/larastan/extension.neon
+	- vendor/nesbot/carbon/extension.neon
+	- vendor/php-standard-library/phpstan-extension/extension.neon
+	- vendor/phpstan/phpstan-mockery/extension.neon
+	- vendor/phpstan/phpstan-phpunit/extension.neon

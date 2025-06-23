@@ -1,28 +1,28 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "verbatimModuleSyntax": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-        "@/*": ["resources/js/*"],
-        "ziggy-js": ["vendor/tightenco/ziggy"]
-    },
-    "types": ["node", "vite/client"],
-    "allowJs": true,
-    "checkJs": true,
-    "skipLibCheck": true,
-    "useDefineForClassFields": true,
-  },
-  "include": [
-    "resources/js/**/*.ts",
-    "resources/js/**/*.svelte",
-    "*.config.ts",
-    "*.config.js",
-  ],
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"verbatimModuleSyntax": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitAny": true,
+		"noEmit": true,
+		"baseUrl": ".",
+		"paths": {
+				"@/*": ["resources/js/*"],
+				"ziggy-js": ["vendor/tightenco/ziggy"]
+		},
+		"types": ["node", "vite/client"],
+		"allowJs": true,
+		"checkJs": true,
+		"skipLibCheck": true,
+		"useDefineForClassFields": true,
+	},
+	"include": [
+		"resources/js/**/*.ts",
+		"resources/js/**/*.svelte",
+		"*.config.ts",
+		"*.config.js",
+	],
 }

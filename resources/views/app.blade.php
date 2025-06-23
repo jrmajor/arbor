@@ -1,16 +1,16 @@
 @extends('base')
 
 @section('head')
-  <title inertia>{{ config('app.name') }}</title>
+	<title inertia>{{ config('app.name') }}</title>
 
-  @unless (app()->runningUnitTests())
-    @vite('resources/css/style.css')
-    @vite(['resources/js/browser.ts', "resources/js/Pages/{$page['component']}.svelte"])
-  @endif
+	@unless (app()->runningUnitTests())
+		@vite('resources/css/style.css')
+		@vite(['resources/js/browser.ts', "resources/js/Pages/{$page['component']}.svelte"])
+	@endif
 
-  @inertiaHead
+	@inertiaHead
 @endsection
 
 @section('body')
-  @inertia
+	@inertia
 @endsection

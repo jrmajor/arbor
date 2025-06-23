@@ -8,10 +8,13 @@ indent_style = tab
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{php,stub,ftl,neon,xml,htaccess}]
+[*.{php,stub,ftl,htaccess}]
 indent_size = 4
 indent_style = space
 
-[*.{blade.php,css,yml,yaml}]
-indent_size = 2
+[*.{yml,yaml}]
 indent_style = space
+
+[*.blade.php]
+indent_size = 2
+indent_style = tab
