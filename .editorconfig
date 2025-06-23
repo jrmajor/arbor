@@ -3,17 +3,15 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 4
-indent_style = space
+indent_size = 2
+indent_style = tab
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.md]
-trim_trailing_whitespace = false
+[*.{php,stub,ftl,neon,xml,htaccess}]
+indent_size = 4
+indent_style = space
 
-[*.{blade.php,html,css,yml,yaml}]
+[*.{blade.php,css,yml,yaml}]
 indent_size = 2
-
-[*.{js,ts,svelte,svg}]
-indent_size = 2
-indent_style = tab
+indent_style = space
