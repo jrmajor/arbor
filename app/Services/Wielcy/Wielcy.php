@@ -41,7 +41,10 @@ final class Wielcy
             [CarbonInterval::day(), CarbonInterval::year()],
             function (): ?string {
                 try {
-                    $source = Http::timeout(2)->get(self::url($this->id));
+                    $source = Http::timeout(2)
+                        // todo: fix SSL issue
+                        ->withoutVerifying()
+                        ->get(self::url($this->id));
                 } catch (ConnectionException) {
                     return null;
                 }
