@@ -3,7 +3,7 @@ onlyBuiltDependencies:
   - esbuild
   - unrs-resolver
 
-useNodeVersion: 22.16.0
+useNodeVersion: 24.4.0
 
 engineStrict: true
 strictDepBuilds: true
