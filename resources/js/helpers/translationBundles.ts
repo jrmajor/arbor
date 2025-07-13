@@ -1,5 +1,3 @@
-
-
 import type { FluentBundle } from '@fluent/bundle';
 import type { Language } from './translations';
 

@@ -68,8 +68,8 @@ export type ShowPersonResource = PersonPage & {
 	funeralPlace: string | null;
 	burialDate: string | null;
 	burialPlace: string | null;
-	father: (Person & { father: Person | null; mother: Person | null }) | null;
-	mother: (Person & { father: Person | null; mother: Person | null }) | null;
+	father: (Person & { father: Person | null, mother: Person | null }) | null;
+	mother: (Person & { father: Person | null, mother: Person | null }) | null;
 	siblings: Person[];
 	siblingsFather: Person[];
 	siblingsMother: Person[];
