@@ -41,7 +41,7 @@
 
 <nav bind:this={containerElement} class="mb-1 bg-white shadow-md">
 	<div class="container mx-auto">
-		<div class="px-3 flex items-center justify-between flex-wrap">
+		<div class="menu-padding flex items-center justify-between flex-wrap">
 			<div class="flex items-center">
 				<a
 					use:inertia
@@ -294,3 +294,13 @@
 		</div>
 	</div>
 </nav>
+
+<style>
+	.menu-padding {
+		padding:
+			env(safe-area-inset-top)
+			max(env(safe-area-inset-left), 0.75rem)
+			0
+			max(env(safe-area-inset-right), 0.75rem);
+	}
+</style>

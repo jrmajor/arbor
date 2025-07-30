@@ -10,7 +10,7 @@
 	const title = authLayoutTitle.set(writable(null));
 </script>
 
-<div class="flex justify-center items-center min-h-screen py-12 px-2 sm:px-6 lg:px-8">
+<div class="auth-container flex justify-center items-center min-h-dvh py-12 px-2 sm:px-6 lg:px-8">
 	<div class="flex flex-col items-center w-full space-y-4">
 		<h1 class="text-3xl sm:text-4xl text-gray-800 leading-none">
 			{$title}
@@ -25,3 +25,13 @@
 		</Link>
 	</div>
 </div>
+
+<style>
+	.auth-container {
+		margin:
+			env(safe-area-inset-top)
+			env(safe-area-inset-right)
+			env(safe-area-inset-bottom)
+			env(safe-area-inset-left);
+	}
+	</style>

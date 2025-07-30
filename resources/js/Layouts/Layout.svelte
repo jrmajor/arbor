@@ -22,7 +22,7 @@
 
 <Menu {activeRoute} {user} {currentLocale} {availableLocales}/>
 
-<div class="container mx-auto my-1 p-2 pt-5">
+<div class="container mx-auto my-1">
 	<FlashMessages {flash}/>
 
 	{@render children()}
@@ -32,3 +32,13 @@
 		<a href={`mailto:${mailto}`} class="hover:text-gray-900">Jeremiasz Major</a>
 	</footer>
 </div>
+
+<style>
+	.container {
+		padding:
+			1.25rem
+			max(env(safe-area-inset-right), 0.5rem)
+			max(env(safe-area-inset-bottom), 0.5rem)
+			max(env(safe-area-inset-left), 0.5rem);
+	}
+</style>
