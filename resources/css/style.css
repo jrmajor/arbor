@@ -2,5 +2,6 @@
 @import './forms.css';
 
 .indent-children-except-first p:not(:first-child) {
+	/* eslint-disable-next-line css/no-invalid-at-rules */
 	@apply ml-4;
 }
