@@ -27,7 +27,7 @@ final class Wielcy
     private array $keys = ['sex', 'name'];
 
     public function __construct(
-        protected string $id,
+        private string $id,
     ) {
         if ($this->getSource()) {
             $this->runParsers();

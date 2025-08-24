@@ -13,8 +13,8 @@ final class ChildrenTest extends TestCase
     {
         $father = Person::factory()->male()->create();
 
-        Person::factory(2)->withParents()->create(['father_id' => $father]);
-        Person::factory()->withoutParents()->create(['father_id' => $father]);
+        Person::factory(2)->withPersonParents()->create(['father_id' => $father]);
+        Person::factory()->withoutPersonParents()->create(['father_id' => $father]);
 
         $this->assertCount(3, $father->children);
     }
@@ -24,13 +24,13 @@ final class ChildrenTest extends TestCase
     {
         $mother = Person::factory()->female()->create();
 
-        Person::factory(3)->withoutParents()->create(['mother_id' => $mother]);
-        Person::factory(2)->withParents()->create(['mother_id' => $mother]);
+        Person::factory(3)->withoutPersonParents()->create(['mother_id' => $mother]);
+        Person::factory(2)->withPersonParents()->create(['mother_id' => $mother]);
 
         $father = Person::factory()->male()->create();
 
-        Person::factory()->withoutParents()->create(['father_id' => $father]);
-        Person::factory(2)->withParents()->create(['father_id' => $father]);
+        Person::factory()->withoutPersonParents()->create(['father_id' => $father]);
+        Person::factory(2)->withPersonParents()->create(['father_id' => $father]);
 
         [$mother, $father] = Person::query()
             ->whereIn('id', [$mother->id, $father->id])

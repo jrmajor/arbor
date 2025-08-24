@@ -18,10 +18,10 @@ final class SiblingsTest extends TestCase
             'father_id' => $father = Person::factory()->male()->create(),
         ])->first();
 
-        Person::factory()->withParents()->create(['mother_id' => $mother]);
-        Person::factory(2)->withoutParents()->create(['mother_id' => $mother]);
-        Person::factory(3)->withParents()->create(['father_id' => $father]);
-        Person::factory()->withoutParents()->create(['father_id' => $father]);
+        Person::factory()->withPersonParents()->create(['mother_id' => $mother]);
+        Person::factory(2)->withoutPersonParents()->create(['mother_id' => $mother]);
+        Person::factory(3)->withPersonParents()->create(['father_id' => $father]);
+        Person::factory()->withoutPersonParents()->create(['father_id' => $father]);
 
         $this->assertCount(2, $person->siblings);
         $this->assertCount(3, $person->siblings_mother);
@@ -45,20 +45,20 @@ final class SiblingsTest extends TestCase
             'father_id' => $firstFather = Person::factory()->male()->create(),
         ]);
 
-        Person::factory()->withParents()->create(['mother_id' => $firstMother]);
-        Person::factory(2)->withoutParents()->create(['mother_id' => $firstMother]);
-        Person::factory(3)->withParents()->create(['father_id' => $firstFather]);
-        Person::factory()->withoutParents()->create(['father_id' => $firstFather]);
+        Person::factory()->withPersonParents()->create(['mother_id' => $firstMother]);
+        Person::factory(2)->withoutPersonParents()->create(['mother_id' => $firstMother]);
+        Person::factory(3)->withPersonParents()->create(['father_id' => $firstFather]);
+        Person::factory()->withoutPersonParents()->create(['father_id' => $firstFather]);
 
         [$secondPerson] = Person::factory(4)->create([
             'mother_id' => $secondMother = Person::factory()->female()->create(),
             'father_id' => $secondFather = Person::factory()->male()->create(),
         ]);
 
-        Person::factory(3)->withParents()->create(['mother_id' => $secondMother]);
-        Person::factory(2)->withoutParents()->create(['mother_id' => $secondMother]);
-        Person::factory(2)->withParents()->create(['father_id' => $secondFather]);
-        Person::factory(4)->withoutParents()->create(['father_id' => $secondFather]);
+        Person::factory(3)->withPersonParents()->create(['mother_id' => $secondMother]);
+        Person::factory(2)->withoutPersonParents()->create(['mother_id' => $secondMother]);
+        Person::factory(2)->withPersonParents()->create(['father_id' => $secondFather]);
+        Person::factory(4)->withoutPersonParents()->create(['father_id' => $secondFather]);
 
         $people = Person::query()
             ->whereIn('id', [$firstPerson->id, $secondPerson->id])

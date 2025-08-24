@@ -10,5 +10,8 @@ $finder = PhpCsFixer\Finder::create()
     ->notName('_ide_helper*.php')
     ->ignoreVCSIgnored(true);
 
-return Major\CS\config($finder)
+return Major\CS\config($finder, [
+    // todo: reenable
+    'phpdoc_order' => false,
+])
     ->setCacheFile('.cache/.php-cs-fixer.cache');

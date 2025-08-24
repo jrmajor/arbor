@@ -45,7 +45,7 @@ final class PersonFactory extends Factory
         ];
     }
 
-    public function withParents(): self
+    public function withPersonParents(): self
     {
         return $this->state([
             'father_id' => Person::factory()->male(),
@@ -53,7 +53,7 @@ final class PersonFactory extends Factory
         ]);
     }
 
-    public function withoutParents(
+    public function withoutPersonParents(
         Person|int|null $father = null,
         Person|int|null $mother = null,
     ): self {
