@@ -16,10 +16,10 @@ importers:
         version: 3.1.1
       '@inertiajs/core':
         specifier: ^2.1
-        version: 2.1.2
+        version: 2.1.3
       '@inertiajs/svelte':
         specifier: ^2.1
-        version: 2.1.2(svelte@5.38.3)
+        version: 2.1.3(svelte@5.38.6)
       '@tailwindcss/forms':
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@4.1.12)
@@ -28,7 +28,7 @@ importers:
         version: 4.1.0
       svelte:
         specifier: ^5.38
-        version: 5.38.3
+        version: 5.38.6
       tailwindcss:
         specifier: ^4.1
         version: 4.1.12
@@ -38,10 +38,10 @@ importers:
         version: 0.19.0
       '@jrmajor/eslint-config':
         specifier: ^0.2.1
-        version: 0.2.1(@typescript-eslint/utils@8.40.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.34.0(jiti@2.5.1))(svelte@5.38.3)(typescript@5.9.2)
+        version: 0.2.1(@typescript-eslint/utils@8.40.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.34.0(jiti@2.5.1))(svelte@5.38.6)(typescript@5.9.2)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.1
-        version: 6.1.3(svelte@5.38.3)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
+        version: 6.1.3(svelte@5.38.6)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
       '@tailwindcss/vite':
         specifier: ^4.1
         version: 4.1.12(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
@@ -59,13 +59,13 @@ importers:
         version: 16.3.0
       laravel-vite-plugin:
         specifier: ^2.0
-        version: 2.0.0(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
+        version: 2.0.1(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
       node:
         specifier: runtime:^24.6
-        version: runtime:24.6.0
+        version: runtime:24.7.0
       svelte-check:
         specifier: ^4.3
-        version: 4.3.1(picomatch@4.0.3)(svelte@5.38.3)(typescript@5.9.2)
+        version: 4.3.1(picomatch@4.0.3)(svelte@5.38.6)(typescript@5.9.2)
       typescript:
         specifier: ^5.9
         version: 5.9.2
@@ -321,13 +321,13 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@inertiajs/core@2.1.2':
-    resolution: {integrity: sha512-fS3bDanwIZMEhtndhs1NvDvFN7y9Nx+FPkuBLSjIvYXFVmwieZmj+q2SYLXVl/jKt0qg69GwfLVrNm+gFiFbMg==}
+  '@inertiajs/core@2.1.3':
+    resolution: {integrity: sha512-X8E5sPF0MF69+2kxOHuBqW06Rr/VD51Je37JY8bi5SCoi9wTpzmaurpDDIftnbfCJGYupFL1jky7DjEpD+6ufg==}
 
-  '@inertiajs/svelte@2.1.2':
-    resolution: {integrity: sha512-REIyNQLoMsp/nlHQGqVZQhQ7a8wioPA9uMyC3BQiRjeqipvZQ3lhQdH7/GzBd0juQFo22hVA54KFnkwixg2FJw==}
+  '@inertiajs/svelte@2.1.3':
+    resolution: {integrity: sha512-LrKu/SZVC08er/N873Rvu6+MxxuD2LOcbRJx2cA0EEewLTxxswVX8AesNu2WZoFXJT+pE6AKYQ9YS6s+aUn1yg==}
     peerDependencies:
-      svelte: ^4.0.0 || ^5.0.0 || ^5.0.0-next.244
+      svelte: ^4.0.0 || ^5.0.0
 
   '@isaacs/balanced-match@4.0.1':
     resolution: {integrity: sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ==}
@@ -606,6 +606,12 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/lodash-es@4.17.12':
+    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
+
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
 
   '@types/node@24.3.0':
     resolution: {integrity: sha512-aPTXCrfwnDLj4VvXrm+UUCQjNEvJgNA8s5F1cvwQU+3KNltTOkBm1j30uNLyqqPNe7gE3KFzImYoZEfLhp4Yow==}
@@ -928,9 +934,6 @@ packages:
     resolution: {integrity: sha512-j6vWzfrGVfyXxge+O0x5sh6cvxAog0a/4Rdd2K36zCMV5eJ+/+tOAngRO8cODMNWbVRdVlmGZQL2YS3yR8bIUA==}
     engines: {node: '>= 0.4'}
 
-  es-toolkit@1.39.10:
-    resolution: {integrity: sha512-E0iGnTtbDhkeczB0T+mxmoVlT4YNweEKBLq7oaU4p11mecdsZpNWOglI4895Vh4usbQ+LsJiuLuI2L0Vdmfm2w==}
-
   esbuild@0.25.9:
     resolution: {integrity: sha512-CRbODhYyQx3qp7ZEwzxOk4JBqmD/seJrzPa/cGjY1VtIn5E09Oi9/dB4JwctnfZ8Q8iT7rioVv5k/FNT/uf54g==}
     engines: {node: '>=18'}
@@ -1216,8 +1219,8 @@ packages:
   known-css-properties@0.37.0:
     resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
 
-  laravel-vite-plugin@2.0.0:
-    resolution: {integrity: sha512-pnaKHInJgiWpG/g+LmaISHl7D/1s5wnOXnrGiBdt4NOs+tYZRw0v/ZANELGX2/dGgHyEzO+iZ6x4idpoK04z/Q==}
+  laravel-vite-plugin@2.0.1:
+    resolution: {integrity: sha512-zQuvzWfUKQu9oNVi1o0RZAJCwhGsdhx4NEOyrVQwJHaWDseGP9tl7XUPLY2T8Cj6+IrZ6lmyxlR1KC8unf3RLA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1302,6 +1305,9 @@ packages:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
 
+  lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
@@ -1379,94 +1385,94 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  node@runtime:24.6.0:
+  node@runtime:24.7.0:
     resolution:
       type: variations
       variants:
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-eXm+UQ/2iWLhaJHuKckQgOMh16Vbn7xrOY2MIKWTK98=
+            integrity: sha256-tkJOblUxhCEJrYJg+J10V9gmfU3qWlQFYJj3C+uganQ=
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-aix-ppc64.tar.gz
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-aix-ppc64.tar.gz
           targets:
             - cpu: ppc64
               os: aix
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-do8UlSQD4wJf7Y4oh1AN+mPutVYoqbID5LjrsPsJx+s=
+            integrity: sha256-/4KY+q+CyFREqtfx4SpIgklihuqQCHAgKbNZ1/rH+LM=
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-darwin-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-darwin-arm64.tar.gz
           targets:
             - cpu: arm64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-aV/DNFSCGyFtaMsZjWRqmtdpx318Mj5zg4EjPkZm3/4=
+            integrity: sha256-uZVI71bshtos5Q7/BB2X4UB3t3tRfEvM4JJdFMJsvuM=
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-darwin-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-darwin-x64.tar.gz
           targets:
             - cpu: x64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-iVbhHb71sZfWLri1uXoTHrQvuyU0f+DNybYqHBqjbfU=
+            integrity: sha256-BN8Cg9KooGJxppD74lKGYVJ7Ognw8oyLtjMn2IiL4YQ=
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-linux-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-linux-arm64.tar.gz
           targets:
             - cpu: arm64
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-+vyIuqmsufv4KgiY64BlmRhTTA7W0ZpJDYZ1YwTGbmc=
+            integrity: sha256-hTeBKUFMqVxQkxc2DFGTKK6Y00Fg/IUkCLoCCQM+X4I=
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-linux-ppc64le.tar.gz
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-linux-ppc64le.tar.gz
           targets:
             - cpu: ppc64le
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-HNd1hrSLbbG1JIZpYZxix4WuyiR6S/qulf6YILd6VAU=
+            integrity: sha256-1bJrGXeVhy29afTdjCdeigjKG+acngE+PNmm9ok55Z0=
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-linux-s390x.tar.gz
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-linux-s390x.tar.gz
           targets:
             - cpu: s390x
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-NS3bxItYbBHwGOybiGIlEXkJ6pPgW0oEptsy8+Y9AoE=
+            integrity: sha256-jPhSWEAuBW76BBFoybFipOOyKev61QAIULiUHJdOnVo=
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-linux-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-linux-x64.tar.gz
           targets:
             - cpu: x64
               os: linux
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-W9hfrLz6Mu84tzppDChFGlw9/3tFRX9e9CHE0LDe6sc=
-            prefix: node-v24.6.0-win-arm64
+            integrity: sha256-yluSmp9mFhmorI2kjfiNUHESRmFfQEGze9D++06hwxA=
+            prefix: node-v24.7.0-win-arm64
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-win-arm64.zip
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-win-arm64.zip
           targets:
             - cpu: arm64
               os: win32
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-Om0y/liDaY5sWcpaZVS0HBsqldtPerfE7dJy9DkXgNo=
-            prefix: node-v24.6.0-win-x64
+            integrity: sha256-CT/leH7yZWw0e5iqP5wQaUbCs13mFFbDB+R4bg0F1Lo=
+            prefix: node-v24.7.0-win-x64
             type: binary
-            url: https://nodejs.org/download/release/v24.6.0/node-v24.6.0-win-x64.zip
+            url: https://nodejs.org/download/release/v24.7.0/node-v24.7.0-win-x64.zip
           targets:
             - cpu: x64
               os: win32
-    version: 24.6.0
+    version: 24.7.0
     hasBin: true
 
   object-inspect@1.13.4:
@@ -1662,8 +1668,8 @@ packages:
       svelte:
         optional: true
 
-  svelte@5.38.3:
-    resolution: {integrity: sha512-ldbPzKdjUy7IALMBn15jzBM/TNxdXMxKeQZ538zzdABUjLg7e7/OIwnlaMQ+OR6s91W7DbDmJYjxHThHH7r9xA==}
+  svelte@5.38.6:
+    resolution: {integrity: sha512-ltBPlkvqk3bgCK7/N323atUpP3O3Y+DrGV4dcULrsSn4fZaaNnOmdplNznwfdWclAgvSr5rxjtzn/zJhRm6TKg==}
     engines: {node: '>=18'}
 
   tailwind-csstree@0.1.3:
@@ -1975,20 +1981,22 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@inertiajs/core@2.1.2':
+  '@inertiajs/core@2.1.3':
     dependencies:
+      '@types/lodash-es': 4.17.12
       axios: 1.11.0
-      es-toolkit: 1.39.10
+      lodash-es: 4.17.21
       qs: 6.14.0
     transitivePeerDependencies:
       - debug
 
-  '@inertiajs/svelte@2.1.2(svelte@5.38.3)':
+  '@inertiajs/svelte@2.1.3(svelte@5.38.6)':
     dependencies:
-      '@inertiajs/core': 2.1.2
-      es-toolkit: 1.39.10
+      '@inertiajs/core': 2.1.3
+      '@types/lodash-es': 4.17.12
       html-escape: 2.0.0
-      svelte: 5.38.3
+      lodash-es: 4.17.21
+      svelte: 5.38.6
     transitivePeerDependencies:
       - debug
 
@@ -2021,7 +2029,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@jrmajor/eslint-config@0.2.1(@typescript-eslint/utils@8.40.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.34.0(jiti@2.5.1))(svelte@5.38.3)(typescript@5.9.2)':
+  '@jrmajor/eslint-config@0.2.1(@typescript-eslint/utils@8.40.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.34.0(jiti@2.5.1))(svelte@5.38.6)(typescript@5.9.2)':
     dependencies:
       '@eslint/css': 0.10.0
       '@eslint/js': 9.34.0
@@ -2029,7 +2037,7 @@ snapshots:
       eslint: 9.34.0(jiti@2.5.1)
       eslint-import-resolver-next: 0.6.0
       eslint-plugin-import-x: 4.16.1(@typescript-eslint/utils@8.40.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint@9.34.0(jiti@2.5.1))
-      eslint-plugin-svelte: 3.11.0(eslint@9.34.0(jiti@2.5.1))(svelte@5.38.3)
+      eslint-plugin-svelte: 3.11.0(eslint@9.34.0(jiti@2.5.1))(svelte@5.38.6)
       tailwind-csstree: 0.1.3
       typescript-eslint: 8.40.0(eslint@9.34.0(jiti@2.5.1))(typescript@5.9.2)
     transitivePeerDependencies:
@@ -2133,23 +2141,23 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
-  '@sveltejs/vite-plugin-svelte-inspector@5.0.1(@sveltejs/vite-plugin-svelte@6.1.3(svelte@5.38.3)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)))(svelte@5.38.3)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))':
+  '@sveltejs/vite-plugin-svelte-inspector@5.0.1(@sveltejs/vite-plugin-svelte@6.1.3(svelte@5.38.6)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)))(svelte@5.38.6)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 6.1.3(svelte@5.38.3)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
+      '@sveltejs/vite-plugin-svelte': 6.1.3(svelte@5.38.6)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
       debug: 4.4.1
-      svelte: 5.38.3
+      svelte: 5.38.6
       vite: 7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@6.1.3(svelte@5.38.3)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))':
+  '@sveltejs/vite-plugin-svelte@6.1.3(svelte@5.38.6)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 5.0.1(@sveltejs/vite-plugin-svelte@6.1.3(svelte@5.38.3)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)))(svelte@5.38.3)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
+      '@sveltejs/vite-plugin-svelte-inspector': 5.0.1(@sveltejs/vite-plugin-svelte@6.1.3(svelte@5.38.6)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)))(svelte@5.38.6)(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
       debug: 4.4.1
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.18
-      svelte: 5.38.3
+      svelte: 5.38.6
       vite: 7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)
       vitefu: 1.1.1(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
     transitivePeerDependencies:
@@ -2239,6 +2247,12 @@ snapshots:
   '@types/estree@1.0.8': {}
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/lodash-es@4.17.12':
+    dependencies:
+      '@types/lodash': 4.17.20
+
+  '@types/lodash@4.17.20': {}
 
   '@types/node@24.3.0':
     dependencies:
@@ -2538,8 +2552,6 @@ snapshots:
       has-tostringtag: 1.0.2
       hasown: 2.0.2
 
-  es-toolkit@1.39.10: {}
-
   esbuild@0.25.9:
     optionalDependencies:
       '@esbuild/aix-ppc64': 0.25.9
@@ -2613,7 +2625,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-svelte@3.11.0(eslint@9.34.0(jiti@2.5.1))(svelte@5.38.3):
+  eslint-plugin-svelte@3.11.0(eslint@9.34.0(jiti@2.5.1))(svelte@5.38.6):
     dependencies:
       '@eslint-community/eslint-utils': 4.7.0(eslint@9.34.0(jiti@2.5.1))
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -2625,9 +2637,9 @@ snapshots:
       postcss-load-config: 3.1.4(postcss@8.5.6)
       postcss-safe-parser: 7.0.1(postcss@8.5.6)
       semver: 7.7.2
-      svelte-eslint-parser: 1.3.1(svelte@5.38.3)
+      svelte-eslint-parser: 1.3.1(svelte@5.38.6)
     optionalDependencies:
-      svelte: 5.38.3
+      svelte: 5.38.6
     transitivePeerDependencies:
       - ts-node
 
@@ -2871,7 +2883,7 @@ snapshots:
 
   known-css-properties@0.37.0: {}
 
-  laravel-vite-plugin@2.0.0(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)):
+  laravel-vite-plugin@2.0.1(vite@7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)):
     dependencies:
       picocolors: 1.1.1
       vite: 7.1.3(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1)
@@ -2935,6 +2947,8 @@ snapshots:
     dependencies:
       p-locate: 5.0.0
 
+  lodash-es@4.17.21: {}
+
   lodash.merge@4.6.2: {}
 
   magic-string@0.30.18:
@@ -2990,7 +3004,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  node@runtime:24.6.0: {}
+  node@runtime:24.7.0: {}
 
   object-inspect@1.13.4: {}
 
@@ -3166,19 +3180,19 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0:
     optional: true
 
-  svelte-check@4.3.1(picomatch@4.0.3)(svelte@5.38.3)(typescript@5.9.2):
+  svelte-check@4.3.1(picomatch@4.0.3)(svelte@5.38.6)(typescript@5.9.2):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.30
       chokidar: 4.0.3
       fdir: 6.5.0(picomatch@4.0.3)
       picocolors: 1.1.1
       sade: 1.8.1
-      svelte: 5.38.3
+      svelte: 5.38.6
       typescript: 5.9.2
     transitivePeerDependencies:
       - picomatch
 
-  svelte-eslint-parser@1.3.1(svelte@5.38.3):
+  svelte-eslint-parser@1.3.1(svelte@5.38.6):
     dependencies:
       eslint-scope: 8.4.0
       eslint-visitor-keys: 4.2.1
@@ -3187,9 +3201,9 @@ snapshots:
       postcss-scss: 4.0.9(postcss@8.5.6)
       postcss-selector-parser: 7.1.0
     optionalDependencies:
-      svelte: 5.38.3
+      svelte: 5.38.6
 
-  svelte@5.38.3:
+  svelte@5.38.6:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@jridgewell/sourcemap-codec': 1.5.5
