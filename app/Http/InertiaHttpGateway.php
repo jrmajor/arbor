@@ -16,9 +16,6 @@ class InertiaHttpGateway implements Gateway
         private Vite $vite,
     ) { }
 
-    /**
-     * @phpstan-ignore missingType.iterableValue
-     */
     public function dispatch(array $page): ?Response
     {
         if ($this->vite->isRunningHot()) {

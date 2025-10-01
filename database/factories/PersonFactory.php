@@ -53,7 +53,7 @@ final class PersonFactory extends Factory
         ]);
     }
 
-    public function withoutParents(
+    public function withoutParentsRel(
         Person|int|null $father = null,
         Person|int|null $mother = null,
     ): self {

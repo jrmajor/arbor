@@ -19,9 +19,9 @@ final class SiblingsTest extends TestCase
         ])->first();
 
         Person::factory()->withParents()->create(['mother_id' => $mother]);
-        Person::factory(2)->withoutParents()->create(['mother_id' => $mother]);
+        Person::factory(2)->withoutParentsRel()->create(['mother_id' => $mother]);
         Person::factory(3)->withParents()->create(['father_id' => $father]);
-        Person::factory()->withoutParents()->create(['father_id' => $father]);
+        Person::factory()->withoutParentsRel()->create(['father_id' => $father]);
 
         $this->assertCount(2, $person->siblings);
         $this->assertCount(3, $person->siblings_mother);
@@ -46,9 +46,9 @@ final class SiblingsTest extends TestCase
         ]);
 
         Person::factory()->withParents()->create(['mother_id' => $firstMother]);
-        Person::factory(2)->withoutParents()->create(['mother_id' => $firstMother]);
+        Person::factory(2)->withoutParentsRel()->create(['mother_id' => $firstMother]);
         Person::factory(3)->withParents()->create(['father_id' => $firstFather]);
-        Person::factory()->withoutParents()->create(['father_id' => $firstFather]);
+        Person::factory()->withoutParentsRel()->create(['father_id' => $firstFather]);
 
         [$secondPerson] = Person::factory(4)->create([
             'mother_id' => $secondMother = Person::factory()->female()->create(),
@@ -56,9 +56,9 @@ final class SiblingsTest extends TestCase
         ]);
 
         Person::factory(3)->withParents()->create(['mother_id' => $secondMother]);
-        Person::factory(2)->withoutParents()->create(['mother_id' => $secondMother]);
+        Person::factory(2)->withoutParentsRel()->create(['mother_id' => $secondMother]);
         Person::factory(2)->withParents()->create(['father_id' => $secondFather]);
-        Person::factory(4)->withoutParents()->create(['father_id' => $secondFather]);
+        Person::factory(4)->withoutParentsRel()->create(['father_id' => $secondFather]);
 
         $people = Person::query()
             ->whereIn('id', [$firstPerson->id, $secondPerson->id])
