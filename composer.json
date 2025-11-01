@@ -20,7 +20,7 @@
 		"laravel/ui": "^4.6",
 		"league/flysystem-aws-s3-v3": "^3.29",
 		"nesbot/carbon": "^3.2",
-		"ohdearapp/ohdear-php-sdk": "^3.10",
+		"ohdearapp/ohdear-php-sdk": "^4.4",
 		"sentry/sentry-laravel": "^4.16",
 		"spatie/laravel-activitylog": "dev-fix-tapping#abd79b0",
 		"spatie/laravel-flash": "^1.10",
