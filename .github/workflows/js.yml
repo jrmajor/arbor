@@ -14,16 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v5
+      - name: Setup pnpm and install dependencies
+        uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
         with:
-          node-version: 24.6.0
-
-      - name: Install npm dependencies
-        run: pnpm install
+          cache: true
+          run_install: true
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -57,16 +52,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v5
+      - name: Setup pnpm and install dependencies
+        uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
         with:
-          node-version: 24.6.0
-
-      - name: Install npm dependencies
-        run: pnpm install
+          cache: true
+          run_install: true
 
       - name: Run ESLint
         run: pnpm lint
@@ -80,16 +70,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v5
+      - name: Setup pnpm and install dependencies
+        uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
         with:
-          node-version: 24.6.0
-
-      - name: Install npm dependencies
-        run: pnpm install
+          cache: true
+          run_install: true
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
