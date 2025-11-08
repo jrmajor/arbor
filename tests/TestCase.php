@@ -86,14 +86,15 @@ abstract class TestCase extends BaseTestCase
             $action->isPublic(), "Action {$controller}@{$method} is not public.",
         );
 
-        $actual = collect($action->getParameters())
-            ->contains(function (ReflectionParameter $parameter) use ($formRequest) {
-                return $parameter->getType() instanceof ReflectionNamedType
-                    && $parameter->getType()->getName() === $formRequest;
-            });
-
         $this->assertTrue(
-            $actual, "Failed asserting that {$controller}@{$method} uses {$formRequest} form request.",
+            Iter\any(
+                $action->getParameters(),
+                function (ReflectionParameter $parameter) use ($formRequest) {
+                    return $parameter->getType() instanceof ReflectionNamedType
+                        && $parameter->getType()->getName() === $formRequest;
+                },
+            ),
+            "Failed asserting that {$controller}@{$method} uses {$formRequest} form request.",
         );
     }
 }

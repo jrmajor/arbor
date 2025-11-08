@@ -9,7 +9,7 @@
 	],
 	"require": {
 		"php": "~8.3.0",
-		"azjezz/psl": "^3.3",
+		"azjezz/psl": "^4.2",
 		"guzzlehttp/guzzle": "^7.10",
 		"inertiajs/inertia-laravel": "^2.0",
 		"jenssegers/agent": "^2.6",
