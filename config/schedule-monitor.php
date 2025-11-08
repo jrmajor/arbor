@@ -13,7 +13,7 @@ return [
 
     'oh_dear' => [
         'api_token' => env('OH_DEAR_API_TOKEN', ''),
-        'site_id' => env('OH_DEAR_SITE_ID'),
+        'monitor_id' => env('OH_DEAR_MONITOR_ID'),
         'queue' => env('OH_DEAR_QUEUE'),
         'retry_job_for_minutes' => 10,
         'silence_ping_oh_dear_job_in_horizon' => true,

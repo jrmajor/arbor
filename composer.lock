@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f60a91ad17a585823805bd2ced7ea7a5",
+    "content-hash": "79865f6b5a25744af9393437ce792bfa",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -3812,62 +3812,6 @@
             "time": "2024-09-09T07:06:30+00:00"
         },
         {
-            "name": "ohdearapp/ohdear-php-sdk",
-            "version": "3.10.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ohdearapp/ohdear-php-sdk.git",
-                "reference": "8d9294927b08a70a3d402682b32b51a23eb4cfff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ohdearapp/ohdear-php-sdk/zipball/8d9294927b08a70a3d402682b32b51a23eb4cfff",
-                "reference": "8d9294927b08a70a3d402682b32b51a23eb4cfff",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.5.8|^7.8.1",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.15.1",
-                "orchestra/testbench": "^8.0|^9.0",
-                "pestphp/pest": "^2.34.7",
-                "vlucas/phpdotenv": "^5.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "OhDear\\PhpSdk\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "support@ohdear.app",
-                    "homepage": "https://ohdear.app",
-                    "role": "Developer"
-                }
-            ],
-            "description": "An SDK to easily work with the Oh Dear API",
-            "homepage": "https://github.com/ohdearapp/ohdear-php-sdk",
-            "keywords": [
-                "api",
-                "monitoring",
-                "oh dear",
-                "sdk"
-            ],
-            "support": {
-                "issues": "https://github.com/ohdearapp/ohdear-php-sdk/issues",
-                "source": "https://github.com/ohdearapp/ohdear-php-sdk/tree/3.10.3"
-            },
-            "time": "2024-12-18T20:57:38+00:00"
-        },
-        {
             "name": "phpoption/phpoption",
             "version": "1.9.4",
             "source": {
@@ -5240,16 +5184,16 @@
         },
         {
             "name": "spatie/laravel-schedule-monitor",
-            "version": "3.10.3",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-schedule-monitor.git",
-                "reference": "8731755b91d5d724a5bd2c7028e3d0c8c930e8a1"
+                "reference": "a1c2b8c671505c6ef502456d24d96b905b3f2601"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/8731755b91d5d724a5bd2c7028e3d0c8c930e8a1",
-                "reference": "8731755b91d5d724a5bd2c7028e3d0c8c930e8a1",
+                "url": "https://api.github.com/repos/spatie/laravel-schedule-monitor/zipball/a1c2b8c671505c6ef502456d24d96b905b3f2601",
+                "reference": "a1c2b8c671505c6ef502456d24d96b905b3f2601",
                 "shasum": ""
             },
             "require": {
@@ -5262,7 +5206,6 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.4",
-                "ohdearapp/ohdear-php-sdk": "^3.0",
                 "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
                 "pestphp/pest": "^1.20|^2.34|^3.7",
                 "pestphp/pest-plugin-laravel": "^1.2|^2.3|^3.1",
@@ -5270,15 +5213,15 @@
                 "spatie/phpunit-snapshot-assertions": "^4.2|^5.1",
                 "spatie/test-time": "^1.2"
             },
-            "suggest": {
-                "ohdearapp/ohdear-php-sdk": "Needed to sync your schedule with Oh Dear"
-            },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
                         "Spatie\\ScheduleMonitor\\ScheduleMonitorServiceProvider"
                     ]
+                },
+                "branch-alias": {
+                    "dev-ohdear-monitor": "4.0.x-dev"
                 }
             },
             "autoload": {
@@ -5307,7 +5250,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-schedule-monitor/issues",
-                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/3.10.3"
+                "source": "https://github.com/spatie/laravel-schedule-monitor/tree/4.1.0"
             },
             "funding": [
                 {
@@ -5315,7 +5258,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-21T19:56:48+00:00"
+            "time": "2025-09-11T09:03:31+00:00"
         },
         {
             "name": "spatie/laravel-sitemap",
@@ -13698,6 +13641,6 @@
     "platform": {
         "php": "~8.3.0"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
