@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { formFieldContext } from './contexts';
+	import { getFormFieldContext } from './contexts';
 
 	let {
 		value = $bindable(),
@@ -10,7 +10,7 @@
 		children: Snippet;
 	} = $props();
 
-	const formField = formFieldContext.get();
+	const formField = getFormFieldContext();
 </script>
 
 <select

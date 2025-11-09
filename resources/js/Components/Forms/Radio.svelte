@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { formFieldContext, radioGroupContext } from './contexts';
+	import { getFormFieldContext, getRadioGroupContext } from './contexts';
 
 	let { value, children }: {
 		value: string | null;
@@ -9,8 +9,8 @@
 
 	const id = $props.id();
 
-	const formField = formFieldContext.get();
-	const radioContext = radioGroupContext.get();
+	const formField = getFormFieldContext();
+	const radioContext = getRadioGroupContext();
 
 	const checked = $derived(radioContext.value === value);
 
@@ -31,7 +31,7 @@
 		class={[
 			'border-gray-300 outline-none checked:border-transparent',
 			'focus:border-blue-600 focus:ring-3 focus:ring-blue-500/50 focus:ring-offset-0',
-			formField.error && 'border-red-600 text-red-500 focus:ring-red-500/50',
+			formField?.error && 'border-red-600 text-red-500 focus:ring-red-500/50',
 		]}
 		{onchange}
 	>

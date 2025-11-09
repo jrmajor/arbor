@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import { formFieldContext } from './contexts';
+	import { getFormFieldContext } from './contexts';
 
 	let {
 		value = $bindable(),
@@ -18,7 +18,7 @@
 		error?: string | null | undefined;
 	} = $props();
 
-	const formField = formFieldContext.get();
+	const formField = getFormFieldContext();
 </script>
 
 <!-- svelte-ignore a11y_autofocus -->

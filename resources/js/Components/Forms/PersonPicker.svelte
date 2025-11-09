@@ -4,7 +4,7 @@
 	import { route } from 'ziggy-js';
 	import type { Sex } from '@/types/resources/people';
 	import { t } from '@/helpers/translations';
-	import { formFieldContext } from './contexts';
+	import { getFormFieldContext } from './contexts';
 
 	let {
 		value = $bindable(),
@@ -138,7 +138,7 @@
 		shouldCloseOnBlur = true;
 	}
 
-	const formField = formFieldContext.get();
+	const formField = getFormFieldContext();
 </script>
 
 <div class="w-full">
@@ -150,7 +150,7 @@
 			class={{
 				'dropdown-icon select': true,
 				disabled,
-				invalid: formField.error,
+				invalid: formField?.error,
 			}}
 		>
 			<div class="pr-4">
@@ -158,7 +158,7 @@
 				-->{#if !disabled}
 					<input
 						bind:this={searchInput}
-						id={formField.id}
+						id={formField?.id}
 						type="text"
 						bind:value={searchValue}
 						autocomplete="off"

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formFieldContext } from './contexts';
+	import { getFormFieldContext } from './contexts';
 
 	let {
 		value = $bindable(),
@@ -9,7 +9,7 @@
 		rows: number;
 	} = $props();
 
-	const formField = formFieldContext.get();
+	const formField = getFormFieldContext();
 </script>
 
 <textarea

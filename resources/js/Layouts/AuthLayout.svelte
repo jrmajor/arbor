@@ -2,12 +2,12 @@
 	import type { Snippet } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { route } from 'ziggy-js';
-	import { authLayoutTitle } from '@/helpers/context';
+	import { setAuthLayoutTitle } from '@/helpers/context';
 	import Link from '@/Components/Primitives/Link.svelte';
 
 	let { appName, children }: { children: Snippet } & SharedProps = $props();
 
-	const title = authLayoutTitle.set(writable(null));
+	const title = setAuthLayoutTitle(writable(null));
 </script>
 
 <div class="auth-container flex justify-center items-center min-h-dvh py-12 px-2 sm:px-6 lg:px-8">

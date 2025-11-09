@@ -1,11 +1,12 @@
-import { createContext } from '@/helpers/context';
+import { createContext } from 'svelte';
+import { createOptionalContext } from '@/helpers/context';
 
-export const formFieldContext = createContext<{
+export const [getFormFieldContext, setFormFieldContext] = createOptionalContext<{
 	readonly id: string;
 	readonly error: string | null | undefined;
 }>();
 
-export const radioGroupContext = createContext<{
+export const [getRadioGroupContext, setRadioGroupContext] = createContext<{
 	readonly id: string;
 	value: string | null;
 }>();

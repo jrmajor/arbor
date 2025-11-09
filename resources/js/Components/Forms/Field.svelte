@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import Error from './Error.svelte';
-	import { formFieldContext } from './contexts';
+	import { setFormFieldContext } from './contexts';
 
 	let { error, children }: {
 		error: string | null | undefined;
@@ -10,7 +10,7 @@
 
 	const id = $props.id();
 
-	formFieldContext.set({
+	setFormFieldContext({
 		id,
 		get error() {
 			return error;

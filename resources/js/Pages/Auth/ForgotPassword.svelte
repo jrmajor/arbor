@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { useForm } from '@inertiajs/svelte';
 	import { route } from 'ziggy-js';
-	import { authLayoutTitle } from '@/helpers/context';
+	import { getAuthLayoutTitle } from '@/helpers/context';
 	import { t } from '@/helpers/translations';
 	import * as Form from '@/Components/Forms';
 	import Button from '@/Components/Primitives/Button.svelte';
@@ -9,7 +9,7 @@
 
 	let { errors }: SharedProps = $props();
 
-	const title = authLayoutTitle.get();
+	const title = getAuthLayoutTitle();
 	$title = t('passwords.password_reset');
 
 	const form = useForm({ email: '' });

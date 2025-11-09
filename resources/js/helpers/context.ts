@@ -1,18 +1,13 @@
-import { getContext, setContext } from 'svelte';
-import { type Writable } from 'svelte/store';
+import { createContext, getContext, setContext } from 'svelte';
+import type { Writable } from 'svelte/store';
 
-interface Context<T> {
-	get: () => T;
-	set: (context: T) => T;
-}
-
-export function createContext<T>(): Context<T> {
+export function createOptionalContext<T>(): [() => T | null, (context: T) => T] {
 	const key = {};
 
-	return {
-		get: () => getContext<T>(key),
-		set: (context: T) => setContext(key, context),
-	};
+	return [
+		() => getContext(key),
+		(context) => setContext(key, context),
+	];
 }
 
-export const authLayoutTitle = createContext<Writable<string | null>>();
+export const [getAuthLayoutTitle, setAuthLayoutTitle] = createContext<Writable<string | null>>();

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { radioGroupContext } from './contexts';
+	import { setRadioGroupContext } from './contexts';
 
 	let {
 		value = $bindable(),
@@ -12,7 +12,7 @@
 
 	const id = $props.id();
 
-	radioGroupContext.set({
+	setRadioGroupContext({
 		id,
 		get value() {
 			return value;
