@@ -1,0 +1,22 @@
+Subject: [PATCH] Do not tap activities twice
+
+---
+ src/Traits/LogsActivity.php | 4 ----
+ tests/LogsActivityTest.php  | 6 ++++++
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/src/Traits/LogsActivity.php b/src/Traits/LogsActivity.php
+index 770ada80..2434ba76 100644
+--- a/src/Traits/LogsActivity.php
++++ b/src/Traits/LogsActivity.php
+@@ -81,10 +81,6 @@ protected static function bootLogsActivity(): void
+                     ->performedOn($model)
+                     ->withProperties($event->changes);
+
+-                if (method_exists($model, 'tapActivity')) {
+-                    $logger->tap([$model, 'tapActivity'], $eventName);
+-                }
+-
+                 $logger->log($description);
+
+                 // Reset log options so the model can be serialized.

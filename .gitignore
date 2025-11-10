@@ -7,4 +7,5 @@
 /vendor
 /.env
 /.env.backup
+/patches.lock.json
 /vite.config.js.timestamp-*

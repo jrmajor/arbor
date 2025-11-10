@@ -10,6 +10,7 @@
 	"require": {
 		"php": "~8.3.0",
 		"azjezz/psl": "^4.2",
+		"cweagans/composer-patches": "^2.0",
 		"guzzlehttp/guzzle": "^7.10",
 		"inertiajs/inertia-laravel": "^2.0",
 		"jenssegers/agent": "^2.6",
@@ -21,7 +22,7 @@
 		"league/flysystem-aws-s3-v3": "^3.30",
 		"nesbot/carbon": "^3.2",
 		"sentry/sentry-laravel": "^4.18",
-		"spatie/laravel-activitylog": "dev-fix-tapping#abd79b0",
+		"spatie/laravel-activitylog": "4.10.1",
 		"spatie/laravel-flash": "^1.10",
 		"spatie/laravel-schedule-monitor": "^4.1",
 		"spatie/laravel-sitemap": "^7.3",
@@ -48,12 +49,6 @@
 		"phpunit/phpunit": "^11.5",
 		"spatie/laravel-ignition": "^2.9"
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/jrmajor/laravel-activitylog"
-		}
-	],
 	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"autoload": {
@@ -73,29 +68,40 @@
 		}
 	},
 	"config": {
+		"allow-plugins": {
+			"cweagans/composer-patches": true
+		},
 		"sort-packages": true
 	},
 	"extra": {
+			"patches": {
+				"spatie/laravel-activitylog": [
+					{
+						"description": "fix double tapping",
+						"url": "patches/activitylog.patch"
+					}
+				]
+		},
 		"laravel": {
 			"dont-discover": []
 		}
 	},
 	"scripts": {
-		"dev" : [
-			"Composer\\Config::disableProcessTimeout",
-			"pnpx concurrently -k -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"pnpm run dev\" --names=server,queue,logs,vite"
-		],
-		"preview" : [
-			"Composer\\Config::disableProcessTimeout",
-			"pnpm run build",
-			"pnpx concurrently -k -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"pnpm exec php artisan inertia:start-ssr\" --names=server,queue,logs,ssr"
-		],
 		"post-update-cmd": [
 			"@php artisan vendor:publish --tag=laravel-assets --ansi"
 		],
 		"post-autoload-dump": [
 			"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
 			"@php artisan package:discover --ansi"
+		],
+		"dev": [
+			"Composer\\Config::disableProcessTimeout",
+			"pnpx concurrently -k -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"pnpm run dev\" --names=server,queue,logs,vite"
+		],
+		"preview": [
+			"Composer\\Config::disableProcessTimeout",
+			"pnpm run build",
+			"pnpx concurrently -k -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"pnpm exec php artisan inertia:start-ssr\" --names=server,queue,logs,ssr"
 		]
 	}
 }
