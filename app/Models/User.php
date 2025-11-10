@@ -66,12 +66,13 @@ class User extends Authenticatable
      */
     public function latestLogin(): MorphOne
     {
-        /** @phpstan-ignore method.notFound */
+        /** @phpstan-ignore return.type */
         return $this
             ->actions()
             ->one()
             ->latestOfMany()
-            ->whereLogName('logins')->whereDescription('logged-in');
+            ->whereLogName('logins')
+            ->whereDescription('logged-in');
     }
 
     public function getActivitylogOptions(): LogOptions
