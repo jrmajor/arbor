@@ -8,7 +8,7 @@
 		"genealogy"
 	],
 	"require": {
-		"php": "~8.3.0",
+		"php": "~8.4.0",
 		"azjezz/psl": "^4.2",
 		"cweagans/composer-patches": "^2.0",
 		"guzzlehttp/guzzle": "^7.10",
