@@ -13,7 +13,6 @@
 		"cweagans/composer-patches": "^2.0",
 		"guzzlehttp/guzzle": "^7.10",
 		"inertiajs/inertia-laravel": "^2.0",
-		"jenssegers/agent": "^2.6",
 		"jrmajor/laravel-fluent": "^1.2",
 		"laravel/framework": "^12.37",
 		"laravel/telescope": "^5.15",
