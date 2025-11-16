@@ -73,25 +73,33 @@
 		"sort-packages": true
 	},
 	"extra": {
-			"patches": {
-				"spatie/laravel-activitylog": [
-					{
-						"description": "fix double tapping",
-						"url": "patches/activitylog.patch"
-					}
-				]
-		},
 		"laravel": {
 			"dont-discover": []
+		},
+		"patches": {
+			"spatie/laravel-activitylog": [
+				{
+					"description": "fix double tapping",
+					"url": "patches/activitylog.patch"
+				}
+			]
 		}
 	},
 	"scripts": {
 		"post-update-cmd": [
 			"@php artisan vendor:publish --tag=laravel-assets --ansi"
 		],
+		"pre-package-uninstall": [
+			"Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+		],
 		"post-autoload-dump": [
 			"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
 			"@php artisan package:discover --ansi"
+		],
+		"setup": [
+			"@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+			"@php artisan key:generate",
+			"touch database/database.sqlite"
 		],
 		"dev": [
 			"Composer\\Config::disableProcessTimeout",
@@ -101,6 +109,9 @@
 			"Composer\\Config::disableProcessTimeout",
 			"pnpm run build",
 			"pnpx concurrently -k -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"pnpm exec php artisan inertia:start-ssr\" --names=server,queue,logs,ssr"
-		]
+		],
+		"check": "phpstan --memory-limit=2G",
+		"format": "php-cs-fixer fix --diff -v",
+		"test": "@php artisan test --parallel"
 	}
 }

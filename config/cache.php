@@ -23,8 +23,13 @@ return [
             'lock_connection' => 'default',
         ],
 
+        'failover' => [
+            'driver' => 'failover',
+            'stores' => ['database', 'array'],
+        ],
+
     ],
 
-    'prefix' => 'arbor_cache_',
+    'prefix' => 'arbor-cache-',
 
 ];

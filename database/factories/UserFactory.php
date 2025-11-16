@@ -6,7 +6,6 @@ use App\Models\User;
 use Faker\Generator as Faker;
 use Faker\Provider\Internet as InternetFaker;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -25,7 +24,7 @@ class UserFactory extends Factory
         return [
             'username' => $this->faker->unique()->username(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'permissions' => 0,
             'remember_token' => Str::random(10),
         ];

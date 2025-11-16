@@ -35,10 +35,7 @@ jobs:
         run: composer install
 
       - name: Prepare Laravel application
-        run: |
-          cp .env.example .env
-          php artisan key:generate
-          touch database/testing.sqlite
+        run: composer setup
 
       - name: Execute tests
         run: php artisan test --parallel
@@ -80,9 +77,7 @@ jobs:
         run: composer install
 
       - name: Prepare Laravel application
-        run: |
-          cp .env.example .env
-          php artisan key:generate
+        run: composer setup
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyze --no-progress --no-interaction

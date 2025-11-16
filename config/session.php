@@ -11,7 +11,7 @@ return [
     'table' => 'sessions',
     'store' => env('SESSION_STORE'),
     'lottery' => [2, 100],
-    'cookie' => env('SESSION_COOKIE', 'arbor_session'),
+    'cookie' => env('SESSION_COOKIE', 'arbor-session'),
     'path' => '/',
     'domain' => null,
     'secure' => null,
