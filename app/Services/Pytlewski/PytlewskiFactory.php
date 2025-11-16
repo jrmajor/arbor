@@ -31,7 +31,7 @@ final class PytlewskiFactory
         }
 
         try {
-            $crawler = (new Crawler($source))->filter('#metrzyczka')->children();
+            $crawler = new Crawler($source)->filter('#metrzyczka')->children();
         } catch (InvalidArgumentException) {
             return null;
         }

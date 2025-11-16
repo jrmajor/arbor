@@ -77,7 +77,7 @@ abstract class TestCase extends BaseTestCase
         );
 
         try {
-            $action = (new ReflectionClass($controller))->getMethod($method);
+            $action = new ReflectionClass($controller)->getMethod($method);
         } catch (ReflectionException) {
             $this->fail("Controller action does not exist: {$controller}@{$method}");
         }

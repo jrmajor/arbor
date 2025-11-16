@@ -20,13 +20,13 @@ class InertiaHttpGateway implements Gateway
     {
         if ($this->vite->isRunningHot()) {
             $url = file_get_contents($this->vite->hotFile()) . '/render';
-        } elseif (config('inertia.ssr.enabled', true) && (new BundleDetector())->detect()) {
+        } elseif (config('inertia.ssr.enabled', true) && new BundleDetector()->detect()) {
             $url = str_replace('/render', '', config('inertia.ssr.url', 'http://127.0.0.1:13714')) . '/render';
         } else {
             return null;
         }
 
-        $page['props']['ziggy'] = (new Ziggy())->toArray();
+        $page['props']['ziggy'] = new Ziggy()->toArray();
 
         try {
             $response = Http::post($url, $page)->throw()->json();
