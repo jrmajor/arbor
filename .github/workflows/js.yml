@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
@@ -50,7 +50,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
@@ -68,7 +68,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup pnpm and install dependencies
         uses: pnpm/action-setup@0bc9da32cd356746083d9e2b8848bad8b974c72c
