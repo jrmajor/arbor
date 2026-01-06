@@ -14,6 +14,7 @@
 		action: 'create' | 'edit';
 	} = $props();
 
+	// svelte-ignore state_referenced_locally
 	const form = useForm({
 		sex: person.sex,
 		name: person.name,

@@ -15,6 +15,7 @@
 	const title = getAuthLayoutTitle();
 	$title = t('passwords.password_reset');
 
+	// svelte-ignore state_referenced_locally
 	const form = useForm({ token, email, password: '', password_confirmation: '' });
 
 	function onsubmit(event: SubmitEvent) {

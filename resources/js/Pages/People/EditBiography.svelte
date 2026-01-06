@@ -14,6 +14,7 @@
 		person: { biography: string | null } & PersonPage;
 	} & SharedProps = $props();
 
+	// svelte-ignore state_referenced_locally
 	const form = useForm({ biography: person.biography });
 
 	function onsubmit(event: SubmitEvent) {

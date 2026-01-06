@@ -7,6 +7,7 @@
 
 	let { user }: SharedProps = $props();
 
+	// svelte-ignore state_referenced_locally
 	const emailForm = useForm({ email: user!.email });
 	const passwordForm = useForm({ password: '', password_confirmation: '' });
 	const logoutForm = useForm({ password: '' });

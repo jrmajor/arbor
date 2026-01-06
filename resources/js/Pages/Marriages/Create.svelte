@@ -8,6 +8,7 @@
 		womanId: number | null;
 	} & SharedProps = $props();
 
+	// svelte-ignore state_referenced_locally
 	const marriage: EditMarriageResource = {
 		id: 0,
 		woman: { id: womanId },

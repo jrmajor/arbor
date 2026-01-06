@@ -8,6 +8,7 @@
 		children,
 	}: { children: Snippet } & SharedProps = $props();
 
+	// svelte-ignore state_referenced_locally
 	setLocale(currentLocale, fallbackLocale);
 	$effect(() => setLocale(currentLocale, fallbackLocale));
 </script>

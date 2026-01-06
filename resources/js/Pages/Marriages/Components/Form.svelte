@@ -13,6 +13,7 @@
 		action: 'create' | 'edit';
 	} = $props();
 
+	// svelte-ignore state_referenced_locally
 	const form = useForm({
 		woman_id: marriage.woman.id,
 		man_id: marriage.man.id,

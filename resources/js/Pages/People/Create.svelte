@@ -8,6 +8,7 @@
 		motherId: number | null;
 	} & SharedProps = $props();
 
+	// svelte-ignore state_referenced_locally
 	const person: EditPersonResource = {
 		id: 0,
 		sex: null,

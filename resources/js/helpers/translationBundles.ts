@@ -2,7 +2,7 @@ import type { FluentBundle } from '@fluent/bundle';
 import type { Language } from './translations';
 
 const bundles: Record<Language, Record<string, FluentBundle>>
-		= { en: {}, pl: {}, de: {} };
+	= { en: {}, pl: {}, de: {} };
 
 const allBundles = import.meta.glob<FluentBundle>(
 	'../../../lang/*/*.ftl',

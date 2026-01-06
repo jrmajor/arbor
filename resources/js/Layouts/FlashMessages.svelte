@@ -7,7 +7,9 @@
 
 	let { flash }: { flash: FlashMessage | null } = $props();
 
+	// svelte-ignore state_referenced_locally
 	let displayedIds = new SvelteSet(flash ? [flash.id] : []);
+	// svelte-ignore state_referenced_locally
 	let messages = $state(flash ? [flash] : []);
 
 	onMount(() => {
