@@ -16,7 +16,7 @@
 		"@inertiajs/svelte": "^2.3",
 		"@tailwindcss/forms": "^0.5.11",
 		"date-fns": "^4.1",
-		"svelte": "^5.46",
+		"svelte": "^5.49",
 		"tailwindcss": "^4.1"
 	},
 	"devDependencies": {
@@ -27,8 +27,8 @@
 		"@types/node": "^24.10",
 		"@types/qs": "^6.14",
 		"eslint": "^9.39",
-		"globals": "^17.0",
-		"laravel-vite-plugin": "^2.0",
+		"globals": "^17.3",
+		"laravel-vite-plugin": "^2.1",
 		"svelte-check": "^4.3",
 		"typescript": "^5.9",
 		"vite": "^7.3"
