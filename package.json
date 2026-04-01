@@ -7,7 +7,7 @@
 		"build": "php artisan ziggy:generate && vite build && vite build --ssr",
 		"check": "php artisan ziggy:generate --types-only && svelte-check --tsconfig ./tsconfig.json --diagnostic-sources js,svelte --fail-on-warnings",
 		"check:watch": "php artisan ziggy:generate --types-only && svelte-check --tsconfig ./tsconfig.json --diagnostic-sources js,svelte --watch",
-		"lint": "eslint . --max-warnings 0"
+		"lint": "eslint . --max-warnings 0 --cache --cache-location .cache/eslint --cache-strategy content"
 	},
 	"dependencies": {
 		"@fluent/bundle": "^0.19.1",
