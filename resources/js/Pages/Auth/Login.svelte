@@ -16,7 +16,7 @@
 
 	function onsubmit(event: SubmitEvent) {
 		event.preventDefault();
-		$form.post(route('login'));
+		form.post(route('login'));
 	}
 </script>
 
@@ -28,7 +28,7 @@
 	<div class="flex flex-wrap">
 		<div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
 			<Form.Input
-				bind:value={$form.username}
+				bind:value={form.username}
 				autofocus
 				autocomplete="username"
 				placeholder={t('auth.username_or_email').toLowerCase()}
@@ -37,7 +37,7 @@
 		</div>
 		<div class="w-full sm:w-1/2 sm:pl-1">
 			<Form.Input
-				bind:value={$form.password}
+				bind:value={form.password}
 				type="password"
 				autocomplete="current-password"
 				placeholder={t('auth.password').toLowerCase()}
@@ -51,7 +51,7 @@
 
 	<div class="mt-4 flex items-center justify-between gap-2">
 		<div class="flex grow" style:flex-grow="10">
-			<Form.Checkbox bind:checked={$form.remember} size="sm">
+			<Form.Checkbox bind:checked={form.remember} size="sm">
 				<small>{t('auth.remember')}</small>
 			</Form.Checkbox>
 		</div>

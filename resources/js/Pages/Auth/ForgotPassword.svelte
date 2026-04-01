@@ -16,7 +16,7 @@
 
 	function onsubmit(event: SubmitEvent) {
 		event.preventDefault();
-		$form.post(route('password.email'));
+		form.post(route('password.email'));
 	}
 </script>
 
@@ -28,7 +28,7 @@
 	<div class="flex flex-wrap">
 		<div class="w-full">
 			<Form.Input
-				bind:value={$form.email}
+				bind:value={form.email}
 				autocomplete="email"
 				placeholder={t('passwords.email').toLowerCase()}
 				error={errors.email}

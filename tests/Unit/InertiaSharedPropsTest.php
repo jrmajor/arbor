@@ -19,7 +19,7 @@ final class InertiaSharedPropsTest extends TestCase
 
         Route::middleware('web')->get(
             'inertia-shared-props-test',
-            fn () => Inertia::render('InertiaSharedPropsTest', []),
+            fn () => Inertia::render('SharedPropsTest', []),
         )->name('test.inertiaProps');
     }
 

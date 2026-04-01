@@ -14,17 +14,17 @@
 
 	function submitEmail(event: SubmitEvent) {
 		event.preventDefault();
-		$emailForm.put(route('settings.updateEmail'));
+		emailForm.put(route('settings.updateEmail'));
 	}
 
 	function submitPassword(event: SubmitEvent) {
 		event.preventDefault();
-		$passwordForm.put(route('settings.updatePassword'));
+		passwordForm.put(route('settings.updatePassword'));
 	}
 
 	function submitLogout(event: SubmitEvent) {
 		event.preventDefault();
-		$logoutForm.post(route('settings.logoutOtherDevices'));
+		logoutForm.post(route('settings.logoutOtherDevices'));
 	}
 </script>
 
@@ -45,11 +45,11 @@
 		<div>
 			<div class="flex flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-5">
 				<div class="flex w-full sm:w-64">
-					<Form.Input bind:value={$emailForm.email}/>
+					<Form.Input bind:value={emailForm.email}/>
 				</div>
 				<Button type="submit">{t('misc.save')}</Button>
 			</div>
-			<Form.Error error={$emailForm.errors.email}/>
+			<Form.Error error={emailForm.errors.email}/>
 		</div>
 	</form>
 
@@ -64,23 +64,23 @@
 			<div class="flex flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-5">
 				<div class="flex w-full sm:w-64">
 					<Form.Input
-						bind:value={$passwordForm.password}
+						bind:value={passwordForm.password}
 						type="password"
 						placeholder={t('settings.password').toLowerCase()}
-						error={$passwordForm.errors.password}
+						error={passwordForm.errors.password}
 					/>
 				</div>
 				<div class="flex w-full sm:w-64">
 					<Form.Input
-						bind:value={$passwordForm.password_confirmation}
+						bind:value={passwordForm.password_confirmation}
 						type="password"
 						placeholder={t('settings.confirm_password').toLowerCase()}
-						error={$passwordForm.errors.password}
+						error={passwordForm.errors.password}
 					/>
 				</div>
 				<Button type="submit">{t('misc.save')}</Button>
 			</div>
-			<Form.Error error={$passwordForm.errors.password}/>
+			<Form.Error error={passwordForm.errors.password}/>
 		</div>
 	</form>
 
@@ -95,15 +95,15 @@
 			<div class="flex flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-5">
 				<div class="flex w-full sm:w-64">
 					<Form.Input
-						bind:value={$logoutForm.password}
+						bind:value={logoutForm.password}
 						type="password"
 						placeholder={t('settings.password').toLowerCase()}
-						error={$logoutForm.errors.password}
+						error={logoutForm.errors.password}
 					/>
 				</div>
 				<Button type="submit">{t('settings.logout')}</Button>
 			</div>
-			<Form.Error error={$logoutForm.errors.password}/>
+			<Form.Error error={logoutForm.errors.password}/>
 		</div>
 	</form>
 </main>
