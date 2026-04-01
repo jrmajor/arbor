@@ -18,13 +18,13 @@ class PeopleSearchController extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        $query = $request->get('search');
+        $query = $request->input('search');
 
         if (blank($query)) {
             return response()->json(['people' => [], 'moreCount' => 0, 'hiddenCount' => 0]);
         }
 
-        $sex = filled($request->get('sex')) ? $request->get('sex') : null;
+        $sex = filled($request->input('sex')) ? $request->input('sex') : null;
 
         $whereFragment = function (Builder $q) use ($query) {
             $queryFragments = Vec\filter_nulls(trim_values(Str\split($query, ' ')));
