@@ -28,8 +28,8 @@
 	} = $props();
 
 	let inertiaArgs = $derived.by(() => {
-		if (type === 'link') return inertiaProp ?? {};
-		if (href) return { ...(inertiaProp ?? {}), href };
+		if (type === 'link') return inertiaProp ?? { };
+		if (href) return { ...(inertiaProp ?? { }), href };
 		return inertiaProp;
 	});
 	let action = $derived(inertiaArgs ? inertia : voidAction);
@@ -37,7 +37,7 @@
 
 {#if type !== 'link'}
 	<button
-		use:action={inertiaArgs ?? {}}
+		use:action={inertiaArgs ?? { }}
 		{onclick}
 		{type}
 		{disabled}
@@ -51,7 +51,7 @@
 	</button>
 {:else if !disabled}
 	<a
-		use:action={inertiaArgs ?? {}}
+		use:action={inertiaArgs ?? { }}
 		{href}
 		{rel}
 		class={{

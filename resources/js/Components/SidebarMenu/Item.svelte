@@ -9,7 +9,7 @@
 		name,
 		href,
 		hotkey = null,
-		visitOptions = {},
+		visitOptions = { },
 		active = false,
 		danger = false,
 		children,

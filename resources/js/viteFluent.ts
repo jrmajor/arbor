@@ -22,7 +22,7 @@ export default function fluent(options: PluginOptions) {
 				}
 			}
 
-			(new Validator()).visit(parse(code, {}));
+			(new Validator()).visit(parse(code, { }));
 
 			return `
 				import { FluentBundle, FluentResource } from '@fluent/bundle';

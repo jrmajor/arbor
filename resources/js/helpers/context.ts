@@ -2,7 +2,7 @@ import { createContext, getContext, setContext } from 'svelte';
 import type { Writable } from 'svelte/store';
 
 export function createOptionalContext<T>(): [() => T | null, (context: T) => T] {
-	const key = {};
+	const key = { };
 
 	return [
 		() => getContext(key),

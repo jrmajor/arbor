@@ -6,7 +6,7 @@ import { getLocale } from './translationsState.svelte';
 
 export type Language = 'en' | 'pl' | 'de';
 
-export function t(key: string, args: Record<string, FluentVariable> = {}) {
+export function t(key: string, args: Record<string, FluentVariable> = { }) {
 	const patternAndBundle = getPatternOrFallback(key);
 	if (!patternAndBundle) return key;
 	const [bundle, pattern] = patternAndBundle;

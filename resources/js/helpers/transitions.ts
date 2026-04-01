@@ -3,7 +3,7 @@ import { type TransitionConfig } from 'svelte/transition';
 
 export function flide(
 	node: Element,
-	{ delay = 0, duration = 400 } = {},
+	{ delay = 0, duration = 400 } = { },
 ): TransitionConfig {
 	const style = getComputedStyle(node);
 
