@@ -4,5 +4,6 @@ allowBuilds:
   unrs-resolver: true
 
 engineStrict: true
+dedupePeers: true
 strictDepBuilds: true
 strictPeerDependencies: true
