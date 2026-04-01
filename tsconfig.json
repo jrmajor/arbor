@@ -1,23 +1,15 @@
 {
 	"compilerOptions": {
-		"target": "esnext",
-		"module": "esnext",
+		"noEmit": true,
 		"moduleResolution": "bundler",
 		"verbatimModuleSyntax": true,
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"noImplicitAny": true,
-		"noEmit": true,
-		"baseUrl": ".",
-		"paths": {
-				"@/*": ["resources/js/*"],
-				"ziggy-js": ["vendor/tightenco/ziggy"],
-		},
-		"types": ["node", "vite/client"],
-		"allowJs": true,
 		"checkJs": true,
 		"skipLibCheck": true,
-		"useDefineForClassFields": true,
+		"paths": {
+			"@/*": ["resources/js/*"],
+			"ziggy-js": ["vendor/tightenco/ziggy"],
+		},
+		"types": ["node", "vite/client"],
 	},
 	"include": [
 		"resources/js/**/*.ts",
