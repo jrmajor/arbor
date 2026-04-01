@@ -35,7 +35,7 @@
 		"barryvdh/laravel-ide-helper": "^3.7",
 		"brianium/paratest": "^7.20",
 		"fakerphp/faker": "^1.24",
-		"jrmajor/cs": "^0.6.1",
+		"jrmajor/cs": "^0.7.0",
 		"larastan/larastan": "^3.9",
 		"laravel/pail": "^1.2",
 		"mockery/mockery": "^1.6",

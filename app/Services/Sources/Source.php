@@ -5,6 +5,7 @@ namespace App\Services\Sources;
 use Illuminate\Contracts\Support\Jsonable;
 use Psl\Regex;
 use Psl\Str;
+use Stringable;
 
 /**
  * @phpstan-type InlineType = 'EscapeSequence'|'Italics'|'ISBN'|'Link'|'SpecialCharacter'|'Url'
@@ -18,7 +19,7 @@ use Psl\Str;
  *     attributes?: array<string, ?string>,
  * }
  */
-final class Source implements Jsonable
+final class Source implements Jsonable, Stringable
 {
     public const string ParsedownVersion = '1.7.4';
 
