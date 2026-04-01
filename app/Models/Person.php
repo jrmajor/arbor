@@ -27,6 +27,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Psl\Str;
+use Psl\Type;
 use Psl\Vec;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -197,7 +198,7 @@ class Person extends Model
     /**
      * @param 'family'|'last' $type
      *
-     * @return Collection<int, object{letter: string, count: int}>
+     * @return Collection<int, Letter>
      */
     public static function letters(string $type): Collection
     {
@@ -218,7 +219,11 @@ class Person extends Model
                 ->groupBy('letter')
                 ->orderBy('letter')
                 ->whereNull('deleted_at')
-                ->get(),
+                ->get()
+                ->map(fn (object $record): Letter => new Letter(
+                    letter: $record->letter,
+                    count: $record->count,
+                )),
         );
     }
 
