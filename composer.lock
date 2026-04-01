@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "80f22c509f047fea60607fae5f36b496",
+    "content-hash": "486cf7eecbbab24ef4943b85e864980b",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -9725,28 +9725,28 @@
         },
         {
             "name": "jrmajor/cs",
-            "version": "v0.6.1",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrmajor/php-cs.git",
-                "reference": "0ea3cbb164a76c8d30acfec3f07492df5311d841"
+                "reference": "ff008a1368a9005501a6ffbfea99592042597327"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/0ea3cbb164a76c8d30acfec3f07492df5311d841",
-                "reference": "0ea3cbb164a76c8d30acfec3f07492df5311d841",
+                "url": "https://api.github.com/repos/jrmajor/php-cs/zipball/ff008a1368a9005501a6ffbfea99592042597327",
+                "reference": "ff008a1368a9005501a6ffbfea99592042597327",
                 "shasum": ""
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^3.64",
-                "kubawerlos/php-cs-fixer-custom-fixers": "^3.22",
-                "php": "8.2 - 8.4"
+                "friendsofphp/php-cs-fixer": "^3.91",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.35",
+                "php": "8.3 - 8.5"
             },
             "require-dev": {
                 "php-cs-fixer/phpunit-constraint-isidenticalstring": "^1.5",
-                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan": "^2.1.33",
                 "phpstan/phpstan-phpunit": "^2.0",
-                "phpunit/phpunit": "^11.4"
+                "phpunit/phpunit": "^12.4"
             },
             "type": "library",
             "autoload": {
@@ -9772,9 +9772,9 @@
             "homepage": "https://github.com/jrmajor/php-cs",
             "support": {
                 "issues": "https://github.com/jrmajor/php-cs/issues",
-                "source": "https://github.com/jrmajor/php-cs/tree/v0.6.1"
+                "source": "https://github.com/jrmajor/php-cs/tree/v0.7.0"
             },
-            "time": "2024-11-22T18:30:10+00:00"
+            "time": "2025-12-07T12:08:45+00:00"
         },
         {
             "name": "kubawerlos/php-cs-fixer-custom-fixers",
@@ -10485,11 +10485,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.45",
+            "version": "2.1.46",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f8cdfd9421b7edb7686a2d150a234870464eac70",
-                "reference": "f8cdfd9421b7edb7686a2d150a234870464eac70",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a193923fc2d6325ef4e741cf3af8c3e8f54dbf25",
+                "reference": "a193923fc2d6325ef4e741cf3af8c3e8f54dbf25",
                 "shasum": ""
             },
             "require": {
@@ -10534,7 +10534,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-30T13:22:02+00:00"
+            "time": "2026-04-01T09:25:14+00:00"
         },
         {
             "name": "phpstan/phpstan-mockery",
