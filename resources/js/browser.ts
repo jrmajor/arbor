@@ -1,6 +1,9 @@
 import { hydrate, mount } from 'svelte';
 import { createInertiaApp } from '@inertiajs/svelte';
+import { Ziggy } from '@/ziggy/index.js';
 import { resolve } from './common';
+
+globalThis.Ziggy = Ziggy;
 
 createInertiaApp({
 	resolve,

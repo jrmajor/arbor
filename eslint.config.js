@@ -29,7 +29,7 @@ export default defineConfig([
 	globalIgnores([
 		'bootstrap/ssr',
 		'public/build',
-		'resources/js/types/ziggy.*',
+		'resources/js/ziggy',
 		// todo: @eslint/css errors
 		'resources/css/tailwind.css',
 		'resources/css/forms.css',

@@ -11,7 +11,7 @@
 		"baseUrl": ".",
 		"paths": {
 				"@/*": ["resources/js/*"],
-				"ziggy-js": ["vendor/tightenco/ziggy"]
+				"ziggy-js": ["vendor/tightenco/ziggy"],
 		},
 		"types": ["node", "vite/client"],
 		"allowJs": true,

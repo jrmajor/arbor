@@ -4,3 +4,9 @@ declare module '*.ftl' {
 	const bundle: FluentBundle;
 	export default bundle;
 }
+
+declare global {
+	var Ziggy: any;
+}
+
+export { };

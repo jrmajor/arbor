@@ -10,5 +10,8 @@ $finder = PhpCsFixer\Finder::create()
     ->notName('_ide_helper*.php')
     ->ignoreVCSIgnored(true);
 
-return Major\CS\config($finder)
-    ->setCacheFile('.cache/.php-cs-fixer.cache');
+return Major\CS\config($finder, [
+    'heredoc_closing_marker' => [
+        'reserved_closing_markers' => ['BLADE', 'FTL', 'JS', 'JSON', 'PHP', 'SQL', 'XML', 'YAML'],
+    ],
+]) ->setCacheFile('.cache/.php-cs-fixer.cache');
