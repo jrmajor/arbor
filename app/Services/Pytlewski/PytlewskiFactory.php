@@ -31,7 +31,7 @@ final class PytlewskiFactory
         }
 
         try {
-            $crawler = new Crawler($source)->filter('#metrzyczka')->children();
+            $crawler = new Crawler($source)->filter('#metrzyczka > tbody');
         } catch (InvalidArgumentException) {
             return null;
         }
@@ -115,13 +115,9 @@ final class PytlewskiFactory
     private function parseNames(Crawler $crawler): array
     {
         try {
-            $names = $crawler->eq(1)
-                ->children()->eq(1)
-                ->children()->first()
-                ->children()->first()
-                ->children()->first()
-                ->children()->first()
-                ->children()->first()
+            $names = $crawler
+                ->filter('tr:nth-child(2) > td:nth-child(2) > table')
+                ->filter('tbody > tr:nth-child(1) > td > font > font[size="3"] > i')
                 ->html();
         } catch (InvalidArgumentException) {
             return Dict\from_keys(['familyName', 'lastName', 'name', 'middleName'], fn () => null);
@@ -149,12 +145,9 @@ final class PytlewskiFactory
         $attributes = Dict\from_keys($attributes, fn () => null);
 
         try {
-            $dates = $crawler->eq(1)
-                ->children()->eq(1)
-                ->children()->first()
-                ->children()->first()
-                ->children()->first()
-                ->children()->eq(2)
+            $dates = $crawler
+                ->filter('tr:nth-child(2) > td:nth-child(2) > table')
+                ->filter('tbody > tr:nth-child(1) > td > font > font.czcionka')
                 ->html();
         } catch (InvalidArgumentException) {
             return $attributes;
@@ -195,7 +188,10 @@ final class PytlewskiFactory
     private function parsePhoto(Crawler $crawler): ?string
     {
         try {
-            $photo = $crawler->eq(2)->children()->eq(1)->filter('img')->attr('src');
+            $photo = $crawler
+                ->filter('tr:nth-child(3) > td:nth-child(2)')
+                ->filter('img')
+                ->attr('src');
         } catch (InvalidArgumentException) {
             return null;
         }
@@ -206,7 +202,9 @@ final class PytlewskiFactory
     private function parseBio(Crawler $crawler): ?string
     {
         try {
-            $bio = $crawler->eq(5)->children()->eq(1)->text();
+            $bio = $crawler
+                ->filter('tr:nth-child(6) > td:nth-child(2)')
+                ->text();
         } catch (InvalidArgumentException) {
             return null;
         }
@@ -234,12 +232,9 @@ final class PytlewskiFactory
     private function parseParent(Crawler $crawler, RelativesRepository $relatives, Sex $type): ?Relative
     {
         try {
-            $parents = $crawler->eq(1)
-                ->children()->eq(1)
-                ->children()->first()
-                ->children()->eq(3)
-                ->children()->first()
-                ->children()->first()
+            $parents = $crawler
+                ->filter('tr:nth-child(2) > td:nth-child(2) > table')
+                ->filter('tbody > tr:nth-child(4) > td')
                 ->html();
         } catch (InvalidArgumentException) {
             return null;
@@ -266,30 +261,30 @@ final class PytlewskiFactory
     private function parseRelations(Crawler $crawler, RelativesRepository $relatives): Generator
     {
         try {
-            $crawler = $crawler->eq(3)
-                ->children()->first()
-                ->children()->first()
-                ->children();
-        } catch (InvalidArgumentException) {
-            return;
-        }
-
-        try {
-            $marriages = $crawler->eq(0)->children()->first()->html();
+            $marriages = $crawler
+                ->filter('tr:nth-child(4) > td:nth-child(1) > table')
+                ->filter('tbody > tr:nth-child(1) > td')
+                ->html();
 
             yield 'marriages' => $this->parseMarriages($marriages, $relatives);
         } catch (InvalidArgumentException) {
         }
 
         try {
-            $children = $crawler->eq(1)->children()->first()->html();
+            $children = $crawler
+                ->filter('tr:nth-child(4) > td:nth-child(1) > table')
+                ->filter('tbody > tr:nth-child(2) > td')
+                ->html();
 
             yield 'children' => $this->parseChildrenOrSiblings($children, $relatives);
         } catch (InvalidArgumentException) {
         }
 
         try {
-            $siblings = $crawler->eq(2)->children()->first()->html();
+            $siblings = $crawler
+                ->filter('tr:nth-child(4) > td:nth-child(1) > table')
+                ->filter('tbody > tr:nth-child(3) > td')
+                ->html();
 
             yield 'siblings' => $this->parseChildrenOrSiblings($siblings, $relatives);
         } catch (InvalidArgumentException) {

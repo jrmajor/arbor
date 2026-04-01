@@ -25,8 +25,8 @@
 		"spatie/laravel-flash": "^1.10",
 		"spatie/laravel-schedule-monitor": "^4.3",
 		"spatie/laravel-sitemap": "^7.4",
-		"symfony/css-selector": "^7.3",
-		"symfony/dom-crawler": "^7.3",
+		"symfony/css-selector": "^7.4",
+		"symfony/dom-crawler": "^7.4",
 		"symfony/mailgun-mailer": "^8.0",
 		"tightenco/ziggy": "^2.6"
 	},
