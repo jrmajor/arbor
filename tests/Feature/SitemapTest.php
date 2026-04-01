@@ -23,11 +23,11 @@ final class GenerateSitemapTest extends TestCase
             ->assertHeader('Content-Type', 'text/xml; charset=UTF-8');
 
         foreach ([
-            '<loc>' . url('http://arbor.test/people') . '</loc>' => true,
-            '<loc>' . url("http://arbor.test/people/{$people[0]->id}") . '</loc>' => false,
-            '<loc>' . url("http://arbor.test/people/{$people[1]->id}") . '</loc>' => false,
-            '<loc>' . url("http://arbor.test/people/{$people[2]->id}") . '</loc>' => true,
-            '<loc>' . url("http://arbor.test/people/{$people[3]->id}") . '</loc>' => true,
+            '<loc>' . url('people') . '</loc>' => true,
+            '<loc>' . url("people/{$people[0]->id}") . '</loc>' => false,
+            '<loc>' . url("people/{$people[1]->id}") . '</loc>' => false,
+            '<loc>' . url("people/{$people[2]->id}") . '</loc>' => true,
+            '<loc>' . url("people/{$people[3]->id}") . '</loc>' => true,
         ] as $part => $present) {
             if ($present) {
                 $response->assertSee($part, false);
