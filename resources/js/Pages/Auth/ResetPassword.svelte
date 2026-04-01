@@ -20,7 +20,7 @@
 
 	function onsubmit(event: SubmitEvent) {
 		event.preventDefault();
-		$form.post(route('password.store'));
+		form.post(route('password.store'));
 	}
 </script>
 
@@ -32,7 +32,7 @@
 	<div class="flex flex-wrap">
 		<div class="w-full">
 			<Form.Input
-				bind:value={$form.email}
+				bind:value={form.email}
 				autocomplete="email"
 				placeholder={t('passwords.email').toLowerCase()}
 				error={errors.email}
@@ -44,7 +44,7 @@
 	<div class="flex flex-wrap mt-4">
 		<div class="w-full sm:w-1/2 sm:pr-1 pb-2 sm:pb-0">
 			<Form.Input
-				bind:value={$form.password}
+				bind:value={form.password}
 				type="password"
 				autofocus
 				autocomplete="new-password"
@@ -54,7 +54,7 @@
 		</div>
 		<div class="w-full sm:w-1/2 sm:pl-1">
 			<Form.Input
-				bind:value={$form.password_confirmation}
+				bind:value={form.password_confirmation}
 				type="password"
 				autocomplete="current-password"
 				placeholder={t('passwords.confirm_password').toLowerCase()}

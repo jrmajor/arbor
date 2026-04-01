@@ -20,7 +20,7 @@
 	function onsubmit(event: SubmitEvent) {
 		event.preventDefault();
 
-		$form.patch(route('people.biography.update', person));
+		form.patch(route('people.biography.update', person));
 	}
 </script>
 
@@ -29,8 +29,8 @@
 </svelte:head>
 
 <form {onsubmit} class="p-6 bg-white rounded-lg shadow-sm overflow-hidden">
-	<Form.Field error={$form.errors.biography}>
-		<Form.Textarea bind:value={$form.biography} rows={20}/>
+	<Form.Field error={form.errors.biography}>
+		<Form.Textarea bind:value={form.biography} rows={20}/>
 	</Form.Field>
 
 	<div class="-m-6 mt-6 px-6 py-4 bg-gray-50 flex justify-end">
