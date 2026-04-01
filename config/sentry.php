@@ -1,8 +1,8 @@
 <?php
 
+use Psl\Async\Exception\CancelledException;
 use Psl\Shell;
 use Psl\Shell\Exception\FailedExecutionException;
-use Psl\Shell\Exception\TimeoutException;
 
 try {
     $gitHash = Shell\execute(
@@ -10,7 +10,7 @@ try {
         ['log', '--pretty=%h', '-n1', 'HEAD'],
         base_path('.git'),
     );
-} catch (FailedExecutionException|TimeoutException) {
+} catch (FailedExecutionException|CancelledException) {
     $gitHash = '';
 }
 

@@ -9,7 +9,6 @@
 	],
 	"require": {
 		"php": "~8.4.0",
-		"azjezz/psl": "^4.3",
 		"cweagans/composer-patches": "^2.0",
 		"guzzlehttp/guzzle": "^7.10",
 		"inertiajs/inertia-laravel": "^3.0",
@@ -20,6 +19,7 @@
 		"laravel/ui": "^4.6",
 		"league/flysystem-aws-s3-v3": "^3.32",
 		"nesbot/carbon": "^3.11",
+		"php-standard-library/php-standard-library": "^6.1",
 		"sentry/sentry-laravel": "^4.24",
 		"spatie/laravel-activitylog": "^4.12",
 		"spatie/laravel-flash": "^1.10",
