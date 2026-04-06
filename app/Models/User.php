@@ -9,18 +9,16 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\CausesActivity;
-use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Models\Concerns\HasActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 class User extends Authenticatable
 {
-    use CausesActivity;
+    use HasActivity;
 
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 
-    use LogsActivity;
     use Notifiable;
     use SoftDeletes;
 
@@ -68,7 +66,7 @@ class User extends Authenticatable
     {
         /** @phpstan-ignore return.type */
         return $this
-            ->actions()
+            ->activitiesAsCauser()
             ->one()
             ->latestOfMany()
             ->whereLogName('logins')
@@ -82,6 +80,6 @@ class User extends Authenticatable
             ->logAll()
             ->logExcept(['id', 'created_at', 'updated_at', 'remember_token'])
             ->logOnlyDirty()
-            ->dontSubmitEmptyLogs();
+            ->dontLogEmptyChanges();
     }
 }

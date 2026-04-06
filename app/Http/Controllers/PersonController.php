@@ -177,7 +177,7 @@ class PersonController extends Controller
     {
         $this->authorize('viewHistory', $person);
 
-        $activities = $person->activities->load('causer')->reverse()->values();
+        $activities = $person->activitiesAsSubject()->with('causer')->get()->reverse();
 
         return Inertia::render('People/History', [
             'person' => new PersonPageResource($person),

@@ -7,8 +7,10 @@ use Illuminate\Support\Arr;
 
 trait TapsActivity
 {
-    public function tapActivity(Activity $activity, string $eventName): void
+    public function beforeActivityLogged(Activity $activity, string $eventName): void
     {
+        $activity->properties = null;
+
         match ($eventName) {
             'updated' => $this->tapUpdated($activity),
             'deleted', 'restored' => $this->tapDeletedOrRestored($activity),
@@ -18,7 +20,7 @@ trait TapsActivity
 
     private function tapUpdated(Activity $activity): void
     {
-        $attr = $activity->properties['attributes'];
+        $attr = $activity->attribute_changes['attributes'];
 
         match (true) {
             array_key_exists('visibility', $attr) => $this->visibilityChanged($activity),
@@ -35,21 +37,16 @@ trait TapsActivity
     private function biographyUpdated(Activity $activity): void
     {
         $activity->description = match (null) {
-            $activity->properties['old']['biography'] => 'added-biography',
-            $activity->properties['attributes']['biography'] => 'deleted-biography',
+            $activity->attribute_changes['old']['biography'] => 'added-biography',
+            $activity->attribute_changes['attributes']['biography'] => 'deleted-biography',
             default => 'updated-biography',
         };
-
-        $activity->properties = collect([
-            'old' => $activity->properties['old']['biography'],
-            'new' => $activity->properties['attributes']['biography'],
-        ]);
     }
 
     private function modelUpdated(Activity $activity): void
     {
-        $old = $activity->properties['old'];
-        $attributes = $activity->properties['attributes'];
+        $old = $activity->attribute_changes['old'];
+        $attributes = $activity->attribute_changes['attributes'];
 
         foreach (static::$dateRanges as $date) {
             $from = "{$date}_from";
@@ -66,14 +63,15 @@ trait TapsActivity
             }
         }
 
-        $activity->properties = collect(['old' => $old, 'attributes' => $attributes]);
+        $activity->attribute_changes = collect(['old' => $old, 'attributes' => $attributes]);
     }
 
     private function tapDeletedOrRestored(Activity $activity): void
     {
-        $attributes = $activity->properties['old'] ?? $activity->properties['attributes'];
+        $attributes = $activity->attribute_changes['old']
+            ?? $activity->attribute_changes['attributes'];
 
-        $activity->properties = collect([
+        $activity->attribute_changes = collect([
             'attributes' => Arr::only($attributes, 'deleted_at'),
         ]);
     }

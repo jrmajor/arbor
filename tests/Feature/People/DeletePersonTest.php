@@ -75,12 +75,13 @@ final class DeletePersonTest extends TestCase
         $this->assertSame('people', $log->log_name);
         $this->assertSame('deleted', $log->description);
         $this->assertSameModel($this->person, $log->subject);
+        $this->assertNull($log->properties);
 
         $this->assertSame((string) $this->person->deleted_at, (string) $log->created_at);
 
         $this->assertSame(
             ['attributes' => ['deleted_at' => $this->person->deleted_at->toJson()]],
-            $log->properties->all(),
+            $log->attribute_changes->all(),
         );
     }
 }

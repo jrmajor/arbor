@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Dashboard;
 
 use App\Models\Activity;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,10 +20,12 @@ final class ActivityResource extends JsonResource
         $description = $this->resource->description;
 
         if ($description === 'changed-visibility') {
-            $description = $this->resource->properties['attributes']['visibility']
+            $description = $this->resource->attribute_changes['attributes']['visibility']
                 ? 'made_visible'
                 : 'made_invisible';
         }
+
+        assert($this->resource->causer === null || $this->resource->causer instanceof User);
 
         return [
             'id' => $this->resource->id,

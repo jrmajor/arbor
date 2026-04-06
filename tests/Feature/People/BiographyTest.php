@@ -129,13 +129,14 @@ final class BiographyTest extends TestCase
         $this->assertSame('people', $log->log_name);
         $this->assertSame('added-biography', $log->description);
         $this->assertSameModel($this->person, $log->subject);
+        $this->assertNull($log->properties);
 
         $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
-        $this->assertSame(
-            ['old' => null, 'new' => $this->newBiography],
-            $log->properties->all(),
-        );
+        $this->assertSame([
+            'attributes' => ['biography' => $this->newBiography],
+            'old' => ['biography' => null],
+        ], $log->attribute_changes->all());
     }
 
     #[TestDox('biography edition is logged')]
@@ -158,13 +159,14 @@ final class BiographyTest extends TestCase
         $this->assertSame('people', $log->log_name);
         $this->assertSame('updated-biography', $log->description);
         $this->assertSameModel($this->person, $log->subject);
+        $this->assertNull($log->properties);
 
         $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
-        $this->assertSame(
-            ['old' => $this->oldBiography, 'new' => $this->newBiography],
-            $log->properties->all(),
-        );
+        $this->assertSame([
+            'attributes' => ['biography' => $this->newBiography],
+            'old' => ['biography' => $this->oldBiography],
+        ], $log->attribute_changes->all());
     }
 
     #[TestDox('biography deletion is logged')]
@@ -187,12 +189,13 @@ final class BiographyTest extends TestCase
         $this->assertSame('people', $log->log_name);
         $this->assertSame('deleted-biography', $log->description);
         $this->assertSameModel($this->person, $log->subject);
+        $this->assertNull($log->properties);
 
         $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
-        $this->assertSame(
-            ['old' => $this->oldBiography, 'new' => null],
-            $log->properties->all(),
-        );
+        $this->assertSame([
+            'attributes' => ['biography' => null],
+            'old' => ['biography' => $this->oldBiography],
+        ], $log->attribute_changes->all());
     }
 }

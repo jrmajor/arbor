@@ -215,6 +215,7 @@ final class EditPersonTest extends TestCase
         $this->assertSame('people', $log->log_name);
         $this->assertSame('updated', $log->description);
         $this->assertSameModel($this->person, $log->subject);
+        $this->assertNull($log->properties);
 
         $oldToCheck = Arr::except($this->oldAttributes, [
             'dead', 'death_cause', 'sources', ...$this->dates,
@@ -223,7 +224,7 @@ final class EditPersonTest extends TestCase
         foreach ($oldToCheck as $key => $value) {
             $m = "Failed asserting that old attribute {$key} has the same value in log.";
 
-            $this->assertSame($value, $log->properties['old'][$key], $m);
+            $this->assertSame($value, $log->attribute_changes['old'][$key], $m);
         }
 
         $newToCheck = Arr::except($this->newAttributes, [
@@ -233,27 +234,27 @@ final class EditPersonTest extends TestCase
         foreach ($newToCheck as $key => $value) {
             $m = "Failed asserting that attribute {$key} has the same value in log.";
 
-            $this->assertSame($value, $log->properties['attributes'][$key], $m);
+            $this->assertSame($value, $log->attribute_changes['attributes'][$key], $m);
         }
 
         $this->assertDoesNotHaveKeys(
             ['dead', 'death_cause', 'created_at', 'updated_at'],
-            $log->properties['old'],
+            $log->attribute_changes['old'],
         );
 
         $this->assertDoesNotHaveKeys(
             ['dead', 'death_cause', 'created_at', 'updated_at'],
-            $log->properties['attributes'],
+            $log->attribute_changes['attributes'],
         );
 
         $this->assertSame((string) $this->person->updated_at, (string) $log->created_at);
 
-        $this->assertSame($this->oldAttributes['sources'], $log->properties['old']['sources']);
-        $this->assertSame($this->newAttributes['sources'], $log->properties['attributes']['sources']);
+        $this->assertSame($this->oldAttributes['sources'], $log->attribute_changes['old']['sources']);
+        $this->assertSame($this->newAttributes['sources'], $log->attribute_changes['attributes']['sources']);
 
         foreach ($this->dates as $date) {
-            $this->assertSame($this->oldAttributes[$date], $log->properties['old'][$date]);
-            $this->assertSame($this->newAttributes[$date], $log->properties['attributes'][$date]);
+            $this->assertSame($this->oldAttributes[$date], $log->attribute_changes['old'][$date]);
+            $this->assertSame($this->newAttributes[$date], $log->attribute_changes['attributes'][$date]);
         }
     }
 }

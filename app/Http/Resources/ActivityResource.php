@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Activity;
+use App\Models\User;
 use App\Services\Sources\Source;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,9 +22,8 @@ final class ActivityResource extends JsonResource
     public function toArray(Request $request): array
     {
         $attributes = [
-            'old' => $this->resource->properties['old'] ?? null,
-            'attributes' => $this->resource->properties['attributes'] ?? null,
-            'new' => $this->resource->properties['new'] ?? null,
+            'old' => $this->resource->attribute_changes['old'] ?? null,
+            'attributes' => $this->resource->attribute_changes['attributes'] ?? null,
         ];
 
         $attributes = Dict\map($attributes, function ($value) {
@@ -32,6 +32,8 @@ final class ActivityResource extends JsonResource
                 default => $value,
             };
         });
+
+        assert($this->resource->causer === null || $this->resource->causer instanceof User);
 
         return [
             'description' => $this->resource->description,

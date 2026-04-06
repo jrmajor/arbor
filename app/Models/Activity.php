@@ -5,22 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Spatie\Activitylog\Contracts\Activity as ActivityContract;
+use Spatie\Activitylog\Enums\ActivityEvent;
 
-/**
- * @property Collection<string, mixed>|null $properties
- */
 class Activity extends Model implements ActivityContract
 {
     protected $table = 'activity_log';
 
     public $guarded = [];
 
-    protected $casts = [
-        'properties' => 'collection',
-    ];
+    /**
+     * @return array{
+     *     attribute_changes: 'collection',
+     *     properties: 'collection',
+     * }
+     */
+    protected function casts(): array
+    {
+        return [
+            'attribute_changes' => 'collection',
+            'properties' => 'collection',
+        ];
+    }
 
     /**
      * @return MorphTo<Model, $this>
@@ -31,37 +37,16 @@ class Activity extends Model implements ActivityContract
     }
 
     /**
-     * @return MorphTo<User, $this>
+     * @return MorphTo<Model, $this>
      */
     public function causer(): MorphTo
     {
-        // @phpstan-ignore return.type
         return $this->morphTo();
     }
 
-    public function getExtraProperty(string $propertyName, mixed $defaultValue = null): mixed
+    public function getProperty(string $propertyName, mixed $defaultValue = null): mixed
     {
-        return Arr::get($this->properties->toArray(), $propertyName, $defaultValue);
-    }
-
-    /**
-     * @return Collection<string, mixed>
-     */
-    public function changes(): Collection
-    {
-        if (! $this->properties instanceof Collection) {
-            return new Collection();
-        }
-
-        return $this->properties->only(['attributes', 'old']);
-    }
-
-    /**
-     * @return Collection<string, mixed>
-     */
-    public function getChangesAttribute(): Collection
-    {
-        return $this->changes();
+        return data_get($this->properties?->toArray() ?? [], $propertyName, $defaultValue);
     }
 
     /**
@@ -70,7 +55,7 @@ class Activity extends Model implements ActivityContract
      *
      * @return Builder<self>
      */
-    public function scopeInLog(Builder $query, ...$logNames): Builder
+    public function scopeInLog(Builder $query, string|array ...$logNames): Builder
     {
         if (is_array($logNames[0])) {
             $logNames = $logNames[0];
@@ -108,29 +93,9 @@ class Activity extends Model implements ActivityContract
      *
      * @return Builder<self>
      */
-    public function scopeForEvent(Builder $query, string $event): Builder
+    public function scopeForEvent(Builder $query, string|ActivityEvent $event): Builder
     {
-        return $query->where('event', $event);
-    }
-
-    /**
-     * @param Builder<self> $query
-     *
-     * @return Builder<self>
-     */
-    public function scopeHasBatch(Builder $query): Builder
-    {
-        return $query->whereNotNull('batch_uuid');
-    }
-
-    /**
-     * @param Builder<self> $query
-     *
-     * @return Builder<self>
-     */
-    public function scopeForBatch(Builder $query, string $batchUuid): Builder
-    {
-        return $query->where('batch_uuid', $batchUuid);
+        return $query->where('event', $event instanceof ActivityEvent ? $event->value : $event);
     }
 
     public static function newest(): self

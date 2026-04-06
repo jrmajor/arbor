@@ -184,6 +184,7 @@ final class CreatePersonTest extends TestCase
         $this->assertSame('people', $log->log_name);
         $this->assertSame('created', $log->description);
         $this->assertSameModel($person, $log->subject);
+        $this->assertNull($log->properties);
 
         $attributesToCheck = Arr::except($this->validAttributes, [
             'sources', ...$this->dates,
@@ -192,18 +193,18 @@ final class CreatePersonTest extends TestCase
         foreach ($attributesToCheck as $key => $value) {
             $m = "Failed asserting that attribute {$key} has the same value in log.";
 
-            $this->assertSame($value, $log->properties['attributes'][$key], $m);
+            $this->assertSame($value, $log->attribute_changes['attributes'][$key], $m);
         }
 
         $this->assertSame((string) $person->created_at, (string) $log->created_at);
         $this->assertSame((string) $person->updated_at, (string) $log->created_at);
 
-        $this->assertDoesNotHaveKeys(['created_at', 'updated_at'], $log->properties['attributes']);
+        $this->assertDoesNotHaveKeys(['created_at', 'updated_at'], $log->attribute_changes['attributes']);
 
-        $this->assertSame($this->validAttributes['sources'], $log->properties['attributes']['sources']);
+        $this->assertSame($this->validAttributes['sources'], $log->attribute_changes['attributes']['sources']);
 
         foreach ($this->dates as $date) {
-            $this->assertSame($person->{$date}->format('Y-m-d'), $log->properties['attributes'][$date]);
+            $this->assertSame($person->{$date}->format('Y-m-d'), $log->attribute_changes['attributes'][$date]);
         }
     }
 }

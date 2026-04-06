@@ -68,10 +68,11 @@ final class RestorePersonTest extends TestCase
         $this->assertSame('people', $log->log_name);
         $this->assertSame('restored', $log->description);
         $this->assertSameModel($this->person, $log->subject);
+        $this->assertNull($log->properties);
 
         $this->assertSame(
             ['attributes' => ['deleted_at' => null]],
-            $log->properties->all(),
+            $log->attribute_changes->all(),
         );
     }
 }

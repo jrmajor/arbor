@@ -89,7 +89,7 @@ class MarriageController extends Controller
     {
         $this->authorize('viewHistory', $marriage);
 
-        $activities = $marriage->activities->load('causer')->reverse()->values();
+        $activities = $marriage->activitiesAsSubject()->with('causer')->get()->reverse();
 
         return Inertia::render('Marriages/History', [
             'marriage' => new MarriagePageResource($marriage),

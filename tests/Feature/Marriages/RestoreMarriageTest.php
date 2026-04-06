@@ -68,10 +68,11 @@ final class RestoreMarriageTest extends TestCase
         $this->assertSame('marriages', $log->log_name);
         $this->assertSame('restored', $log->description);
         $this->assertSameModel($this->marriage, $log->subject);
+        $this->assertNull($log->properties);
 
         $this->assertSame(
             ['attributes' => ['deleted_at' => null]],
-            $log->properties->all(),
+            $log->attribute_changes->all(),
         );
     }
 }

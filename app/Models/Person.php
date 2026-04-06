@@ -27,10 +27,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Psl\Str;
-use Psl\Type;
 use Psl\Vec;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 /**
  * @property ?Carbon $birth_date_from
@@ -234,6 +233,6 @@ class Person extends Model
             ->logAll()
             ->logExcept(['id', 'created_at', 'updated_at'])
             ->logOnlyDirty()
-            ->dontSubmitEmptyLogs();
+            ->dontLogEmptyChanges();
     }
 }

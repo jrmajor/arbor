@@ -75,12 +75,13 @@ final class DeleteMarriageTest extends TestCase
         $this->assertSame('marriages', $log->log_name);
         $this->assertSame('deleted', $log->description);
         $this->assertSameModel($this->marriage, $log->subject);
+        $this->assertNull($log->properties);
 
         $this->assertSame((string) $this->marriage->deleted_at, (string) $log->created_at);
 
         $this->assertSame(
             ['attributes' => ['deleted_at' => $this->marriage->deleted_at->toJson()]],
-            $log->properties->all(),
+            $log->attribute_changes->all(),
         );
     }
 }
