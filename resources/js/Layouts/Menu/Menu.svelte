@@ -201,7 +201,7 @@
 						</span>
 					</a>
 
-					<div class="hidden lg:block relative">
+					<div class="hidden lg:block">
 						<button
 							onclick={(e) => {
 								e.stopPropagation();
@@ -216,6 +216,7 @@
 								flex items-center
 								{dropdown ? 'border-blue-500' : 'border-transparent hover:border-gray-400 focus:border-gray-400 active:border-blue-500'}
 							"
+							style:anchor-name="--account-dropdown-anchor"
 						>
 							{user.username}
 							<svg
@@ -231,9 +232,11 @@
 						{#if dropdown}
 							<div
 								bind:this={dropdownElement}
-								class="flex absolute right-0 z-10 flex-col items-end"
+								class="flex absolute z-10 flex-col items-end"
 								style:transform-origin="calc(100% - 2rem) top"
 								transition:scale={{ duration: 150, start: 0.9 }}
+								style:position-anchor="--account-dropdown-anchor"
+								style:position-area="bottom center"
 							>
 								<div class="size-0 mr-8 z-20 border-8 border-t-0 border-r-transparent border-l-transparent border-b-white"></div>
 
@@ -241,12 +244,14 @@
 									<a
 										use:inertia
 										href={route('settings.edit')}
-										class="pl-5 pr-12 py-4 text-gray-800
+										class="
+											pl-5 pr-12 py-4 text-gray-800
 											hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
 											border-l-2 border-solid
 											{activeRoute === 'settings.edit' ? 'border-blue-500' : 'border-transparent hover:border-gray-400 focus:border-gray-400 active:border-blue-500'}
 											focus:outline-none hover:no-underline
-											transition-colors duration-200"
+											transition-colors duration-200
+										"
 									>
 										{t('misc.menu.settings')}
 									</a>
