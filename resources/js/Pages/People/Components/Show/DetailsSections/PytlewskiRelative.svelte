@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { inertia } from '@inertiajs/svelte';
 	import { route } from 'ziggy-js';
 	import type { PytlewskiRelative } from '@/types/resources/pytlewski';
+	import { inertia } from '@/helpers/inertia';
 
 	type Relative = Omit<PytlewskiRelative, 'surname'> & Partial<Pick<PytlewskiRelative, 'surname'>>;
 
@@ -18,7 +18,11 @@
 </script>
 
 {#if showInternalLink}
-	<a use:inertia href={route('people.show', person.arborId!)} class={colors}>
+	<a
+		{@attach inertia()}
+		href={route('people.show', person.arborId!)}
+		class={colors}
+	>
 		{#if person.surname}
 			{person.surname},
 		{/if}

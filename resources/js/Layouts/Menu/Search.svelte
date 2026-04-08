@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { inertia, router } from '@inertiajs/svelte';
+	import { router } from '@inertiajs/svelte';
 	import { route } from 'ziggy-js';
 	import { hotkey } from '@/helpers/hotkey';
+	import { inertia } from '@/helpers/inertia';
 	import { t } from '@/helpers/translations';
 
 	let { user }: { user: SharedUser | null } = $props();
@@ -138,7 +139,11 @@
 			onmousedown={() => shouldCloseOnBlur = false}
 		>
 			{#each results as person, index (person.id)}
-				<a use:inertia href={route('people.show', person)} onclick={() => isOpen = false}>
+				<a
+					{@attach inertia()}
+					href={route('people.show', person)}
+					onclick={() => isOpen = false}
+				>
 					<!-- svelte-ignore a11y_mouse_events_have_key_events -->
 					<li
 						onmouseover={() => hoveredIndex = index}

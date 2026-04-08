@@ -2,8 +2,7 @@
 	import { type Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import type { VisitOptions } from '@inertiajs/core';
-	import { inertia } from '@inertiajs/svelte';
-	import { voidAction } from '@/helpers/utils';
+	import { inertia } from '@/helpers/inertia';
 
 	let {
 		type = 'button',
@@ -32,12 +31,13 @@
 		if (href) return { ...(inertiaProp ?? { }), href };
 		return inertiaProp;
 	});
-	let action = $derived(inertiaArgs ? inertia : voidAction);
+
+	let attachment = $derived(inertiaArgs && inertia(inertiaArgs));
 </script>
 
 {#if type !== 'link'}
 	<button
-		use:action={inertiaArgs ?? { }}
+		{@attach attachment}
 		{onclick}
 		{type}
 		{disabled}
@@ -51,7 +51,7 @@
 	</button>
 {:else if !disabled}
 	<a
-		use:action={inertiaArgs ?? { }}
+		{@attach attachment}
 		{href}
 		{rel}
 		class={{

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type Snippet } from 'svelte';
-	import { inertia } from '@inertiajs/svelte';
 	import { hotkey as hotkeyAttachment } from '@/helpers/hotkey';
+	import { inertia, type VisitOptions } from '@/helpers/inertia';
 	import { t } from '@/helpers/translations';
 
 	let {
@@ -21,8 +21,6 @@
 		danger?: boolean;
 		children: Snippet;
 	} = $props();
-
-	type VisitOptions = NonNullable<Parameters<typeof inertia>[1]>;
 
 	let shouldBeLink = $derived((visitOptions.method ?? 'get') === 'get');
 
@@ -50,8 +48,8 @@
 {:else}
 	<svelte:element
 		this={shouldBeLink ? 'a' : 'button'}
+		{@attach inertia({ ...visitOptions, href, onBefore })}
 		{@attach hotkey ? hotkeyAttachment(hotkey) : null}
-		use:inertia={{ ...visitOptions, href, onBefore }}
 		href={shouldBeLink ? href : null}
 		class={[
 			'group block w-full uppercase transition focus:outline-none',
