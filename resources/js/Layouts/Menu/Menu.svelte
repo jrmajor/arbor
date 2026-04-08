@@ -5,6 +5,7 @@
 	import { route, type RouteList } from 'ziggy-js';
 	import { hotkey } from '@/helpers/hotkey';
 	import { t, type Language } from '@/helpers/translations';
+	import { useContactEmail } from '@/helpers/useContactEmail.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import Search from './Search.svelte';
 
@@ -18,6 +19,8 @@
 	let containerElement: HTMLElement;
 	// svelte-ignore non_reactive_update
 	let dropdownElement: HTMLElement;
+
+	let email = useContactEmail();
 
 	let open = $state(false);
 	let dropdown = $state(false);
@@ -129,7 +132,7 @@
 				{#if !user}
 					<!-- todo: obfuscate email -->
 					<a
-						href="mailto:jeremiah.major@npng.pl"
+						href={email.href}
 						class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
 							hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
 							rounded lg:rounded-none uppercase lg:normal-case
