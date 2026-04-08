@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
 	import type { ShowPersonResource } from '@/types/resources/people';
+	import { hotkey } from '@/helpers/hotkey';
 	import toRoman from '@/helpers/toRoman';
 	import { t } from '@/helpers/translations';
 	import Name from '@/Components/Name.svelte';
@@ -179,8 +180,8 @@
 
 								{#if marriage.perm.update}
 									<Link
+										{@attach hotkey(person.marriages.length === 1 ? 'm' : `m ${i + 1}`)}
 										href={route('marriages.edit', { marriage })}
-										hotkey={person.marriages.length === 1 ? 'm' : `m ${i + 1}`}
 									>
 										<small>[{t('marriages.marriage')} №{marriage.id}]</small>
 									</Link>

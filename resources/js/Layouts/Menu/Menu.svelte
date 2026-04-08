@@ -44,8 +44,8 @@
 		<div class="menu-padding flex items-center justify-between flex-wrap">
 			<div class="flex items-center">
 				<a
+					{@attach hotkey('t')}
 					use:inertia
-					use:hotkey={'t'}
 					href={route('people.index')}
 					class="px-4 pt-4 pb-3 md:pt-5 md:pb-4 lg:pt-6 lg:pb-4 text-gray-800
 						hover:text-gray-900 hover:bg-gray-100 focus:bg-cool-gray-100
@@ -164,8 +164,8 @@
 					</a>
 				{:else}
 					<a
+						{@attach hotkey('g s')}
 						use:inertia
-						use:hotkey={'g s'}
 						href={route('settings.edit')}
 						class="lg:hidden px-3 py-1 text-gray-800
 							hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100

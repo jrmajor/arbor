@@ -108,7 +108,7 @@
 	onsubmit={(e) => e.preventDefault()}
 >
 	<input
-		use:hotkey={'s,/'}
+		{@attach hotkey('s,/')}
 		type="search"
 		class="form-input w-full h-9"
 		autocomplete="off"
