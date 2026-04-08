@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { EditPersonResource } from '@/types/resources/people';
 	import { t } from	'@/helpers/translations';
+	import PageTitle from '@/Components/PageTitle.svelte';
 	import Form from './Components/Form/Form.svelte';
 
 	let { fatherId, motherId }: {
@@ -42,8 +43,8 @@
 	<title>{t('people.titles.new_person')} - Arbor</title>
 </svelte:head>
 
-<h1 class="mb-3 leading-none text-3xl font-medium">
+<PageTitle>
 	{t('people.add_a_new_person')}
-</h1>
+</PageTitle>
 
 <Form {person} action="create"/>

@@ -3,6 +3,7 @@
 	import { route } from 'ziggy-js';
 	import { t } from '@/helpers/translations';
 	import * as Form from '@/Components/Forms';
+	import PageTitle from '@/Components/PageTitle.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 
 	let { user }: SharedProps = $props();
@@ -32,9 +33,9 @@
 	<title>{t('settings.settings')} - Arbor</title>
 </svelte:head>
 
-<h1 class="mb-3 leading-none text-3xl font-medium">
+<PageTitle>
 	{t('settings.user')}: {user!.username}
-</h1>
+</PageTitle>
 
 <main class="p-6 bg-white rounded-lg shadow-sm">
 	<form onsubmit={submitEmail} class="flex flex-col">

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { EditMarriageResource } from '@/types/resources/marriages';
 	import { t } from	'@/helpers/translations';
+	import PageTitle from '@/Components/PageTitle.svelte';
 	import Form from './Components/Form.svelte';
 
 	let { manId, womanId }: {
@@ -35,8 +36,8 @@
 	<title>{t('marriages.titles.new_marriage')} - Arbor</title>
 </svelte:head>
 
-<h1 class="mb-3 leading-none text-3xl font-medium">
+<PageTitle>
 	{t('marriages.add_a_new_marriage')}
-</h1>
+</PageTitle>
 
 <Form {marriage} action="create"/>

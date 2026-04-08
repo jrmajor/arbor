@@ -22,12 +22,12 @@
 
 <Menu {activeRoute} {user} {currentLocale} {availableLocales}/>
 
-<div class="container mx-auto my-1">
+<div class="container mx-auto my-1 flex flex-col gap-3">
 	<FlashMessages {flash}/>
 
 	{@render children()}
 
-	<footer class="mt-3 mb-1 px-3 text-center text-gray-600 text-sm">
+	<footer class="mb-1 px-3 text-center text-gray-600 text-sm">
 		&copy; 2018-{currentYear}
 		<a href={`mailto:${mailto}`} class="hover:text-gray-900">Jeremiasz Major</a>
 	</footer>

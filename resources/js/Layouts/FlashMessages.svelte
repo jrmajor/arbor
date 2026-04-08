@@ -22,21 +22,10 @@
 	});
 </script>
 
-<div>
+<div class="flex flex-col gap-3" class:hidden={!messages.length}>
 	{#each messages as message, i (message.id)}
 		<div class="message" transition:flide>
 			<Message {...message} ondismiss={() => messages.splice(i, 1)}/>
 		</div>
 	{/each}
 </div>
-
-<style>
-	@reference '$style';
-
-	.message {
-		@apply mb-3;
-	}
-	.message:last-child {
-		@apply mb-6;
-	}
-</style>
