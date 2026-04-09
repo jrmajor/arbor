@@ -5,6 +5,7 @@
 	import { hotkey } from '@/helpers/hotkey';
 	import { inertia } from '@/helpers/inertia';
 	import { t } from '@/helpers/translations';
+	import Icon, { icons } from '@/Components/Icons/Icon.svelte';
 
 	let { user }: { user: SharedUser | null } = $props();
 
@@ -126,9 +127,7 @@
 			text-gray-700 transition-colors duration-200 active:text-gray-900
 		"
 	>
-		<svg class="fill-current size-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-			<path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
-		</svg>
+		<Icon icon={icons.search} class="size-5"/>
 	</div>
 	{#if isOpen && search.length}
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->

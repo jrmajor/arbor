@@ -1,25 +1,25 @@
 <script lang="ts">
-	import { type Snippet } from 'svelte';
 	import { hotkey as hotkeyAttachment } from '@/helpers/hotkey';
 	import { inertia, type VisitOptions } from '@/helpers/inertia';
 	import { t } from '@/helpers/translations';
+	import Icon, { type IconData } from '@/Components/Icons/Icon.svelte';
 
 	let {
 		name,
 		href,
 		hotkey = null,
 		visitOptions = { },
+		icon,
 		active = false,
 		danger = false,
-		children,
 	}: {
 		name: string;
 		href: string;
 		hotkey?: string | null;
 		visitOptions?: (Omit<VisitOptions, 'href' | 'onBefore'> & { confirm?: string });
+		icon: IconData;
 		active?: boolean;
 		danger?: boolean;
-		children: Snippet;
 	} = $props();
 
 	let shouldBeLink = $derived((visitOptions.method ?? 'get') === 'get');
@@ -34,13 +34,7 @@
 	<span class="text-blue-700 transition">
 		<li class="px-3 py-1 rounded-sm transition">
 			<span class="flex w-full items-center border-b-2 border-dotted border-blue-500 uppercase">
-				<svg
-					viewBox="0 0 20 20"
-					xmlns="http://www.w3.org/2000/svg"
-					class="size-4 mr-2 fill-current text-blue-600 transition"
-				>
-					{@render children()}
-				</svg>
+				<Icon {icon} class="size-4 mr-2 text-blue-600 transition"/>
 				{t(name)}
 			</span>
 		</li>
@@ -63,16 +57,13 @@
 			]}
 		>
 			<span class="w-full flex items-center">
-				<svg
+				<Icon
+					{icon}
 					class={[
-						'size-4 mr-2 fill-current transition',
-						danger ? '' : 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700',
+						'size-4 mr-2 transition',
+						danger || 'text-gray-600 group-hover:text-gray-700 group-focus:text-gray-700',
 					]}
-					viewBox="0 0 20 20"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					{@render children()}
-				</svg>
+				/>
 				{t(name)}
 			</span>
 		</li>

@@ -6,6 +6,7 @@
 	import { hotkey } from '@/helpers/hotkey';
 	import { t, type Language } from '@/helpers/translations';
 	import { useContactEmail } from '@/helpers/useContactEmail.svelte';
+	import Icon, { icons } from '@/Components/Icons/Icon.svelte';
 	import Button from '@/Components/Primitives/Button.svelte';
 	import Search from './Search.svelte';
 
@@ -58,10 +59,7 @@
 						transition-colors duration-200
 						flex items-center"
 				>
-					<svg class="fill-current size-4 mr-2" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-						<path d="M460.8 64V38.4H345.6v64H140.8v140.8H51.2v25.6h89.6v140.8h204.8v64h115.2V448h-89.6V345.6h89.6V320H345.6v64H166.4V128h179.2v64h115.2v-25.6h-89.6V64z"/>
-						<path d="M0 179.8h102.4v152.4H0zM409.6 128H512v102.4H409.6zM409.6 0H512v102.4H409.6zM204.8 64h102.4v102.4H204.8zM204.8 345.6h102.4V448H204.8zM409.6 409.6H512V512H409.6zM409.6 281.6H512V384H409.6z"/>
-					</svg>
+					<Icon icon={icons.tree} class="size-4 mr-2"/>
 					{t('misc.menu.tree')}
 				</a>
 			</div>
@@ -101,9 +99,7 @@
 							transition-colors duration-200"
 					>
 						<div class="w-full {activeRoute === 'people.create' ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : ''} flex items-center">
-							<svg class="fill-current size-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-								<path d="M2 6H0v2h2v2h2V8h2V6H4V4H2v2zm7 0a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0V6zm11 9.14A15.93 15.93 0 0 0 12 13c-2.91 0-5.65.78-8 2.14V18h16v-2.86z"/>
-							</svg>
+							<Icon icon={icons.userAdd} class="size-4 mr-2 lg:hidden"/>
 							{t('misc.menu.add_person')}
 						</div>
 					</a>
@@ -121,16 +117,13 @@
 							transition-colors duration-200"
 					>
 						<div class="w-full {activeRoute.startsWith('dashboard') ? 'border-b-2 border-dotted border-blue-500 lg:border-none' : ''} flex items-center">
-							<svg class="fill-current size-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-								<path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"/>
-							</svg>
+							<Icon icon={icons.dashboard} class="size-4 mr-2 lg:hidden"/>
 							{t('misc.menu.dashboard')}
 						</div>
 					</a>
 				{/if}
 
 				{#if !user}
-					<!-- todo: obfuscate email -->
 					<a
 						href={email.href}
 						class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
@@ -142,9 +135,7 @@
 							transition-colors duration-200
 							flex items-center"
 					>
-						<svg class="fill-current size-4 mr-2 lg:hidden" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-							<path d="M13.6 13.47A4.99 4.99 0 0 1 5 10a5 5 0 0 1 8-4V5h2v6.5a1.5 1.5 0 0 0 3 0V10a8 8 0 1 0-4.42 7.16l.9 1.79A10 10 0 1 1 20 10h-.18.17v1.5a3.5 3.5 0 0 1-6.4 1.97zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-						</svg>
+						<Icon icon={icons.atSymbol} class="size-4 mr-2 lg:hidden"/>
 						{t('misc.menu.contact')}
 					</a>
 
@@ -159,10 +150,7 @@
 							transition-colors duration-200
 							flex items-center"
 					>
-						<svg class="stroke-current size-5 -ml-1 mr-1 lg:hidden" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-							<path d="M192 176v-40a40 40 0 0140-40h160a40 40 0 0140 40v240a40 40 0 01-40 40H240c-22.09 0-48-17.91-48-40v-40" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="38"/>
-							<path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="38" d="M288 336l80-80-80-80M80 256h272"/>
-						</svg>
+						<Icon icon={icons.login} class="size-5 -ml-1 mr-1 lg:hidden"/>
 						{t('misc.menu.login')}
 					</a>
 				{:else}
@@ -178,9 +166,7 @@
 							transition-colors duration-200"
 					>
 						<div class="w-full {activeRoute === 'settings.edit' ? 'border-b-2 border-dotted border-blue-500' : ''} flex items-center">
-							<svg class="fill-current size-4 mr-2" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-								<path d="M3.94 6.5L2.22 3.64l1.42-1.42L6.5 3.94c.52-.3 1.1-.54 1.7-.7L9 0h2l.8 3.24c.6.16 1.18.4 1.7.7l2.86-1.72 1.42 1.42-1.72 2.86c.3.52.54 1.1.7 1.7L20 9v2l-3.24.8c-.16.6-.4 1.18-.7 1.7l1.72 2.86-1.42 1.42-2.86-1.72c-.52.3-1.1.54-1.7.7L11 20H9l-.8-3.24c-.6-.16-1.18-.4-1.7-.7l-2.86 1.72-1.42-1.42 1.72-2.86c-.3-.52-.54-1.1-.7-1.7L0 11V9l3.24-.8c.16-.6.4-1.18.7-1.7zM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-							</svg>
+							<Icon icon={icons.cog} class="size-4 mr-2"/>
 							{t('misc.menu.settings')}
 						</div>
 					</a>
@@ -196,9 +182,7 @@
 							transition-colors duration-200
 							flex items-center"
 					>
-						<svg class="stroke-current size-5 mr-1 lg:hidden" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-							<path d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="38"/>
-						</svg>
+						<Icon icon={icons.logout} class="size-5 mr-1 lg:hidden"/>
 						<span>
 							{t('misc.menu.logout')}<small class="ml-1 normal-case">({user.username})</small>
 						</span>
