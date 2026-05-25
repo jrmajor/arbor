@@ -7,6 +7,8 @@ import { defineConfig } from 'vite';
 import run from 'vite-plugin-run';
 import fluent from './resources/js/viteFluent';
 
+const dir = import.meta.dirname;
+
 export default defineConfig({
 	plugins: [
 		laravel({
@@ -38,6 +40,13 @@ export default defineConfig({
 		tsconfigPaths: true,
 		alias: {
 			$style: `${import.meta.dirname}/resources/css/style.css`,
+		},
+	},
+	server: {
+		watch: {
+			ignored: [
+				`${dir}/storage/framework/views/**`,
+			],
 		},
 	},
 });
