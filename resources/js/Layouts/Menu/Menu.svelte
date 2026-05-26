@@ -7,14 +7,13 @@
 	import { t, type Language } from '@/helpers/translations';
 	import { useContactEmail } from '@/helpers/useContactEmail.svelte';
 	import Icon, { icons } from '@/Components/Icons/Icon.svelte';
-	import Button from '@/Components/Primitives/Button.svelte';
 	import Search from './Search.svelte';
+	import { localeName, localeToSwitchTo } from './locale';
 
-	let { activeRoute, user, currentLocale, availableLocales }: {
+	let { activeRoute, user, currentLocale }: {
 		activeRoute: keyof RouteList;
 		user: SharedUser | null;
 		currentLocale: Language;
-		availableLocales: Language[];
 	} = $props();
 
 	let containerElement: HTMLElement;
@@ -22,6 +21,8 @@
 	let dropdownElement: HTMLElement;
 
 	let email = useContactEmail();
+
+	const switcherLocale = $derived(localeToSwitchTo(currentLocale));
 
 	let open = $state(false);
 	let dropdown = $state(false);
@@ -261,27 +262,25 @@
 					</div>
 				{/if}
 
-				<div class="lg:mt-1 px-2 py-1 text-gray-800 text-sm flex items-center">
-					{t('misc.language')}:&nbsp;
-					<div>
-						{#each availableLocales as locale}
-							{#if locale !== currentLocale}
-								<Button
-									inertia={{
-										href: route('locale.store'),
-										method: 'post',
-										data: { language: locale },
-									}}
-									outline
-									small
-								>
-									{locale.toUpperCase()}
-								</Button>
-								<span class="hidden"></span>
-							{/if}
-						{/each}
+				<button
+					use:inertia={{
+						href: route('locale.store'),
+						method: 'post',
+						data: { language: switcherLocale },
+					}}
+					class="px-3 py-1 lg:pt-6 lg:pb-4 text-gray-800
+						hover:text-gray-900 focus:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 lg:hover:bg-gray-100 lg:focus:bg-cool-gray-100
+						rounded lg:rounded-none uppercase lg:normal-case
+						border-b-2 border-solid
+						border-transparent lg:hover:border-gray-400 lg:focus:border-gray-400 lg:active:border-blue-500
+						focus:outline-none hover:no-underline
+						transition-colors duration-200"
+				>
+					<div class="w-full flex items-center">
+						<Icon icon={icons.translate} class="size-4 mr-2 lg:hidden"/>
+						<span>{localeName(switcherLocale)}</span>
 					</div>
-				</div>
+				</button>
 			</div>
 		</div>
 	</div>

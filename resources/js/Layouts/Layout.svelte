@@ -7,7 +7,6 @@
 	let {
 		currentYear,
 		currentLocale,
-		availableLocales,
 		flash,
 		activeRoute,
 		user,
@@ -17,7 +16,7 @@
 	const email = useContactEmail();
 </script>
 
-<Menu {activeRoute} {user} {currentLocale} {availableLocales}/>
+<Menu {activeRoute} {user} {currentLocale}/>
 
 <div class="container mx-auto my-1 flex flex-col gap-3">
 	<FlashMessages {flash}/>

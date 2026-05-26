@@ -18,7 +18,6 @@ class HandleInertiaRequests extends Middleware
             'currentYear' => now()->year,
             'currentLocale' => $request->getLocale(),
             'fallbackLocale' => config('app.fallback_locale'),
-            'availableLocales' => config('app.available_locales'),
             'flash' => $this->getFlash(),
             'activeRoute' => $request->route()->getName(),
             'user' => $this->getUser($request),

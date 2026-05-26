@@ -36,7 +36,6 @@ final class InertiaSharedPropsTest extends TestCase
                     'currentYear' => now()->year,
                     'currentLocale' => 'en',
                     'fallbackLocale' => 'en',
-                    'availableLocales' => ['pl', 'en', 'de'],
                     'flash' => null,
                     'activeRoute' => 'test.inertiaProps',
                     'user' => null,
@@ -64,7 +63,6 @@ final class InertiaSharedPropsTest extends TestCase
                     'currentYear' => now()->year,
                     'currentLocale' => 'en',
                     'fallbackLocale' => 'en',
-                    'availableLocales' => ['pl', 'en', 'de'],
                     'flash' => [
                         'id' => $flashId,
                         'level' => 'success',

@@ -29,8 +29,6 @@ hidden = versteckt
 
 save = Speichern
 
-language = Sprache
-
 coming_soon = demnächst...
 
 year = { $rawAge ->

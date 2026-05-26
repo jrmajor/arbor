@@ -8,7 +8,6 @@ declare global {
 		currentYear: number;
 		currentLocale: Language;
 		fallbackLocale: Language;
-		availableLocales: Language[];
 		flash: FlashMessage | null;
 		activeRoute: keyof RouteList;
 		user: SharedUser;

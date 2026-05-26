@@ -34,8 +34,6 @@ hidden = hidden
 
 save = Save
 
-language = language
-
 coming_soon = coming soon...
 
 year = { $rawAge ->

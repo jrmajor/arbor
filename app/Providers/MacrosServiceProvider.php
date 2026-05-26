@@ -91,7 +91,6 @@ class MacrosServiceProvider extends ServiceProvider
                 'currentYear',
                 'currentLocale',
                 'fallbackLocale',
-                'availableLocales',
                 'flash',
                 'activeRoute',
                 'user',
