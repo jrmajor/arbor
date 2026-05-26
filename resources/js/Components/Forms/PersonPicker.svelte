@@ -144,7 +144,7 @@
 	const anchorName = `--people-picker-${id}-dropdown-anchor`;
 </script>
 
-<div class="w-full" style:anchor-name={anchorName}>
+<div class="w-full">
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
@@ -154,6 +154,7 @@
 			disabled,
 			invalid: formField?.error,
 		}}
+		style:anchor-name={anchorName}
 	>
 		<div class="pr-4">
 			<span>{value ? (names.get(value) ?? t('misc.loading')) : ''}</span><!--

@@ -108,6 +108,7 @@
 	role="search"
 	class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3 lg:w-96"
 	onsubmit={(e) => e.preventDefault()}
+	style:anchor-name="--search-bar-anchor"
 >
 	<input
 		{@attach hotkey('s,/')}
@@ -119,7 +120,6 @@
 		{oninput}
 		onfocus={() => isOpen = shouldCloseOnBlur = true}
 		onblur={closeDropdown}
-		style:anchor-name="--search-bar-anchor"
 	>
 	<div
 		class="
