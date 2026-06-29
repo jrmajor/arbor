@@ -83,7 +83,8 @@ final class PytlewskiFactory
                 }
 
                 return Fun\pipe(
-                    fn ($s) => iconv('Windows-1250', 'UTF-8', $s) ?: '',
+                    // the site emits UTF-8 text produced from legacy Windows-1250 bytes decoded as ISO-8859-2
+                    fn ($s) => iconv('Windows-1250', 'UTF-8', iconv('UTF-8', 'ISO-8859-2', $s) ?: '') ?: '',
                     fn ($s) => Str\after($s, '<table border=0 align=center width=500><tr><td>') ?? '',
                     fn ($s) => Str\before($s, '<td background="images/spacer.gif" width="35" height="1"></td>'),
                 )($source->body());

@@ -1,5 +1,5 @@
 [*.html]
-charset = windows1250
+charset =
 end_of_line = unset
 indent_style = unset
 insert_final_newline = unset
