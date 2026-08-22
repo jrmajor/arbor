@@ -38,7 +38,7 @@ jobs:
         run: composer setup
 
       - name: Execute tests
-        run: php artisan test --parallel
+        run: composer test
 
   types:
     name: Types
@@ -80,7 +80,7 @@ jobs:
         run: composer setup
 
       - name: Run PHPStan
-        run: vendor/bin/phpstan analyze --no-progress --no-interaction
+        run: composer check
 
   style:
     name: Style
@@ -119,4 +119,4 @@ jobs:
         run: composer install
 
       - name: Run PHP-CS-Fixer
-        run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction
+        run: composer format -- --dry-run
