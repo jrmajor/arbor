@@ -146,13 +146,17 @@ final class CreatePersonTest extends TestCase
     public function testParentParams(): void
     {
         $mother = Person::factory()->female()->create();
-        $father = Person::factory()->male()->create();
+        $father = Person::factory()->male()->create([
+            'family_name' => 'Gąsiorowski',
+        ]);
 
         $this->withPermissions(2)
             ->get("people/create?mother={$mother->id}&father={$father->id}")
-            ->assertOk()
-            ->assertSee((string) $mother->id)
-            ->assertSee((string) $father->id);
+            ->assertInertiaOk([
+                'fatherId' => $father->id,
+                'motherId' => $mother->id,
+                'familyName' => 'Gąsiorowski',
+            ], 'People/Create');
     }
 
     #[TestDox('data is validated using appropriate form request')]

@@ -4,9 +4,10 @@
 	import PageTitle from '@/Components/PageTitle.svelte';
 	import Form from './Components/Form/Form.svelte';
 
-	let { fatherId, motherId }: {
+	let { fatherId, motherId, familyName }: {
 		fatherId: number | null;
 		motherId: number | null;
+		familyName: string | null;
 	} & SharedProps = $props();
 
 	// svelte-ignore state_referenced_locally
@@ -15,7 +16,7 @@
 		sex: null,
 		name: '',
 		middleName: null,
-		familyName: '',
+		familyName: familyName ?? '',
 		lastName: null,
 		wielcyId: null,
 		pytlewskiId: null,

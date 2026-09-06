@@ -68,9 +68,14 @@ class PersonController extends Controller
     {
         $this->authorize('create', Person::class);
 
+        $fatherId = $request->integer('father') ?: null;
+
         return Inertia::render('People/Create', [
-            'fatherId' => $request->integer('father') ?: null,
+            'fatherId' => $fatherId,
             'motherId' => $request->integer('mother') ?: null,
+            'familyName' => $fatherId
+                ? Person::find($fatherId)?->family_name
+                : null,
         ]);
     }
 
