@@ -196,6 +196,9 @@
 				>
 					<span>
 						{person.name}
+						{#if person.dates}
+							<small>({person.dates})</small>
+						{/if}
 						<small>[№{person.id}]</small>
 					</span>
 					<span class="text-gray-800">{value === person.id ? '✓ ' : ''}</span>
