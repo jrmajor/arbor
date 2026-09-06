@@ -22,7 +22,6 @@
 		"php-standard-library/php-standard-library": "^6.1",
 		"sentry/sentry-laravel": "^4.24",
 		"spatie/laravel-activitylog": "^5.0",
-		"spatie/laravel-flash": "^1.10",
 		"spatie/laravel-schedule-monitor": "^4.3",
 		"spatie/laravel-sitemap": "^7.4",
 		"symfony/css-selector": "^8.0",

@@ -36,7 +36,6 @@ final class InertiaSharedPropsTest extends TestCase
                     'currentYear' => now()->year,
                     'currentLocale' => 'en',
                     'fallbackLocale' => 'en',
-                    'flash' => null,
                     'activeRoute' => 'test.inertiaProps',
                     'user' => null,
                 ], $page->toArray()['props']);
@@ -46,28 +45,17 @@ final class InertiaSharedPropsTest extends TestCase
     #[TestDox('it shares errors and user from request')]
     public function testShareUser(): void
     {
-        flash('success', 'people.alerts.changes_have_been_saved');
-
         $this
             ->actingAs($user = User::factory()->createOne())
             ->get('inertia-shared-props-test')
             ->assertOk()
             ->assertInertia(function (Assert $page) use ($user) {
-                $flashId = $page->toArray()['props']['flash']['id'] ?? null;
-                $this->assertIsString($flashId);
-                $this->assertTrue(strlen($flashId) === 8);
-
                 $this->assertSame([
                     'errors' => [],
                     'appName' => config('app.name'),
                     'currentYear' => now()->year,
                     'currentLocale' => 'en',
                     'fallbackLocale' => 'en',
-                    'flash' => [
-                        'id' => $flashId,
-                        'level' => 'success',
-                        'message' => 'Changes have been saved.',
-                    ],
                     'activeRoute' => 'test.inertiaProps',
                     'user' => [
                         'username' => $user->username,
@@ -77,5 +65,28 @@ final class InertiaSharedPropsTest extends TestCase
                     ],
                 ], $page->toArray()['props']);
             });
+    }
+
+    #[TestDox('it sends flash data')]
+    public function testFlashAfterRedirect(): void
+    {
+        Route::middleware('web')->post('inertia-flash-test', function () {
+            flash('success', 'people.alerts.changes_have_been_saved');
+
+            return redirect('inertia-shared-props-test');
+        });
+
+        $this->post('inertia-flash-test')->assertRedirect('inertia-shared-props-test');
+
+        $this->get('inertia-shared-props-test')
+            ->assertOk()
+            ->assertInertia(function (Assert $page) {
+                $page->hasFlash('notification.level', 'success')
+                    ->hasFlash('notification.message', 'Changes have been saved.');
+            });
+
+        $this->get('inertia-shared-props-test')
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page->missingFlash('notification'));
     }
 }

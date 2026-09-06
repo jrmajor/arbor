@@ -10,7 +10,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Spatie\Flash\Flash;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,12 +20,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->registerModelsConfig();
         $this->registerRouteBindings();
-
-        Flash::levels([
-            'success' => 'success',
-            'warning' => 'warning',
-            'error' => 'error',
-        ]);
     }
 
     private function registerModelsConfig(): void

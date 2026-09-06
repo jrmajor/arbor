@@ -8,7 +8,6 @@
 		appName,
 		currentYear,
 		currentLocale,
-		flash,
 		activeRoute,
 		user,
 		children,
@@ -20,7 +19,7 @@
 <div class="container mx-auto flex flex-col gap-3">
 	<Menu {appName} {activeRoute} {user} {currentLocale}/>
 
-	<FlashMessages {flash}/>
+	<FlashMessages/>
 
 	{@render children()}
 

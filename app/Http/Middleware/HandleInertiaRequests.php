@@ -18,25 +18,8 @@ class HandleInertiaRequests extends Middleware
             'currentYear' => now()->year,
             'currentLocale' => $request->getLocale(),
             'fallbackLocale' => config('app.fallback_locale'),
-            'flash' => $this->getFlash(),
             'activeRoute' => $request->route()->getName(),
             'user' => $this->getUser($request),
-        ];
-    }
-
-    /**
-     * @return ?array<string, string>
-     */
-    public function getFlash(): ?array
-    {
-        if (! $message = flash()->getMessage()) {
-            return null;
-        }
-
-        return [
-            'id' => $message->class,
-            'level' => $message->level,
-            'message' => $message->message,
         ];
     }
 

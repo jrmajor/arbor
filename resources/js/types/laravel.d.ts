@@ -1,6 +1,14 @@
 import type { RouteList } from 'ziggy-js';
 import type { Language } from '@/helpers/translations';
 
+declare module '@inertiajs/core' {
+	interface InertiaConfig {
+		flashDataType: {
+			notification?: FlashMessage;
+		};
+	}
+}
+
 declare global {
 	interface SharedProps {
 		errors: Record<string, string>;
@@ -8,7 +16,6 @@ declare global {
 		currentYear: number;
 		currentLocale: Language;
 		fallbackLocale: Language;
-		flash: FlashMessage | null;
 		activeRoute: keyof RouteList;
 		user: SharedUser;
 	}
@@ -21,7 +28,6 @@ declare global {
 	} | null;
 
 	type FlashMessage = {
-		id: string;
 		level: 'error' | 'warning' | 'success';
 		message: string;
 	};
