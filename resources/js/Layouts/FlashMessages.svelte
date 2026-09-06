@@ -14,6 +14,7 @@
 
 	onMount(() => {
 		router.on('finish', () => {
+			messages = [];
 			if (!flash) return;
 			if (displayedIds.has(flash.id)) return;
 			displayedIds.add(flash.id);
