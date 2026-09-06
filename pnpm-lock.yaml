@@ -6,90 +6,97 @@ importers:
   .:
     configDependencies: {}
     packageManagerDependencies:
-      '@pnpm/exe':
-        specifier: 10.33.0
-        version: 10.33.0
       pnpm:
-        specifier: 10.33.0
-        version: 10.33.0
+        specifier: 12.2.1
+        version: 12.2.1
 
 packages:
 
-  '@pnpm/exe@10.33.0':
-    resolution: {integrity: sha512-sGsjztJBelzVMd0RhceDJ3p8Hk7eBcpu4G/TF6REzIvNdkKyxDT0czc1BWyo8Kbg+U0OBtK/TAGXN7Art4rTdg==}
-    hasBin: true
-
-  '@pnpm/linux-arm64@10.33.0':
-    resolution: {integrity: sha512-oYb5NxEyImqaTkLVX/7jL59m9Vfmd07iLWzr4Pg2LIk4XEtAllNcnksNHcp5Uf+lFk/BggtpOdvC84TG3VnbFw==}
-    cpu: [arm64]
-    os: [linux]
-    hasBin: true
-
-  '@pnpm/linux-x64@10.33.0':
-    resolution: {integrity: sha512-JYD2GXDF2roKpvTg5s032lYcUcT9lMedYlzxoqitWTjKlkMhl2gXRYpiDHdi2mWC5nFOJYlgYbUuy6jh3rXhng==}
-    cpu: [x64]
-    os: [linux]
-    hasBin: true
-
-  '@pnpm/macos-arm64@10.33.0':
-    resolution: {integrity: sha512-3w9Pqpw0swnAbnEdAKumMuKj+TPaGratnqC49bC41vjR1pNs0UMwVdOxiIROUMQy5OHKPx0IH/wOOP0hkhJd+g==}
+  '@pnpm/exe.darwin-arm64@12.2.1':
+    resolution: {integrity: sha512-efC1yfz2xbyHiMLrQAYtnoo5XP20LeAiYYcyL1962qQagZrMXIB0BoQYeZoPTLggLh0Q4MD7jpZUInU5fWxCgQ==}
     cpu: [arm64]
     os: [darwin]
-    hasBin: true
 
-  '@pnpm/macos-x64@10.33.0':
-    resolution: {integrity: sha512-SBeiLjU/9ORMIXAMsD6+Ltaaesniwh49FeFcG6kA64Zxr30U9SyzeZDnNOyWCGFjHeCmGfzCnSpNEN4VNo827g==}
+  '@pnpm/exe.darwin-x64@12.2.1':
+    resolution: {integrity: sha512-0bloFmxrvYY5LYex5V6SZySwg+egBk0pOW+YUeOm9fiG2U1wv+qRVLBOUvIzLAeJE7vBlAzxUwXkQAYtr12n+Q==}
     cpu: [x64]
     os: [darwin]
-    hasBin: true
 
-  '@pnpm/win-arm64@10.33.0':
-    resolution: {integrity: sha512-8X3NQqmfNVZ+dCu+EfD7ZkAgDgIKKdAgBBKcvhvMoMJq/nWHOfqDLxewE9TQ7qzVLuUKG/9b/xBVRVjdtDOm0w==}
+  '@pnpm/exe.linux-arm64-musl@12.2.1':
+    resolution: {integrity: sha512-AZl7apVZC4TV1/vTp/bS16XUsHeqx9AHsU4V55joiGR+iR6vl+WF0WlGvGCTjqjICS4q/kThpgNrtG8aqQ9seQ==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@pnpm/exe.linux-arm64@12.2.1':
+    resolution: {integrity: sha512-S36+tMEGrPz3nwtfFU9kYxbHoi8sV7WJfMO9njEL4jRaShTNaLRERMAqyI2DUCiA5QCr6/a50lt4+pKCV2mCvw==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@pnpm/exe.linux-x64-musl@12.2.1':
+    resolution: {integrity: sha512-4MQClkAk1em55LFZJpeIqb7j+gEqCgX8yC42j9DFWL42q1uMX1e1tvTy2Dtd4NoWQqgdkLxOStZ+D9CYC+28ow==}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@pnpm/exe.linux-x64@12.2.1':
+    resolution: {integrity: sha512-A/AlR71Leph7qgB3ThSU9yU/vLfre4HmP6nbt3/qt51fzAjQ0xuq7j+cw0f1yDskzOsGzmo5uD6ruefCwLK5uQ==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@pnpm/exe.win32-arm64@12.2.1':
+    resolution: {integrity: sha512-TEGUmroT6NGfo2O2+tHK9Zr1lhP1zLzpwx+QAQV19l8V4ljUoMfz8Os5V9zzNCtIpzyKcK7SuG7fkVbxFgRMzg==}
     cpu: [arm64]
     os: [win32]
-    hasBin: true
 
-  '@pnpm/win-x64@10.33.0':
-    resolution: {integrity: sha512-wiPVvxmTuB6FFn+rZ4FfSk1WTn+cxiQ7MTJEEz1k9VZLN/yZujGrv/WLYH2JcwzVTgObfmQuBKeNgEUavEL0Qg==}
+  '@pnpm/exe.win32-x64@12.2.1':
+    resolution: {integrity: sha512-V2Q+AF8fCsw8/CC3bWF8kopOmH0aAjgk9m7H7uAQNulOYIJs9YJBiAlgByswmt+igV9axc4dBI//ZlK2NKpDcw==}
     cpu: [x64]
     os: [win32]
-    hasBin: true
 
-  pnpm@10.33.0:
-    resolution: {integrity: sha512-EFaLtKavtYyes2MNqQzJUWQXq+vT+rvmc58K55VyjaFJHp21pUTHatjrdXD1xLs9bGN7LLQb/c20f6gjyGSTGQ==}
-    engines: {node: '>=18.12'}
+  pnpm@12.2.1:
+    resolution: {integrity: sha512-9Vymiqy561q2nGb4KKmK+JoyKGcDrvH42hMcp+q01nfzS/qF4YZGepGcB5nfi29KokD33CkZszsycxkBBBYmFg==}
+    engines: {node: '>=18.*'}
     hasBin: true
 
 snapshots:
 
-  '@pnpm/exe@10.33.0':
+  '@pnpm/exe.darwin-arm64@12.2.1':
+    optional: true
+
+  '@pnpm/exe.darwin-x64@12.2.1':
+    optional: true
+
+  '@pnpm/exe.linux-arm64-musl@12.2.1':
+    optional: true
+
+  '@pnpm/exe.linux-arm64@12.2.1':
+    optional: true
+
+  '@pnpm/exe.linux-x64-musl@12.2.1':
+    optional: true
+
+  '@pnpm/exe.linux-x64@12.2.1':
+    optional: true
+
+  '@pnpm/exe.win32-arm64@12.2.1':
+    optional: true
+
+  '@pnpm/exe.win32-x64@12.2.1':
+    optional: true
+
+  pnpm@12.2.1:
     optionalDependencies:
-      '@pnpm/linux-arm64': 10.33.0
-      '@pnpm/linux-x64': 10.33.0
-      '@pnpm/macos-arm64': 10.33.0
-      '@pnpm/macos-x64': 10.33.0
-      '@pnpm/win-arm64': 10.33.0
-      '@pnpm/win-x64': 10.33.0
-
-  '@pnpm/linux-arm64@10.33.0':
-    optional: true
-
-  '@pnpm/linux-x64@10.33.0':
-    optional: true
-
-  '@pnpm/macos-arm64@10.33.0':
-    optional: true
-
-  '@pnpm/macos-x64@10.33.0':
-    optional: true
-
-  '@pnpm/win-arm64@10.33.0':
-    optional: true
-
-  '@pnpm/win-x64@10.33.0':
-    optional: true
-
-  pnpm@10.33.0: {}
+      '@pnpm/exe.darwin-arm64': 12.2.1
+      '@pnpm/exe.darwin-x64': 12.2.1
+      '@pnpm/exe.linux-arm64': 12.2.1
+      '@pnpm/exe.linux-arm64-musl': 12.2.1
+      '@pnpm/exe.linux-x64': 12.2.1
+      '@pnpm/exe.linux-x64-musl': 12.2.1
+      '@pnpm/exe.win32-arm64': 12.2.1
+      '@pnpm/exe.win32-x64': 12.2.1
 
 ---
 lockfileVersion: '9.0'
@@ -159,8 +166,8 @@ importers:
         specifier: ^3.0
         version: 3.0.0(vite@8.0.3)
       node:
-        specifier: runtime:^24.14
-        version: runtime:24.14.1
+        specifier: runtime:^24.20
+        version: runtime:24.20.0
       svelte-check:
         specifier: ^4.4
         version: 4.4.6(picomatch@4.0.4)(svelte@5.55.1)(typescript@6.0.2)
@@ -1362,94 +1369,136 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  node@runtime:24.14.1:
+  node@runtime:24.20.0:
     resolution:
       type: variations
       variants:
         - resolution:
             archive: tarball
-            bin: bin/node
-            integrity: sha256-VvbBjF6XvrAFlMJOs8+jxwtyR8QDsAyn6udbujC4XOU=
+            bin:
+              node: bin/node
+            integrity: sha256-FLW9etQKtfRxX7Ti+WSFjYINlCX+KR09ZfmJJua4nB4=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-aix-ppc64.tar.gz
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-aix-ppc64.tar.gz
           targets:
             - cpu: ppc64
               os: aix
         - resolution:
             archive: tarball
-            bin: bin/node
-            integrity: sha256-JUlf+FvYni2KJNiFZtfi+CfGsNPYcrLOv3U3H5P8sf4=
+            bin:
+              node: bin/node
+            integrity: sha256-QOVgfl7LPbkZJyN3baLXXZZiYPx0p6nnMcG9Z92pa8g=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-darwin-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-darwin-arm64.tar.gz
           targets:
             - cpu: arm64
               os: darwin
         - resolution:
             archive: tarball
-            bin: bin/node
-            integrity: sha256-JSYjCtfZIr6C1P2x5+4ehDA+Ez47Sw7Ewol6sx3gJT0=
+            bin:
+              node: bin/node
+            integrity: sha256-nlsmRM8Qe++2rvymdrltMpa8EBOAlvAi7TeNYjPtgfQ=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-darwin-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-darwin-x64.tar.gz
           targets:
             - cpu: x64
               os: darwin
         - resolution:
             archive: tarball
-            bin: bin/node
-            integrity: sha256-c0/wT6f47S6KeNQMrPWsP8RRXawoWHV8urMT60g7qKI=
+            bin:
+              node: bin/node
+            integrity: sha256-NRVgPiSHh5o5vHVxbxoq/9AnUAxkulDoRc9yyzMhkBM=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-linux-arm64.tar.gz
           targets:
             - cpu: arm64
               os: linux
         - resolution:
             archive: tarball
-            bin: bin/node
-            integrity: sha256-BoJCkui0C39lpvmXPz1g88wAAakWgjS8PW4wqhNkn9I=
+            bin:
+              node: bin/node
+            integrity: sha256-pzSzbI0dFs5FXA65wymwfdEhwshVQ1UGSphhvJbDrcw=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-ppc64le.tar.gz
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-linux-ppc64le.tar.gz
           targets:
             - cpu: ppc64le
               os: linux
         - resolution:
             archive: tarball
-            bin: bin/node
-            integrity: sha256-OuVz9DyT2v2v7cgIY/oqBAv+qhXmq4PBqOAQHwmVLcQ=
+            bin:
+              node: bin/node
+            integrity: sha256-2MIktG7wHweKUj2bfbeSgjBvrigemGoVotv/6UfFMB4=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-s390x.tar.gz
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-linux-s390x.tar.gz
           targets:
             - cpu: s390x
               os: linux
         - resolution:
             archive: tarball
-            bin: bin/node
-            integrity: sha256-rOn6EEmS7QgpZCYpxGynvX/W52J4y5bJWMSzh9KWWOo=
+            bin:
+              node: bin/node
+            integrity: sha256-1ubRu7mtSssW1YC4m+ipyafkkJJuk708MKINRuFSv4o=
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-linux-x64-musl.tar.gz
+          targets:
+            - cpu: x64
+              os: linux
+              libc: musl
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-hV1YH4pOsagRfjQm3iX+AncFkv68+zE2mu4f+/7p6Ow=
+            type: binary
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-linux-x64.tar.gz
           targets:
             - cpu: x64
               os: linux
         - resolution:
             archive: zip
-            bin: node.exe
-            integrity: sha256-p7fGhJDkqM3hkh/loM+zAB1T+cg55BaQPk8o5ye2L2A=
-            prefix: node-v24.14.1-win-arm64
+            bin:
+              node: node.exe
+            integrity: sha256-McZ5l0TeilRgFkMJgEDGjDaX5WyU5AfWHQ5fpfNBkdc=
+            prefix: node-v24.20.0-win-arm64
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-win-arm64.zip
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-win-arm64.zip
           targets:
             - cpu: arm64
               os: win32
         - resolution:
             archive: zip
-            bin: node.exe
-            integrity: sha256-blDOVJjAzrwg/TmrP/Xfg27S+KMaoJPOythJfP8SbXA=
-            prefix: node-v24.14.1-win-x64
+            bin:
+              node: node.exe
+            integrity: sha256-bKyf+8qPakcJHktcdy4GBgScOHHLZ9kAwM7d5jDlRbo=
+            prefix: node-v24.20.0-win-x64
             type: binary
-            url: https://nodejs.org/download/release/v24.14.1/node-v24.14.1-win-x64.zip
+            url: https://nodejs.org/download/release/v24.20.0/node-v24.20.0-win-x64.zip
           targets:
             - cpu: x64
               os: win32
-    version: 24.14.1
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-LIxQfMsPIIEtlSa6jKRUsWUqre9o/IutBvB/sRIt0e8=
+            type: binary
+            url: https://unofficial-builds.nodejs.org/download/release/v24.20.0/node-v24.20.0-linux-arm64-musl.tar.gz
+          targets:
+            - cpu: arm64
+              os: linux
+              libc: musl
+        - resolution:
+            archive: tarball
+            bin:
+              node: bin/node
+            integrity: sha256-muE5n+9L2JkOFXc84TJ7M2oguel9jHVJ9PQspzxD9WI=
+            type: binary
+            url: https://unofficial-builds.nodejs.org/download/release/v24.20.0/node-v24.20.0-linux-x64-musl.tar.gz
+          targets:
+            - cpu: x64
+              os: linux
+              libc: musl
+    version: 24.20.0
     hasBin: true
 
   npm-run-path@4.0.1:
@@ -2772,7 +2821,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  node@runtime:24.14.1: {}
+  node@runtime:24.20.0: {}
 
   npm-run-path@4.0.1:
     dependencies:

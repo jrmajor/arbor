@@ -3,7 +3,7 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 
+minimumReleaseAge: 0
 engineStrict: true
 dedupePeers: true
-strictDepBuilds: true
 strictPeerDependencies: true
