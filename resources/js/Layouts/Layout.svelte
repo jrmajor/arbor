@@ -5,6 +5,7 @@
 	import Menu from './Menu/Menu.svelte';
 
 	let {
+		appName,
 		currentYear,
 		currentLocale,
 		flash,
@@ -16,14 +17,14 @@
 	const email = useContactEmail();
 </script>
 
-<Menu {activeRoute} {user} {currentLocale}/>
+<div class="container mx-auto flex flex-col gap-3">
+	<Menu {appName} {activeRoute} {user} {currentLocale}/>
 
-<div class="container mx-auto my-1 flex flex-col gap-3">
 	<FlashMessages {flash}/>
 
 	{@render children()}
 
-	<footer class="mb-1 px-3 text-center text-gray-600 text-sm">
+	<footer class="px-3 text-center text-gray-600 text-sm">
 		&copy; 2018-{currentYear}
 		<a href={email.href} class="hover:text-gray-900">Jeremiasz Major</a>
 	</footer>
@@ -32,9 +33,9 @@
 <style>
 	.container {
 		padding:
-			1.25rem
+			max(env(safe-area-inset-top), calc(3 * var(--spacing)))
 			max(env(safe-area-inset-right), 0.5rem)
-			max(env(safe-area-inset-bottom), 0.5rem)
+			max(env(safe-area-inset-bottom), calc(3 * var(--spacing)))
 			max(env(safe-area-inset-left), 0.5rem);
 	}
 </style>

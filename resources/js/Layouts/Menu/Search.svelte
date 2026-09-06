@@ -7,7 +7,10 @@
 	import { t } from '@/helpers/translations';
 	import Icon, { icons } from '@/Components/Icons/Icon.svelte';
 
-	let { user }: { user: SharedUser | null } = $props();
+	let { user, class: className = '' }: {
+		user: SharedUser | null;
+		class?: string;
+	} = $props();
 
 	type Person = {
 		id: number;
@@ -106,7 +109,7 @@
 
 <form
 	role="search"
-	class="relative mb-2 lg:mb-0 lg:mt-1 lg:mr-3 lg:w-96"
+	class={['relative', className]}
 	onsubmit={(e) => e.preventDefault()}
 	style:anchor-name="--search-bar-anchor"
 >
@@ -132,7 +135,7 @@
 	{#if isOpen && search.length}
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<ul
-			class="absolute my-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
+			class="absolute my-2 z-60 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
 			style:position-anchor="--search-bar-anchor"
 			style:position-area="bottom center"
 			onmousedown={() => shouldCloseOnBlur = false}

@@ -179,7 +179,7 @@
 	{#if isOpen && searchValue}
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<ul
-			class="absolute my-2 z-50 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
+			class="absolute my-2 z-20 py-1 w-full text-gray-800 bg-white rounded-md shadow-md border border-gray-300"
 			onmousedown={() => shouldCloseOnBlur = false}
 			style:position-anchor={anchorName}
 			style:position-area="bottom center"
