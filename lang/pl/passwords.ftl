@@ -19,5 +19,6 @@ if_you_didnt_request = Jeśli nie próbowałeś zresetować hasła, zignoruj tę
 reset = Twoje hasło zostało zresetowane!
 sent = Wysłaliśmy email z linkiem resetującym hasło!
 throttled = Spróbuj ponownie za kilka minut.
+failed = Nie udało się wysłać emaila z linkiem resetującym hasło.
 token = Ten token jest nieprawidłowy.
 user = Nie możemy znależć użytkownika z tym adresem email.
