@@ -26,6 +26,7 @@
 		"spatie/laravel-sitemap": "^7.4",
 		"symfony/css-selector": "^8.0",
 		"symfony/dom-crawler": "^8.0",
+		"symfony/http-client": "^8.1",
 		"symfony/mailgun-mailer": "^8.0",
 		"tightenco/ziggy": "^2.6"
 	},

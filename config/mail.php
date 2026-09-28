@@ -30,6 +30,7 @@ return [
             // ],
         ],
 
+        // requires symfony/http-client (mailgun HTTP transport fails at runtime without it)
         'mailgun' => [
             'transport' => 'mailgun',
             // 'client' => [
