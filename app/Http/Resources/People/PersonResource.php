@@ -30,9 +30,8 @@ final class PersonResource extends JsonResource
                 'birthYear' => $this->resource->birth_year,
                 'deathYear' => $this->resource->death_year,
             ]),
-            'pytlewskiUrl' => $this->resource->pytlewski?->url,
-            // @phpstan-ignore property.protected
-            'wielcyUrl' => $this->resource->wielcy?->url,
+            'pytlewskiUrl' => $this->resource->pytlewski_url,
+            'wielcyUrl' => $this->resource->wielcy_url,
             $this->mergeWhen($this->recursiveWithParents > 0, function () {
                 $father = new self($this->resource->father);
                 $father->recursiveWithParents = $this->recursiveWithParents - 1;

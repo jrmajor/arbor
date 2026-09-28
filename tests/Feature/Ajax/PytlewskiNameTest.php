@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Services\Pytlewski\PytlewskiFactory;
+use App\Services\Pytlewski\PytlewskiScraper;
 use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\TestDox;
 use Psl\File;
@@ -19,7 +19,7 @@ final class PytlewskiNameTest extends TestCase
     #[TestDox('it returns null when person is not found')]
     public function testNotFound(): void
     {
-        Http::fake([PytlewskiFactory::url(556) => Http::response(status: 404)]);
+        Http::fake([PytlewskiScraper::url(556) => Http::response(status: 404)]);
 
         $this
             ->withPermissions(1)
@@ -32,7 +32,7 @@ final class PytlewskiNameTest extends TestCase
     public function testOk(): void
     {
         $source = File\read(__DIR__ . '/../../Datasets/Pytlewscy/543.html');
-        Http::fake([PytlewskiFactory::url(543) => Http::response($source)]);
+        Http::fake([PytlewskiScraper::url(543) => Http::response($source)]);
 
         $this
             ->withPermissions(543)

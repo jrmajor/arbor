@@ -3,7 +3,7 @@
 namespace Tests\Unit\Pytlewski;
 
 use App\Models\Person;
-use App\Services\Pytlewski\PytlewskiFactory;
+use App\Services\Pytlewski\PytlewskiScraper;
 use App\Services\Pytlewski\Relative;
 use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -14,13 +14,13 @@ final class RelationsTest extends TestCase
 {
     use UsesPytlewskiDataset;
 
-    private PytlewskiFactory $factory;
+    private PytlewskiScraper $scraper;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->factory = $this->app->make(PytlewskiFactory::class);
+        $this->scraper = $this->app->make(PytlewskiScraper::class);
     }
 
     /**
@@ -30,7 +30,7 @@ final class RelationsTest extends TestCase
     #[TestDox('it can load relations')]
     public function testRelations(int $id, string $source, array $attributes): void
     {
-        Http::fake([PytlewskiFactory::url($id) => Http::response($source)]);
+        Http::fake([PytlewskiScraper::url($id) => Http::response($source)]);
 
         $id === 704
             ? $this->test704()
@@ -50,7 +50,7 @@ final class RelationsTest extends TestCase
 
         [$motherModel, $fatherModel, $wifeModel, $firstChild, $secondChild, $secondSibling] = $relatives;
 
-        $pytlewski = $this->factory->find(704);
+        $pytlewski = $this->scraper->find(704);
 
         $mother = $pytlewski->mother;
         $this->assertInstanceOf(Relative::class, $mother);
@@ -105,7 +105,7 @@ final class RelationsTest extends TestCase
      */
     private function testOther(int $id, array $attributes): void
     {
-        $pytlewski = $this->factory->find($id);
+        $pytlewski = $this->scraper->find($id);
 
         $mother = $pytlewski->mother;
 

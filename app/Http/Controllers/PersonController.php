@@ -9,6 +9,8 @@ use App\Http\Resources\People\PersonPageResource;
 use App\Http\Resources\People\PersonResource;
 use App\Http\Resources\People\ShowPersonResource;
 use App\Models\Person;
+use App\Services\Pytlewski\PytlewskiScraper;
+use App\Services\Wielcy\WielcyScraper;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -92,8 +94,11 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
-    public function show(Person $person): View|Response|RedirectResponse
-    {
+    public function show(
+        Person $person,
+        PytlewskiScraper $pytlewskiScraper,
+        WielcyScraper $wielcyScraper,
+    ): View|Response|RedirectResponse {
         if ($person->trashed()) {
             return Auth::user()?->canViewHistory()
                 ? redirect()->route('people.history', $person)
@@ -103,7 +108,11 @@ class PersonController extends Controller
         $this->authorize('view', $person);
 
         return Inertia::render('People/Show', [
-            'person' => new ShowPersonResource($person),
+            'person' => new ShowPersonResource(
+                $person,
+                pytlewski: $pytlewskiScraper->for($person),
+                wielcy: $wielcyScraper->for($person),
+            ),
         ]);
     }
 

@@ -10,14 +10,12 @@ use App\Models\Relations\Siblings;
 use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
 use App\Services\Age;
-use App\Services\Pytlewski\Pytlewski;
-use App\Services\Pytlewski\PytlewskiFactory;
+use App\Services\Pytlewski\PytlewskiScraper;
 use App\Services\Sources\SourcesCast;
-use App\Services\Wielcy\Wielcy;
+use App\Services\Wielcy\WielcyScraper;
 use Carbon\Carbon;
 use Database\Factories\PersonFactory;
 use Exception;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -48,7 +46,8 @@ use Spatie\Activitylog\Support\LogOptions;
  * @property-read ?int $funeral_year
  * @property-read ?string $burial_date
  * @property-read ?int $burial_year
- * @property-read ?Pytlewski $pytlewski
+ * @property-read ?string $pytlewski_url
+ * @property-read ?string $wielcy_url
  * @property-read EloquentCollection<int, Person> $siblings
  * @property-read EloquentCollection<int, Person> $siblings_father
  * @property-read EloquentCollection<int, Person> $siblings_mother
@@ -82,8 +81,6 @@ class Person extends Model
         'funeral_date',
         'burial_date',
     ];
-
-    protected ?Wielcy $wielcy = null;
 
     protected static function booting()
     {
@@ -120,32 +117,14 @@ class Person extends Model
         return $this->belongsTo(self::class);
     }
 
-    /**
-     * @return Attribute<?Wielcy, never>
-     */
-    public function wielcy(): Attribute
+    public function getWielcyUrlAttribute(): ?string
     {
-        /** @phpstan-ignore return.type */
-        return Attribute::get(function (): ?Wielcy {
-            if (! $this->id_wielcy) {
-                return null;
-            }
-
-            if (! $this->wielcy) {
-                $this->wielcy = new Wielcy($this->id_wielcy);
-            }
-
-            return $this->wielcy;
-        });
+        return $this->id_wielcy ? WielcyScraper::url($this->id_wielcy) : null;
     }
 
-    /**
-     * @return Attribute<?Pytlewski, never>
-     */
-    public function pytlewski(): Attribute
+    public function getPytlewskiUrlAttribute(): ?string
     {
-        /** @phpstan-ignore return.type */
-        return Attribute::get(fn () => app(PytlewskiFactory::class)->for($this));
+        return $this->id_pytlewski !== null ? PytlewskiScraper::url($this->id_pytlewski) : null;
     }
 
     public function siblings(): Siblings

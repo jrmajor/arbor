@@ -6,8 +6,9 @@ use App\Http\Resources\Marriages\MarriageResource;
 use App\Http\Resources\Pytlewski\PytlewskiResource;
 use App\Models\Marriage;
 use App\Models\Person;
-use App\Services\Pytlewski\PytlewskiFactory;
+use App\Services\Pytlewski\Pytlewski;
 use App\Services\Sources\Source;
+use App\Services\Wielcy\Wielcy;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,6 +18,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 final class ShowPersonResource extends JsonResource
 {
     use PersonPageMixin;
+
+    public function __construct(
+        Person $resource,
+        private readonly ?Pytlewski $pytlewski,
+        private readonly ?Wielcy $wielcy,
+    ) {
+        parent::__construct($resource);
+    }
 
     /**
      * @return array<mixed>
@@ -67,17 +76,13 @@ final class ShowPersonResource extends JsonResource
                     ],
                 ),
             ],
-            'pytlewskiId' => $pytlewskiId = $this->resource->id_pytlewski,
-            'pytlewskiUrl' => $pytlewskiId ? PytlewskiFactory::url($this->resource->id_pytlewski) : null,
-            'pytlewski' => new PytlewskiResource($this->resource->pytlewski),
-            // @phpstan-ignore property.protected
-            'wielcy' => $this->when($this->resource->wielcy !== null, fn () => [
-                // @phpstan-ignore property.protected
-                'id' => $this->resource->wielcy->id,
-                // @phpstan-ignore property.protected
-                'url' => $this->resource->wielcy->url,
-                // @phpstan-ignore property.protected
-                'name' => $this->resource->wielcy->name,
+            'pytlewskiId' => $this->resource->id_pytlewski,
+            'pytlewskiUrl' => $this->resource->pytlewski_url,
+            'pytlewski' => new PytlewskiResource($this->pytlewski),
+            'wielcy' => $this->when((bool) $this->resource->id_wielcy, fn () => [
+                'id' => $this->resource->id_wielcy,
+                'url' => $this->resource->wielcy_url,
+                'name' => $this->wielcy?->name,
             ]),
             'biography' => $this->resource->biography,
             'sources' => $this->resource->sources->map(fn (Source $s) => $s->markup()),

@@ -3,6 +3,10 @@
 namespace Tests\Feature\People;
 
 use App\Models\Person;
+use App\Services\Pytlewski\PytlewskiScraper;
+use App\Services\Wielcy\WielcyScraper;
+use Illuminate\Support\Facades\Http;
+use Inertia\Testing\AssertableInertia as Assert;
 use PHPUnit\Framework\Attributes\TestDox;
 use Tests\TestCase;
 
@@ -89,6 +93,29 @@ final class ViewPeopleLetterListingTest extends TestCase
             'activeType' => 'l',
             'activeLetter' => 'M',
         ], 'People/Letter');
+    }
+
+    #[TestDox('it links external sources without fetching them')]
+    public function testExternalUrls(): void
+    {
+        $this->withPermissions(1);
+
+        Http::fake();
+
+        Person::factory()->create([
+            'family_name' => 'Zbyrowski',
+            'id_pytlewski' => 556,
+            'id_wielcy' => 'psb.1234.1',
+        ]);
+
+        $this->get('/people/f/Z')
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->where('people.0.pytlewskiUrl', PytlewskiScraper::url(556))
+                ->where('people.0.wielcyUrl', WielcyScraper::url('psb.1234.1'))
+                ->etc());
+
+        Http::assertNothingSent();
     }
 
     #[TestDox('it hides sensitive data to guests')]

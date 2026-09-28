@@ -22,7 +22,7 @@ use function App\nullable_trim;
 use function App\parse_int;
 use function App\trim_values;
 
-final class PytlewskiFactory
+final class PytlewskiScraper
 {
     public function find(int $id): ?Pytlewski
     {

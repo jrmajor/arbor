@@ -3,7 +3,12 @@
 namespace Tests\Feature\People;
 
 use App\Models\Person;
+use App\Services\Pytlewski\PytlewskiScraper;
+use App\Services\Wielcy\WielcyScraper;
+use Illuminate\Support\Facades\Http;
+use Inertia\Testing\AssertableInertia as Assert;
 use PHPUnit\Framework\Attributes\TestDox;
+use Psl\File;
 use Tests\TestCase;
 
 final class ViewPersonTest extends TestCase
@@ -105,6 +110,60 @@ final class ViewPersonTest extends TestCase
         $this->withPermissions(1)
             ->get('people/1')
             ->assertNotFound();
+    }
+
+    #[TestDox('it shows data scraped from external sources')]
+    public function testExternalSources(): void
+    {
+        Http::fake([
+            PytlewskiScraper::url(556) => Http::response(File\read(__DIR__ . '/../../Datasets/Pytlewscy/556.html')),
+            WielcyScraper::url('psb.6305.1') => Http::response("<meta property='og:title' content='Henryk' />"),
+        ]);
+
+        $person = Person::factory()->create([
+            'id_pytlewski' => 556,
+            'id_wielcy' => 'psb.6305.1',
+        ]);
+
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->where('person.pytlewskiUrl', PytlewskiScraper::url(556))
+                ->where('person.pytlewski.familyName', 'Major')
+                ->where('person.wielcy', [
+                    'id' => 'psb.6305.1',
+                    'url' => WielcyScraper::url('psb.6305.1'),
+                    'name' => 'Henryk',
+                ])
+                ->etc());
+    }
+
+    #[TestDox('it links external sources when they are unavailable')]
+    public function testExternalSourcesUnavailable(): void
+    {
+        Http::fake([
+            PytlewskiScraper::url(556) => Http::failedConnection(),
+            WielcyScraper::url('psb.6305.1') => Http::response(status: 500),
+        ]);
+
+        $person = Person::factory()->create([
+            'id_pytlewski' => 556,
+            'id_wielcy' => 'psb.6305.1',
+        ]);
+
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->where('person.pytlewskiUrl', PytlewskiScraper::url(556))
+                ->where('person.pytlewski', null)
+                ->where('person.wielcy', [
+                    'id' => 'psb.6305.1',
+                    'url' => WielcyScraper::url('psb.6305.1'),
+                    'name' => null,
+                ])
+                ->etc());
     }
 
     #[TestDox('guest see 404 when attempting to view deleted person')]

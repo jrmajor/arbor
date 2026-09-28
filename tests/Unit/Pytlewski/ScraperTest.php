@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Pytlewski;
 
-use App\Services\Pytlewski\PytlewskiFactory;
+use App\Services\Pytlewski\PytlewskiScraper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -12,17 +12,17 @@ use PHPUnit\Framework\Attributes\TestDox;
 use Psl\File;
 use Tests\TestCase;
 
-final class FactoryTest extends TestCase
+final class ScraperTest extends TestCase
 {
     use UsesPytlewskiDataset;
 
-    private PytlewskiFactory $factory;
+    private PytlewskiScraper $scraper;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->factory = $this->app->make(PytlewskiFactory::class);
+        $this->scraper = $this->app->make(PytlewskiScraper::class);
     }
 
     #[TestDox('it can make proper url')]
@@ -30,7 +30,7 @@ final class FactoryTest extends TestCase
     {
         $this->assertSame(
             'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
-            PytlewskiFactory::url(556),
+            PytlewskiScraper::url(556),
         );
     }
 
@@ -39,7 +39,7 @@ final class FactoryTest extends TestCase
     {
         Http::fake();
 
-        $this->factory->find(556);
+        $this->scraper->find(556);
 
         Http::assertSent(
             fn ($request) => $request->url() === 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
@@ -51,15 +51,15 @@ final class FactoryTest extends TestCase
     {
         Http::fake();
 
-        $this->assertNull($this->factory->find(556));
+        $this->assertNull($this->scraper->find(556));
     }
 
     #[TestDox('it returns null when receives error response')]
     public function testErrorResponse(): void
     {
-        Http::fake([PytlewskiFactory::url(556) => Http::response(status: 404)]);
+        Http::fake([PytlewskiScraper::url(556) => Http::response(status: 404)]);
 
-        $this->assertNull($this->factory->find(556));
+        $this->assertNull($this->scraper->find(556));
     }
 
     #[TestDox('it caches parsed attributes from pytlewski.pl')]
@@ -72,7 +72,7 @@ final class FactoryTest extends TestCase
             ->with('pytlewski.556', Mockery::any(), Mockery::any())
             ->andReturn('');
 
-        $this->factory->find(556);
+        $this->scraper->find(556);
 
         Http::assertSentCount(0);
     }
@@ -85,7 +85,7 @@ final class FactoryTest extends TestCase
             '<b>Major</b><br>Józef' => "<b>\u{8C}wi\u{161}tek</b><br>Józef",
         ]);
 
-        $this->assertSame('Świątek', $this->factory->find(556)->familyName);
+        $this->assertSame('Świątek', $this->scraper->find(556)->familyName);
     }
 
     #[TestDox('it keeps characters that are not in iso-8859-2')]
@@ -95,7 +95,7 @@ final class FactoryTest extends TestCase
             '<b>Major</b>' => '<b>Major €😀</b>',
         ]);
 
-        $this->assertSame('Major €😀', $this->factory->find(556)->familyName);
+        $this->assertSame('Major €😀', $this->scraper->find(556)->familyName);
     }
 
     #[TestDox('it tolerates names without separator')]
@@ -105,7 +105,7 @@ final class FactoryTest extends TestCase
             '<b>Major</b><br>Józef' => '<b>Major</b> Józef',
         ]);
 
-        $pytlewski = $this->factory->find(556);
+        $pytlewski = $this->scraper->find(556);
 
         $this->assertSame('Major Józef', $pytlewski->familyName);
         $this->assertNull($pytlewski->name);
@@ -118,7 +118,7 @@ final class FactoryTest extends TestCase
             'Gołębiowska, Jadwiga<br>Major, Jacenty' => 'Gołębiowska, Jadwiga',
         ]);
 
-        $pytlewski = $this->factory->find(556);
+        $pytlewski = $this->scraper->find(556);
 
         $this->assertNull($pytlewski->mother);
         $this->assertNull($pytlewski->father);
@@ -132,7 +132,7 @@ final class FactoryTest extends TestCase
             '<center><b>Dzieci(4):</b></center>' => '',
         ]);
 
-        $pytlewski = $this->factory->find(556);
+        $pytlewski = $this->scraper->find(556);
 
         $this->assertSame([], $pytlewski->marriages);
         $this->assertSame([], $pytlewski->children);
@@ -146,9 +146,9 @@ final class FactoryTest extends TestCase
     #[TestDox('it properly scrapes pytlewski.pl')]
     public function testScrape(int $id, string $source, array $attributes): void
     {
-        Http::fake([PytlewskiFactory::url($id) => Http::response($source)]);
+        Http::fake([PytlewskiScraper::url($id) => Http::response($source)]);
 
-        $pytlewski = $this->factory->find($id);
+        $pytlewski = $this->scraper->find($id);
 
         $keysToCheck = [
             'familyName', 'lastName', 'name', 'middleName',
@@ -175,6 +175,6 @@ final class FactoryTest extends TestCase
             $this->assertStringContainsString($search, $source);
         }
 
-        Http::fake([PytlewskiFactory::url($id) => Http::response(strtr($source, $replacements))]);
+        Http::fake([PytlewskiScraper::url($id) => Http::response(strtr($source, $replacements))]);
     }
 }

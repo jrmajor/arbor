@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Pytlewski\PytlewskiFactory;
+use App\Services\Pytlewski\PytlewskiScraper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
     public function __construct(
-        private PytlewskiFactory $pytlewskiFactory,
+        private PytlewskiScraper $pytlewskiScraper,
     ) { }
 
     public function pytlewskiName(Request $request): JsonResponse
     {
         $request->validate(['id' => 'required|integer']);
 
-        $pytlewski = $this->pytlewskiFactory->find($request->integer('id'));
+        $pytlewski = $this->pytlewskiScraper->find($request->integer('id'));
 
         if (! $pytlewski) {
             return response()->json(['result' => null]);

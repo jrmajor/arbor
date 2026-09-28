@@ -22,7 +22,7 @@ final class Relative
         /** @phpstan-ignore property.uninitializedReadonly, unset.readOnlyProperty */
         unset($this->person);
 
-        $this->url = $id !== null ? PytlewskiFactory::url($id) : null;
+        $this->url = $id !== null ? PytlewskiScraper::url($id) : null;
     }
 
     public function __get(string $name): ?Person

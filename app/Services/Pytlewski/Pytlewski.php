@@ -28,6 +28,6 @@ final class Pytlewski
         /** @var list<Relative> */
         public readonly array $siblings = [],
     ) {
-        $this->url = PytlewskiFactory::url($id);
+        $this->url = PytlewskiScraper::url($id);
     }
 }
