@@ -84,12 +84,42 @@ final class PytlewskiFactory
 
                 return Fun\pipe(
                     // the site emits UTF-8 text produced from legacy Windows-1250 bytes decoded as ISO-8859-2
-                    fn ($s) => iconv('Windows-1250', 'UTF-8', iconv('UTF-8', 'ISO-8859-2', $s) ?: '') ?: '',
+                    fn ($s) => strtr($s, self::mojibakeMap()),
                     fn ($s) => Str\after($s, '<table border=0 align=center width=500><tr><td>') ?? '',
                     fn ($s) => Str\before($s, '<td background="images/spacer.gif" width="35" height="1"></td>'),
                 )($source->body());
             },
         );
+    }
+
+    /**
+     * Maps characters that differ between ISO-8859-2 and Windows-1250.
+     * Unlike running iconv on the whole page, this can't choke on characters
+     * outside of ISO-8859-2 (like emoji), it just leaves them untouched.
+     *
+     * @return array<string, string>
+     */
+    private static function mojibakeMap(): array
+    {
+        static $map;
+
+        if (isset($map)) {
+            return $map;
+        }
+
+        $map = [];
+
+        foreach (range(0x80, 0xFF) as $byte) {
+            $iso = iconv('ISO-8859-2', 'UTF-8', chr($byte));
+            // a few bytes are undefined in Windows-1250
+            $windows = @iconv('Windows-1250', 'UTF-8', chr($byte));
+
+            if ($iso !== false && $windows !== false && $iso !== $windows) {
+                $map[$iso] = $windows;
+            }
+        }
+
+        return $map;
     }
 
     /**
@@ -124,7 +154,7 @@ final class PytlewskiFactory
             return Dict\from_keys(['familyName', 'lastName', 'name', 'middleName'], fn () => null);
         }
 
-        [$surnames, $names] = Str\split($names, '<br>');
+        [$surnames, $names] = Str\split($names, '<br>') + [1 => ''];
 
         $names = Str\split($names, '-');
         $matches = Regex\first_match($surnames, '/(.*) \\((.*)\\).*/');
@@ -241,9 +271,16 @@ final class PytlewskiFactory
             return null;
         }
 
+        $parents = Str\split(Str\replace($parents, '-', ' '), '<br>');
+
+        // without both entries we can't tell which parent is which
+        if (count($parents) < 2) {
+            return null;
+        }
+
         $parent = match ($type) {
-            Sex::Male => Str\split(Str\replace($parents, '-', ' '), '<br>')[1],
-            Sex::Female => Str\split(Str\replace($parents, '-', ' '), '<br>')[0],
+            Sex::Male => $parents[1],
+            Sex::Female => $parents[0],
         };
 
         $names = explode(',', Html\strip_tags($parent));
@@ -299,9 +336,12 @@ final class PytlewskiFactory
     {
         $pattern = '/(?:<u><a href=".*id=([0-9]*)">)?([^<>(]+)(?:<\\/a><\\/u>)? ?(?:\\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\\))?/';
 
+        if (null === $src = Str\after($src, '</center>')) {
+            return [];
+        }
+
         /** @phpstan-ignore */
         return Fun\pipe(
-            fn (string $src) => Str\split($src, '</center>')[1],
             fn (string $src) => Str\split($src, '<br>'),
             fn (array $marriages) => Vec\map($marriages, fn (string $m) => Regex\first_match($m, $pattern)),
             fn (array $m) => Vec\filter($m, function (?array $match) {
@@ -324,9 +364,12 @@ final class PytlewskiFactory
     {
         $pattern = '/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/';
 
+        if (null === $src = Str\after($src, '</center>')) {
+            return [];
+        }
+
         /** @phpstan-ignore */
         return Fun\pipe(
-            fn (string $src) => Str\split($src, '</center>')[1],
             fn (string $src) => Str\split($src, '; '),
             fn (array $children) => Vec\map($children, fn (string $c) => Regex\first_match($c, $pattern)),
             fn (array $c) => Vec\filter($c, function (?array $match) {

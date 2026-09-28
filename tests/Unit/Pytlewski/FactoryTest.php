@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Mockery;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
+use Psl\File;
 use Tests\TestCase;
 
 final class FactoryTest extends TestCase
@@ -76,6 +77,68 @@ final class FactoryTest extends TestCase
         Http::assertSentCount(0);
     }
 
+    #[TestDox('it fixes windows-1250 text decoded as iso-8859-2')]
+    public function testMojibake(): void
+    {
+        $this->fakeSource(556, [
+            // windows-1250 bytes of "Świątek" decoded as iso-8859-2
+            '<b>Major</b><br>Józef' => "<b>\u{8C}wi\u{161}tek</b><br>Józef",
+        ]);
+
+        $this->assertSame('Świątek', $this->factory->find(556)->familyName);
+    }
+
+    #[TestDox('it keeps characters that are not in iso-8859-2')]
+    public function testCharactersOutsideCharset(): void
+    {
+        $this->fakeSource(556, [
+            '<b>Major</b>' => '<b>Major €😀</b>',
+        ]);
+
+        $this->assertSame('Major €😀', $this->factory->find(556)->familyName);
+    }
+
+    #[TestDox('it tolerates names without separator')]
+    public function testNamesWithoutSeparator(): void
+    {
+        $this->fakeSource(556, [
+            '<b>Major</b><br>Józef' => '<b>Major</b> Józef',
+        ]);
+
+        $pytlewski = $this->factory->find(556);
+
+        $this->assertSame('Major Józef', $pytlewski->familyName);
+        $this->assertNull($pytlewski->name);
+    }
+
+    #[TestDox('it skips parents when it cannot tell them apart')]
+    public function testParentsWithoutSeparator(): void
+    {
+        $this->fakeSource(556, [
+            'Gołębiowska, Jadwiga<br>Major, Jacenty' => 'Gołębiowska, Jadwiga',
+        ]);
+
+        $pytlewski = $this->factory->find(556);
+
+        $this->assertNull($pytlewski->mother);
+        $this->assertNull($pytlewski->father);
+    }
+
+    #[TestDox('it skips relations without header')]
+    public function testRelationsWithoutHeader(): void
+    {
+        $this->fakeSource(556, [
+            '<center><b>Małżeństwa(2):</b></center>' => '',
+            '<center><b>Dzieci(4):</b></center>' => '',
+        ]);
+
+        $pytlewski = $this->factory->find(556);
+
+        $this->assertSame([], $pytlewski->marriages);
+        $this->assertSame([], $pytlewski->children);
+        $this->assertCount(4, $pytlewski->siblings);
+    }
+
     /**
      * @param array<string, mixed> $attributes
      */
@@ -97,5 +160,21 @@ final class FactoryTest extends TestCase
         foreach (Arr::only($attributes, $keysToCheck) as $key => $value) {
             $this->assertSame($value, $pytlewski->{$key}, "Value of {$key} does not match.");
         }
+    }
+
+    /**
+     * Fakes the response with a dataset source altered by the replacements.
+     *
+     * @param array<string, string> $replacements
+     */
+    private function fakeSource(int $id, array $replacements): void
+    {
+        $source = File\read(__DIR__ . "/../../Datasets/Pytlewscy/{$id}.html");
+
+        foreach ($replacements as $search => $replace) {
+            $this->assertStringContainsString($search, $source);
+        }
+
+        Http::fake([PytlewskiFactory::url($id) => Http::response(strtr($source, $replacements))]);
     }
 }
