@@ -6,8 +6,6 @@ parameters:
 		- database
 		- routes
 		- tests
-	excludePaths:
-		- app/Services/Pytlewski/PytlewskiScraper.php
 	stubFiles:
 		- phpstan.stub
 	checkModelProperties: true

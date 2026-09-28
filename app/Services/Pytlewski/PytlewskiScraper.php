@@ -5,7 +5,6 @@ namespace App\Services\Pytlewski;
 use App\Enums\Sex;
 use App\Models\Person;
 use Carbon\CarbonInterval;
-use Generator;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -15,7 +14,6 @@ use Psl\Fun;
 use Psl\Html;
 use Psl\Regex;
 use Psl\Str;
-use Psl\Vec;
 use Symfony\Component\DomCrawler\Crawler;
 
 use function App\nullable_trim;
@@ -45,7 +43,7 @@ final class PytlewskiScraper
         $relations = $this->scrapeRelations($crawler, $relatives = new RelativesRepository());
 
         return tap(
-            new Pytlewski($id, ...$attributes, ...$relations),
+            new Pytlewski($id, ...[...$attributes, ...$relations]),
             fn (Pytlewski $pytlewski) => $relatives->initialize($pytlewski),
         );
     }
@@ -59,6 +57,9 @@ final class PytlewskiScraper
         return $this->find($person->id_pytlewski);
     }
 
+    /**
+     * @param array<string, ?string> $attributes
+     */
     private function exists(array $attributes): bool
     {
         return isset($attributes['familyName'])
@@ -245,18 +246,20 @@ final class PytlewskiScraper
 
     /**
      * @return array{
-     *     familyName?: string, lastName?: string, name?: string, middleName?: string,
-     *     birthDate?: string, birthPlace?: string,
-     *     deathDate?: string, deathPlace?: string, burialPlace?: string,
-     *     photo?: string, bio?: string
+     *     father: ?Relative, mother: ?Relative,
+     *     marriages: list<Marriage>, children: list<Relative>, siblings: list<Relative>
      * }
      */
     private function scrapeRelations(Crawler $crawler, RelativesRepository $relatives): array
     {
+        $table = $crawler->filter('tr:nth-child(4) > td:nth-child(1) > table');
+
         return [
             'father' => $this->parseParent($crawler, $relatives, Sex::Male),
             'mother' => $this->parseParent($crawler, $relatives, Sex::Female),
-            ...$this->parseRelations($crawler, $relatives),
+            'marriages' => $this->parseMarriages($this->row($table, 1), $relatives),
+            'children' => $this->parseChildrenOrSiblings($this->row($table, 2), $relatives),
+            'siblings' => $this->parseChildrenOrSiblings($this->row($table, 3), $relatives),
         ];
     }
 
@@ -296,91 +299,75 @@ final class PytlewskiScraper
         return new Relative($relatives, $id, $name, $surname);
     }
 
-    private function parseRelations(Crawler $crawler, RelativesRepository $relatives): Generator
+    private function row(Crawler $table, int $row): ?string
     {
         try {
-            $marriages = $crawler
-                ->filter('tr:nth-child(4) > td:nth-child(1) > table')
-                ->filter('tbody > tr:nth-child(1) > td')
-                ->html();
-
-            yield 'marriages' => $this->parseMarriages($marriages, $relatives);
+            return $table->filter("tbody > tr:nth-child({$row}) > td")->html();
         } catch (InvalidArgumentException) {
-        }
-
-        try {
-            $children = $crawler
-                ->filter('tr:nth-child(4) > td:nth-child(1) > table')
-                ->filter('tbody > tr:nth-child(2) > td')
-                ->html();
-
-            yield 'children' => $this->parseChildrenOrSiblings($children, $relatives);
-        } catch (InvalidArgumentException) {
-        }
-
-        try {
-            $siblings = $crawler
-                ->filter('tr:nth-child(4) > td:nth-child(1) > table')
-                ->filter('tbody > tr:nth-child(3) > td')
-                ->html();
-
-            yield 'siblings' => $this->parseChildrenOrSiblings($siblings, $relatives);
-        } catch (InvalidArgumentException) {
+            return null;
         }
     }
 
     /**
      * @return list<Marriage>
      */
-    private function parseMarriages(string $src, RelativesRepository $relatives): array
+    private function parseMarriages(?string $src, RelativesRepository $relatives): array
     {
         $pattern = '/(?:<u><a href=".*id=([0-9]*)">)?([^<>(]+)(?:<\\/a><\\/u>)? ?(?:\\(.*: ?([0-9.]*)(?:(?:,| )*([^)]*))?\\))?/';
 
-        if (null === $src = Str\after($src, '</center>')) {
+        if (null === $src = Str\after($src ?? '', '</center>')) {
             return [];
         }
 
-        /** @phpstan-ignore */
-        return Fun\pipe(
-            fn (string $src) => Str\split($src, '<br>'),
-            fn (array $marriages) => Vec\map($marriages, fn (string $m) => Regex\first_match($m, $pattern)),
-            fn (array $m) => Vec\filter($m, function (?array $match) {
-                return $match !== null && ! Str\starts_with($match[2] ?? '', 'Nie zawar');
-            }),
-            fn (array $result) => Vec\map($result, fn (array $m) => new Marriage(
+        $marriages = [];
+
+        foreach (Str\split($src, '<br>') as $marriage) {
+            $match = Regex\first_match($marriage, $pattern);
+
+            if ($match === null || Str\starts_with($match[2] ?? '', 'Nie zawar')) {
+                continue;
+            }
+
+            $marriages[] = new Marriage(
                 $relatives,
-                id: parse_int($m[1] ?? null),
-                name: nullable_trim($m[2] ?? null),
-                date: nullable_trim($m[3] ?? null),
-                place: nullable_trim($m[4] ?? null),
-            )),
-        )($src);
+                id: parse_int($match[1] ?? null),
+                name: nullable_trim($match[2] ?? null),
+                date: nullable_trim($match[3] ?? null),
+                place: nullable_trim($match[4] ?? null),
+            );
+        }
+
+        return $marriages;
     }
 
     /**
-     * @return list<Marriage>
+     * @return list<Relative>
      */
-    private function parseChildrenOrSiblings(string $src, RelativesRepository $relatives): array
+    private function parseChildrenOrSiblings(?string $src, RelativesRepository $relatives): array
     {
         $pattern = '/(?:<u><a href=".*id=([0-9]*)">)?([^<>]*)/';
 
-        if (null === $src = Str\after($src, '</center>')) {
+        if (null === $src = Str\after($src ?? '', '</center>')) {
             return [];
         }
 
-        /** @phpstan-ignore */
-        return Fun\pipe(
-            fn (string $src) => Str\split($src, '; '),
-            fn (array $children) => Vec\map($children, fn (string $c) => Regex\first_match($c, $pattern)),
-            fn (array $c) => Vec\filter($c, function (?array $match) {
-                return $match !== null && ! Str\starts_with($match[2] ?? '', 'Nie ma');
-            }),
-            fn (array $result) => Vec\map($result, fn (array $c) => new Relative(
+        $relations = [];
+
+        foreach (Str\split($src, '; ') as $relation) {
+            $match = Regex\first_match($relation, $pattern);
+
+            if ($match === null || Str\starts_with($match[2] ?? '', 'Nie ma')) {
+                continue;
+            }
+
+            $relations[] = new Relative(
                 $relatives,
-                id: parse_int($c[1] ?? null),
-                name: $c[2] ?? null,
-            )),
-        )($src);
+                id: parse_int($match[1] ?? null),
+                name: $match[2] ?? null,
+            );
+        }
+
+        return $relations;
     }
 
     public static function url(int $id): string
