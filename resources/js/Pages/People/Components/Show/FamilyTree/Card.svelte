@@ -25,7 +25,7 @@
 		return years.length ? years.join(', ') : null;
 	});
 
-	const card = 'relative flex min-h-16 w-36 flex-col justify-center rounded-md border px-2 py-1.5 text-center text-sm leading-tight';
+	const card = 'relative flex min-h-16 w-full flex-col justify-center rounded-md border px-2 py-1.5 text-center text-sm leading-tight wrap-break-word';
 </script>
 
 {#if !person}
@@ -36,8 +36,7 @@
 		<small>[{t('misc.hidden')}]</small>
 	</div>
 {:else if current}
-	<!-- raised, so that the ring is drawn over connecting lines -->
-	<div class={[card, 'z-1 border-blue-600 bg-blue-50 ring-1 ring-blue-600']} aria-current="page">
+	<div class={[card, 'border-blue-600 bg-blue-50 ring-1 ring-blue-600']} aria-current="page">
 		{@render content(person)}
 	</div>
 {:else}
@@ -52,7 +51,6 @@
 
 {#snippet badge()}
 	{#if label}
-		<!-- sits on the top border, where it covers the end of the connecting line -->
 		<span class="absolute -top-2 left-1/2 z-1 -translate-x-1/2 rounded-full bg-white px-1.5 text-xs leading-4 whitespace-nowrap text-gray-500">
 			{label}
 		</span>
@@ -61,14 +59,14 @@
 
 {#snippet content(person: Person & { visible: true })}
 	{@render badge()}
-	<div class:italic={person.isDead} class:text-blue-700={!current}>
-		<div>{person.name}</div>
-		<div class="font-medium">{person.lastName ?? person.familyName}</div>
+	<span class="line-clamp-3" class:italic={person.isDead} class:text-blue-700={!current}>
+		{person.name}
+		<span class="font-medium">{person.lastName ?? person.familyName}</span>
 		{#if person.lastName}
-			<div class="text-xs">({person.familyName})</div>
+			<span class="text-xs">({person.familyName})</span>
 		{/if}
-	</div>
+	</span>
 	{#if years}
-		<div class="mt-0.5 text-xs text-gray-600">{years}</div>
+		<span class="mt-0.5 text-xs text-gray-600">{years}</span>
 	{/if}
 {/snippet}

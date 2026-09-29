@@ -37,6 +37,11 @@ type HiddenPerson = PersonCommon & {
 
 export type Person = VisiblePerson | HiddenPerson;
 
+type PersonWithParentIds = Person & {
+	fatherId: number | null;
+	motherId: number | null;
+};
+
 export type PersonPage = {
 	id: number;
 	sex: Sex;
@@ -72,11 +77,12 @@ export type ShowPersonResource = PersonPage & {
 	father: (Person & { father: Person | null, mother: Person | null }) | null;
 	mother: (Person & { father: Person | null, mother: Person | null }) | null;
 	siblings: Person[];
-	siblingsFather: Person[];
-	siblingsMother: Person[];
+	siblingsFather: PersonWithParentIds[];
+	siblingsMother: PersonWithParentIds[];
 	marriages: Marriage[];
-	children: Array<Person & { fatherId: number | null, motherId: number | null }>;
+	children: PersonWithParentIds[];
 	siblingsBefore: number;
+	otherParents: Person[];
 	age: {
 		current: number | null;
 		prettyCurrent: string | null;

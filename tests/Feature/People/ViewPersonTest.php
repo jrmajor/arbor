@@ -6,10 +6,12 @@ use App\Models\Marriage;
 use App\Models\Person;
 use App\Services\Pytlewski\PytlewskiScraper;
 use App\Services\Wielcy\WielcyScraper;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Inertia\Testing\AssertableInertia as Assert;
 use PHPUnit\Framework\Attributes\TestDox;
 use Psl\File;
+use Psl\Vec;
 use Tests\TestCase;
 
 final class ViewPersonTest extends TestCase
@@ -173,6 +175,55 @@ final class ViewPersonTest extends TestCase
                 ->where('person.children.0.visible', false)
                 ->where('person.children.0.fatherId', $person->id)
                 ->where('person.children.0.motherId', $wife->id)
+                ->etc());
+    }
+
+    #[TestDox('it shows half-siblings with their other parents')]
+    public function testHalfSiblingsOtherParents(): void
+    {
+        $father = Person::factory()->male()->create();
+        $mother = Person::factory()->female()->create();
+        $fatherPartner = Person::factory()->female()->create();
+        $motherPartner = Person::factory()->male()->create();
+
+        $person = Person::factory()->create([
+            'father_id' => $father->id,
+            'mother_id' => $mother->id,
+            'visibility' => true,
+        ]);
+
+        Person::factory()->create(['father_id' => $father->id, 'mother_id' => $fatherPartner->id]);
+        Person::factory()->create(['father_id' => $motherPartner->id, 'mother_id' => $mother->id]);
+
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('person.siblingsFather', 1)
+                ->where('person.siblingsFather.0.motherId', $fatherPartner->id)
+                ->has('person.siblingsMother', 1)
+                ->where('person.siblingsMother.0.fatherId', $motherPartner->id)
+                ->has('person.otherParents', 2)
+                ->where('person.otherParents', fn (Collection $parents) => $parents->pluck('id')->sort()->values()->all()
+                    === Vec\sort([$fatherPartner->id, $motherPartner->id]))
+                ->etc());
+    }
+
+    #[TestDox('it shows other parents of children')]
+    public function testChildrenOtherParents(): void
+    {
+        $person = Person::factory()->male()->create(['visibility' => true]);
+        $partner = Person::factory()->female()->create();
+
+        Person::factory()->count(2)->create(['father_id' => $person->id, 'mother_id' => $partner->id]);
+        Person::factory()->create(['father_id' => $person->id, 'mother_id' => null]);
+
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('person.otherParents', 1)
+                ->where('person.otherParents.0.id', $partner->id)
                 ->etc());
     }
 

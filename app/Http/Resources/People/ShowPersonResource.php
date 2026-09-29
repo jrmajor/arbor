@@ -10,6 +10,7 @@ use App\Models\Person;
 use App\Services\Pytlewski\Pytlewski;
 use App\Services\Sources\Source;
 use App\Services\Wielcy\Wielcy;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -55,8 +56,12 @@ final class ShowPersonResource extends JsonResource
             'father' => $father,
             'mother' => $mother,
             'siblings' => PersonResource::collection($this->resource->siblings),
-            'siblingsFather' => PersonResource::collection($this->resource->siblings_father),
-            'siblingsMother' => PersonResource::collection($this->resource->siblings_mother),
+            'siblingsFather' => $this->resource->siblings_father->map(
+                fn (Person $sibling) => new PersonResource($sibling)->withParentIds(),
+            ),
+            'siblingsMother' => $this->resource->siblings_mother->map(
+                fn (Person $sibling) => new PersonResource($sibling)->withParentIds(),
+            ),
             'marriages' => $this->resource->marriages->map(function (Marriage $m) {
                 $m = new MarriageResource($m);
                 $m->partnerFor = $this->resource;
@@ -67,6 +72,7 @@ final class ShowPersonResource extends JsonResource
                 fn (Person $child) => new PersonResource($child)->withParentIds(),
             ),
             'siblingsBefore' => $this->siblingsBefore(),
+            'otherParents' => PersonResource::collection($this->otherParents()),
             'age' => [
                 'current' => $this->resource->age->current(),
                 'prettyCurrent' => $this->resource->age->prettyCurrent(),
@@ -89,6 +95,27 @@ final class ShowPersonResource extends JsonResource
             'biography' => $this->resource->biography,
             'sources' => $this->resource->sources->map(fn (Source $s) => $s->markup()),
         ];
+    }
+
+    /**
+     * @return EloquentCollection<int, Person>
+     */
+    private function otherParents(): EloquentCollection
+    {
+        $person = $this->resource;
+
+        $ids = collect()
+            ->merge($person->children->map(
+                fn (Person $child) => $child->father_id === $person->id ? $child->mother_id : $child->father_id,
+            ))
+            ->merge($person->siblings_father->pluck('mother_id'))
+            ->merge($person->siblings_mother->pluck('father_id'))
+            ->filter()
+            ->unique();
+
+        return $ids->isEmpty()
+            ? new EloquentCollection()
+            : Person::query()->whereIn('id', $ids)->get();
     }
 
     /**

@@ -110,18 +110,6 @@
 			<dd><Name person={person.father}/></dd>
 		{/if}
 
-		<!-- siblings -->
-		{#if person.siblings.length}
-			<dt>{t('people.siblings')} ({person.siblings.length})</dt>
-			<dd>
-				<ul>
-					{#each person.siblings as sibling}
-						<li><Name person={sibling}/></li>
-					{/each}
-				</ul>
-			</dd>
-		{/if}
-
 		<!-- przyr. od str. matki -->
 		{#if person.siblingsMother.length}
 			<dt>{t('people.siblings_mother')} ({person.siblingsMother.length})</dt>
