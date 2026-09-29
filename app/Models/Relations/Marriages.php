@@ -22,13 +22,18 @@ class Marriages extends Relation
 
     public function __construct(Person $parent)
     {
-        $query = Marriage::query()->orderBy(match ($parent->sex) {
+        $query = Marriage::query()->orderBy(self::orderColumn($parent));
+
+        parent::__construct($query, $parent);
+    }
+
+    protected static function orderColumn(Person $person): string
+    {
+        return match ($person->sex) {
             Sex::Male => 'man_order',
             Sex::Female => 'woman_order',
             null => 'first_event_date_from',
-        });
-
-        parent::__construct($query, $parent);
+        };
     }
 
     public function addConstraints(): void
@@ -79,12 +84,17 @@ class Marriages extends Relation
         }
 
         foreach ($people as $person) {
+            $column = self::orderColumn($person);
+
             $person->setRelation(
                 $relation,
-                $marriages->filter(function (Marriage $marriage) use ($person) {
-                    return $marriage->woman_id === $person->id
-                        || $marriage->man_id === $person->id;
-                }),
+                $marriages
+                    ->filter(function (Marriage $marriage) use ($person) {
+                        return $marriage->woman_id === $person->id
+                            || $marriage->man_id === $person->id;
+                    })
+                    ->sortBy(fn (Marriage $marriage) => $marriage->{$column})
+                    ->values(),
             );
         }
 
