@@ -123,6 +123,96 @@ final class ViewPersonTest extends TestCase
                 ->etc());
     }
 
+    #[TestDox('it shows parent ids of children')]
+    public function testChildrenParentIds(): void
+    {
+        $person = Person::factory()->male()->create(['visibility' => true]);
+        $wife = Person::factory()->female()->create();
+
+        Person::factory()->create([
+            'father_id' => $person->id,
+            'mother_id' => $wife->id,
+            'visibility' => true,
+            'birth_date_from' => '1930-01-01',
+            'birth_date_to' => '1930-01-01',
+        ]);
+
+        Person::factory()->create([
+            'father_id' => $person->id,
+            'mother_id' => null,
+            'birth_date_from' => '1940-01-01',
+            'birth_date_to' => '1940-01-01',
+        ]);
+
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('person.children', 2)
+                ->where('person.children.0.fatherId', $person->id)
+                ->where('person.children.0.motherId', $wife->id)
+                ->where('person.children.1.fatherId', $person->id)
+                ->where('person.children.1.motherId', null)
+                ->etc());
+    }
+
+    #[TestDox('it shows parent ids of hidden children')]
+    public function testHiddenChildrenParentIds(): void
+    {
+        $person = Person::factory()->male()->create(['visibility' => true]);
+        $wife = Person::factory()->female()->create();
+
+        Person::factory()->create([
+            'father_id' => $person->id,
+            'mother_id' => $wife->id,
+        ]);
+
+        $this->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->where('person.children.0.visible', false)
+                ->where('person.children.0.fatherId', $person->id)
+                ->where('person.children.0.motherId', $wife->id)
+                ->etc());
+    }
+
+    #[TestDox('it counts siblings born before person')]
+    public function testSiblingsBefore(): void
+    {
+        $father = Person::factory()->male()->create();
+        $mother = Person::factory()->female()->create();
+
+        $createChild = fn (?string $from, ?string $to = null) => Person::factory()->create([
+            'father_id' => $father->id,
+            'mother_id' => $mother->id,
+            'visibility' => true,
+            'birth_date_from' => $from,
+            'birth_date_to' => $to ?? $from,
+        ]);
+
+        $createChild(null);
+        $createChild('1890-01-01');
+        $createChild('1895-01-01');
+        $createChild('1900-01-01', '1910-12-31');
+        $createChild('1920-01-01');
+
+        $person = $createChild('1895-01-01');
+        $unknown = $createChild(null);
+
+        $this->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('person.siblings', 6)
+                ->where('person.siblingsBefore', 4)
+                ->etc());
+
+        $this->get("people/{$unknown->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->where('person.siblingsBefore', 1)
+                ->etc());
+    }
+
     #[TestDox('guest see 404 when attempting to view nonexistent person')]
     public function testGuestNonexistent(): void
     {

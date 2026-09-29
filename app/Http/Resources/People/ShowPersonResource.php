@@ -63,7 +63,10 @@ final class ShowPersonResource extends JsonResource
 
                 return $m;
             }),
-            'children' => PersonResource::collection($this->resource->children),
+            'children' => $this->resource->children->map(
+                fn (Person $child) => new PersonResource($child)->withParentIds(),
+            ),
+            'siblingsBefore' => $this->siblingsBefore(),
             'age' => [
                 'current' => $this->resource->age->current(),
                 'prettyCurrent' => $this->resource->age->prettyCurrent(),
@@ -86,5 +89,19 @@ final class ShowPersonResource extends JsonResource
             'biography' => $this->resource->biography,
             'sources' => $this->resource->sources->map(fn (Source $s) => $s->markup()),
         ];
+    }
+
+    /**
+     * Siblings are ordered by birth date with unknown dates first,
+     * so the siblings born before the person always form a prefix.
+     */
+    private function siblingsBefore(): int
+    {
+        $birthDate = $this->resource->birth_date_from;
+
+        return $this->resource->siblings
+            ->filter(fn (Person $sibling) => $sibling->birth_date_from === null
+                || ($birthDate !== null && $sibling->birth_date_from->lte($birthDate)))
+            ->count();
     }
 }

@@ -14,6 +14,15 @@ final class PersonResource extends JsonResource
 {
     public int $recursiveWithParents = 0;
 
+    private bool $withParentIds = false;
+
+    public function withParentIds(): self
+    {
+        $this->withParentIds = true;
+
+        return $this;
+    }
+
     /**
      * @return array<mixed>
      */
@@ -40,6 +49,10 @@ final class PersonResource extends JsonResource
 
                 return ['father' => $father, 'mother' => $mother];
             }),
+            $this->mergeWhen($this->withParentIds, fn () => [
+                'fatherId' => $this->resource->father_id,
+                'motherId' => $this->resource->mother_id,
+            ]),
             'perm' => [
                 'update' => Gate::allows('update', $this->resource),
             ],

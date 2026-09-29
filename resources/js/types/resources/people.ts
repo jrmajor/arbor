@@ -75,7 +75,8 @@ export type ShowPersonResource = PersonPage & {
 	siblingsFather: Person[];
 	siblingsMother: Person[];
 	marriages: Marriage[];
-	children: Person[];
+	children: Array<Person & { fatherId: number | null, motherId: number | null }>;
+	siblingsBefore: number;
 	age: {
 		current: number | null;
 		prettyCurrent: string | null;

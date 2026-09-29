@@ -6,7 +6,7 @@
 	import type { ShowPersonResource } from '@/types/resources/people';
 	import Biography from './Components/Show/Sections/Biography.svelte';
 	import Details from './Components/Show/Sections/Details.svelte';
-	import SmallTree from './Components/Show/Sections/SmallTree.svelte';
+	import FamilyTree from './Components/Show/Sections/FamilyTree.svelte';
 
 	let { person }: { person: ShowPersonResource } & SharedProps = $props();
 </script>
@@ -17,4 +17,4 @@
 
 <Details {person}/>
 <Biography {person}/>
-<SmallTree {person}/>
+<FamilyTree {person}/>
