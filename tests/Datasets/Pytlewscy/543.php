@@ -15,7 +15,7 @@ return [
     'fatherId' => null,
     'fatherSurname' => 'Kosela',
     'fatherName' => 'Stanisław',
-    'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006081743.jpg',
+    'photo' => 'https://www.pytlewski.pl/index/drzewo/foto/08202006081743.jpg',
     'marriages' => [
         [
             'name' => 'Pytlewska, Kornelia',

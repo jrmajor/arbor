@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { route } from 'ziggy-js';
-	import type { PytlewskiRelative } from '@/types/resources/pytlewski';
 	import { inertia } from '@/helpers/inertia';
 
-	type Relative = Omit<PytlewskiRelative, 'surname'> & Partial<Pick<PytlewskiRelative, 'surname'>>;
+	type Relative = {
+		name: string | null;
+		surname?: string | null;
+		url: string | null;
+		arborId: number | null;
+		canBeViewedInArbor: boolean;
+	};
 
 	let { person }: { person: Relative } = $props();
 

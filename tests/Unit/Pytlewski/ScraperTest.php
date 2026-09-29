@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Pytlewski;
 
+use App\Models\Person;
 use App\Services\Pytlewski\PytlewskiScraper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
@@ -29,7 +30,7 @@ final class ScraperTest extends TestCase
     public function testUrl(): void
     {
         $this->assertSame(
-            'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
+            'https://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
             PytlewskiScraper::url(556),
         );
     }
@@ -42,7 +43,7 @@ final class ScraperTest extends TestCase
         $this->scraper->find(556);
 
         Http::assertSent(
-            fn ($request) => $request->url() === 'http://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
+            fn ($request) => $request->url() === 'https://www.pytlewski.pl/index/drzewo/index.php?view=true&id=556',
         );
     }
 
@@ -60,6 +61,22 @@ final class ScraperTest extends TestCase
         Http::fake([PytlewskiScraper::url(556) => Http::response(status: 404)]);
 
         $this->assertNull($this->scraper->find(556));
+    }
+
+    #[TestDox('it returns null when connection fails')]
+    public function testConnectionError(): void
+    {
+        Http::fake([PytlewskiScraper::url(556) => Http::failedConnection()]);
+
+        $this->assertNull($this->scraper->find(556));
+    }
+
+    #[TestDox('it does not request anything for person without id')]
+    public function testPersonWithoutId(): void
+    {
+        $person = Person::factory()->make(['id_pytlewski' => null]);
+
+        $this->assertNull($this->scraper->for($person));
     }
 
     #[TestDox('it caches parsed attributes from pytlewski.pl')]

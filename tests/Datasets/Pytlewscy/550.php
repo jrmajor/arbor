@@ -15,7 +15,7 @@ return [
     'fatherId' => 543,
     'fatherSurname' => 'Kosela',
     'fatherName' => 'Franciszek',
-    'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006090640.jpg',
+    'photo' => 'https://www.pytlewski.pl/index/drzewo/foto/08202006090640.jpg',
     'marriages' => [
         [
             'name' => 'Bobiński, Jarosław',

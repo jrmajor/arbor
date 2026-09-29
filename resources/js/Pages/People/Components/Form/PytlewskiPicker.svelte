@@ -26,9 +26,12 @@
 			return;
 		}
 
+		const id = value;
+
 		fetch(route('ajax.pytlewskiName', { id: intValue }))
 			.then((response) => response.json())
-			.then((data) => result = data.result);
+			// ignore responses for ids that were changed in the meantime
+			.then((data) => value === id && (result = data.result));
 	}
 
 	onMount(() => oninput());

@@ -15,7 +15,7 @@ return [
     'fatherId' => null,
     'fatherSurname' => 'Major',
     'fatherName' => 'Jacenty',
-    'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08202006104940.jpg',
+    'photo' => 'https://www.pytlewski.pl/index/drzewo/foto/08202006104940.jpg',
     'marriages' => [
         [
             'id' => 1141,

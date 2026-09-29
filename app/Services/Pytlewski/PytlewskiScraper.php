@@ -228,7 +228,7 @@ final class PytlewskiScraper
             return null;
         }
 
-        return "http://www.pytlewski.pl/index/drzewo/{$photo}";
+        return "https://www.pytlewski.pl/index/drzewo/{$photo}";
     }
 
     private function parseBio(Crawler $crawler): ?string
@@ -372,6 +372,6 @@ final class PytlewskiScraper
 
     public static function url(int $id): string
     {
-        return "http://www.pytlewski.pl/index/drzewo/index.php?view=true&id={$id}";
+        return "https://www.pytlewski.pl/index/drzewo/index.php?view=true&id={$id}";
     }
 }

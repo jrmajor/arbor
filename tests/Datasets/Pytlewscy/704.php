@@ -15,7 +15,7 @@ return [
     'fatherId' => 637,
     'fatherSurname' => 'Pytlewski',
     'fatherName' => 'Łukasz',
-    'photo' => 'http://www.pytlewski.pl/index/drzewo/foto/08222006145226.jpg',
+    'photo' => 'https://www.pytlewski.pl/index/drzewo/foto/08222006145226.jpg',
     'marriages' => [
         [
             'id' => 705,

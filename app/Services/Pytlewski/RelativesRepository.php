@@ -45,6 +45,8 @@ final class RelativesRepository
 
         if ($this->ids === []) {
             $this->loaded = [];
+
+            return;
         }
 
         $this->loaded = Person::query()
