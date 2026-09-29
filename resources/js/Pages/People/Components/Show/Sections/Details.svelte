@@ -9,32 +9,17 @@
 	import Link from '@/Components/Primitives/Link.svelte';
 	import Source from '@/Components/Source.svelte';
 	import PytlewskiSection from '../DetailsSections/PytlewskiSection.svelte';
+	import WielcySection from '../DetailsSections/WielcySection.svelte';
 	import OptionalDatePlace from '../OptionalDatePlace.svelte';
 
 	let { person }: { person: ShowPersonResource } = $props();
-
-	let wielcy = $derived(person.wielcy);
 </script>
 
 <div class="p-6 bg-white rounded-lg shadow-sm">
 	<DataList>
 		<PytlewskiSection {person}/>
 
-		<!-- wielcy -->
-		{#if wielcy}
-			<dt>
-				{t('people.id_in')}
-				<Link href="http://www.wielcy.pl/" external>wielcy.pl</Link>
-			</dt>
-			<dd>
-				<Link href={wielcy.url} external>
-					{wielcy.id}
-					{#if wielcy.name}
-						<small>{t('people.wielcy.as')} {wielcy.name}</small>
-					{/if}
-				</Link>
-			</dd>
-		{/if}
+		<WielcySection {person}/>
 
 		<!-- names -->
 		{#if person.middleName}

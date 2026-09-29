@@ -117,7 +117,7 @@ final class ViewPersonTest extends TestCase
     {
         Http::fake([
             PytlewskiScraper::url(556) => Http::response(File\read(__DIR__ . '/../../Datasets/Pytlewscy/556.html')),
-            WielcyScraper::url('psb.6305.1') => Http::response("<meta property='og:title' content='Henryk' />"),
+            WielcyScraper::url('psb.6305.1') => Http::response(File\read(__DIR__ . '/../../Datasets/Wielcy/psb.6305.1.html')),
         ]);
 
         $person = Person::factory()->create([
@@ -131,11 +131,10 @@ final class ViewPersonTest extends TestCase
             ->assertInertia(fn (Assert $page) => $page
                 ->where('person.pytlewskiUrl', PytlewskiScraper::url(556))
                 ->where('person.pytlewski.familyName', 'Major')
-                ->where('person.wielcy', [
-                    'id' => 'psb.6305.1',
-                    'url' => WielcyScraper::url('psb.6305.1'),
-                    'name' => 'Henryk',
-                ])
+                ->where('person.wielcyId', 'psb.6305.1')
+                ->where('person.wielcyUrl', WielcyScraper::url('psb.6305.1'))
+                ->where('person.wielcy.surname', 'Gąsiorowski')
+                ->where('person.wielcy.father.name', 'Leodgard')
                 ->etc());
     }
 
@@ -158,11 +157,9 @@ final class ViewPersonTest extends TestCase
             ->assertInertia(fn (Assert $page) => $page
                 ->where('person.pytlewskiUrl', PytlewskiScraper::url(556))
                 ->where('person.pytlewski', null)
-                ->where('person.wielcy', [
-                    'id' => 'psb.6305.1',
-                    'url' => WielcyScraper::url('psb.6305.1'),
-                    'name' => null,
-                ])
+                ->where('person.wielcyId', 'psb.6305.1')
+                ->where('person.wielcyUrl', WielcyScraper::url('psb.6305.1'))
+                ->where('person.wielcy', null)
                 ->etc());
     }
 

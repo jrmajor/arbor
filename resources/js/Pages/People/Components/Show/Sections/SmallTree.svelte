@@ -85,7 +85,7 @@
 			{/if}
 
 			<div class="w-full">
-				<Name person={{ ...person, visible: true, wielcyUrl: person.wielcy?.url }}/>
+				<Name person={{ ...person, visible: true }}/>
 			</div>
 		</div>
 	</div>

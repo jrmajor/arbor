@@ -50,3 +50,6 @@ Route::patch('people/{person}/biography', [BiographyController::class, 'update']
 
 Route::get('ajax/pytlewski-name', [AjaxController::class, 'pytlewskiName'])
     ->middleware('auth')->name('ajax.pytlewskiName');
+
+Route::get('ajax/wielcy-name', [AjaxController::class, 'wielcyName'])
+    ->middleware('auth')->name('ajax.wielcyName');

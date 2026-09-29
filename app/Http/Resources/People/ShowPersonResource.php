@@ -4,6 +4,7 @@ namespace App\Http\Resources\People;
 
 use App\Http\Resources\Marriages\MarriageResource;
 use App\Http\Resources\Pytlewski\PytlewskiResource;
+use App\Http\Resources\Wielcy\WielcyResource;
 use App\Models\Marriage;
 use App\Models\Person;
 use App\Services\Pytlewski\Pytlewski;
@@ -79,11 +80,9 @@ final class ShowPersonResource extends JsonResource
             'pytlewskiId' => $this->resource->id_pytlewski,
             'pytlewskiUrl' => $this->resource->pytlewski_url,
             'pytlewski' => new PytlewskiResource($this->pytlewski),
-            'wielcy' => $this->when((bool) $this->resource->id_wielcy, fn () => [
-                'id' => $this->resource->id_wielcy,
-                'url' => $this->resource->wielcy_url,
-                'name' => $this->wielcy?->name,
-            ]),
+            'wielcyId' => $this->resource->id_wielcy ?: null,
+            'wielcyUrl' => $this->resource->wielcy_url,
+            'wielcy' => new WielcyResource($this->wielcy),
             'biography' => $this->resource->biography,
             'sources' => $this->resource->sources->map(fn (Source $s) => $s->markup()),
         ];

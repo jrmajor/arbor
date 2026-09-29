@@ -6,8 +6,8 @@
 	import { t } from '@/helpers/translations';
 	import * as Form from '@/Components/Forms';
 	import Button from '@/Components/Primitives/Button.svelte';
-	import Link from '@/Components/Primitives/Link.svelte';
 	import PytlewskiPicker from './PytlewskiPicker.svelte';
+	import WielcyPicker from './WielcyPicker.svelte';
 
 	let { person, action }: {
 		person: EditPersonResource;
@@ -108,28 +108,8 @@
 			<div class="font-medium text-xl text-gray-900">{t('people.external_links')}</div>
 		</div>
 		<fieldset class="space-y-5 md:space-y-0 md:space-x-5 flex flex-col md:flex-row">
-			<div class="w-full md:w-1/2 flex flex-col">
-				<label for="id_wielcy" class="w-full font-medium pb-1 text-gray-700">
-					{t('people.id_in')}
-					<Link href="http://www.wielcy.pl/" external>wielcy.pl</Link>
-				</label>
-				<div class="w-full flex">
-					<input
-						type="text"
-						id="id_wielcy"
-						bind:value={form.id_wielcy}
-						class="form-input rounded-r-none w-1/4 md:w-3/12 z-10"
-						class:invalid={form.errors.id_wielcy}
-					>
-					<input
-						type="text"
-						id="wielcy_search"
-						placeholder={t('misc.coming_soon')}
-						disabled
-						class="form-input rounded-l-none -ml-px w-3/4 md:w-9/12"
-					>
-				</div>
-				<Form.Error error={form.errors.id_wielcy}/>
+			<div class="w-full md:w-1/2">
+				<WielcyPicker bind:value={form.id_wielcy} error={form.errors.id_wielcy ?? null}/>
 			</div>
 			<div class="w-full md:w-1/2">
 				<PytlewskiPicker bind:value={form.id_pytlewski} error={form.errors.id_pytlewski ?? null}/>

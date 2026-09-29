@@ -1,4 +1,5 @@
 import type { Pytlewski } from './pytlewski';
+import type { Wielcy } from './wielcy';
 
 export type Letters = {
 	family: Letter[];
@@ -86,11 +87,9 @@ export type ShowPersonResource = PersonPage & {
 	pytlewskiId: number | null;
 	pytlewskiUrl: string | null;
 	pytlewski: Pytlewski | null;
-	wielcy: {
-		id: string;
-		url: string;
-		name: string | null;
-	};
+	wielcyId: string | null;
+	wielcyUrl: string | null;
+	wielcy: Wielcy | null;
 	biography: string;
 	sources: string[];
 };

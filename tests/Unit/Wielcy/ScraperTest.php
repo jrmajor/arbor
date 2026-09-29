@@ -4,14 +4,20 @@ namespace Tests\Unit\Wielcy;
 
 use App\Models\Person;
 use App\Services\Wielcy\WielcyScraper;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Mockery;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
+use Psl\File;
+use Psl\Str;
 use Tests\TestCase;
 
 final class ScraperTest extends TestCase
 {
+    use UsesWielcyDataset;
+
     private WielcyScraper $scraper;
 
     protected function setUp(): void
@@ -25,41 +31,76 @@ final class ScraperTest extends TestCase
     public function testUrl(): void
     {
         $this->assertSame(
-            'http://www.sejm-wielki.pl/s/?m=NG&t=PN&n=psb.6305.1',
+            'https://www.sejm-wielki.pl/s/?m=NG&t=PN&n=psb.6305.1',
             WielcyScraper::url('psb.6305.1'),
         );
     }
 
-    #[TestDox('it scrapes name and sex')]
-    public function testScrape(): void
+    #[TestDox('it requests source from sejm-wielki.pl')]
+    public function testSourceRequest(): void
     {
-        $source = <<<'EOD'
-            <meta property='og:title' content='Henryk Gąsiorowski' />
-            <img src="images/male.png" width="13" height="13"
-            alt="M" align=left>
-            EOD;
+        Http::fake();
 
-        Http::fake([
-            WielcyScraper::url('psb.6305.1') => Http::response(iconv('UTF-8', 'ISO-8859-2', $source)),
-        ]);
+        $this->scraper->find('psb.6305.1');
 
-        $wielcy = $this->scraper->find('psb.6305.1');
-
-        $this->assertSame('psb.6305.1', $wielcy->id);
-        $this->assertSame(WielcyScraper::url('psb.6305.1'), $wielcy->url);
-        $this->assertSame('Henryk Gąsiorowski', $wielcy->name);
-        $this->assertSame('xy', $wielcy->sex);
+        Http::assertSent(fn ($request) => $request->url() === WielcyScraper::url('psb.6305.1'));
     }
 
-    #[TestDox('it returns empty attributes when it cannot scrape the response')]
+    /**
+     * @param array<string, mixed> $attributes
+     */
+    #[DataProvider('provideScrapeCases')]
+    #[TestDox('it properly scrapes sejm-wielki.pl')]
+    public function testScrape(string $id, string $source, array $attributes): void
+    {
+        Http::fake([WielcyScraper::url($id) => Http::response($source)]);
+
+        $wielcy = $this->scraper->find($id);
+
+        $this->assertSame($id, $wielcy->id);
+        $this->assertSame(WielcyScraper::url($id), $wielcy->url);
+
+        $keysToCheck = [
+            'name', 'middleName', 'surname', 'sex',
+            'birthDate', 'birthPlace',
+            'deathDate', 'deathPlace', 'burialPlace',
+            'photo',
+        ];
+
+        foreach (Arr::only($attributes, $keysToCheck) as $key => $value) {
+            $this->assertSame($value, $wielcy->{$key}, "Value of {$key} does not match.");
+        }
+    }
+
+    #[TestDox('it returns null for unknown person')]
+    public function testNotFound(): void
+    {
+        $source = File\read(__DIR__ . '/../../Datasets/Wielcy/xx.999999999.html');
+        Http::fake([WielcyScraper::url('xx.999999999') => Http::response($source)]);
+
+        $this->assertNull($this->scraper->find('xx.999999999'));
+    }
+
+    #[TestDox("it returns null when it can't scrape received response")]
     public function testScrapeError(): void
     {
         Http::fake();
 
+        $this->assertNull($this->scraper->find('psb.6305.1'));
+    }
+
+    #[TestDox('it tolerates missing facts')]
+    public function testMissingFacts(): void
+    {
+        $source = File\read(__DIR__ . '/../../Datasets/Wielcy/psb.6305.1.html');
+        $source = Str\replace($source, '<div class="lewa-szpalta">', '<div>');
+        Http::fake([WielcyScraper::url('psb.6305.1') => Http::response($source)]);
+
         $wielcy = $this->scraper->find('psb.6305.1');
 
-        $this->assertNull($wielcy->name);
-        $this->assertNull($wielcy->sex);
+        $this->assertSame('Gąsiorowski', $wielcy->surname);
+        $this->assertNull($wielcy->birthDate);
+        $this->assertNull($wielcy->burialPlace);
     }
 
     #[TestDox('it returns null when receives error response')]
@@ -78,7 +119,7 @@ final class ScraperTest extends TestCase
         $this->assertNull($this->scraper->find('psb.6305.1'));
     }
 
-    #[TestDox('it caches source from wielcy.pl')]
+    #[TestDox('it caches source from sejm-wielki.pl')]
     public function testCache(): void
     {
         Http::fake();
