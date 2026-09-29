@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\People;
 
+use App\Models\Marriage;
 use App\Models\Person;
 use App\Services\Pytlewski\PytlewskiScraper;
 use App\Services\Wielcy\WielcyScraper;
@@ -95,6 +96,31 @@ final class ViewPersonTest extends TestCase
         $this->withPermissions(1)
             ->get("people/{$person->id}")
             ->assertOk();
+    }
+
+    #[TestDox('it shows person with multiple marriages without lazy loading')]
+    public function testMultipleMarriages(): void
+    {
+        $person = Person::factory()->male()->create([
+            'visibility' => true,
+            'birth_date_from' => '1900-01-01',
+            'birth_date_to' => '1900-01-01',
+        ]);
+
+        Marriage::factory()->count(2)->create(['man_id' => $person->id]);
+
+        $this->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('person.marriages', 2)
+                ->etc());
+
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('person.marriages', 2)
+                ->etc());
     }
 
     #[TestDox('guest see 404 when attempting to view nonexistent person')]

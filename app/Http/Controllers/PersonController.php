@@ -107,6 +107,8 @@ class PersonController extends Controller
 
         $this->authorize('view', $person);
 
+        $person->loadMissing(['marriages.man', 'marriages.woman']);
+
         return Inertia::render('People/Show', [
             'person' => new ShowPersonResource(
                 $person,
