@@ -39,9 +39,11 @@ class Marriages extends Relation
     public function addConstraints(): void
     {
         if (static::$constraints) {
-            $this->query
-                ->where('woman_id', $this->parent->id)
-                ->orWhere('man_id', $this->parent->id);
+            $this->query->where(function (Builder $query) {
+                $query
+                    ->where('woman_id', $this->parent->id)
+                    ->orWhere('man_id', $this->parent->id);
+            });
         }
     }
 
@@ -52,9 +54,11 @@ class Marriages extends Relation
     {
         $people = collect($people)->pluck('id');
 
-        $this->query
-            ->whereIn('woman_id', $people)
-            ->orWhereIn('man_id', $people);
+        $this->query->where(function (Builder $query) use ($people) {
+            $query
+                ->whereIn('woman_id', $people)
+                ->orWhereIn('man_id', $people);
+        });
     }
 
     /**

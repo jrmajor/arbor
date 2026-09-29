@@ -21,7 +21,7 @@ final class UserResource extends JsonResource
             'username' => $this->resource->username,
             'email' => $this->resource->email,
             'permissions' => $this->resource->permissions,
-            'latestLogin' => $this->resource->latestLogin?->created_at?->format('Y-m-d h:s'),
+            'latestLogin' => $this->resource->latestLogin?->created_at?->format('Y-m-d H:i'),
         ];
     }
 }

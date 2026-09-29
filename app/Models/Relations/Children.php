@@ -26,9 +26,11 @@ class Children extends Relation
     public function addConstraints(): void
     {
         if (static::$constraints) {
-            $this->query
-                ->where('mother_id', $this->parent->id)
-                ->orWhere('father_id', $this->parent->id);
+            $this->query->where(function (Builder $query) {
+                $query
+                    ->where('mother_id', $this->parent->id)
+                    ->orWhere('father_id', $this->parent->id);
+            });
         }
     }
 
@@ -39,9 +41,11 @@ class Children extends Relation
     {
         $people = collect($people)->pluck('id');
 
-        $this->query
-            ->whereIn('mother_id', $people)
-            ->orWhereIn('father_id', $people);
+        $this->query->where(function (Builder $query) use ($people) {
+            $query
+                ->whereIn('mother_id', $people)
+                ->orWhereIn('father_id', $people);
+        });
     }
 
     /**
