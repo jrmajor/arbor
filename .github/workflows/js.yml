@@ -1,8 +1,6 @@
 name: JS
 
-on:
-  push:
-    branches-ignore: [master]
+on: push
 
 jobs:
   check:
