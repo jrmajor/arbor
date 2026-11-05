@@ -26,7 +26,7 @@
 		"@jrmajor/eslint-config": "^0.3.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0",
 		"@tailwindcss/vite": "^4.2",
-		"@types/node": "^24.12",
+		"@types/node": "^26.6",
 		"@types/qs": "^6.15",
 		"eslint": "^10.1",
 		"globals": "*",
@@ -43,7 +43,7 @@
 		},
 		"runtime": {
 			"name": "node",
-			"version": "^24.20",
+			"version": "^26.13",
 			"onFail": "download"
 		}
 	}
