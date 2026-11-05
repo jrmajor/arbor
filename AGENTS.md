@@ -1,0 +1,3 @@
+- use `composer dev` to start dev server.
+- in a fresh worktree, run `composer setup`, copy `database/database.sqlite` from the main checkout (it's gitignored and has real data), then run `php artisan migrate`.
+- keep inline comments lowercase, preserving capitalization in acronyms and code identifiers, and omit periods unless there are multiple sentences (eg. `# inline SVG assets`, ``// `startsWith` does not narrow unions, hence the casts``). keep docblocks as proper sentences with standard capitalization and punctuation.
