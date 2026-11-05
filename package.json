@@ -4,7 +4,7 @@
 	"packageManager": "pnpm@12.16.1",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "php artisan ziggy:generate && vite build && vite build --ssr",
+		"build": "vite build && vite build --ssr",
 		"check": "php artisan ziggy:generate --types-only && svelte-check --tsconfig ./tsconfig.json --diagnostic-sources js,svelte --fail-on-warnings",
 		"check:watch": "php artisan ziggy:generate --types-only && svelte-check --tsconfig ./tsconfig.json --diagnostic-sources js,svelte --watch",
 		"lint": "eslint . --max-warnings 0 --cache --cache-location .cache/eslint --cache-strategy content"

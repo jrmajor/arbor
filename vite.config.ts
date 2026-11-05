@@ -23,7 +23,6 @@ export default defineConfig({
 			name: 'ziggy',
 			pattern: 'routes/*.php',
 			run: ['php', 'artisan', 'ziggy:generate', '--types'],
-			build: false,
 		}),
 		svelte(),
 		tailwindcss(),
