@@ -1,0 +1,2 @@
+- use `composer dev` to start dev server.
+- in a fresh worktree, run `composer setup`, copy `database/database.sqlite` from the main checkout (it's gitignored and has real data), then run `php artisan migrate`.
