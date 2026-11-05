@@ -227,9 +227,9 @@
 		@apply px-3 py-1.5 pr-9 rounded-md border border-gray-300;
 
 		&:not(.disabled) {
-			@apply focus:border-blue-600 focus:ring-3 focus:ring-blue-500/50;
-			@apply focus-within:border-blue-600 focus-within:ring-3 focus-within:ring-blue-500/50;
-			@apply active:border-blue-600 active:ring-3 active:ring-blue-500/50;
+			@variant focus, focus-within, active {
+				@apply border-blue-600 ring-3 ring-blue-500/50;
+			}
 		}
 	}
 
@@ -237,9 +237,9 @@
 		@apply border-red-600;
 
 		&:not(.disabled) {
-			@apply focus:ring-red-500/50;
-			@apply focus-within:ring-red-500/50;
-			@apply active:ring-red-500/50;
+			@variant focus, focus-within, active {
+				@apply ring-red-500/50;
+			}
 		}
 	}
 
