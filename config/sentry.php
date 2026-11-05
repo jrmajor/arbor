@@ -2,15 +2,14 @@
 
 use Psl\Async\Exception\CancelledException;
 use Psl\Shell;
-use Psl\Shell\Exception\FailedExecutionException;
 
 try {
     $gitHash = Shell\execute(
         'git',
-        ['log', '--pretty=%h', '-n1', 'HEAD'],
-        base_path('.git'),
+        ['rev-parse', '--short=7', 'HEAD'],
+        base_path(),
     );
-} catch (FailedExecutionException|CancelledException) {
+} catch (Shell\Exception\ExceptionInterface|CancelledException) {
     $gitHash = '';
 }
 
