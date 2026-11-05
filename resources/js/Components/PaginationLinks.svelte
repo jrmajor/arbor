@@ -16,7 +16,7 @@
 
 {#snippet elementSnippet({ active, label, url: href }: PaginationLink)}
 	{#if label === 'previous'}
-		{@const disabled = meta.current_page === 1}
+		{const disabled = $derived(meta.current_page === 1);}
 		<Button type="link" {href} rel="prev" {disabled} outline>&lsaquo;</Button>
 	{/if}
 
@@ -29,7 +29,7 @@
 	{/if}
 
 	{#if label === 'next'}
-		{@const disabled = meta.current_page === meta.last_page}
+		{const disabled = $derived(meta.current_page === meta.last_page);}
 		<Button type="link" {href} rel="next" {disabled} outline>&rsaquo;</Button>
 	{/if}
 {/snippet}
