@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"type": "module",
-	"packageManager": "pnpm@12.2.1",
+	"packageManager": "pnpm@12.16.1",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "php artisan ziggy:generate && vite build && vite build --ssr",
@@ -39,7 +39,7 @@
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
-			"version": "12.2.1"
+			"version": "12.16.1"
 		},
 		"runtime": {
 			"name": "node",
