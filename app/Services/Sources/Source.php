@@ -223,7 +223,6 @@ final class Source implements Jsonable, Stringable
             'name' => 'a',
             'handler' => 'line',
             'nonNestables' => ['Url', 'Link'],
-            'text' => null,
             'attributes' => [
                 'href' => null,
                 'title' => null,
@@ -325,7 +324,7 @@ final class Source implements Jsonable, Stringable
             $markup .= ' ' . $name . '="' . e($value) . '"';
         }
 
-        $text = $element['text'] ?? null;
+        $text = $element['text'];
 
         if ($text === null) {
             return $markup . '/>';

@@ -9,7 +9,6 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
-use Psl\Dict;
 use Psl\Iter;
 use Psl\Regex;
 use Psl\Str;
@@ -17,7 +16,6 @@ use Psl\Vec;
 use Symfony\Component\DomCrawler\Crawler;
 
 use function App\nullable_trim;
-use function App\trim_values;
 
 final class WielcyScraper
 {
@@ -113,7 +111,7 @@ final class WielcyScraper
         try {
             $heading = $crawler->filter('h1')->text();
         } catch (InvalidArgumentException) {
-            return Dict\from_keys(['name', 'middleName', 'surname'], fn () => null);
+            return ['name' => null, 'middleName' => null, 'surname' => null];
         }
 
         try {
@@ -128,11 +126,11 @@ final class WielcyScraper
 
         $names = Str\split(Str\trim($names ?? ''), ' ', 2);
 
-        return trim_values([
-            'name' => $names[0],
-            'middleName' => $names[1] ?? null,
-            'surname' => $surname,
-        ]);
+        return [
+            'name' => nullable_trim($names[0]),
+            'middleName' => nullable_trim($names[1] ?? null),
+            'surname' => nullable_trim($surname),
+        ];
     }
 
     /**
@@ -158,8 +156,13 @@ final class WielcyScraper
      */
     private function parseDates(Crawler $crawler): array
     {
-        $attributes = ['birthDate', 'birthPlace', 'deathDate', 'deathPlace', 'burialPlace'];
-        $attributes = Dict\from_keys($attributes, fn () => null);
+        $attributes = [
+            'birthDate' => null,
+            'birthPlace' => null,
+            'deathDate' => null,
+            'deathPlace' => null,
+            'burialPlace' => null,
+        ];
 
         try {
             $facts = $crawler->filter('.lewa-szpalta ul')->first()->children('li');
@@ -179,7 +182,7 @@ final class WielcyScraper
             }
         }
 
-        return trim_values($attributes);
+        return $attributes;
     }
 
     /**

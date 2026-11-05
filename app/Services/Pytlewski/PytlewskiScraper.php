@@ -9,7 +9,6 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use InvalidArgumentException;
-use Psl\Dict;
 use Psl\Fun;
 use Psl\Html;
 use Psl\Regex;
@@ -18,7 +17,6 @@ use Symfony\Component\DomCrawler\Crawler;
 
 use function App\nullable_trim;
 use function App\parse_int;
-use function App\trim_values;
 
 final class PytlewskiScraper
 {
@@ -152,7 +150,7 @@ final class PytlewskiScraper
                 ->filter('tbody > tr:nth-child(1) > td > font > font[size="3"] > i')
                 ->html();
         } catch (InvalidArgumentException) {
-            return Dict\from_keys(['familyName', 'lastName', 'name', 'middleName'], fn () => null);
+            return ['familyName' => null, 'lastName' => null, 'name' => null, 'middleName' => null];
         }
 
         [$surnames, $names] = Str\split($names, '<br>') + [1 => ''];
@@ -160,12 +158,12 @@ final class PytlewskiScraper
         $names = Str\split($names, '-');
         $matches = Regex\first_match($surnames, '/(.*) \\((.*)\\).*/');
 
-        return trim_values([
-            'familyName' => Html\strip_tags($matches ? $matches[2] : $surnames),
-            'lastName' => $matches ? Html\strip_tags($matches[1]) : null,
-            'name' => array_shift($names),
-            'middleName' => Str\join($names, ' '),
-        ]);
+        return [
+            'familyName' => nullable_trim(Html\strip_tags($matches ? $matches[2] : $surnames)),
+            'lastName' => $matches ? nullable_trim(Html\strip_tags($matches[1])) : null,
+            'name' => nullable_trim(array_shift($names)),
+            'middleName' => nullable_trim(Str\join($names, ' ')),
+        ];
     }
 
     /**
@@ -173,8 +171,13 @@ final class PytlewskiScraper
      */
     private function parseDates(Crawler $crawler): array
     {
-        $attributes = ['birthDate', 'birthPlace', 'deathDate', 'deathPlace', 'burialPlace'];
-        $attributes = Dict\from_keys($attributes, fn () => null);
+        $attributes = [
+            'birthDate' => null,
+            'birthPlace' => null,
+            'deathDate' => null,
+            'deathPlace' => null,
+            'burialPlace' => null,
+        ];
 
         try {
             $dates = $crawler
@@ -190,31 +193,31 @@ final class PytlewskiScraper
         $matches = Regex\first_match($dates[0], '/ur\\. ([^ ]*) w ([^<]*)/');
 
         if ($matches !== null) {
-            $attributes['birthDate'] = $matches[1];
+            $attributes['birthDate'] = nullable_trim($matches[1]);
 
             if (! Str\contains($matches[2], 'brak')) {
-                $attributes['birthPlace'] = $matches[2];
+                $attributes['birthPlace'] = nullable_trim($matches[2]);
             }
         }
 
         if (! isset($dates[1])) {
-            return trim_values($attributes);
+            return $attributes;
         }
 
         $pattern = '/\\(zm\\. ([^ ]*)(?: w ([^<),]*)(?:,poch\\.([^<)]*)?\\)?)?)?/';
         $matches = Regex\first_match($dates[1], $pattern);
 
         if ($matches !== null) {
-            $attributes['deathDate'] = $matches[1];
+            $attributes['deathDate'] = nullable_trim($matches[1]);
 
             if (! Str\contains($matches[2] ?? '', 'brak')) {
-                $attributes['deathPlace'] = $matches[2] ?? null;
+                $attributes['deathPlace'] = nullable_trim($matches[2] ?? null);
             }
 
-            $attributes['burialPlace'] = $matches[3] ?? null;
+            $attributes['burialPlace'] = nullable_trim($matches[3] ?? null);
         }
 
-        return trim_values($attributes);
+        return $attributes;
     }
 
     private function parsePhoto(Crawler $crawler): ?string
