@@ -26,6 +26,13 @@ export default defineConfig([
 			'svelte/require-each-key': 'off',
 		},
 	},
+	{
+		// vite's native config loader needs file extensions
+		files: ['*.config.ts'],
+		rules: {
+			'import-x/extensions': ['error', 'ignorePackages', { ts: 'always' }],
+		},
+	},
 	globalIgnores([
 		'bootstrap/ssr',
 		'public/build',
