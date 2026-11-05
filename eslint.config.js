@@ -1,5 +1,6 @@
+import { fileURLToPath } from 'node:url';
 import base, { css, js, svelte } from '@jrmajor/eslint-config';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { defineConfig, globalIgnores, includeIgnoreFile } from 'eslint/config';
 import globals from 'globals';
 
 export default defineConfig([
@@ -26,9 +27,15 @@ export default defineConfig([
 			'svelte/require-each-key': 'off',
 		},
 	},
+	{
+		// vite's native config loader needs file extensions
+		files: ['*.config.ts'],
+		rules: {
+			'import-x/extensions': ['error', 'ignorePackages', { ts: 'always' }],
+		},
+	},
+	includeIgnoreFile(fileURLToPath(new URL('.gitignore', import.meta.url))),
 	globalIgnores([
-		'bootstrap/ssr',
-		'public/build',
 		'resources/js/ziggy',
 		// todo: @eslint/css errors
 		'resources/css/tailwind.css',

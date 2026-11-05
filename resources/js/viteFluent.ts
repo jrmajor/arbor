@@ -24,13 +24,17 @@ export default function fluent(options: PluginOptions) {
 
 			(new Validator()).visit(parse(code, { }));
 
-			return `
-				import { FluentBundle, FluentResource } from '@fluent/bundle';
+			return {
+				code: `
+					import { FluentBundle, FluentResource } from '@fluent/bundle';
 
-				const bundle = new FluentBundle(${JSON.stringify(locale)});
-				bundle.addResource(new FluentResource(${JSON.stringify(code)}));
-				export default bundle;
-				`;
+					const bundle = new FluentBundle(${JSON.stringify(locale)});
+					bundle.addResource(new FluentResource(${JSON.stringify(code)}));
+					export default bundle;
+					`,
+				// generated code doesn't map to the source file
+				map: { mappings: '' },
+			};
 		},
 	} as Plugin;
 }

@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 import run from 'vite-plugin-run';
-import fluent from './resources/js/viteFluent';
+import fluent from './resources/js/viteFluent.ts';
 
 const dir = import.meta.dirname;
 
@@ -23,7 +23,6 @@ export default defineConfig({
 			name: 'ziggy',
 			pattern: 'routes/*.php',
 			run: ['php', 'artisan', 'ziggy:generate', '--types'],
-			build: false,
 		}),
 		svelte(),
 		tailwindcss(),
