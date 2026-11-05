@@ -1,6 +1,6 @@
 allowBuilds:
   esbuild: true
-  unrs-resolver: true
+  unrs-resolver: false
 
 minimumReleaseAge: 0
 engineStrict: true
