@@ -2,20 +2,24 @@
 	@apply rounded-md border border-gray-300 bg-white px-3 py-1.5 outline-none;
 
 	&:not([disabled]) {
-		@apply focus:ring-3 active:ring-3;
+		@variant focus, active {
+			@apply ring-3;
+		}
 	}
 
 	&:not([disabled]):not(.invalid) {
-		@apply focus:border-blue-600 focus:ring-blue-500/50;
-		@apply active:border-blue-600 active:ring-blue-500/50;
+		@variant focus, active {
+			@apply border-blue-600 ring-blue-500/50;
+		}
 	}
 
 	&.invalid {
 		@apply border-red-600;
 
 		&:not([disabled]) {
-			@apply focus:ring-red-500/50;
-			@apply active:ring-red-500/50;
+			@variant focus, active {
+				@apply ring-red-500/50;
+			}
 		}
 	}
 
