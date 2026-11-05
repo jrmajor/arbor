@@ -42,7 +42,7 @@
 		"phpstan/phpstan": "^2.3",
 		"phpstan/phpstan-mockery": "^2.0",
 		"phpstan/phpstan-phpunit": "^2.1",
-		"phpunit/phpunit": "~13.3.0",
+		"phpunit/phpunit": "^13.3",
 		"spatie/laravel-ignition": "^2.12"
 	},
 	"minimum-stability": "stable",
