@@ -174,11 +174,11 @@ importers:
         specifier: ^3.1
         version: 3.1.4
       '@inertiajs/core':
-        specifier: ^3.0
-        version: 3.0.1
+        specifier: ^3.11
+        version: 3.11.0
       '@inertiajs/svelte':
-        specifier: ^3.0
-        version: 3.0.1(svelte@5.55.1)
+        specifier: ^3.11
+        version: 3.11.0(svelte@5.55.1)
       '@tailwindcss/forms':
         specifier: ^0.5.11
         version: 0.5.11(tailwindcss@4.2.2)
@@ -199,8 +199,8 @@ importers:
         specifier: ^0.19.0
         version: 0.19.0
       '@inertiajs/vite':
-        specifier: ^3.0
-        version: 3.0.1(vite@8.0.3)
+        specifier: ^3.11
+        version: 3.11.0(vite@8.0.3)
       '@jrmajor/eslint-config':
         specifier: ^0.3.0
         version: 0.3.0(@typescript-eslint/utils@8.58.0)(eslint-import-resolver-node@0.3.9)(eslint@10.1.0)(svelte@5.55.1)(typescript@6.0.2)
@@ -485,21 +485,25 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@inertiajs/core@3.0.1':
-    resolution: {integrity: sha512-Fm6w6t9zfUKAWZuzPYVufo7gx5d3EO3OSMLUgP/3KgxX3H/9UNbuvy6dR+pzrWS7OtW/L3TAZfpCXAAb1FlhEA==}
+  '@inertiajs/core@3.11.0':
+    resolution: {integrity: sha512-YDqkKHsTiDUKofVzE3p6IduuU1u0ZwmheSpk2AZP6Eig3ZwhTlchDiLbUhFUCd138naqlhjRh2rTxIXeKrnmOQ==}
     peerDependencies:
-      axios: ^1.13.2
+      axios: ^1.15.2
     peerDependenciesMeta:
       axios:
         optional: true
 
-  '@inertiajs/svelte@3.0.1':
-    resolution: {integrity: sha512-/rIf2g2mzWjIR6BYZUbqW+qui1q3rw2HMUXCMtDlhO4UMa0VXUS9CR59V/dTMAMQwzBTRAiElAQyanoxA9VMbw==}
+  '@inertiajs/svelte@3.11.0':
+    resolution: {integrity: sha512-vBnBJDQew8rfOGeD3ONe0XD25QdYkVnsgMhiuF0i5DQ/SmzjYmVGIhBPDMdIVknUE5q/WvbCnI0EH42OnnImJg==}
     peerDependencies:
+      '@laravel/echo-svelte': ^2.0.0
       svelte: ^5.0.0
+    peerDependenciesMeta:
+      '@laravel/echo-svelte':
+        optional: true
 
-  '@inertiajs/vite@3.0.1':
-    resolution: {integrity: sha512-SAEMMRnnvm60M/UsPePxzqJ4StkXWS/tS9K3fFY1zTYBJHjqZ7xn4ze/jnIdcnJC/6+wU18aTpjoXVlw8AxWYw==}
+  '@inertiajs/vite@3.11.0':
+    resolution: {integrity: sha512-BQDD++BbQ/Q7U2E3yPGYki/vkwC+pT2DNUXUItrGeMefLy8aBaJXftF979+hupU/V3rfXf1RpGZZRi+BcQ5jRQ==}
     peerDependencies:
       vite: ^7.0.0 || ^8.0.0
 
@@ -1284,8 +1288,8 @@ packages:
   known-css-properties@0.37.0:
     resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
 
-  laravel-precognition@2.0.0:
-    resolution: {integrity: sha512-dmA4HGc9m+TsVNsJs9/XQBI8u6j7coilN+qKkBuhuXQzH3HypwS/c5dFQ4UqUGjBbcxIM7zdk91kM/SRZwIvWQ==}
+  laravel-precognition@2.1.1:
+    resolution: {integrity: sha512-Wg05+puJ5qiNsE8rdO5JmSiqQ2xcEf7442AIZiDhZg1JyPOePv5SSCu0fO7z7LqmJcPMxNNuOIcZd6UatEmYug==}
     peerDependencies:
       axios: ^1.4.0
     peerDependenciesMeta:
@@ -2037,24 +2041,27 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@inertiajs/core@3.0.1':
+  '@inertiajs/core@3.11.0':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       es-toolkit: 1.45.1
-      laravel-precognition: 2.0.0
+      laravel-precognition: 2.1.1
 
-  '@inertiajs/svelte@3.0.1(svelte@5.55.1)':
+  '@inertiajs/svelte@3.11.0(svelte@5.55.1)':
     dependencies:
-      '@inertiajs/core': 3.0.1
+      '@inertiajs/core': 3.11.0
       es-toolkit: 1.45.1
-      laravel-precognition: 2.0.0
+      laravel-precognition: 2.1.1
       svelte: 5.55.1
     transitivePeerDependencies:
       - axios
 
-  '@inertiajs/vite@3.0.1(vite@8.0.3)':
+  '@inertiajs/vite@3.11.0(vite@8.0.3)':
     dependencies:
-      '@inertiajs/core': 3.0.1
+      '@inertiajs/core': 3.11.0
+      '@jridgewell/remapping': 2.3.5
+      magic-string: 0.30.21
+      tinyglobby: 0.2.15
       vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@26.6.6)(esbuild@0.27.4)(jiti@2.6.1)
     transitivePeerDependencies:
       - axios
@@ -2800,7 +2807,7 @@ snapshots:
 
   known-css-properties@0.37.0: {}
 
-  laravel-precognition@2.0.0:
+  laravel-precognition@2.1.1:
     dependencies:
       es-toolkit: 1.45.1
 

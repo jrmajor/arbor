@@ -12,8 +12,8 @@
 	"dependencies": {
 		"@fluent/bundle": "^0.19.1",
 		"@github/hotkey": "^3.1",
-		"@inertiajs/core": "^3.0",
-		"@inertiajs/svelte": "^3.0",
+		"@inertiajs/core": "^3.11",
+		"@inertiajs/svelte": "^3.11",
 		"@tailwindcss/forms": "^0.5.11",
 		"date-fns": "^4.1",
 		"runed": "^0.37.1",
@@ -22,7 +22,7 @@
 	},
 	"devDependencies": {
 		"@fluent/syntax": "^0.19.0",
-		"@inertiajs/vite": "^3.0",
+		"@inertiajs/vite": "^3.11",
 		"@jrmajor/eslint-config": "^0.3.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0",
 		"@tailwindcss/vite": "^4.2",
