@@ -142,6 +142,17 @@ final class CreateMarriageTest extends TestCase
             ->assertSee((string) $man->id);
     }
 
+    #[TestDox('array spouse id parameters are ignored')]
+    public function testArraySpouseParams(): void
+    {
+        $this->withPermissions(2)
+            ->get('marriages/create?woman[]=x&man[]=x')
+            ->assertInertiaOk([
+                'manId' => null,
+                'womanId' => null,
+            ], 'Marriages/Create');
+    }
+
     #[TestDox('data is validated using appropriate form request')]
     public function testFormRequest(): void
     {

@@ -18,16 +18,16 @@ class PeopleSearchController extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        $query = $request->input('search');
+        $query = $request->string('search', strict: true);
 
         if (blank($query)) {
             return response()->json(['people' => [], 'moreCount' => 0, 'hiddenCount' => 0]);
         }
 
-        $sex = filled($request->input('sex')) ? $request->input('sex') : null;
+        $sex = $request->string('sex', strict: true);
 
         $whereFragment = function (Builder $q) use ($query) {
-            $queryFragments = Vec\filter_nulls(trim_values(Str\split($query, ' ')));
+            $queryFragments = Vec\filter_nulls(trim_values(Str\split($query->value(), ' ')));
 
             foreach ($queryFragments as $fragment) {
                 $q->where(function (Builder $q) use ($fragment) {
@@ -40,14 +40,14 @@ class PeopleSearchController extends Controller
 
         $whereSex = function (Builder $q) use ($sex) {
             return $q->where(function (Builder $q) use ($sex) {
-                $q->where('sex', $sex)->orWhereNull('sex');
+                $q->where('sex', $sex->value())->orWhereNull('sex');
             });
         };
 
         /** @var Collection<int, Person> $people */
         $people = Person::query()
-            ->where(fn (Builder $q) => $q->where('id', $query)->orWhere($whereFragment))
-            ->when($sex, $whereSex)
+            ->where(fn (Builder $q) => $q->where('id', $query->value())->orWhere($whereFragment))
+            ->when(filled($sex), $whereSex)
             ->get();
 
         $people = $people->map(fn (Person $p) => Gate::allows('view', $p) ? $p : null);

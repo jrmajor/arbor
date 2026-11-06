@@ -159,6 +159,18 @@ final class CreatePersonTest extends TestCase
             ], 'People/Create');
     }
 
+    #[TestDox('array parent id parameters are ignored')]
+    public function testArrayParentParams(): void
+    {
+        $this->withPermissions(2)
+            ->get('people/create?mother[]=x&father[]=x')
+            ->assertInertiaOk([
+                'fatherId' => null,
+                'motherId' => null,
+                'familyName' => null,
+            ], 'People/Create');
+    }
+
     #[TestDox('data is validated using appropriate form request')]
     public function testFormRequest(): void
     {
