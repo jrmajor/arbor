@@ -88,6 +88,7 @@ final class PytlewskiScraper
                     fn ($s) => Str\before($s, '<td background="images/spacer.gif" width="35" height="1"></td>'),
                 )($source->body());
             },
+            ['seconds' => 600],
         );
     }
 
