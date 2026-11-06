@@ -4,7 +4,9 @@ namespace App\Services\Wielcy;
 
 final class Wielcy
 {
-    public readonly string $url;
+    public string $url {
+        get => WielcyScraper::url($this->id);
+    }
 
     public function __construct(
         public readonly string $id,
@@ -21,7 +23,5 @@ final class Wielcy
         public readonly ?string $photo = null,
         public readonly ?Relative $mother = null,
         public readonly ?Relative $father = null,
-    ) {
-        $this->url = WielcyScraper::url($id);
-    }
+    ) { }
 }
