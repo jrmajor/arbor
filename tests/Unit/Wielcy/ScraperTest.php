@@ -126,7 +126,7 @@ final class ScraperTest extends TestCase
 
         Cache::shouldReceive('flexible')
             ->once()
-            ->with('wielcy.psb.6305.1', Mockery::any(), Mockery::any())
+            ->with('wielcy.psb.6305.1', Mockery::any(), Mockery::any(), ['seconds' => 600])
             ->andReturn('');
 
         $this->scraper->find('psb.6305.1');

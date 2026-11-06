@@ -82,6 +82,7 @@ final class WielcyScraper
 
                 return $source !== false ? $source : null;
             },
+            ['seconds' => 600],
         );
     }
 
