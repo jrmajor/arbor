@@ -31,7 +31,7 @@
 	},
 	"require-dev": {
 		"barryvdh/laravel-debugbar": "^4.4",
-		"brianium/paratest": "^7.25",
+		"brianium/paratest": "^7.27",
 		"fakerphp/faker": "^1.24",
 		"jrmajor/cs": "^0.7.0",
 		"larastan/larastan": "^3.14",
@@ -42,7 +42,7 @@
 		"phpstan/phpstan": "^2.3",
 		"phpstan/phpstan-mockery": "^2.0",
 		"phpstan/phpstan-phpunit": "^2.1",
-		"phpunit/phpunit": "^13.3",
+		"phpunit/phpunit": "^13.4",
 		"spatie/laravel-ignition": "^2.12"
 	},
 	"minimum-stability": "stable",
