@@ -4,7 +4,9 @@ namespace App\Services\Pytlewski;
 
 final class Pytlewski
 {
-    public readonly string $url;
+    public string $url {
+        get => PytlewskiScraper::url($this->id);
+    }
 
     public function __construct(
         public readonly int $id,
@@ -27,7 +29,5 @@ final class Pytlewski
         public readonly array $children = [],
         /** @var list<Relative> */
         public readonly array $siblings = [],
-    ) {
-        $this->url = PytlewskiScraper::url($id);
-    }
+    ) { }
 }
