@@ -185,9 +185,9 @@ class Person extends Model
             'last' => 'ifnull(last_name, family_name)',
         };
 
-        return Cache::rememberForever(
-            "letters_{$type}",
-            fn () => DB::table('people')
+        $letters = Cache::rememberForever(
+            "letters.{$type}",
+            fn (): array => DB::table('people')
                 ->selectRaw(<<<SQL
                     substr({$nameQuery}, 1, 1)
                     /* collate utf8mb4_0900_as_ci */
@@ -198,11 +198,17 @@ class Person extends Model
                 ->orderBy('letter')
                 ->whereNull('deleted_at')
                 ->get()
-                ->map(fn (object $record): Letter => new Letter(
-                    letter: $record->letter,
-                    count: $record->count,
-                )),
+                ->map(fn (object $record): array => [
+                    'letter' => $record->letter,
+                    'count' => $record->count,
+                ])
+                ->all(),
         );
+
+        return collect($letters)->map(fn (array $record): Letter => new Letter(
+            letter: $record['letter'],
+            count: $record['count'],
+        ));
     }
 
     public function getActivitylogOptions(): LogOptions

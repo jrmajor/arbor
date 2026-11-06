@@ -32,4 +32,6 @@ return [
 
     'prefix' => 'arbor-cache-',
 
+    'serializable_classes' => false,
+
 ];

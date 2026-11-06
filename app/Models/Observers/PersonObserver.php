@@ -34,7 +34,7 @@ class PersonObserver
 
     protected function clearLettersCache(): void
     {
-        Cache::forget('letters_family');
-        Cache::forget('letters_last');
+        Cache::forget('letters.family');
+        Cache::forget('letters.last');
     }
 }
