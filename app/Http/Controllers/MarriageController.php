@@ -23,8 +23,8 @@ class MarriageController extends Controller
         $this->authorize('create', Marriage::class);
 
         return Inertia::render('Marriages/Create', [
-            'manId' => $request->integer('man') ?: null,
-            'womanId' => $request->integer('woman') ?: null,
+            'manId' => $request->integer('man', strict: true) ?: null,
+            'womanId' => $request->integer('woman', strict: true) ?: null,
         ]);
     }
 

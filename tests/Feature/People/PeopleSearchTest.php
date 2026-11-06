@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\People;
 
+use App\Enums\Sex;
 use App\Models\Person;
 use Illuminate\Database\Eloquent\Collection;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -112,5 +113,24 @@ final class PeopleSearchTest extends TestCase
             ->assertJsonCount(10, 'people')
             ->assertJsonPath('moreCount', 6)
             ->assertJsonPath('hiddenCount', 1);
+    }
+
+    #[TestDox('it ignores array query')]
+    public function testArrayQuery(): void
+    {
+        $this->get('people/search?search[]=maj')
+            ->assertOk()
+            ->assertExactJson(['people' => [], 'moreCount' => 0, 'hiddenCount' => 0]);
+    }
+
+    #[TestDox('it ignores array sex filter')]
+    public function testArraySex(): void
+    {
+        $this->people[0]->update(['sex' => Sex::Male]);
+
+        $this->get('people/search?search=jan&sex[]=xx')
+            ->assertOk()
+            ->assertJsonCount(1, 'people')
+            ->assertJsonPath('people.0.id', $this->people[0]->id);
     }
 }
