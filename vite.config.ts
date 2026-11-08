@@ -19,8 +19,8 @@ export default defineConfig({
 				local('Inter', {
 					alias: 'sans',
 					variants: [
-						{ src: 'resources/fonts/inter/InterVariable.woff2', weight: '100 900', style: 'normal' },
-						{ src: 'resources/fonts/inter/InterVariable-Italic.woff2', weight: '100 900', style: 'italic' },
+						{ src: 'node_modules/inter-ui/variable/InterVariable.woff2', weight: '100 900', style: 'normal' },
+						{ src: 'node_modules/inter-ui/variable/InterVariable-Italic.woff2', weight: '100 900', style: 'italic' },
 					],
 					fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
 					optimizedFallbacks: false,
