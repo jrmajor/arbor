@@ -26,7 +26,7 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/errors.log'),
             'level' => 'debug',
-            'days' => 14,
+            'max_files' => 14,
             'replace_placeholders' => true,
         ],
 
@@ -34,7 +34,7 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/deprecations.log'),
             'level' => 'debug',
-            'days' => 14,
+            'max_files' => 14,
             'replace_placeholders' => true,
         ],
     ],
