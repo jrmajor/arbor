@@ -17,6 +17,7 @@ use App\Services\Wielcy\WielcyScraper;
 use Carbon\Carbon;
 use Database\Factories\PersonFactory;
 use Exception;
+use Illuminate\Database\Eloquent\Attributes\Boot;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -85,7 +86,8 @@ class Person extends Model
         'burial_date',
     ];
 
-    protected static function booting()
+    #[Boot]
+    protected static function isolateVisibilityUpdates(): void
     {
         static::updating(function (self $person) {
             if ($person->isDirty('visibility') && count($person->getDirty()) > 1) {
