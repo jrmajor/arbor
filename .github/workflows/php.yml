@@ -18,19 +18,8 @@ jobs:
           php-version: '8.5'
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v6
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: Install Composer dependencies
-        run: composer install
+        uses: ramsey/composer-install@v4
 
       - name: Prepare Laravel application
         run: composer setup
@@ -53,17 +42,6 @@ jobs:
           php-version: '8.5'
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v6
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: PHPStan cache
         uses: actions/cache@v6
         with:
@@ -72,7 +50,7 @@ jobs:
           restore-keys: phpstan-
 
       - name: Install Composer dependencies
-        run: composer install
+        uses: ramsey/composer-install@v4
 
       - name: Prepare Laravel application
         run: composer setup
@@ -95,17 +73,6 @@ jobs:
           php-version: '8.5'
           coverage: none
 
-      - name: Get Composer cache directory path
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v6
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ hashFiles('composer.lock') }}
-          restore-keys: composer-
-
       - name: PHP-CS-Fixer cache
         uses: actions/cache@v6
         with:
@@ -114,7 +81,7 @@ jobs:
           restore-keys: php-cs-fixer-
 
       - name: Install Composer dependencies
-        run: composer install
+        uses: ramsey/composer-install@v4
 
       - name: Run PHP-CS-Fixer
         run: composer format -- --dry-run
