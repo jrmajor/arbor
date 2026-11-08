@@ -54,7 +54,7 @@ final class Source implements Jsonable, Stringable
 
     public function sanitized(): ?string
     {
-        $collapsed = trim(preg_replace('/\\s+/', ' ', $this->raw));
+        $collapsed = preg_replace('/\\s+/', ' ', $this->raw) |> trim(...);
 
         return $collapsed === '' ? null : $collapsed;
     }
@@ -136,7 +136,7 @@ final class Source implements Jsonable, Stringable
 
         $markup .= $text;
 
-        return trim(preg_replace('/\\s+/', ' ', $markup));
+        return preg_replace('/\\s+/', ' ', $markup) |> trim(...);
     }
 
     /**
