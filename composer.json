@@ -72,11 +72,15 @@
 	"extra": {
 		"laravel": {
 			"dont-discover": []
+		},
+		"skeleton": {
+			"laravel/laravel": "def7ce1",
+			"laravel/svelte-starter-kit": "4c9bed1"
 		}
 	},
 	"scripts": {
 		"post-update-cmd": [
-			"@php artisan vendor:publish --tag=laravel-assets --ansi"
+			"@php artisan vendor:publish --tag=laravel-assets --ansi --force"
 		],
 		"pre-package-uninstall": [
 			"Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
@@ -92,7 +96,7 @@
 		],
 		"dev": [
 			"Composer\\Config::disableProcessTimeout",
-			"pnpx concurrently -k -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"pnpm run dev\" --names=server,queue,logs,vite"
+			"@php artisan dev"
 		],
 		"preview": [
 			"Composer\\Config::disableProcessTimeout",

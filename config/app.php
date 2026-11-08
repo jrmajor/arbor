@@ -7,7 +7,7 @@ return [
     'env' => env('APP_ENV', 'production'),
     'debug' => (bool) env('APP_DEBUG', false),
 
-    'url' => env('APP_URL', 'https://arbor.test'),
+    'url' => env('APP_URL', 'http://localhost:8000'),
 
     // todo: change to UTC
     'timezone' => 'Europe/Warsaw',

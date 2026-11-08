@@ -24,7 +24,12 @@ export default defineConfig({
 			pattern: 'routes/*.php',
 			run: ['php', 'artisan', 'ziggy:generate', '--types'],
 		}),
-		svelte(),
+		svelte({
+			compilerOptions: {
+				runes: ({ filename }) => filename.split('/').includes('node_modules') ? undefined : true,
+			},
+			inspector: true,
+		}),
 		tailwindcss(),
 		fluent({
 			resolveLocale(path) {
@@ -45,6 +50,7 @@ export default defineConfig({
 		watch: {
 			ignored: [
 				`${dir}/storage/framework/views/**`,
+				`${dir}/vendor/**`,
 			],
 		},
 	},

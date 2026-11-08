@@ -3,9 +3,10 @@
 /public/build
 /public/hot
 /public/storage
+/storage/pail
 /storage/*.key
 /vendor
 /.env
 /.env.backup
 /patches.lock.json
-/vite.config.js.timestamp-*
+/vite.config.ts.timestamp-*
