@@ -2,17 +2,17 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Psl\Filesystem;
 
+#[Signature('backup:run')]
+#[Description('Make a new backup.')]
 class MakeBackup extends Command
 {
-    protected $signature = 'backup:run';
-
-    protected $description = 'Make a new backup.';
-
     public function handle(): void
     {
         $databasePath = DB::getConfig()['database'];

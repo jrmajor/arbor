@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Sex;
+use App\Models\Observers\PersonObserver;
 use App\Models\Relations\Children;
 use App\Models\Relations\HalfSiblings;
 use App\Models\Relations\Marriages;
@@ -16,6 +17,8 @@ use App\Services\Wielcy\WielcyScraper;
 use Carbon\Carbon;
 use Database\Factories\PersonFactory;
 use Exception;
+use Illuminate\Database\Eloquent\Attributes\Guarded;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -54,6 +57,8 @@ use Spatie\Activitylog\Support\LogOptions;
  * @property-read EloquentCollection<int, Marriage> $marriages
  * @property-read EloquentCollection<int, Person> $children
  */
+#[Guarded(['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'])]
+#[ObservedBy(PersonObserver::class)]
 class Person extends Model
 {
     use HasDateRanges;
@@ -64,8 +69,6 @@ class Person extends Model
     use LogsActivity;
     use SoftDeletes;
     use TapsActivity;
-
-    protected $guarded = ['id', 'visibility', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
         'sex' => Sex::class,
