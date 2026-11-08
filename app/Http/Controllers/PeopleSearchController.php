@@ -27,7 +27,10 @@ class PeopleSearchController extends Controller
         $sex = $request->string('sex', strict: true);
 
         $whereFragment = function (Builder $q) use ($query) {
-            $queryFragments = Vec\filter_nulls(trim_values(Str\split($query->value(), ' ')));
+            $queryFragments = $query->value()
+                |> (fn ($value) => Str\split($value, ' '))
+                |> trim_values(...)
+                |> Vec\filter_nulls(...);
 
             foreach ($queryFragments as $fragment) {
                 $q->where(function (Builder $q) use ($fragment) {
