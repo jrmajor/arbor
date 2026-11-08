@@ -3,7 +3,7 @@ import inertia from '@inertiajs/vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import laravel from 'laravel-vite-plugin';
-import { google } from 'laravel-vite-plugin/fonts';
+import { local } from 'laravel-vite-plugin/fonts';
 import { defineConfig } from 'vite';
 import run from 'vite-plugin-run';
 import fluent from './resources/js/viteFluent.ts';
@@ -16,11 +16,12 @@ export default defineConfig({
 			input: ['resources/js/app.ts', 'resources/css/style.css'],
 			refresh: true,
 			fonts: [
-				google('Inter', {
+				local('Inter', {
 					alias: 'sans',
-					weights: ['100..900'],
-					styles: ['normal', 'italic'],
-					subsets: ['latin', 'latin-ext'],
+					variants: [
+						{ src: 'resources/fonts/inter/InterVariable.woff2', weight: '100 900', style: 'normal' },
+						{ src: 'resources/fonts/inter/InterVariable-Italic.woff2', weight: '100 900', style: 'italic' },
+					],
 					fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
 					optimizedFallbacks: false,
 				}),
