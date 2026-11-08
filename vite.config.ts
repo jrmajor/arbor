@@ -19,6 +19,7 @@ export default defineConfig({
 				google('Inter', {
 					alias: 'sans',
 					weights: ['100..900'],
+					styles: ['normal', 'italic'],
 					subsets: ['latin', 'latin-ext'],
 					fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
 					optimizedFallbacks: false,
