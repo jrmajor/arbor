@@ -27,6 +27,10 @@ final class RelativesRepository
 
     public function get(?string $id): ?Person
     {
+        if ($id === null) {
+            return null;
+        }
+
         if (! isset($this->loaded)) {
             $this->load();
         }
