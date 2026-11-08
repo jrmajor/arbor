@@ -10,6 +10,7 @@ use App\Http\Resources\Marriages\MarriagePageResource;
 use App\Models\Marriage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Attributes\Controllers\Authorize;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -18,20 +19,18 @@ use function App\flash;
 
 class MarriageController extends Controller
 {
+    #[Authorize('create', Marriage::class)]
     public function create(Request $request): Response
     {
-        $this->authorize('create', Marriage::class);
-
         return Inertia::render('Marriages/Create', [
             'manId' => $request->integer('man', strict: true) ?: null,
             'womanId' => $request->integer('woman', strict: true) ?: null,
         ]);
     }
 
+    #[Authorize('create', Marriage::class)]
     public function store(CreateMarriage $request): RedirectResponse
     {
-        $this->authorize('create', Marriage::class);
-
         $marriage = new Marriage($request->validated());
 
         $marriage->save()
@@ -41,19 +40,17 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
+    #[Authorize('update', 'marriage')]
     public function edit(Marriage $marriage): Response
     {
-        $this->authorize('update', $marriage);
-
         return Inertia::render('Marriages/Edit', [
             'marriage' => new EditMarriageResource($marriage),
         ]);
     }
 
+    #[Authorize('update', 'marriage')]
     public function update(EditMarriage $request, Marriage $marriage): RedirectResponse
     {
-        $this->authorize('update', $marriage);
-
         $marriage->update($request->validated())
             ? flash('success', 'marriages.alerts.changes_have_been_saved')
             : flash('error', 'misc.an_unknown_error_occurred');
@@ -61,10 +58,9 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
+    #[Authorize('delete', 'marriage')]
     public function destroy(Marriage $marriage): RedirectResponse
     {
-        $this->authorize('delete', $marriage);
-
         $marriage->delete()
             ? flash('success', 'marriages.alerts.marriage_has_been_deleted')
             : flash('error', 'misc.an_unknown_error_occurred');
@@ -74,10 +70,9 @@ class MarriageController extends Controller
             : redirect()->route('people.show', $marriage->woman);
     }
 
+    #[Authorize('restore', 'trashedMarriage')]
     public function restore(Marriage $marriage): RedirectResponse
     {
-        $this->authorize('restore', $marriage);
-
         $marriage->restore()
             ? flash('success', 'marriages.alerts.marriage_has_been_restored')
             : flash('error', 'misc.an_unknown_error_occurred');
@@ -85,10 +80,9 @@ class MarriageController extends Controller
         return redirect()->route('people.show', $marriage->woman);
     }
 
+    #[Authorize('viewHistory', 'anyMarriage')]
     public function history(Marriage $marriage): Response
     {
-        $this->authorize('viewHistory', $marriage);
-
         $activities = $marriage->activitiesAsSubject()->with('causer')->get()->reverse();
 
         return Inertia::render('Marriages/History', [

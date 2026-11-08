@@ -5,15 +5,15 @@ namespace Database\Factories;
 use App\Models\Marriage;
 use App\Models\Person;
 use Carbon\CarbonInterval;
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<Marriage>
  */
+#[UseModel(Marriage::class)]
 class MarriageFactory extends Factory
 {
-    protected $model = Marriage::class;
-
     public function definition(): array
     {
         return [

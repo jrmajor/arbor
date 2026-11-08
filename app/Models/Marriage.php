@@ -8,6 +8,7 @@ use App\Models\Traits\HasDateRanges;
 use App\Models\Traits\TapsActivity;
 use Carbon\Carbon;
 use Database\Factories\MarriageFactory;
+use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,6 +31,7 @@ use Spatie\Activitylog\Support\LogOptions;
  * @property-read ?int $second_event_year
  * @property-read ?int $divorce_year
  */
+#[Guarded(['id', 'created_at', 'updated_at', 'deleted_at'])]
 class Marriage extends Model
 {
     use HasDateRanges;
@@ -40,8 +42,6 @@ class Marriage extends Model
     use LogsActivity;
     use SoftDeletes;
     use TapsActivity;
-
-    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $casts = [
         'divorced' => 'boolean',

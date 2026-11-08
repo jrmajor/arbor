@@ -4,12 +4,14 @@ namespace App\Models\Traits;
 
 use App\Models\Casts\DateRangeToDateCast;
 use App\Models\Casts\DateRangeToYearCast;
+use Illuminate\Database\Eloquent\Attributes\Initialize;
 use InvalidArgumentException;
 use Psl\Str;
 
 trait HasDateRanges
 {
-    public function initializeHasDateRanges(): void
+    #[Initialize]
+    public function initializeDateRanges(): void
     {
         foreach (static::$dateRanges as $dateRange) {
             if (! Str\ends_with($dateRange, '_date')) {

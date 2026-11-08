@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Faker\Generator as Faker;
 use Faker\Provider\Internet as InternetFaker;
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,10 +16,9 @@ use Illuminate\Support\Str;
  *
  * @phpstan-ignore propertyTag.unresolvableType
  */
+#[UseModel(User::class)]
 class UserFactory extends Factory
 {
-    protected $model = User::class;
-
     public function definition(): array
     {
         return [

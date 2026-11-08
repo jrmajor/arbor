@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,6 +14,8 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Models\Concerns\HasActivity;
 use Spatie\Activitylog\Support\LogOptions;
 
+#[Fillable(['username', 'email', 'password'])]
+#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     use HasActivity;
@@ -21,14 +25,6 @@ class User extends Authenticatable
 
     use Notifiable;
     use SoftDeletes;
-
-    protected $fillable = [
-        'username', 'email', 'password',
-    ];
-
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
 
     protected $casts = [
         'password' => 'hashed',

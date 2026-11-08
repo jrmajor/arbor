@@ -14,6 +14,7 @@ use App\Services\Wielcy\WielcyScraper;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Attributes\Controllers\Authorize;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -22,10 +23,9 @@ use function App\flash;
 
 class PersonController extends Controller
 {
+    #[Authorize('viewAny', Person::class)]
     public function index(): Response
     {
-        $this->authorize('viewAny', Person::class);
-
         return Inertia::render('People/Index', [
             'total' => Person::count(),
             'letters' => [
@@ -38,10 +38,9 @@ class PersonController extends Controller
     /**
      * @param 'f'|'l' $type
      */
+    #[Authorize('viewAny', Person::class)]
     public function letter(Request $request, string $type, string $letter): Response
     {
-        $this->authorize('viewAny', Person::class);
-
         $people = match ($type) {
             'f' => Person::query()
                 ->whereRaw('substr(family_name, 1, 1) /* collate utf8mb4_0900_as_ci */ = ?', $letter)
@@ -66,10 +65,9 @@ class PersonController extends Controller
         ]);
     }
 
+    #[Authorize('create', Person::class)]
     public function create(Request $request): Response
     {
-        $this->authorize('create', Person::class);
-
         $fatherId = $request->integer('father', strict: true) ?: null;
 
         return Inertia::render('People/Create', [
@@ -81,10 +79,9 @@ class PersonController extends Controller
         ]);
     }
 
+    #[Authorize('create', Person::class)]
     public function store(StorePerson $request): RedirectResponse
     {
-        $this->authorize('create', Person::class);
-
         $person = new Person($request->validated());
 
         $person->save()
@@ -118,19 +115,17 @@ class PersonController extends Controller
         ]);
     }
 
+    #[Authorize('update', 'person')]
     public function edit(Person $person): View|Response
     {
-        $this->authorize('update', $person);
-
         return Inertia::render('People/Edit', [
             'person' => new EditPersonResource($person),
         ]);
     }
 
+    #[Authorize('update', 'person')]
     public function update(StorePerson $request, Person $person): RedirectResponse
     {
-        $this->authorize('update', $person);
-
         $person->update($request->validated())
             ? flash('success', 'people.alerts.changes_have_been_saved')
             : flash('error', 'misc.an_unknown_error_occurred');
@@ -138,10 +133,9 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
+    #[Authorize('changeVisibility', 'person')]
     public function changeVisibility(Request $request, Person $person): RedirectResponse
     {
-        $this->authorize('changeVisibility', $person);
-
         $visibility = $request->validate([
             'visibility' => ['required', 'boolean'],
         ]);
@@ -153,10 +147,9 @@ class PersonController extends Controller
         return back();
     }
 
+    #[Authorize('delete', 'person')]
     public function destroy(Person $person): RedirectResponse
     {
-        $this->authorize('delete', $person);
-
         if ($person->marriages->isNotEmpty()) {
             flash('error', 'people.alerts.cant_delete_person_with_marriages');
 
@@ -178,10 +171,9 @@ class PersonController extends Controller
             : redirect()->route('people.index');
     }
 
+    #[Authorize('restore', 'trashedPerson')]
     public function restore(Person $person): RedirectResponse
     {
-        $this->authorize('restore', $person);
-
         $person->restore()
             ? flash('success', 'people.alerts.person_has_been_restored')
             : flash('error', 'misc.an_unknown_error_occurred');
@@ -189,10 +181,9 @@ class PersonController extends Controller
         return redirect()->route('people.show', $person);
     }
 
+    #[Authorize('viewHistory', 'anyPerson')]
     public function history(Person $person): Response
     {
-        $this->authorize('viewHistory', $person);
-
         $activities = $person->activitiesAsSubject()->with('causer')->get()->reverse();
 
         return Inertia::render('People/History', [

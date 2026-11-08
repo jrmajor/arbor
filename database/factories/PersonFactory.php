@@ -5,15 +5,15 @@ namespace Database\Factories;
 use App\Enums\Sex;
 use App\Models\Person;
 use Carbon\CarbonInterval;
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<Person>
  */
+#[UseModel(Person::class)]
 final class PersonFactory extends Factory
 {
-    protected $model = Person::class;
-
     public function definition(): array
     {
         return [

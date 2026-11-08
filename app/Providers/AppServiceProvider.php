@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models;
-use App\Models\Observers\PersonObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,8 +23,6 @@ class AppServiceProvider extends ServiceProvider
 
     private function registerModelsConfig(): void
     {
-        Models\Person::observe(PersonObserver::class);
-
         Relation::enforceMorphMap([
             'marriage' => Models\Marriage::class,
             'person' => Models\Person::class,

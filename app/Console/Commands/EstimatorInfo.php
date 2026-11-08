@@ -4,16 +4,16 @@ namespace App\Console\Commands;
 
 use App\Models\Person;
 use App\Services\Age;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+#[Signature('estimator:info')]
+#[Description('Get statistics about people age estimation quality.')]
 class EstimatorInfo extends Command
 {
-    protected $signature = 'estimator:info';
-
-    protected $description = 'Get statistics about people age estimation quality.';
-
     public function handle(): void
     {
         $initialLazyLoadingMode = Model::preventsLazyLoading();

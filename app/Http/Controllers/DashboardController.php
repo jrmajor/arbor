@@ -11,23 +11,20 @@ use App\Models\User;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class DashboardController extends Controller
-{
-    public function __construct()
-    {
-        $this->middleware(function (Request $request, Closure $next) {
-            if (! Auth::user()->isSuperAdmin()) {
-                return abort(403);
-            }
-
-            return $next($request);
-        });
+#[Middleware(static function (Request $request, Closure $next) {
+    if (! Auth::user()->isSuperAdmin()) {
+        return abort(403);
     }
 
+    return $next($request);
+})]
+class DashboardController extends Controller
+{
     public function users(): Response
     {
         $users = User::query()
