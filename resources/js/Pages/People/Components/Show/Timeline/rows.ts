@@ -6,7 +6,7 @@ const unknownFade = 40;
 // people born longer ago are not drawn as alive, even when not marked as dead
 const maxAge = 110;
 
-export type RowPerson = Pick<Extract<Person, { visible: true }>, 'id' | 'name' | 'familyName' | 'lastName' | 'isDead'>;
+export type RowPerson = Pick<Extract<Person, { visible: true }>, 'id' | 'name' | 'familyName' | 'lastName' | 'isDead' | 'birthYears' | 'deathYears'>;
 
 /**
  * A bar end fades between `from` and `to`, which are equal for exact years.
@@ -29,6 +29,7 @@ export type Row = {
 	end: Edge;
 	alive: boolean;
 	birth: YearRange | null;
+	death: YearRange | null;
 	markers: Marker[];
 };
 
@@ -47,7 +48,6 @@ export type Timeline = {
 };
 
 export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
-	const lifespans = new Map(person.timeline.people.map((l) => [l.id, l]));
 	const year = now.getFullYear() + (dayOfYear(now) / 365);
 
 	const markers = new Map<number, Marker[]>();
@@ -56,23 +56,19 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 	}
 
 	for (const marriage of person.marriages) {
-		const years = person.timeline.marriages.find((m) => m.id === marriage.id);
-		if (!years) continue;
-
 		const list: Marker[] = [];
-		if (years.start) list.push(marker(`marriage-${marriage.id}`, 'marriage', years.start));
-		if (years.divorce) list.push(marker(`divorce-${marriage.id}`, 'divorce', years.divorce));
+		if (marriage.startYears) list.push(marker(`marriage-${marriage.id}`, 'marriage', marriage.startYears));
+		if (marriage.divorceYears) list.push(marker(`divorce-${marriage.id}`, 'divorce', marriage.divorceYears));
 
 		addMarkers(person.id, list);
 		addMarkers(marriage.partner.id, list);
 	}
 
 	function row(group: string, p: RowPerson, current = false): Row | null {
-		const lifespan = lifespans.get(p.id);
-		if (!lifespan || (!lifespan.birth && !lifespan.death)) return null;
+		const { birthYears: birth, deathYears: death } = p;
+		if (!birth && !death) return null;
 
-		const { birth, death } = lifespan;
-		const alive = !lifespan.dead && !death && birth !== null && birth[0] > year - maxAge;
+		const alive = !p.isDead && !death && birth !== null && birth[0] > year - maxAge;
 
 		let start = birth ? edge(birth) : null;
 		let end = death ? edge(death) : alive ? { from: year, to: year } : null;
@@ -89,6 +85,7 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 			end,
 			alive,
 			birth,
+			death,
 			markers: markers.get(p.id) ?? [],
 		};
 	}

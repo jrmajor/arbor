@@ -47,4 +47,21 @@ final class HasDateRangesTraitTest extends TestCase
         $this->assertNull($person->funeral_date);
         $this->assertSame('2020-2021', $person->burial_date);
     }
+
+    #[TestDox('it gets year ranges')]
+    public function testYearRange(): void
+    {
+        $person = Person::factory()->dead()->make([
+            'birth_date_from' => '1957-05-20',
+            'birth_date_to' => '1957-05-20',
+            'death_date_from' => '2020-01-01',
+            'death_date_to' => '2021-12-31',
+            'funeral_date_from' => null,
+            'funeral_date_to' => null,
+        ]);
+
+        $this->assertSame([1957, 1957], $person->yearRange('birth_date'));
+        $this->assertSame([2020, 2021], $person->yearRange('death_date'));
+        $this->assertNull($person->yearRange('funeral_date'));
+    }
 }

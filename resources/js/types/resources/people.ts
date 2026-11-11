@@ -29,6 +29,8 @@ type VisiblePerson = PersonCommon & {
 	isDead: boolean;
 	birthYear: number | null;
 	deathYear: number | null;
+	birthYears: YearRange | null;
+	deathYears: YearRange | null;
 };
 
 type HiddenPerson = PersonCommon & {
@@ -64,9 +66,11 @@ export type PersonPage = {
 export type ShowPersonResource = PersonPage & {
 	middleName: string | null;
 	birthYear: number | null;
+	birthYears: YearRange | null;
 	birthDate: string | null;
 	birthPlace: string | null;
 	deathYear: number | null;
+	deathYears: YearRange | null;
 	deathDate: string | null;
 	deathPlace: string | null;
 	deathCause: string | null;
@@ -83,14 +87,6 @@ export type ShowPersonResource = PersonPage & {
 	children: PersonWithParentIds[];
 	siblingsBefore: number;
 	otherParents: Person[];
-	timeline: {
-		people: Lifespan[];
-		marriages: Array<{
-			id: number;
-			start: YearRange | null;
-			divorce: YearRange | null;
-		}>;
-	};
 	age: {
 		current: number | null;
 		prettyCurrent: string | null;
@@ -110,13 +106,6 @@ export type ShowPersonResource = PersonPage & {
 };
 
 export type YearRange = [from: number, to: number];
-
-type Lifespan = {
-	id: number;
-	birth: YearRange | null;
-	death: YearRange | null;
-	dead: boolean;
-};
 
 export type EditPersonResource = {
 	id: number;
@@ -163,6 +152,9 @@ type Marriage = {
 	divorced: boolean;
 	divorceDate: string | null;
 	divorcePlace: string | null;
+	// only for viewable marriages
+	startYears?: YearRange | null;
+	divorceYears?: YearRange | null;
 	partner: Person;
 	perm: {
 		view: boolean;

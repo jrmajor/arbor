@@ -10,11 +10,9 @@ use App\Models\Person;
 use App\Services\Pytlewski\Pytlewski;
 use App\Services\Sources\Source;
 use App\Services\Wielcy\Wielcy;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Gate;
 
 /**
  * @property Person $resource
@@ -46,9 +44,11 @@ final class ShowPersonResource extends JsonResource
             'middleName' => $this->resource->middle_name,
             'birthYear' => $this->resource->birth_year,
             'birthDate' => $this->resource->birth_date,
+            'birthYears' => $this->resource->yearRange('birth_date'),
             'birthPlace' => $this->resource->birth_place,
             'deathYear' => $this->resource->death_year,
             'deathDate' => $this->resource->death_date,
+            'deathYears' => $this->resource->yearRange('death_date'),
             'deathPlace' => $this->resource->death_place,
             'deathCause' => $this->resource->death_cause,
             'funeralDate' => $this->resource->funeral_date,
@@ -75,7 +75,6 @@ final class ShowPersonResource extends JsonResource
             ),
             'siblingsBefore' => $this->siblingsBefore(),
             'otherParents' => PersonResource::collection($this->otherParents()),
-            'timeline' => $this->timeline(),
             'age' => [
                 'current' => $this->resource->age->current(),
                 'prettyCurrent' => $this->resource->age->prettyCurrent(),
@@ -119,54 +118,6 @@ final class ShowPersonResource extends JsonResource
         return $ids->isEmpty()
             ? new EloquentCollection()
             : Person::query()->whereIn('id', $ids)->get();
-    }
-
-    /**
-     * Year ranges of the close family for the lifespan timeline.
-     * Hidden people and marriages are left out.
-     *
-     * @return array{people: list<mixed>, marriages: list<mixed>}
-     */
-    private function timeline(): array
-    {
-        $person = $this->resource;
-
-        $people = collect([$person, $person->father, $person->mother])
-            ->merge($person->siblings)
-            ->merge($person->siblings_father)
-            ->merge($person->siblings_mother)
-            ->merge($person->marriages->map(fn (Marriage $m) => $m->partner($person)))
-            ->merge($person->children)
-            ->filter(fn (?Person $p) => $p && Gate::allows('view', $p))
-            ->unique('id')
-            ->map(fn (Person $p) => [
-                'id' => $p->id,
-                'birth' => $this->years($p->birth_date_from, $p->birth_date_to),
-                'death' => $this->years($p->death_date_from, $p->death_date_to),
-                'dead' => $p->dead,
-            ]);
-
-        $marriages = $person->marriages
-            ->filter(fn (Marriage $m) => Gate::allows('view', $m))
-            ->map(fn (Marriage $m) => [
-                'id' => $m->id,
-                'start' => $m->first_event_date_from
-                    ? $this->years($m->first_event_date_from, $m->first_event_date_to)
-                    : $this->years($m->second_event_date_from, $m->second_event_date_to),
-                'divorce' => $m->divorced
-                    ? $this->years($m->divorce_date_from, $m->divorce_date_to)
-                    : null,
-            ]);
-
-        return ['people' => $people->values()->all(), 'marriages' => $marriages->values()->all()];
-    }
-
-    /**
-     * @return ?array{int, int}
-     */
-    private function years(?Carbon $from, ?Carbon $to): ?array
-    {
-        return $from && $to ? [$from->year, $to->year] : null;
     }
 
     /**

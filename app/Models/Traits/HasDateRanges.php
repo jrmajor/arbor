@@ -25,4 +25,17 @@ trait HasDateRanges
             $this->casts[$dateRange] = DateRangeToDateCast::class;
         }
     }
+
+    /**
+     * The years of a date range's endpoints, or null when either is missing.
+     *
+     * @return ?array{int, int}
+     */
+    public function yearRange(string $dateRange): ?array
+    {
+        $from = $this->{"{$dateRange}_from"};
+        $to = $this->{"{$dateRange}_to"};
+
+        return $from && $to ? [$from->year, $to->year] : null;
+    }
 }

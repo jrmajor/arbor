@@ -57,11 +57,9 @@
 	}
 
 	function title(row: Row) {
-		const lifespan = person.timeline.people.find((l) => l.id === row.person.id)!;
-
 		return [
-			lifespan.birth ? `∗︎${formatYears(lifespan.birth)}` : null,
-			lifespan.death ? `✝︎${formatYears(lifespan.death)}` : null,
+			row.birth ? `∗︎${formatYears(row.birth)}` : null,
+			row.death ? `✝︎${formatYears(row.death)}` : null,
 		].filter((y) => y !== null).join(', ');
 	}
 </script>

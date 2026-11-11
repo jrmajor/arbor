@@ -103,4 +103,25 @@ final class MarriageTest extends TestCase
         $this->assertTrue($thirdMarriage->hasFirstEvent());
         $this->assertTrue($thirdMarriage->hasSecondEvent());
     }
+
+    #[TestDox('it starts at the first event, or the second one when the first has no date')]
+    public function testStartDate(): void
+    {
+        $marriage = Marriage::factory()->make([
+            'first_event_date_from' => '1925-01-01',
+            'first_event_date_to' => '1926-12-31',
+            'second_event_date_from' => '1924-06-01',
+            'second_event_date_to' => '1924-06-01',
+        ]);
+
+        $this->assertSame([1925, 1926], $marriage->yearRange('start_date'));
+
+        $marriage->fill(['first_event_date_from' => null, 'first_event_date_to' => null]);
+
+        $this->assertSame([1924, 1924], $marriage->yearRange('start_date'));
+
+        $marriage->fill(['second_event_date_from' => null, 'second_event_date_to' => null]);
+
+        $this->assertNull($marriage->yearRange('start_date'));
+    }
 }
