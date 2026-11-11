@@ -42,7 +42,10 @@
 	let chartWidth = $state(0);
 	let cardWidth = $state(0);
 
-	let hoveredAge = $derived(hoveredRow && cursor !== null ? ageAt(hoveredRow, cursor) : null);
+	// the hover card shows the events of the hovered marriage badge
+	let card = $derived(hoveredRow && hoveredBadge
+		? badges(hoveredRow.markers).find((badge) => badge.key === hoveredBadge) ?? null
+		: null);
 
 	// ages sit right of the cursor, except near the right edge
 	let agesOnLeft = $derived(cursor !== null && cursor > max - ((max - min) * 0.15));
@@ -131,12 +134,6 @@
 		return `${type} ${formatYears(marker.years)}`;
 	}
 
-	function title(row: Row) {
-		return [
-			row.birth ? `∗︎${formatYears(row.birth)}` : null,
-			row.death ? `✝︎${formatYears(row.death)}` : null,
-		].filter((y) => y !== null).join(', ');
-	}
 </script>
 
 {#if rowsByKey.size > 1}
@@ -210,7 +207,7 @@
 										row.start.from === row.start.to && 'rounded-l-full',
 										row.end.from === row.end.to && !row.alive && 'rounded-r-full',
 									]}
-									style:left="{x(row.start.from)}%"
+									style:left="min({x(row.start.from)}%, 100% - 0.375rem)"
 									style:width="{x(row.end.to) - x(row.start.from)}%"
 									style:background={gradient(row)}
 								></div>
@@ -240,7 +237,7 @@
 										agesOnLeft ? '-translate-x-full -ml-1' : 'ml-1',
 									]}
 									style:left="{x(cursor!)}%"
-								>{age.label}</span>
+								>{age}</span>
 							{/if}
 						</div>
 					</div>
@@ -255,8 +252,7 @@
 				{/each}
 			{/each}
 
-			{#if hoveredRow && cursor !== null}
-				{@const badge = badges(hoveredRow.markers).find((b) => b.key === hoveredBadge)}
+			{#if card}
 				<div
 					class="pointer-events-none absolute z-10 w-max max-w-64 rounded-md bg-white px-2.5 py-1.5 text-xs leading-5 text-gray-700 shadow-md ring-1 ring-gray-200"
 					style:left="{pointer.x}px"
@@ -265,26 +261,9 @@
 					bind:offsetWidth={cardWidth}
 					aria-hidden="true"
 				>
-					<p class="font-medium text-gray-900">
-						{hoveredRow.person.name}
-						{hoveredRow.person.lastName ?? hoveredRow.person.familyName}
-					</p>
-					{#if title(hoveredRow)}
-						<p>{title(hoveredRow)}</p>
-					{/if}
-					{#if hoveredAge}
-						<p class="text-blue-700">
-							{Math.floor(cursor)}:
-							{t('misc.year', { rawAge: hoveredAge.age, age: hoveredAge.label })}
-						</p>
-					{/if}
-					{#if badge}
-						<div class="mt-1 border-t border-gray-100 pt-1">
-							{#each badge.markers as marker (marker.key)}
-								<p>{markerTitle(marker)}</p>
-							{/each}
-						</div>
-					{/if}
+					{#each card.markers as marker (marker.key)}
+						<p>{markerTitle(marker)}</p>
+					{/each}
 				</div>
 			{/if}
 		</div>
