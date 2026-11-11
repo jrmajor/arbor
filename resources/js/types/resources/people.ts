@@ -83,6 +83,14 @@ export type ShowPersonResource = PersonPage & {
 	children: PersonWithParentIds[];
 	siblingsBefore: number;
 	otherParents: Person[];
+	timeline: {
+		people: Lifespan[];
+		marriages: Array<{
+			id: number;
+			start: YearRange | null;
+			divorce: YearRange | null;
+		}>;
+	};
 	age: {
 		current: number | null;
 		prettyCurrent: string | null;
@@ -99,6 +107,15 @@ export type ShowPersonResource = PersonPage & {
 	wielcy: Wielcy | null;
 	biography: string;
 	sources: string[];
+};
+
+export type YearRange = [from: number, to: number];
+
+type Lifespan = {
+	id: number;
+	birth: YearRange | null;
+	death: YearRange | null;
+	dead: boolean;
 };
 
 export type EditPersonResource = {
