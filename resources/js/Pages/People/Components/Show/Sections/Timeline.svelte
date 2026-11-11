@@ -93,6 +93,9 @@
 
 	function gradient(row: Row) {
 		const length = row.end.to - row.start.from;
+		// born and died in the same year
+		if (length <= 0) return 'currentColor';
+
 		const solidFrom = ((row.start.to - row.start.from) / length) * 100;
 		const solidTo = ((row.end.from - row.start.from) / length) * 100;
 
@@ -202,7 +205,7 @@
 							<div class="absolute inset-0 overflow-hidden">
 								<div
 									class={[
-										'absolute top-1/2 h-2.5 -translate-y-1/2',
+										'absolute top-1/2 h-2.5 min-w-1.5 -translate-y-1/2',
 										row.current ? 'text-blue-600' : 'text-gray-400',
 										row.start.from === row.start.to && 'rounded-l-full',
 										row.end.from === row.end.to && !row.alive && 'rounded-r-full',

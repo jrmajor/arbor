@@ -117,7 +117,11 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 		{
 			key: 'marriages',
 			label: 'people.marriages',
-			rows: rows('marriages', person.marriages.filter((m) => m.perm.view).map((m) => m.partner)),
+			// a partner married more than once gets one row, with markers for every marriage
+			rows: rows('marriages', person.marriages
+				.filter((m) => m.perm.view)
+				.map((m) => m.partner)
+				.filter((partner, i, partners) => partners.findIndex((p) => p.id === partner.id) === i)),
 		},
 		{
 			key: 'children',
