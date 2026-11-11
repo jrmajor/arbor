@@ -15,7 +15,7 @@
 
 	let timeline = $derived(buildTimeline(person, new Date()));
 
-	let rowCount = $derived(timeline.groups.reduce((count, group) => count + group.rows.length, 0));
+	let rowsByKey = $derived(new Map(timeline.groups.flatMap((group) => group.rows).map((row) => [row.key, row])));
 
 	let track = $state<HTMLElement>();
 	let width = $state(0);
@@ -73,15 +73,22 @@
 
 		const outer = chart.getBoundingClientRect();
 		pointer = { x: event.clientX - outer.left, y: event.clientY - outer.top };
+
+		// hit-test instead of using enter and leave events, which a touch drag
+		// doesn't fire because the element it started on captures the pointer
+		const target = document.elementFromPoint(event.clientX, event.clientY);
+		const rowKey = target?.closest<HTMLElement>('[data-row]')?.dataset.row;
+		hoveredRow = rowKey ? rowsByKey.get(rowKey) ?? null : null;
+		hoveredBadge = target?.closest<HTMLElement>('[data-badge]')?.dataset.badge ?? null;
 	}
 
 	function leave(event: PointerEvent) {
 		// keep the cursor where a touch left it
-		if (event.pointerType === 'mouse') cursor = null;
-	}
+		if (event.pointerType !== 'mouse') return;
 
-	function leaveRow(event: PointerEvent) {
-		if (event.pointerType === 'mouse') hoveredRow = null;
+		cursor = null;
+		hoveredRow = null;
+		hoveredBadge = null;
 	}
 
 	function gradient(row: Row) {
@@ -129,7 +136,7 @@
 	}
 </script>
 
-{#if rowCount > 1}
+{#if rowsByKey.size > 1}
 	<div class="rounded-lg bg-white p-6 shadow-sm">
 		<div
 			bind:this={chart}
@@ -174,12 +181,7 @@
 
 				{#each group.rows as row (row.key)}
 					{@const age = cursor === null ? null : ageAt(row, cursor)}
-					<div
-						class="relative grid grid-cols-1 items-center py-0.5 sm:grid-cols-[var(--label)_1fr]"
-						onpointerenter={() => hoveredRow = row}
-						onpointerleave={leaveRow}
-						role="presentation"
-					>
+					<div class="relative grid grid-cols-1 items-center py-0.5 sm:grid-cols-[var(--label)_1fr]" data-row={row.key}>
 						<!-- on phones names sit above the bars, so their background cuts the gridlines behind them -->
 						<div class="pr-3 text-sm leading-5" class:italic={row.person.isDead}>
 							<span class="backdrop">
@@ -218,8 +220,7 @@
 										hoveredBadge === badge.key ? 'ring-blue-400' : 'ring-gray-300',
 									]}
 									style:left="{x(badge.at)}%"
-									onpointerenter={() => hoveredBadge = badge.key}
-									onpointerleave={() => hoveredBadge = null}
+									data-badge={badge.key}
 									aria-label={badge.markers.map(markerTitle).join(', ')}
 									role="img"
 								>
