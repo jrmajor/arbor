@@ -23,28 +23,28 @@ final class MarriageResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
+            'visible' => $visible = Gate::allows('view', $this->resource),
             'order' => $this->resource->order($this->partnerFor),
-            'rite' => $this->resource->rite,
-            'firstEvent' => $this->when($this->resource->hasFirstEvent(), fn () => [
-                'type' => $this->resource->first_event_type,
-                'date' => $this->resource->first_event_date,
-                'place' => $this->resource->first_event_place,
-            ]),
-            'secondEvent' => $this->when($this->resource->hasSecondEvent(), fn () => [
-                'type' => $this->resource->second_event_type,
-                'date' => $this->resource->second_event_date,
-                'place' => $this->resource->second_event_place,
-            ]),
-            'divorced' => $this->resource->divorced,
-            'divorceDate' => $this->resource->divorce_date,
-            'divorcePlace' => $this->resource->divorce_place,
-            $this->mergeWhen(Gate::allows('view', $this->resource), fn () => [
+            $this->mergeWhen($visible, fn () => [
+                'rite' => $this->resource->rite,
+                'firstEvent' => $this->when($this->resource->hasFirstEvent(), fn () => [
+                    'type' => $this->resource->first_event_type,
+                    'date' => $this->resource->first_event_date,
+                    'place' => $this->resource->first_event_place,
+                ]),
+                'secondEvent' => $this->when($this->resource->hasSecondEvent(), fn () => [
+                    'type' => $this->resource->second_event_type,
+                    'date' => $this->resource->second_event_date,
+                    'place' => $this->resource->second_event_place,
+                ]),
+                'divorced' => $this->resource->divorced,
+                'divorceDate' => $this->resource->divorce_date,
+                'divorcePlace' => $this->resource->divorce_place,
                 'startYears' => $this->resource->yearRange('start_date'),
                 'divorceYears' => $this->resource->divorced ? $this->resource->yearRange('divorce_date') : null,
             ]),
             'partner' => new PersonResource($this->resource->partner($this->partnerFor)),
             'perm' => [
-                'view' => Gate::allows('view', $this->resource),
                 'update' => Gate::allows('update', $this->resource),
             ],
         ];

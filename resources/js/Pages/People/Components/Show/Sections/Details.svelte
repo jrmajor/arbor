@@ -140,7 +140,7 @@
 			<dd>
 				<ul>
 					{#each person.marriages as marriage, i}
-						{#if marriage.perm.view}
+						{#if marriage.visible}
 							<li class="indent-children-except-first">
 								{#if person.marriages.length > 1 && marriage.order}
 									{toRoman(marriage.order).toLowerCase()}.

@@ -285,6 +285,64 @@ final class ViewPersonTest extends TestCase
                 ->etc());
     }
 
+    #[TestDox('guest cannot see details of marriage with hidden partner')]
+    public function testGuestHiddenMarriageDetails(): void
+    {
+        [$person, $marriage] = $this->createMarriageWithHiddenPartner();
+
+        $this->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->has('person.marriages', 1)
+                ->where('person.marriages.0', function (Collection $m) use ($marriage) {
+                    $this->assertSame(['id', 'visible', 'order', 'partner', 'perm'], $m->keys()->all());
+                    $this->assertSame($marriage->id, $m['id']);
+                    $this->assertFalse($m['visible']);
+                    $this->assertSame($marriage->woman_id, $m['partner']['id']);
+                    $this->assertSame(['update' => false], $m['perm']);
+
+                    return true;
+                })
+                ->etc());
+    }
+
+    #[TestDox('user with permissions can see details of marriage with hidden partner')]
+    public function testUserHiddenMarriageDetails(): void
+    {
+        [$person, $marriage] = $this->createMarriageWithHiddenPartner();
+
+        $this->withPermissions(1)
+            ->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->where('person.marriages.0.visible', true)
+                ->where('person.marriages.0.rite', 'roman_catholic')
+                ->where('person.marriages.0.firstEvent.place', $marriage->first_event_place)
+                ->where('person.marriages.0.secondEvent.place', $marriage->second_event_place)
+                ->where('person.marriages.0.divorced', true)
+                ->where('person.marriages.0.divorceDate', $marriage->divorce_date)
+                ->where('person.marriages.0.divorcePlace', $marriage->divorce_place)
+                ->has('person.marriages.0.startYears')
+                ->has('person.marriages.0.divorceYears')
+                ->etc());
+    }
+
+    /**
+     * @return array{Person, Marriage}
+     */
+    private function createMarriageWithHiddenPartner(): array
+    {
+        $person = Person::factory()->male()->create(['visibility' => true]);
+        $wife = Person::factory()->female()->create(['visibility' => false]);
+
+        $marriage = Marriage::factory()->divorced()->create([
+            'man_id' => $person->id,
+            'woman_id' => $wife->id,
+        ]);
+
+        return [$person, $marriage];
+    }
+
     #[TestDox('it counts siblings born before person')]
     public function testSiblingsBefore(): void
     {
