@@ -3,9 +3,6 @@ import type { Person, ShowPersonResource, YearRange } from '@/types/resources/pe
 // how many years a bar fades over when its birth or death year is unknown
 const unknownFade = 40;
 
-// people born longer ago are not drawn as alive, even when not marked as dead
-const maxAge = 110;
-
 export type RowPerson = Pick<Extract<Person, { visible: true }>, 'id' | 'name' | 'familyName' | 'lastName' | 'isDead' | 'birthYears' | 'deathYears'>;
 
 /**
@@ -68,7 +65,7 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 		const { birthYears: birth, deathYears: death } = p;
 		if (!birth && !death) return null;
 
-		const alive = !p.isDead && !death && birth !== null && birth[0] > year - maxAge;
+		const alive = !p.isDead && !death && birth !== null;
 
 		let start = birth ? edge(birth) : null;
 		let end = death ? edge(death) : alive ? { from: year, to: year } : null;
