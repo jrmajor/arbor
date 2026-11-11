@@ -34,21 +34,37 @@
 
 	let cursor = $state<number | null>(null);
 
+	// the hovered row and badge, and the pointer position for the hover card
+	let chart = $state<HTMLElement>();
+	let hoveredRow = $state<Row | null>(null);
+	let hoveredBadge = $state<string | null>(null);
+	let pointer = $state({ x: 0, y: 0, flip: false });
+
+	let hoveredAge = $derived(hoveredRow && cursor !== null ? ageAt(hoveredRow, cursor) : null);
+
 	function x(year: number) {
 		return ((year - min) / (max - min)) * 100;
 	}
 
 	function point(event: PointerEvent) {
-		if (!track) return;
+		if (!track || !chart) return;
 
 		const rect = track.getBoundingClientRect();
 		const fraction = (event.clientX - rect.left) / rect.width;
 		cursor = fraction < 0 || fraction > 1 ? null : min + (fraction * (max - min));
+
+		const outer = chart.getBoundingClientRect();
+		const x = event.clientX - outer.left;
+		pointer = { x, y: event.clientY - outer.top, flip: x > outer.width / 2 };
 	}
 
 	function leave(event: PointerEvent) {
 		// keep the cursor where a touch left it
 		if (event.pointerType === 'mouse') cursor = null;
+	}
+
+	function leaveRow(event: PointerEvent) {
+		if (event.pointerType === 'mouse') hoveredRow = null;
 	}
 
 	function gradient(row: Row) {
@@ -99,6 +115,7 @@
 {#if rowCount > 1}
 	<div class="rounded-lg bg-white p-6 shadow-sm">
 		<div
+			bind:this={chart}
 			class="relative touch-pan-y select-none [--label:0px] sm:[--label:12rem]"
 			onpointermove={point}
 			onpointerdown={point}
@@ -120,8 +137,9 @@
 			</div>
 
 			<div class="pointer-events-none absolute top-6 right-0 bottom-0 left-(--label)" aria-hidden="true">
-				{#each ticks as tick (tick)}
-					<div class="absolute inset-y-0 border-l border-gray-100" style:left="{x(tick)}%"></div>
+				{#each ticks as tick, i (tick)}
+					<!-- on phones the first line would run along the names -->
+					<div class={['absolute inset-y-0 border-l border-gray-100', i === 0 && 'max-sm:hidden']} style:left="{x(tick)}%"></div>
 				{/each}
 				{#if timeline.now !== null}
 					<div class="absolute inset-y-0 right-0 border-r border-dashed border-gray-300"></div>
@@ -138,7 +156,12 @@
 
 				{#each group.rows as row (row.key)}
 					{@const age = cursor === null ? null : ageAt(row, cursor)}
-					<div class="relative grid grid-cols-1 items-center py-0.5 sm:grid-cols-[var(--label)_1fr]">
+					<div
+						class="relative grid grid-cols-1 items-center py-0.5 sm:grid-cols-[var(--label)_1fr]"
+						onpointerenter={() => hoveredRow = row}
+						onpointerleave={leaveRow}
+						role="presentation"
+					>
 						<div class="truncate pr-3 text-sm leading-5" class:italic={row.person.isDead}>
 							{#if row.current}
 								<span class="font-medium" aria-current="page">{@render name()}</span>
@@ -162,15 +185,20 @@
 									style:left="{x(row.start.from)}%"
 									style:width="{x(row.end.to) - x(row.start.from)}%"
 									style:background={gradient(row)}
-									title={title(row)}
 								></div>
 							</div>
 
 							{#each badges(row.markers) as badge (badge.key)}
 								<span
-									class="absolute top-1/2 z-2 flex -translate-1/2 gap-1 rounded-sm bg-white px-1.5 text-xs leading-4 text-gray-700 ring-1 ring-gray-300"
+									class={[
+										'absolute top-1/2 z-2 flex -translate-1/2 gap-1 rounded-sm bg-white px-1 text-xs leading-4 text-gray-700 ring-1',
+										hoveredBadge === badge.key ? 'ring-blue-400' : 'ring-gray-300',
+									]}
 									style:left="{x(badge.at)}%"
-									title={badge.markers.map(markerTitle).join('\n')}
+									onpointerenter={() => hoveredBadge = badge.key}
+									onpointerleave={() => hoveredBadge = null}
+									aria-label={badge.markers.map(markerTitle).join(', ')}
+									role="img"
 								>
 									{#each badge.markers as marker (marker.key)}
 										<span class={['relative', marker.type === 'divorce' && 'divorce']}>∞</span>
@@ -185,7 +213,7 @@
 										cursor! > max - ((max - min) * 0.15) ? '-translate-x-full -ml-1' : 'ml-1',
 									]}
 									style:left="{x(cursor!)}%"
-								>{age}</span>
+								>{age.label}</span>
 							{/if}
 						</div>
 					</div>
@@ -199,6 +227,38 @@
 					{/snippet}
 				{/each}
 			{/each}
+
+			{#if hoveredRow && cursor !== null}
+				{@const badge = badges(hoveredRow.markers).find((b) => b.key === hoveredBadge)}
+				<div
+					class="pointer-events-none absolute z-10 w-max max-w-64 rounded-md bg-white px-2.5 py-1.5 text-xs leading-5 text-gray-700 shadow-md ring-1 ring-gray-200"
+					style:left="{pointer.x}px"
+					style:top="{pointer.y}px"
+					style:transform="translate({pointer.flip ? 'calc(-100% - 12px)' : '12px'}, -50%)"
+					aria-hidden="true"
+				>
+					<p class="font-medium text-gray-900">
+						{hoveredRow.person.name}
+						{hoveredRow.person.lastName ?? hoveredRow.person.familyName}
+					</p>
+					{#if title(hoveredRow)}
+						<p>{title(hoveredRow)}</p>
+					{/if}
+					{#if hoveredAge}
+						<p class="text-blue-700">
+							{Math.floor(cursor)}:
+							{t('misc.year', { rawAge: hoveredAge.age, age: hoveredAge.label })}
+						</p>
+					{/if}
+					{#if badge}
+						<div class="mt-1 border-t border-gray-100 pt-1">
+							{#each badge.markers as marker (marker.key)}
+								<p>{markerTitle(marker)}</p>
+							{/each}
+						</div>
+					{/if}
+				</div>
+			{/if}
 		</div>
 	</div>
 {/if}

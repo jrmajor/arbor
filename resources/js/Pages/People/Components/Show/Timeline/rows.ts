@@ -142,14 +142,14 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
  * The age at a year, as a range when the birth year is uncertain,
  * or null outside the part of the bar where the person may have lived.
  */
-export function ageAt(row: Row, at: number): string | null {
+export function ageAt(row: Row, at: number): { age: number, label: string } | null {
 	if (!row.birth || at < row.birth[0] || at > (row.alive ? row.end.from : row.end.to)) return null;
 
 	const year = Math.floor(at);
 	const lo = Math.max(0, year - row.birth[1]);
 	const hi = Math.max(0, year - row.birth[0]);
 
-	return lo === hi ? `${lo}` : `${lo}–${hi}`;
+	return { age: hi, label: lo === hi ? `${lo}` : `${lo}–${hi}` };
 }
 
 export function formatYears(years: YearRange) {
