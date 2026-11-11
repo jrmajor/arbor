@@ -96,7 +96,6 @@ siblings_mother = Stiefgeschwister Mutterseits
 siblings_father = Stiefgeschwister Vaterseits
 marriages = Ehen
 children = Kindern
-timeline = Lebensspannen
 sources = Quellen
 isbn_url = https://de.wikipedia.org/wiki/Spezial:ISBN-Suche/
 isbn_in_wikipedia = in Wikipedia

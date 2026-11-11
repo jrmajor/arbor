@@ -97,7 +97,6 @@ siblings_mother = Rodzeństwo od str. matki
 siblings_father = Rodzeństwo od str. ojca
 marriages = Małżeństwa
 children = Dzieci
-timeline = Daty życia
 sources = Źródła
 isbn_url = https://pl.wikipedia.org/wiki/Specjalna:Książki/
 isbn_in_wikipedia = w Wikipedii

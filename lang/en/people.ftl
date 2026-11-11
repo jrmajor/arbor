@@ -97,7 +97,6 @@ siblings_mother = Half-sibl. f. mother's side
 siblings_father = Half-sibl. f. father's side
 marriages = Marriages
 children = Children
-timeline = Lifespans
 sources = Sources
 isbn_url = https://en.wikipedia.org/wiki/Special:BookSources/
 isbn_in_wikipedia = in Wikipedia

@@ -42,6 +42,8 @@ export type Timeline = {
 	groups: Group[];
 	min: number;
 	max: number;
+	// the current date, when anyone in the timeline is alive
+	now: number | null;
 };
 
 export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
@@ -98,9 +100,14 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 			.filter((r) => r !== null);
 	}
 
+	// half-siblings join full siblings in birth order, with unknown years first.
+	// the sort is stable, so siblings born in the same year keep their order
+	// and the person follows them, as on the backend
 	const self = row('siblings', person, true);
-	const siblings = rows('siblings', person.siblings);
-	if (self) siblings.splice(Math.min(person.siblingsBefore, siblings.length), 0, self);
+	const siblings = [
+		...rows('siblings', [...person.siblings, ...person.siblingsFather, ...person.siblingsMother]),
+		...self ? [self] : [],
+	].sort((a, b) => (a.birth?.[0] ?? 0) - (b.birth?.[0] ?? 0));
 
 	const groups: Group[] = [
 		{
@@ -112,16 +119,6 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 			key: 'siblings',
 			label: siblings.length > (self ? 1 : 0) ? 'people.siblings' : null,
 			rows: siblings,
-		},
-		{
-			key: 'siblings-father',
-			label: 'people.siblings_father',
-			rows: rows('siblings-father', person.siblingsFather),
-		},
-		{
-			key: 'siblings-mother',
-			label: 'people.siblings_mother',
-			rows: rows('siblings-mother', person.siblingsMother),
 		},
 		{
 			key: 'marriages',
@@ -137,10 +134,13 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 
 	const all = groups.flatMap((group) => group.rows);
 
+	const today = all.some((r) => r.alive) ? year : null;
+
 	return {
 		groups,
 		min: Math.min(...all.map((r) => r.start.from), ...all.flatMap((r) => r.markers.map((m) => m.years[0]))),
-		max: Math.max(...all.map((r) => r.end.to), ...all.flatMap((r) => r.markers.map((m) => m.years[1] + 1))),
+		max: today ?? Math.max(...all.map((r) => r.end.to), ...all.flatMap((r) => r.markers.map((m) => m.years[1] + 1))),
+		now: today,
 	};
 }
 

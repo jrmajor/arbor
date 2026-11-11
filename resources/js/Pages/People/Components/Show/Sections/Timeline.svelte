@@ -24,9 +24,10 @@
 	});
 
 	let min = $derived(Math.floor(timeline.min / step) * step);
-	let max = $derived(Math.ceil(timeline.max / step) * step);
+	// end at the current date when anyone is alive, so their bars reach the edge
+	let max = $derived(timeline.now ?? Math.ceil(timeline.max / step) * step);
 
-	let ticks = $derived(Array.from({ length: ((max - min) / step) + 1 }, (_, i) => min + (i * step)));
+	let ticks = $derived(Array.from({ length: Math.floor((max - min) / step) + 1 }, (_, i) => min + (i * step)));
 
 	let cursor = $state<number | null>(null);
 
@@ -67,8 +68,6 @@
 
 {#if rowCount > 1}
 	<div class="rounded-lg bg-white p-6 shadow-sm">
-		<h2 class="mb-3 text-sm font-medium text-gray-500">{t('people.timeline')}</h2>
-
 		<div
 			class="relative touch-pan-y select-none [--label:0px] sm:[--label:12rem]"
 			onpointermove={point}
@@ -94,6 +93,9 @@
 				{#each ticks as tick (tick)}
 					<div class="absolute inset-y-0 border-l border-gray-100" style:left="{x(tick)}%"></div>
 				{/each}
+				{#if timeline.now !== null}
+					<div class="absolute inset-y-0 right-0 border-r border-dashed border-gray-300"></div>
+				{/if}
 				{#if cursor !== null}
 					<div class="absolute inset-y-0 z-1 border-l border-blue-400" style:left="{x(cursor)}%"></div>
 				{/if}
@@ -118,18 +120,21 @@
 						</div>
 
 						<div class="relative h-5">
-							<div
-								class={[
-									'absolute top-1/2 h-2.5 -translate-y-1/2',
-									row.current ? 'text-blue-600' : 'text-gray-400',
-									row.start.from === row.start.to && 'rounded-l-full',
-									row.end.from === row.end.to && !row.alive && 'rounded-r-full',
-								]}
-								style:left="{x(row.start.from)}%"
-								style:width="{x(row.end.to) - x(row.start.from)}%"
-								style:background={gradient(row)}
-								title={title(row)}
-							></div>
+							<!-- unknown deaths may fade out past the current date -->
+							<div class="absolute inset-0 overflow-hidden">
+								<div
+									class={[
+										'absolute top-1/2 h-2.5 -translate-y-1/2',
+										row.current ? 'text-blue-600' : 'text-gray-400',
+										row.start.from === row.start.to && 'rounded-l-full',
+										row.end.from === row.end.to && !row.alive && 'rounded-r-full',
+									]}
+									style:left="{x(row.start.from)}%"
+									style:width="{x(row.end.to) - x(row.start.from)}%"
+									style:background={gradient(row)}
+									title={title(row)}
+								></div>
+							</div>
 
 							{#each row.markers as marker (marker.key)}
 								<span
