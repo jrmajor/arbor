@@ -138,7 +138,8 @@ export type EditPersonResource = {
 type Marriage = {
 	id: number;
 	order: number | null;
-	rite: string | null;
+	// only for viewable marriages
+	rite?: string | null;
 	firstEvent?: {
 		type: string | null;
 		date: string | null;
@@ -149,10 +150,9 @@ type Marriage = {
 		date: string | null;
 		place: string | null;
 	};
-	divorced: boolean;
-	divorceDate: string | null;
-	divorcePlace: string | null;
-	// only for viewable marriages
+	divorced?: boolean;
+	divorceDate?: string | null;
+	divorcePlace?: string | null;
 	startYears?: YearRange | null;
 	divorceYears?: YearRange | null;
 	partner: Person;

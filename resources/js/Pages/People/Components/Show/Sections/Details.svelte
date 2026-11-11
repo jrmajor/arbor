@@ -186,8 +186,8 @@
 
 								{#if marriage.divorced}
 									<OptionalDatePlace
-										date={marriage.divorceDate}
-										place={marriage.divorcePlace}
+										date={marriage.divorceDate ?? null}
+										place={marriage.divorcePlace ?? null}
 										prefix={t('marriages.divorced').toLowerCase()}
 									/>
 								{/if}
