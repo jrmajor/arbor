@@ -41,12 +41,15 @@ final class RelationshipFinderTest extends TestCase
         $f['wife'] = $woman();
         $f['wifesMother'] = $woman();
         $f['wifesBrother'] = $man(null, $f['wifesMother']);
+        $f['wifesSister'] = $woman(null, $f['wifesMother']);
+        $f['wifesSistersHusband'] = $man();
         $f['wife']->update(['mother_id' => $f['wifesMother']->id]);
         $f['daughterInLaw'] = $woman();
         $f['stranger'] = $man();
 
         Marriage::factory()->create(['man_id' => $f['me']->id, 'woman_id' => $f['wife']->id]);
         Marriage::factory()->create(['man_id' => $f['son']->id, 'woman_id' => $f['daughterInLaw']->id]);
+        Marriage::factory()->create(['man_id' => $f['wifesSistersHusband']->id, 'woman_id' => $f['wifesSister']->id]);
 
         $this->family = $f;
     }
@@ -87,8 +90,13 @@ final class RelationshipFinderTest extends TestCase
             ]],
             "cousin's son" => ['cousinsSon', true, ['type' => 'cousin', 'degree' => 1, 'removed' => 1, 'older' => false]],
             'wife' => ['wife', false, ['type' => 'spouse', 'sex' => 'xx']],
-            "wife's mother" => ['wifesMother', false, ['type' => 'parent_in_law', 'sex' => 'xx']],
-            "wife's brother" => ['wifesBrother', false, ['type' => 'sibling_in_law', 'kind' => 'spouse_sibling']],
+            "wife's mother" => ['wifesMother', false, ['type' => 'parent_in_law', 'sex' => 'xx', 'fromSex' => 'xy']],
+            "wife's brother" => ['wifesBrother', false, [
+                'type' => 'sibling_in_law', 'sex' => 'xy', 'kind' => 'spouse_sibling', 'fromSex' => 'xy',
+            ]],
+            "wife's sister's husband" => ['wifesSistersHusband', false, [
+                'type' => 'co_sibling_in_law', 'sex' => 'xy', 'via' => 'xx', 'fromSex' => 'xy',
+            ]],
             "son's wife" => ['daughterInLaw', false, ['type' => 'child_in_law', 'sex' => 'xx']],
         ];
     }

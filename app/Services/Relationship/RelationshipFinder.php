@@ -225,16 +225,32 @@ final class RelationshipFinder
         $sex = $this->sex($steps[count($steps) - 1]['id']);
         $path = implode(',', array_column(array_slice($steps, 1), 'step'));
 
+        // old Polish names in-laws differently on the husband's and the wife's side
+        $fromSex = $this->sex($steps[0]['id']);
+
         return match ($path) {
             'spouse' => ['type' => 'spouse', 'sex' => $sex],
-            'spouse,parent' => ['type' => 'parent_in_law', 'sex' => $sex],
+            'spouse,parent' => ['type' => 'parent_in_law', 'sex' => $sex, 'fromSex' => $fromSex],
             'child,spouse' => ['type' => 'child_in_law', 'sex' => $sex],
-            'spouse,parent,child' => ['type' => 'sibling_in_law', 'sex' => $sex, 'kind' => 'spouse_sibling', 'via' => ''],
+            'spouse,parent,child' => [
+                'type' => 'sibling_in_law',
+                'sex' => $sex,
+                'kind' => 'spouse_sibling',
+                'via' => '',
+                'fromSex' => $fromSex,
+            ],
             'parent,child,spouse' => [
                 'type' => 'sibling_in_law',
                 'sex' => $sex,
                 'kind' => 'sibling_spouse',
                 'via' => $this->sex($steps[2]['id']),
+                'fromSex' => $fromSex,
+            ],
+            'spouse,parent,child,spouse' => [
+                'type' => 'co_sibling_in_law',
+                'sex' => $sex,
+                'via' => $this->sex($steps[3]['id']),
+                'fromSex' => $fromSex,
             ],
             'parent,spouse' => ['type' => 'step_parent', 'sex' => $sex],
             'spouse,child' => ['type' => 'step_child', 'sex' => $sex],

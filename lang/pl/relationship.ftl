@@ -149,23 +149,66 @@ kind =
         [xy] mąż
        *[other] małżonek
     }
-    .parent_in_law = { $sex ->
-        [xx] teściowa
-       *[other] teść
+    .parent_in_law = { $fromSex ->
+        [xx] { $sex ->
+            [xx] świekra (matka męża)
+           *[other] świekier (ojciec męża)
+        }
+        [xy] { $sex ->
+            [xx] teściowa (matka żony)
+           *[other] cieść (ojciec żony)
+        }
+       *[other] { $sex ->
+            [xx] teściowa
+           *[other] teść
+        }
     }
     .child_in_law = { $sex ->
         [xx] synowa
        *[other] zięć
     }
-    .sibling_in_law = { $sex ->
-        [xx] { $kind ->
-            [sibling_spouse] { $via ->
+    .sibling_in_law = { $kind ->
+        [spouse_sibling] { $fromSex ->
+            [xx] { $sex ->
+                [xx] zełwa (siostra męża)
+               *[other] dziewierz (brat męża)
+            }
+            [xy] { $sex ->
+                [xx] świeść (siostra żony)
+               *[other] szurzy (brat żony)
+            }
+           *[other] { $sex ->
+                [xx] szwagierka
+               *[other] szwagier
+            }
+        }
+       *[other] { $sex ->
+            [xx] { $via ->
                 [xy] bratowa
                *[other] szwagierka
             }
-           *[other] szwagierka
+           *[other] szwagier
         }
-       *[other] szwagier
+    }
+    .co_sibling_in_law = { $fromSex ->
+        [xx] { $sex ->
+            [xx] { $via ->
+                [xy] jątrew (żona brata męża)
+               *[other] spowinowacona
+            }
+           *[other] spowinowacony
+        }
+        [xy] { $sex ->
+            [xy] { $via ->
+                [xx] paszenog (mąż siostry żony)
+               *[other] spowinowacony
+            }
+           *[other] spowinowacona
+        }
+       *[other] { $sex ->
+            [xx] spowinowacona
+           *[other] spowinowacony
+        }
     }
     .step_parent = { $sex ->
         [xx] macocha

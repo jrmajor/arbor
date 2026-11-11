@@ -99,6 +99,11 @@ kind =
         [xy] brother-in-law
        *[other] sibling-in-law
     }
+    .co_sibling_in_law = { $sex ->
+        [xx] sister-in-law
+        [xy] brother-in-law
+       *[other] sibling-in-law
+    }
     .step_parent = { $sex ->
         [xx] stepmother
         [xy] stepfather
