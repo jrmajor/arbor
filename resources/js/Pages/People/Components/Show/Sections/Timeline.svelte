@@ -139,13 +139,13 @@
 		<div
 			bind:this={chart}
 			bind:clientWidth={chartWidth}
-			class="relative touch-pan-y select-none [--label:0px] sm:[--label:12rem]"
+			class="chart relative touch-pan-y select-none"
 			onpointermove={point}
 			onpointerdown={point}
 			onpointerleave={leave}
 			role="presentation"
 		>
-			<div class="grid grid-cols-[var(--label)_1fr]">
+			<div class="axis grid">
 				<div></div>
 				<div bind:this={track} bind:clientWidth={width} class="relative h-5 text-xs text-gray-500 tabular-nums">
 					{#each ticks as tick (tick)}
@@ -159,7 +159,7 @@
 				</div>
 			</div>
 
-			<div class="pointer-events-none absolute top-6 right-0 bottom-0 left-(--label)" aria-hidden="true">
+			<div class="lines pointer-events-none absolute top-6 right-0 bottom-0" aria-hidden="true">
 				{#each ticks as tick, i (tick)}
 					<!-- on phones the first line would run along the names -->
 					<div class={['absolute inset-y-0 border-l border-gray-100', i === 0 && 'max-sm:hidden']} style:left="{x(tick)}%"></div>
@@ -179,7 +179,7 @@
 
 				{#each group.rows as row (row.key)}
 					{@const age = cursor === null ? null : ageAt(row, cursor)}
-					<div class="relative grid grid-cols-1 items-center py-0.5 sm:grid-cols-[var(--label)_1fr]" data-row={row.key}>
+					<div class="row relative grid items-center py-0.5" data-row={row.key}>
 						<!-- on phones names sit above the bars, so their background cuts the gridlines behind them -->
 						<div class="pr-3 text-sm leading-5" class:italic={row.person.isDead}>
 							<span class="backdrop">
@@ -269,6 +269,33 @@
 {/if}
 
 <style>
+	@reference '$style';
+
+	/* on phones names sit above the bars, on wider screens in a column beside them */
+	.chart {
+		--label: 0px;
+
+		@media (width >= theme(--breakpoint-sm)) {
+			--label: 12rem;
+		}
+	}
+
+	.axis {
+		grid-template-columns: var(--label) 1fr;
+	}
+
+	.lines {
+		left: var(--label);
+	}
+
+	.row {
+		grid-template-columns: 1fr;
+
+		@media (width >= theme(--breakpoint-sm)) {
+			grid-template-columns: var(--label) 1fr;
+		}
+	}
+
 	/* a white backdrop that fades out a little beyond the text */
 	.backdrop {
 		position: relative;
