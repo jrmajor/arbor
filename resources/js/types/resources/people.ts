@@ -135,31 +135,37 @@ export type EditPersonResource = {
 	sources: string[];
 };
 
-type Marriage = {
+type MarriageCommon = {
 	id: number;
 	order: number | null;
-	// only for viewable marriages
-	rite?: string | null;
-	firstEvent?: {
-		type: string | null;
-		date: string | null;
-		place: string | null;
-	};
-	secondEvent?: {
-		type: string | null;
-		date: string | null;
-		place: string | null;
-	};
-	divorced?: boolean;
-	divorceDate?: string | null;
-	divorcePlace?: string | null;
-	startYears?: YearRange | null;
-	divorceYears?: YearRange | null;
 	partner: Person;
 	perm: {
-		view: boolean;
 		update: boolean;
 	};
+};
+
+type VisibleMarriage = MarriageCommon & {
+	visible: true;
+	rite: string | null;
+	firstEvent?: MarriageEvent;
+	secondEvent?: MarriageEvent;
+	divorced: boolean;
+	divorceDate: string | null;
+	divorcePlace: string | null;
+	startYears: YearRange | null;
+	divorceYears: YearRange | null;
+};
+
+type HiddenMarriage = MarriageCommon & {
+	visible: false;
+};
+
+type Marriage = VisibleMarriage | HiddenMarriage;
+
+type MarriageEvent = {
+	type: string | null;
+	date: string | null;
+	place: string | null;
 };
 
 export enum Sex {

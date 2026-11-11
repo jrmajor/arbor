@@ -52,6 +52,7 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 	}
 
 	for (const marriage of person.marriages) {
+		if (!marriage.visible) continue;
 		const list: Marker[] = [];
 		if (marriage.startYears) list.push(marker(`marriage-${marriage.id}`, 'marriage', marriage.startYears));
 		if (marriage.divorceYears) list.push(marker(`divorce-${marriage.id}`, 'divorce', marriage.divorceYears));
@@ -119,7 +120,7 @@ export function buildTimeline(person: ShowPersonResource, now: Date): Timeline {
 			label: 'people.marriages',
 			// a partner married more than once gets one row, with markers for every marriage
 			rows: rows('marriages', person.marriages
-				.filter((m) => m.perm.view)
+				.filter((m) => m.visible)
 				.map((m) => m.partner)
 				.filter((partner, i, partners) => partners.findIndex((p) => p.id === partner.id) === i)),
 		},

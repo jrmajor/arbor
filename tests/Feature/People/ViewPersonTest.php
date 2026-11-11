@@ -295,10 +295,11 @@ final class ViewPersonTest extends TestCase
             ->assertInertia(fn (Assert $page) => $page
                 ->has('person.marriages', 1)
                 ->where('person.marriages.0', function (Collection $m) use ($marriage) {
-                    $this->assertSame(['id', 'order', 'partner', 'perm'], $m->keys()->all());
+                    $this->assertSame(['id', 'visible', 'order', 'partner', 'perm'], $m->keys()->all());
                     $this->assertSame($marriage->id, $m['id']);
+                    $this->assertFalse($m['visible']);
                     $this->assertSame($marriage->woman_id, $m['partner']['id']);
-                    $this->assertSame(['view' => false, 'update' => false], $m['perm']);
+                    $this->assertSame(['update' => false], $m['perm']);
 
                     return true;
                 })
@@ -314,7 +315,7 @@ final class ViewPersonTest extends TestCase
             ->get("people/{$person->id}")
             ->assertOk()
             ->assertInertia(fn (Assert $page) => $page
-                ->where('person.marriages.0.perm.view', true)
+                ->where('person.marriages.0.visible', true)
                 ->where('person.marriages.0.rite', 'roman_catholic')
                 ->where('person.marriages.0.firstEvent.place', $marriage->first_event_place)
                 ->where('person.marriages.0.secondEvent.place', $marriage->second_event_place)

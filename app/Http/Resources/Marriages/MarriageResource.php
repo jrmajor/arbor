@@ -23,8 +23,9 @@ final class MarriageResource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
+            'visible' => $visible = Gate::allows('view', $this->resource),
             'order' => $this->resource->order($this->partnerFor),
-            $this->mergeWhen(Gate::allows('view', $this->resource), fn () => [
+            $this->mergeWhen($visible, fn () => [
                 'rite' => $this->resource->rite,
                 'firstEvent' => $this->when($this->resource->hasFirstEvent(), fn () => [
                     'type' => $this->resource->first_event_type,
@@ -44,7 +45,6 @@ final class MarriageResource extends JsonResource
             ]),
             'partner' => new PersonResource($this->resource->partner($this->partnerFor)),
             'perm' => [
-                'view' => Gate::allows('view', $this->resource),
                 'update' => Gate::allows('update', $this->resource),
             ],
         ];
