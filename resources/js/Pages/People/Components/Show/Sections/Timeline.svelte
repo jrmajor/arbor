@@ -38,9 +38,27 @@
 	let chart = $state<HTMLElement>();
 	let hoveredRow = $state<Row | null>(null);
 	let hoveredBadge = $state<string | null>(null);
-	let pointer = $state({ x: 0, y: 0, flip: false });
+	let pointer = $state({ x: 0, y: 0 });
+	let chartWidth = $state(0);
+	let cardWidth = $state(0);
 
 	let hoveredAge = $derived(hoveredRow && cursor !== null ? ageAt(hoveredRow, cursor) : null);
+
+	// ages sit right of the cursor, except near the right edge
+	let agesOnLeft = $derived(cursor !== null && cursor > max - ((max - min) * 0.15));
+
+	// put the hover card opposite the ages, or past them when it doesn't fit there
+	let cardTransform = $derived.by(() => {
+		const gap = 12;
+		const pastAges = 52;
+
+		let onLeft = !agesOnLeft;
+		if (onLeft && pointer.x - gap - cardWidth < 0) onLeft = false;
+		if (!onLeft && pointer.x + gap + cardWidth > chartWidth) onLeft = true;
+
+		const offset = onLeft === agesOnLeft ? pastAges : gap;
+		return onLeft ? `translate(calc(-100% - ${offset}px), -50%)` : `translate(${offset}px, -50%)`;
+	});
 
 	function x(year: number) {
 		return ((year - min) / (max - min)) * 100;
@@ -54,8 +72,7 @@
 		cursor = fraction < 0 || fraction > 1 ? null : min + (fraction * (max - min));
 
 		const outer = chart.getBoundingClientRect();
-		const x = event.clientX - outer.left;
-		pointer = { x, y: event.clientY - outer.top, flip: x > outer.width / 2 };
+		pointer = { x: event.clientX - outer.left, y: event.clientY - outer.top };
 	}
 
 	function leave(event: PointerEvent) {
@@ -116,6 +133,7 @@
 	<div class="rounded-lg bg-white p-6 shadow-sm">
 		<div
 			bind:this={chart}
+			bind:clientWidth={chartWidth}
 			class="relative touch-pan-y select-none [--label:0px] sm:[--label:12rem]"
 			onpointermove={point}
 			onpointerdown={point}
@@ -151,7 +169,7 @@
 
 			{#each timeline.groups as group (group.key)}
 				{#if group.label}
-					<div class="relative mt-3 text-xs font-medium text-gray-400">{t(group.label)}</div>
+					<div class="relative mt-3 text-xs font-medium text-gray-400"><span class="backdrop">{t(group.label)}</span></div>
 				{/if}
 
 				{#each group.rows as row (row.key)}
@@ -162,14 +180,19 @@
 						onpointerleave={leaveRow}
 						role="presentation"
 					>
-						<div class="truncate pr-3 text-sm leading-5" class:italic={row.person.isDead}>
-							{#if row.current}
-								<span class="font-medium" aria-current="page">{@render name()}</span>
-							{:else}
-								<a {@attach inertia()} href={route('people.show', row.person)} class="text-blue-700 hover:underline">
-									{@render name()}
-								</a>
-							{/if}
+						<!-- on phones names sit above the bars, so their background cuts the gridlines behind them -->
+						<div class="pr-3 text-sm leading-5" class:italic={row.person.isDead}>
+							<span class="backdrop">
+								<span class="block truncate">
+									{#if row.current}
+										<span class="font-medium" aria-current="page">{@render name()}</span>
+									{:else}
+										<a {@attach inertia()} href={route('people.show', row.person)} class="text-blue-700 hover:underline">
+											{@render name()}
+										</a>
+									{/if}
+								</span>
+							</span>
 						</div>
 
 						<div class="relative h-5">
@@ -210,7 +233,7 @@
 								<span
 									class={[
 										'absolute top-1/2 z-3 -translate-y-1/2 rounded-sm bg-white/85 px-1 text-xs font-medium text-blue-700 tabular-nums',
-										cursor! > max - ((max - min) * 0.15) ? '-translate-x-full -ml-1' : 'ml-1',
+										agesOnLeft ? '-translate-x-full -ml-1' : 'ml-1',
 									]}
 									style:left="{x(cursor!)}%"
 								>{age.label}</span>
@@ -234,7 +257,8 @@
 					class="pointer-events-none absolute z-10 w-max max-w-64 rounded-md bg-white px-2.5 py-1.5 text-xs leading-5 text-gray-700 shadow-md ring-1 ring-gray-200"
 					style:left="{pointer.x}px"
 					style:top="{pointer.y}px"
-					style:transform="translate({pointer.flip ? 'calc(-100% - 12px)' : '12px'}, -50%)"
+					style:transform={cardTransform}
+					bind:offsetWidth={cardWidth}
 					aria-hidden="true"
 				>
 					<p class="font-medium text-gray-900">
@@ -264,6 +288,27 @@
 {/if}
 
 <style>
+	/* a white backdrop that fades out a little beyond the text */
+	.backdrop {
+		position: relative;
+		isolation: isolate;
+		display: inline-block;
+		max-width: 100%;
+		vertical-align: top;
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset: -6px -10px;
+			z-index: -1;
+			background: white;
+			mask-image:
+				linear-gradient(to right, transparent, black 10px, black calc(100% - 10px), transparent),
+				linear-gradient(to bottom, transparent, black 6px, black calc(100% - 6px), transparent);
+			mask-composite: intersect;
+		}
+	}
+
 	/* a diagonal stroke across the ∞ */
 	.divorce::after {
 		content: '';
