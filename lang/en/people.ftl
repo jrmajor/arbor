@@ -11,6 +11,7 @@ menu =
     .edit_person = Edit person
     .edit_biography = Edit biography
     .edits_history = Edits history
+    .relationship = Relationship
 
     .make_invisible = Make invisible
     .make_visible = Make visible

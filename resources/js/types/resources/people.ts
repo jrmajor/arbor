@@ -172,3 +172,19 @@ export enum Sex {
 	MALE = 'xy',
 	FEMALE = 'xx',
 }
+
+export type Kinship = { type: string } & Record<string, string | number | boolean>;
+
+export type RelationshipStep = {
+	person: Person;
+	// how this person is reached from the previous one
+	step: 'parent' | 'child' | 'spouse' | null;
+	sex: Sex | null;
+};
+
+export type Relationship = {
+	blood: boolean;
+	steps: RelationshipStep[];
+	commonAncestors: Person[];
+	kinship: Kinship;
+};

@@ -24,6 +24,14 @@
 				/>
 
 				<Item
+					name="people.menu.relationship"
+					href={route('people.relationship', person)}
+					hotkey="r"
+					icon={icons.userGroup}
+					active={activeRoute === 'people.relationship'}
+				/>
+
+				<Item
 					name="people.menu.edit_person"
 					href={route('people.edit', person)}
 					hotkey="e"
