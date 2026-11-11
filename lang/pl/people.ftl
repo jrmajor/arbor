@@ -11,6 +11,7 @@ menu =
     .edit_person = Edytuj osobę
     .edit_biography = Edytuj biografię
     .edits_history = Historia edycji
+    .relationship = Pokrewieństwo
 
     .make_invisible = Sprywatyzuj
     .make_visible = Opublicznij

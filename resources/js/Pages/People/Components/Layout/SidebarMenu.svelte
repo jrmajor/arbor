@@ -24,6 +24,16 @@
 				/>
 
 				<Item
+					name="people.menu.relationship"
+					href={route('people.relationship', person)}
+					hotkey="r"
+					icon={icons.userGroup}
+					active={activeRoute === 'people.relationship'}
+				/>
+			{/if}
+
+			{#if person.perm.update && !person.isTrashed}
+				<Item
 					name="people.menu.edit_person"
 					href={route('people.edit', person)}
 					hotkey="e"
@@ -65,7 +75,7 @@
 				/>
 			{/if}
 
-			{#if !person.isTrashed}
+			{#if person.perm.delete && !person.isTrashed}
 				<Item
 					name="people.menu.delete"
 					href={route('people.destroy', person)}
@@ -86,7 +96,7 @@
 				/>
 			{/if}
 
-			{#if !person.isTrashed}
+			{#if person.perm.update && !person.isTrashed}
 				<hr class="my-1 text-gray-200">
 
 				<Item

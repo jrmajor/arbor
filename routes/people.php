@@ -4,6 +4,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\BiographyController;
 use App\Http\Controllers\PeopleSearchController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\RelationshipController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('people', [PersonController::class, 'index'])
@@ -35,6 +36,9 @@ Route::delete('people/{person}', [PersonController::class, 'destroy'])
 
 Route::patch('people/{trashedPerson}/restore', [PersonController::class, 'restore'])
     ->middleware('auth')->name('people.restore');
+
+Route::get('people/{person}/relationship', RelationshipController::class)
+    ->name('people.relationship');
 
 Route::get('people/{anyPerson}/history', [PersonController::class, 'history'])
     ->middleware('auth')->name('people.history');
