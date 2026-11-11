@@ -42,7 +42,6 @@
 	let chartWidth = $state(0);
 	let cardWidth = $state(0);
 
-	// the hover card shows the events of the hovered marriage badge
 	let card = $derived(hoveredRow && hoveredBadge
 		? badges(hoveredRow.markers).find((badge) => badge.key === hoveredBadge) ?? null
 		: null);
@@ -96,7 +95,6 @@
 
 	function gradient(row: Row) {
 		const length = row.end.to - row.start.from;
-		// born and died in the same year
 		if (length <= 0) return 'currentColor';
 
 		const solidFrom = ((row.start.to - row.start.from) / length) * 100;
