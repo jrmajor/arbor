@@ -9,8 +9,6 @@
 		person: PersonPage;
 		children: Snippet;
 	} & SharedProps = $props();
-
-	let perm = $derived(person.perm);
 </script>
 
 <PageTitle>
@@ -22,9 +20,7 @@
 		{@render children()}
 	</main>
 
-	{#if perm.update || perm.changeVisibility || perm.delete || perm.restore || perm.viewHistory}
-		<div class="shrink-0 p-1 md:py-3">
-			<SidebarMenu {person} {activeRoute}/>
-		</div>
-	{/if}
+	<div class="shrink-0 p-1 md:py-3">
+		<SidebarMenu {person} {activeRoute}/>
+	</div>
 </div>
