@@ -3,12 +3,15 @@
 	import type { ShowPersonResource } from '@/types/resources/people';
 	import { inertia } from '@/helpers/inertia';
 	import { t } from '@/helpers/translations';
-	import { ageAt, buildTimeline, formatYears, type Row } from '../Timeline/rows';
+	import { ageAt, buildTimeline, formatYears, type Marker, type Row } from '../Timeline/rows';
 
 	let { person }: { person: ShowPersonResource } = $props();
 
 	// keep year labels at least this far apart
 	const minTickSpacing = 48;
+
+	// merge markers closer than this into one badge, so they don't overlap
+	const minMarkerSpacing = 24;
 
 	let timeline = $derived(buildTimeline(person, new Date()));
 
@@ -54,6 +57,35 @@
 		const solidTo = ((row.end.from - row.start.from) / length) * 100;
 
 		return `linear-gradient(to right, transparent, currentColor ${solidFrom}%, currentColor ${solidTo}%, transparent)`;
+	}
+
+	// group markers into badges, chaining each one to the previous one when they're too close
+	function badges(markers: Marker[]) {
+		const groups: Marker[][] = [];
+
+		for (const marker of markers.toSorted((a, b) => a.at - b.at)) {
+			const last = groups.at(-1);
+			if (last && toPixels(marker.at - last.at(-1)!.at) < minMarkerSpacing) {
+				last.push(marker);
+			} else {
+				groups.push([marker]);
+			}
+		}
+
+		return groups.map((group) => ({
+			key: group.map((m) => m.key).join(),
+			at: (group[0].at + group.at(-1)!.at) / 2,
+			markers: group,
+		}));
+	}
+
+	function toPixels(years: number) {
+		return (years / (max - min)) * (width || 600);
+	}
+
+	function markerTitle(marker: Marker) {
+		const type = marker.type === 'divorce' ? t('marriages.divorced').toLowerCase() : t('marriages.marriage');
+		return `${type} ${formatYears(marker.years)}`;
 	}
 
 	function title(row: Row) {
@@ -134,15 +166,16 @@
 								></div>
 							</div>
 
-							{#each row.markers as marker (marker.key)}
+							{#each badges(row.markers) as badge (badge.key)}
 								<span
-									class={[
-										'absolute top-1/2 z-2 -translate-1/2 rounded-full bg-white px-1 text-xs leading-4 text-gray-700 ring-1 ring-gray-300',
-										marker.type === 'divorce' && 'line-through',
-									]}
-									style:left="{x(marker.at)}%"
-									title="{marker.type === 'divorce' ? t('marriages.divorced') : '∞'} {formatYears(marker.years)}"
-								>∞</span>
+									class="absolute top-1/2 z-2 flex -translate-1/2 gap-1 rounded-sm bg-white px-1.5 text-xs leading-4 text-gray-700 ring-1 ring-gray-300"
+									style:left="{x(badge.at)}%"
+									title={badge.markers.map(markerTitle).join('\n')}
+								>
+									{#each badge.markers as marker (marker.key)}
+										<span class={['relative', marker.type === 'divorce' && 'divorce']}>∞</span>
+									{/each}
+								</span>
 							{/each}
 
 							{#if age !== null}
@@ -169,3 +202,18 @@
 		</div>
 	</div>
 {/if}
+
+<style>
+	/* a diagonal stroke across the ∞ */
+	.divorce::after {
+		content: '';
+		position: absolute;
+		inset: 1px -1px;
+		background: linear-gradient(
+			to top right,
+			transparent calc(50% - 0.6px),
+			currentColor calc(50% - 0.6px) calc(50% + 0.6px),
+			transparent calc(50% + 0.6px)
+		);
+	}
+</style>
