@@ -92,6 +92,7 @@ burial_place = Miejsce pochówku
 parents = Rodzice
 mother = Matka
 father = Ojciec
+siblings = Rodzeństwo
 siblings_mother = Rodzeństwo od str. matki
 siblings_father = Rodzeństwo od str. ojca
 marriages = Małżeństwa

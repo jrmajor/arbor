@@ -92,6 +92,7 @@ burial_place = Burial place
 parents = Parents
 mother = Mother
 father = Father
+siblings = Siblings
 siblings_mother = Half-sibl. f. mother's side
 siblings_father = Half-sibl. f. father's side
 marriages = Marriages

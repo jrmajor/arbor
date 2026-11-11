@@ -91,6 +91,7 @@ burial_place = Beerdigungsort
 parents = Eltern
 mother = Mutter
 father = Vater
+siblings = Geschwister
 siblings_mother = Stiefgeschwister Mutterseits
 siblings_father = Stiefgeschwister Vaterseits
 marriages = Ehen

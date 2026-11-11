@@ -38,6 +38,10 @@ final class MarriageResource extends JsonResource
             'divorced' => $this->resource->divorced,
             'divorceDate' => $this->resource->divorce_date,
             'divorcePlace' => $this->resource->divorce_place,
+            $this->mergeWhen(Gate::allows('view', $this->resource), fn () => [
+                'startYears' => $this->resource->yearRange('start_date'),
+                'divorceYears' => $this->resource->divorced ? $this->resource->yearRange('divorce_date') : null,
+            ]),
             'partner' => new PersonResource($this->resource->partner($this->partnerFor)),
             'perm' => [
                 'view' => Gate::allows('view', $this->resource),

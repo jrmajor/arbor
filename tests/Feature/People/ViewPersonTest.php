@@ -227,6 +227,64 @@ final class ViewPersonTest extends TestCase
                 ->etc());
     }
 
+    #[TestDox('it shows year ranges of visible people and marriages')]
+    public function testYearRanges(): void
+    {
+        $person = Person::factory()->male()->dead()->create([
+            'visibility' => true,
+            'birth_date_from' => '1900-01-01',
+            'birth_date_to' => '1909-12-31',
+            'death_date_from' => '1970-05-01',
+            'death_date_to' => '1970-05-01',
+        ]);
+        $wife = Person::factory()->female()->create([
+            'visibility' => true,
+            'birth_date_from' => '1902-03-04',
+            'birth_date_to' => '1902-03-04',
+            'death_date_from' => null,
+            'death_date_to' => null,
+        ]);
+        $secondWife = Person::factory()->female()->create(['visibility' => true]);
+        $hiddenWife = Person::factory()->female()->create(['visibility' => false]);
+
+        $divorced = Marriage::factory()->divorced()->create([
+            'man_id' => $person->id,
+            'woman_id' => $wife->id,
+            'first_event_date_from' => '1925-06-01',
+            'first_event_date_to' => '1925-06-01',
+            'divorce_date_from' => '1930-01-01',
+            'divorce_date_to' => '1931-12-31',
+        ]);
+        $notDivorced = Marriage::factory()->create([
+            'man_id' => $person->id,
+            'woman_id' => $secondWife->id,
+            'divorced' => false,
+            'divorce_date_from' => '1950-01-01',
+            'divorce_date_to' => '1950-01-01',
+        ]);
+        $hidden = Marriage::factory()->create(['man_id' => $person->id, 'woman_id' => $hiddenWife->id]);
+
+        $this->get("people/{$person->id}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->where('person.birthYears', [1900, 1909])
+                ->where('person.deathYears', [1970, 1970])
+                ->where('person.marriages', function (Collection $marriages) use ($divorced, $notDivorced, $hidden) {
+                    $marriages = $marriages->keyBy('id');
+
+                    $this->assertSame([1925, 1925], $marriages[$divorced->id]['startYears']);
+                    $this->assertSame([1930, 1931], $marriages[$divorced->id]['divorceYears']);
+                    $this->assertSame([1902, 1902], $marriages[$divorced->id]['partner']['birthYears']);
+                    $this->assertNull($marriages[$divorced->id]['partner']['deathYears']);
+                    $this->assertNull($marriages[$notDivorced->id]['divorceYears']);
+                    $this->assertArrayNotHasKey('startYears', $marriages[$hidden->id]);
+                    $this->assertArrayNotHasKey('birthYears', $marriages[$hidden->id]['partner']);
+
+                    return true;
+                })
+                ->etc());
+    }
+
     #[TestDox('it counts siblings born before person')]
     public function testSiblingsBefore(): void
     {

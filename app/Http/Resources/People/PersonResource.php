@@ -38,6 +38,8 @@ final class PersonResource extends JsonResource
                 'isDead' => $this->resource->dead,
                 'birthYear' => $this->resource->birth_year,
                 'deathYear' => $this->resource->death_year,
+                'birthYears' => $this->resource->yearRange('birth_date'),
+                'deathYears' => $this->resource->yearRange('death_date'),
             ]),
             'pytlewskiUrl' => $this->resource->pytlewski_url,
             'wielcyUrl' => $this->resource->wielcy_url,

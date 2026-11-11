@@ -30,6 +30,8 @@ use Spatie\Activitylog\Support\LogOptions;
  * @property-read ?int $first_event_year
  * @property-read ?int $second_event_year
  * @property-read ?int $divorce_year
+ * @property-read ?Carbon $start_date_from
+ * @property-read ?Carbon $start_date_to
  */
 #[Guarded(['id', 'created_at', 'updated_at', 'deleted_at'])]
 class Marriage extends Model
@@ -94,6 +96,19 @@ class Marriage extends Model
             $this->woman_id => $this->woman_order,
             default => throw new InvalidArgumentException(),
         };
+    }
+
+    /**
+     * A marriage starts at its first event, or at its second one when the first has no date.
+     */
+    public function getStartDateFromAttribute(): ?Carbon
+    {
+        return $this->first_event_date_from ?? $this->second_event_date_from;
+    }
+
+    public function getStartDateToAttribute(): ?Carbon
+    {
+        return $this->first_event_date_from ? $this->first_event_date_to : $this->second_event_date_to;
     }
 
     public function hasFirstEvent(): bool

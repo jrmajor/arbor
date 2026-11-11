@@ -7,6 +7,7 @@
 	import Biography from './Components/Show/Sections/Biography.svelte';
 	import Details from './Components/Show/Sections/Details.svelte';
 	import FamilyTree from './Components/Show/Sections/FamilyTree.svelte';
+	import Timeline from './Components/Show/Sections/Timeline.svelte';
 
 	let { person }: { person: ShowPersonResource } & SharedProps = $props();
 </script>
@@ -18,3 +19,4 @@
 <Details {person}/>
 <Biography {person}/>
 <FamilyTree {person}/>
+<Timeline {person}/>
